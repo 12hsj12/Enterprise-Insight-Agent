@@ -1,0 +1,40 @@
+# Enterprise Insight Agent - GPT Researcher Baseline Configuration
+# Baseline version: GPT Researcher v3.6.1
+# Cutoff date: 2026-09-05
+# Purpose: freeze the baseline environment for reproducible benchmark comparison
+
+environment:
+  os: "Windows 11 Home China"
+  os_version: "25H2"
+  os_build: "26200.9168"
+  python: "3.11.9"
+
+llm:
+  fast: "openai:deepseek-v4-flash"
+  smart: "openai:deepseek-v4-flash"
+  strategic: "openai:deepseek-v4-flash"
+
+embedding:
+  provider: "huggingface"
+  model: "sentence-transformers/all-MiniLM-L6-v2"
+
+retrieval:
+  retriever: "tavily"
+  retriever_source: "project_default"
+  max_search_results_per_query: 5
+
+rag:
+  similarity_threshold: 0.42
+  chunk_size: 1000
+  chunk_overlap: 100
+  compression_threshold: 8000
+
+research:
+  total_words: 1200
+  max_iterations: 3
+  max_subtopics: 3
+
+output:
+  report_format: "APA"
+  language: "english"
+  language_source: "project_default"

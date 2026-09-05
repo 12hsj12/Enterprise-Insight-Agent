@@ -1,1 +1,2 @@
 run_id,case_id,version,latency_s,sources,llm_calls,input_tokens,output_tokens,estimated_cost,error
+baseline_EI001_20260905_001,EI_001,baseline-gpt-researcher-v3.6.1,110,,,,,0.05794002,

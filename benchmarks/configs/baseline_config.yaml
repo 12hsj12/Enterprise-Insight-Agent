@@ -35,6 +35,9 @@ research:
   max_subtopics: 3
 
 output:
+  report_type: "research_report"
+  report_source: "web"
+  tone: "objective"
   report_format: "APA"
   language: "english"
   language_source: "project_default"

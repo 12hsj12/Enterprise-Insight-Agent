@@ -36,6 +36,7 @@ from chat.chat import ChatAgentWithMemory
 
 from server.report_store import ReportStore
 from server.enterprise_api import create_enterprise_router
+from server.sqlite_report_store import SQLiteReportStore
 from gpt_researcher.enterprise import IntelligenceWorkflow
 
 # MongoDB services removed - no database persistence needed
@@ -73,6 +74,8 @@ class ChatRequest(BaseModel):
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
+    recovered = await enterprise_store.recover_running()
+    logger.info("Enterprise task store ready; marked %d interrupted tasks", recovered)
     os.makedirs("outputs", exist_ok=True)
     app.mount("/outputs", StaticFiles(directory="outputs"), name="outputs")
     
@@ -97,7 +100,7 @@ async def lifespan(app: FastAPI):
 
 # App initialization
 app = FastAPI(lifespan=lifespan)
-enterprise_store = ReportStore(Path(os.getenv("ENTERPRISE_STORE_PATH", "outputs/enterprise_tasks.json")))
+enterprise_store = SQLiteReportStore(Path(os.getenv("ENTERPRISE_STORE_PATH", "outputs/enterprise_tasks.sqlite3")))
 app.include_router(create_enterprise_router(
     enterprise_store,
     workflow_factory=lambda: IntelligenceWorkflow(config_path=os.getenv("ENTERPRISE_CONFIG_PATH")),

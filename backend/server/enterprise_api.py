@@ -43,7 +43,10 @@ def create_enterprise_router(store, workflow_factory: Callable = IntelligenceWor
     @router.get("/ready", response_model=HealthResponse)
     async def ready():
         try:
-            await store.list_reports()
+            if hasattr(store, "check_health"):
+                await store.check_health()
+            else:
+                await store.list_reports()
         except (OSError, ValueError):
             raise HTTPException(503, "Task store unavailable") from None
         return HealthResponse(status="ready")
@@ -82,6 +85,12 @@ def create_enterprise_router(store, workflow_factory: Callable = IntelligenceWor
             task.result = await asyncio.wait_for(
                 workflow_factory().run(request, run_id=task_id, trace=trace), timeout_s)
             task.status = "completed"
+        except asyncio.CancelledError:
+            task.status, task.error_code = "interrupted", "request_cancelled"
+            task.updated_at = datetime.now(timezone.utc)
+            task.diagnostics = trace.snapshot()
+            await asyncio.shield(store.upsert_report(task_id, task.model_dump(mode="json")))
+            raise
         except TimeoutError:
             task.status, task.error_code, status_code = "failed", "research_timeout", 504
         except (ValueError, TypeError, AssertionError):

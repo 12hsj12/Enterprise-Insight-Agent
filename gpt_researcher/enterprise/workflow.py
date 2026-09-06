@@ -59,6 +59,10 @@ class IntelligenceWorkflow:
 
     async def run(self, request: IntelligenceRequest, run_id: str | None = None,
                   trace: RunTrace | None = None) -> IntelligenceResult:
+        if trace is not None:
+            if run_id is not None and trace.run_id != run_id:
+                raise ValueError("Trace and result run IDs must match")
+            run_id = trace.run_id
         with trace.activate() if trace else nullcontext():
             return await self._run(request, run_id, trace)
 

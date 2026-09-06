@@ -10,6 +10,7 @@ python -m benchmarks.run --variant source_aware --split development --output out
 # Adding --live executes provider/search calls. Use a NEW output directory each time.
 # Reserve --split holdout for the final comparison.
 python -m benchmarks.score --run-dir outputs/baseline-dev --annotations annotations.json --output outputs/baseline-dev-scored
+python -m benchmarks.compare --baseline outputs/baseline-dev --source-aware outputs/source-aware-dev --output outputs/dev-comparison.json
 ```
 
 The JSON configurations compare the **current implementation with weight 0 vs 0.2**.
@@ -35,6 +36,12 @@ denominators yield null. Missing annotations yield null, and scoring writes a se
 artifact rather than modifying raw runs. Required facts should be defined from each
 case's required dimensions **before** reviewing variants; dimensions are not automatically
 treated as verified facts. Citation presence alone never establishes support.
+
+`compare` requires matching commit/runtime/settings/dataset and the complete frozen split.
+It retains failed cases and leaves aggregate quality unavailable unless every case has a
+defined reviewed metric. Scored directories retain the original manifest and may be used
+as comparison inputs. See [curated v1 results](results/v1/README.md) for measured runs and
+their limits; the source weight was not tuned on the reserved holdout cases.
 
 This directory contains the benchmark and evaluation assets for the **Enterprise Insight Agent** project.
 

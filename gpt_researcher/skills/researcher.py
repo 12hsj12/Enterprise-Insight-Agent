@@ -6,6 +6,8 @@ and context gathering.
 """
 
 import asyncio
+from contextlib import nullcontext
+from gpt_researcher.enterprise.trace import current_trace
 import logging
 import os
 import random
@@ -844,9 +846,13 @@ class ResearchConductor:
                 retriever = retriever_class(query, query_domains=query_domains)
 
                 # Perform the search using the current retriever
-                search_results = await asyncio.to_thread(
-                    retriever.search, max_results=self.researcher.cfg.max_search_results_per_query
-                )
+                trace = current_trace()
+                if trace:
+                    trace.search_calls += 1
+                with trace.stage("search") if trace else nullcontext():
+                    search_results = await asyncio.to_thread(
+                        retriever.search, max_results=self.researcher.cfg.max_search_results_per_query
+                    )
 
                 if not search_results:
                     continue

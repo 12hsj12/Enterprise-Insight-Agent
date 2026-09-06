@@ -5,6 +5,7 @@ retrieval, compression, and similarity matching for research queries.
 """
 
 import asyncio
+from contextlib import nullcontext
 from typing import Dict, List, Optional, Set
 
 from ..actions.utils import stream_output
@@ -15,6 +16,7 @@ from ..context.compression import (
 )
 from gpt_researcher.evidence import EvidenceContext
 from gpt_researcher.evidence.reliability import EvidenceReliabilityEvaluator
+from gpt_researcher.enterprise.trace import current_trace
 
 
 class ContextManager:
@@ -62,9 +64,14 @@ class ContextManager:
             prompt_family=self.researcher.prompt_family,
             **self.researcher.kwargs
         )
-        result = await context_compressor.async_get_context(
-            query=query, max_results=10, cost_callback=self.researcher.add_costs
-        )
+        trace = current_trace()
+        with trace.stage("retrieval") if trace else nullcontext():
+            result = await context_compressor.async_get_context(
+                query=query, max_results=10, cost_callback=self.researcher.add_costs
+            )
+        if trace:
+            trace.retrieval(result, context_compressor.source_reliability_weight,
+                            context_compressor.similarity_threshold)
         self.researcher.add_evidences(result.evidences)
         evaluator = EvidenceReliabilityEvaluator()
         self.researcher.add_evidence_assessments([

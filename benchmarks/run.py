@@ -16,6 +16,7 @@ import time
 from uuid import uuid4
 
 from benchmarks.metrics import quality_metrics, summarize
+from gpt_researcher.enterprise.trace import RunTrace
 
 ROOT = Path(__file__).resolve().parents[1]
 DATASET = ROOT / "benchmarks/dataset/enterprise_insight_bench_v0.json"
@@ -89,6 +90,7 @@ async def run_benchmark(variant: str, split: str, output: Path, live: bool = Fal
         write_json(case_dir / "input.json", case)
         if live:
             researcher = None
+            trace = RunTrace(record["run_id"])
             started = time.perf_counter()
             try:
                 researcher = researcher_factory(
@@ -96,8 +98,11 @@ async def run_benchmark(variant: str, split: str, output: Path, live: bool = Fal
                     config_path=str(config_path), report_type="research_report", report_source="web", verbose=False,
                 )
                 async def execute():
-                    context = await researcher.conduct_research()
-                    report = await researcher.write_report()
+                    with trace.activate():
+                        with trace.stage("research"):
+                            context = await researcher.conduct_research()
+                        with trace.stage("report"):
+                            report = await researcher.write_report()
                     return context, report
                 context, report = await asyncio.wait_for(execute(), timeout_s)
                 if not report.strip():
@@ -115,6 +120,9 @@ async def run_benchmark(variant: str, split: str, output: Path, live: bool = Fal
                 record.update(status="failed", error_type=type(exc).__name__)
             finally:
                 record["latency_s"] = time.perf_counter() - started
+                record["search_calls"] = trace.search_calls
+                record["search_failures"] = trace.search_failures
+                write_json(case_dir / "trace.json", trace.snapshot())
                 if researcher is not None:
                     record["estimated_cost_usd"] = researcher.get_costs()
         records.append(record)

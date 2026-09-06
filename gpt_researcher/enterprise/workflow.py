@@ -1,6 +1,7 @@
 """Business orchestration; retrieval and evidence rules remain in their own layers."""
 
 from datetime import date
+from contextlib import nullcontext
 from typing import Callable
 from uuid import uuid4
 
@@ -10,6 +11,7 @@ from gpt_researcher.evidence import (
     Evidence, EvidenceAssessment, EvidenceConsistencyAssessment,
     EvidenceConsistencyEvaluator,
 )
+from .trace import RunTrace
 
 
 class IntelligenceRequest(BaseModel):
@@ -42,6 +44,7 @@ class IntelligenceResult(BaseModel):
     source_urls: list[str]
     estimated_cost_usd: float | None = Field(default=None, ge=0)
     limitations: list[str] = Field(default_factory=list)
+    diagnostics: dict | None = None
 
 
 class IntelligenceWorkflow:
@@ -54,19 +57,26 @@ class IntelligenceWorkflow:
         self.researcher_factory = researcher_factory
         self.config_path = config_path
 
-    async def run(self, request: IntelligenceRequest, run_id: str | None = None) -> IntelligenceResult:
+    async def run(self, request: IntelligenceRequest, run_id: str | None = None,
+                  trace: RunTrace | None = None) -> IntelligenceResult:
+        with trace.activate() if trace else nullcontext():
+            return await self._run(request, run_id, trace)
+
+    async def _run(self, request, run_id, trace):
         researcher = self.researcher_factory(
             query=request.research_query(), report_type="research_report",
             report_source="web", config_path=self.config_path, verbose=False,
         )
-        await researcher.conduct_research()
-        report = await researcher.write_report(custom_prompt=(
-            request.research_query() + "\nWrite a competitive intelligence report with these sections: "
-            + "; ".join(request.dimensions)
-            + ". Cite source URLs inline for factual claims. Distinguish source assertions, "
-            "your inferences, conflicting evidence, and unknowns. A source authority prior "
-            "does not establish factual correctness. Do not fill evidence gaps with invented facts."
-        ))
+        with trace.stage("research") if trace else nullcontext():
+            await researcher.conduct_research()
+        with trace.stage("report") if trace else nullcontext():
+            report = await researcher.write_report(custom_prompt=(
+                request.research_query() + "\nWrite a competitive intelligence report with these sections: "
+                + "; ".join(request.dimensions)
+                + ". Cite source URLs inline for factual claims. Distinguish source assertions, "
+                "your inferences, conflicting evidence, and unknowns. A source authority prior "
+                "does not establish factual correctness. Do not fill evidence gaps with invented facts."
+            ))
         evidences_by_id = {}
         for evidence in researcher.get_evidences():
             previous = evidences_by_id.get(evidence.evidence_id)
@@ -91,4 +101,5 @@ class IntelligenceWorkflow:
             consistency=EvidenceConsistencyEvaluator().evaluate(evidences),
             source_urls=source_urls, estimated_cost_usd=researcher.get_costs(),
             limitations=limitations,
+            diagnostics=trace.snapshot() if trace else None,
         )

@@ -23,7 +23,9 @@ per-case input/report/context/sources/evidence/metrics, and aggregate JSON resul
 Failures remain in the failure-rate denominator. Exception classes are recorded without
 potentially sensitive provider messages. Existing directories are never overwritten.
 Cost is the existing provider's estimate, not an invoice; unsupported model pricing may
-be incomplete. Search-call counts are null until instrumented, never inferred from URLs.
+be incomplete. Search-call counts cover ResearchConductor web searches, excluding
+planning searches, MCP calls and retries inside providers. `trace.json` records bounded
+stage timing, failures and selection scores without query text, source content or URLs.
 
 The four quality metrics require reviewed counts following `docs/baseline_protocol.md`.
 An annotation is a JSON array of `QualityAnnotation` objects (schema in

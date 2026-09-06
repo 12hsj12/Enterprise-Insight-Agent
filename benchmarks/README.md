@@ -1,5 +1,39 @@
 # Enterprise Insight Benchmark
 
+## v1 repeatable runner
+
+Run from the repository root (PowerShell: use `.venv/Scripts/python`):
+
+```sh
+python -m benchmarks.run --variant baseline --split development --output outputs/baseline-dev-dry
+python -m benchmarks.run --variant source_aware --split development --output outputs/source-aware-dev-dry
+# Adding --live executes provider/search calls. Use a NEW output directory each time.
+# Reserve --split holdout for the final comparison.
+python -m benchmarks.score --run-dir outputs/baseline-dev --annotations annotations.json --output outputs/baseline-dev-scored
+```
+
+The JSON configurations compare the **current implementation with weight 0 vs 0.2**.
+This is a same-version ablation, distinct from the historical upstream baseline below.
+Weight 0.2 is a candidate, not an optimized value. Configuration overrides that change
+frozen settings are rejected. Dry runs validate inputs and write manifests but execute
+no research and report no measured quality, latency, or costs.
+
+Each live run writes a timestamp, commit SHA, dataset hash, frozen configuration,
+per-case input/report/context/sources/evidence/metrics, and aggregate JSON results.
+Failures remain in the failure-rate denominator. Exception classes are recorded without
+potentially sensitive provider messages. Existing directories are never overwritten.
+Cost is the existing provider's estimate, not an invoice; unsupported model pricing may
+be incomplete. Search-call counts are null until instrumented, never inferred from URLs.
+
+The four quality metrics require reviewed counts following `docs/baseline_protocol.md`.
+An annotation is a JSON array of `QualityAnnotation` objects (schema in
+`benchmarks/metrics.py`), including run ID, exact report SHA-256, reviewer and method.
+Each factual claim must be classified as supported or unsupported. Zero citation/claim
+denominators yield null. Missing annotations yield null, and scoring writes a separate
+artifact rather than modifying raw runs. Required facts should be defined from each
+case's required dimensions **before** reviewing variants; dimensions are not automatically
+treated as verified facts. Citation presence alone never establishes support.
+
 This directory contains the benchmark and evaluation assets for the **Enterprise Insight Agent** project.
 
 The benchmark is used to measure whether the engineering modifications to GPT Researcher improve evidence reliability, traceability, and enterprise research quality.

@@ -14,6 +14,7 @@ from ..context.compression import (
     WrittenContentCompressor,
 )
 from gpt_researcher.evidence import EvidenceContext
+from gpt_researcher.evidence.reliability import EvidenceReliabilityEvaluator
 
 
 class ContextManager:
@@ -158,5 +159,12 @@ class ContextManager:
         )
 
         self.researcher.add_evidences(result.evidences)
+
+        evaluator = EvidenceReliabilityEvaluator()
+        assessments = [
+            evaluator.evaluate(evidence)
+            for evidence in result.evidences
+        ]
+        self.researcher.add_evidence_assessments(assessments)
 
         return result

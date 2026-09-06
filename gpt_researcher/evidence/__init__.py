@@ -1,3 +1,3 @@
-from .models import Evidence, EvidenceContext
+from .models import Evidence, EvidenceAssessment, EvidenceContext
 
-__all__ = ["Evidence", "EvidenceContext"]
+__all__ = ["Evidence", "EvidenceAssessment", "EvidenceContext"]

@@ -22,11 +22,21 @@ class Evidence(BaseModel):
     )
 
 
+class RetrievalDiagnostic(BaseModel):
+    """Ranking diagnostics; authority is a source prior, never claim confidence."""
+
+    evidence_id: str
+    similarity_score: float
+    authority_score: float
+    final_score: float
+
+
 class EvidenceContext(BaseModel):
     """RAG output containing both report context and structured evidence."""
 
     context: str
     evidences: list[Evidence] = Field(default_factory=list)
+    retrieval_diagnostics: list[RetrievalDiagnostic] = Field(default_factory=list)
 
 
 class EvidenceAssessment(BaseModel):

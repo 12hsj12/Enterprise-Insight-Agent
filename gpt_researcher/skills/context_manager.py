@@ -58,12 +58,19 @@ class ContextManager:
             documents=pages,
             embeddings=self.researcher.memory.get_embeddings(),
             similarity_threshold=getattr(self.researcher.cfg, "similarity_threshold", None),
+            source_reliability_weight=getattr(self.researcher.cfg, "source_reliability_weight", None),
             prompt_family=self.researcher.prompt_family,
             **self.researcher.kwargs
         )
-        return await context_compressor.async_get_context(
+        result = await context_compressor.async_get_context(
             query=query, max_results=10, cost_callback=self.researcher.add_costs
         )
+        self.researcher.add_evidences(result.evidences)
+        evaluator = EvidenceReliabilityEvaluator()
+        self.researcher.add_evidence_assessments([
+            evaluator.evaluate(evidence) for evidence in result.evidences
+        ])
+        return result
 
     async def get_similar_content_by_query_with_vectorstore(self, query: str, filter: dict | None) -> str:
         """Get similar content from vectorstore based on the query.
@@ -152,19 +159,8 @@ class ContextManager:
             similarity_threshold=similarity_threshold,
             **self.researcher.kwargs
         )
-        result = await context_compressor.async_get_context(
+        return await written_content_compressor.async_get_context(
             query=query,
             max_results=10,
             cost_callback=self.researcher.add_costs,
         )
-
-        self.researcher.add_evidences(result.evidences)
-
-        evaluator = EvidenceReliabilityEvaluator()
-        assessments = [
-            evaluator.evaluate(evidence)
-            for evidence in result.evidences
-        ]
-        self.researcher.add_evidence_assessments(assessments)
-
-        return result

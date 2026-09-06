@@ -44,6 +44,8 @@ class Config:
 
         config_to_use = self.load_config(config_path)
         self._set_attributes(config_to_use)
+        if not 0.0 <= self.source_reliability_weight <= 1.0:
+            raise ValueError("SOURCE_RELIABILITY_WEIGHT must be between 0 and 1")
         self._set_embedding_attributes()
         self._set_llm_attributes()
         self._handle_deprecated_attributes()

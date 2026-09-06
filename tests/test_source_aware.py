@@ -162,6 +162,8 @@ async def test_context_compressor_applies_source_aware_reranking(monkeypatch):
 
     assert result.evidences[0].url == "https://openai.com/test"
     assert result.evidences[1].url == "https://example.com/test"
+    assert result.retrieval_diagnostics[0].evidence_id == result.evidences[0].evidence_id
+    assert result.retrieval_diagnostics[0].final_score == pytest.approx(0.84)
 
 
 @pytest.mark.asyncio

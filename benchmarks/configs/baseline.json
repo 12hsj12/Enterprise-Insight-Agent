@@ -1,0 +1,15 @@
+{
+  "SOURCE_RELIABILITY_WEIGHT": 0.0,
+  "SIMILARITY_THRESHOLD": 0.42,
+  "FAST_LLM": "openai:deepseek-v4-flash",
+  "SMART_LLM": "openai:deepseek-v4-flash",
+  "STRATEGIC_LLM": "openai:deepseek-v4-flash",
+  "EMBEDDING": "huggingface:sentence-transformers/all-MiniLM-L6-v2",
+  "RETRIEVER": "tavily",
+  "MAX_SEARCH_RESULTS_PER_QUERY": 5,
+  "TOTAL_WORDS": 1200,
+  "MAX_ITERATIONS": 3,
+  "MAX_SUBTOPICS": 3,
+  "REPORT_FORMAT": "APA",
+  "LANGUAGE": "english"
+}

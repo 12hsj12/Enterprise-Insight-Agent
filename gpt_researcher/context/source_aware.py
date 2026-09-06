@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import math
 from collections.abc import Sequence
 
 from langchain_core.documents import Document
@@ -24,6 +25,8 @@ class SourceAwareScorer:
         self.reliability_evaluator = EvidenceReliabilityEvaluator()
 
     def score(self, similarity_score: float, url: str) -> SourceAwareScore:
+        if not math.isfinite(similarity_score) or not -1 <= similarity_score <= 1:
+            raise ValueError("similarity_score must be finite and between -1 and 1")
         source_type = self.reliability_evaluator.classify_source_type(url)
         authority_score = self.reliability_evaluator.get_authority_score(
             source_type

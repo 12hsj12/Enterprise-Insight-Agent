@@ -34,6 +34,7 @@ from ..vector_store import VectorStoreWrapper
 from .retriever import SearchAPIRetriever, SectionRetriever
 from gpt_researcher.evidence import Evidence, EvidenceContext
 from .source_aware import SourceAwareScorer
+from gpt_researcher.evidence.models import RetrievalDiagnostic
 
 class VectorstoreCompressor:
     """Retrieves and compresses context from a vector store.
@@ -252,6 +253,15 @@ class ContextCompressor:
         return EvidenceContext(
             context=self.prompt_family.pretty_print_docs(relevant_docs, max_results),
             evidences=evidences,
+            retrieval_diagnostics=[
+                RetrievalDiagnostic(
+                    evidence_id=evidence.evidence_id,
+                    **vars(self.source_aware_scorer.score(
+                        float(doc.state["query_similarity_score"]), evidence.url
+                    )),
+                )
+                for evidence, doc in zip(evidences, relevant_docs)
+            ] if self.source_reliability_weight > 0 else [],
         )
 
 

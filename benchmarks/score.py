@@ -26,6 +26,7 @@ def score_run(run_dir: Path, annotations_path: Path, output: Path):
         record.update(quality_metrics(annotation))
         record["quality_annotation"] = annotation.model_dump()
     output.mkdir(parents=True, exist_ok=False)
+    write_json(output / "manifest.json", json.loads((run_dir / "manifest.json").read_text(encoding="utf-8")))
     write_json(output / "results.json", records)
     write_json(output / "summary.json", summarize(records))
 

@@ -93,7 +93,7 @@ async def lifespan(app: FastAPI):
     else:
         logger.warning(f"Frontend directory not found: {frontend_path}")
     
-    logger.info("GPT Researcher API ready - local mode (no database persistence)")
+    logger.info("Research API ready - local mode with SQLite enterprise task history")
     yield
     # Shutdown
     logger.info("Research API shutting down")

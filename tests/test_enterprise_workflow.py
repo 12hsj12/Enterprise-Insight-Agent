@@ -67,3 +67,11 @@ async def test_provider_failure_is_not_a_success():
             raise ConnectionError("fixture failure")
     with pytest.raises(ConnectionError):
         await IntelligenceWorkflow(Broken).run(IntelligenceRequest(target="FixtureCo"))
+
+
+async def test_empty_report_is_not_a_success():
+    class Empty(FakeResearcher):
+        async def write_report(self, **kwargs):
+            return "   "
+    with pytest.raises(ValueError, match="empty report"):
+        await IntelligenceWorkflow(Empty).run(IntelligenceRequest(target="FixtureCo"))

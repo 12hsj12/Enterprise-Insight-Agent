@@ -81,6 +81,8 @@ class IntelligenceWorkflow:
                 "your inferences, conflicting evidence, and unknowns. A source authority prior "
                 "does not establish factual correctness. Do not fill evidence gaps with invented facts."
             ))
+        if not isinstance(report, str) or not report.strip():
+            raise ValueError("Research provider returned an empty report")
         evidences_by_id = {}
         for evidence in researcher.get_evidences():
             previous = evidences_by_id.get(evidence.evidence_id)

@@ -1,0 +1,48 @@
+{
+  "experiment_id": "3b14f859-8697-4785-8f32-757ba736368a",
+  "variant": "source_aware",
+  "split": "development",
+  "mode": "live",
+  "commit_sha": "9004478dc52b4ccdca4cc9bb03c6d86c3e6d1624",
+  "created_at": "2026-09-06T14:59:33.069167+00:00",
+  "config": {
+    "SOURCE_RELIABILITY_WEIGHT": 0.2,
+    "SIMILARITY_THRESHOLD": 0.42,
+    "FAST_LLM": "openai:deepseek-v4-flash",
+    "SMART_LLM": "openai:deepseek-v4-flash",
+    "STRATEGIC_LLM": "openai:deepseek-v4-flash",
+    "EMBEDDING": "huggingface:sentence-transformers/all-MiniLM-L6-v2",
+    "RETRIEVER": "tavily",
+    "MAX_SEARCH_RESULTS_PER_QUERY": 5,
+    "TOTAL_WORDS": 1200,
+    "MAX_ITERATIONS": 3,
+    "MAX_SUBTOPICS": 3,
+    "REPORT_FORMAT": "APA",
+    "LANGUAGE": "english"
+  },
+  "effective_settings": {
+    "CURATE_SOURCES": false,
+    "TEMPERATURE": 0.4,
+    "SCRAPER": "bs",
+    "MAX_SCRAPER_WORKERS": 15,
+    "REASONING_EFFORT": "medium",
+    "MCP_STRATEGY": "fast",
+    "IMAGE_GENERATION_ENABLED": false,
+    "FAST_TOKEN_LIMIT": 6000,
+    "SMART_TOKEN_LIMIT": 12000,
+    "STRATEGIC_TOKEN_LIMIT": 8000
+  },
+  "compression_threshold": 8000,
+  "max_content_chars": 50000,
+  "python_version": "3.11.9",
+  "package_versions": {
+    "langchain-core": "1.6.0",
+    "langchain-classic": "1.0.8",
+    "pydantic": "2.13.4",
+    "openai": "2.54.0"
+  },
+  "dataset_sha256": "e93cd881793861cbf0e6f170b54ca417371790b841d3f4e16b215db02d8d9541",
+  "cutoff_date": "2026-09-05",
+  "timeout_s": 900,
+  "comparison": "Same-version zero-weight ablation, not a rerun of the historical upstream baseline"
+}

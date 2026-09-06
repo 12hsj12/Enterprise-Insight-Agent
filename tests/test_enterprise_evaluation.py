@@ -85,3 +85,22 @@ async def test_completed_fixture_and_annotation_hash(tmp_path):
     path.write_text(json.dumps([annotation(run_id=a.run_id, report_sha256="a" * 64).model_dump()]))
     with pytest.raises(ValueError, match="hash mismatch"):
         score_run(output, path, tmp_path / "bad")
+
+
+async def test_comparison_keeps_failed_cases_and_checks_controls(tmp_path):
+    from benchmarks.compare import compare_runs
+    def broken(**kwargs):
+        raise ConnectionError("synthetic fixture")
+    a, b = tmp_path / "baseline", tmp_path / "source-aware"
+    await run_benchmark("baseline", "development", a, True, broken)
+    await run_benchmark("source_aware", "development", b, True, broken)
+    comparison = compare_runs(a, b)
+    assert comparison["baseline"]["failures"] == 8
+    assert comparison["source_aware"]["failure_rate"] == 1
+    assert comparison["baseline"]["evidence_coverage"] is None
+    path = b / "manifest.json"
+    manifest = json.loads(path.read_text())
+    manifest["config"]["SIMILARITY_THRESHOLD"] = 0.5
+    path.write_text(json.dumps(manifest))
+    with pytest.raises(ValueError, match="Controlled configurations"):
+        compare_runs(a, b)

@@ -56,13 +56,18 @@ class ContextManager:
                 self.researcher.websocket,
             )
 
+        compressor_kwargs = dict(self.researcher.kwargs)
+        source_weight = compressor_kwargs.pop(
+            "source_reliability_weight",
+            getattr(self.researcher.cfg, "source_reliability_weight", None),
+        )
         context_compressor = ContextCompressor(
             documents=pages,
             embeddings=self.researcher.memory.get_embeddings(),
             similarity_threshold=getattr(self.researcher.cfg, "similarity_threshold", None),
-            source_reliability_weight=getattr(self.researcher.cfg, "source_reliability_weight", None),
+            source_reliability_weight=source_weight,
             prompt_family=self.researcher.prompt_family,
-            **self.researcher.kwargs
+            **compressor_kwargs
         )
         trace = current_trace()
         with trace.stage("retrieval") if trace else nullcontext():

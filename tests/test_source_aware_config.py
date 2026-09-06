@@ -43,7 +43,8 @@ def test_standard_retriever_source_alias():
     assert docs[0].metadata["source"] == "https://example.com"
 
 
-async def test_context_manager_registers_evidence_and_forwards_weight(monkeypatch):
+@pytest.mark.parametrize("kwargs,expected_weight", [({}, 0.2), ({"source_reliability_weight": 0.1}, 0.1)])
+async def test_context_manager_registers_evidence_and_forwards_weight(monkeypatch, kwargs, expected_weight):
     from gpt_researcher.evidence import EvidenceContext, Evidence
     evidence = Evidence(evidence_id="one", sub_query="q", url="https://openai.com", content="text")
     captured = {}
@@ -53,10 +54,11 @@ async def test_context_manager_registers_evidence_and_forwards_weight(monkeypatc
     monkeypatch.setattr("gpt_researcher.skills.context_manager.ContextCompressor", compressor)
     evidences, assessments = [], []
     researcher = SimpleNamespace(verbose=False, cfg=SimpleNamespace(source_reliability_weight=0.2),
-        memory=SimpleNamespace(get_embeddings=lambda: None), prompt_family=PromptFamily, kwargs={},
+        memory=SimpleNamespace(get_embeddings=lambda: None), prompt_family=PromptFamily, kwargs=kwargs,
         add_costs=lambda c: None, add_evidences=evidences.extend, add_evidence_assessments=assessments.extend)
     await ContextManager(researcher).get_similar_content_by_query("q", [])
-    assert captured["source_reliability_weight"] == 0.2
+    assert captured["source_reliability_weight"] == expected_weight
+    assert researcher.kwargs == kwargs
     assert evidences == [evidence]
     assert assessments[0].evidence_id == "one"
 

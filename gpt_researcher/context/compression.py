@@ -33,6 +33,7 @@ from ..utils.costs import estimate_embedding_cost
 from ..vector_store import VectorStoreWrapper
 from .retriever import SearchAPIRetriever, SectionRetriever
 from gpt_researcher.evidence import Evidence, EvidenceContext
+from .source_aware import SourceAwareScorer
 
 class VectorstoreCompressor:
     """Retrieves and compresses context from a vector store.
@@ -102,6 +103,7 @@ class ContextCompressor:
         embeddings,
         max_results: int = 5,
         similarity_threshold: float | None = None,
+        source_reliability_weight: float | None = None,
         prompt_family: type[PromptFamily] | PromptFamily = PromptFamily,
         **kwargs,
     ):
@@ -123,6 +125,17 @@ class ContextCompressor:
         if similarity_threshold is None:
             similarity_threshold = float(os.environ.get("SIMILARITY_THRESHOLD", 0.35))
         self.similarity_threshold = similarity_threshold
+
+        if source_reliability_weight is None:
+            source_reliability_weight = float(
+                os.environ.get("SOURCE_RELIABILITY_WEIGHT", "0.0")
+            )
+
+        self.source_reliability_weight = source_reliability_weight
+        self.source_aware_scorer = SourceAwareScorer(
+            reliability_weight=source_reliability_weight
+        )
+
         self.prompt_family = prompt_family
 
     def __get_contextual_retriever(self):
@@ -181,7 +194,11 @@ class ContextCompressor:
         chunk_threshold = int(os.environ.get("COMPRESSION_THRESHOLD", "8000"))
 
         # If total content is small, skip expensive compression and return directly
-        if total_chars < chunk_threshold and len(self.documents) <= max_results:
+        if (
+            self.source_reliability_weight == 0
+            and total_chars < chunk_threshold
+            and len(self.documents) <= max_results
+        ):
             # Fast path: no compression needed
             # Map scraper/retriever dict keys into metadata that pretty_print_docs expects.
             # Raw dicts use `url`; SearchAPIRetriever / pretty_print use `source`.
@@ -221,6 +238,11 @@ class ContextCompressor:
             query,
             **self.kwargs,
         )
+
+        if self.source_reliability_weight > 0:
+            relevant_docs = self.source_aware_scorer.rank_documents(
+                relevant_docs
+            )
 
         evidences = [
             self._document_to_evidence(doc, query)

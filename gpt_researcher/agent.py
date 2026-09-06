@@ -151,6 +151,7 @@ class GPTResearcher:
         self.research_sources = []  # The list of scraped sources including title, content and images
         self.evidences = []  # The list of structured evidences produced by the RAG pipeline
         self.evidence_assessments = []  # Reliability assessments for structured evidences
+        self.evidence_consistency_assessments = []  # Cross-evidence consistency assessments
         self.research_images = []  # The list of selected research images
         self.documents = documents
         self.vector_store = VectorStoreWrapper(vector_store) if vector_store else None
@@ -699,9 +700,17 @@ class GPTResearcher:
         """Get all evidence reliability assessments."""
         return self.evidence_assessments
 
+    def get_evidence_consistency_assessments(self):
+        """Get all evidence consistency assessments."""
+        return self.evidence_consistency_assessments
+
     def add_evidence_assessments(self, assessments: list) -> None:
         """Add evidence reliability assessments."""
         self.evidence_assessments.extend(assessments)
+
+    def add_evidence_consistency_assessments(self, assessments):
+        """Add evidence consistency assessments."""
+        self.evidence_consistency_assessments.extend(assessments)
 
     def add_references(self, report_markdown: str, visited_urls: set) -> str:
         """Add reference section to a markdown report.

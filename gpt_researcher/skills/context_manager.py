@@ -13,6 +13,7 @@ from ..context.compression import (
     VectorstoreCompressor,
     WrittenContentCompressor,
 )
+from gpt_researcher.evidence import EvidenceContext
 
 
 class ContextManager:
@@ -34,7 +35,7 @@ class ContextManager:
         """
         self.researcher = researcher
 
-    async def get_similar_content_by_query(self, query: str, pages: list) -> str:
+    async def get_similar_content_by_query(self, query: str, pages: list,) -> EvidenceContext:
         """Get similar content from pages based on the query.
 
         Args:
@@ -42,7 +43,7 @@ class ContextManager:
             pages: List of page content to search through.
 
         Returns:
-            Compressed context string of relevant content.
+            EvidenceContext containing formatted context and structured evidences.
         """
         if self.researcher.verbose:
             await stream_output(
@@ -150,6 +151,12 @@ class ContextManager:
             similarity_threshold=similarity_threshold,
             **self.researcher.kwargs
         )
-        return await written_content_compressor.async_get_context(
-            query=query, max_results=max_results, cost_callback=self.researcher.add_costs
+        result = await context_compressor.async_get_context(
+            query=query,
+            max_results=10,
+            cost_callback=self.researcher.add_costs,
         )
+
+        self.researcher.add_evidences(result.evidences)
+
+        return result

@@ -149,6 +149,7 @@ class GPTResearcher:
         self.complement_source_urls = complement_source_urls
         self.query_domains = query_domains or []
         self.research_sources = []  # The list of scraped sources including title, content and images
+        self.evidences = []  # The list of structured evidences produced by the RAG pipeline
         self.research_images = []  # The list of selected research images
         self.documents = documents
         self.vector_store = VectorStoreWrapper(vector_store) if vector_store else None
@@ -684,6 +685,14 @@ class GPTResearcher:
             sources: List of source dictionaries to add.
         """
         self.research_sources.extend(sources)
+
+    def get_evidences(self) -> list:
+        """Get all structured evidences collected during research."""
+        return self.evidences
+
+    def add_evidences(self, evidences: list) -> None:
+        """Add structured evidences produced by the RAG pipeline."""
+        self.evidences.extend(evidences)
 
     def add_references(self, report_markdown: str, visited_urls: set) -> str:
         """Add reference section to a markdown report.

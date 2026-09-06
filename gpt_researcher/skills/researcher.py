@@ -253,10 +253,10 @@ class ResearchConductor:
         if self.researcher.vector_store:
             self.researcher.vector_store.load(scraped_content)
 
-        context = await self.researcher.context_manager.get_similar_content_by_query(
+        context_result = await self.researcher.context_manager.get_similar_content_by_query(
             self.researcher.query, scraped_content
         )
-        return context
+        return context_result.context
 
     # Add logging to other methods similarly...
 
@@ -599,7 +599,10 @@ class ResearchConductor:
 
             # Get similar content based on scraped data
             if scraped_data:
-                web_context = await self.researcher.context_manager.get_similar_content_by_query(sub_query, scraped_data)
+                web_result = await self.researcher.context_manager.get_similar_content_by_query(
+                    sub_query, scraped_data
+                )
+                web_context = web_result.context
                 self.logger.info(f"Web content found for sub-query: {len(str(web_context)) if web_context else 0} chars")
 
             # Combine MCP context with web context intelligently
@@ -1079,11 +1082,11 @@ class ResearchConductor:
             return ""
             
         # Summarize the content using the context manager
-        summary = await self.researcher.context_manager.get_similar_content_by_query(
+        summary_result = await self.researcher.context_manager.get_similar_content_by_query(
             query, content
         )
-        
-        return summary
+
+        return summary_result.context
         
     async def _update_search_progress(self, current, total):
         """

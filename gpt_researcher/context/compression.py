@@ -16,6 +16,7 @@ Classes:
 
 import asyncio
 import os
+import hashlib
 from typing import Optional
 
 from langchain_classic.retrievers import ContextualCompressionRetriever
@@ -31,7 +32,7 @@ from ..prompts import PromptFamily
 from ..utils.costs import estimate_embedding_cost
 from ..vector_store import VectorStoreWrapper
 from .retriever import SearchAPIRetriever, SectionRetriever
-
+from gpt_researcher.evidence import Evidence, EvidenceContext
 
 class VectorstoreCompressor:
     """Retrieves and compresses context from a vector store.
@@ -145,7 +146,23 @@ class ContextCompressor:
         )
         return contextual_retriever
 
-    async def async_get_context(self, query: str, max_results: int = 5, cost_callback=None) -> str:
+    def _document_to_evidence(self, doc: Document, sub_query: str) -> Evidence:
+        url = doc.metadata.get("source", "") or ""
+        content = doc.page_content or ""
+
+        raw_id = f"{sub_query}|{url}|{content}"
+        evidence_hash = hashlib.sha256(raw_id.encode("utf-8")).hexdigest()[:16]
+
+        return Evidence(
+            evidence_id=f"ev_{evidence_hash}",
+            sub_query=sub_query,
+            title=doc.metadata.get("title", "") or "",
+            url=url,
+            content=content,
+        )
+
+
+    async def async_get_context(self, query: str, max_results: int = 5, cost_callback=None) -> EvidenceContext:
         """Get relevant context from documents asynchronously.
 
         Optimization: Skip expensive compression pipeline for small document sets.
@@ -157,7 +174,7 @@ class ContextCompressor:
             cost_callback: Optional callback for tracking embedding costs.
 
         Returns:
-            Formatted string of relevant document content.
+            EvidenceContext containing formatted context and structured evidences.
         """
         # Optimization: Calculate total content size
         total_chars = sum(len(str(doc.get('raw_content', ''))) for doc in self.documents)
@@ -178,14 +195,42 @@ class ContextCompressor:
                 )
                 for doc in self.documents[:max_results]
             ]
-            return self.prompt_family.pretty_print_docs(direct_docs, max_results)
+            evidences = [
+                self._document_to_evidence(doc, query)
+                for doc in direct_docs
+            ]
+
+            return EvidenceContext(
+                context=self.prompt_family.pretty_print_docs(direct_docs, max_results),
+                evidences=evidences,
+            )
 
         # Standard path: use compression for large content
         compressed_docs = self.__get_contextual_retriever()
+
         if cost_callback:
-            cost_callback(estimate_embedding_cost(model=OPENAI_EMBEDDING_MODEL, docs=self.documents))
-        relevant_docs = await asyncio.to_thread(compressed_docs.invoke, query, **self.kwargs)
-        return self.prompt_family.pretty_print_docs(relevant_docs, max_results)
+            cost_callback(
+                estimate_embedding_cost(
+                    model=OPENAI_EMBEDDING_MODEL,
+                    docs=self.documents,
+                )
+            )
+
+        relevant_docs = await asyncio.to_thread(
+            compressed_docs.invoke,
+            query,
+            **self.kwargs,
+        )
+
+        evidences = [
+            self._document_to_evidence(doc, query)
+            for doc in relevant_docs[:max_results]
+        ]
+
+        return EvidenceContext(
+            context=self.prompt_family.pretty_print_docs(relevant_docs, max_results),
+            evidences=evidences,
+        )
 
 
 class WrittenContentCompressor:

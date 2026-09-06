@@ -92,3 +92,51 @@ def test_researcher_can_store_evidence_assessments():
     assert stored[0].evidence_id == "ev_store"
     assert stored[0].source_type == "official"
     assert stored[0].authority_score == 1.0
+
+
+def test_official_subdomain_is_classified_correctly():
+    evaluator = EvidenceReliabilityEvaluator()
+
+    evidence = Evidence(
+        evidence_id="ev_subdomain",
+        sub_query="test",
+        url="https://research.openai.com/example",
+        content="test content",
+    )
+
+    assessment = evaluator.evaluate(evidence)
+
+    assert assessment.source_type == "official"
+    assert assessment.authority_score == 1.0
+
+
+def test_deceptive_domain_is_not_classified_as_official():
+    evaluator = EvidenceReliabilityEvaluator()
+
+    evidence = Evidence(
+        evidence_id="ev_fake",
+        sub_query="test",
+        url="https://fakeopenai.com/article",
+        content="test content",
+    )
+
+    assessment = evaluator.evaluate(evidence)
+
+    assert assessment.source_type == "web"
+    assert assessment.authority_score == 0.6
+
+
+def test_malformed_url_falls_back_to_unknown():
+    evaluator = EvidenceReliabilityEvaluator()
+
+    evidence = Evidence(
+        evidence_id="ev_malformed",
+        sub_query="test",
+        url="not-a-valid-url",
+        content="test content",
+    )
+
+    assessment = evaluator.evaluate(evidence)
+
+    assert assessment.source_type == "unknown"
+    assert assessment.authority_score == 0.3

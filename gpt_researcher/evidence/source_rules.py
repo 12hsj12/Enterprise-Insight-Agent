@@ -1,3 +1,6 @@
+# Authority scores are source-level priors used for evidence ranking.
+# They do not represent factual correctness or claim-level confidence.
+
 OFFICIAL_DOMAINS = {
     "openai.com",
     "anthropic.com",

@@ -35,6 +35,8 @@ from gpt_researcher.utils.enum import Tone
 from chat.chat import ChatAgentWithMemory
 
 from server.report_store import ReportStore
+from server.enterprise_api import create_enterprise_router
+from gpt_researcher.enterprise import IntelligenceWorkflow
 
 # MongoDB services removed - no database persistence needed
 
@@ -95,6 +97,12 @@ async def lifespan(app: FastAPI):
 
 # App initialization
 app = FastAPI(lifespan=lifespan)
+enterprise_store = ReportStore(Path(os.getenv("ENTERPRISE_STORE_PATH", "outputs/enterprise_tasks.json")))
+app.include_router(create_enterprise_router(
+    enterprise_store,
+    workflow_factory=lambda: IntelligenceWorkflow(config_path=os.getenv("ENTERPRISE_CONFIG_PATH")),
+    timeout_s=float(os.getenv("ENTERPRISE_TASK_TIMEOUT", "900")),
+))
 
 # Configure allowed origins for CORS
 allowed_origins_env = os.getenv("CORS_ALLOW_ORIGINS")

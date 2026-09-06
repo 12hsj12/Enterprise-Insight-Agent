@@ -2,7 +2,7 @@
 
 from datetime import date
 from contextlib import nullcontext
-from typing import Callable
+from typing import Annotated, Callable
 from uuid import uuid4
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -20,7 +20,7 @@ class IntelligenceRequest(BaseModel):
     target: str = Field(min_length=1, max_length=300)
     topic: str = Field(default="Competitive intelligence", min_length=1, max_length=3000)
     cutoff_date: date = date(2026, 9, 5)
-    dimensions: list[str] = Field(default_factory=lambda: [
+    dimensions: list[Annotated[str, Field(min_length=1, max_length=300)]] = Field(default_factory=lambda: [
         "Company overview and key facts", "Products and business lines",
         "Competitors and competitive landscape", "Recent developments",
         "Evidence-backed findings, risks and uncertainties",

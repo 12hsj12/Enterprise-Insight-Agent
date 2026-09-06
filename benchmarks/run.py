@@ -8,10 +8,12 @@ import argparse
 import asyncio
 from datetime import datetime, timezone
 import hashlib
+import importlib.metadata
 import json
 import os
 from pathlib import Path
 import subprocess
+import sys
 import time
 from uuid import uuid4
 
@@ -69,6 +71,17 @@ async def run_benchmark(variant: str, split: str, output: Path, live: bool = Fal
         "experiment_id": str(uuid4()), "variant": variant, "split": split,
         "mode": "live" if live else "dry_run", "commit_sha": git_sha(),
         "created_at": datetime.now(timezone.utc).isoformat(), "config": config,
+        "effective_settings": {key: getattr(effective, key.lower()) for key in (
+            "CURATE_SOURCES", "TEMPERATURE", "SCRAPER", "MAX_SCRAPER_WORKERS",
+            "REASONING_EFFORT", "MCP_STRATEGY", "IMAGE_GENERATION_ENABLED",
+            "FAST_TOKEN_LIMIT", "SMART_TOKEN_LIMIT", "STRATEGIC_TOKEN_LIMIT",
+        )},
+        "compression_threshold": 8000,
+        "max_content_chars": int(os.getenv("MAX_CONTENT_CHARS", "50000")),
+        "python_version": sys.version.split()[0],
+        "package_versions": {name: importlib.metadata.version(name) for name in (
+            "langchain-core", "langchain-classic", "pydantic", "openai",
+        )},
         "dataset_sha256": digest(DATASET.read_text(encoding="utf-8")),
         "cutoff_date": data["cutoff_date"], "timeout_s": timeout_s,
         "comparison": "Same-version zero-weight ablation, not a rerun of the historical upstream baseline",
@@ -134,6 +147,8 @@ async def run_benchmark(variant: str, split: str, output: Path, live: bool = Fal
 
 
 def main():
+    from dotenv import load_dotenv
+    load_dotenv(ROOT / ".env")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--variant", choices=VARIANTS, required=True)
     parser.add_argument("--split", choices=["development", "holdout"], default="development")

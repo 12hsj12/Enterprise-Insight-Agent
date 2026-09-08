@@ -82,3 +82,125 @@ S0 evidence:
 ## Recovery boundary
 
 Recovery requires an explicit new user-authorized run or manual intervention. Before resuming, the three final O1 findings must be repaired and independently reviewed, the failed untracked O1 artifacts must be reconciled without prohibited bulk deletion, and a real fresh-worker/read-only-reviewer smoke must pass. Only then may `D1_POLICY_MODELS` become dependency-ready.
+
+---
+
+## O1 recovery cycle outcome — 2026-09-08
+
+The user explicitly authorized one new O1 recovery cycle after the blocker recorded above.
+That cycle is now **BLOCKED** after its initial independent review and both permitted repair
+attempts. This section is the current recovery outcome; the preceding report remains the
+forensic record of the original blocked run.
+
+O1 was not accepted, no O1 checkpoint commit was created, and no O1 commit was pushed.
+Because the independent review gate did not pass, the required real fresh-worker/read-only-
+reviewer smoke was not run or claimed. The frozen downstream graph remains stopped before
+`D1_POLICY_MODELS`; no paid/live benchmark work was started.
+
+### Recovery starting point
+
+- Branch: `feat/evidence-v2`
+- Recovery HEAD and committed blocker report: `fdd3d838d20804fff339e4930dfe87a0eab050dd`
+- Last independently accepted V2 implementation checkpoint:
+  `25be9cd57c44a4494c220a70baef043532fda2cb`
+- Frozen V1 commit/ref: `0e3c6b8643db499936312f4ff24e6af1641409e4`
+- Local and `origin/feat/evidence-v2` were synchronized at recovery start and before this
+  report update (`0 0` left/right count at `fdd3d838`).
+
+### Work performed
+
+The five rejected O1 files were inspected individually and repaired in place without bulk
+deletion:
+
+- `docs/v2/V2_ORCHESTRATION.md`
+- `orchestration/reviewer_result.schema.json`
+- `orchestration/worker_result.schema.json`
+- `scripts/v2_orchestrator.py`
+- `tests/test_v2_orchestrator.py`
+
+The recovery fixed the original three findings in several stages: delivery/blocker path
+isolation, explicit accepted-checkpoint semantics for `last_safe_commit`, and a single
+`main()`-owned terminal finalizer. It also added recovery-history checkpoint import,
+worker-commit-bound reviewer validation, runtime-state tamper detection, structured terminal
+batch identity, and regression coverage. These changes remain rejected because the final
+independent review found additional failure-path gaps listed below.
+
+### Independent review history
+
+#### Initial recovery review — FAIL
+
+The reviewer found that O1 import could not cross the preserved `fdd3d838` blocker commit,
+terminal state was still written below the canonical finalizer and could lose the actual
+batch identity, and reviewer acceptance was not bound tightly enough to the worker commit.
+
+#### Repair attempt 1 review — FAIL
+
+The reviewer found that runtime-state paths were hidden from committed/staged path checks
+and an untrusted worker could tamper with accepted-checkpoint state; structured blocker
+reasons were flattened during finalization; and existing blocker text was not preserved
+byte-for-byte.
+
+#### Repair attempt 2 review — FAIL
+
+The final permitted review found four remaining blockers:
+
+1. **HIGH — state-path alias can mutate the forbidden delivery report.** `--state` is not
+   validated as distinct from delivery, blocker, and lock paths. A terminal failure with
+   `--state V2_FINAL_DELIVERY_REPORT.md` can therefore overwrite the delivery artifact while
+   writing JSON state.
+2. **MEDIUM — accepted-checkpoint validation is still incomplete.** Persisted safety checks
+   bind status, commit, and reviewer metadata, but do not revalidate the complete worker test
+   evidence, worker `git_diff_check`, reviewer tests/path/diff checks, and distinct session
+   chain before trusting `last_safe_commit`.
+3. **MEDIUM — terminal-event deduplication lacks occurrence identity.** A later execution
+   attempt with the same batch and reason text can be mistaken for a retry of an earlier
+   finalization, silently dropping new attempt/review evidence.
+4. **MEDIUM — exhausted-review reasons are incomplete.** The canonical blocker list records
+   only the generic exhaustion message instead of also retaining the final reviewer's
+   structured findings/blockers.
+
+The reviewer confirmed that the single `main()` finalization path, runtime-state restoration,
+committed/staged runtime-path visibility, reviewer-to-worker commit binding, preserved-history
+O1 import, and byte-prefix preservation were otherwise working. Passing portions cannot
+override the four failure-path findings.
+
+### Actual test and audit evidence
+
+Latest implementation-worker verification before final review:
+
+```text
+.venv\Scripts\python.exe -B -m pytest tests/test_v2_orchestrator.py tests/test_v2_spec_freeze.py -q -p no:cacheprovider
+40 passed, 1 inherited PytestConfigWarning
+
+.venv\Scripts\python.exe -B -m pytest tests/test_v2_orchestrator.py tests/test_v2_spec_freeze.py tests/test_evidence_reliability.py tests/test_evidence_consistency.py tests/test_source_aware.py tests/test_source_aware_config.py tests/test_context_compressor_source_url.py tests/test_enterprise_workflow.py tests/test_enterprise_trace.py tests/test_enterprise_api.py tests/test_enterprise_persistence.py -q -p no:cacheprovider
+93 passed, 3 inherited warnings
+
+git diff --check
+PASS
+```
+
+The final independent reviewer separately recorded:
+
+```text
+O1 + S0: 40 passed, 1 warning
+Relevant V1/S0 regressions: 60 passed, 3 warnings
+git diff --cached --check: PASS
+Frozen V1 ref and ancestry: PASS
+```
+
+No benchmark metrics were produced. No provider cost was incurred by a V2 benchmark. The
+installed Codex CLI was observed as version `0.153.4`, but capability availability alone is
+not an orchestration smoke result.
+
+### Repository preservation and downstream state
+
+- The five failed O1 files are deliberately left untracked and uncommitted for forensic
+  inspection. They were removed from the index individually and were not bulk-deleted.
+- This blocker-report update is the only intended recovery-cycle checkpoint artifact.
+- Frozen S0 specifications, taxonomy, dataset, dev/holdout split, Required Units, metrics,
+  acceptance criteria, and experimental rules were not changed.
+- Frozen V1 history, annotations, results, and branch ref were not changed or rerun.
+- `D1_POLICY_MODELS` and every dependent batch remain unexecuted.
+- A future recovery requires new explicit authorization because this cycle exhausted both
+  permitted repairs. It must begin from this blocker state, repair all four remaining
+  findings, pass a new independent review, and only then run the real orchestration smoke.

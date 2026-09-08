@@ -11,6 +11,14 @@ from gpt_researcher.evidence import (
     Evidence, EvidenceAssessment, EvidenceConsistencyAssessment,
     EvidenceConsistencyEvaluator,
 )
+from gpt_researcher.evidence.models import RetrievalDiagnostic
+from .task_policy import (
+    EVIDENCE_SELECTION_LIMITATION_CODES,
+    EvidencePolicy,
+    ResearchTaskClassifier,
+    TaskClassification,
+    evidence_policy_for,
+)
 from .trace import RunTrace
 
 
@@ -25,6 +33,11 @@ class IntelligenceRequest(BaseModel):
         "Competitors and competitive landscape", "Recent developments",
         "Evidence-backed findings, risks and uncertainties",
     ], min_length=1, max_length=12)
+    enable_v2_evidence_selection: bool = False
+
+    def research_intent(self) -> str:
+        """Return only user-authored intent, excluding report-template expansion."""
+        return f"{self.target}: {self.topic}"
 
     def research_query(self) -> str:
         return (
@@ -45,6 +58,10 @@ class IntelligenceResult(BaseModel):
     estimated_cost_usd: float | None = Field(default=None, ge=0)
     limitations: list[str] = Field(default_factory=list)
     diagnostics: dict | None = None
+    task_classification: TaskClassification | None = None
+    evidence_policy: EvidencePolicy | None = None
+    retrieval_diagnostics: list[RetrievalDiagnostic] = Field(default_factory=list)
+    evidence_selection_limitation_codes: list[str] = Field(default_factory=list)
 
 
 class IntelligenceWorkflow:
@@ -67,10 +84,29 @@ class IntelligenceWorkflow:
             return await self._run(request, run_id, trace)
 
     async def _run(self, request, run_id, trace):
-        researcher = self.researcher_factory(
+        task_classification = None
+        evidence_policy = None
+        selection_limitations = ()
+        if request.enable_v2_evidence_selection:
+            task_classification = ResearchTaskClassifier().classify(
+                request.research_intent()
+            )
+            evidence_policy = evidence_policy_for(task_classification.category)
+            selection_limitations = EVIDENCE_SELECTION_LIMITATION_CODES
+            if trace:
+                trace.task_policy(
+                    task_classification, evidence_policy, selection_limitations
+                )
+        researcher_kwargs = dict(
             query=request.research_query(), report_type="research_report",
             report_source="web", config_path=self.config_path, verbose=False,
         )
+        if task_classification is not None and evidence_policy is not None:
+            researcher_kwargs.update(
+                task_classification=task_classification,
+                evidence_policy=evidence_policy,
+            )
+        researcher = self.researcher_factory(**researcher_kwargs)
         with trace.stage("research") if trace else nullcontext():
             await researcher.conduct_research()
         with trace.stage("report") if trace else nullcontext():
@@ -101,6 +137,14 @@ class IntelligenceWorkflow:
         ]
         if not evidences:
             limitations.append("No structured evidence was collected; report claims require manual review.")
+        retrieval_diagnostics_getter = getattr(
+            researcher, "get_retrieval_diagnostics", None
+        )
+        retrieval_diagnostics = (
+            list(retrieval_diagnostics_getter())
+            if retrieval_diagnostics_getter is not None
+            else []
+        )
         return IntelligenceResult(
             run_id=run_id or str(uuid4()), request=request, report=report,
             evidences=evidences, assessments=list(assessments.values()),
@@ -108,4 +152,8 @@ class IntelligenceWorkflow:
             source_urls=source_urls, estimated_cost_usd=researcher.get_costs(),
             limitations=limitations,
             diagnostics=trace.snapshot() if trace else None,
+            task_classification=task_classification,
+            evidence_policy=evidence_policy,
+            retrieval_diagnostics=retrieval_diagnostics,
+            evidence_selection_limitation_codes=list(selection_limitations),
         )

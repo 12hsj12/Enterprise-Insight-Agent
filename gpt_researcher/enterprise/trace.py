@@ -56,14 +56,56 @@ class RunTrace:
             event["duration_s"] = time.perf_counter() - start
             self._append(event)
 
-    def retrieval(self, result, weight: float, similarity_threshold: float):
+    def task_policy(self, classification, policy, limitations):
+        """Record public task-policy metadata without query or evidence payloads."""
+        self._append({
+            "stage": "task_policy",
+            "task_category": classification.category.value,
+            "classifier_version": classification.classifier_version,
+            "classifier_confidence": classification.confidence,
+            "fallback_used": classification.fallback_used,
+            "policy_version": policy.policy_version,
+            "authority_weight": policy.authority_weight,
+            "freshness_mode": policy.freshness_mode.value,
+            "max_age_days": policy.max_age_days,
+            "preferred_source_types": list(policy.preferred_source_types),
+            "corroboration_rule": policy.corroboration_rule,
+            "primary_source_rule": policy.primary_source_rule,
+            "independent_source_rule": policy.independent_source_rule,
+            "policy_reason_codes": list(policy.reason_codes),
+            "policy_limitation_codes": list(limitations),
+        })
+
+    def retrieval(self, result, weight: float, similarity_threshold: float,
+                  task_classification=None, evidence_policy=None,
+                  policy_limitations=()):
         self.retrieval_calls += 1
         self.selected_evidence_count += len(result.evidences)
-        self._append({
+        event = {
             "stage": "retrieval_selection", "source_reliability_weight": weight,
             "similarity_threshold": similarity_threshold, "selected_count": len(result.evidences),
             "scores": [d.model_dump() for d in result.retrieval_diagnostics],
-        })
+        }
+        if task_classification is not None and evidence_policy is not None:
+            event.update({
+                "task_category": task_classification.category.value,
+                "classifier_version": task_classification.classifier_version,
+                "classifier_confidence": task_classification.confidence,
+                "fallback_used": task_classification.fallback_used,
+                "policy_version": evidence_policy.policy_version,
+                "authority_weight": evidence_policy.authority_weight,
+                "freshness_mode": evidence_policy.freshness_mode.value,
+                "max_age_days": evidence_policy.max_age_days,
+                "preferred_source_types": list(
+                    evidence_policy.preferred_source_types
+                ),
+                "corroboration_rule": evidence_policy.corroboration_rule,
+                "primary_source_rule": evidence_policy.primary_source_rule,
+                "independent_source_rule": evidence_policy.independent_source_rule,
+                "policy_reason_codes": list(evidence_policy.reason_codes),
+                "policy_limitation_codes": list(policy_limitations),
+            })
+        self._append(event)
 
     def snapshot(self):
         return {

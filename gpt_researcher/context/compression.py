@@ -35,6 +35,7 @@ from .retriever import SearchAPIRetriever, SectionRetriever
 from gpt_researcher.evidence import Evidence, EvidenceContext
 from .source_aware import SourceAwareScorer
 from gpt_researcher.evidence.models import RetrievalDiagnostic
+from gpt_researcher.enterprise.task_policy import EvidencePolicy
 
 class VectorstoreCompressor:
     """Retrieves and compresses context from a vector store.
@@ -105,6 +106,7 @@ class ContextCompressor:
         max_results: int = 5,
         similarity_threshold: float | None = None,
         source_reliability_weight: float | None = None,
+        evidence_policy: EvidencePolicy | None = None,
         prompt_family: type[PromptFamily] | PromptFamily = PromptFamily,
         **kwargs,
     ):
@@ -116,6 +118,9 @@ class ContextCompressor:
             max_results: Maximum number of results to return.
             similarity_threshold: Minimum similarity score for inclusion.
                 Falls back to the SIMILARITY_THRESHOLD env var when not given.
+            source_reliability_weight: Optional fixed V1 source-authority weight.
+            evidence_policy: Optional typed V2 policy. When present, its authority
+                weight is the source of truth and the semantic path always executes.
             prompt_family: Prompt family for formatting output.
             **kwargs: Additional keyword arguments.
         """
@@ -127,11 +132,21 @@ class ContextCompressor:
             similarity_threshold = float(os.environ.get("SIMILARITY_THRESHOLD", 0.35))
         self.similarity_threshold = similarity_threshold
 
-        if source_reliability_weight is None:
+        if evidence_policy is not None:
+            if (
+                source_reliability_weight is not None
+                and source_reliability_weight != evidence_policy.authority_weight
+            ):
+                raise ValueError(
+                    "source_reliability_weight conflicts with EvidencePolicy authority_weight"
+                )
+            source_reliability_weight = evidence_policy.authority_weight
+        elif source_reliability_weight is None:
             source_reliability_weight = float(
                 os.environ.get("SOURCE_RELIABILITY_WEIGHT", "0.0")
             )
 
+        self.evidence_policy = evidence_policy
         self.source_reliability_weight = source_reliability_weight
         self.source_aware_scorer = SourceAwareScorer(
             reliability_weight=source_reliability_weight

@@ -17,6 +17,18 @@ from pydantic import BaseModel, ConfigDict, Field
 CLASSIFIER_VERSION: Final = "enterprise-insight-task-classifier/1.0.0"
 POLICY_VERSION: Final = "enterprise-insight-v2-architecture/2.0.0"
 
+# The current web evidence model has URL provenance, but not publication timestamps,
+# publisher ownership, or the richer source-role vocabulary required to enforce these
+# policy fields honestly.  Keep the requirements typed and make the boundary auditable
+# until claim grounding owns the corresponding checks.
+EVIDENCE_SELECTION_LIMITATION_CODES: Final = (
+    "preferred_source_types_not_enforced_missing_structured_provenance",
+    "freshness_not_enforced_missing_publication_time",
+    "corroboration_deferred_to_claim_grounding",
+    "primary_source_rule_deferred_to_claim_grounding",
+    "independence_rule_deferred_to_claim_grounding",
+)
+
 PublicCode = Annotated[
     str,
     Field(min_length=1, pattern=r"^[a-z][a-z0-9_]*$"),
@@ -412,6 +424,7 @@ def evidence_policy_for(category: ResearchTaskCategory) -> EvidencePolicy:
 
 __all__ = [
     "CLASSIFIER_VERSION",
+    "EVIDENCE_SELECTION_LIMITATION_CODES",
     "POLICY_VERSION",
     "EvidencePolicy",
     "FreshnessMode",

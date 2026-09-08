@@ -17,6 +17,9 @@ from ..context.compression import (
 from gpt_researcher.evidence import EvidenceContext
 from gpt_researcher.evidence.reliability import EvidenceReliabilityEvaluator
 from gpt_researcher.enterprise.trace import current_trace
+from gpt_researcher.enterprise.task_policy import (
+    EVIDENCE_SELECTION_LIMITATION_CODES,
+)
 
 
 class ContextManager:
@@ -57,11 +60,18 @@ class ContextManager:
             )
 
         compressor_kwargs = dict(self.researcher.kwargs)
-        source_weight = compressor_kwargs.pop(
-            "source_reliability_weight",
-            getattr(self.researcher.cfg, "source_reliability_weight", None),
-        )
-        context_compressor = ContextCompressor(
+        evidence_policy = getattr(self.researcher, "evidence_policy", None)
+        if evidence_policy is None:
+            source_weight = compressor_kwargs.pop(
+                "source_reliability_weight",
+                getattr(self.researcher.cfg, "source_reliability_weight", None),
+            )
+        else:
+            # The typed per-request policy, not config or an environment variable,
+            # owns the V2 weight. Avoid passing two potentially conflicting sources.
+            compressor_kwargs.pop("source_reliability_weight", None)
+            source_weight = None
+        compressor_init = dict(
             documents=pages,
             embeddings=self.researcher.memory.get_embeddings(),
             similarity_threshold=getattr(self.researcher.cfg, "similarity_threshold", None),
@@ -69,6 +79,9 @@ class ContextManager:
             prompt_family=self.researcher.prompt_family,
             **compressor_kwargs
         )
+        if evidence_policy is not None:
+            compressor_init["evidence_policy"] = evidence_policy
+        context_compressor = ContextCompressor(**compressor_init)
         trace = current_trace()
         with trace.stage("retrieval") if trace else nullcontext():
             result = await context_compressor.async_get_context(
@@ -76,8 +89,20 @@ class ContextManager:
             )
         if trace:
             trace.retrieval(result, context_compressor.source_reliability_weight,
-                            context_compressor.similarity_threshold)
+                            context_compressor.similarity_threshold,
+                            task_classification=getattr(
+                                self.researcher, "task_classification", None
+                            ),
+                            evidence_policy=evidence_policy,
+                            policy_limitations=(
+                                EVIDENCE_SELECTION_LIMITATION_CODES
+                                if evidence_policy is not None
+                                else ()
+                            ))
         self.researcher.add_evidences(result.evidences)
+        add_diagnostics = getattr(self.researcher, "add_retrieval_diagnostics", None)
+        if add_diagnostics is not None:
+            add_diagnostics(result.retrieval_diagnostics)
         evaluator = EvidenceReliabilityEvaluator()
         self.researcher.add_evidence_assessments([
             evaluator.evaluate(evidence) for evidence in result.evidences

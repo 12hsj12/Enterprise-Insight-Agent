@@ -4,10 +4,15 @@ This module provides the main GPTResearcher class that orchestrates
 autonomous research and report generation using LLMs and web search.
 """
 
+from __future__ import annotations
+
 import asyncio
 import json
 import os
-from typing import Any, Optional
+from typing import TYPE_CHECKING, Any, Optional
+
+if TYPE_CHECKING:
+    from .enterprise.task_policy import EvidencePolicy, TaskClassification
 
 from .actions import (
     add_references,
@@ -80,6 +85,8 @@ class GPTResearcher:
         mcp_configs: list[dict] | None = None,
         mcp_max_iterations: int | None = None,
         mcp_strategy: str | None = None,
+        task_classification: TaskClassification | None = None,
+        evidence_policy: EvidencePolicy | None = None,
         **kwargs
     ):
         """
@@ -152,6 +159,9 @@ class GPTResearcher:
         self.evidences = []  # The list of structured evidences produced by the RAG pipeline
         self.evidence_assessments = []  # Reliability assessments for structured evidences
         self.evidence_consistency_assessments = []  # Cross-evidence consistency assessments
+        self.retrieval_diagnostics = []  # Content-free evidence-selection score components
+        self.task_classification = task_classification
+        self.evidence_policy = evidence_policy
         self.research_images = []  # The list of selected research images
         self.documents = documents
         self.vector_store = VectorStoreWrapper(vector_store) if vector_store else None
@@ -704,6 +714,10 @@ class GPTResearcher:
         """Get all evidence consistency assessments."""
         return self.evidence_consistency_assessments
 
+    def get_retrieval_diagnostics(self) -> list:
+        """Get content-free diagnostics for selected evidence chunks."""
+        return self.retrieval_diagnostics
+
     def add_evidence_assessments(self, assessments: list) -> None:
         """Add evidence reliability assessments."""
         self.evidence_assessments.extend(assessments)
@@ -711,6 +725,10 @@ class GPTResearcher:
     def add_evidence_consistency_assessments(self, assessments):
         """Add evidence consistency assessments."""
         self.evidence_consistency_assessments.extend(assessments)
+
+    def add_retrieval_diagnostics(self, diagnostics: list) -> None:
+        """Add selected-evidence ranking diagnostics."""
+        self.retrieval_diagnostics.extend(diagnostics)
 
     def add_references(self, report_markdown: str, visited_urls: set) -> str:
         """Add reference section to a markdown report.

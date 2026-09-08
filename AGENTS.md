@@ -764,3 +764,37 @@ orchestration-specific blocker artifact.
 Never fabricate completion.
 Never fabricate benchmark improvement.
 Never rewrite V1 evidence.
+
+## 24. Codex batch autonomy
+
+Within an explicitly authorized V2 implementation batch, Codex should autonomously
+complete the engineering loop:
+
+inspect repository
+→ implement
+→ add/update tests
+→ run focused tests
+→ run relevant regressions
+→ inspect diff
+→ run git diff --check
+→ commit
+→ push to feat/evidence-v2
+→ report results
+
+Do not stop to ask the user to manually run routine Git, test, formatting, or inspection
+commands when Codex can safely perform them itself.
+
+Stop and request user intervention only when encountering a genuine decision boundary,
+including:
+
+- unexpected dirty or conflicting user changes
+- branch/history inconsistency
+- secrets or credential risk
+- ambiguous frozen V2 requirements
+- need to modify frozen benchmark/specification artifacts
+- destructive Git operations
+- benchmark/provider spending not already authorized
+
+Implementation details may be decided autonomously within the frozen V2 architecture.
+Research design, benchmark definitions, taxonomy, Required Units, metrics, acceptance
+criteria, and frozen V1 artifacts must not be changed without explicit authorization.

@@ -637,22 +637,26 @@ Inspect staged files before every commit.
 
 ---
 
-## 20. Autonomous V2 execution
+## 20. V2 batch execution workflow
 
-For long-running V2 development, do not attempt to retain the entire project inside one enormous worker context.
+V2 development should use a bounded, operator-mediated batch workflow rather than a
+programmatic multi-agent orchestrator.
 
-Prefer:
+Preferred execution pattern:
 
 Planner
 → bounded batch specification
-→ fresh worker
-→ independent reviewer
-→ repair worker if necessary
-→ checkpoint
+→ fresh Codex worker conversation
+→ focused tests
+→ Git checkpoint
+→ independent review for meaningful/core batches
+→ repair if necessary
+→ next batch
 
-The planning layer should define a durable batch manifest.
+The user acts only as the execution coordinator. The user should not be required to
+manually implement code.
 
-Each batch should specify:
+Each implementation batch should clearly define:
 
 - batch id
 - objective
@@ -666,32 +670,46 @@ Each batch should specify:
 - expected artifacts
 - expected Git checkpoint
 
-Where supported, a deterministic local orchestrator may use Codex App Server or another supported programmable Codex interface to manage fresh execution sessions.
+Use a fresh Codex conversation when starting a substantial new batch so that unrelated
+context from previous implementation work does not accumulate.
 
-The orchestrator should coordinate workflow mechanically rather than repeatedly re-reasoning about the entire repository.
+Programmatic Codex App Server orchestration is explicitly out of scope for the V2 core
+deliverable and must not be treated as a prerequisite for implementing the Evidence V2
+architecture.
 
-Never claim child-session orchestration occurred unless it actually did.
+The absence of an automated orchestrator must not block downstream V2 core implementation,
+testing, evaluation, or benchmark work.
 
 ---
 
 ## 21. Review and repair
 
-A worker should not be its sole final reviewer for a meaningful implementation batch.
+A worker should not be its sole final reviewer for a meaningful or core implementation batch.
 
-Prefer independent review contexts.
+Independent review is required for major V2 checkpoints, including:
 
-If a batch fails review:
+- core architecture implementation
+- query-aware evidence selection
+- claim grounding and claim gate
+- benchmark and evaluation infrastructure
+- final V2 qualification
 
-1. launch a fresh repair attempt
-2. rerun review
+For small implementation changes, focused tests and Git inspection may be sufficient.
 
-Maximum automatic repair attempts:
+If a meaningful batch fails independent review:
 
-2
+1. record the concrete review findings
+2. use a fresh Codex conversation to repair the same batch
+3. rerun the relevant focused and regression tests
+4. request independent review again before proceeding
 
-If still blocked, stop downstream dependent work and create a blocker report.
+Do not continue downstream work when a genuine core dependency remains broken.
 
-Do not continue through a broken dependency chain.
+A failed batch is not a failed V2 project. Resolve or explicitly re-scope the affected
+implementation before continuing.
+
+Programmatic automatic repair loops and orchestration-specific blocker handling are out of
+scope for the V2 core deliverable.
 
 ---
 
@@ -732,12 +750,16 @@ Do NOT declare V2 complete until:
 - local and remote V2 branch are synchronized
 - working tree is clean
 - no secrets or unintended generated files are committed
-- final delivery or blocker report exists
+- final V2 delivery documentation accurately records completed work, measured results,
+  unresolved limitations, and any explicitly de-scoped items
 
-Final result should be one of:
+The final V2 project artifact should be:
 
 - `V2_FINAL_DELIVERY_REPORT.md`
-- `V2_FINAL_BLOCKER_REPORT.md`
+
+If a core implementation batch cannot be completed, record the limitation accurately in
+the relevant development or review documentation rather than creating an
+orchestration-specific blocker artifact.
 
 Never fabricate completion.
 Never fabricate benchmark improvement.

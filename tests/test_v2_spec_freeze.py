@@ -5,7 +5,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DATASET = ROOT / "benchmarks/dataset/enterprise_insight_bench_v2.json"
-MANIFEST = ROOT / "orchestration/v2_batch_manifest.json"
 ARCHITECTURE = ROOT / "docs/v2/V2_ARCHITECTURE_SPEC.md"
 BENCHMARK = ROOT / "docs/v2/V2_BENCHMARK_SPEC.md"
 
@@ -114,45 +113,3 @@ def test_frozen_docs_cover_required_semantics():
         "category robustness", "generalization gap", "paired candidate", "baseline", "v1", "v2",
     ):
         assert phrase in text
-
-
-def test_manifest_is_a_complete_acyclic_dag_and_protects_v1():
-    manifest = load(MANIFEST)
-    assert manifest["status"] == "FROZEN"
-    assert manifest["branch"] == "feat/evidence-v2"
-    assert manifest["frozen_v1_commit"] == "0e3c6b8643db499936312f4ff24e6af1641409e4"
-    assert manifest["execution_policy"]["max_repair_attempts"] == 2
-    handler = manifest["failure_handler"]
-    assert handler["always_runnable"] is True
-    assert handler["activation"] == "any_batch_blocked_or_repair_attempts_exhausted"
-    assert handler["allowed_paths"] == ["V2_FINAL_BLOCKER_REPORT.md", "orchestration/state/**"]
-    assert "V2_FINAL_DELIVERY_REPORT.md" in handler["forbidden_paths"]
-    batches = manifest["batches"]
-    ids = [batch["batch_id"] for batch in batches]
-    assert len(ids) == len(set(ids))
-    required_fields = {
-        "batch_id", "objective", "rationale", "dependencies", "allowed_paths", "forbidden_paths",
-        "implementation_requirements", "tests", "acceptance_criteria", "expected_artifacts",
-        "expected_git_checkpoint",
-    }
-    seen = set()
-    for batch in batches:
-        assert required_fields <= set(batch)
-        assert set(batch["dependencies"]) <= seen
-        seen.add(batch["batch_id"])
-        protected = " ".join(batch["forbidden_paths"] + manifest["global_forbidden_paths"])
-        assert "benchmarks/results/v1" in protected
-        assert "benchmarks/annotations/v1" in protected
-    assert ids[0] == "S0_SPEC_FREEZE"
-    assert ids[-1] == "F1_FINAL_DELIVERY"
-    offline = next(batch for batch in batches if batch["batch_id"] == "E1_OFFLINE_QUALIFICATION")
-    commands = " ".join(offline["tests"])
-    assert "GPTR_BLOCK_NETWORK" in commands
-    assert "run_offline_tests.py --output" in commands
-    assert "pytest tests -q" not in commands
-
-
-def test_no_v1_paths_are_allowed_by_manifest():
-    manifest = load(MANIFEST)
-    for batch in manifest["batches"]:
-        assert all("/v1" not in path and "bench_v0" not in path for path in batch["allowed_paths"])

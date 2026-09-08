@@ -1,0 +1,423 @@
+{
+  "schema_version": "enterprise-insight-bench-v2/2.0.0",
+  "status": "FROZEN",
+  "frozen_on": "2026-09-07",
+  "cutoff_date": "2026-09-05",
+  "categories": [
+    "factual_verification",
+    "technical_capability_analysis",
+    "competitive_comparison",
+    "trend_market_intelligence",
+    "conflict_credibility_resolution",
+    "enterprise_decision_recommendation"
+  ],
+  "claim_gate_rules": {
+    "default_non_required_unit_rule": "standard",
+    "required_unit_combination": "union_without_weakening",
+    "multi_risk_combination": "union_without_weakening",
+    "strength_rules": ["standard", "primary_or_two_independent", "two_independent", "primary_plus_independent", "conflict_sides_plus_adjudicator"],
+    "risk_to_minimum_rule": {
+      "numeric_value": "primary_or_two_independent",
+      "date_or_time_window": "primary_or_two_independent",
+      "release_status_availability": "primary_or_two_independent",
+      "comparative_claim": "two_independent",
+      "superlative_or_ranking": "two_independent",
+      "market_metric": "primary_or_two_independent",
+      "benchmark_or_performance": "primary_plus_independent",
+      "conflict_sensitive_claim": "conflict_sides_plus_adjudicator"
+    },
+    "comparison_primary_override": "comparable_primary_evidence_per_entity",
+    "insufficient_actions": ["hedge", "omit", "retrieve_more"],
+    "remaining_violation": "fail"
+  },
+  "evidence_policies": {
+    "factual_verification": {
+      "authority_weight": 0.3,
+      "preferred_source_types": ["official", "regulator_standard", "official_documentation", "authoritative_media"],
+      "freshness_mode": "contextual",
+      "max_age_days": 365,
+      "corroboration_rule": "primary_or_two_independent",
+      "primary_source_rule": "required_or_two_independent",
+      "independent_source_rule": "publisher_organization"
+    },
+    "technical_capability_analysis": {
+      "authority_weight": 0.22,
+      "preferred_source_types": ["official_documentation", "peer_reviewed_research", "regulator_standard", "independent_technical"],
+      "freshness_mode": "contextual",
+      "max_age_days": 730,
+      "corroboration_rule": "primary_plus_independent",
+      "primary_source_rule": "preferred",
+      "independent_source_rule": "publisher_organization"
+    },
+    "competitive_comparison": {
+      "authority_weight": 0.1,
+      "preferred_source_types": ["official_documentation", "independent_technical", "authoritative_media", "peer_reviewed_research"],
+      "freshness_mode": "strict",
+      "max_age_days": 365,
+      "corroboration_rule": "primary_plus_independent",
+      "primary_source_rule": "one_per_compared_entity",
+      "independent_source_rule": "publisher_organization"
+    },
+    "trend_market_intelligence": {
+      "authority_weight": 0.12,
+      "preferred_source_types": ["regulator_standard", "authoritative_media", "industry_analysis", "official"],
+      "freshness_mode": "strict",
+      "max_age_days": 180,
+      "corroboration_rule": "two_independent",
+      "primary_source_rule": "preferred_for_measured_inputs",
+      "independent_source_rule": "publisher_organization"
+    },
+    "conflict_credibility_resolution": {
+      "authority_weight": 0.18,
+      "preferred_source_types": ["regulator_standard", "official_documentation", "peer_reviewed_research", "authoritative_media"],
+      "freshness_mode": "contextual",
+      "max_age_days": 365,
+      "corroboration_rule": "conflict_sides_plus_adjudicator",
+      "primary_source_rule": "source_for_each_material_side",
+      "independent_source_rule": "publisher_organization"
+    },
+    "enterprise_decision_recommendation": {
+      "authority_weight": 0.08,
+      "preferred_source_types": ["official_documentation", "independent_technical", "industry_analysis", "peer_reviewed_research"],
+      "freshness_mode": "contextual",
+      "max_age_days": 730,
+      "corroboration_rule": "two_independent",
+      "primary_source_rule": "preferred",
+      "independent_source_rule": "publisher_organization"
+    }
+  },
+  "acceptance_criteria": {
+    "holdout_completed_and_annotated": 12,
+    "minimum_improved_core_metrics_vs_baseline": 4,
+    "citation_correctness": "v2 > baseline",
+    "citation_completeness": "v2 >= baseline",
+    "strong_evidence_coverage": "v2 > baseline",
+    "source_reliability_score": "v2 > baseline",
+    "high_risk_claim_corroboration_rate": "v2 > baseline",
+    "remaining_metric_max_regression_pp": 1.0,
+    "severe_category_regression_pp": 5.0,
+    "classification_accuracy_min": 0.9,
+    "generalization_gap_rule": "mean_abs_gap_v2 <= mean_abs_gap_baseline - 0.01",
+    "absolute_quality_floor": {
+      "citation_correctness": 0.9,
+      "citation_completeness": 0.97,
+      "strong_evidence_coverage": 0.85,
+      "source_reliability_score": 0.75,
+      "high_risk_claim_corroboration_rate": 0.9
+    }
+  },
+  "metric_contracts": {
+    "citation_correctness": "supporting_evaluated_citation_links/evaluated_citation_links",
+    "citation_completeness": "factual_claims_with_valid_support/factual_claims",
+    "unsupported_claim_rate": "1-citation_completeness",
+    "strong_evidence_coverage": "required_units_satisfying_strength/all_required_units",
+    "source_reliability_score": {
+      "unit": "distinct_normalized_supporting_source_per_report",
+      "deduplicate_chunks_and_links": true,
+      "exclude_relations": ["conflict", "unclear", "unused"]
+    },
+    "high_risk_claim_corroboration_rate": "high_risk_claims_satisfying_all_rules/emitted_high_risk_claims"
+  },
+  "cases": [
+    {
+      "id": "EIV2_FV_001", "split": "development", "category": "factual_verification",
+      "query": "截至信息截止日，核实 OpenAI API 客户数据是否默认用于训练模型，并说明适用例外与数据保留边界。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "training_default", "description": "默认训练用途政策", "evidence_strength_rule": "primary_or_two_independent", "high_risk_types": ["release_status_availability"]},
+        {"id": "exceptions", "description": "明确适用例外", "evidence_strength_rule": "primary_or_two_independent", "high_risk_types": ["conflict_sensitive_claim"]},
+        {"id": "retention", "description": "数据保留或控制边界", "evidence_strength_rule": "primary_or_two_independent", "high_risk_types": ["numeric_value", "date_or_time_window"]}
+      ]
+    },
+    {
+      "id": "EIV2_FV_002", "split": "development", "category": "factual_verification",
+      "query": "截至信息截止日，核实 AWS Bedrock 是否提供企业私有连接能力，并说明其官方服务范围与限制。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "availability", "description": "私有连接能力是否可用", "evidence_strength_rule": "primary_or_two_independent", "high_risk_types": ["release_status_availability"]},
+        {"id": "scope", "description": "支持范围", "evidence_strength_rule": "primary_or_two_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "limitations", "description": "官方限制或前置条件", "evidence_strength_rule": "standard", "high_risk_types": []}
+      ]
+    },
+    {
+      "id": "EIV2_FV_003", "split": "development", "category": "factual_verification",
+      "query": "截至信息截止日，核实 NVIDIA H200 的公开产品状态、关键内存规格和云端可获得性。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "status", "description": "产品状态", "evidence_strength_rule": "primary_or_two_independent", "high_risk_types": ["release_status_availability", "date_or_time_window"]},
+        {"id": "memory", "description": "关键内存规格", "evidence_strength_rule": "primary_or_two_independent", "high_risk_types": ["numeric_value"]},
+        {"id": "cloud", "description": "云端可获得性", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": ["release_status_availability"]}
+      ]
+    },
+    {
+      "id": "EIV2_FV_004", "split": "holdout", "category": "factual_verification",
+      "query": "截至信息截止日，核实 Anthropic Claude Enterprise 是否支持单点登录、审计或合规相关能力，并区分已发布与营销性表述。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "sso", "description": "单点登录状态", "evidence_strength_rule": "primary_or_two_independent", "high_risk_types": ["release_status_availability"]},
+        {"id": "audit", "description": "审计能力状态", "evidence_strength_rule": "primary_or_two_independent", "high_risk_types": ["release_status_availability"]},
+        {"id": "compliance", "description": "合规能力及限定", "evidence_strength_rule": "primary_or_two_independent", "high_risk_types": ["conflict_sensitive_claim"]}
+      ]
+    },
+    {
+      "id": "EIV2_FV_005", "split": "holdout", "category": "factual_verification",
+      "query": "截至信息截止日，核实 Microsoft Azure OpenAI 的内容日志与滥用监测数据处理政策及可申请的控制选项。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "logging", "description": "内容日志政策", "evidence_strength_rule": "primary_or_two_independent", "high_risk_types": ["date_or_time_window"]},
+        {"id": "monitoring", "description": "滥用监测处理", "evidence_strength_rule": "primary_or_two_independent", "high_risk_types": ["conflict_sensitive_claim"]},
+        {"id": "controls", "description": "可申请控制选项与资格", "evidence_strength_rule": "primary_or_two_independent", "high_risk_types": ["release_status_availability"]}
+      ]
+    },
+    {
+      "id": "EIV2_TC_001", "split": "development", "category": "technical_capability_analysis",
+      "query": "分析 PostgreSQL pgvector 的混合检索能力、索引选择和企业 RAG 工作负载中的工程限制。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "hybrid", "description": "混合检索机制", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": []},
+        {"id": "indexes", "description": "索引选择与权衡", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "limits", "description": "企业工作负载限制", "evidence_strength_rule": "two_independent", "high_risk_types": ["benchmark_or_performance"]}
+      ]
+    },
+    {
+      "id": "EIV2_TC_002", "split": "development", "category": "technical_capability_analysis",
+      "query": "分析 OpenAI Responses API 的工具调用、状态管理和企业级 Agent 编排边界。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "tools", "description": "工具调用模型", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": ["release_status_availability"]},
+        {"id": "state", "description": "状态管理机制", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": []},
+        {"id": "boundaries", "description": "企业编排边界", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim"]}
+      ]
+    },
+    {
+      "id": "EIV2_TC_003", "split": "development", "category": "technical_capability_analysis",
+      "query": "分析 Apache Iceberg 在企业 AI 数据平台中的表格式能力、并发机制与运维复杂度。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "table_format", "description": "表格式核心能力", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": []},
+        {"id": "concurrency", "description": "并发与一致性机制", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": []},
+        {"id": "operations", "description": "运维复杂度", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim"]}
+      ]
+    },
+    {
+      "id": "EIV2_TC_004", "split": "holdout", "category": "technical_capability_analysis",
+      "query": "分析 Kubernetes Gateway API 对 AI 推理流量治理的适用能力与仍需外部组件补足的部分。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "routing", "description": "流量路由能力", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": ["release_status_availability"]},
+        {"id": "policy", "description": "策略与可观测能力", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": []},
+        {"id": "gaps", "description": "需要外部组件的缺口", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim"]}
+      ]
+    },
+    {
+      "id": "EIV2_TC_005", "split": "holdout", "category": "technical_capability_analysis",
+      "query": "分析 vLLM 的连续批处理、KV cache 管理与企业推理部署中的性能和可靠性权衡。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "batching", "description": "连续批处理机制", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": []},
+        {"id": "kv_cache", "description": "KV cache 管理", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": []},
+        {"id": "tradeoffs", "description": "性能可靠性权衡", "evidence_strength_rule": "two_independent", "high_risk_types": ["benchmark_or_performance", "comparative_claim"]}
+      ]
+    },
+    {
+      "id": "EIV2_CC_001", "split": "development", "category": "competitive_comparison",
+      "query": "比较 AWS Bedrock 与 Azure OpenAI 在模型选择、企业治理、网络隔离和定价透明度方面的差异。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "model_choice", "description": "模型选择对比", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": ["comparative_claim", "release_status_availability"]},
+        {"id": "governance_network", "description": "治理与网络隔离对比", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "pricing", "description": "定价透明度对比", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": ["comparative_claim", "numeric_value"]}
+      ]
+    },
+    {
+      "id": "EIV2_CC_002", "split": "development", "category": "competitive_comparison",
+      "query": "比较 Snowflake Cortex AI 与 Databricks Mosaic AI 的数据集成、模型开发、治理和企业锁定风险。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "integration", "description": "数据集成对比", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "development_governance", "description": "开发与治理对比", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "lock_in", "description": "锁定风险", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim"]}
+      ]
+    },
+    {
+      "id": "EIV2_CC_003", "split": "development", "category": "competitive_comparison",
+      "query": "比较 Pinecone 与 Weaviate 在混合搜索、部署模式、运维负担和企业安全方面的取舍。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "search", "description": "混合搜索对比", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "deployment_ops", "description": "部署与运维对比", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "security", "description": "企业安全对比", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": ["comparative_claim", "release_status_availability"]}
+      ]
+    },
+    {
+      "id": "EIV2_CC_004", "split": "holdout", "category": "competitive_comparison",
+      "query": "比较 GitHub Copilot Enterprise 与 Cursor 面向大型软件团队的上下文能力、治理、集成和采用风险。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "context", "description": "上下文能力对比", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "governance", "description": "治理与集成对比", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": ["comparative_claim", "release_status_availability"]},
+        {"id": "adoption", "description": "采用风险", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim"]}
+      ]
+    },
+    {
+      "id": "EIV2_CC_005", "split": "holdout", "category": "competitive_comparison",
+      "query": "比较 LangSmith 与 Arize Phoenix 在 LLM 可观测、评测、部署控制和开源可移植性方面的差异。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "observability", "description": "可观测能力对比", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "evaluation", "description": "评测与部署控制对比", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "portability", "description": "开源可移植性对比", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim"]}
+      ]
+    },
+    {
+      "id": "EIV2_TM_001", "split": "development", "category": "trend_market_intelligence",
+      "query": "分析截至信息截止日企业 AI Agent 平台在治理、可观测和人工审批方面的产品趋势，并区分事实与推断。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "governance", "description": "治理趋势", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim", "date_or_time_window"]},
+        {"id": "observability", "description": "可观测趋势", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "human_approval", "description": "人工审批趋势", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim"]}
+      ]
+    },
+    {
+      "id": "EIV2_TM_002", "split": "development", "category": "trend_market_intelligence",
+      "query": "分析截至信息截止日 RAG 技术从单纯向量检索向混合检索、重排与评测驱动发展的证据。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "hybrid", "description": "混合检索趋势", "evidence_strength_rule": "two_independent", "high_risk_types": ["date_or_time_window"]},
+        {"id": "reranking", "description": "重排采用趋势", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "evaluation", "description": "评测驱动趋势", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim"]}
+      ]
+    },
+    {
+      "id": "EIV2_TM_003", "split": "development", "category": "trend_market_intelligence",
+      "query": "分析截至信息截止日主要云厂商生成式 AI 服务的区域扩张、模型多样化和企业控制能力趋势。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "regions", "description": "区域扩张趋势", "evidence_strength_rule": "two_independent", "high_risk_types": ["numeric_value", "release_status_availability"]},
+        {"id": "models", "description": "模型多样化趋势", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "controls", "description": "企业控制趋势", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim"]}
+      ]
+    },
+    {
+      "id": "EIV2_TM_004", "split": "holdout", "category": "trend_market_intelligence",
+      "query": "分析截至信息截止日企业采用小型语言模型与模型路由的趋势、驱动因素和证据局限。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "adoption", "description": "采用趋势", "evidence_strength_rule": "two_independent", "high_risk_types": ["market_metric", "date_or_time_window"]},
+        {"id": "drivers", "description": "成本、延迟或隐私驱动", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "limits", "description": "证据局限", "evidence_strength_rule": "standard", "high_risk_types": []}
+      ]
+    },
+    {
+      "id": "EIV2_TM_005", "split": "holdout", "category": "trend_market_intelligence",
+      "query": "分析截至信息截止日企业 AI 基础设施支出与 GPU 云市场变化的公开证据，避免把预测当成已发生事实。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "spending", "description": "支出变化", "evidence_strength_rule": "two_independent", "high_risk_types": ["market_metric", "numeric_value"]},
+        {"id": "gpu_cloud", "description": "GPU 云市场变化", "evidence_strength_rule": "two_independent", "high_risk_types": ["market_metric", "comparative_claim"]},
+        {"id": "forecast_boundary", "description": "预测与已发生事实边界", "evidence_strength_rule": "two_independent", "high_risk_types": ["date_or_time_window", "conflict_sensitive_claim"]}
+      ]
+    },
+    {
+      "id": "EIV2_CR_001", "split": "development", "category": "conflict_credibility_resolution",
+      "query": "核查 Google Gemini 2.5 Pro 的官方上下文窗口声明与独立测评中有效长上下文表现的差异，并判断是否构成冲突。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "vendor_claim", "description": "厂商上下文声明", "evidence_strength_rule": "primary_or_two_independent", "high_risk_types": ["numeric_value"]},
+        {"id": "independent_test", "description": "独立有效上下文测评", "evidence_strength_rule": "two_independent", "high_risk_types": ["benchmark_or_performance"]},
+        {"id": "resolution", "description": "冲突与口径解释", "evidence_strength_rule": "conflict_sides_plus_adjudicator", "high_risk_types": ["conflict_sensitive_claim"]}
+      ]
+    },
+    {
+      "id": "EIV2_CR_002", "split": "development", "category": "conflict_credibility_resolution",
+      "query": "核查 Meta Llama 4 的许可证是否允许商业使用，解释模型发布页、许可证文本与媒体描述之间可能存在的差异。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "license", "description": "许可证原文要求", "evidence_strength_rule": "primary_or_two_independent", "high_risk_types": ["conflict_sensitive_claim"]},
+        {"id": "descriptions", "description": "发布页与媒体描述", "evidence_strength_rule": "two_independent", "high_risk_types": ["conflict_sensitive_claim"]},
+        {"id": "commercial", "description": "商业使用结论及限制", "evidence_strength_rule": "conflict_sides_plus_adjudicator", "high_risk_types": ["release_status_availability", "conflict_sensitive_claim"]}
+      ]
+    },
+    {
+      "id": "EIV2_CR_003", "split": "development", "category": "conflict_credibility_resolution",
+      "query": "核查 DeepSeek-R1 在 AIME 2024 上的官方报告分数与第三方复现结果的差异，分析模型版本、提示或评测设置的影响。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "vendor_score", "description": "厂商报告分数", "evidence_strength_rule": "primary_or_two_independent", "high_risk_types": ["benchmark_or_performance", "numeric_value"]},
+        {"id": "replication", "description": "第三方复现结果", "evidence_strength_rule": "two_independent", "high_risk_types": ["benchmark_or_performance", "numeric_value"]},
+        {"id": "explanation", "description": "差异解释与可信判断", "evidence_strength_rule": "conflict_sides_plus_adjudicator", "high_risk_types": ["conflict_sensitive_claim"]}
+      ]
+    },
+    {
+      "id": "EIV2_CR_004", "split": "holdout", "category": "conflict_credibility_resolution",
+      "query": "核查 Microsoft 365 Copilot 关于企业数据边界的公开声明与其子处理方、遥测或支持流程说明是否一致。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "boundary_claim", "description": "数据边界声明", "evidence_strength_rule": "primary_or_two_independent", "high_risk_types": ["conflict_sensitive_claim"]},
+        {"id": "subprocessors", "description": "子处理方与遥测事实", "evidence_strength_rule": "primary_or_two_independent", "high_risk_types": ["release_status_availability"]},
+        {"id": "consistency", "description": "一致性与适用范围判断", "evidence_strength_rule": "conflict_sides_plus_adjudicator", "high_risk_types": ["conflict_sensitive_claim"]}
+      ]
+    },
+    {
+      "id": "EIV2_CR_005", "split": "holdout", "category": "conflict_credibility_resolution",
+      "query": "核查 Pinecone 关于低延迟或高吞吐的营销声明与可复现实验，判断差异是否源于工作负载设置。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "marketing", "description": "营销性能声明", "evidence_strength_rule": "primary_or_two_independent", "high_risk_types": ["benchmark_or_performance", "superlative_or_ranking"]},
+        {"id": "experiments", "description": "独立可复现实验", "evidence_strength_rule": "two_independent", "high_risk_types": ["benchmark_or_performance", "numeric_value"]},
+        {"id": "workload", "description": "工作负载差异解释", "evidence_strength_rule": "conflict_sides_plus_adjudicator", "high_risk_types": ["conflict_sensitive_claim"]}
+      ]
+    },
+    {
+      "id": "EIV2_ED_001", "split": "development", "category": "enterprise_decision_recommendation",
+      "query": "为受监管金融企业选择托管大模型 API、自建开源模型或混合方案，给出基于证据的决策框架。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "options", "description": "三类方案事实基础", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "criteria", "description": "监管、数据、成本与能力条件", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "recommendation", "description": "条件化建议与限制", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim"]}
+      ]
+    },
+    {
+      "id": "EIV2_ED_002", "split": "development", "category": "enterprise_decision_recommendation",
+      "query": "为中型制造企业选择 pgvector、托管向量数据库或搜索引擎作为 RAG 检索底座，给出迁移和运维建议。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "capabilities", "description": "候选技术能力", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "operations", "description": "规模与运维条件", "evidence_strength_rule": "two_independent", "high_risk_types": ["benchmark_or_performance"]},
+        {"id": "migration", "description": "条件化迁移建议", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim"]}
+      ]
+    },
+    {
+      "id": "EIV2_ED_003", "split": "development", "category": "enterprise_decision_recommendation",
+      "query": "为跨国企业设计生成式 AI 可观测方案，判断应采用云厂商原生工具、独立平台还是开源组件。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "options", "description": "三类工具能力", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "criteria", "description": "合规、可移植与成本条件", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "design", "description": "架构建议与边界", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim"]}
+      ]
+    },
+    {
+      "id": "EIV2_ED_004", "split": "holdout", "category": "enterprise_decision_recommendation",
+      "query": "企业部署代码生成助手时，应优先选择单一厂商平台还是多工具组合？给出安全、治理、体验和成本的条件化建议。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "security", "description": "安全与治理证据", "evidence_strength_rule": "primary_plus_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "experience_cost", "description": "体验与成本证据", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim", "numeric_value"]},
+        {"id": "recommendation", "description": "单一或多工具条件化建议", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim"]}
+      ]
+    },
+    {
+      "id": "EIV2_ED_005", "split": "holdout", "category": "enterprise_decision_recommendation",
+      "query": "企业竞争情报 Agent 应优先投资搜索覆盖、证据可靠性、生成门控还是自动化编排？给出分阶段路线图。",
+      "cutoff_date": "2026-09-05",
+      "required_units": [
+        {"id": "tradeoffs", "description": "四项能力的证据化权衡", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "dependencies", "description": "能力依赖与风险", "evidence_strength_rule": "two_independent", "high_risk_types": ["comparative_claim"]},
+        {"id": "roadmap", "description": "分阶段优先级路线图", "evidence_strength_rule": "two_independent", "high_risk_types": ["superlative_or_ranking", "comparative_claim"]}
+      ]
+    }
+  ]
+}

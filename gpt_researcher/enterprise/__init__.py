@@ -1,5 +1,23 @@
 """Enterprise competitive intelligence built on the GPT Researcher pipeline."""
 
+from .task_policy import (
+    EvidencePolicy,
+    FreshnessMode,
+    ResearchTaskCategory,
+    ResearchTaskClassifier,
+    TaskClassification,
+    evidence_policy_for,
+)
 from .workflow import IntelligenceRequest, IntelligenceResult, IntelligenceWorkflow
 
-__all__ = ["IntelligenceRequest", "IntelligenceResult", "IntelligenceWorkflow"]
+__all__ = [
+    "EvidencePolicy",
+    "FreshnessMode",
+    "IntelligenceRequest",
+    "IntelligenceResult",
+    "IntelligenceWorkflow",
+    "ResearchTaskCategory",
+    "ResearchTaskClassifier",
+    "TaskClassification",
+    "evidence_policy_for",
+]

@@ -14,7 +14,7 @@ from typing import Annotated, Final
 from pydantic import BaseModel, ConfigDict, Field
 
 
-CLASSIFIER_VERSION: Final = "enterprise-insight-task-classifier/1.0.0"
+CLASSIFIER_VERSION: Final = "enterprise-insight-task-classifier/1.0.1"
 POLICY_VERSION: Final = "enterprise-insight-v2-architecture/2.0.0"
 
 # The current web evidence model has URL provenance, but not publication timestamps,
@@ -112,6 +112,64 @@ def _compile(pattern: str) -> re.Pattern[str]:
     return re.compile(pattern, re.IGNORECASE)
 
 
+# Conflict/credibility intent needs both a relationship question and evidence that
+# the relationship is between source accounts or materials. Keeping those concerns
+# separate prevents ordinary product differences from becoming credibility work.
+_ZH_SOURCE_RELATION: Final = (
+    r"(?:是否)?(?:一致|相符|吻合)|(?:存在|有什么|有何|可能存在)?(?:差异|分歧)|"
+    r"(?:相互)?(?:矛盾|冲突)"
+)
+_ZH_MULTI_SOURCE_CONTEXT: Final = (
+    r"(?:不同|多个|多方|各方|双方|权威).{0,12}"
+    r"(?:来源|说法|声明|披露|报告|记录|数据|材料|描述|说明|文档)|"
+    r"(?:官方|厂商|媒体|第三方|独立|权威|监管).{0,50}(?:与|和|及|同|、).{0,50}"
+    r"(?:官方|厂商|媒体|第三方|独立|权威|监管)|"
+    r"(?:说法|声明|披露|报告|记录|数据|材料|描述|说明|文档|许可证(?:文本|信息)|发布页|官网)"
+    r".{0,80}(?:与|和|及|同|、).{0,80}"
+    r"(?:说法|声明|披露|报告|记录|数据|材料|描述|说明|文档|许可证(?:文本|信息)|发布页|官网)"
+)
+_EN_SOURCE_RELATION: Final = (
+    r"\b(?:agree(?:ment)?|consistent|consistency|differ(?:ence|ences|ent)?|"
+    r"disagree(?:ment)?|inconsisten(?:cy|t)|discrepanc(?:y|ies))\b"
+)
+_EN_MULTI_SOURCE_CONTEXT: Final = (
+    r"\b(?:multiple|different|authoritative)\s+"
+    r"(?:sources?|accounts?|claims?|disclosures?|records?|reports?)\b|"
+    r"\b(?:source|official|vendor|media|third[- ]party|independent|authoritative)\s+accounts?\b|"
+    r"\b(?:official|vendor|media|third[- ]party|independent|authoritative)\b"
+    r".{0,80}\b(?:and|versus|vs\.?|with)\b.{0,80}"
+    r"\b(?:official|vendor|media|third[- ]party|independent|authoritative)\b|"
+    r"\b(?:sources?|accounts?|claims?|disclosures?|records?|reports?|documentation|reporting|"
+    r"data|statements?|descriptions?|licen[cs](?:e|ing)|website)\b"
+    r".{0,80}\b(?:and|versus|vs\.?|with)\b.{0,80}"
+    r"\b(?:sources?|accounts?|claims?|disclosures?|records?|reports?|documentation|reporting|"
+    r"data|statements?|descriptions?|licen[cs](?:e|ing)|website)\b"
+)
+
+# Directional grammar is a trend signal only when an evolution verb is paired with
+# market/technology/ecosystem context. Plain file, data, format, or configuration
+# transfers therefore do not match merely because they contain "from ... to ...".
+_ZH_EVOLUTION_CONTEXT: Final = (
+    r"(?:市场|技术|生态|行业|产业|产品|平台|服务|架构|基础设施|模型|检索|治理|能力|采用)"
+)
+_ZH_EVOLUTION_PROCESS: Final = (
+    r"(?:从|由).{1,100}(?:(?:向|往).{1,100}(?:发展|演进|转变)|(?:转向|走向).{1,100})|"
+    r"(?:正在|逐步|持续).{0,16}(?:向|往).{1,100}(?:发展|演进|转变)|"
+    r"近年来.{0,100}(?:从|由).{1,100}(?:转向|走向)"
+)
+_EN_EVOLUTION_CONTEXT: Final = (
+    r"\b(?:market|technolog(?:y|ies|ical)|ecosystems?|industr(?:y|ies)|sectors?|adoption|"
+    r"platforms?|services?|architectures?|infrastructure|models?|retrieval|governance|"
+    r"capabilit(?:y|ies)|products?)\b"
+)
+_EN_EVOLUTION_PROCESS: Final = (
+    r"\b(?:evolv(?:e|es|ed|ing)|shift(?:s|ed|ing)?|transition(?:s|ed|ing)?|"
+    r"develop(?:s|ed|ing)?)\s+from\b.{1,100}\b(?:to|toward|towards|into)\b|"
+    r"\bmov(?:e|es|ed|ing)\s+from\b.{1,100}\btowards?\b|"
+    r"\b(?:moving|evolving)\s+towards?\b"
+)
+
+
 _SIGNALS: Final = MappingProxyType(
     {
         ResearchTaskCategory.ENTERPRISE_DECISION_RECOMMENDATION: (
@@ -139,8 +197,7 @@ _SIGNALS: Final = MappingProxyType(
             (
                 "explicit_conflict",
                 _compile(
-                    r"\b(?:conflict|contradict(?:ion|ory)?|inconsisten(?:cy|t)|"
-                    r"discrepanc(?:y|ies)|reconcile)\b|冲突|矛盾|不一致"
+                    r"\b(?:conflict|contradict(?:ion|ory)?|reconcile)\b|冲突|矛盾|不一致"
                 ),
             ),
             (
@@ -159,6 +216,13 @@ _SIGNALS: Final = MappingProxyType(
             (
                 "material_sides_resolution",
                 _compile(r"各方.{0,20}(?:说法|证据)|双方.{0,20}(?:说法|证据)|material\s+sides"),
+            ),
+            (
+                "source_account_consistency",
+                _compile(
+                    rf"^(?=.*(?:{_ZH_SOURCE_RELATION}))(?=.*(?:{_ZH_MULTI_SOURCE_CONTEXT})).*$|"
+                    rf"^(?=.*(?:{_EN_SOURCE_RELATION}))(?=.*(?:{_EN_MULTI_SOURCE_CONTEXT})).*$"
+                ),
             ),
         ),
         ResearchTaskCategory.COMPETITIVE_COMPARISON: (
@@ -182,6 +246,13 @@ _SIGNALS: Final = MappingProxyType(
                     r"\bmarket\b.{0,40}\b(?:growth|change|evolution|adoption|outlook)\b|"
                     r"\b(?:growth|change|evolution|adoption)\b.{0,40}\bmarket\b|"
                     r"市场.{0,20}(?:变化|增长|演进|采用|前景)|(?:历年|近年来|随时间)"
+                ),
+            ),
+            (
+                "temporal_process_evolution",
+                _compile(
+                    rf"^(?=.*(?:{_ZH_EVOLUTION_CONTEXT}))(?=.*(?:{_ZH_EVOLUTION_PROCESS})).*$|"
+                    rf"^(?=.*(?:{_EN_EVOLUTION_CONTEXT}))(?=.*(?:{_EN_EVOLUTION_PROCESS})).*$"
                 ),
             ),
         ),

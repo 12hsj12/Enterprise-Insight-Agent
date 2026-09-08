@@ -1,4 +1,6 @@
 import inspect
+import json
+from pathlib import Path
 
 import pytest
 from pydantic import ValidationError
@@ -206,6 +208,169 @@ def test_classifier_is_deterministic_across_repeated_calls():
     query = "Compare two platforms and recommend which one an enterprise should adopt."
 
     assert classifier.classify(query) == classifier.classify(query)
+
+
+@pytest.mark.parametrize(
+    "query",
+    [
+        "分析数据库技术从单机架构向云原生架构演进的公开证据。",
+        "研究企业软件平台由本地套件向托管服务转变的产业证据。",
+        "分析数据基础设施从集中部署转向分布式平台的演进过程。",
+        "近年来企业软件生态从单体套件走向模块化平台。",
+        "研究检索技术正在向混合方法发展所体现的行业变化。",
+        "Assess how the data-platform ecosystem evolved from warehouses to lakehouses.",
+        "Study the technology transition from on-premise platforms to managed services.",
+        "Analyze why retrieval technology is shifting from dense-only search toward hybrid search.",
+        "Examine how enterprise AI platforms are moving toward governed agent workflows.",
+    ],
+)
+def test_classifier_recognizes_temporal_process_evolution_without_trend_word(query):
+    result = ResearchTaskClassifier().classify(query)
+
+    assert result.category is ResearchTaskCategory.TREND_MARKET_INTELLIGENCE
+    assert "temporal_process_evolution" in result.matched_signal_codes
+
+
+@pytest.mark.parametrize(
+    "query",
+    [
+        "Analyze how to move a file from folder A to folder B.",
+        "Analyze how to copy data from system A to system B.",
+        "Analyze how to convert format A to format B.",
+        "Analyze how to migrate one configuration from cluster A to cluster B.",
+        "分析如何将单个配置从集群 A 迁移到集群 B。",
+    ],
+)
+def test_classifier_does_not_treat_generic_directional_operations_as_trends(query):
+    result = ResearchTaskClassifier().classify(query)
+
+    assert result.category is ResearchTaskCategory.TECHNICAL_CAPABILITY_ANALYSIS
+    assert "temporal_process_evolution" not in result.matched_signal_codes
+
+
+@pytest.mark.parametrize(
+    "query",
+    [
+        "核对官方与媒体说法是否一致，并解释分歧来源。",
+        "评估许可证信息与官网描述是否一致。",
+        "分析多方披露存在的差异及其可信性。",
+        "Determine whether official and independent sources agree on the release status.",
+        "Assess consistency across multiple authoritative reports about the incident.",
+        "Explain differences between vendor documentation and independent reporting.",
+    ],
+)
+def test_classifier_recognizes_multi_source_consistency_and_discrepancy(query):
+    result = ResearchTaskClassifier().classify(query)
+
+    assert result.category is ResearchTaskCategory.CONFLICT_CREDIBILITY_RESOLUTION
+    assert "source_account_consistency" in result.matched_signal_codes
+
+
+@pytest.mark.parametrize(
+    ("query", "expected"),
+    [
+        (
+            "Compare Product A and Product B on price and performance.",
+            ResearchTaskCategory.COMPETITIVE_COMPARISON,
+        ),
+        (
+            "对比公司 A 和公司 B 的产品能力。",
+            ResearchTaskCategory.COMPETITIVE_COMPARISON,
+        ),
+        (
+            "Verify whether Product X is available.",
+            ResearchTaskCategory.FACTUAL_VERIFICATION,
+        ),
+        (
+            "核实某产品是否已经发布。",
+            ResearchTaskCategory.FACTUAL_VERIFICATION,
+        ),
+        (
+            "Compare the numeric price difference between Product A and Product B.",
+            ResearchTaskCategory.COMPETITIVE_COMPARISON,
+        ),
+        (
+            "比较产品 A 和产品 B 的数值性能差异。",
+            ResearchTaskCategory.COMPETITIVE_COMPARISON,
+        ),
+    ],
+)
+def test_classifier_does_not_confuse_entity_comparison_or_single_fact_with_source_conflict(
+    query,
+    expected,
+):
+    result = ResearchTaskClassifier().classify(query)
+
+    assert result.category is expected
+    assert "source_account_consistency" not in result.matched_signal_codes
+
+
+@pytest.mark.parametrize(
+    "query",
+    [
+        "What is the numeric difference between Product A and Product B prices?",
+        "The performance discrepancy between Product A and Product B is five percent.",
+        "产品 A 与产品 B 的性能数值差异是多少？",
+    ],
+)
+def test_plain_entity_difference_is_not_credibility_resolution(query):
+    result = ResearchTaskClassifier().classify(query)
+
+    assert result.category is not ResearchTaskCategory.CONFLICT_CREDIBILITY_RESOLUTION
+    assert "source_account_consistency" not in result.matched_signal_codes
+
+
+@pytest.mark.parametrize(
+    ("query", "expected_runner_up"),
+    [
+        (
+            "核查官方声明与独立报告是否一致。",
+            ResearchTaskCategory.FACTUAL_VERIFICATION,
+        ),
+        (
+            "Compare official and independent source accounts and explain their differences.",
+            ResearchTaskCategory.COMPETITIVE_COMPARISON,
+        ),
+    ],
+)
+def test_source_consistency_signal_wins_by_frozen_precedence(query, expected_runner_up):
+    result = ResearchTaskClassifier().classify(query)
+
+    assert result.category is ResearchTaskCategory.CONFLICT_CREDIBILITY_RESOLUTION
+    assert result.runner_up_categories[0] is expected_runner_up
+    assert "frozen_precedence_applied" in result.rationale_codes
+
+
+def test_repaired_semantic_signals_remain_deterministic():
+    classifier = ResearchTaskClassifier()
+    query = "核查多个权威来源是否一致，并解释材料之间的差异。"
+
+    results = [classifier.classify(query) for _ in range(10)]
+
+    assert all(result == results[0] for result in results[1:])
+
+
+def test_classifier_matches_all_frozen_dataset_categories_using_query_text_only():
+    dataset_path = (
+        Path(__file__).resolve().parents[1]
+        / "benchmarks"
+        / "dataset"
+        / "enterprise_insight_bench_v2.json"
+    )
+    dataset = json.loads(dataset_path.read_text(encoding="utf-8"))
+    classifier = ResearchTaskClassifier()
+    results = [
+        (
+            case["id"],
+            case["category"],
+            classifier.classify(case["query"]).category.value,
+        )
+        for case in dataset["cases"]
+    ]
+    mismatches = [result for result in results if result[1] != result[2]]
+
+    assert len(results) == 30
+    assert not mismatches, f"frozen classifier mismatches: {mismatches}"
 
 
 def test_classifier_accepts_only_query_text_not_benchmark_metadata():

@@ -215,15 +215,17 @@ def test_classifier_is_deterministic_across_repeated_calls():
     [
         "分析数据库技术从单机架构向云原生架构演进的公开证据。",
         "研究企业软件平台由本地套件向托管服务转变的产业证据。",
-        "分析数据基础设施从集中部署转向分布式平台的演进过程。",
+        "分析数据基础设施从集中部署转向分布式平台的长期演进过程。",
         "近年来企业软件生态从单体套件走向模块化平台。",
         "研究检索技术正在向混合方法发展所体现的行业变化。",
         "Assess how the data-platform ecosystem evolved from warehouses to lakehouses.",
-        "Study the technology transition from on-premise platforms to managed services.",
-        "Analyze why retrieval technology is shifting from dense-only search toward hybrid search.",
-        "Examine how enterprise AI platforms are moving toward governed agent workflows.",
+        "Study the industry technology transition from on-premise platforms to managed services.",
+        "Analyze why retrieval technology adoption is shifting from dense-only search toward hybrid search.",
+        "Examine how the enterprise AI ecosystem is moving toward governed agent workflows.",
     ],
 )
+# Direction alone no longer establishes historical scope; examples explicitly identify
+# long-term, adoption, industry, ecosystem, or discipline development semantics.
 def test_classifier_recognizes_temporal_process_evolution_without_trend_word(query):
     result = ResearchTaskClassifier().classify(query)
 

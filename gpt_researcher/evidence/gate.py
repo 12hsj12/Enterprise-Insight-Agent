@@ -18,6 +18,7 @@ from .models import (
     ClaimRiskType,
     Evidence,
     EvidenceStrengthRule,
+    ResolvedClaimGateObligations,
 )
 
 
@@ -64,8 +65,13 @@ class ClaimGate:
         links: Iterable[ClaimEvidenceLink],
         qualifications: Iterable[ClaimEvidenceQualification] = (),
         context: ClaimGateContext | None = None,
+        *,
+        resolved_obligations: ResolvedClaimGateObligations | None = None,
     ) -> ClaimGateResult:
         gate_context = context or ClaimGateContext()
+        obligations = resolved_obligations or self._resolve_obligations(
+            claim, gate_context
+        )
         evidence_list = list(evidences)
         binder = ClaimEvidenceBinder([claim], evidence_list)
         known_evidence_ids = {evidence.evidence_id for evidence in evidence_list}
@@ -99,7 +105,7 @@ class ClaimGate:
         qualification_by_id = self._index_qualifications(
             qualifications, known_evidence_ids
         )
-        required_rules = self._required_rules(claim, gate_context)
+        required_rules = obligations.evidence_strength_rules
         satisfied: list[str] = []
         unmet: list[str] = []
 
@@ -109,13 +115,13 @@ class ClaimGate:
                 support_ids,
                 conflict_ids,
                 qualification_by_id,
-                gate_context,
+                obligations,
             )
             for requirement, is_satisfied in evaluations:
                 (satisfied if is_satisfied else unmet).append(requirement)
 
-        if gate_context.required_entity_ids:
-            for entity_id in gate_context.required_entity_ids:
+        if obligations.required_entity_ids:
+            for entity_id in obligations.required_entity_ids:
                 requirement = f"comparable_primary:{entity_id}"
                 covered = any(
                     qualification.is_primary_source is True
@@ -136,6 +142,7 @@ class ClaimGate:
             decision=decision,
             applicable_risk_types=claim.risk_types,
             required_rules=required_rules,
+            resolved_obligations=obligations,
             satisfied_requirements=tuple(satisfied),
             unmet_requirements=tuple(unmet),
             supporting_evidence_ids=support_ids,
@@ -162,16 +169,27 @@ class ClaimGate:
         return indexed
 
     @staticmethod
-    def _required_rules(
+    def _resolve_obligations(
         claim: Claim,
         context: ClaimGateContext,
-    ) -> tuple[EvidenceStrengthRule, ...]:
+    ) -> ResolvedClaimGateObligations:
         rules = [RISK_MINIMUM_RULES[risk_type] for risk_type in claim.risk_types]
         if context.required_unit_rule is not None:
             rules.append(context.required_unit_rule)
         if not rules:
             rules.append(EvidenceStrengthRule.STANDARD)
-        return tuple(dict.fromkeys(rules))
+        required_rules = tuple(dict.fromkeys(rules))
+        conflict_required = (
+            EvidenceStrengthRule.CONFLICT_SIDES_PLUS_ADJUDICATOR in required_rules
+        )
+        return ResolvedClaimGateObligations(
+            evidence_strength_rules=required_rules,
+            required_entity_ids=context.required_entity_ids,
+            required_material_side_ids=(
+                context.required_material_side_ids if conflict_required else ()
+            ),
+            requires_independent_adjudicator=conflict_required,
+        )
 
     @staticmethod
     def _evaluate_rule(
@@ -179,7 +197,7 @@ class ClaimGate:
         support_ids: tuple[str, ...],
         conflict_ids: tuple[str, ...],
         qualifications: dict[str, ClaimEvidenceQualification],
-        context: ClaimGateContext,
+        obligations: ResolvedClaimGateObligations,
     ) -> tuple[tuple[str, bool], ...]:
         support_qualifications = [
             qualifications[evidence_id]
@@ -226,17 +244,17 @@ class ClaimGate:
                 if (qualification := qualifications.get(evidence_id)) is not None
                 for side_id in qualification.material_side_ids
             }
-            sides_satisfied = bool(context.required_material_side_ids) and set(
-                context.required_material_side_ids
+            sides_satisfied = bool(obligations.required_material_side_ids) and set(
+                obligations.required_material_side_ids
             ).issubset(represented_sides)
             adjudicator_satisfied = any(
                 qualification.is_independent_adjudicator is True
                 for qualification in support_qualifications
             )
-            return (
-                (_ALL_MATERIAL_SIDES, sides_satisfied),
-                (_INDEPENDENT_ADJUDICATOR, adjudicator_satisfied),
-            )
+            evaluations = [(_ALL_MATERIAL_SIDES, sides_satisfied)]
+            if obligations.requires_independent_adjudicator:
+                evaluations.append((_INDEPENDENT_ADJUDICATOR, adjudicator_satisfied))
+            return tuple(evaluations)
         raise AssertionError(f"Unhandled evidence strength rule: {rule}")
 
     @staticmethod

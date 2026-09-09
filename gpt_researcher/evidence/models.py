@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import struct
 import unicodedata
 from datetime import date
 from enum import Enum
@@ -71,6 +72,7 @@ class GroundingFindingCode(str, Enum):
 
     UNKNOWN_CLAIM = "unknown_claim"
     MISSING_GATE_RESULT = "missing_gate_result"
+    INVALID_GATE_OBLIGATIONS = "invalid_gate_obligations"
     OMITTED_CLAIM_EMITTED = "omitted_claim_emitted"
     RETRIEVE_MORE_CLAIM_EMITTED = "retrieve_more_claim_emitted"
     HEDGE_REQUIRED_BUT_UNQUALIFIED = "hedge_required_but_unqualified"
@@ -104,15 +106,25 @@ def stable_claim_id(scope_id: str, normalized_text: str) -> str:
         raise ValueError("scope_id must not be empty")
     if not normalized_claim:
         raise ValueError("normalized_text must not be empty")
-    payload = f"{normalized_scope}\0{normalized_claim}".encode("utf-8")
+    scope_bytes = normalized_scope.encode("utf-8")
+    claim_bytes = normalized_claim.encode("utf-8")
+    payload = b"enterprise-insight-agent:claim-id:v2" + b"".join(
+        (
+            struct.pack(">Q", len(scope_bytes)),
+            scope_bytes,
+            struct.pack(">Q", len(claim_bytes)),
+            claim_bytes,
+        )
+    )
     return f"claim_{hashlib.sha256(payload).hexdigest()}"
 
 
 class Claim(BaseModel):
     """An atomic factual assertion, independent of classifier and source priors.
 
-    ``claim_id`` is SHA-256 over ``NFKC(scope_id) + NUL + normalized_text``.
-    Text normalization collapses all Unicode whitespace without case folding.
+    ``claim_id`` is SHA-256 over a versioned, length-prefixed UTF-8 encoding of
+    the normalized scope and claim text. Text normalization collapses all Unicode
+    whitespace without case folding.
     ``is_material`` is intentionally boolean because the frozen contract does not
     define a broader materiality ontology.
     """
@@ -218,6 +230,49 @@ class ClaimGateContext(BaseModel):
         return tuple(dict.fromkeys(normalized))
 
 
+class ResolvedClaimGateObligations(BaseModel):
+    """Persistent requirements used by Gate evaluation and later revalidation."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    evidence_strength_rules: tuple[EvidenceStrengthRule, ...]
+    required_entity_ids: tuple[str, ...] = ()
+    required_material_side_ids: tuple[str, ...] = ()
+    requires_independent_adjudicator: bool = False
+
+    @field_validator("evidence_strength_rules", mode="after")
+    @classmethod
+    def canonicalize_rules(
+        cls,
+        rules: tuple[EvidenceStrengthRule, ...],
+    ) -> tuple[EvidenceStrengthRule, ...]:
+        if not rules:
+            raise ValueError("evidence_strength_rules must not be empty")
+        return tuple(dict.fromkeys(rules))
+
+    @field_validator("required_entity_ids", "required_material_side_ids", mode="after")
+    @classmethod
+    def canonicalize_required_ids(cls, values: tuple[str, ...]) -> tuple[str, ...]:
+        normalized = tuple(normalize_claim_text(value) for value in values)
+        if any(not value for value in normalized):
+            raise ValueError("required obligation IDs must not be empty")
+        return tuple(dict.fromkeys(normalized))
+
+    @model_validator(mode="after")
+    def validate_conflict_obligations(self) -> ResolvedClaimGateObligations:
+        conflict_rule_required = (
+            EvidenceStrengthRule.CONFLICT_SIDES_PLUS_ADJUDICATOR
+            in self.evidence_strength_rules
+        )
+        if self.requires_independent_adjudicator != conflict_rule_required:
+            raise ValueError(
+                "independent adjudicator obligation must match the conflict rule"
+            )
+        if self.required_material_side_ids and not conflict_rule_required:
+            raise ValueError("material side obligations require the conflict rule")
+        return self
+
+
 class ClaimGateResult(BaseModel):
     """Auditable output of deterministic evidence-strength enforcement."""
 
@@ -227,6 +282,7 @@ class ClaimGateResult(BaseModel):
     decision: ClaimGateDecision
     applicable_risk_types: tuple[ClaimRiskType, ...] = ()
     required_rules: tuple[EvidenceStrengthRule, ...]
+    resolved_obligations: ResolvedClaimGateObligations | None = None
     satisfied_requirements: tuple[str, ...] = ()
     unmet_requirements: tuple[str, ...] = ()
     supporting_evidence_ids: tuple[str, ...] = ()

@@ -69,7 +69,9 @@ class GroundingValidator:
         )
         link_list = list(links)
         qualification_list = list(qualifications)
-        contexts = gate_contexts or {}
+        # Retained for API compatibility. Correctness comes from the resolved
+        # obligation snapshot persisted by ClaimGateResult, not caller replay.
+        _ = gate_contexts
         findings: list[GroundingFinding] = []
         reapplied: list[ClaimGateResult] = []
 
@@ -91,6 +93,16 @@ class GroundingValidator:
                     self._finding(GroundingFindingCode.MISSING_GATE_RESULT, record)
                 )
                 continue
+
+            obligations = previous_gate.resolved_obligations
+            if not self._obligations_are_consistent(claim, previous_gate):
+                findings.append(
+                    self._finding(
+                        GroundingFindingCode.INVALID_GATE_OBLIGATIONS, record
+                    )
+                )
+                continue
+            assert obligations is not None
 
             if previous_gate.decision is ClaimGateDecision.OMIT:
                 findings.append(
@@ -183,7 +195,7 @@ class GroundingValidator:
                 effective_evidences,
                 effective_links,
                 qualification_list,
-                contexts.get(record.claim_id),
+                resolved_obligations=obligations,
             )
             reapplied.append(current_gate)
 
@@ -241,6 +253,23 @@ class GroundingValidator:
         )
 
     @staticmethod
+    def _obligations_are_consistent(
+        claim: Claim,
+        gate_result: ClaimGateResult,
+    ) -> bool:
+        obligations = gate_result.resolved_obligations
+        if obligations is None:
+            return False
+        if gate_result.applicable_risk_types != claim.risk_types:
+            return False
+        if gate_result.required_rules != obligations.evidence_strength_rules:
+            return False
+        base_rules = ClaimGate._resolve_obligations(
+            claim, ClaimGateContext()
+        ).evidence_strength_rules
+        return all(rule in obligations.evidence_strength_rules for rule in base_rules)
+
+    @staticmethod
     def create_repair_plan(
         result: GroundingValidationResult,
     ) -> GroundingRepairPlan:
@@ -254,6 +283,7 @@ class GroundingValidator:
         remove_claim_codes = {
             GroundingFindingCode.UNKNOWN_CLAIM,
             GroundingFindingCode.MISSING_GATE_RESULT,
+            GroundingFindingCode.INVALID_GATE_OBLIGATIONS,
             GroundingFindingCode.OMITTED_CLAIM_EMITTED,
             GroundingFindingCode.RETRIEVE_MORE_CLAIM_EMITTED,
             GroundingFindingCode.INSUFFICIENT_FINAL_CITATIONS,

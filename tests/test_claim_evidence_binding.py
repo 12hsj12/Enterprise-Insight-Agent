@@ -1,4 +1,6 @@
+import hashlib
 import json
+import struct
 
 import pytest
 from pydantic import ValidationError
@@ -54,6 +56,33 @@ def test_claim_scope_is_part_of_identity():
         scope_id="run-2",
         normalized_text="Revenue was $10 million.",
     ).claim_id
+
+
+def test_claim_id_length_prefix_eliminates_nul_delimiter_collision():
+    first = Claim(scope_id="a\0b", normalized_text="c")
+    second = Claim(scope_id="a", normalized_text="b\0c")
+
+    assert first.claim_id != second.claim_id
+
+
+def test_claim_id_is_deterministic_for_normalized_unicode_utf8_components():
+    first = Claim(scope_id=" 研究\t范围 ", normalized_text="收入为 １０ 亿欧元。")
+    second = Claim(scope_id="研究 范围", normalized_text="收入为 10 亿欧元。")
+
+    assert first.scope_id == second.scope_id == "研究 范围"
+    assert first.normalized_text == second.normalized_text == "收入为 10 亿欧元。"
+    assert first.claim_id == second.claim_id
+    assert first.claim_id == stable_claim_id(first.scope_id, first.normalized_text)
+    scope_bytes = first.scope_id.encode("utf-8")
+    text_bytes = first.normalized_text.encode("utf-8")
+    expected_payload = (
+        b"enterprise-insight-agent:claim-id:v2"
+        + struct.pack(">Q", len(scope_bytes))
+        + scope_bytes
+        + struct.pack(">Q", len(text_bytes))
+        + text_bytes
+    )
+    assert first.claim_id == f"claim_{hashlib.sha256(expected_payload).hexdigest()}"
 
 
 def test_claim_rejects_identity_that_does_not_match_normalized_input():

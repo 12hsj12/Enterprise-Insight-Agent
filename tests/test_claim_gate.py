@@ -208,6 +208,7 @@ def test_multi_risk_is_a_semantic_union_not_a_weakest_rule_shortcut():
         EvidenceStrengthRule.PRIMARY_OR_TWO_INDEPENDENT,
         EvidenceStrengthRule.PRIMARY_PLUS_INDEPENDENT,
     )
+    assert result.resolved_obligations.evidence_strength_rules == result.required_rules
     assert result.satisfied_requirements == (
         "primary_or_two_independent_support",
     )

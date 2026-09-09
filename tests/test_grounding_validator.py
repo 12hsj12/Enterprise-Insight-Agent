@@ -146,9 +146,190 @@ def test_emit_dropped_required_citation_reapplies_gate_and_requires_repair():
     )
 
     assert approved.decision is ClaimGateDecision.EMIT
+    assert approved.resolved_obligations is not None
+    assert (
+        approved.resolved_obligations.evidence_strength_rules
+        == approved.required_rules
+    )
     assert result.reapplied_gate_results[0].decision is ClaimGateDecision.OMIT
     assert result.status is GroundingStatus.REPAIR_REQUIRED
     assert GroundingFindingCode.INSUFFICIENT_FINAL_CITATIONS in result.reason_codes
+
+
+def test_revalidation_allows_replacement_evidence_satisfying_same_obligations():
+    item = claim("Product A outperforms Product B.", ClaimRiskType.COMPARATIVE_CLAIM)
+    evidences = [evidence(f"ev-{name}") for name in ("a", "b", "c", "d")]
+    links = [link(item, ev.evidence_id) for ev in evidences]
+    qualifications = [
+        qualification("ev-a", independence_group_id="group-1"),
+        qualification("ev-b", independence_group_id="group-2"),
+        qualification("ev-c", independence_group_id="group-3"),
+        qualification("ev-d", independence_group_id="group-4"),
+    ]
+    approved = gate(item, evidences[:2], links[:2], qualifications)
+
+    result = validate(
+        [record(item, "ev-c", "ev-d")],
+        claims=[item],
+        evidences=evidences,
+        links=links,
+        gate_results=[approved],
+        qualifications=qualifications,
+        audit_metadata=[metadata(ev.evidence_id) for ev in evidences],
+    )
+
+    assert approved.supporting_evidence_ids == ("ev-a", "ev-b")
+    assert result.status is GroundingStatus.PASS
+    assert result.reapplied_gate_results[0].supporting_evidence_ids == (
+        "ev-c",
+        "ev-d",
+    )
+
+
+def test_revalidation_preserves_comparison_required_entity_coverage():
+    item = claim("Product A outperforms Product B.", ClaimRiskType.COMPARATIVE_CLAIM)
+    context = ClaimGateContext(required_entity_ids=("product-a", "product-b"))
+    evidences = [evidence(f"ev-{name}") for name in ("a", "b", "c")]
+    links = [link(item, ev.evidence_id) for ev in evidences]
+    qualifications = [
+        qualification(
+            "ev-a",
+            independence_group_id="group-a",
+            is_primary_source=True,
+            supported_entity_ids=("product-a",),
+        ),
+        qualification(
+            "ev-b",
+            independence_group_id="group-b",
+            is_primary_source=True,
+            supported_entity_ids=("product-b",),
+        ),
+        qualification("ev-c", independence_group_id="group-c"),
+    ]
+    approved = gate(item, evidences[:2], links[:2], qualifications, context)
+
+    result = validate(
+        [record(item, "ev-a", "ev-c")],
+        claims=[item],
+        evidences=evidences,
+        links=links,
+        gate_results=[approved],
+        qualifications=qualifications,
+        audit_metadata=[metadata(ev.evidence_id) for ev in evidences],
+    )
+
+    assert approved.decision is ClaimGateDecision.EMIT
+    assert approved.resolved_obligations.required_entity_ids == (
+        "product-a",
+        "product-b",
+    )
+    assert result.status is GroundingStatus.REPAIR_REQUIRED
+    assert result.reapplied_gate_results[0].unmet_requirements == (
+        "comparable_primary:product-b",
+    )
+
+
+def test_revalidation_preserves_required_unit_strengthening():
+    item = claim("Revenue was 10 million.", ClaimRiskType.NUMERIC_VALUE)
+    context = ClaimGateContext(required_unit_rule="two_independent")
+    evidences = [evidence("ev-a"), evidence("ev-b")]
+    links = [link(item, "ev-a"), link(item, "ev-b")]
+    qualifications = [
+        qualification(
+            "ev-a", independence_group_id="group-a", is_primary_source=True
+        ),
+        qualification("ev-b", independence_group_id="group-b"),
+    ]
+    approved = gate(item, evidences, links, qualifications, context)
+
+    result = validate(
+        [record(item, "ev-a")],
+        claims=[item],
+        evidences=evidences,
+        links=links,
+        gate_results=[approved],
+        qualifications=qualifications,
+        audit_metadata=[metadata("ev-a"), metadata("ev-b")],
+    )
+
+    assert approved.decision is ClaimGateDecision.EMIT
+    assert len(approved.resolved_obligations.evidence_strength_rules) == 2
+    assert result.status is GroundingStatus.REPAIR_REQUIRED
+    assert result.reapplied_gate_results[0].unmet_requirements == (
+        "two_independent_support_groups",
+    )
+
+
+@pytest.mark.parametrize(
+    ("final_citations", "expected_unmet"),
+    [
+        (("side-a", "judge"), "all_required_material_sides"),
+        (("side-a", "side-b"), "independent_adjudicating_support"),
+    ],
+)
+def test_revalidation_preserves_conflict_side_and_adjudicator_obligations(
+    final_citations, expected_unmet
+):
+    item = claim("The reports conflict.", ClaimRiskType.CONFLICT_SENSITIVE_CLAIM)
+    context = ClaimGateContext(required_material_side_ids=("vendor", "replication"))
+    evidences = [evidence("side-a"), evidence("side-b"), evidence("judge")]
+    links = [
+        link(item, "side-a"),
+        link(item, "side-b", "conflict"),
+        link(item, "judge"),
+    ]
+    qualifications = [
+        qualification("side-a", material_side_ids=("vendor",)),
+        qualification("side-b", material_side_ids=("replication",)),
+        qualification("judge", is_independent_adjudicator=True),
+    ]
+    approved = gate(item, evidences, links, qualifications, context)
+
+    result = validate(
+        [record(item, *final_citations)],
+        claims=[item],
+        evidences=evidences,
+        links=links,
+        gate_results=[approved],
+        qualifications=qualifications,
+        audit_metadata=[metadata(ev.evidence_id) for ev in evidences],
+    )
+
+    assert approved.decision is ClaimGateDecision.EMIT
+    assert approved.resolved_obligations.required_material_side_ids == (
+        "vendor",
+        "replication",
+    )
+    assert approved.resolved_obligations.requires_independent_adjudicator is True
+    assert result.status is GroundingStatus.REPAIR_REQUIRED
+    assert expected_unmet in result.reapplied_gate_results[0].unmet_requirements
+
+
+@pytest.mark.parametrize("mutation", ["missing", "inconsistent"])
+def test_revalidation_fails_closed_for_invalid_obligation_snapshot(mutation):
+    item = claim()
+    ev = evidence("ev-1")
+    links = [link(item, "ev-1")]
+    approved = gate(item, [ev], links)
+    if mutation == "missing":
+        invalid = approved.model_copy(update={"resolved_obligations": None})
+    else:
+        invalid = approved.model_copy(update={"required_rules": ()})
+
+    result = validate(
+        [record(item, "ev-1")],
+        claims=[item],
+        evidences=[ev],
+        links=links,
+        gate_results=[invalid],
+        audit_metadata=[metadata("ev-1")],
+    )
+
+    assert result.status is GroundingStatus.REPAIR_REQUIRED
+    assert result.reason_codes == (
+        GroundingFindingCode.INVALID_GATE_OBLIGATIONS,
+    )
+    assert result.reapplied_gate_results == ()
 
 
 @pytest.mark.parametrize(
@@ -286,11 +467,25 @@ def test_validator_calls_injected_claim_gate_with_only_cited_evidence():
         def __init__(self):
             self.evidence_ids = []
 
-        def evaluate(self, claim, evidences, links, qualifications=(), context=None):
+        def evaluate(
+            self,
+            claim,
+            evidences,
+            links,
+            qualifications=(),
+            context=None,
+            *,
+            resolved_obligations=None,
+        ):
             evidence_list = list(evidences)
             self.evidence_ids.append(tuple(e.evidence_id for e in evidence_list))
             return super().evaluate(
-                claim, evidence_list, links, qualifications, context
+                claim,
+                evidence_list,
+                links,
+                qualifications,
+                context,
+                resolved_obligations=resolved_obligations,
             )
 
     item = claim()

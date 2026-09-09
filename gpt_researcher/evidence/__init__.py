@@ -27,6 +27,7 @@ from .models import (
     GroundingRepairPlan,
     GroundingStatus,
     GroundingValidationResult,
+    ResolvedClaimGateObligations,
     normalize_claim_text,
     stable_claim_id,
 )
@@ -62,6 +63,7 @@ __all__ = [
     "GroundingValidationResult",
     "GroundingValidator",
     "RISK_MINIMUM_RULES",
+    "ResolvedClaimGateObligations",
     "normalize_claim_text",
     "stable_claim_id",
 ]

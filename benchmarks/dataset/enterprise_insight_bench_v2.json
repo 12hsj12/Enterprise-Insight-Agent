@@ -1,7 +1,7 @@
 {
-  "schema_version": "enterprise-insight-bench-v2/2.0.0",
+  "schema_version": "enterprise-insight-bench-v2/2.1.0",
   "status": "FROZEN",
-  "frozen_on": "2026-09-07",
+  "frozen_on": "2026-09-09",
   "cutoff_date": "2026-09-05",
   "categories": [
     "factual_verification",
@@ -11,6 +11,71 @@
     "conflict_credibility_resolution",
     "enterprise_decision_recommendation"
   ],
+  "policy_routing_contract": {
+    "resolver_version": "enterprise-insight-policy-resolver/1.0.0",
+    "routing_modes": ["single", "multi_policy", "broad_fallback"],
+    "max_policy_branches": 3,
+    "candidate_categories": {
+      "type": "unique_ordered_research_task_categories",
+      "primary_required_unless_invalid_typed_classification": true,
+      "ordering": "primary_then_deterministic_runner_ups"
+    },
+    "single_rule": "valid_typed_classification_without_fallback_or_material_runner_up",
+    "multi_policy_rule": "primary_plus_at_most_two_material_runner_ups",
+    "broad_fallback": {
+      "triggers": ["classifier_fallback_used", "invalid_typed_classification"],
+      "classifier_diagnostic_fallback": "technical_capability_analysis",
+      "candidate_categories": [
+        "technical_capability_analysis",
+        "factual_verification",
+        "competitive_comparison",
+        "trend_market_intelligence",
+        "conflict_credibility_resolution",
+        "enterprise_decision_recommendation"
+      ],
+      "observable": true
+    },
+    "shared_candidate_pool": {
+      "retrieval_count_per_request": 1,
+      "semantic_eligibility_before_policy_reranking": true,
+      "policy_branches_use_same_immutable_pool": true,
+      "multi_policy_must_not_multiply_live_retrieval": true
+    },
+    "fusion": {
+      "algorithm": "deterministic_round_robin",
+      "branch_order": "primary_then_resolver_candidate_order",
+      "deduplicate_by": "evidence_id",
+      "stop_rule": "max_results_or_all_branch_views_exhausted",
+      "stable_tie_break": "existing_stable_order_then_evidence_id"
+    },
+    "policy_obligations": [
+      "freshness_requirement",
+      "preferred_source_roles",
+      "corroboration_rule",
+      "primary_source_rule",
+      "independence_rule",
+      "comparison_symmetry",
+      "conflict_side_preservation_adjudication"
+    ],
+    "claim_minimums": "classifier_independent_union_without_weakening",
+    "retrieve_more_driver": "unmet_named_claim_or_policy_obligations",
+    "information_cutoff_unconditional": true
+  },
+  "routing_diagnostic_contracts": {
+    "policy_candidate_recall": "cases_frozen_category_in_candidate_categories/cases_with_routing_decision",
+    "headline": false,
+    "additional_diagnostics": [
+      "ambiguity_rate",
+      "broad_fallback_rate",
+      "mean_resolved_policy_count",
+      "maximum_resolved_policy_count",
+      "routing_mode_by_frozen_and_predicted_category",
+      "policy_obligation_preservation",
+      "evidence_overlap_across_policy_branches_optional",
+      "local_policy_fusion_latency"
+    ],
+    "policy_obligation_preservation": "resolver_and_fusion_must_not_silently_discard_named_obligations"
+  },
   "claim_gate_rules": {
     "default_non_required_unit_rule": "standard",
     "required_unit_combination": "union_without_weakening",

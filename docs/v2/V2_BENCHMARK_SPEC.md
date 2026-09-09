@@ -1,17 +1,20 @@
 # Enterprise Insight Benchmark V2 — Frozen Protocol
 
-**Protocol:** `enterprise-insight-bench-v2/2.0.0`
+**Protocol:** `enterprise-insight-bench-v2/2.1.0`
 
 **Status:** FROZEN
 
 **Dataset:** `benchmarks/dataset/enterprise_insight_bench_v2.json`
 
-**Information cutoff:** 2026-09-05
-**Frozen on:** 2026-09-08
+**Dataset SHA-256:** `956519ed56ecabdba6c8e3ad059b48785772be9b63e1a937485433a204cc3dd5`
 
-This protocol was frozen before V2 implementation and final comparison. It is independent
-of the immutable V1 dataset, annotations, runs, and results. Any semantic change requires a
-new version and hash; unfavorable cases or results may not be removed.
+**Information cutoff:** 2026-09-05
+**Frozen on:** 2026-09-09
+
+This protocol is the V2.1 routing-compatible re-freeze. It remains independent of the
+immutable V1 dataset, annotations, runs, and results. The V2.0 case content and every
+non-routing benchmark semantic are preserved. Any later semantic change requires a new
+version and hash; unfavorable cases or results may not be removed.
 
 ## 1. Cases and split
 
@@ -19,7 +22,7 @@ The dataset contains 30 unique cases: five in each of the six frozen categories.
 category contributes three development cases and two holdout cases, producing 18 development
 and 12 holdout cases. Category labels, split, cutoff, query, Required Units, evidence-strength
 rules, and applicable high-risk types are frozen. Development may be used for debugging and
-one documented policy revision before the final freeze; this version is that final freeze.
+the documented V2.1 architecture revision; this version is the resulting re-freeze.
 Holdout may be executed only in the final locked comparison and may not drive tuning.
 
 The cutoff applies to the state of the world claimed in a report. A source published after
@@ -27,12 +30,15 @@ the cutoff is excluded even if it describes an earlier event, unless it is retai
 explicitly labeled audit metadata and never used for scoring or generation. Unknown dates
 fail strict freshness rules and are flagged for other modes.
 
-## 2. Paired candidate fixture
+## 2. Paired candidate fixture and shared-pool routing
 
-For each case, retrieve one candidate evidence pool once under a recorded retrieval query,
+For each case, retrieve one candidate evidence pool exactly once under a recorded retrieval query,
 cutoff, provider/configuration, timestamp, and budget. Preserve raw candidates, normalized
 provenance, publication-date observations, independence-group IDs, failures, and a canonical
-SHA-256. Baseline, V1, and V2 selection operate on that identical immutable pool.
+SHA-256. Apply semantic eligibility once to create one immutable eligible candidate pool.
+Baseline, V1, and every V2 policy branch operate on that identical pool. Multi-policy routing
+must not multiply live search, retrieval, or scraping calls, and a policy preference cannot
+rescue semantically ineligible evidence.
 
 This paired fixture reduces search variance; it does not remove embedding, model, or report
 generation nondeterminism. Retrieval-stage metrics and end-to-end report metrics are reported
@@ -49,8 +55,9 @@ in the stack are recorded where observable.
   gate, no grounding validator.
 - `v1`: fixed source-aware selection, `authority_weight=0.20`, no task-aware policy, no claim
   gate, no grounding validator. The weight is not claimed globally optimal.
-- `v2`: frozen query-aware policy, evidence-gated claims, and post-generation grounding
-  validation.
+- `v2`: deterministic task classification, uncertainty-aware PolicyResolver, shared-pool
+  task-aware branch reranking and deterministic fusion, evidence-gated claim generation,
+  and post-generation grounding validation. Claim-risk minimums are classifier-independent.
 
 All non-variant controls—candidate hash, code commit, model/provider, prompts except the
 mechanism under ablation, temperature, token limits, embedding configuration, and timeout—
@@ -116,7 +123,39 @@ unsatisfied. Claim/citation metrics cannot be invented for an absent report, so 
 metric is `null`; the final quality gate therefore fails. Classification may still be scored
 if the pre-retrieval prediction was durably recorded.
 
-## 6. Quantitative acceptance and predefined failure conditions
+Task Classification Accuracy is not candidate-set recall. It remains:
+
+`primary predicted category == frozen category`
+
+## 6. Frozen non-headline routing diagnostics
+
+Routing diagnostics explain the resolver and fusion behavior. They are not headline quality
+metrics, do not alter an acceptance threshold, and cannot be combined into a synthetic
+overall quality score.
+
+- **Policy Candidate Recall** = cases where the frozen category is contained in
+  `candidate_categories` / cases with a routing decision. It cannot substitute for Task
+  Classification Accuracy or any core quality metric.
+- **ambiguity rate** = routing decisions in `multi_policy` mode / routing decisions.
+- **broad-fallback rate** = routing decisions in `broad_fallback` mode / routing decisions.
+- **mean resolved policy count** and **maximum resolved policy count** use the number of
+  unique candidate policy branches in each routing decision.
+- **routing mode by frozen/predicted category** is a cross-tabulation, never a relabeling of
+  benchmark truth.
+- **Policy Obligation Preservation** is a deterministic contract check that resolver/fusion
+  output did not silently discard any named obligation contributed by applicable candidate
+  policies. It records pass/fail and missing obligation codes rather than a quality score.
+- **evidence overlap across policy branches** is optional and, when reported, uses
+  `evidence_id` membership over ranked branch views.
+- **local policy-fusion latency** measures only local resolver, branch reranking, and fusion
+  work; it excludes search, scraping, embeddings, report generation, and provider latency.
+
+Routing modes are exactly `single`, `multi_policy`, and `broad_fallback`. Multi-policy mode
+is bounded to three branches. Broad fallback resolves all six policies in the exact frozen
+order defined by the architecture and must be observable. The resolver version is
+`enterprise-insight-policy-resolver/1.0.0` and is independent of classifier versioning.
+
+## 7. Quantitative acceptance and predefined failure conditions
 
 V2 passes only if every condition below is met on the single final locked experiment. The
 five core comparison dimensions are Citation Correctness, Citation Completeness, Strong
@@ -158,7 +197,7 @@ Passing aggregate thresholds cannot override a hard failure. The experiment is a
 conclude that V2 failed. Paired Baseline and V1 are evaluated on the new frozen V2 fixture;
 historical V1 values are never backfilled into missing V2-fixture metrics.
 
-## 7. Cost and execution controls
+## 8. Cost and execution controls
 
 All schema, CLI, fixture, hashing, scoring, and synthetic/offline tests must pass before any
 paid call. The initiating V2 delivery request is the authorization for one locked experiment;
@@ -168,6 +207,7 @@ renewed authorization. Record actual estimated cost, model tokens, search calls,
 per case and variant. Paid live runs are never a debugging mechanism.
 
 Run outputs are append-only, uniquely named, and never overwrite V1 or another run. The final
-comparison locks commit SHA, dataset SHA-256, spec versions, candidate fixture hashes,
+comparison locks commit SHA, dataset SHA-256, architecture/protocol/resolver versions,
+candidate fixture hashes,
 configuration, environment/package versions, and annotation rubric. Raw and annotation
 artifacts are retained even when the result is unfavorable.

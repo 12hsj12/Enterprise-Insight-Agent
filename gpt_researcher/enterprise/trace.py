@@ -56,7 +56,7 @@ class RunTrace:
             event["duration_s"] = time.perf_counter() - start
             self._append(event)
 
-    def task_policy(self, classification, policy, limitations):
+    def task_policy(self, classification, policy, limitations, authority_weight):
         """Record public task-policy metadata without query or evidence payloads."""
         self._append({
             "stage": "task_policy",
@@ -65,7 +65,9 @@ class RunTrace:
             "classifier_confidence": classification.confidence,
             "fallback_used": classification.fallback_used,
             "policy_version": policy.policy_version,
-            "authority_weight": policy.authority_weight,
+            "authority_weight": authority_weight,
+            "policy_authority_weight_anchor": policy.authority_weight,
+            "authority_weight_fallback_used": classification.fallback_used,
             "freshness_mode": policy.freshness_mode.value,
             "max_age_days": policy.max_age_days,
             "preferred_source_types": list(policy.preferred_source_types),
@@ -93,7 +95,9 @@ class RunTrace:
                 "classifier_confidence": task_classification.confidence,
                 "fallback_used": task_classification.fallback_used,
                 "policy_version": evidence_policy.policy_version,
-                "authority_weight": evidence_policy.authority_weight,
+                "authority_weight": weight,
+                "policy_authority_weight_anchor": evidence_policy.authority_weight,
+                "authority_weight_fallback_used": task_classification.fallback_used,
                 "freshness_mode": evidence_policy.freshness_mode.value,
                 "max_age_days": evidence_policy.max_age_days,
                 "preferred_source_types": list(

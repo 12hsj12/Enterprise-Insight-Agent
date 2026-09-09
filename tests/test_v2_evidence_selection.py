@@ -12,10 +12,13 @@ from langchain_community.document_transformers.embeddings_redundant_filter impor
 from gpt_researcher.context.compression import ContextCompressor
 from gpt_researcher.enterprise import (
     EVIDENCE_SELECTION_LIMITATION_CODES,
+    NEUTRAL_FALLBACK_AUTHORITY_WEIGHT,
     IntelligenceRequest,
     IntelligenceWorkflow,
     ResearchTaskCategory,
     ResearchTaskClassifier,
+    TaskClassification,
+    adaptive_authority_weight,
     evidence_policy_for,
 )
 from gpt_researcher.enterprise.trace import RunTrace
@@ -34,12 +37,29 @@ def _stateful_doc(content, url, similarity):
     return doc
 
 
-def _compressor_for_policy(policy, docs, monkeypatch):
+def _classification(category, **updates):
+    values = {
+        "category": category,
+        "confidence": 0.80,
+        "classifier_version": "test-classifier",
+        "matched_signal_codes": ["test_signal"],
+        "runner_up_categories": [],
+        "rationale_codes": ["test_rationale"],
+        "fallback_used": False,
+    }
+    values.update(updates)
+    return TaskClassification(**values)
+
+
+def _compressor_for_policy(policy, docs, monkeypatch, classification=None):
+    if classification is None:
+        classification = _classification(policy.category)
     compressor = ContextCompressor(
         documents=[{"raw_content": "small", "url": "https://ignored.example"}],
         embeddings=None,
         max_results=10,
         evidence_policy=policy,
+        task_classification=classification,
     )
     retriever = SimpleNamespace(invoke=lambda *args, **kwargs: list(docs))
     monkeypatch.setattr(
@@ -48,6 +68,104 @@ def _compressor_for_policy(policy, docs, monkeypatch):
         lambda: retriever,
     )
     return compressor
+
+
+@pytest.mark.parametrize(
+    ("category", "expected_weight"),
+    [
+        (ResearchTaskCategory.FACTUAL_VERIFICATION, 0.30),
+        (ResearchTaskCategory.TECHNICAL_CAPABILITY_ANALYSIS, 0.22),
+        (ResearchTaskCategory.COMPETITIVE_COMPARISON, 0.10),
+        (ResearchTaskCategory.TREND_MARKET_INTELLIGENCE, 0.12),
+        (ResearchTaskCategory.CONFLICT_CREDIBILITY_RESOLUTION, 0.18),
+        (ResearchTaskCategory.ENTERPRISE_DECISION_RECOMMENDATION, 0.08),
+    ],
+)
+def test_primary_category_selects_exact_adaptive_authority_weight(
+    category, expected_weight
+):
+    classification = _classification(category)
+
+    assert adaptive_authority_weight(classification) == expected_weight
+    assert ContextCompressor(
+        [],
+        None,
+        evidence_policy=evidence_policy_for(category),
+        task_classification=classification,
+    ).source_reliability_weight == expected_weight
+
+
+def test_fallback_and_unusable_classification_use_exactly_neutral_v1_weight():
+    fallback = _classification(
+        ResearchTaskCategory.TECHNICAL_CAPABILITY_ANALYSIS,
+        confidence=0.35,
+        matched_signal_codes=[],
+        fallback_used=True,
+    )
+    compressor = ContextCompressor(
+        [],
+        None,
+        evidence_policy=evidence_policy_for(fallback.category),
+        task_classification=fallback,
+    )
+    unusable = fallback.model_copy(
+        update={"category": "not_a_research_task_category", "fallback_used": False}
+    )
+
+    assert NEUTRAL_FALLBACK_AUTHORITY_WEIGHT == 0.20
+    assert adaptive_authority_weight(fallback) == 0.20
+    assert adaptive_authority_weight(None) == 0.20
+    assert adaptive_authority_weight(unusable) == 0.20
+    assert compressor.source_reliability_weight == 0.20
+
+
+def test_runner_ups_and_confidence_do_not_change_runtime_weight():
+    category = ResearchTaskCategory.COMPETITIVE_COMPARISON
+    plain = _classification(category, confidence=0.95)
+    ambiguous = _classification(
+        category,
+        confidence=0.05,
+        runner_up_categories=[
+            ResearchTaskCategory.FACTUAL_VERIFICATION,
+            ResearchTaskCategory.TREND_MARKET_INTELLIGENCE,
+        ],
+    )
+
+    assert adaptive_authority_weight(plain) == 0.10
+    assert adaptive_authority_weight(ambiguous) == 0.10
+
+
+def test_non_weight_policy_metadata_does_not_change_ranking_weight():
+    category = ResearchTaskCategory.FACTUAL_VERIFICATION
+    classification = _classification(category)
+    policy = evidence_policy_for(category)
+    metadata_variant = policy.model_copy(
+        update={
+            "preferred_source_types": ("web",),
+            "corroboration_rule": "standard",
+            "primary_source_rule": "preferred",
+            "independent_source_rule": "publisher_organization",
+        }
+    )
+
+    original = ContextCompressor(
+        [], None, evidence_policy=policy, task_classification=classification
+    )
+    variant = ContextCompressor(
+        [], None, evidence_policy=metadata_variant, task_classification=classification
+    )
+    assert original.source_reliability_weight == 0.30
+    assert variant.source_reliability_weight == 0.30
+
+
+def test_baseline_zero_weight_and_v1_fixed_weight_remain_available():
+    baseline = ContextCompressor([], None, source_reliability_weight=0.0)
+    v1 = ContextCompressor([], None, source_reliability_weight=0.20)
+
+    assert baseline.source_aware_scorer.score(0.8, "https://openai.com").final_score == 0.8
+    assert v1.source_aware_scorer.score(
+        0.8, "https://openai.com"
+    ).final_score == pytest.approx(0.84)
 
 
 @pytest.mark.asyncio
@@ -141,14 +259,14 @@ async def test_v2_reranking_fails_safely_without_similarity_score(monkeypatch):
         await compressor.async_get_context("query")
 
 
-def test_policy_is_source_of_truth_and_conflicting_fixed_weight_fails():
+def test_policy_only_call_is_backward_compatible_and_conflicting_weight_fails():
     policy = evidence_policy_for(ResearchTaskCategory.COMPETITIVE_COMPARISON)
 
     compressor = ContextCompressor([], None, evidence_policy=policy)
     assert compressor.evidence_policy is policy
     assert compressor.source_reliability_weight == policy.authority_weight
 
-    with pytest.raises(ValueError, match="conflicts with EvidencePolicy"):
+    with pytest.raises(ValueError, match="conflicts with adaptive authority weight"):
         ContextCompressor(
             [],
             None,
@@ -214,6 +332,7 @@ async def test_context_manager_passes_typed_policy_without_environment_mutation(
         await ContextManager(researcher).get_similar_content_by_query("q", [])
 
     assert captured["evidence_policy"] is policy
+    assert captured["task_classification"] == classification
     assert captured["source_reliability_weight"] is None
     assert collected_diagnostics == [diagnostic]
     assert dict(os.environ) == environment_before
@@ -347,6 +466,28 @@ async def test_report_template_expansion_does_not_contaminate_classification():
 
 
 @pytest.mark.asyncio
+async def test_workflow_fallback_diagnostics_record_neutral_effective_weight():
+    _WorkflowResearcher.instances.clear()
+    trace = RunTrace("fallback-weight")
+
+    result = await IntelligenceWorkflow(_WorkflowResearcher).run(
+        IntelligenceRequest(
+            target="FixtureCo",
+            topic="Enterprise implications and considerations.",
+            enable_v2_evidence_selection=True,
+        ),
+        trace=trace,
+    )
+
+    event = result.diagnostics["events"][0]
+    assert result.task_classification.fallback_used is True
+    assert result.evidence_policy.authority_weight == 0.22
+    assert event["authority_weight"] == 0.20
+    assert event["policy_authority_weight_anchor"] == 0.22
+    assert event["authority_weight_fallback_used"] is True
+
+
+@pytest.mark.asyncio
 async def test_v2_diagnostics_are_auditable_and_content_free():
     _WorkflowResearcher.instances.clear()
     trace = RunTrace("v2-trace")
@@ -373,6 +514,8 @@ async def test_v2_diagnostics_are_auditable_and_content_free():
     assert task_event["fallback_used"] is False
     assert task_event["policy_version"]
     assert task_event["authority_weight"] == 0.30
+    assert task_event["policy_authority_weight_anchor"] == 0.30
+    assert task_event["authority_weight_fallback_used"] is False
     assert task_event["freshness_mode"] == "contextual"
     assert task_event["policy_reason_codes"]
     serialized_event = json.dumps(task_event)

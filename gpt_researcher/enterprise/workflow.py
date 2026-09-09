@@ -17,6 +17,7 @@ from .task_policy import (
     EvidencePolicy,
     ResearchTaskClassifier,
     TaskClassification,
+    adaptive_authority_weight,
     evidence_policy_for,
 )
 from .trace import RunTrace
@@ -95,7 +96,10 @@ class IntelligenceWorkflow:
             selection_limitations = EVIDENCE_SELECTION_LIMITATION_CODES
             if trace:
                 trace.task_policy(
-                    task_classification, evidence_policy, selection_limitations
+                    task_classification,
+                    evidence_policy,
+                    selection_limitations,
+                    adaptive_authority_weight(task_classification),
                 )
         researcher_kwargs = dict(
             query=request.research_query(), report_type="research_report",

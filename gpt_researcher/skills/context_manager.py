@@ -61,6 +61,7 @@ class ContextManager:
 
         compressor_kwargs = dict(self.researcher.kwargs)
         evidence_policy = getattr(self.researcher, "evidence_policy", None)
+        task_classification = getattr(self.researcher, "task_classification", None)
         if evidence_policy is None:
             source_weight = compressor_kwargs.pop(
                 "source_reliability_weight",
@@ -81,6 +82,7 @@ class ContextManager:
         )
         if evidence_policy is not None:
             compressor_init["evidence_policy"] = evidence_policy
+            compressor_init["task_classification"] = task_classification
         context_compressor = ContextCompressor(**compressor_init)
         trace = current_trace()
         with trace.stage("retrieval") if trace else nullcontext():
@@ -90,9 +92,7 @@ class ContextManager:
         if trace:
             trace.retrieval(result, context_compressor.source_reliability_weight,
                             context_compressor.similarity_threshold,
-                            task_classification=getattr(
-                                self.researcher, "task_classification", None
-                            ),
+                            task_classification=task_classification,
                             evidence_policy=evidence_policy,
                             policy_limitations=(
                                 EVIDENCE_SELECTION_LIMITATION_CODES

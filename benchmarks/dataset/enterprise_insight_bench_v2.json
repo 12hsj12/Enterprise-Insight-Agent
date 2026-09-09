@@ -1,5 +1,7 @@
 {
-  "schema_version": "enterprise-insight-bench-v2/2.1.0",
+  "schema_version": "enterprise-insight-bench-v2/2.2.0",
+  "architecture_version": "enterprise-insight-v2-architecture/2.2.0",
+  "classifier_version": "enterprise-insight-task-classifier/1.1.0",
   "status": "FROZEN",
   "frozen_on": "2026-09-09",
   "cutoff_date": "2026-09-05",
@@ -11,70 +13,46 @@
     "conflict_credibility_resolution",
     "enterprise_decision_recommendation"
   ],
-  "policy_routing_contract": {
-    "resolver_version": "enterprise-insight-policy-resolver/1.0.0",
-    "routing_modes": ["single", "multi_policy", "broad_fallback"],
-    "max_policy_branches": 3,
-    "candidate_categories": {
-      "type": "unique_ordered_research_task_categories",
-      "primary_required_unless_invalid_typed_classification": true,
-      "ordering": "primary_then_deterministic_runner_ups"
-    },
-    "single_rule": "valid_typed_classification_without_fallback_or_material_runner_up",
-    "multi_policy_rule": "primary_plus_at_most_two_material_runner_ups",
-    "broad_fallback": {
-      "triggers": ["classifier_fallback_used", "invalid_typed_classification"],
-      "classifier_diagnostic_fallback": "technical_capability_analysis",
-      "candidate_categories": [
-        "technical_capability_analysis",
-        "factual_verification",
-        "competitive_comparison",
-        "trend_market_intelligence",
-        "conflict_credibility_resolution",
-        "enterprise_decision_recommendation"
-      ],
+  "adaptive_weight_contract": {
+    "runtime_effect": "primary_category_selects_authority_weight_only",
+    "runner_up_categories_affect_weight": false,
+    "confidence_affects_weight": false,
+    "fallback": {
+      "triggers": ["classifier_fallback_used", "invalid_or_missing_classification"],
+      "diagnostic_primary_category": "technical_capability_analysis",
+      "authority_weight": 0.2,
       "observable": true
     },
-    "shared_candidate_pool": {
+    "semantic_selection": {
       "retrieval_count_per_request": 1,
-      "semantic_eligibility_before_policy_reranking": true,
-      "policy_branches_use_same_immutable_pool": true,
-      "multi_policy_must_not_multiply_live_retrieval": true
+      "semantic_eligibility_before_source_aware_reranking": true,
+      "task_classification_must_not_add_retrieval": true,
+      "missing_similarity_in_weighted_standard_path": "fail"
     },
-    "fusion": {
-      "algorithm": "deterministic_round_robin",
-      "branch_order": "primary_then_resolver_candidate_order",
-      "deduplicate_by": "evidence_id",
-      "stop_rule": "max_results_or_all_branch_views_exhausted",
-      "stable_tie_break": "existing_stable_order_then_evidence_id"
+    "scoring": {
+      "formula": "(1-w)*semantic_similarity+w*authority_score",
+      "maximum_authority_weight": 0.3,
+      "authority_score_semantics": "source_level_reliability_prior"
     },
-    "policy_obligations": [
-      "freshness_requirement",
-      "preferred_source_roles",
-      "corroboration_rule",
-      "primary_source_rule",
-      "independence_rule",
-      "comparison_symmetry",
-      "conflict_side_preservation_adjudication"
-    ],
-    "claim_minimums": "classifier_independent_union_without_weakening",
-    "retrieve_more_driver": "unmet_named_claim_or_policy_obligations",
-    "information_cutoff_unconditional": true
+    "evidence_policy_runtime_scope": {
+      "actively_enforced_field": "authority_weight",
+      "other_fields": "metadata_and_downstream_guidance_not_classifier_controlled_hard_rules"
+    },
+    "claim_minimums": "classifier_independent_union_without_weakening"
   },
-  "routing_diagnostic_contracts": {
-    "policy_candidate_recall": "cases_frozen_category_in_candidate_categories/cases_with_routing_decision",
-    "headline": false,
-    "additional_diagnostics": [
-      "ambiguity_rate",
-      "broad_fallback_rate",
-      "mean_resolved_policy_count",
-      "maximum_resolved_policy_count",
-      "routing_mode_by_frozen_and_predicted_category",
-      "policy_obligation_preservation",
-      "evidence_overlap_across_policy_branches_optional",
-      "local_policy_fusion_latency"
+  "selection_diagnostic_contracts": {
+    "task_classification_accuracy": "primary_predicted_category_equals_frozen_category",
+    "fields": [
+      "primary_category",
+      "classifier_confidence",
+      "runner_up_categories",
+      "signal_codes",
+      "rationale_codes",
+      "fallback_used",
+      "classifier_version",
+      "effective_authority_weight"
     ],
-    "policy_obligation_preservation": "resolver_and_fusion_must_not_silently_discard_named_obligations"
+    "headline": false
   },
   "claim_gate_rules": {
     "default_non_required_unit_rule": "standard",

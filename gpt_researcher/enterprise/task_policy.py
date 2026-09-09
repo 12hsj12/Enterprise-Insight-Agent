@@ -1,8 +1,4 @@
-"""Deterministic V2 research-task classification and evidence policies.
-
-This module is intentionally independent of the retrieval and report-generation flows.
-It defines the frozen V2 domain contracts without changing V1 runtime behavior.
-"""
+"""Deterministic V2 task classification and adaptive evidence weighting."""
 
 from __future__ import annotations
 
@@ -16,7 +12,8 @@ from pydantic import BaseModel, ConfigDict, Field
 
 
 CLASSIFIER_VERSION: Final = "enterprise-insight-task-classifier/1.1.0"
-POLICY_VERSION: Final = "enterprise-insight-v2-architecture/2.0.0"
+POLICY_VERSION: Final = "enterprise-insight-v2-architecture/2.2.0"
+NEUTRAL_FALLBACK_AUTHORITY_WEIGHT: Final = 0.20
 
 # The current web evidence model has URL provenance, but not publication timestamps,
 # publisher ownership, or the richer source-role vocabulary required to enforce these
@@ -74,10 +71,12 @@ class TaskClassification(BaseModel):
 
 
 class EvidencePolicy(BaseModel):
-    """Immutable task-aware source-selection policy for later V2 integration.
+    """Immutable task-aware evidence-policy metadata.
 
     ``authority_weight`` remains a source-level reliability prior. The frozen
     maximum of 0.30 preserves semantic relevance as the dominant ranking signal.
+    In Batch 2, only that field is enforced by retrieval ranking. The remaining
+    fields are downstream guidance, not classifier-controlled safety rules.
     Tuples make collection fields immutable as well as the model itself.
     """
 
@@ -712,14 +711,32 @@ def evidence_policy_for(category: ResearchTaskCategory) -> EvidencePolicy:
     return _EVIDENCE_POLICIES[category]
 
 
+def adaptive_authority_weight(classification: TaskClassification | None) -> float:
+    """Resolve the one runtime ranking weight from the primary classification.
+
+    Runner-ups and heuristic confidence are intentionally ignored. A classifier
+    fallback, missing result, or unusable category gets the neutral V1 weight.
+    """
+
+    if not isinstance(classification, TaskClassification):
+        return NEUTRAL_FALLBACK_AUTHORITY_WEIGHT
+    if classification.fallback_used:
+        return NEUTRAL_FALLBACK_AUTHORITY_WEIGHT
+    if not isinstance(classification.category, ResearchTaskCategory):
+        return NEUTRAL_FALLBACK_AUTHORITY_WEIGHT
+    return evidence_policy_for(classification.category).authority_weight
+
+
 __all__ = [
     "CLASSIFIER_VERSION",
     "EVIDENCE_SELECTION_LIMITATION_CODES",
+    "NEUTRAL_FALLBACK_AUTHORITY_WEIGHT",
     "POLICY_VERSION",
     "EvidencePolicy",
     "FreshnessMode",
     "ResearchTaskCategory",
     "ResearchTaskClassifier",
     "TaskClassification",
+    "adaptive_authority_weight",
     "evidence_policy_for",
 ]

@@ -35,7 +35,12 @@ from .retriever import SearchAPIRetriever, SectionRetriever
 from gpt_researcher.evidence import Evidence, EvidenceContext
 from .source_aware import SourceAwareScorer
 from gpt_researcher.evidence.models import RetrievalDiagnostic
-from gpt_researcher.enterprise.task_policy import EvidencePolicy
+from gpt_researcher.enterprise.task_policy import (
+    EvidencePolicy,
+    ResearchTaskCategory,
+    TaskClassification,
+    adaptive_authority_weight,
+)
 
 class VectorstoreCompressor:
     """Retrieves and compresses context from a vector store.
@@ -107,6 +112,7 @@ class ContextCompressor:
         similarity_threshold: float | None = None,
         source_reliability_weight: float | None = None,
         evidence_policy: EvidencePolicy | None = None,
+        task_classification: TaskClassification | None = None,
         prompt_family: type[PromptFamily] | PromptFamily = PromptFamily,
         **kwargs,
     ):
@@ -120,7 +126,9 @@ class ContextCompressor:
                 Falls back to the SIMILARITY_THRESHOLD env var when not given.
             source_reliability_weight: Optional fixed V1 source-authority weight.
             evidence_policy: Optional typed V2 policy. When present, its authority
-                weight is the source of truth and the semantic path always executes.
+                anchor and metadata remain available to downstream layers.
+            task_classification: Optional V2 classification. Its primary category
+                selects the adaptive weight; fallback resolves to the neutral 0.20.
             prompt_family: Prompt family for formatting output.
             **kwargs: Additional keyword arguments.
         """
@@ -134,19 +142,33 @@ class ContextCompressor:
 
         if evidence_policy is not None:
             if (
-                source_reliability_weight is not None
-                and source_reliability_weight != evidence_policy.authority_weight
+                isinstance(task_classification, TaskClassification)
+                and isinstance(task_classification.category, ResearchTaskCategory)
+                and task_classification.category is not evidence_policy.category
             ):
                 raise ValueError(
-                    "source_reliability_weight conflicts with EvidencePolicy authority_weight"
+                    "TaskClassification category conflicts with EvidencePolicy category"
                 )
-            source_reliability_weight = evidence_policy.authority_weight
+            effective_weight = (
+                adaptive_authority_weight(task_classification)
+                if task_classification is not None
+                else evidence_policy.authority_weight
+            )
+            if (
+                source_reliability_weight is not None
+                and source_reliability_weight != effective_weight
+            ):
+                raise ValueError(
+                    "source_reliability_weight conflicts with adaptive authority weight"
+                )
+            source_reliability_weight = effective_weight
         elif source_reliability_weight is None:
             source_reliability_weight = float(
                 os.environ.get("SOURCE_RELIABILITY_WEIGHT", "0.0")
             )
 
         self.evidence_policy = evidence_policy
+        self.task_classification = task_classification
         self.source_reliability_weight = source_reliability_weight
         self.source_aware_scorer = SourceAwareScorer(
             reliability_weight=source_reliability_weight

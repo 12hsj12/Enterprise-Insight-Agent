@@ -21,6 +21,35 @@ class ClaimRiskType(str, Enum):
     CONFLICT_SENSITIVE_CLAIM = "conflict_sensitive_claim"
 
 
+class EvidenceStrengthRule(str, Enum):
+    """Frozen V2 evidence-strength rules."""
+
+    STANDARD = "standard"
+    PRIMARY_OR_TWO_INDEPENDENT = "primary_or_two_independent"
+    TWO_INDEPENDENT = "two_independent"
+    PRIMARY_PLUS_INDEPENDENT = "primary_plus_independent"
+    CONFLICT_SIDES_PLUS_ADJUDICATOR = "conflict_sides_plus_adjudicator"
+
+
+class ClaimGateDecision(str, Enum):
+    """Closed set of deterministic Claim Gate actions."""
+
+    EMIT = "emit"
+    HEDGE = "hedge"
+    OMIT = "omit"
+    RETRIEVE_MORE = "retrieve_more"
+
+
+class ClaimGateReasonCode(str, Enum):
+    """Public, non-reasoning diagnostics for a gate decision."""
+
+    ALL_REQUIREMENTS_SATISFIED = "all_requirements_satisfied"
+    EVIDENCE_REQUIREMENTS_UNMET = "evidence_requirements_unmet"
+    RETRIEVAL_AVAILABLE = "retrieval_available"
+    CONFLICT_UNADJUDICATED = "conflict_unadjudicated"
+    NO_VALID_SUPPORT = "no_valid_support"
+
+
 def normalize_claim_text(text: str) -> str:
     """Normalize identity text with NFKC and collapsed Unicode whitespace."""
 
@@ -89,6 +118,83 @@ class Claim(BaseModel):
         return tuple(dict.fromkeys(risk_types))
 
 
+class ClaimEvidenceQualification(BaseModel):
+    """Explicit claim-specific provenance facts used by the deterministic gate.
+
+    Boolean ``None`` means unknown. No field is inferred from a URL, source score,
+    or another qualification record. ``is_primary_source=True`` explicitly means
+    that the evidence is an appropriate primary source for the claim being gated.
+    """
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    evidence_id: str
+    independence_group_id: str | None = None
+    is_primary_source: bool | None = None
+    supported_entity_ids: tuple[str, ...] = ()
+    material_side_ids: tuple[str, ...] = ()
+    is_independent_adjudicator: bool | None = None
+
+    @field_validator(
+        "evidence_id",
+        "independence_group_id",
+        mode="before",
+    )
+    @classmethod
+    def normalize_optional_id(cls, value: Any) -> Any:
+        if value is None:
+            return None
+        if not isinstance(value, str):
+            raise ValueError("qualification IDs must be strings")
+        normalized = normalize_claim_text(value)
+        if not normalized:
+            raise ValueError("qualification IDs must not be empty")
+        return normalized
+
+    @field_validator("supported_entity_ids", "material_side_ids", mode="after")
+    @classmethod
+    def canonicalize_id_tuple(cls, values: tuple[str, ...]) -> tuple[str, ...]:
+        normalized = tuple(normalize_claim_text(value) for value in values)
+        if any(not value for value in normalized):
+            raise ValueError("qualification IDs must not be empty")
+        return tuple(dict.fromkeys(normalized))
+
+
+class ClaimGateContext(BaseModel):
+    """Optional external obligations and retry availability for one claim."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    required_unit_rule: EvidenceStrengthRule | None = None
+    required_entity_ids: tuple[str, ...] = ()
+    required_material_side_ids: tuple[str, ...] = ()
+    allow_retrieve_more: bool = False
+
+    @field_validator("required_entity_ids", "required_material_side_ids", mode="after")
+    @classmethod
+    def canonicalize_required_ids(cls, values: tuple[str, ...]) -> tuple[str, ...]:
+        normalized = tuple(normalize_claim_text(value) for value in values)
+        if any(not value for value in normalized):
+            raise ValueError("required IDs must not be empty")
+        return tuple(dict.fromkeys(normalized))
+
+
+class ClaimGateResult(BaseModel):
+    """Auditable output of deterministic evidence-strength enforcement."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    claim_id: str
+    decision: ClaimGateDecision
+    applicable_risk_types: tuple[ClaimRiskType, ...] = ()
+    required_rules: tuple[EvidenceStrengthRule, ...]
+    satisfied_requirements: tuple[str, ...] = ()
+    unmet_requirements: tuple[str, ...] = ()
+    supporting_evidence_ids: tuple[str, ...] = ()
+    conflicting_evidence_ids: tuple[str, ...] = ()
+    reason_codes: tuple[ClaimGateReasonCode, ...]
+
+
 class Evidence(BaseModel):
     """Structured evidence preserved from the research and RAG pipeline."""
 
@@ -126,6 +232,10 @@ class EvidenceContext(BaseModel):
     claims: list[Claim] = Field(default_factory=list)
     claim_evidence_links: list[ClaimEvidenceLink] = Field(default_factory=list)
     claim_support_summaries: list[ClaimSupportSummary] = Field(default_factory=list)
+    claim_evidence_qualifications: list[ClaimEvidenceQualification] = Field(
+        default_factory=list
+    )
+    claim_gate_results: list[ClaimGateResult] = Field(default_factory=list)
 
 
 class EvidenceAssessment(BaseModel):

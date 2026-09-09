@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import unicodedata
+from datetime import date
 from enum import Enum
 from typing import Any, Literal
 
@@ -48,6 +49,44 @@ class ClaimGateReasonCode(str, Enum):
     RETRIEVAL_AVAILABLE = "retrieval_available"
     CONFLICT_UNADJUDICATED = "conflict_unadjudicated"
     NO_VALID_SUPPORT = "no_valid_support"
+
+
+class GeneratedClaimOutputMode(str, Enum):
+    """Closed rendering modes supplied by report generation."""
+
+    FACTUAL = "factual"
+    HEDGED = "hedged"
+
+
+class GroundingStatus(str, Enum):
+    """Terminal states for one deterministic grounding audit pass."""
+
+    PASS = "pass"
+    REPAIR_REQUIRED = "repair_required"
+    FAIL = "fail"
+
+
+class GroundingFindingCode(str, Enum):
+    """Stable public diagnostics emitted by post-generation validation."""
+
+    UNKNOWN_CLAIM = "unknown_claim"
+    MISSING_GATE_RESULT = "missing_gate_result"
+    OMITTED_CLAIM_EMITTED = "omitted_claim_emitted"
+    RETRIEVE_MORE_CLAIM_EMITTED = "retrieve_more_claim_emitted"
+    HEDGE_REQUIRED_BUT_UNQUALIFIED = "hedge_required_but_unqualified"
+    UNKNOWN_CITATION = "unknown_citation"
+    CITATION_NOT_LINKED_TO_CLAIM = "citation_not_linked_to_claim"
+    INSUFFICIENT_FINAL_CITATIONS = "insufficient_final_citations"
+    POST_CUTOFF_EVIDENCE = "post_cutoff_evidence"
+    CUTOFF_UNVERIFIED = "cutoff_unverified"
+
+
+class GroundingRepairOperation(str, Enum):
+    """Local repairs that never add or reinterpret evidence."""
+
+    REMOVE_CLAIM = "remove_claim"
+    MARK_CLAIM_HEDGED = "mark_claim_hedged"
+    REMOVE_INVALID_CITATION = "remove_invalid_citation"
 
 
 def normalize_claim_text(text: str) -> str:
@@ -195,6 +234,121 @@ class ClaimGateResult(BaseModel):
     reason_codes: tuple[ClaimGateReasonCode, ...]
 
 
+class GeneratedClaimRecord(BaseModel):
+    """One factual assertion that report generation actually emitted.
+
+    Identity and output mode are explicit integration inputs. The validator does
+    not infer claims or hedging from prose and does not claim semantic equivalence
+    between ``rendered_text`` and the registered Claim text.
+    """
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    claim_id: str
+    rendered_text: str
+    cited_evidence_ids: tuple[str, ...] = ()
+    output_mode: GeneratedClaimOutputMode = GeneratedClaimOutputMode.FACTUAL
+
+    @field_validator("claim_id", mode="before")
+    @classmethod
+    def validate_claim_id(cls, value: Any) -> str:
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError("claim_id must not be empty")
+        return value
+
+    @field_validator("rendered_text", mode="before")
+    @classmethod
+    def validate_rendered_text(cls, value: Any) -> str:
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError("rendered_text must not be empty")
+        return value
+
+    @field_validator("cited_evidence_ids", mode="after")
+    @classmethod
+    def canonicalize_citations(cls, values: tuple[str, ...]) -> tuple[str, ...]:
+        if any(not value.strip() for value in values):
+            raise ValueError("cited evidence IDs must not be empty")
+        return tuple(dict.fromkeys(values))
+
+
+class GroundingEvidenceAuditMetadata(BaseModel):
+    """Optional observed publication metadata for deterministic cutoff audit."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    evidence_id: str
+    publication_date: date | None = None
+
+    @field_validator("evidence_id", mode="before")
+    @classmethod
+    def validate_evidence_id(cls, value: Any) -> str:
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError("evidence_id must not be empty")
+        return value
+
+
+class GroundingFinding(BaseModel):
+    """One concise public grounding diagnostic without private reasoning."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    code: GroundingFindingCode
+    claim_id: str
+    evidence_id: str | None = None
+    blocking: bool = True
+    repairable: bool = True
+
+
+class GroundingValidationResult(BaseModel):
+    """Auditable outcome of one post-generation grounding validation pass."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    status: GroundingStatus
+    validated_claim_ids: tuple[str, ...] = ()
+    findings: tuple[GroundingFinding, ...] = ()
+    repairable_claim_ids: tuple[str, ...] = ()
+    failed_claim_ids: tuple[str, ...] = ()
+    reason_codes: tuple[GroundingFindingCode, ...] = ()
+    repair_attempt: int = Field(ge=0, le=1)
+    reapplied_gate_results: tuple[ClaimGateResult, ...] = ()
+
+
+class GroundingRepairAction(BaseModel):
+    """One deterministic local edit to structured generated-claim records."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    operation: GroundingRepairOperation
+    claim_id: str
+    evidence_id: str | None = None
+
+    @model_validator(mode="after")
+    def validate_operation_fields(self) -> GroundingRepairAction:
+        if not self.claim_id.strip():
+            raise ValueError("claim_id must not be empty")
+        citation_operation = (
+            self.operation is GroundingRepairOperation.REMOVE_INVALID_CITATION
+        )
+        if citation_operation and (
+            self.evidence_id is None or not self.evidence_id.strip()
+        ):
+            raise ValueError("remove_invalid_citation requires evidence_id")
+        if not citation_operation and self.evidence_id is not None:
+            raise ValueError("evidence_id is only valid for remove_invalid_citation")
+        return self
+
+
+class GroundingRepairPlan(BaseModel):
+    """The sole local repair pass allowed after an initial validation."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    source_repair_attempt: Literal[0] = 0
+    target_repair_attempt: Literal[1] = 1
+    actions: tuple[GroundingRepairAction, ...] = ()
+
+
 class Evidence(BaseModel):
     """Structured evidence preserved from the research and RAG pipeline."""
 
@@ -236,6 +390,10 @@ class EvidenceContext(BaseModel):
         default_factory=list
     )
     claim_gate_results: list[ClaimGateResult] = Field(default_factory=list)
+    generated_claim_records: list[GeneratedClaimRecord] = Field(default_factory=list)
+    grounding_validation_results: list[GroundingValidationResult] = Field(
+        default_factory=list
+    )
 
 
 class EvidenceAssessment(BaseModel):

@@ -151,7 +151,7 @@ def test_classifier_has_clear_examples_for_all_six_categories(query, expected):
     [
         (
             "Recommend whether we should choose A versus B after resolving contradictory "
-            "market trends and verifying their technical capabilities.",
+            "source accounts about market trends and verifying their technical capabilities.",
             ResearchTaskCategory.ENTERPRISE_DECISION_RECOMMENDATION,
             ResearchTaskCategory.CONFLICT_CREDIBILITY_RESOLUTION,
         ),

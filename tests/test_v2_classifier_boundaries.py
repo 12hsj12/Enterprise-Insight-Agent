@@ -67,6 +67,81 @@ MIXED_PRECEDENCE = [
     ("核查市场从本地部署向托管服务长期演进的证据。", TREND, "Temporal scope precedes verification"),
 ]
 
+REVIEWER_FAILURE_REGRESSIONS = [
+    (
+        "Analyze a protocol transition from handshake to streaming during execution in an industry gateway.",
+        TECHNICAL,
+    ),
+    (
+        "Analyze technology service-state evolution from queued to active during a single runtime execution.",
+        TECHNICAL,
+    ),
+    (
+        "Compare Vendor Orion documentation with Vendor Nova documentation for supported-region differences.",
+        COMPARISON,
+    ),
+    (
+        "Compare the conflict-resolution capabilities of Platform Copper versus Platform Silver.",
+        COMPARISON,
+    ),
+    (
+        "Verify whether the pair of reports is consistent about the same breach notification date.",
+        CONFLICT,
+    ),
+    (
+        "Verify whether two independent sources are consistent about the same product launch date.",
+        CONFLICT,
+    ),
+]
+
+NEW_TREND_TECHNICAL = [
+    ("Analyze a scheduler transition from waiting to dispatched during one execution.", TECHNICAL),
+    ("Explain a failover state change from leader to standby in one database runtime.", TECHNICAL),
+    ("分析请求状态机从待处理到完成的转换机制。", TECHNICAL),
+    ("说明单次部署中模型从训练模式切换到评估模式。", TECHNICAL),
+    ("Trace cloud-security market adoption changes over the last decade.", TREND),
+    ("Explain payment-platform ecosystem evolution across generations.", TREND),
+    ("分析近年来制造业软件生态的演变。", TREND),
+    ("研究历代数据库技术的长期演进。", TREND),
+]
+
+NEW_CONFLICT_COMPARISON = [
+    ("Compare Vendor Apollo documentation with Vendor Borealis documentation on protocol support.", COMPARISON),
+    ("Compare Company Alder financial filings and Company Beacon financial filings for margin differences.", COMPARISON),
+    ("比较甲平台网站与乙平台网站的无障碍设计。", COMPARISON),
+    ("比较两个厂商的基准表并对各自产品排序。", COMPARISON),
+    ("Reconcile two accounts of the same payment outage.", CONFLICT),
+    ("Determine whether official and regulator statements agree about the same merger.", CONFLICT),
+    ("核查两方说法对同一次停机事故是否一致。", CONFLICT),
+    ("比较官网与第三方材料对同一交易金额的说法差异。", CONFLICT),
+]
+
+NEW_CONFLICT_FACTUAL = [
+    ("Check whether both reports were published before May.", FACTUAL),
+    ("Are two sources publicly accessible?", FACTUAL),
+    ("核实两份报告是否都在六月前发布。", FACTUAL),
+    ("核查两个来源是否可以公开访问。", FACTUAL),
+    ("Verify whether both reports agree about the same patent filing date.", CONFLICT),
+    ("Are these two accounts consistent on the same shipment count?", CONFLICT),
+    ("核实两条记录对同一事故日期是否一致。", CONFLICT),
+    ("判断官网与监管记录对同一条件的说法是否相符。", CONFLICT),
+]
+
+TECHNICAL_CONFLICT_WORD_NEGATIVES = [
+    "Analyze the conflict-resolution capabilities of a replicated cache.",
+    "Explain the conflict resolution algorithm used by the merge engine.",
+    "Describe merge conflict handling in the source-control client.",
+    "Analyze scheduler conflict detection for overlapping jobs.",
+    "Explain how the dependency conflict resolver selects a package version.",
+]
+
+RECOMMENDATION_PRECEDENCE = [
+    "Recommend a platform after comparing Vendor A with Vendor B.",
+    "Advise which response to choose after reconciling two accounts of the same outage.",
+    "根据长期市场采用趋势，建议企业选择部署路线。",
+    "核查两个来源对同一发布日期的说法并给出分阶段路线图。",
+]
+
 
 @pytest.mark.parametrize("query,expected,reason", TREND_TECHNICAL)
 def test_trend_technical_boundary(query, expected, reason):
@@ -94,6 +169,67 @@ def test_mixed_precedence_boundary(query, expected, reason):
     result = ResearchTaskClassifier().classify(query)
     assert result.category is expected, reason
     assert "frozen_precedence_applied" in result.rationale_codes
+
+
+@pytest.mark.parametrize("query,expected", REVIEWER_FAILURE_REGRESSIONS)
+def test_latest_reviewer_failure_regressions(query, expected):
+    assert ResearchTaskClassifier().classify(query).category is expected
+
+
+@pytest.mark.parametrize("query,expected", NEW_TREND_TECHNICAL)
+def test_new_trend_technical_semantic_neighbors(query, expected):
+    result = ResearchTaskClassifier().classify(query)
+    assert result.category is expected
+    if expected is TECHNICAL:
+        assert "temporal_process_evolution" not in result.matched_signal_codes
+
+
+@pytest.mark.parametrize("query,expected", NEW_CONFLICT_COMPARISON)
+def test_new_conflict_comparison_semantic_neighbors(query, expected):
+    result = ResearchTaskClassifier().classify(query)
+    assert result.category is expected
+    assert ("source_account_consistency" in result.matched_signal_codes) is (
+        expected is CONFLICT
+    )
+
+
+@pytest.mark.parametrize("query,expected", NEW_CONFLICT_FACTUAL)
+def test_new_conflict_factual_semantic_neighbors(query, expected):
+    result = ResearchTaskClassifier().classify(query)
+    assert result.category is expected
+    assert ("source_account_consistency" in result.matched_signal_codes) is (
+        expected is CONFLICT
+    )
+
+
+@pytest.mark.parametrize("query", TECHNICAL_CONFLICT_WORD_NEGATIVES)
+def test_technical_conflict_words_do_not_imply_evidence_conflict(query):
+    result = ResearchTaskClassifier().classify(query)
+    assert result.category is TECHNICAL
+    assert "source_account_consistency" not in result.matched_signal_codes
+
+
+@pytest.mark.parametrize("query", RECOMMENDATION_PRECEDENCE)
+def test_recommendation_remains_the_highest_precedence(query):
+    result = ResearchTaskClassifier().classify(query)
+    assert result.category is DECISION
+    assert "frozen_precedence_applied" in result.rationale_codes
+
+
+def test_clause_locality_does_not_join_unrelated_source_and_difference_signals():
+    result = ResearchTaskClassifier().classify(
+        "List two reports; compare Product Amber with Product Cobalt for interface differences."
+    )
+    assert result.category is COMPARISON
+    assert "source_account_consistency" not in result.matched_signal_codes
+
+
+def test_clause_locality_does_not_join_macro_scope_to_a_runtime_transition():
+    result = ResearchTaskClassifier().classify(
+        "Use the industry-wide glossary, then analyze a request transition from queued to active during runtime."
+    )
+    assert result.category is TECHNICAL
+    assert "temporal_process_evolution" not in result.matched_signal_codes
 
 
 @pytest.mark.parametrize("sources", [

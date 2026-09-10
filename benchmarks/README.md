@@ -1,5 +1,49 @@
 # Enterprise Insight Benchmark
 
+## V2 deterministic evaluation harness
+
+`benchmarks.evaluation` aggregates existing structured case outputs for frozen
+`enterprise-insight-bench-v2/2.2.0`. It does not run retrieval, invoke an LLM judge,
+or change Claim Gate and Grounding Validator decisions.
+
+The typed input is an `EvaluationRunMetadata` JSON object plus a JSON array of
+`EvaluationCaseResult` objects. Callers may also use `EvaluationAdapter` to derive
+evidence counts, Claim Gate decision counts, and Grounding Validator status counts
+from an existing `EvidenceContext`. Source reliability requires its audited
+supporting-source numerator and denominator; it is never inferred from a URL or from
+the mere presence of an authority prior. Empty structured collections are unavailable
+unless the caller explicitly marks that metric's artifact as available; this preserves
+the distinction between a measured zero and missing instrumentation.
+
+```sh
+python -m benchmarks.evaluation run --metadata metadata.json --cases case-results.json --output outputs/evaluation-v2
+python -m benchmarks.evaluation compare --run-a outputs/baseline/evaluation.json --run-b outputs/enterprise-v2/evaluation.json --output outputs/baseline-v2-comparison
+```
+
+A run output contains:
+
+```text
+evaluation-v2/
+├── evaluation.json
+└── summary.md
+```
+
+A comparison output contains `comparison.json` and `comparison.md`. Comparisons
+require identical dataset hashes, benchmark schema versions, and case sets. Cases are
+aligned by `case_id`; a numerical delta is emitted only when both runs provide that
+metric. Missing baseline-only or V2-only values remain JSON `null` and Markdown `N/A`,
+not zero. JSON keys and cases use stable ordering, non-finite floats are rejected, and
+output directories are append-only.
+
+Provider/model identifiers, source commit, and timestamps are caller-provided metadata.
+Missing optional metadata stays null; the harness does not invoke Git or read provider
+credentials. Errors retain only a type and optional bounded code, never raw provider
+messages.
+
+Grounding pre/post rates are the number of non-passing validation records divided by
+the number of validation records at that repair stage. They are deliberately named
+`violating_validation_rate`: they do not claim to count individual findings or claims.
+
 ## v1 repeatable runner
 
 Run from the repository root (PowerShell: use `.venv/Scripts/python`):

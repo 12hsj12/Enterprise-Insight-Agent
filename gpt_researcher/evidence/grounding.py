@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterable, Mapping
+from contextlib import nullcontext
 from datetime import date
 
 from .gate import ClaimGate
@@ -190,13 +191,25 @@ class GroundingValidator:
                 if link.claim_id == record.claim_id
                 and link.evidence_id in effective_evidence_ids
             ]
-            current_gate = self._claim_gate.evaluate(
-                claim,
-                effective_evidences,
-                effective_links,
-                qualification_list,
-                resolved_obligations=obligations,
-            )
+            try:
+                from gpt_researcher.enterprise.trace import (
+                    ClaimGateTracePhase,
+                    claim_gate_trace_phase,
+                )
+
+                trace_phase = claim_gate_trace_phase(
+                    ClaimGateTracePhase.GROUNDING_REVALIDATION
+                )
+            except Exception:
+                trace_phase = nullcontext()
+            with trace_phase:
+                current_gate = self._claim_gate.evaluate(
+                    claim,
+                    effective_evidences,
+                    effective_links,
+                    qualification_list,
+                    resolved_obligations=obligations,
+                )
             reapplied.append(current_gate)
 
             if previous_gate.decision is ClaimGateDecision.EMIT:
@@ -241,7 +254,7 @@ class GroundingValidator:
             repairable_claim_ids = ()
             failed_claim_ids = tuple(sorted(blocking_claim_ids))
 
-        return GroundingValidationResult(
+        result = GroundingValidationResult(
             status=status,
             validated_claim_ids=validated_claim_ids,
             findings=tuple(findings),
@@ -251,6 +264,16 @@ class GroundingValidator:
             repair_attempt=repair_attempt,
             reapplied_gate_results=tuple(reapplied),
         )
+        # Observe the already-computed result; tracing never invokes validation.
+        try:
+            from gpt_researcher.enterprise.trace import current_trace
+
+            trace = current_trace()
+            if trace is not None:
+                trace.try_record_grounding_validation(result, record_list)
+        except Exception:
+            pass
+        return result
 
     @staticmethod
     def _obligations_are_consistent(
@@ -388,6 +411,15 @@ class GroundingValidator:
                     }
                 )
             )
+        # A repair event means the plan was actually applied, not merely built.
+        try:
+            from gpt_researcher.enterprise.trace import current_trace
+
+            trace = current_trace()
+            if trace is not None:
+                trace.try_record_repair(plan)
+        except Exception:
+            pass
         return repaired
 
     @staticmethod

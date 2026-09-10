@@ -2,6 +2,7 @@
 
 from datetime import date
 from contextlib import nullcontext
+from pathlib import Path
 from typing import Annotated, Callable
 from uuid import uuid4
 
@@ -20,7 +21,7 @@ from .task_policy import (
     adaptive_authority_weight,
     evidence_policy_for,
 )
-from .trace import RunTrace
+from .trace import ResearchTraceRecorder
 
 
 class IntelligenceRequest(BaseModel):
@@ -63,6 +64,8 @@ class IntelligenceResult(BaseModel):
     evidence_policy: EvidencePolicy | None = None
     retrieval_diagnostics: list[RetrievalDiagnostic] = Field(default_factory=list)
     evidence_selection_limitation_codes: list[str] = Field(default_factory=list)
+    trace_id: str | None = None
+    trace_artifact_reference: str | None = None
 
 
 class IntelligenceWorkflow:
@@ -76,15 +79,49 @@ class IntelligenceWorkflow:
         self.config_path = config_path
 
     async def run(self, request: IntelligenceRequest, run_id: str | None = None,
-                  trace: RunTrace | None = None) -> IntelligenceResult:
+                  trace: ResearchTraceRecorder | None = None, *,
+                  trace_output_directory: Path | str | None = None,
+                  output_artifact_reference: str | None = None) -> IntelligenceResult:
         if trace is not None:
             if run_id is not None and trace.run_id != run_id:
                 raise ValueError("Trace and result run IDs must match")
             run_id = trace.run_id
-        with trace.activate() if trace else nullcontext():
-            return await self._run(request, run_id, trace)
+        try:
+            with trace.activate() if trace else nullcontext():
+                result = await self._run(
+                    request, run_id, trace, output_artifact_reference
+                )
+        except BaseException as exc:
+            if trace:
+                terminal_trace = trace.try_fail(
+                    exc, output_artifact_reference=output_artifact_reference
+                )
+                if terminal_trace is not None and trace_output_directory is not None:
+                    trace.try_export(trace_output_directory)
+            raise
 
-    async def _run(self, request, run_id, trace):
+        if trace:
+            terminal_trace = trace.try_complete(
+                final_claim_count=None,
+                output_artifact_reference=output_artifact_reference,
+            )
+            trace_path = (
+                trace.try_export(trace_output_directory)
+                if terminal_trace is not None and trace_output_directory is not None
+                else None
+            )
+            result = result.model_copy(
+                update={
+                    "trace_id": trace.trace_id,
+                    "trace_artifact_reference": (
+                        str(trace_path) if trace_path is not None else None
+                    ),
+                    "diagnostics": trace.try_snapshot() or result.diagnostics,
+                }
+            )
+        return result
+
+    async def _run(self, request, run_id, trace, output_artifact_reference):
         task_classification = None
         evidence_policy = None
         selection_limitations = ()
@@ -95,7 +132,7 @@ class IntelligenceWorkflow:
             evidence_policy = evidence_policy_for(task_classification.category)
             selection_limitations = EVIDENCE_SELECTION_LIMITATION_CODES
             if trace:
-                trace.task_policy(
+                trace.try_record_task_policy(
                     task_classification,
                     evidence_policy,
                     selection_limitations,
@@ -123,6 +160,12 @@ class IntelligenceWorkflow:
             ))
         if not isinstance(report, str) or not report.strip():
             raise ValueError("Research provider returned an empty report")
+        if trace:
+            # The legacy report writer has no typed claim hook. Record only the
+            # stage outcome and optional artifact reference, never report text.
+            trace.try_record_generation(
+                output_artifact_reference=output_artifact_reference
+            )
         evidences_by_id = {}
         for evidence in researcher.get_evidences():
             previous = evidences_by_id.get(evidence.evidence_id)
@@ -155,9 +198,10 @@ class IntelligenceWorkflow:
             consistency=EvidenceConsistencyEvaluator().evaluate(evidences),
             source_urls=source_urls, estimated_cost_usd=researcher.get_costs(),
             limitations=limitations,
-            diagnostics=trace.snapshot() if trace else None,
+            diagnostics=trace.try_snapshot() if trace else None,
             task_classification=task_classification,
             evidence_policy=evidence_policy,
             retrieval_diagnostics=retrieval_diagnostics,
             evidence_selection_limitation_codes=list(selection_limitations),
+            trace_id=trace.trace_id if trace else None,
         )

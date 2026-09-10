@@ -213,6 +213,57 @@ class EvaluationCaseResult(EvaluationModel):
     efficiency: EfficiencyCaseMetrics = Field(default_factory=EfficiencyCaseMetrics)
     error: EvaluationError | None = None
     artifact_reference: str | None = None
+    trace_id: str | None = Field(
+        default=None,
+        min_length=1,
+        max_length=100,
+        pattern=r"^[A-Za-z0-9_.:-]+$",
+    )
+    trace_artifact_reference: str | None = Field(default=None, max_length=500)
+
+    @field_validator("trace_id")
+    @classmethod
+    def trace_id_is_public(cls, value: str | None) -> str | None:
+        if value is not None and any(
+            marker in value.lower()
+            for marker in (
+                "authorization",
+                "bearer",
+                "api_key",
+                "api-key",
+                "access_token",
+                "access-token",
+                "password",
+                "secret",
+            )
+        ):
+            raise ValueError("trace ID must be a safe opaque identifier")
+        return value
+
+    @field_validator("trace_artifact_reference")
+    @classmethod
+    def trace_reference_is_bounded(cls, value: str | None) -> str | None:
+        if value is not None and (
+            not value
+            or any(ord(character) < 32 for character in value)
+            or "://" in value
+            or "?" in value
+            or any(
+                marker in value.lower()
+                for marker in (
+                    "authorization",
+                    "bearer",
+                    "api_key",
+                    "api-key",
+                    "access_token",
+                    "access-token",
+                    "password",
+                    "secret",
+                )
+            )
+        ):
+            raise ValueError("trace artifact reference must be a safe local reference")
+        return value
 
     @model_validator(mode="after")
     def error_matches_status(self) -> "EvaluationCaseResult":
@@ -391,6 +442,8 @@ class EvaluationAdapter:
         efficiency: EfficiencyCaseMetrics | None = None,
         error: EvaluationError | None = None,
         artifact_reference: str | None = None,
+        trace_id: str | None = None,
+        trace_artifact_reference: str | None = None,
         selected_evidence_available: bool | None = None,
         generated_claim_records_available: bool | None = None,
         evidence_qualifications_available: bool | None = None,
@@ -544,6 +597,8 @@ class EvaluationAdapter:
             efficiency=efficiency or EfficiencyCaseMetrics(),
             error=error,
             artifact_reference=artifact_reference,
+            trace_id=trace_id,
+            trace_artifact_reference=trace_artifact_reference,
         )
 
 

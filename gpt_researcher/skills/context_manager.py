@@ -94,6 +94,7 @@ class ContextManager:
                             context_compressor.similarity_threshold,
                             task_classification=task_classification,
                             evidence_policy=evidence_policy,
+                            candidate_evidence_count=len(pages),
                             policy_limitations=(
                                 EVIDENCE_SELECTION_LIMITATION_CODES
                                 if evidence_policy is not None

@@ -12,6 +12,7 @@ from .task_policy import (
     evidence_policy_for,
 )
 from .workflow import IntelligenceRequest, IntelligenceResult, IntelligenceWorkflow
+from .trace import ResearchTrace, ResearchTraceRecorder
 
 __all__ = [
     "EVIDENCE_SELECTION_LIMITATION_CODES",
@@ -23,6 +24,8 @@ __all__ = [
     "IntelligenceWorkflow",
     "ResearchTaskCategory",
     "ResearchTaskClassifier",
+    "ResearchTrace",
+    "ResearchTraceRecorder",
     "TaskClassification",
     "adaptive_authority_weight",
     "evidence_policy_for",

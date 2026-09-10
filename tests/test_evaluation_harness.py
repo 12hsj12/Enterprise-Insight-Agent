@@ -368,6 +368,18 @@ def test_failed_case_requires_bounded_error_and_secret_message_is_not_supported(
             benchmark_contract=BenchmarkContractCaseMetrics(passed=True),
             error=EvaluationError(error_type="ProviderError"),
         )
+    with pytest.raises(ValueError, match="safe local reference"):
+        EvaluationCaseResult(
+            case_id="unsafe-trace-ref",
+            execution_status="completed",
+            trace_artifact_reference="https://signed.test/trace?token=secret",
+        )
+    with pytest.raises(ValueError, match="safe opaque identifier"):
+        EvaluationCaseResult(
+            case_id="unsafe-trace-id",
+            execution_status="completed",
+            trace_id="api_key:SECRET_VALUE",
+        )
 
 
 def test_frozen_benchmark_adapter_preserves_v22_contract_and_hash():

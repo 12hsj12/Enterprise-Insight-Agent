@@ -137,7 +137,7 @@ class ClaimGate:
             satisfied=satisfied,
             allow_retrieve_more=gate_context.allow_retrieve_more,
         )
-        return ClaimGateResult(
+        result = ClaimGateResult(
             claim_id=claim.claim_id,
             decision=decision,
             applicable_risk_types=claim.risk_types,
@@ -149,6 +149,17 @@ class ClaimGate:
             conflicting_evidence_ids=conflict_ids,
             reason_codes=reason_codes,
         )
+        # Local import avoids coupling the evidence model layer to an
+        # observability backend. Recording is strictly fail-open.
+        try:
+            from gpt_researcher.enterprise.trace import current_trace
+
+            trace = current_trace()
+            if trace is not None:
+                trace.try_record_claim_gate(claim, result)
+        except Exception:
+            pass
+        return result
 
     @staticmethod
     def _index_qualifications(

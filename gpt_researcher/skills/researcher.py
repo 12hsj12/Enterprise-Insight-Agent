@@ -881,19 +881,37 @@ class ResearchConductor:
                     elif requires_scraping is False:
                         # Declared: the retriever fetched the content itself.
                         if raw_content:
-                            prefetched_content.append({
+                            prefetched = {
                                 "url": url,
                                 "raw_content": raw_content,
-                            })
+                            }
+                            for field in (
+                                "title", "publisher", "source_organization",
+                                "source_owner", "author", "publication_date",
+                                "source_type",
+                            ):
+                                value = result.get(field)
+                                if isinstance(value, str) and value.strip():
+                                    prefetched[field] = value.strip()
+                            prefetched_content.append(prefetched)
                             self.researcher.add_research_sources([{"url": url}])
                         else:
                             new_search_urls.append(url)
                     elif raw_content and len(raw_content) > 100:
                         # Undeclared: legacy behaviour, unchanged.
-                        prefetched_content.append({
+                        prefetched = {
                             "url": url,
                             "raw_content": raw_content,
-                        })
+                        }
+                        for field in (
+                            "title", "publisher", "source_organization",
+                            "source_owner", "author", "publication_date",
+                            "source_type",
+                        ):
+                            value = result.get(field)
+                            if isinstance(value, str) and value.strip():
+                                prefetched[field] = value.strip()
+                        prefetched_content.append(prefetched)
                         self.researcher.add_research_sources([{"url": url}])
                     else:
                         new_search_urls.append(url)

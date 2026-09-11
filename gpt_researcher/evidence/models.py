@@ -417,6 +417,15 @@ class Evidence(BaseModel):
 
     source_type: str = "unknown"
 
+    # Optional provenance supplied explicitly by a retriever or scraper. These
+    # fields are descriptive inputs, never Claim Gate qualifications by
+    # themselves. URL- or score-derived values must not be placed here.
+    publisher: str | None = None
+    source_organization: str | None = None
+    source_owner: str | None = None
+    author: str | None = None
+    publication_date: str | None = None
+
     relevance_score: float | None = Field(
         default=None,
         ge=-1.0,

@@ -96,14 +96,19 @@ relations and the chosen citation subset. The adapter constructs stable Claim ID
 before binding any relation. These are authoring inputs, not independently reviewed
 semantic entailment results; inaccurate labels or relations remain a limitation.
 
-The model cannot supply qualifications in this schema. For explicit reviewed inputs,
-the same API accepts optional `claim_plan` using `ClaimPlan` in OpenAPI:
+The original Batch 8 writer could not supply qualifications. The subsequent
+Qualification Coverage Integration now lets the same single structured authoring
+call provide bounded entity/side references, claim/evidence associations, and
+content-anchored source identity candidates. Deterministic validation maps only
+accepted inputs into the existing `ClaimEvidenceQualification`; missing or invalid
+metadata remains unqualified. For explicit reviewed inputs, the same API accepts
+optional `claim_plan` using `ClaimPlan` in OpenAPI:
 each `items[]` contains an existing `Claim`, `links`, claim-specific
 `qualifications`, `gate_context`, and `cited_evidence_ids`; optional `audit_metadata`
 supplies observed publication dates. Omit `claim_id` within Claim to let the existing
 model calculate it, but links must reference that stable ID. All evidence IDs must
 match evidence actually selected in this execution. Stale/unmatched input fails;
-there is no URL-based ID remapping or qualification inference.
+there is no URL-based ID remapping or URL/authority/ranking-based qualification.
 
 The fixture tests exercise qualified numeric, conflict-side HEDGE, missing metadata,
 unknown IDs, citation-subset repair and failure cases without real provider keys.

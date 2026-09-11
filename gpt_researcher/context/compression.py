@@ -31,7 +31,12 @@ from ..memory.embeddings import OPENAI_EMBEDDING_MODEL
 from ..prompts import PromptFamily
 from ..utils.costs import estimate_embedding_cost
 from ..vector_store import VectorStoreWrapper
-from .retriever import SearchAPIRetriever, SectionRetriever
+from .retriever import (
+    EXPLICIT_SOURCE_METADATA_FIELDS,
+    SearchAPIRetriever,
+    SectionRetriever,
+    document_metadata_from_page,
+)
 from gpt_researcher.evidence import Evidence, EvidenceContext
 from .source_aware import SourceAwareScorer
 from gpt_researcher.evidence.models import RetrievalDiagnostic
@@ -210,6 +215,12 @@ class ContextCompressor:
             title=doc.metadata.get("title", "") or "",
             url=url,
             content=content,
+            source_type=doc.metadata.get("source_type", "unknown") or "unknown",
+            **{
+                field: doc.metadata.get(field)
+                for field in EXPLICIT_SOURCE_METADATA_FIELDS
+                if field != "source_type" and doc.metadata.get(field)
+            },
         )
 
 
@@ -243,10 +254,7 @@ class ContextCompressor:
             direct_docs = [
                 Document(
                     page_content=doc.get('raw_content', '') or '',
-                    metadata={
-                        "title": doc.get("title", "") or "",
-                        "source": doc.get("source") or doc.get("url") or "",
-                    },
+                    metadata=document_metadata_from_page(doc),
                 )
                 for doc in self.documents[:max_results]
             ]

@@ -12,6 +12,32 @@ from langchain_core.retrievers import BaseRetriever
 # Defaults to 50 000 chars (~12 500 tokens); override with MAX_CONTENT_CHARS env var.
 _MAX_CONTENT_CHARS = int(os.environ.get("MAX_CONTENT_CHARS", 50000))
 
+EXPLICIT_SOURCE_METADATA_FIELDS = (
+    "publisher",
+    "source_organization",
+    "source_owner",
+    "author",
+    "publication_date",
+    "source_type",
+)
+
+
+def document_metadata_from_page(page: Dict) -> Dict[str, str]:
+    """Copy only explicit source metadata into a Document.
+
+    Hostnames and ranking scores are deliberately excluded.
+    """
+
+    metadata = {
+        "title": page.get("title", "") or "",
+        "source": page.get("source") or page.get("url") or "",
+    }
+    for field in EXPLICIT_SOURCE_METADATA_FIELDS:
+        value = page.get(field)
+        if isinstance(value, str) and value.strip():
+            metadata[field] = value.strip()
+    return metadata
+
 
 class SearchAPIRetriever(BaseRetriever):
     """Search API retriever."""
@@ -27,10 +53,7 @@ class SearchAPIRetriever(BaseRetriever):
                 # None for pages that failed to scrape), and slicing None raises
                 # TypeError. Coerce to a string before truncating.
                 page_content=(page.get("raw_content") or "")[:_MAX_CONTENT_CHARS],
-                metadata={
-                    "title": page.get("title", ""),
-                    "source": page.get("source") or page.get("url") or "",
-                },
+                metadata=document_metadata_from_page(page),
             )
             for page in self.pages
         ]

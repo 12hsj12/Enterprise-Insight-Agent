@@ -69,12 +69,16 @@ retains this limitation; no benchmark quality improvement is claimed.
 
 Relations are supplied explicitly as support/conflict/unclear; citation choice
 does not create support. Authority remains a source prior only. Stable Evidence
-IDs and ranking are unchanged. The writer schema cannot supply qualifications.
-Optional reviewed `claim_plan` inputs supply existing qualifications and gate
+IDs and ranking are unchanged. At Batch 8 delivery time, the writer schema could
+not supply qualifications. The later Qualification Coverage Integration extends
+that same bounded writer call with fail-closed entity/side associations and
+explicit source-identity anchors; it does not change the Gate contract. Optional
+reviewed `claim_plan` inputs continue to supply existing qualifications and gate
 contexts; unknown qualification evidence IDs are rejected. Qualification is
 kept per Claim for both Gate and Grounding, so primary status, independence,
 entities, conflict sides and adjudicator status cannot leak across claims.
 Missing qualification/date data remains missing. No domain-based inference exists.
+See `QUALIFICATION_COVERAGE_INTEGRATION_DELIVERY.md` for the implemented boundary.
 
 ## Gate / Generation Behavior
 

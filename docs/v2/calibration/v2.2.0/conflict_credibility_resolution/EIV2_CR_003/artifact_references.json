@@ -1,0 +1,19 @@
+{
+  "case_id": "EIV2_CR_003",
+  "split": "development",
+  "material_status": "MISSING",
+  "run_status": "NOT_ATTEMPTED",
+  "report": null,
+  "raw_output": null,
+  "candidate_evidence": null,
+  "eligible_candidate_pool": null,
+  "selected_evidence": null,
+  "source_citation_references": null,
+  "structured_execution_metadata": null,
+  "cutoff_metadata": {
+    "benchmark_cutoff": "2026-09-05",
+    "publication_date_observations": null,
+    "cutoff_filter_verification": null
+  },
+  "reason": "No verified case-linked development report and frozen saved evidence are available. Execution was not attempted; this is not a failed development run or an unsatisfied-unit label."
+}

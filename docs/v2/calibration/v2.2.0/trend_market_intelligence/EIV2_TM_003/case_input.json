@@ -1,0 +1,34 @@
+{
+  "id": "EIV2_TM_003",
+  "split": "development",
+  "category": "trend_market_intelligence",
+  "query": "分析截至信息截止日主要云厂商生成式 AI 服务的区域扩张、模型多样化和企业控制能力趋势。",
+  "cutoff_date": "2026-09-05",
+  "required_units": [
+    {
+      "id": "regions",
+      "description": "区域扩张趋势",
+      "evidence_strength_rule": "two_independent",
+      "high_risk_types": [
+        "numeric_value",
+        "release_status_availability"
+      ]
+    },
+    {
+      "id": "models",
+      "description": "模型多样化趋势",
+      "evidence_strength_rule": "two_independent",
+      "high_risk_types": [
+        "comparative_claim"
+      ]
+    },
+    {
+      "id": "controls",
+      "description": "企业控制趋势",
+      "evidence_strength_rule": "two_independent",
+      "high_risk_types": [
+        "comparative_claim"
+      ]
+    }
+  ]
+}

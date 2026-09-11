@@ -1,0 +1,14 @@
+{
+  "algorithm": "sha256",
+  "dataset_sha256": "95a9718c7e16b5a5c1ee966ee89e217aba0b0368b6e6afc4cd7c5d6a071896fa",
+  "report_sha256": null,
+  "raw_output_sha256": null,
+  "candidate_pool_sha256": null,
+  "eligible_candidate_pool_sha256": null,
+  "selected_evidence_sha256": null,
+  "scoring_input_sha256": "5ead31f5f5b47408423321fd81e1a090770ca3294c2ea3508cc3259eef083473",
+  "case_input_sha256": "80b7f25ff41b69b61594babc767a2152bb1aec026e978f0056b2e2e1bbecf030",
+  "review_sheet_sha256": "a142dbf04bdc3f6c81ac75eed3298846c9a8f2b366468e69e86038ad363d1075",
+  "artifact_references_sha256": "9fda1ad4dc4b1c5b7fc35b039aa48bd7a00cc4410a2e3cbf4f526e89864278c8",
+  "null_reason": "Artifact unavailable; null is not the hash of empty content."
+}

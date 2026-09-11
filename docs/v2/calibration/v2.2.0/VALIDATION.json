@@ -1,0 +1,22 @@
+{
+  "status": "PASSED",
+  "checks": [
+    "six selected IDs are development cases with unique categories",
+    "18 Required Units match frozen development records exactly",
+    "24 unique queue IDs",
+    "human identity, timestamps, decisions and adjudication remain null",
+    "human review status remains PENDING",
+    "available per-case hashes recomputed and match",
+    "template references resolve",
+    "dataset SHA unchanged",
+    "package-scoped LF attributes preserve artifact bytes across Git checkout"
+  ],
+  "tests": {
+    "command": ".venv/Scripts/python.exe -m pytest tests/test_v2_spec_freeze.py -q",
+    "passed": 9,
+    "warnings": [
+      "Inherited unknown pytest configuration option asyncio_fixture_loop_scope"
+    ]
+  },
+  "scope": "Offline metadata validation only; does not establish report quality or complete calibration."
+}

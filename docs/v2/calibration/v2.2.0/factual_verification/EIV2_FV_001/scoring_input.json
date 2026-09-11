@@ -1,0 +1,39 @@
+{
+  "case_id": "EIV2_FV_001",
+  "benchmark_schema": "enterprise-insight-bench-v2/2.2.0",
+  "status": "DRAFT_NOT_FOR_SCORING",
+  "required_units": [
+    {
+      "id": "training_default",
+      "description": "默认训练用途政策",
+      "evidence_strength_rule": "primary_or_two_independent",
+      "high_risk_types": [
+        "release_status_availability"
+      ]
+    },
+    {
+      "id": "exceptions",
+      "description": "明确适用例外",
+      "evidence_strength_rule": "primary_or_two_independent",
+      "high_risk_types": [
+        "conflict_sensitive_claim"
+      ]
+    },
+    {
+      "id": "retention",
+      "description": "数据保留或控制边界",
+      "evidence_strength_rule": "primary_or_two_independent",
+      "high_risk_types": [
+        "numeric_value",
+        "date_or_time_window"
+      ]
+    }
+  ],
+  "report_reference": null,
+  "candidate_pool_reference": null,
+  "selected_evidence_reference": null,
+  "reviewed_annotations": null,
+  "metrics": null,
+  "human_review_status": "PENDING",
+  "note": "Preparation sidecar, not an accepted benchmark evaluator input. Do not load into scoring or count as a failed run."
+}

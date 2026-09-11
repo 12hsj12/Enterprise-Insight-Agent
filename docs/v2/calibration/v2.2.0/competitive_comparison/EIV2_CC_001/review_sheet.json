@@ -1,0 +1,111 @@
+{
+  "case_id": "EIV2_CC_001",
+  "category": "competitive_comparison",
+  "benchmark_schema": "enterprise-insight-bench-v2/2.2.0",
+  "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+  "human_review_status": "PENDING",
+  "reviewer": null,
+  "status": "BLOCKED_MISSING_MATERIAL",
+  "ai_preannotation_status": "NOT_STARTED_MISSING_REPORT",
+  "claim_segmentation_review": [],
+  "citation_support_review": [],
+  "required_unit_review": [
+    {
+      "review_id": "EIV2_CC_001-RU-model_choice",
+      "required_unit_id": "model_choice",
+      "exact_required_unit_text": "模型选择对比",
+      "evidence_strength_rule": "primary_plus_independent",
+      "frozen_high_risk_types": [
+        "comparative_claim",
+        "release_status_availability"
+      ],
+      "report_passage": null,
+      "supporting_evidence_references": [],
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "ai_recommendation": null,
+      "ambiguity_flag": true,
+      "human_review_status": "PENDING",
+      "reviewer_identity": null,
+      "review_timestamp": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "human_decision": null,
+      "adjudication_note": null,
+      "short_reason": "No verified case-linked development report and frozen saved evidence are available. Execution was not attempted; this is not a failed development run or an unsatisfied-unit label.",
+      "flags": [
+        "UNCERTAIN",
+        "MISSING_CALIBRATION_MATERIAL"
+      ]
+    },
+    {
+      "review_id": "EIV2_CC_001-RU-governance_network",
+      "required_unit_id": "governance_network",
+      "exact_required_unit_text": "治理与网络隔离对比",
+      "evidence_strength_rule": "primary_plus_independent",
+      "frozen_high_risk_types": [
+        "comparative_claim"
+      ],
+      "report_passage": null,
+      "supporting_evidence_references": [],
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "ai_recommendation": null,
+      "ambiguity_flag": true,
+      "human_review_status": "PENDING",
+      "reviewer_identity": null,
+      "review_timestamp": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "human_decision": null,
+      "adjudication_note": null,
+      "short_reason": "No verified case-linked development report and frozen saved evidence are available. Execution was not attempted; this is not a failed development run or an unsatisfied-unit label.",
+      "flags": [
+        "UNCERTAIN",
+        "MISSING_CALIBRATION_MATERIAL"
+      ]
+    },
+    {
+      "review_id": "EIV2_CC_001-RU-pricing",
+      "required_unit_id": "pricing",
+      "exact_required_unit_text": "定价透明度对比",
+      "evidence_strength_rule": "primary_plus_independent",
+      "frozen_high_risk_types": [
+        "comparative_claim",
+        "numeric_value"
+      ],
+      "report_passage": null,
+      "supporting_evidence_references": [],
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "ai_recommendation": null,
+      "ambiguity_flag": true,
+      "human_review_status": "PENDING",
+      "reviewer_identity": null,
+      "review_timestamp": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "human_decision": null,
+      "adjudication_note": null,
+      "short_reason": "No verified case-linked development report and frozen saved evidence are available. Execution was not attempted; this is not a failed development run or an unsatisfied-unit label.",
+      "flags": [
+        "UNCERTAIN",
+        "MISSING_CALIBRATION_MATERIAL"
+      ]
+    }
+  ],
+  "evidence_strength_review": [],
+  "independence_review": [],
+  "freshness_cutoff_review": [],
+  "high_risk_review": [],
+  "conflict_adjudication_review_ids": [
+    "EIV2_CC_001-MATERIAL-001",
+    "EIV2_CC_001-RU-model_choice",
+    "EIV2_CC_001-RU-governance_network",
+    "EIV2_CC_001-RU-pricing"
+  ],
+  "empty_sections_mean": "Not assessable because report/evidence are missing; not absence of factual claims, risks or violations.",
+  "human_completion": {
+    "reviewer_identity": null,
+    "review_timestamp": null,
+    "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+    "human_decision": null,
+    "adjudication_note": null
+  },
+  "review_item_template_reference": "../../REVIEW_ITEM_TEMPLATES.json",
+  "artifact_reference": "artifact_references.json"
+}

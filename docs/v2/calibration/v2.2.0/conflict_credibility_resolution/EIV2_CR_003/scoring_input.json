@@ -1,0 +1,40 @@
+{
+  "case_id": "EIV2_CR_003",
+  "benchmark_schema": "enterprise-insight-bench-v2/2.2.0",
+  "status": "DRAFT_NOT_FOR_SCORING",
+  "required_units": [
+    {
+      "id": "vendor_score",
+      "description": "厂商报告分数",
+      "evidence_strength_rule": "primary_or_two_independent",
+      "high_risk_types": [
+        "benchmark_or_performance",
+        "numeric_value"
+      ]
+    },
+    {
+      "id": "replication",
+      "description": "第三方复现结果",
+      "evidence_strength_rule": "two_independent",
+      "high_risk_types": [
+        "benchmark_or_performance",
+        "numeric_value"
+      ]
+    },
+    {
+      "id": "explanation",
+      "description": "差异解释与可信判断",
+      "evidence_strength_rule": "conflict_sides_plus_adjudicator",
+      "high_risk_types": [
+        "conflict_sensitive_claim"
+      ]
+    }
+  ],
+  "report_reference": null,
+  "candidate_pool_reference": null,
+  "selected_evidence_reference": null,
+  "reviewed_annotations": null,
+  "metrics": null,
+  "human_review_status": "PENDING",
+  "note": "Preparation sidecar, not an accepted benchmark evaluator input. Do not load into scoring or count as a failed run."
+}

@@ -1,0 +1,123 @@
+{
+  "benchmark_schema": "enterprise-insight-bench-v2/2.2.0",
+  "source": "benchmarks/dataset/enterprise_insight_bench_v2.json",
+  "dataset_sha256": "95a9718c7e16b5a5c1ee966ee89e217aba0b0368b6e6afc4cd7c5d6a071896fa",
+  "protocol_reference": "docs/v2/V2_BENCHMARK_SPEC.md",
+  "protocol_sha256": "5f88f95672115f3af41b24248e7b176d2b9d907df22f28fff96d3308a8febd5e",
+  "claim_gate_rules": {
+    "default_non_required_unit_rule": "standard",
+    "required_unit_combination": "union_without_weakening",
+    "multi_risk_combination": "union_without_weakening",
+    "strength_rules": [
+      "standard",
+      "primary_or_two_independent",
+      "two_independent",
+      "primary_plus_independent",
+      "conflict_sides_plus_adjudicator"
+    ],
+    "risk_to_minimum_rule": {
+      "numeric_value": "primary_or_two_independent",
+      "date_or_time_window": "primary_or_two_independent",
+      "release_status_availability": "primary_or_two_independent",
+      "comparative_claim": "two_independent",
+      "superlative_or_ranking": "two_independent",
+      "market_metric": "primary_or_two_independent",
+      "benchmark_or_performance": "primary_plus_independent",
+      "conflict_sensitive_claim": "conflict_sides_plus_adjudicator"
+    },
+    "comparison_primary_override": "comparable_primary_evidence_per_entity",
+    "insufficient_actions": [
+      "hedge",
+      "omit",
+      "retrieve_more"
+    ],
+    "remaining_violation": "fail"
+  },
+  "evidence_policies": {
+    "factual_verification": {
+      "authority_weight": 0.3,
+      "preferred_source_types": [
+        "official",
+        "regulator_standard",
+        "official_documentation",
+        "authoritative_media"
+      ],
+      "freshness_mode": "contextual",
+      "max_age_days": 365,
+      "corroboration_rule": "primary_or_two_independent",
+      "primary_source_rule": "required_or_two_independent",
+      "independent_source_rule": "publisher_organization"
+    },
+    "technical_capability_analysis": {
+      "authority_weight": 0.22,
+      "preferred_source_types": [
+        "official_documentation",
+        "peer_reviewed_research",
+        "regulator_standard",
+        "independent_technical"
+      ],
+      "freshness_mode": "contextual",
+      "max_age_days": 730,
+      "corroboration_rule": "primary_plus_independent",
+      "primary_source_rule": "preferred",
+      "independent_source_rule": "publisher_organization"
+    },
+    "competitive_comparison": {
+      "authority_weight": 0.1,
+      "preferred_source_types": [
+        "official_documentation",
+        "independent_technical",
+        "authoritative_media",
+        "peer_reviewed_research"
+      ],
+      "freshness_mode": "strict",
+      "max_age_days": 365,
+      "corroboration_rule": "primary_plus_independent",
+      "primary_source_rule": "one_per_compared_entity",
+      "independent_source_rule": "publisher_organization"
+    },
+    "trend_market_intelligence": {
+      "authority_weight": 0.12,
+      "preferred_source_types": [
+        "regulator_standard",
+        "authoritative_media",
+        "industry_analysis",
+        "official"
+      ],
+      "freshness_mode": "strict",
+      "max_age_days": 180,
+      "corroboration_rule": "two_independent",
+      "primary_source_rule": "preferred_for_measured_inputs",
+      "independent_source_rule": "publisher_organization"
+    },
+    "conflict_credibility_resolution": {
+      "authority_weight": 0.18,
+      "preferred_source_types": [
+        "regulator_standard",
+        "official_documentation",
+        "peer_reviewed_research",
+        "authoritative_media"
+      ],
+      "freshness_mode": "contextual",
+      "max_age_days": 365,
+      "corroboration_rule": "conflict_sides_plus_adjudicator",
+      "primary_source_rule": "source_for_each_material_side",
+      "independent_source_rule": "publisher_organization"
+    },
+    "enterprise_decision_recommendation": {
+      "authority_weight": 0.08,
+      "preferred_source_types": [
+        "official_documentation",
+        "independent_technical",
+        "industry_analysis",
+        "peer_reviewed_research"
+      ],
+      "freshness_mode": "contextual",
+      "max_age_days": 730,
+      "corroboration_rule": "two_independent",
+      "primary_source_rule": "preferred",
+      "independent_source_rule": "publisher_organization"
+    }
+  },
+  "note": "Verbatim existing global rules for reviewer reference; not calibration labels and not a re-freeze."
+}

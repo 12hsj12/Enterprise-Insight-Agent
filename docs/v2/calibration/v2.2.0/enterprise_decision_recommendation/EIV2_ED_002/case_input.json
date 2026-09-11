@@ -1,0 +1,33 @@
+{
+  "id": "EIV2_ED_002",
+  "split": "development",
+  "category": "enterprise_decision_recommendation",
+  "query": "为中型制造企业选择 pgvector、托管向量数据库或搜索引擎作为 RAG 检索底座，给出迁移和运维建议。",
+  "cutoff_date": "2026-09-05",
+  "required_units": [
+    {
+      "id": "capabilities",
+      "description": "候选技术能力",
+      "evidence_strength_rule": "primary_plus_independent",
+      "high_risk_types": [
+        "comparative_claim"
+      ]
+    },
+    {
+      "id": "operations",
+      "description": "规模与运维条件",
+      "evidence_strength_rule": "two_independent",
+      "high_risk_types": [
+        "benchmark_or_performance"
+      ]
+    },
+    {
+      "id": "migration",
+      "description": "条件化迁移建议",
+      "evidence_strength_rule": "two_independent",
+      "high_risk_types": [
+        "comparative_claim"
+      ]
+    }
+  ]
+}

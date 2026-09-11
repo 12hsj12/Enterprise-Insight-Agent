@@ -155,8 +155,11 @@ Final artifact task IDs:
 - B: `7f43d01c-d639-48b9-abff-b3dde9e1918c`
 - C: `514acee5-e31b-4537-b501-3a06f5d6aaf8`
 
-Actual provider cost was USD 0.34522702, 0.50492900, and 0.68598082,
-respectively (USD 1.53613684 total).
+Final-run provider cost was USD 0.34522702, 0.50492900, and 0.68598082,
+respectively (USD 1.53613684). An earlier three-run integration smoke exposed
+and rejected an over-broad source-identity anchor rule before final acceptance;
+those runs cost USD 1.71635468. Total provider cost for this completion was
+therefore USD 3.25249152. Rejected-run results are not used in the comparison.
 
 ## Frozen Contract Check
 

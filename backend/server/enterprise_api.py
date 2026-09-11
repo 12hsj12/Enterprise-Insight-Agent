@@ -4,6 +4,7 @@ import asyncio
 from datetime import datetime, timezone
 from typing import Callable, Literal
 from uuid import UUID, uuid4
+from pathlib import Path
 
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse
@@ -11,6 +12,9 @@ from pydantic import BaseModel
 
 from gpt_researcher.enterprise import IntelligenceRequest, IntelligenceResult, IntelligenceWorkflow
 from gpt_researcher.enterprise.trace import RunTrace
+from benchmarks.evaluation import (
+    EvaluationAdapter, EvaluationCaseResult, EvaluationError, ExecutionStatus,
+)
 
 
 class TaskRecord(BaseModel):
@@ -22,6 +26,9 @@ class TaskRecord(BaseModel):
     result: IntelligenceResult | None = None
     error_code: str | None = None
     diagnostics: dict | None = None
+    trace_id: str | None = None
+    trace_artifact_reference: str | None = None
+    evaluation_result: EvaluationCaseResult | None = None
 
 
 class HealthResponse(BaseModel):
@@ -81,14 +88,43 @@ def create_enterprise_router(store, workflow_factory: Callable = IntelligenceWor
         except (OSError, ValueError):
             raise HTTPException(503, "Task store unavailable") from None
         status_code = 200
+        workflow = None
+
+        def associate_execution():
+            if not request.enable_v2_execution:
+                return
+            task.trace_id = trace.trace_id
+            if task.result is not None:
+                task.trace_artifact_reference = task.result.trace_artifact_reference
+                task.evaluation_result = task.result.to_evaluation_case(task_id)
+            else:
+                # Workflow exports its failed trace before reraising; references
+                # are exposed only when the file actually exists.
+                directory = getattr(workflow, "output_directory", None)
+                if directory is not None:
+                    path = Path(directory) / "traces" / f"{trace.trace_id}.json"
+                    try:
+                        if path.is_file():
+                            task.trace_artifact_reference = str(path)
+                    except OSError:
+                        pass
+                task.evaluation_result = EvaluationAdapter.from_structured_result(
+                    case_id=task_id, execution_status=ExecutionStatus.FAILED,
+                    error=EvaluationError(error_type="EnterpriseExecutionFailure", error_code=task.error_code),
+                    trace_id=trace.trace_id,
+                    trace_artifact_reference=task.trace_artifact_reference,
+                )
+
         try:
+            workflow = workflow_factory()
             task.result = await asyncio.wait_for(
-                workflow_factory().run(request, run_id=task_id, trace=trace), timeout_s)
+                workflow.run(request, run_id=task_id, trace=trace), timeout_s)
             task.status = "completed"
         except asyncio.CancelledError:
             task.status, task.error_code = "interrupted", "request_cancelled"
             task.updated_at = datetime.now(timezone.utc)
-            task.diagnostics = trace.snapshot()
+            task.diagnostics = trace.try_snapshot()
+            associate_execution()
             await asyncio.shield(store.upsert_report(task_id, task.model_dump(mode="json")))
             raise
         except TimeoutError:
@@ -98,7 +134,8 @@ def create_enterprise_router(store, workflow_factory: Callable = IntelligenceWor
         except Exception:
             task.status, task.error_code, status_code = "failed", "research_failed", 502
         task.updated_at = datetime.now(timezone.utc)
-        task.diagnostics = trace.snapshot()
+        task.diagnostics = trace.try_snapshot()
+        associate_execution()
         try:
             await store.upsert_report(task_id, task.model_dump(mode="json"))
         except (OSError, ValueError):

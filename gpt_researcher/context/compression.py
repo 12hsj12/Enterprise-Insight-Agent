@@ -40,6 +40,7 @@ from .retriever import (
 from gpt_researcher.evidence import Evidence, EvidenceContext
 from .source_aware import SourceAwareScorer
 from gpt_researcher.evidence.models import RetrievalDiagnostic
+from gpt_researcher.enterprise.calibration_capture import observe
 from gpt_researcher.enterprise.task_policy import (
     EvidencePolicy,
     ResearchTaskCategory,
@@ -238,6 +239,7 @@ class ContextCompressor:
         Returns:
             EvidenceContext containing formatted context and structured evidences.
         """
+        observe("pages_before_compression", query, self.documents)
         # Optimization: Calculate total content size
         total_chars = sum(len(str(doc.get('raw_content', ''))) for doc in self.documents)
         chunk_threshold = int(os.environ.get("COMPRESSION_THRESHOLD", "8000"))
@@ -285,6 +287,7 @@ class ContextCompressor:
             **self.kwargs,
         )
 
+        observe("eligible_chunks_before_ranking", query, relevant_docs)
         if self.source_reliability_weight > 0:
             relevant_docs = self.source_aware_scorer.rank_documents(
                 relevant_docs

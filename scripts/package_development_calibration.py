@@ -183,7 +183,9 @@ def package(source, recommendations):
                         "human_review_status": "PENDING", "reviewer": None,
                         "review_sheet": str((directory / "review_sheet.json").relative_to(ROOT))})
     ambiguous = sum(item["ambiguity_flag"] for item in queue)
-    write(PACKAGE / "HUMAN_REVIEW_QUEUE.json", {"human_review_status": "PENDING", "reviewer": None, "items": queue})
+    write(PACKAGE / "FULL_AI_ASSISTED_LEDGER.json", {
+        "layer": "FULL_AI_ASSISTED_LEDGER", "status": "AI_ASSISTED", "final_gold": False,
+        "item_count": len(queue), "human_review_status": "PENDING", "reviewer": None, "items": queue})
     lines = ["# Six-case populated human review queue", "", "AI recommendations only. Every human decision remains pending.",
              "Markdown trims line-end whitespace for display. Exact excerpt characters are preserved in HUMAN_REVIEW_QUEUE.json and selected.json.", ""]
     for item in queue:
@@ -236,6 +238,9 @@ def package(source, recommendations):
     write(PACKAGE / "VALIDATION.json", {"status": "PASSED", "verified_artifact_hashes": verified,
         "dataset_sha256_verified": DATASET_SHA, "case_run_report_evidence_mapping_review_trace_links": "verified",
         "human_fields_unset": True, "required_units": counts["required_unit"], "official_holdout_executions": 0})
+    # Offline triage preserves all item payloads and creates bounded review tasks.
+    from scripts.compress_human_review_queue import compress
+    compress(PACKAGE)
     print(json.dumps({"counts": dict(counts), "items": len(queue), "ambiguous": ambiguous, "verified_hashes": verified}))
 
 

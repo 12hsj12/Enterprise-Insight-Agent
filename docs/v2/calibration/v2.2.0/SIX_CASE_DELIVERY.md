@@ -66,7 +66,15 @@ All items preserve AI_ASSISTED_RECOMMENDATION, reasons, exact saved text and hum
 
 ## Human Review Queue
 
-483 items: 242 recommendations requiring confirmation and 241 ambiguous/manual-review items. Neither group is final gold. All reviewer_identity, human_decision, review_timestamp and adjudication_note fields remain null.
+The complete 483-item AI-assisted ledger remains intact. Human work is compressed
+to 87 tasks: 51 representative calibration-core tasks and 36 adjudication tasks.
+The latter comprise 34 parent-report semantic bundles covering all 203 flagged
+segmentation/citation/high-risk ledger records, plus one publisher-relationship
+independence decision and one genuinely disputed date-attribution decision. All 18 Required Units remain directly reviewable in the
+calibration core. Missing dates, unavailable source organizations, domain-only
+differences and unqualified primary status remain deterministic ledger outcomes,
+not separate confirmation tasks. No recommendation changed and all human fields
+remain null.
 
 ## Calibration Manifest
 
@@ -78,7 +86,13 @@ Six-case runtime accumulated estimate: **USD 3.68123008**. Actual provider invoi
 
 ## Tests and Independent Review
 
-138 focused/regression tests passed (3 warnings, 40.91 s): capture, Batch 8 enterprise integration/evaluation, qualification integration, Trace, Evaluation, frozen benchmark, source-aware ranking, API/persistence, ClaimGate and Grounding. Six capture-specific tests passed before live execution. Relevant compileall and git diff --check passed. No unrelated broad-suite repair was attempted.
+For this compression checkpoint, 143 focused/regression tests passed (3 warnings,
+22.52 s): the new queue compression tests plus capture, Batch 8 enterprise
+integration/evaluation, qualification integration, Trace, Evaluation, frozen
+benchmark, source-aware ranking, API/persistence, ClaimGate and Grounding. Offline
+package verification also passed: 78 per-case hashes, 191 selected/candidate
+matches, 483 ledger items, 87 human tasks and all 18 Required Units. No unrelated
+broad-suite repair was attempted.
 Independent review verified all then-existing 72 hashes, 483 unique review IDs, exact spans/excerpts, 184 citation links, 19 explicit date excerpts, 191 selected-to-candidate mappings and all 18 Required Units. Additional diagnostics exports are included in final hash validation. This is engineering integrity review, not human gold adjudication.
 
 ## Frozen Contract Check
@@ -87,4 +101,4 @@ Six development cases only; official holdout executions = 0. No holdout report w
 
 ## Next Step
 
-Human reviewer must review the populated calibration queue and finalize the six development calibration reports.
+Human reviewer reviews the compressed calibration core and adjudication queue.

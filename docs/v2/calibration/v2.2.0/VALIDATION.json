@@ -1,8 +1,16 @@
 {
   "case_run_report_evidence_mapping_review_trace_links": "verified",
   "dataset_sha256_verified": "95a9718c7e16b5a5c1ee966ee89e217aba0b0368b6e6afc4cd7c5d6a071896fa",
+  "full_ai_assisted_ledger_items": 483,
+  "holdout_used_during_compression": false,
+  "human_adjudication_queue_items": 36,
+  "human_calibration_core_items": 51,
   "human_fields_unset": true,
+  "human_queue_material_links_verified": true,
+  "human_workload_items": 87,
+  "machine_resolved_no_human_action_items": 227,
   "official_holdout_executions": 0,
+  "provider_calls_during_compression": 0,
   "required_units": 18,
   "status": "PASSED",
   "verified_artifact_hashes": 78

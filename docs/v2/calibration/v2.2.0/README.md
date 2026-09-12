@@ -7,14 +7,20 @@ IntelligenceWorkflow, GPTResearcher, ResearchConductor, search/scrape, ContextMa
 and V2 Claim/Gate/Grounding path with `enable_v2_execution=true`. ASGI transport was
 in-process; provider, search, scraping and embedding execution was real.
 
-Start with [HUMAN_REVIEW_QUEUE.md](HUMAN_REVIEW_QUEUE.md), or use
-[HUMAN_REVIEW_QUEUE.json](HUMAN_REVIEW_QUEUE.json) for exact excerpts and editable
-reviewer fields. The queue contains 483 real review items: 115 proposed atomic
-factual claims, 3 non-factual segments, 184 citation pairs, 18 Required Units,
-45 source-strength items, 45 independence items, 45 freshness items and 28
-high-risk items. 242 recommendations need confirmation; 241 are ambiguous or
-unresolved. None is final gold. Counts reflect proposed segmentation and can change
-through recorded human adjudication.
+Start with [HUMAN_REVIEW_QUEUE.md](HUMAN_REVIEW_QUEUE.md). The package now has
+three explicit layers: [FULL_AI_ASSISTED_LEDGER.json](FULL_AI_ASSISTED_LEDGER.json)
+preserves all 483 pre-annotation objects; [HUMAN_CALIBRATION_CORE.json](HUMAN_CALIBRATION_CORE.json)
+contains 51 bounded calibration tasks; and [HUMAN_ADJUDICATION_QUEUE.json](HUMAN_ADJUDICATION_QUEUE.json)
+contains 36 genuine semantic/adjudication tasks. [HUMAN_REVIEW_QUEUE.json](HUMAN_REVIEW_QUEUE.json)
+is the combined 87-task entry point. None is final gold and every human field remains unset.
+
+The 483-object ledger still contains 115 proposed atomic factual claims, 3
+non-factual segments, 184 citation pairs, 18 Required Units, 45 source-strength
+items, 45 independence items, 45 freshness items and 28 high-risk items. The
+compression changes triage only. It does not change any recommendation or label.
+Related claim segmentation, citation-support and high-risk ledger records are
+grouped at a shared parent-report boundary so the reviewer makes one coherent
+semantic decision without losing any item-level audit reference.
 
 Each case directory contains report.md, selected.json, scoring.json, execution.json,
 trace.json, diagnostics.json, citation_mapping.json, review_sheet.json,
@@ -67,4 +73,4 @@ See [SIX_CASE_DELIVERY.md](SIX_CASE_DELIVERY.md),
 Frozen dataset SHA, cutoff, rubric and Agent semantics are unchanged. No holdout
 report was executed, opened for evaluation, annotated or used for tuning.
 
-Human reviewer must review the populated calibration queue and finalize the six development calibration reports.
+Human reviewer reviews the compressed calibration core and adjudication queue.

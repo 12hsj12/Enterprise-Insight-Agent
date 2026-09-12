@@ -6,6 +6,7 @@
     "numeric_value",
     "release_status_availability"
   ],
+  "ai_assisted_ambiguity_flag_count": 241,
   "ai_preannotation_status": "COMPLETED",
   "atomic_factual_claim_count": 115,
   "benchmark_schema": "enterprise-insight-bench-v2/2.2.0",
@@ -576,7 +577,6 @@
       "updated_at": "2026-09-11T14:10:39.170984Z"
     }
   ],
-  "confident_recommendations_requiring_confirmation": 242,
   "cost_note": "Runtime estimate is not provider billing; generic pricing/local embedding estimate may be inaccurate; search billing unavailable.",
   "counts": {
     "citation_support": 184,
@@ -590,8 +590,14 @@
   "cutoff": "2026-09-05",
   "dataset_sha256": "95a9718c7e16b5a5c1ee966ee89e217aba0b0368b6e6afc4cd7c5d6a071896fa",
   "execution_code_commit": "fa385086",
-  "human_review_item_count": 483,
+  "full_ai_assisted_ledger_item_count": 483,
+  "human_adjudication_queue_item_count": 36,
+  "human_calibration_core_item_count": 51,
+  "human_linked_ledger_record_count": 256,
+  "human_review_compression": "HUMAN_REVIEW_COMPRESSION.json",
+  "human_review_item_count": 87,
   "human_review_status": "PENDING",
+  "machine_resolved_no_human_action_item_count": 227,
   "nonfactual_segment_count": 3,
   "official_benchmark_cost_usd": 0,
   "official_holdout_executions": 0,
@@ -613,6 +619,5 @@
     "date_or_time_window",
     "market_metric",
     "superlative_or_ranking"
-  ],
-  "unresolved_count": 241
+  ]
 }

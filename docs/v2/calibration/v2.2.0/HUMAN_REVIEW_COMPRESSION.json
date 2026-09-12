@@ -1,0 +1,64 @@
+{
+  "adjudication_flags": {
+    "AMBIGUOUS_SEGMENTATION": 31,
+    "CITATION_SUPPORT_UNCERTAIN": 23,
+    "DATE_ROLE_OR_ATTRIBUTION_DISPUTABLE": 1,
+    "HIGH_RISK_REVIEW": 16,
+    "PUBLISHER_RELATIONSHIP_DISPUTABLE": 1,
+    "SEMANTIC_BOUNDARY_REVIEW": 34
+  },
+  "after_human_workload_items": 87,
+  "full_ledger_items": 483,
+  "holdout_used": false,
+  "human_adjudication_queue_items": 36,
+  "human_calibration_core_items": 51,
+  "human_items_by_category": {
+    "adjudication_queue": {
+      "conflict_credibility_resolution": 1,
+      "enterprise_decision_recommendation": 8,
+      "factual_verification": 1,
+      "technical_capability_analysis": 10,
+      "trend_market_intelligence": 16
+    },
+    "calibration_core": {
+      "competitive_comparison": 5,
+      "conflict_credibility_resolution": 6,
+      "enterprise_decision_recommendation": 10,
+      "factual_verification": 10,
+      "technical_capability_analysis": 10,
+      "trend_market_intelligence": 10
+    }
+  },
+  "human_items_by_type": {
+    "adjudication_queue": {
+      "freshness": 1,
+      "independence": 1,
+      "semantic_claim_bundle": 34
+    },
+    "calibration_core": {
+      "citation_support": 8,
+      "claim_segmentation": 8,
+      "evidence_strength": 6,
+      "freshness": 5,
+      "independence": 6,
+      "required_unit": 18
+    }
+  },
+  "human_linked_ledger_records": 256,
+  "labels_or_recommendations_changed": false,
+  "linked_ledger_records_by_type": {
+    "citation_support": 93,
+    "claim_segmentation": 98,
+    "evidence_strength": 6,
+    "freshness": 6,
+    "high_risk": 28,
+    "independence": 7,
+    "required_unit": 18
+  },
+  "machine_resolved_no_human_action_items": 227,
+  "official_benchmark_calls": 0,
+  "provider_calls": 0,
+  "required_units_human_reviewable": 18,
+  "semantic_ambiguity_records_covered": 203,
+  "status": "PASSED"
+}

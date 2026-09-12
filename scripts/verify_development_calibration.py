@@ -24,8 +24,26 @@ def verify():
     assert digest(ROOT / "benchmarks/dataset/enterprise_insight_bench_v2.json") == manifest["dataset_sha256"]
     assert manifest["dataset_sha256"] == "95a9718c7e16b5a5c1ee966ee89e217aba0b0368b6e6afc4cd7c5d6a071896fa"
     assert manifest["human_review_status"] == "PENDING" and manifest["reviewer"] is None
-    queue = read(PACKAGE / "HUMAN_REVIEW_QUEUE.json")["items"]
-    assert len(queue) == manifest["human_review_item_count"] == len({i["review_id"] for i in queue})
+    ledger = read(PACKAGE / "FULL_AI_ASSISTED_LEDGER.json")
+    queue = read(PACKAGE / "HUMAN_REVIEW_QUEUE.json")
+    core = read(PACKAGE / "HUMAN_CALIBRATION_CORE.json")["tasks"]
+    adjudication = read(PACKAGE / "HUMAN_ADJUDICATION_QUEUE.json")["tasks"]
+    items = ledger["items"]
+    assert ledger["status"] == "AI_ASSISTED" and not ledger["final_gold"]
+    assert len(items) == ledger["item_count"] == 483 == len({i["review_id"] for i in items})
+    assert len(core) == manifest["human_calibration_core_item_count"]
+    assert len(adjudication) == manifest["human_adjudication_queue_item_count"]
+    assert len(core) + len(adjudication) == manifest["human_review_item_count"] == queue["after_human_workload_count"]
+    ledger_ids = {item["review_id"] for item in items}
+    ledger_by_id = {item["review_id"]: item for item in items}
+    human_tasks = core + adjudication
+    assert all(set(task["ledger_review_ids"]) <= ledger_ids for task in human_tasks)
+    for task in human_tasks:
+        linked = [ledger_by_id[review_id] for review_id in task["ledger_review_ids"]]
+        assert {item["case_id"] for item in linked} == {task["case_id"]}
+        assert {item["category"] for item in linked} == {task["category"]}
+        for human_field in ("reviewer_identity", "human_decision", "review_timestamp", "adjudication_note"):
+            assert task[human_field] is None
     hashes = selected_count = 0
     scan_paths = set(p for p in PACKAGE.rglob("*") if p.is_file())
     for case in manifest["cases"]:
@@ -56,10 +74,10 @@ def verify():
                        for e in candidate["events"] if e["stage"] == "eligible_chunks_before_ranking"
                        for p in e["records"])
             selected_count += 1
-        items = [i for i in queue if i["case_id"] == case["case_id"]]
-        assert {i["required_unit_id"] for i in items if i["item_type"] == "required_unit"} == {u["id"] for u in meta["required_units"]}
+        case_items = [i for i in items if i["case_id"] == case["case_id"]]
+        assert {i["required_unit_id"] for i in case_items if i["item_type"] == "required_unit"} == {u["id"] for u in meta["required_units"]}
         by_id = {e["evidence_id"]: e for e in selected}
-        for item in items:
+        for item in case_items:
             for name in ("reviewer_identity", "human_decision", "review_timestamp", "adjudication_note"):
                 assert item[name] is None
             assert "FINAL_LABEL" not in item and "final_label" not in item
@@ -71,7 +89,21 @@ def verify():
                 assert saved["exact_saved_evidence_excerpt"] == evidence["content"]
                 assert saved["source_reference"] == evidence["url"]
         records = execution["execution"]["evidence_context"]["generated_claim_records"]
-        assert {i["runtime_claim_id"] for i in items if i["item_type"] == "claim_segmentation"} == {r["claim_id"] for r in records}
+        assert {i["runtime_claim_id"] for i in case_items if i["item_type"] == "claim_segmentation"} == {r["claim_id"] for r in records}
+        for task in [task for task in human_tasks if task["case_id"] == case["case_id"]]:
+            passage = task.get("exact_report_passage") or task.get("material", {}).get("exact_report_passage")
+            if passage:
+                assert passage in report
+            task_evidence = task.get("evidence") or task.get("material", {}).get("evidence", [])
+            linked_evidence = {
+                saved["evidence_id"]: saved
+                for review_id in task["ledger_review_ids"]
+                for saved in ledger_by_id[review_id].get("saved_evidence", [])
+            }
+            for saved in task_evidence:
+                assert saved["evidence_id"] in linked_evidence
+                assert saved["source_reference"] == linked_evidence[saved["evidence_id"]]["source_reference"]
+                assert saved["excerpt_location"] == linked_evidence[saved["evidence_id"]]["excerpt_location"]
     # Scan actual configured secret values without printing or serializing them.
     from dotenv import dotenv_values
     environment = {**dotenv_values(ROOT / ".env"), **os.environ}
@@ -83,7 +115,7 @@ def verify():
         if path.suffix == ".json":
             read(path)
     result = {"status": "PASSED", "verified_artifact_hashes": hashes, "selected_candidate_matches": selected_count,
-              "human_review_items": len(queue), "required_units": 18, "configured_secret_matches": 0,
+              "full_ledger_items": len(items), "human_review_items": len(human_tasks), "required_units": 18, "configured_secret_matches": 0,
               "finite_utf8_json": True, "official_holdout_executions": 0}
     print(json.dumps(result))
     return result

@@ -1,23 +1,18 @@
-============================= test session starts =============================
-platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.6.0
-rootdir: E:\AIProjects\gpt-researcher
-configfile: pyproject.toml
-plugins: anyio-4.14.2, langsmith-0.11.1, asyncio-1.4.0, forked-1.7.5, timeout-2.4.0
-asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
-collected 138 items
+V2.2 Human Review Queue Compression offline regression
+Date: 2026-09-12
 
-tests\test_calibration_capture.py ......                                 [  4%]
-tests\test_enterprise_integration.py .......................             [ 21%]
-tests\test_batch8_evaluation_compat.py .                                 [ 21%]
-tests\test_qualification_coverage_integration.py .............           [ 31%]
-tests\test_enterprise_trace.py ....                                      [ 34%]
-tests\test_research_trace.py ............                                [ 42%]
-tests\test_enterprise_evaluation.py .......                              [ 47%]
-tests\test_v2_spec_freeze.py .........                                   [ 54%]
-tests\test_source_aware.py ..........                                    [ 61%]
-tests\test_enterprise_api.py ....                                        [ 64%]
-tests\test_enterprise_persistence.py .....                               [ 68%]
-tests\test_claim_gate.py ......................                          [ 84%]
-tests\test_grounding_validator.py ......................                 [100%]
+Command:
+.venv\Scripts\python.exe -m pytest tests\test_human_review_queue_compression.py tests\test_calibration_capture.py tests\test_enterprise_integration.py tests\test_batch8_evaluation_compat.py tests\test_qualification_coverage_integration.py tests\test_enterprise_trace.py tests\test_research_trace.py tests\test_enterprise_evaluation.py tests\test_v2_spec_freeze.py tests\test_source_aware.py tests\test_enterprise_api.py tests\test_enterprise_persistence.py tests\test_claim_gate.py tests\test_grounding_validator.py -q
 
-====================== 138 passed, 3 warnings in 40.91s =======================
+Result:
+143 passed, 3 warnings in 22.52s
+
+Additional offline package verification:
+.venv\Scripts\python.exe scripts\verify_development_calibration.py
+
+Result:
+PASSED; 78 per-case artifact hashes; 191 selected/candidate matches; 483 full-ledger items; 87 human-review tasks; all 18 Required Units; 0 configured-secret matches; finite UTF-8 JSON; 0 official holdout executions.
+
+Warnings were inherited configuration/deprecation warnings: unknown asyncio_fixture_loop_scope, langchain-community PyMuPDF loader deprecation, and Starlette httpx test-client deprecation.
+
+No development case, provider, official benchmark, or holdout execution was performed.

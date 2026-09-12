@@ -1,19 +1,77 @@
 {
-  "case_id": "EIV2_CR_003",
-  "split": "development",
-  "material_status": "MISSING",
-  "run_status": "NOT_ATTEMPTED",
-  "report": null,
-  "raw_output": null,
-  "candidate_evidence": null,
-  "eligible_candidate_pool": null,
-  "selected_evidence": null,
-  "source_citation_references": null,
-  "structured_execution_metadata": null,
-  "cutoff_metadata": {
-    "benchmark_cutoff": "2026-09-05",
-    "publication_date_observations": null,
-    "cutoff_filter_verification": null
+  "artifacts": {
+    "candidate": {
+      "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_CR_003\\candidate.json",
+      "original_runtime_sha256": "15ed412bf2a2237a4e3b003c09de25474fb9b784c733655e1b817ccaf61eb61d",
+      "path": "outputs\\calibration-six-20260911\\EIV2_CR_003\\candidate.json",
+      "serialization_note": "original bytes",
+      "sha256": "15ed412bf2a2237a4e3b003c09de25474fb9b784c733655e1b817ccaf61eb61d",
+      "tracked_portable": false
+    },
+    "execution": {
+      "original_runtime_path": "outputs\\calibration-six-20260911\\enterprise\\b2dadf7b-8489-439b-a7b5-9c9191b708f1\\execution.json",
+      "original_runtime_sha256": "22505104bbd2ab7653a98225344d03a3ec27ec102bcec1c37bd8a48ea7b7add4",
+      "path": "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\execution.json",
+      "serialization_note": "LF-normalized JSON copy; original bytes retained",
+      "sha256": "2c748caaa94f612a9d042a4e7c71f595da48f3119b1d050779d8193adef1918f",
+      "tracked_portable": true
+    },
+    "report": {
+      "original_runtime_path": "outputs\\calibration-six-20260911\\enterprise\\b2dadf7b-8489-439b-a7b5-9c9191b708f1\\report.md",
+      "original_runtime_sha256": "b62b0864f0f22ce06a6b162cf63bfc7c828fb967874bbe681a21ba6434a5ef8b",
+      "path": "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\report.md",
+      "serialization_note": "original bytes",
+      "sha256": "b62b0864f0f22ce06a6b162cf63bfc7c828fb967874bbe681a21ba6434a5ef8b",
+      "tracked_portable": true
+    },
+    "scoring": {
+      "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_CR_003\\scoring.json",
+      "original_runtime_sha256": "a42b132f48017f2aa5ce914f6d50e7dd1f1e28d84f4cbab550d2ec4fd4780498",
+      "path": "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\scoring.json",
+      "serialization_note": "original bytes",
+      "sha256": "a42b132f48017f2aa5ce914f6d50e7dd1f1e28d84f4cbab550d2ec4fd4780498",
+      "tracked_portable": true
+    },
+    "selected": {
+      "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_CR_003\\selected.json",
+      "original_runtime_sha256": "96b366f149d7d5d0a352d183b6345934c00fecc540680334ed341e74471d470f",
+      "path": "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\selected.json",
+      "serialization_note": "original bytes",
+      "sha256": "96b366f149d7d5d0a352d183b6345934c00fecc540680334ed341e74471d470f",
+      "tracked_portable": true
+    },
+    "task": {
+      "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_CR_003\\task.json",
+      "original_runtime_sha256": "b8c26f89e1ecce3a69a9675b33a27807e7fbfa78b325acd7af6b3e1a9184f9a8",
+      "path": "outputs\\calibration-six-20260911\\EIV2_CR_003\\task.json",
+      "serialization_note": "original bytes",
+      "sha256": "b8c26f89e1ecce3a69a9675b33a27807e7fbfa78b325acd7af6b3e1a9184f9a8",
+      "tracked_portable": false
+    },
+    "trace": {
+      "original_runtime_path": "outputs\\calibration-six-20260911\\enterprise\\traces\\trace_8c06ef02714e406894f842d3a375ed91.json",
+      "original_runtime_sha256": "fe7586d3147de1fbf874f0716d7bda7fcdaa55683ad4cf2f5af2396b195c0b52",
+      "path": "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\trace.json",
+      "serialization_note": "LF-normalized JSON copy; original bytes retained",
+      "sha256": "a88969465ae133d5805167bd631928dcb854c93243ca41125ae393cd60b26399",
+      "tracked_portable": true
+    }
   },
-  "reason": "No verified case-linked development report and frozen saved evidence are available. Execution was not attempted; this is not a failed development run or an unsatisfied-unit label."
+  "case_id": "EIV2_CR_003",
+  "portability": "candidate/task artifacts are ignored local files; selected excerpts and execution are tracked",
+  "run": {
+    "capture_errors": [],
+    "case_id": "EIV2_CR_003",
+    "category": "conflict_credibility_resolution",
+    "cost_usd_runtime_estimate": 0.5527396,
+    "created_at": "2026-09-11T14:05:07.406145Z",
+    "execution": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\b2dadf7b-8489-439b-a7b5-9c9191b708f1\\execution.json",
+    "http_status": 200,
+    "report": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\b2dadf7b-8489-439b-a7b5-9c9191b708f1\\report.md",
+    "status": "completed",
+    "task_id": "b2dadf7b-8489-439b-a7b5-9c9191b708f1",
+    "trace": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\traces\\trace_8c06ef02714e406894f842d3a375ed91.json",
+    "trace_id": "trace_8c06ef02714e406894f842d3a375ed91",
+    "updated_at": "2026-09-11T14:07:52.190010Z"
+  }
 }

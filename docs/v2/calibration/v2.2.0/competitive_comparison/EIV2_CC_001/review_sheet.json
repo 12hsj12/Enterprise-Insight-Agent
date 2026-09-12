@@ -1,111 +1,497 @@
 {
+  "ai_preannotation_status": "COMPLETED",
   "case_id": "EIV2_CC_001",
   "category": "competitive_comparison",
-  "benchmark_schema": "enterprise-insight-bench-v2/2.2.0",
-  "rubric_version": "enterprise-insight-bench-v2/2.2.0",
-  "human_review_status": "PENDING",
-  "reviewer": null,
-  "status": "BLOCKED_MISSING_MATERIAL",
-  "ai_preannotation_status": "NOT_STARTED_MISSING_REPORT",
-  "claim_segmentation_review": [],
   "citation_support_review": [],
-  "required_unit_review": [
+  "claim_segmentation_review": [],
+  "evidence_strength_review": [
     {
-      "review_id": "EIV2_CC_001-RU-model_choice",
-      "required_unit_id": "model_choice",
-      "exact_required_unit_text": "模型选择对比",
-      "evidence_strength_rule": "primary_plus_independent",
-      "frozen_high_risk_types": [
-        "comparative_claim",
-        "release_status_availability"
-      ],
-      "report_passage": null,
-      "supporting_evidence_references": [],
-      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
-      "ai_recommendation": null,
-      "ambiguity_flag": true,
-      "human_review_status": "PENDING",
-      "reviewer_identity": null,
-      "review_timestamp": null,
-      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
-      "human_decision": null,
       "adjudication_note": null,
-      "short_reason": "No verified case-linked development report and frozen saved evidence are available. Execution was not attempted; this is not a failed development run or an unsatisfied-unit label.",
+      "ai_recommendation": "NOT_PRIMARY_FOR_CLOUD_CAPABILITIES",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_CC_001",
+      "category": "competitive_comparison",
+      "evidence_ids": [
+        "ev_f14e2f4e2cc2dac7"
+      ],
       "flags": [
-        "UNCERTAIN",
-        "MISSING_CALIBRATION_MATERIAL"
-      ]
+        "EVIDENCE_STRENGTH_REVIEW"
+      ],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "evidence_strength",
+      "primary_source_status": "NOT_PRIMARY_FOR_CLOUD_CAPABILITIES",
+      "reasoning": "来源是第三方实施指南，不是 AWS/Microsoft 的自身产品文档；未展示可检验原始实验。",
+      "review_date": null,
+      "review_id": "EIV2_CC_001-evidence_strength-001",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_f14e2f4e2cc2dac7",
+          "exact_saved_evidence_excerpt": "Platform Architecture Comparison\nModel selection.\nAzure OpenAI provides access to OpenAI’s full lineup, including the GPT-5 family, GPT-4.1, GPT-4o, and o-series reasoning models. Through Microsoft Foundry, the same platform also offers select models from Meta, Mistral, Cohere, DeepSeek, and Anthropic. AWS Bedrock takes a broader-by-default approach, with foundation models from AI21 Labs, Anthropic, Cohere, DeepSeek, Luma AI, Meta, Mistral AI, OpenAI, Stability AI, Amazon Nova, and others through a unified API. Both platforms now offer significant model diversity. The difference is which provider gets first-class treatment.\nIntegration depth.\nAzure OpenAI is tightly woven into the Microsoft stack: Dynamics 365, Power Platform, Microsoft 365, and Copilot. Bedrock takes a modular, API-first approach with native ties into AWS services like Lambda, S3, SageMaker, and the broader AWS data and analytics stack. Both platforms reward customers already invested in their respective ecosystems.",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\selected.json#/evidences/10/content",
+          "source_reference": "https://www.vitoshainc.com/azure-openai-vs-aws-bedrock-enterprise-implementation-guide"
+        }
+      ],
+      "source_identity_information": "Vitosha 企业实施比较文章",
+      "uncertainty_reason": "一手性只限此片段可证实的来源角色，不等于真实性或 authority 分数。"
     },
     {
-      "review_id": "EIV2_CC_001-RU-governance_network",
-      "required_unit_id": "governance_network",
-      "exact_required_unit_text": "治理与网络隔离对比",
-      "evidence_strength_rule": "primary_plus_independent",
-      "frozen_high_risk_types": [
-        "comparative_claim"
-      ],
-      "report_passage": null,
-      "supporting_evidence_references": [],
-      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
-      "ai_recommendation": null,
-      "ambiguity_flag": true,
-      "human_review_status": "PENDING",
-      "reviewer_identity": null,
-      "review_timestamp": null,
-      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
-      "human_decision": null,
       "adjudication_note": null,
-      "short_reason": "No verified case-linked development report and frozen saved evidence are available. Execution was not attempted; this is not a failed development run or an unsatisfied-unit label.",
+      "ai_recommendation": "NOT_PRIMARY_FOR_CLOUD_CAPABILITIES",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_CC_001",
+      "category": "competitive_comparison",
+      "evidence_ids": [
+        "ev_5c77e2cd82a5f3f3"
+      ],
       "flags": [
-        "UNCERTAIN",
-        "MISSING_CALIBRATION_MATERIAL"
-      ]
+        "EVIDENCE_STRENGTH_REVIEW"
+      ],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "evidence_strength",
+      "primary_source_status": "NOT_PRIMARY_FOR_CLOUD_CAPABILITIES",
+      "reasoning": "来源是第三方比较表；自称 vendor-independent 不能证明独立编辑控制或一手性。",
+      "review_date": null,
+      "review_id": "EIV2_CC_001-evidence_strength-002",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_5c77e2cd82a5f3f3",
+          "exact_saved_evidence_excerpt": "Private networking\nPrivateLink, VPC endpoints, KMS-encrypted, IAM-scoped.\nPrivate Endpoints, VNet integration, Managed Identity, Customer-Managed Keys.\nBest-fit customer\nAWS-native enterprises wanting model choice and no OpenAI lock-in.\nMicrosoft-native enterprises wanting first-party OpenAI models.\nCompliance\nSOC 2, HIPAA, PCI DSS, ISO 27001, FedRAMP High.\nSOC 2, HIPAA, PCI DSS, ISO 27001, FedRAMP High, EU Data Boundary.\nVerdict\nWhen each one wins.\nPick\nAWS Bedrock\nif…\n•\nYou are AWS-standardized (S3, Redshift, Aurora, OpenSearch, IAM).\n•\nModel choice matters — Claude, Llama, Mistral, Titan, Nova on one API.\n•\nBedrock Guardrails, Knowledge Bases and Agents fit your governance model.\n•\nProvisioned throughput and PrivateLink are hard requirements.\nAWS Bedrock\noverview →\nPick\nAzure OpenAI\nif…\n•\nYou are Microsoft-first (M365, Dynamics, Purview, Entra, Azure).\n•\nAccess to the newest OpenAI models (GPT-5, o-series, Sora) is strategic.\n•",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\selected.json#/evidences/20/content",
+          "source_reference": "https://pronix.ai/resources/compare/bedrock-vs-azure-openai"
+        }
+      ],
+      "source_identity_information": "Pronix 平台比较页",
+      "uncertainty_reason": "一手性只限此片段可证实的来源角色，不等于真实性或 authority 分数。"
     },
     {
-      "review_id": "EIV2_CC_001-RU-pricing",
-      "required_unit_id": "pricing",
-      "exact_required_unit_text": "定价透明度对比",
-      "evidence_strength_rule": "primary_plus_independent",
-      "frozen_high_risk_types": [
-        "comparative_claim",
-        "numeric_value"
-      ],
-      "report_passage": null,
-      "supporting_evidence_references": [],
-      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
-      "ai_recommendation": null,
-      "ambiguity_flag": true,
-      "human_review_status": "PENDING",
-      "reviewer_identity": null,
-      "review_timestamp": null,
-      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
-      "human_decision": null,
       "adjudication_note": null,
-      "short_reason": "No verified case-linked development report and frozen saved evidence are available. Execution was not attempted; this is not a failed development run or an unsatisfied-unit label.",
+      "ai_recommendation": "NOT_PRIMARY_FOR_CLOUD_PRICING",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_CC_001",
+      "category": "competitive_comparison",
+      "evidence_ids": [
+        "ev_5c44f9c31b22f4b9"
+      ],
       "flags": [
-        "UNCERTAIN",
-        "MISSING_CALIBRATION_MATERIAL"
-      ]
+        "EVIDENCE_STRENGTH_REVIEW"
+      ],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "evidence_strength",
+      "primary_source_status": "NOT_PRIMARY_FOR_CLOUD_PRICING",
+      "reasoning": "片段标注 Reviewed by NextGen engineering team，非厂商正式价目表。",
+      "review_date": null,
+      "review_id": "EIV2_CC_001-evidence_strength-003",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_5c44f9c31b22f4b9",
+          "exact_saved_evidence_excerpt": "AI Cloud Services Pricing: AWS vs Azure vs GCP TCO\nSkip to main content\nBack to\nInsights\n//\n// insight\nAI Cloud Services Pricing Benchmark: AWS Bedrock vs Azure OpenAI vs GCP Vertex AI Infrastructure TCO\nAI cloud services pricing ranges from $1.25 to $5.00 per million input tokens and $0.30 to $15.00 per million output tokens for managed frontier APIs like GPT-4o, Claude 3.5 Sonnet, and Gemini 1.5 Pro. However, production total cost of ownership (TCO) increases 30% to 70% above baseline API rates once provisioned throughput (PTUs/MUs), vector databases, and data egress are factored in.\nPublished\nSeptember 8, 2026\n· Reviewed by the NextGen engineering team",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\selected.json#/evidences/7/content",
+          "source_reference": "https://www.nextgencodingcompany.com/insights/ai-cloud-services-pricing"
+        }
+      ],
+      "source_identity_information": "NextGen 工程团队云服务定价文章",
+      "uncertainty_reason": "一手性只限此片段可证实的来源角色，不等于真实性或 authority 分数。"
     }
   ],
-  "evidence_strength_review": [],
-  "independence_review": [],
-  "freshness_cutoff_review": [],
-  "high_risk_review": [],
-  "conflict_adjudication_review_ids": [
-    "EIV2_CC_001-MATERIAL-001",
-    "EIV2_CC_001-RU-model_choice",
-    "EIV2_CC_001-RU-governance_network",
-    "EIV2_CC_001-RU-pricing"
+  "freshness_review": [
+    {
+      "adjudication_note": null,
+      "age_at_cutoff_days": null,
+      "ai_recommendation": "unverified",
+      "ambiguity_flag": true,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "benchmark_cutoff": "2026-09-05",
+      "case_id": "EIV2_CC_001",
+      "category": "competitive_comparison",
+      "date_evidence_location": "selected evidence content",
+      "event_date": null,
+      "evidence_ids": [
+        "ev_f14e2f4e2cc2dac7"
+      ],
+      "exact_date_evidence_excerpt": null,
+      "flags": [
+        "FRESHNESS_UNVERIFIED"
+      ],
+      "freshness_mode": "strict",
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "freshness",
+      "max_age_days": 365,
+      "publication_date": null,
+      "reasoning": "保存片段没有可明确归属于此页面/引用的发布日期。访问时间不是发布日期；事件日期不能代替发布日期。",
+      "review_date": null,
+      "review_id": "EIV2_CC_001-freshness-001",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_f14e2f4e2cc2dac7",
+          "exact_saved_evidence_excerpt": "Platform Architecture Comparison\nModel selection.\nAzure OpenAI provides access to OpenAI’s full lineup, including the GPT-5 family, GPT-4.1, GPT-4o, and o-series reasoning models. Through Microsoft Foundry, the same platform also offers select models from Meta, Mistral, Cohere, DeepSeek, and Anthropic. AWS Bedrock takes a broader-by-default approach, with foundation models from AI21 Labs, Anthropic, Cohere, DeepSeek, Luma AI, Meta, Mistral AI, OpenAI, Stability AI, Amazon Nova, and others through a unified API. Both platforms now offer significant model diversity. The difference is which provider gets first-class treatment.\nIntegration depth.\nAzure OpenAI is tightly woven into the Microsoft stack: Dynamics 365, Power Platform, Microsoft 365, and Copilot. Bedrock takes a modular, API-first approach with native ties into AWS services like Lambda, S3, SageMaker, and the broader AWS data and analytics stack. Both platforms reward customers already invested in their respective ecosystems.",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\selected.json#/evidences/10/content",
+          "source_reference": "https://www.vitoshainc.com/azure-openai-vs-aws-bedrock-enterprise-implementation-guide"
+        }
+      ],
+      "source_identity_information": "Vitosha 企业实施比较文章",
+      "uncertainty_reason": "需确认发布日期归属与冻结 freshness 模式。",
+      "within_age_window": null
+    },
+    {
+      "adjudication_note": null,
+      "age_at_cutoff_days": null,
+      "ai_recommendation": "unverified",
+      "ambiguity_flag": true,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "benchmark_cutoff": "2026-09-05",
+      "case_id": "EIV2_CC_001",
+      "category": "competitive_comparison",
+      "date_evidence_location": "selected evidence content",
+      "event_date": null,
+      "evidence_ids": [
+        "ev_5c77e2cd82a5f3f3"
+      ],
+      "exact_date_evidence_excerpt": null,
+      "flags": [
+        "FRESHNESS_UNVERIFIED"
+      ],
+      "freshness_mode": "strict",
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "freshness",
+      "max_age_days": 365,
+      "publication_date": null,
+      "reasoning": "保存片段没有可明确归属于此页面/引用的发布日期。访问时间不是发布日期；事件日期不能代替发布日期。",
+      "review_date": null,
+      "review_id": "EIV2_CC_001-freshness-002",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_5c77e2cd82a5f3f3",
+          "exact_saved_evidence_excerpt": "Private networking\nPrivateLink, VPC endpoints, KMS-encrypted, IAM-scoped.\nPrivate Endpoints, VNet integration, Managed Identity, Customer-Managed Keys.\nBest-fit customer\nAWS-native enterprises wanting model choice and no OpenAI lock-in.\nMicrosoft-native enterprises wanting first-party OpenAI models.\nCompliance\nSOC 2, HIPAA, PCI DSS, ISO 27001, FedRAMP High.\nSOC 2, HIPAA, PCI DSS, ISO 27001, FedRAMP High, EU Data Boundary.\nVerdict\nWhen each one wins.\nPick\nAWS Bedrock\nif…\n•\nYou are AWS-standardized (S3, Redshift, Aurora, OpenSearch, IAM).\n•\nModel choice matters — Claude, Llama, Mistral, Titan, Nova on one API.\n•\nBedrock Guardrails, Knowledge Bases and Agents fit your governance model.\n•\nProvisioned throughput and PrivateLink are hard requirements.\nAWS Bedrock\noverview →\nPick\nAzure OpenAI\nif…\n•\nYou are Microsoft-first (M365, Dynamics, Purview, Entra, Azure).\n•\nAccess to the newest OpenAI models (GPT-5, o-series, Sora) is strategic.\n•",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\selected.json#/evidences/20/content",
+          "source_reference": "https://pronix.ai/resources/compare/bedrock-vs-azure-openai"
+        }
+      ],
+      "source_identity_information": "Pronix 平台比较页",
+      "uncertainty_reason": "需确认发布日期归属与冻结 freshness 模式。",
+      "within_age_window": null
+    },
+    {
+      "adjudication_note": null,
+      "age_at_cutoff_days": -3,
+      "ai_recommendation": "out_of_cutoff",
+      "ambiguity_flag": true,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "benchmark_cutoff": "2026-09-05",
+      "case_id": "EIV2_CC_001",
+      "category": "competitive_comparison",
+      "date_evidence_location": "selected evidence content",
+      "event_date": null,
+      "evidence_ids": [
+        "ev_5c44f9c31b22f4b9"
+      ],
+      "exact_date_evidence_excerpt": "Published\nSeptember 8, 2026",
+      "flags": [],
+      "freshness_mode": "strict",
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "freshness",
+      "max_age_days": 365,
+      "publication_date": "2026-09-08",
+      "reasoning": "保存片段明确发布日期晚于 2026-09-05；必须排除评分，仅保留审计。实际运行已选择此材料，但未发出报告 Claim；不改写候选来掩盖。",
+      "review_date": null,
+      "review_id": "EIV2_CC_001-freshness-003",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_5c44f9c31b22f4b9",
+          "exact_saved_evidence_excerpt": "AI Cloud Services Pricing: AWS vs Azure vs GCP TCO\nSkip to main content\nBack to\nInsights\n//\n// insight\nAI Cloud Services Pricing Benchmark: AWS Bedrock vs Azure OpenAI vs GCP Vertex AI Infrastructure TCO\nAI cloud services pricing ranges from $1.25 to $5.00 per million input tokens and $0.30 to $15.00 per million output tokens for managed frontier APIs like GPT-4o, Claude 3.5 Sonnet, and Gemini 1.5 Pro. However, production total cost of ownership (TCO) increases 30% to 70% above baseline API rates once provisioned throughput (PTUs/MUs), vector databases, and data egress are factored in.\nPublished\nSeptember 8, 2026\n· Reviewed by the NextGen engineering team",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\selected.json#/evidences/7/content",
+          "source_reference": "https://www.nextgencodingcompany.com/insights/ai-cloud-services-pricing"
+        }
+      ],
+      "source_identity_information": "NextGen 工程团队云服务定价文章",
+      "uncertainty_reason": "需确认发布日期归属与冻结 freshness 模式。",
+      "within_age_window": false
+    }
   ],
-  "empty_sections_mean": "Not assessable because report/evidence are missing; not absence of factual claims, risks or violations.",
-  "human_completion": {
-    "reviewer_identity": null,
-    "review_timestamp": null,
-    "rubric_version": "enterprise-insight-bench-v2/2.2.0",
-    "human_decision": null,
-    "adjudication_note": null
-  },
-  "review_item_template_reference": "../../REVIEW_ITEM_TEMPLATES.json",
-  "artifact_reference": "artifact_references.json"
+  "high_risk_review": [],
+  "human_review_status": "PENDING",
+  "independence_review": [
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "SAME_SOURCE_GROUP",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_CC_001",
+      "category": "competitive_comparison",
+      "editorial_control_information": null,
+      "evidence_ids": [
+        "ev_f14e2f4e2cc2dac7"
+      ],
+      "flags": [],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "independence",
+      "proposed_independence_grouping": "Vitosha",
+      "reasoning": "使用内容身份与来源角色建议分组；同一页面的多个 chunk 不重复计为独立来源。不同域名本身不证明独立性。来源是第三方实施指南，不是 AWS/Microsoft 的自身产品文档；未展示可检验原始实验。",
+      "review_date": null,
+      "review_id": "EIV2_CC_001-independence-001",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_f14e2f4e2cc2dac7",
+          "exact_saved_evidence_excerpt": "Platform Architecture Comparison\nModel selection.\nAzure OpenAI provides access to OpenAI’s full lineup, including the GPT-5 family, GPT-4.1, GPT-4o, and o-series reasoning models. Through Microsoft Foundry, the same platform also offers select models from Meta, Mistral, Cohere, DeepSeek, and Anthropic. AWS Bedrock takes a broader-by-default approach, with foundation models from AI21 Labs, Anthropic, Cohere, DeepSeek, Luma AI, Meta, Mistral AI, OpenAI, Stability AI, Amazon Nova, and others through a unified API. Both platforms now offer significant model diversity. The difference is which provider gets first-class treatment.\nIntegration depth.\nAzure OpenAI is tightly woven into the Microsoft stack: Dynamics 365, Power Platform, Microsoft 365, and Copilot. Bedrock takes a modular, API-first approach with native ties into AWS services like Lambda, S3, SageMaker, and the broader AWS data and analytics stack. Both platforms reward customers already invested in their respective ecosystems.",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\selected.json#/evidences/10/content",
+          "source_reference": "https://www.vitoshainc.com/azure-openai-vs-aws-bedrock-enterprise-implementation-guide"
+        }
+      ],
+      "source_identity_information": "Vitosha 企业实施比较文章",
+      "source_producing_organization": "Vitosha",
+      "uncertainty_reason": "组内去重可确认，跨组独立性仍需人工审核。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "SAME_SOURCE_GROUP",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_CC_001",
+      "category": "competitive_comparison",
+      "editorial_control_information": null,
+      "evidence_ids": [
+        "ev_5c77e2cd82a5f3f3"
+      ],
+      "flags": [],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "independence",
+      "proposed_independence_grouping": "Pronix",
+      "reasoning": "使用内容身份与来源角色建议分组；同一页面的多个 chunk 不重复计为独立来源。不同域名本身不证明独立性。来源是第三方比较表；自称 vendor-independent 不能证明独立编辑控制或一手性。",
+      "review_date": null,
+      "review_id": "EIV2_CC_001-independence-002",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_5c77e2cd82a5f3f3",
+          "exact_saved_evidence_excerpt": "Private networking\nPrivateLink, VPC endpoints, KMS-encrypted, IAM-scoped.\nPrivate Endpoints, VNet integration, Managed Identity, Customer-Managed Keys.\nBest-fit customer\nAWS-native enterprises wanting model choice and no OpenAI lock-in.\nMicrosoft-native enterprises wanting first-party OpenAI models.\nCompliance\nSOC 2, HIPAA, PCI DSS, ISO 27001, FedRAMP High.\nSOC 2, HIPAA, PCI DSS, ISO 27001, FedRAMP High, EU Data Boundary.\nVerdict\nWhen each one wins.\nPick\nAWS Bedrock\nif…\n•\nYou are AWS-standardized (S3, Redshift, Aurora, OpenSearch, IAM).\n•\nModel choice matters — Claude, Llama, Mistral, Titan, Nova on one API.\n•\nBedrock Guardrails, Knowledge Bases and Agents fit your governance model.\n•\nProvisioned throughput and PrivateLink are hard requirements.\nAWS Bedrock\noverview →\nPick\nAzure OpenAI\nif…\n•\nYou are Microsoft-first (M365, Dynamics, Purview, Entra, Azure).\n•\nAccess to the newest OpenAI models (GPT-5, o-series, Sora) is strategic.\n•",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\selected.json#/evidences/20/content",
+          "source_reference": "https://pronix.ai/resources/compare/bedrock-vs-azure-openai"
+        }
+      ],
+      "source_identity_information": "Pronix 平台比较页",
+      "source_producing_organization": "Pronix",
+      "uncertainty_reason": "组内去重可确认，跨组独立性仍需人工审核。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "SAME_SOURCE_GROUP",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_CC_001",
+      "category": "competitive_comparison",
+      "editorial_control_information": null,
+      "evidence_ids": [
+        "ev_5c44f9c31b22f4b9"
+      ],
+      "flags": [],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "independence",
+      "proposed_independence_grouping": "NextGen engineering team",
+      "reasoning": "使用内容身份与来源角色建议分组；同一页面的多个 chunk 不重复计为独立来源。不同域名本身不证明独立性。片段标注 Reviewed by NextGen engineering team，非厂商正式价目表。",
+      "review_date": null,
+      "review_id": "EIV2_CC_001-independence-003",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_5c44f9c31b22f4b9",
+          "exact_saved_evidence_excerpt": "AI Cloud Services Pricing: AWS vs Azure vs GCP TCO\nSkip to main content\nBack to\nInsights\n//\n// insight\nAI Cloud Services Pricing Benchmark: AWS Bedrock vs Azure OpenAI vs GCP Vertex AI Infrastructure TCO\nAI cloud services pricing ranges from $1.25 to $5.00 per million input tokens and $0.30 to $15.00 per million output tokens for managed frontier APIs like GPT-4o, Claude 3.5 Sonnet, and Gemini 1.5 Pro. However, production total cost of ownership (TCO) increases 30% to 70% above baseline API rates once provisioned throughput (PTUs/MUs), vector databases, and data egress are factored in.\nPublished\nSeptember 8, 2026\n· Reviewed by the NextGen engineering team",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\selected.json#/evidences/7/content",
+          "source_reference": "https://www.nextgencodingcompany.com/insights/ai-cloud-services-pricing"
+        }
+      ],
+      "source_identity_information": "NextGen 工程团队云服务定价文章",
+      "source_producing_organization": "NextGen engineering team",
+      "uncertainty_reason": "组内去重可确认，跨组独立性仍需人工审核。"
+    }
+  ],
+  "required_unit_review": [
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "NOT_SATISFIED",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_CC_001",
+      "category": "competitive_comparison",
+      "evidence_ids": [
+        "ev_f14e2f4e2cc2dac7"
+      ],
+      "evidence_role": "selected-but-not-emitted audit material; not a citation/support claim",
+      "exact_report_text": "No claims could be emitted from the available structured evidence.",
+      "exact_required_unit_text": "模型选择对比",
+      "flags": [
+        "REQUIRED_UNIT_REVIEW"
+      ],
+      "frozen_required_unit": {
+        "description": "模型选择对比",
+        "evidence_strength_rule": "primary_plus_independent",
+        "high_risk_types": [
+          "comparative_claim",
+          "release_status_availability"
+        ],
+        "id": "model_choice"
+      },
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "required_unit",
+      "reasoning": "执行成功，最终报告仅有未能发出断言的固定说明。没有报告内容覆盖此 Required Unit。附证据用于检查省略原因，绝非该报告的支持引用。",
+      "report_span": [
+        22,
+        88
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "required_unit_id": "model_choice",
+      "review_date": null,
+      "review_id": "EIV2_CC_001-required_unit-001",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_f14e2f4e2cc2dac7",
+          "exact_saved_evidence_excerpt": "Platform Architecture Comparison\nModel selection.\nAzure OpenAI provides access to OpenAI’s full lineup, including the GPT-5 family, GPT-4.1, GPT-4o, and o-series reasoning models. Through Microsoft Foundry, the same platform also offers select models from Meta, Mistral, Cohere, DeepSeek, and Anthropic. AWS Bedrock takes a broader-by-default approach, with foundation models from AI21 Labs, Anthropic, Cohere, DeepSeek, Luma AI, Meta, Mistral AI, OpenAI, Stability AI, Amazon Nova, and others through a unified API. Both platforms now offer significant model diversity. The difference is which provider gets first-class treatment.\nIntegration depth.\nAzure OpenAI is tightly woven into the Microsoft stack: Dynamics 365, Power Platform, Microsoft 365, and Copilot. Bedrock takes a modular, API-first approach with native ties into AWS services like Lambda, S3, SageMaker, and the broader AWS data and analytics stack. Both platforms reward customers already invested in their respective ecosystems.",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\selected.json#/evidences/10/content",
+          "source_reference": "https://www.vitoshainc.com/azure-openai-vs-aws-bedrock-enterprise-implementation-guide"
+        }
+      ],
+      "uncertainty_reason": "严格完整覆盖及证据强度需人工裁定；不计部分分。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "NOT_SATISFIED",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_CC_001",
+      "category": "competitive_comparison",
+      "evidence_ids": [
+        "ev_5c77e2cd82a5f3f3"
+      ],
+      "evidence_role": "selected-but-not-emitted audit material; not a citation/support claim",
+      "exact_report_text": "No claims could be emitted from the available structured evidence.",
+      "exact_required_unit_text": "治理与网络隔离对比",
+      "flags": [
+        "REQUIRED_UNIT_REVIEW"
+      ],
+      "frozen_required_unit": {
+        "description": "治理与网络隔离对比",
+        "evidence_strength_rule": "primary_plus_independent",
+        "high_risk_types": [
+          "comparative_claim"
+        ],
+        "id": "governance_network"
+      },
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "required_unit",
+      "reasoning": "执行成功，最终报告仅有未能发出断言的固定说明。没有报告内容覆盖此 Required Unit。附证据用于检查省略原因，绝非该报告的支持引用。",
+      "report_span": [
+        22,
+        88
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "required_unit_id": "governance_network",
+      "review_date": null,
+      "review_id": "EIV2_CC_001-required_unit-002",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_5c77e2cd82a5f3f3",
+          "exact_saved_evidence_excerpt": "Private networking\nPrivateLink, VPC endpoints, KMS-encrypted, IAM-scoped.\nPrivate Endpoints, VNet integration, Managed Identity, Customer-Managed Keys.\nBest-fit customer\nAWS-native enterprises wanting model choice and no OpenAI lock-in.\nMicrosoft-native enterprises wanting first-party OpenAI models.\nCompliance\nSOC 2, HIPAA, PCI DSS, ISO 27001, FedRAMP High.\nSOC 2, HIPAA, PCI DSS, ISO 27001, FedRAMP High, EU Data Boundary.\nVerdict\nWhen each one wins.\nPick\nAWS Bedrock\nif…\n•\nYou are AWS-standardized (S3, Redshift, Aurora, OpenSearch, IAM).\n•\nModel choice matters — Claude, Llama, Mistral, Titan, Nova on one API.\n•\nBedrock Guardrails, Knowledge Bases and Agents fit your governance model.\n•\nProvisioned throughput and PrivateLink are hard requirements.\nAWS Bedrock\noverview →\nPick\nAzure OpenAI\nif…\n•\nYou are Microsoft-first (M365, Dynamics, Purview, Entra, Azure).\n•\nAccess to the newest OpenAI models (GPT-5, o-series, Sora) is strategic.\n•",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\selected.json#/evidences/20/content",
+          "source_reference": "https://pronix.ai/resources/compare/bedrock-vs-azure-openai"
+        }
+      ],
+      "uncertainty_reason": "严格完整覆盖及证据强度需人工裁定；不计部分分。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "NOT_SATISFIED",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_CC_001",
+      "category": "competitive_comparison",
+      "evidence_ids": [
+        "ev_5c44f9c31b22f4b9"
+      ],
+      "evidence_role": "selected-but-not-emitted audit material; not a citation/support claim",
+      "exact_report_text": "No claims could be emitted from the available structured evidence.",
+      "exact_required_unit_text": "定价透明度对比",
+      "flags": [
+        "REQUIRED_UNIT_REVIEW"
+      ],
+      "frozen_required_unit": {
+        "description": "定价透明度对比",
+        "evidence_strength_rule": "primary_plus_independent",
+        "high_risk_types": [
+          "comparative_claim",
+          "numeric_value"
+        ],
+        "id": "pricing"
+      },
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "required_unit",
+      "reasoning": "执行成功，最终报告仅有未能发出断言的固定说明。没有报告内容覆盖此 Required Unit。附证据用于检查省略原因，绝非该报告的支持引用。",
+      "report_span": [
+        22,
+        88
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "required_unit_id": "pricing",
+      "review_date": null,
+      "review_id": "EIV2_CC_001-required_unit-003",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_5c44f9c31b22f4b9",
+          "exact_saved_evidence_excerpt": "AI Cloud Services Pricing: AWS vs Azure vs GCP TCO\nSkip to main content\nBack to\nInsights\n//\n// insight\nAI Cloud Services Pricing Benchmark: AWS Bedrock vs Azure OpenAI vs GCP Vertex AI Infrastructure TCO\nAI cloud services pricing ranges from $1.25 to $5.00 per million input tokens and $0.30 to $15.00 per million output tokens for managed frontier APIs like GPT-4o, Claude 3.5 Sonnet, and Gemini 1.5 Pro. However, production total cost of ownership (TCO) increases 30% to 70% above baseline API rates once provisioned throughput (PTUs/MUs), vector databases, and data egress are factored in.\nPublished\nSeptember 8, 2026\n· Reviewed by the NextGen engineering team",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\selected.json#/evidences/7/content",
+          "source_reference": "https://www.nextgencodingcompany.com/insights/ai-cloud-services-pricing"
+        }
+      ],
+      "uncertainty_reason": "严格完整覆盖及证据强度需人工裁定；不计部分分。"
+    }
+  ],
+  "reviewer": null,
+  "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+  "status": "READY_FOR_HUMAN_REVIEW"
 }

@@ -1,0 +1,406 @@
+{
+  "assessments": [
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_0e6422100fea0896",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_0879fe5165096e8d",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_bcf458ac6aaf1146",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_87423fa7f5aa47c8",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_e8e6f0fe473c541a",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_9562fe5d87acd2c0",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_734423ec37023d5b",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_c52f8a6671d853dc",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_49c24b4e4125459b",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_f9d8189e3e096d02",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_e6fd319212a40e41",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_69b8968db067dab3",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_d804caf04b023668",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_ba15efe17df67fc7",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_66b81b09c02cd2ae",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_9bff6e8f7e5ebfc7",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_2af3d1ca37cb6fdf",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_287bf7420361be3c",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_00550cac35a09171",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_81aa639da898299b",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_84a2a763024f482f",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_a5b94d34106143ba",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_867a3b4329e036b9",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_9955377302cb400b",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_33633b8a5c8a6f0e",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_bc4bb002e341d18a",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_bc22fbd114afea97",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_919bbfcc27f32b00",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_3a82ca761c52dcda",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_b7b08374bb8f37a2",
+      "freshness_score": null,
+      "source_type": "web"
+    }
+  ],
+  "case_id": "EIV2_TM_003",
+  "evidence_policy": {
+    "authority_weight": 0.12,
+    "category": "trend_market_intelligence",
+    "corroboration_rule": "two_independent",
+    "freshness_mode": "strict",
+    "independent_source_rule": "publisher_organization",
+    "max_age_days": 180,
+    "policy_version": "enterprise-insight-v2-architecture/2.2.0",
+    "preferred_source_types": [
+      "regulator_standard",
+      "authoritative_media",
+      "industry_analysis",
+      "official"
+    ],
+    "primary_source_rule": "preferred_for_measured_inputs",
+    "reason_codes": [
+      "trend_recency_source_diversity"
+    ]
+  },
+  "note": "Existing runtime scores only; candidate similarities in candidate.json; no new scores.",
+  "retrieval_diagnostics": [
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_0e6422100fea0896",
+      "final_score": 0.7246144097853504,
+      "similarity_score": 0.7416072838469892
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_0879fe5165096e8d",
+      "final_score": 0.6978028677713767,
+      "similarity_score": 0.7111396224674735
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_bcf458ac6aaf1146",
+      "final_score": 0.6936987411846839,
+      "similarity_score": 0.7064758422553227
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_87423fa7f5aa47c8",
+      "final_score": 0.6831357068685624,
+      "similarity_score": 0.694472394168821
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_e8e6f0fe473c541a",
+      "final_score": 0.6729865148224813,
+      "similarity_score": 0.6829392213891833
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_9562fe5d87acd2c0",
+      "final_score": 0.6717279923323182,
+      "similarity_score": 0.6815090821958162
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_734423ec37023d5b",
+      "final_score": 0.6710685458288473,
+      "similarity_score": 0.6807597111691448
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_c52f8a6671d853dc",
+      "final_score": 0.6694248788428073,
+      "similarity_score": 0.6788919077759175
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_49c24b4e4125459b",
+      "final_score": 0.6645215846367748,
+      "similarity_score": 0.6733199825417896
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_f9d8189e3e096d02",
+      "final_score": 0.6621824012676774,
+      "similarity_score": 0.6706618196223607
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_e6fd319212a40e41",
+      "final_score": 0.7330673301850464,
+      "similarity_score": 0.7512128752102801
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_69b8968db067dab3",
+      "final_score": 0.7035935867514862,
+      "similarity_score": 0.7177199849448708
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_d804caf04b023668",
+      "final_score": 0.7027405196646834,
+      "similarity_score": 0.7167505905280493
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_ba15efe17df67fc7",
+      "final_score": 0.693491157600399,
+      "similarity_score": 0.7062399518186353
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_66b81b09c02cd2ae",
+      "final_score": 0.6886137066955708,
+      "similarity_score": 0.7006973939722395
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_9bff6e8f7e5ebfc7",
+      "final_score": 0.6784758152458726,
+      "similarity_score": 0.6891770627794008
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_2af3d1ca37cb6fdf",
+      "final_score": 0.6704555833504454,
+      "similarity_score": 0.6800631628982334
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_287bf7420361be3c",
+      "final_score": 0.6667250924859659,
+      "similarity_score": 0.6758239687340521
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_00550cac35a09171",
+      "final_score": 0.6588967095794418,
+      "similarity_score": 0.6669280790675476
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_81aa639da898299b",
+      "final_score": 0.6513977218624818,
+      "similarity_score": 0.6584065021164567
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_84a2a763024f482f",
+      "final_score": 0.7702132946172883,
+      "similarity_score": 0.7934241984287367
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_a5b94d34106143ba",
+      "final_score": 0.7533039824757403,
+      "similarity_score": 0.7742090709951595
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_867a3b4329e036b9",
+      "final_score": 0.7466588589600014,
+      "similarity_score": 0.766657794272729
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_9955377302cb400b",
+      "final_score": 0.7213709398132019,
+      "similarity_score": 0.7379215225150022
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_33633b8a5c8a6f0e",
+      "final_score": 0.7155173931161791,
+      "similarity_score": 0.731269764904749
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_bc4bb002e341d18a",
+      "final_score": 0.7150504624237283,
+      "similarity_score": 0.7307391618451458
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_bc22fbd114afea97",
+      "final_score": 0.7098474499236327,
+      "similarity_score": 0.7248266476404918
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_919bbfcc27f32b00",
+      "final_score": 0.7055232282986316,
+      "similarity_score": 0.7199127594302632
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_3a82ca761c52dcda",
+      "final_score": 0.7034154788274429,
+      "similarity_score": 0.7175175895766397
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_b7b08374bb8f37a2",
+      "final_score": 0.6882878668291341,
+      "similarity_score": 0.7003271213967434
+    }
+  ],
+  "task_classification": {
+    "category": "trend_market_intelligence",
+    "classifier_version": "enterprise-insight-task-classifier/1.1.0",
+    "confidence": 0.8,
+    "fallback_used": false,
+    "matched_signal_codes": [
+      "explicit_trend",
+      "market_change_over_time",
+      "capability_mechanism",
+      "explicit_analysis"
+    ],
+    "rationale_codes": [
+      "selected_time_market_trend",
+      "frozen_precedence_applied"
+    ],
+    "runner_up_categories": [
+      "technical_capability_analysis"
+    ]
+  }
+}

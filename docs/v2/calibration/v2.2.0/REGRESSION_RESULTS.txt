@@ -1,0 +1,23 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.6.0
+rootdir: E:\AIProjects\gpt-researcher
+configfile: pyproject.toml
+plugins: anyio-4.14.2, langsmith-0.11.1, asyncio-1.4.0, forked-1.7.5, timeout-2.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 138 items
+
+tests\test_calibration_capture.py ......                                 [  4%]
+tests\test_enterprise_integration.py .......................             [ 21%]
+tests\test_batch8_evaluation_compat.py .                                 [ 21%]
+tests\test_qualification_coverage_integration.py .............           [ 31%]
+tests\test_enterprise_trace.py ....                                      [ 34%]
+tests\test_research_trace.py ............                                [ 42%]
+tests\test_enterprise_evaluation.py .......                              [ 47%]
+tests\test_v2_spec_freeze.py .........                                   [ 54%]
+tests\test_source_aware.py ..........                                    [ 61%]
+tests\test_enterprise_api.py ....                                        [ 64%]
+tests\test_enterprise_persistence.py .....                               [ 68%]
+tests\test_claim_gate.py ......................                          [ 84%]
+tests\test_grounding_validator.py ......................                 [100%]
+
+====================== 138 passed, 3 warnings in 40.91s =======================

@@ -1,14 +1,15 @@
 {
-  "algorithm": "sha256",
-  "dataset_sha256": "95a9718c7e16b5a5c1ee966ee89e217aba0b0368b6e6afc4cd7c5d6a071896fa",
-  "report_sha256": null,
-  "raw_output_sha256": null,
-  "candidate_pool_sha256": null,
-  "eligible_candidate_pool_sha256": null,
-  "selected_evidence_sha256": null,
-  "scoring_input_sha256": "52c7adbb666a6462e29dd9889bc19721bcebe41ab59bb1024a4246b9eb1caad9",
-  "case_input_sha256": "6925530fa4001cd8337d136cf6efaffdebe300ecffea0f24b3cf8f9691335195",
-  "review_sheet_sha256": "4b897c35157d3eb09d82d7235ab48d9fc48f63adfe678da8d3a76f9e548736bc",
-  "artifact_references_sha256": "d4e9ca2c60378b8439e4aac0b47227ef8ab6d4740623f0660aa1cddc3a47c8f9",
-  "null_reason": "Artifact unavailable; null is not the hash of empty content."
+  "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\artifact_references.json": "f1e017ae30788d03e05385a750c899e0c3ef8ca78ce9660e10278e6b7b74d710",
+  "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\case_input.json": "6925530fa4001cd8337d136cf6efaffdebe300ecffea0f24b3cf8f9691335195",
+  "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\citation_mapping.json": "23cd59811f37a387e34cfd1c3d0855c2718b5820aa0e064c5a4b62558eacac5c",
+  "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\diagnostics.json": "2c97b1ba8c2f23da370edbc4a0c34733bea7069a0085c4d10a4e02e885c23ccb",
+  "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\execution.json": "2efe271e8d7864f97066d0c729f11e8dfd21a40d30d190dc881c81d5234b8eb1",
+  "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\report.md": "67164249d67c25f51ec47c1391fbdaf4e6297e47c49496ffddc5c55880ca916a",
+  "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\review_sheet.json": "b85b339cf99922c0c912f12e6a450f93022deaa6d4b5ba1c1c3cb399cd6358c1",
+  "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\scoring.json": "8d55d29115572c1f5f986fa16727c3d066a6045700c77a3a5e23685c22547b62",
+  "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\scoring_input.json": "2f19f141de1e99e123cd9e7dd14dcd58f2f55bf613d45f3f7e355dde2e5a8ba9",
+  "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\selected.json": "17940df4ba1f17407ee60f3f7a5031466d272530c6b9f78bb97cc43a66fd3c20",
+  "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\trace.json": "9de5feac3132d903f5c2f83eefc114d2a37a2364904d2cd11343b37d12f4b4f6",
+  "outputs\\calibration-six-20260911\\EIV2_ED_002\\candidate.json": "e3c968005f592376b2c77bf988e893c70907c8766347630cfd74c8cc39aff3c0",
+  "outputs\\calibration-six-20260911\\EIV2_ED_002\\task.json": "f87db96a31ed8b777c8f2e605902e1e0f9f824bfe579e8982286fd41e23128b8"
 }

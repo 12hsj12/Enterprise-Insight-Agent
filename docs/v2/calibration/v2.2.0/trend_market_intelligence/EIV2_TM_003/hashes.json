@@ -1,14 +1,15 @@
 {
-  "algorithm": "sha256",
-  "dataset_sha256": "95a9718c7e16b5a5c1ee966ee89e217aba0b0368b6e6afc4cd7c5d6a071896fa",
-  "report_sha256": null,
-  "raw_output_sha256": null,
-  "candidate_pool_sha256": null,
-  "eligible_candidate_pool_sha256": null,
-  "selected_evidence_sha256": null,
-  "scoring_input_sha256": "5ead31f5f5b47408423321fd81e1a090770ca3294c2ea3508cc3259eef083473",
-  "case_input_sha256": "80b7f25ff41b69b61594babc767a2152bb1aec026e978f0056b2e2e1bbecf030",
-  "review_sheet_sha256": "a142dbf04bdc3f6c81ac75eed3298846c9a8f2b366468e69e86038ad363d1075",
-  "artifact_references_sha256": "9fda1ad4dc4b1c5b7fc35b039aa48bd7a00cc4410a2e3cbf4f526e89864278c8",
-  "null_reason": "Artifact unavailable; null is not the hash of empty content."
+  "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\artifact_references.json": "a913351851118044a5f65ad82d770b4211d1af4856b8c8ecae6643e9188b4fda",
+  "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\case_input.json": "80b7f25ff41b69b61594babc767a2152bb1aec026e978f0056b2e2e1bbecf030",
+  "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\citation_mapping.json": "77b3aff73c8269bb2cb7c2206f818adec5719e269a4cbc0dc5c3fc9bdb6012c8",
+  "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\diagnostics.json": "99246d180fc83a6d71d83930be23a4a7c2a31990ee0bfba4552fae75f1fcb4e0",
+  "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\execution.json": "89ce30209af4c22c1b2b4c4ccf735b6bc2b8eb9fe288bedae0e4d8d8e5e246b4",
+  "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\report.md": "0f816f55c911340ab704d83ec232c34eeb1c90c08e1680d90b96dc16b994e139",
+  "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\review_sheet.json": "7da4bb240523968e04db9159ffc0e866bed2c26d4e039d70daff3b550226d4ba",
+  "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\scoring.json": "19ad0a70da9411307a577333eab13301cd957be205c801ceeb3eeaa3af1bc499",
+  "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\scoring_input.json": "bed3ea8787c4b80342489d12961bc5cfeaa00a50838185276e99f0e01a65df6b",
+  "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\selected.json": "b9d2cc2f7ccaef2a645365a058c05c79ea00d5e0378569fd176c6bd13ab72e48",
+  "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\trace.json": "48b3202313428bd642fbc5a58b076bf420cf7dc05bdb19a857f671a39d133b1c",
+  "outputs\\calibration-six-20260911\\EIV2_TM_003\\candidate.json": "d5e00ebcab6bff3220201b33fb2c67fb51b37f648cb94cd350dbfb6cba79ae91",
+  "outputs\\calibration-six-20260911\\EIV2_TM_003\\task.json": "58964209b6f36486c831cb1ab3f7744c6a4ee11b9d6a475354f5ecc278c6420d"
 }

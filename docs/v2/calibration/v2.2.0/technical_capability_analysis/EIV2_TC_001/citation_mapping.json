@@ -1,0 +1,93 @@
+[
+  {
+    "cited_evidence_ids": [
+      "ev_62fa0fb7bbfd9bb8",
+      "ev_7a6809120ded0e6a",
+      "ev_4426f461ab217c20"
+    ],
+    "claim_id": "claim_101711903f55f31c445a33d6fb936e648fc4522c130ca6bb111b6107333eac67",
+    "output_mode": "factual",
+    "rendered_text": "Hybrid search in pgvector contexts combines vector-based similarity search with traditional keyword or metadata filtering because vector search handles semantic meaning but can fail on specific keywords or structured constraints."
+  },
+  {
+    "cited_evidence_ids": [
+      "ev_16e2a002c3dcd617",
+      "ev_7a6809120ded0e6a",
+      "ev_4426f461ab217c20",
+      "ev_4b2cc9add6171347"
+    ],
+    "claim_id": "claim_87893725cf3c4d1690f9ace3476451700b6ddfb31cd844d623b6317fbc12f65e",
+    "output_mode": "hedged",
+    "rendered_text": "Hybrid retrieval can be assembled using PostgreSQL full-text search, pg_trgm, and reciprocal rank fusion, but one source characterizes pgvector as lacking built-in hybrid and reranking primitives, recommending pairing with full-text search instead."
+  },
+  {
+    "cited_evidence_ids": [
+      "ev_4b2cc9add6171347"
+    ],
+    "claim_id": "claim_e1d37007d2f02e52fc068030b517f804f40a489ea089f5d94f3babe63a621cac",
+    "output_mode": "factual",
+    "rendered_text": "pgvector is the right choice when the dataset fits comfortably on one PostgreSQL instance, filter selectivity is moderate, and transactional consistency with relational data is valued; the edges to watch include index build cost, filtered query performance, missing hybrid and reranking primitives, and absence of horizontal scaling."
+  },
+  {
+    "cited_evidence_ids": [
+      "ev_648babff2ebe3058",
+      "ev_24320d0559472fcb"
+    ],
+    "claim_id": "claim_5ebc6aa595f4dc38870ee8df476bf90efc34e57598683368ecba084fe43976b9",
+    "output_mode": "factual",
+    "rendered_text": "Managing pgvector in production requires PostgreSQL expertise: vacuum operations become more complex with large vector tables, index maintenance requires downtime or careful online rebuilding, monitoring vector-specific performance requires custom instrumentation, and backup and restore times increase significantly with vector data."
+  },
+  {
+    "cited_evidence_ids": [
+      "ev_4b2cc9add6171347"
+    ],
+    "claim_id": "claim_25497b5eefbdd3579d30ae566d33ca06c5a9f6edda428fe551f7ef574adc3642",
+    "output_mode": "factual",
+    "rendered_text": "Filtered vector query performance is a practical edge for pgvector; one source recommends pgvector when filter selectivity is moderate and warns that filtered query performance, index build cost, and missing hybrid primitives are limits."
+  },
+  {
+    "cited_evidence_ids": [
+      "ev_a68505e19318d340",
+      "ev_c87ab4cb76d42dd2",
+      "ev_62fa0fb7bbfd9bb8"
+    ],
+    "claim_id": "claim_dcd681207445083a9a6e046e66a4425bf700ebd2f7330fc941dd782864bf1d0e",
+    "output_mode": "factual",
+    "rendered_text": "pgvector hybrid search is described as useful for enterprise search, document retrieval in knowledge bases, and RAG because it can filter by structured attributes such as department, author, date, or document type while using vector embeddings for semantic ranking."
+  },
+  {
+    "cited_evidence_ids": [
+      "ev_16e2a002c3dcd617",
+      "ev_4426f461ab217c20",
+      "ev_274ff76c3275e1d6"
+    ],
+    "claim_id": "claim_d712d9abf213453673cf72d8112320366ea13c61b7310c787d2d94bc9ccf38b4",
+    "output_mode": "factual",
+    "rendered_text": "Reciprocal rank fusion is mentioned as an available component for hybrid search with pgvector, alongside tsvector and pg_trgm."
+  },
+  {
+    "cited_evidence_ids": [
+      "ev_9c01b4455145f8f5",
+      "ev_e38e6e3a23869cb1"
+    ],
+    "claim_id": "claim_12bc113a25626044d355f8779c106165b40eb1742eed0a34cd490f31b42ad2bf",
+    "output_mode": "factual",
+    "rendered_text": "The PostgreSQL query planner can use pgvector indexes for nearest-neighbor queries, and vector search can be combined with standard SQL filters, joins, and CTEs in the same query."
+  },
+  {
+    "cited_evidence_ids": [
+      "ev_24320d0559472fcb"
+    ],
+    "claim_id": "claim_140a2e4b77490fbd5a972e858a8668fcfb567e12755802474a25c56a6e506a64",
+    "output_mode": "factual",
+    "rendered_text": "Vector columns increase backup sizes significantly, so teams may need incremental backup strategies, separate tablespaces for vector data, and restore-time testing with realistic data volumes."
+  },
+  {
+    "cited_evidence_ids": [
+      "ev_648babff2ebe3058"
+    ],
+    "claim_id": "claim_c14112a2e350caf55c5b613f663ea1000c660e962895da416c75c2b438e64404",
+    "output_mode": "factual",
+    "rendered_text": "pgvector search quality depends entirely on the upstream embedding model; the extension stores and retrieves vectors but does not understand or improve semantic quality, so poor embeddings produce poor results regardless of database performance."
+  }
+]

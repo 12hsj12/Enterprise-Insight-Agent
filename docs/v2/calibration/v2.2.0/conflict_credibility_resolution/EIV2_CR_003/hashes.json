@@ -1,14 +1,15 @@
 {
-  "algorithm": "sha256",
-  "dataset_sha256": "95a9718c7e16b5a5c1ee966ee89e217aba0b0368b6e6afc4cd7c5d6a071896fa",
-  "report_sha256": null,
-  "raw_output_sha256": null,
-  "candidate_pool_sha256": null,
-  "eligible_candidate_pool_sha256": null,
-  "selected_evidence_sha256": null,
-  "scoring_input_sha256": "e0c0f1758e61b59ca3a07cc64257f1db833716c13169588fb163e96b92e94a9c",
-  "case_input_sha256": "8c289a9823587285c6f68ff66d373f6aea4233ba83401b3edc21554e8adaa127",
-  "review_sheet_sha256": "be00b1b59bd3127fbb8db1af58bfd2aca6bcec2d6f58caec28a29353f5dd6f10",
-  "artifact_references_sha256": "1519bec8100d67291d95577392b5f26492ef42d96657a4a638f1ecd453e500e9",
-  "null_reason": "Artifact unavailable; null is not the hash of empty content."
+  "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\artifact_references.json": "c9d3b41908cdbd10a532942c5aaf6f90ea7c638265e94ee7b3fb4b9092b34764",
+  "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\case_input.json": "8c289a9823587285c6f68ff66d373f6aea4233ba83401b3edc21554e8adaa127",
+  "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\citation_mapping.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\diagnostics.json": "70ccfa45e66d9f6fd846c0294e6c0cfecb3a564a8f0efeb2740ce4272f5df6bb",
+  "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\execution.json": "2c748caaa94f612a9d042a4e7c71f595da48f3119b1d050779d8193adef1918f",
+  "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\report.md": "b62b0864f0f22ce06a6b162cf63bfc7c828fb967874bbe681a21ba6434a5ef8b",
+  "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\review_sheet.json": "8b300926ce441cb525ba1206e7607f2ee9429b6bbbcd6dc6a365e5d073d60db4",
+  "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\scoring.json": "a42b132f48017f2aa5ce914f6d50e7dd1f1e28d84f4cbab550d2ec4fd4780498",
+  "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\scoring_input.json": "228d2ae28e1f2bf5042f571d303b14191d16c2ebe1d4aed4ad901bfce98b8725",
+  "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\selected.json": "96b366f149d7d5d0a352d183b6345934c00fecc540680334ed341e74471d470f",
+  "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\trace.json": "a88969465ae133d5805167bd631928dcb854c93243ca41125ae393cd60b26399",
+  "outputs\\calibration-six-20260911\\EIV2_CR_003\\candidate.json": "15ed412bf2a2237a4e3b003c09de25474fb9b784c733655e1b817ccaf61eb61d",
+  "outputs\\calibration-six-20260911\\EIV2_CR_003\\task.json": "b8c26f89e1ecce3a69a9675b33a27807e7fbfa78b325acd7af6b3e1a9184f9a8"
 }

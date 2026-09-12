@@ -1,39 +1,40 @@
 {
+  "annotations": "review_sheet.json",
   "case_id": "EIV2_TM_003",
-  "benchmark_schema": "enterprise-insight-bench-v2/2.2.0",
-  "status": "DRAFT_NOT_FOR_SCORING",
   "required_units": [
     {
-      "id": "regions",
       "description": "区域扩张趋势",
       "evidence_strength_rule": "two_independent",
       "high_risk_types": [
         "numeric_value",
         "release_status_availability"
-      ]
+      ],
+      "id": "regions"
     },
     {
-      "id": "models",
       "description": "模型多样化趋势",
       "evidence_strength_rule": "two_independent",
       "high_risk_types": [
         "comparative_claim"
-      ]
+      ],
+      "id": "models"
     },
     {
-      "id": "controls",
       "description": "企业控制趋势",
       "evidence_strength_rule": "two_independent",
       "high_risk_types": [
         "comparative_claim"
-      ]
+      ],
+      "id": "controls"
     }
   ],
-  "report_reference": null,
-  "candidate_pool_reference": null,
-  "selected_evidence_reference": null,
-  "reviewed_annotations": null,
-  "metrics": null,
-  "human_review_status": "PENDING",
-  "note": "Preparation sidecar, not an accepted benchmark evaluator input. Do not load into scoring or count as a failed run."
+  "runtime_scoring": {
+    "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_TM_003\\scoring.json",
+    "original_runtime_sha256": "19ad0a70da9411307a577333eab13301cd957be205c801ceeb3eeaa3af1bc499",
+    "path": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\scoring.json",
+    "serialization_note": "original bytes",
+    "sha256": "19ad0a70da9411307a577333eab13301cd957be205c801ceeb3eeaa3af1bc499",
+    "tracked_portable": true
+  },
+  "status": "AI recommendations only, not evaluator-ready human gold"
 }

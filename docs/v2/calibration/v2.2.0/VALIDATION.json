@@ -1,22 +1,9 @@
 {
+  "case_run_report_evidence_mapping_review_trace_links": "verified",
+  "dataset_sha256_verified": "95a9718c7e16b5a5c1ee966ee89e217aba0b0368b6e6afc4cd7c5d6a071896fa",
+  "human_fields_unset": true,
+  "official_holdout_executions": 0,
+  "required_units": 18,
   "status": "PASSED",
-  "checks": [
-    "six selected IDs are development cases with unique categories",
-    "18 Required Units match frozen development records exactly",
-    "24 unique queue IDs",
-    "human identity, timestamps, decisions and adjudication remain null",
-    "human review status remains PENDING",
-    "available per-case hashes recomputed and match",
-    "template references resolve",
-    "dataset SHA unchanged",
-    "package-scoped LF attributes preserve artifact bytes across Git checkout"
-  ],
-  "tests": {
-    "command": ".venv/Scripts/python.exe -m pytest tests/test_v2_spec_freeze.py -q",
-    "passed": 9,
-    "warnings": [
-      "Inherited unknown pytest configuration option asyncio_fixture_loop_scope"
-    ]
-  },
-  "scope": "Offline metadata validation only; does not establish report quality or complete calibration."
+  "verified_artifact_hashes": 78
 }

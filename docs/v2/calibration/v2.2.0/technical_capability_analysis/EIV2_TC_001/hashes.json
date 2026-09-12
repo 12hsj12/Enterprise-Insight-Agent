@@ -1,14 +1,15 @@
 {
-  "algorithm": "sha256",
-  "dataset_sha256": "95a9718c7e16b5a5c1ee966ee89e217aba0b0368b6e6afc4cd7c5d6a071896fa",
-  "report_sha256": null,
-  "raw_output_sha256": null,
-  "candidate_pool_sha256": null,
-  "eligible_candidate_pool_sha256": null,
-  "selected_evidence_sha256": null,
-  "scoring_input_sha256": "c72e7c839500931df811d0891469e927c266ab6e96c2a0fc52c73e488932110f",
-  "case_input_sha256": "a116def4b429b318e47d27bdf137d0aca52076e88aca8bf6b5a0bb17ecdac30e",
-  "review_sheet_sha256": "de995beb4a983a087d144d69a89b4028a9fcb584da4ec2d1ece53347543dc74a",
-  "artifact_references_sha256": "8f718d3091189e5fb265c1b1168c70b341fd6b1a30aecc81fa3351a4954004e6",
-  "null_reason": "Artifact unavailable; null is not the hash of empty content."
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\artifact_references.json": "919effdbeaa1c4ba87db8b43260f52dd93e4c668b6e54336efb1973fa2c1b053",
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\case_input.json": "a116def4b429b318e47d27bdf137d0aca52076e88aca8bf6b5a0bb17ecdac30e",
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\citation_mapping.json": "c603cb77c4ac66c603bff6a518e55fa5e2420681864926c2ef2aa5fa67680733",
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\diagnostics.json": "4938073541c0550a08673ef84197d8593c6cd10a6beef4a94d32402fb653dae9",
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\execution.json": "f463772e1f3f33af985d4d836683b07246a8dcf934e1029389ca77334b360889",
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\report.md": "c5f1d1e8939f43402f1782961b24f646474cbcb11ef7672a12679096a9ced4c7",
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\review_sheet.json": "1c7708a6c6a78fe6c054b825cbe26187462bb4381ffbc11f2ac53c4b34223868",
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\scoring.json": "8b6564c43adf6a1041e9a664caebad417922e94c47e5d105a8216368e7139e21",
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\scoring_input.json": "be5bf0f6c510b327ad49fc72298402bc09d36bfdee322c6ee84e6a10bb8e61d6",
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json": "850ad96c87660df375f5749043908917aee8a49b5129f825b5350c9ec0aee8d1",
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\trace.json": "5b6fab56da27f5376027c6ea51def81be2d43cd473370076a66faf1009697b44",
+  "outputs\\calibration-six-20260911\\EIV2_TC_001\\candidate.json": "4495644cde1a75d8eeb9a6291359102f2e098bd1f8897ccb933ace39e6f5afa0",
+  "outputs\\calibration-six-20260911\\EIV2_TC_001\\task.json": "803e4d0b7bbac6330e312c41a6316c555674cbde10b3833bdf242ada99a5a746"
 }

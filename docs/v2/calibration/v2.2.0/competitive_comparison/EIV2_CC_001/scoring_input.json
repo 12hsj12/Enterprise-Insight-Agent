@@ -1,40 +1,41 @@
 {
+  "annotations": "review_sheet.json",
   "case_id": "EIV2_CC_001",
-  "benchmark_schema": "enterprise-insight-bench-v2/2.2.0",
-  "status": "DRAFT_NOT_FOR_SCORING",
   "required_units": [
     {
-      "id": "model_choice",
       "description": "模型选择对比",
       "evidence_strength_rule": "primary_plus_independent",
       "high_risk_types": [
         "comparative_claim",
         "release_status_availability"
-      ]
+      ],
+      "id": "model_choice"
     },
     {
-      "id": "governance_network",
       "description": "治理与网络隔离对比",
       "evidence_strength_rule": "primary_plus_independent",
       "high_risk_types": [
         "comparative_claim"
-      ]
+      ],
+      "id": "governance_network"
     },
     {
-      "id": "pricing",
       "description": "定价透明度对比",
       "evidence_strength_rule": "primary_plus_independent",
       "high_risk_types": [
         "comparative_claim",
         "numeric_value"
-      ]
+      ],
+      "id": "pricing"
     }
   ],
-  "report_reference": null,
-  "candidate_pool_reference": null,
-  "selected_evidence_reference": null,
-  "reviewed_annotations": null,
-  "metrics": null,
-  "human_review_status": "PENDING",
-  "note": "Preparation sidecar, not an accepted benchmark evaluator input. Do not load into scoring or count as a failed run."
+  "runtime_scoring": {
+    "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_CC_001\\scoring.json",
+    "original_runtime_sha256": "83a2ace162ffb552f9dff1b50ca4d07d72cabf96a2a8659548eb413e39d6648b",
+    "path": "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\scoring.json",
+    "serialization_note": "original bytes",
+    "sha256": "83a2ace162ffb552f9dff1b50ca4d07d72cabf96a2a8659548eb413e39d6648b",
+    "tracked_portable": true
+  },
+  "status": "AI recommendations only, not evaluator-ready human gold"
 }

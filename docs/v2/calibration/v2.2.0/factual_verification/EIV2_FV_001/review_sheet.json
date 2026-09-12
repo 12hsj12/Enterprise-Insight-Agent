@@ -1,110 +1,1682 @@
 {
+  "ai_preannotation_status": "COMPLETED",
   "case_id": "EIV2_FV_001",
   "category": "factual_verification",
-  "benchmark_schema": "enterprise-insight-bench-v2/2.2.0",
-  "rubric_version": "enterprise-insight-bench-v2/2.2.0",
-  "human_review_status": "PENDING",
-  "reviewer": null,
-  "status": "BLOCKED_MISSING_MATERIAL",
-  "ai_preannotation_status": "NOT_STARTED_MISSING_REPORT",
-  "claim_segmentation_review": [],
-  "citation_support_review": [],
-  "required_unit_review": [
+  "citation_support_review": [
     {
-      "review_id": "EIV2_FV_001-RU-training_default",
-      "required_unit_id": "training_default",
-      "exact_required_unit_text": "默认训练用途政策",
-      "evidence_strength_rule": "primary_or_two_independent",
-      "frozen_high_risk_types": [
-        "release_status_availability"
-      ],
-      "report_passage": null,
-      "supporting_evidence_references": [],
-      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
-      "ai_recommendation": null,
-      "ambiguity_flag": true,
-      "human_review_status": "PENDING",
-      "reviewer_identity": null,
-      "review_timestamp": null,
-      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
-      "human_decision": null,
       "adjudication_note": null,
-      "short_reason": "No verified case-linked development report and frozen saved evidence are available. Execution was not attempted; this is not a failed development run or an unsatisfied-unit label.",
-      "flags": [
-        "UNCERTAIN",
-        "MISSING_CALIBRATION_MATERIAL"
-      ]
+      "ai_recommendation": "support",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "claim_review_id": "EIV2_FV_001-C001",
+      "evidence_ids": [
+        "ev_6f1b032c397627b6"
+      ],
+      "exact_parent_report_text": "OpenAI 的隐私政策不适用于其代表商业产品客户\\(例如 API 服务客户\\)处理的内容;此类数据的使用受相关客户协议约束。",
+      "exact_report_text": "OpenAI 的隐私政策不适用于其代表商业产品客户\\(例如 API 服务客户\\)处理的内容",
+      "flags": [],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "citation_support",
+      "proposed_relation": "support",
+      "reasoning": "保存的 OpenAI 隐私政策直接说明商业/API 客户内容的排除范围及客户协议约束。",
+      "report_span": [
+        22,
+        67
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-citation_support-001",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_6f1b032c397627b6",
+          "exact_saved_evidence_excerpt": "隐私政策 | OpenAI\nOpenAI\n输入语言\n…\nUpdated: 2026年2月6日\n隐私政策\n（\n先前版本\n⁠\n）\n如果您位于欧洲经济区、英国或瑞士，可以阅读\n此版本\n的隐私政策。如果您位于美国，可以阅读\n此版本\n的隐私政策。\n如果您位于韩国，请参阅\n韩国附录\n⁠\n。\n在 OpenAI，我们的使命是确保通用人工智能惠及全人类。我们打造了 ChatGPT 和 Sora 等工具，旨在帮助人们学习、创作并解决问题。OpenAI（连同我们的关联公司，统称为“OpenAI”、“我们”或“我方”）重视您的隐私，并坚定致力于保障我们从您处获得或与您相关的任何信息的安全。本隐私政策阐明了当您使用我们的网站、应用程序和服务（统称为“服务”）时，我们如何收集与您相关的个人数据以及如何使用这些数据。\n本隐私政策不适用于我们代表商业产品客户（例如我们的 API 服务客户）处理的内容。我们对该数据的使用受相关客户协议约束，此类协议涵盖了对相关产品的访问及使用规则。\n有关我们如何收集和使用训练信息以开发驱动 ChatGPT 及其他服务的语言模型，以及您在这些信息方面可以作出的选择，请参阅本政策以及\n这篇帮助中心文章\n⁠\n（在新窗口中打开）\n。\n1. 我们收集的个人数据\n我们收集与您相关的个人数据（“个人数据”）如下：\n您提供的个人数据：\n我们会在您创建帐户以使用我们的服务或与我们沟通时收集个人数据，具体如下：\n账户信息\n：当您创建账户时，我们会收集与您的账户相关的信息，包括您的姓名、联系信息、账户凭据、出生日期、支付信息和交易历史记录（统称为“账户信息”）。我们的一些服务还允许您上传个人资料照片、用户名或其他信息，作为账户信息的一部分。\n用户内容：\n我们会收集您在向我们的服务提供输入时提交的个人数据（“内容”），包括您的提示以及您上传的其他内容，例如\n文件\n⁠\n（在新窗口中打开）\n、\n图片\n⁠\n（在新窗口中打开）\n、\n音频和视频\n⁠\n（在新窗口中打开）\n、\nSora 角色\n⁠\n（在新窗口中打开）\n，以及来自\n连接服务\n⁠\n（在新窗口中打开）\n的数据，具体取决于您使用的功能。我们的一些服务允许您与其他用户互动，例如发帖、评论或发送消息，我们也将这些互动视为内容的一部分。\n通信信息：",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/1/content",
+          "source_reference": "https://openai.com/zh-Hans-CN/policies/row-privacy-policy"
+        }
+      ],
+      "uncertainty_reason": "文本支持建议仍待来源日期和人工确认。"
     },
     {
-      "review_id": "EIV2_FV_001-RU-exceptions",
-      "required_unit_id": "exceptions",
-      "exact_required_unit_text": "明确适用例外",
-      "evidence_strength_rule": "primary_or_two_independent",
-      "frozen_high_risk_types": [
-        "conflict_sensitive_claim"
-      ],
-      "report_passage": null,
-      "supporting_evidence_references": [],
-      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
-      "ai_recommendation": null,
-      "ambiguity_flag": true,
-      "human_review_status": "PENDING",
-      "reviewer_identity": null,
-      "review_timestamp": null,
-      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
-      "human_decision": null,
       "adjudication_note": null,
-      "short_reason": "No verified case-linked development report and frozen saved evidence are available. Execution was not attempted; this is not a failed development run or an unsatisfied-unit label.",
-      "flags": [
-        "UNCERTAIN",
-        "MISSING_CALIBRATION_MATERIAL"
-      ]
+      "ai_recommendation": "support",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "claim_review_id": "EIV2_FV_001-C002",
+      "evidence_ids": [
+        "ev_6f1b032c397627b6"
+      ],
+      "exact_parent_report_text": "OpenAI 的隐私政策不适用于其代表商业产品客户\\(例如 API 服务客户\\)处理的内容;此类数据的使用受相关客户协议约束。",
+      "exact_report_text": "此类数据的使用受相关客户协议约束。",
+      "flags": [],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "citation_support",
+      "proposed_relation": "support",
+      "reasoning": "保存的 OpenAI 隐私政策直接说明商业/API 客户内容的排除范围及客户协议约束。",
+      "report_span": [
+        68,
+        85
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-citation_support-002",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_6f1b032c397627b6",
+          "exact_saved_evidence_excerpt": "隐私政策 | OpenAI\nOpenAI\n输入语言\n…\nUpdated: 2026年2月6日\n隐私政策\n（\n先前版本\n⁠\n）\n如果您位于欧洲经济区、英国或瑞士，可以阅读\n此版本\n的隐私政策。如果您位于美国，可以阅读\n此版本\n的隐私政策。\n如果您位于韩国，请参阅\n韩国附录\n⁠\n。\n在 OpenAI，我们的使命是确保通用人工智能惠及全人类。我们打造了 ChatGPT 和 Sora 等工具，旨在帮助人们学习、创作并解决问题。OpenAI（连同我们的关联公司，统称为“OpenAI”、“我们”或“我方”）重视您的隐私，并坚定致力于保障我们从您处获得或与您相关的任何信息的安全。本隐私政策阐明了当您使用我们的网站、应用程序和服务（统称为“服务”）时，我们如何收集与您相关的个人数据以及如何使用这些数据。\n本隐私政策不适用于我们代表商业产品客户（例如我们的 API 服务客户）处理的内容。我们对该数据的使用受相关客户协议约束，此类协议涵盖了对相关产品的访问及使用规则。\n有关我们如何收集和使用训练信息以开发驱动 ChatGPT 及其他服务的语言模型，以及您在这些信息方面可以作出的选择，请参阅本政策以及\n这篇帮助中心文章\n⁠\n（在新窗口中打开）\n。\n1. 我们收集的个人数据\n我们收集与您相关的个人数据（“个人数据”）如下：\n您提供的个人数据：\n我们会在您创建帐户以使用我们的服务或与我们沟通时收集个人数据，具体如下：\n账户信息\n：当您创建账户时，我们会收集与您的账户相关的信息，包括您的姓名、联系信息、账户凭据、出生日期、支付信息和交易历史记录（统称为“账户信息”）。我们的一些服务还允许您上传个人资料照片、用户名或其他信息，作为账户信息的一部分。\n用户内容：\n我们会收集您在向我们的服务提供输入时提交的个人数据（“内容”），包括您的提示以及您上传的其他内容，例如\n文件\n⁠\n（在新窗口中打开）\n、\n图片\n⁠\n（在新窗口中打开）\n、\n音频和视频\n⁠\n（在新窗口中打开）\n、\nSora 角色\n⁠\n（在新窗口中打开）\n，以及来自\n连接服务\n⁠\n（在新窗口中打开）\n的数据，具体取决于您使用的功能。我们的一些服务允许您与其他用户互动，例如发帖、评论或发送消息，我们也将这些互动视为内容的一部分。\n通信信息：",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/1/content",
+          "source_reference": "https://openai.com/zh-Hans-CN/policies/row-privacy-policy"
+        }
+      ],
+      "uncertainty_reason": "文本支持建议仍待来源日期和人工确认。"
     },
     {
-      "review_id": "EIV2_FV_001-RU-retention",
-      "required_unit_id": "retention",
-      "exact_required_unit_text": "数据保留或控制边界",
-      "evidence_strength_rule": "primary_or_two_independent",
-      "frozen_high_risk_types": [
-        "numeric_value",
-        "date_or_time_window"
-      ],
-      "report_passage": null,
-      "supporting_evidence_references": [],
-      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
-      "ai_recommendation": null,
-      "ambiguity_flag": true,
-      "human_review_status": "PENDING",
-      "reviewer_identity": null,
-      "review_timestamp": null,
-      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
-      "human_decision": null,
       "adjudication_note": null,
-      "short_reason": "No verified case-linked development report and frozen saved evidence are available. Execution was not attempted; this is not a failed development run or an unsatisfied-unit label.",
+      "ai_recommendation": "support",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "claim_review_id": "EIV2_FV_001-C003",
+      "evidence_ids": [
+        "ev_b08a10e340e4cca0"
+      ],
+      "exact_parent_report_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务;该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+      "exact_report_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务",
+      "flags": [],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "citation_support",
+      "proposed_relation": "support",
+      "reasoning": "原帖明确引述 DPA 的 deidentified/anonymized/aggregated 及 improve systems and services；只支持社区引述这一归因。",
+      "report_span": [
+        216,
+        288
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-citation_support-003",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_b08a10e340e4cca0",
+          "exact_saved_evidence_excerpt": "API - Is our data really \"ours\"? Major Concern in Data Processing Addendum - Community - OpenAI Developer Community\nAPI - Is our data really \"ours\"? Major Concern in Data Processing Addendum\nCommunity\napi\n,\nprivacy\n,\nlegal\nnaferreira_7\nMay 22, 2024, 5:57pm\n1\nOpenAI clearly says that “\nWe do not train on your business data (data from ChatGPT Team, ChatGPT Enterprise, or our API Platform)\n”, and that “\nyou own your inputs and outputs\n”.\nHowever, in the data processing addendum at\nhttps://openai.com/policies/data-processing-addendum/\n, which regulates data processing for the API and ChatGPT Enterprise, there is a clause that says:\n“\nFor clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\n”",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/11/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        }
+      ],
+      "uncertainty_reason": "文本支持建议仍待来源日期和人工确认。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "support",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "claim_review_id": "EIV2_FV_001-C003",
+      "evidence_ids": [
+        "ev_d384aee29a4051c8"
+      ],
+      "exact_parent_report_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务;该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+      "exact_report_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务",
+      "flags": [],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "citation_support",
+      "proposed_relation": "support",
+      "reasoning": "同一讨论的保存片段包含完整相同引文；不是另一独立来源。",
+      "report_span": [
+        216,
+        288
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-citation_support-004",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_d384aee29a4051c8",
+          "exact_saved_evidence_excerpt": "For clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\nIn context, it looks like they’re talking about metadata that still exists after the data itself is deleted e.g. logs of request times, usage amounts, etc. I could be wrong, but the section it was a part of is relevant.\nlijianathome\nApril 7, 2025, 4:03am\n9\nSorry but I’d assume this has been a standard approach in the industry since Internet if not longer, whether end users or organizations like it or not? Or Im missing something obvious please?\nRelated topics\nTopic\nReplies\nViews\nActivity\nData Retention for Batches\nAPI\nbatch\n6\n2982\nMay 22, 2024\nContradiction between terms of use and policy docs\nAPI\n0\n3628\nJanuary 16, 2023\nIs OpenAI HIPAA-Compliant?",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/10/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        }
+      ],
+      "uncertainty_reason": "文本支持建议仍待来源日期和人工确认。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "unclear",
+      "ambiguity_flag": true,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "claim_review_id": "EIV2_FV_001-C003",
+      "evidence_ids": [
+        "ev_d2c625b8589d3de9"
+      ],
+      "exact_parent_report_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务;该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+      "exact_report_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务",
       "flags": [
-        "UNCERTAIN",
-        "MISSING_CALIBRATION_MATERIAL"
-      ]
+        "CITATION_SUPPORT_UNCERTAIN"
+      ],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "citation_support",
+      "proposed_relation": "unclear",
+      "reasoning": "镜像政策片段讨论默认训练与保留，未证明该 DPA 引述。",
+      "report_span": [
+        216,
+        288
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-citation_support-005",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "exact_saved_evidence_excerpt": "数据使用政策 | OpenAI 官方帮助文档中文版\n跳到主要内容\n本页总览\n数据使用政策\n从2023年3月1日开始，我们对数据使用和保留政策做出了两项更改：\n除非您明确决定与我们共享您的数据，否则OpenAI将不会使用通过我们的API提交的数据来训练或改进我们的模型。您可以选择选择加入以共享数据。\n通过API发送的任何数据将被保留用于滥用和误用监控目的，最长时间为30天，之后将被删除（除非法律另有规定）。\nOpenAI API处理用户提示和完成请求，以及通过“Files”端点提交的训练数据以微调模型。我们将此类数据称为API数据。\n默认情况下，OpenAI不会使用通过我们的API提交的数据来训练OpenAI模型或改善OpenAI的服务提供。用户提交的用于微调的数据仅用于微调客户的模型。但是，OpenAI将允许用户选择选择加入共享他们的数据以提高模型性能。共享您的数据将确保模型的未来迭代针对您的用例得到改进。在此更改生效之前的2023年3月1日之前通过API提交的数据，如果客户之前没有选择退出共享数据，则可能已用于改进。\nOpenAI为了滥用和误用监控目的保留API数据30天。少数经过授权的OpenAI员工以及受保密和安全义务约束的专业第三方承包商可以访问此数据，仅用于调查和验证涉嫌滥用行为。部署低误用可能性用例的企业客户可以请求根本不存储API数据，包括用于安全监控和预防。OpenAI仍可能有内容分类器标记涉嫌包含平台滥用的数据。例如，通过“Files”端点由用户提交的用于微调模型的数据将保留，直到用户删除该文件。\n请注意，此数据政策不适用于OpenAI的非API消费者服务，如ChatGPT或DALL·E实验室。您可以在我们的\n消费者服务数据使用FAQ\n中了解更多信息。\n常见问题解答\n​\nOpenAI的公共API拥有哪些技术保护和安全认证？\n​\nOpenAI符合SOC 2 Type 1标准，并已经通过独立第三方审核，符合2017年安全信托服务标准。\nAPI数据存储在哪里？\n​\n内容存储在OpenAI系统和我们的子处理器系统中。我们还可能向第三方承包商发送部分去标识化的内容（受保密和安全义务约束）以确保安全。我们的30天数据保留政策也适用于我们的子处理器和承包商。您可以查看我们的子处理器列表以了解其位置和详细信息。\n当我调用API时，数据是否在传输过程中加密？\n​",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/6/content",
+          "source_reference": "https://openai.xiniushu.com/policies/api-data-usage-policies"
+        }
+      ],
+      "uncertainty_reason": "保存片段未建立完整范围；不给部分支持分。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "unclear",
+      "ambiguity_flag": true,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "claim_review_id": "EIV2_FV_001-C003",
+      "evidence_ids": [
+        "ev_2031367fc36e847d"
+      ],
+      "exact_parent_report_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务;该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+      "exact_report_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务",
+      "flags": [
+        "CITATION_SUPPORT_UNCERTAIN"
+      ],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "citation_support",
+      "proposed_relation": "unclear",
+      "reasoning": "官方平台片段讨论默认训练和日志，未载该 DPA 引文。",
+      "report_span": [
+        216,
+        288
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-citation_support-006",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_2031367fc36e847d",
+          "exact_saved_evidence_excerpt": "Try ChatGPT\nCopy Page\nUnderstand how OpenAI uses your data, and how you can control it.\nYour data is your data. As of March 1, 2023, data sent to the OpenAI API is not used to train or improve OpenAI models (unless you explicitly opt in to share data with us).\nTypes of data stored with the OpenAI API\nWhen using the OpenAI API, data may be stored as:\nAbuse monitoring logs:\nLogs generated from your use of the platform, necessary for OpenAI to enforce our\nUsage Policies\nand agreements and mitigate harmful uses of AI.\nApplication state:\nData persisted from some API features in order to fulfill the task or request.\nData retention controls for abuse monitoring",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/19/content",
+          "source_reference": "https://developers.openai.com/api/docs/guides/your-data"
+        }
+      ],
+      "uncertainty_reason": "保存片段未建立完整范围；不给部分支持分。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "support",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "claim_review_id": "EIV2_FV_001-C004",
+      "evidence_ids": [
+        "ev_b08a10e340e4cca0"
+      ],
+      "exact_parent_report_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务;该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+      "exact_report_text": "该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+      "flags": [],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "citation_support",
+      "proposed_relation": "support",
+      "reasoning": "原帖将不训练承诺与 DPA 条款用 However 并置，支持存在边界质疑这一狭义陈述。",
+      "report_span": [
+        289,
+        320
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-citation_support-007",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_b08a10e340e4cca0",
+          "exact_saved_evidence_excerpt": "API - Is our data really \"ours\"? Major Concern in Data Processing Addendum - Community - OpenAI Developer Community\nAPI - Is our data really \"ours\"? Major Concern in Data Processing Addendum\nCommunity\napi\n,\nprivacy\n,\nlegal\nnaferreira_7\nMay 22, 2024, 5:57pm\n1\nOpenAI clearly says that “\nWe do not train on your business data (data from ChatGPT Team, ChatGPT Enterprise, or our API Platform)\n”, and that “\nyou own your inputs and outputs\n”.\nHowever, in the data processing addendum at\nhttps://openai.com/policies/data-processing-addendum/\n, which regulates data processing for the API and ChatGPT Enterprise, there is a clause that says:\n“\nFor clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\n”",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/11/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        }
+      ],
+      "uncertainty_reason": "文本支持建议仍待来源日期和人工确认。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "support",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "claim_review_id": "EIV2_FV_001-C004",
+      "evidence_ids": [
+        "ev_d384aee29a4051c8"
+      ],
+      "exact_parent_report_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务;该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+      "exact_report_text": "该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+      "flags": [],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "citation_support",
+      "proposed_relation": "support",
+      "reasoning": "同一讨论回应给出 metadata 的不同解释并明确 I could be wrong，支持争议存在而非争议结论。",
+      "report_span": [
+        289,
+        320
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-citation_support-008",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_d384aee29a4051c8",
+          "exact_saved_evidence_excerpt": "For clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\nIn context, it looks like they’re talking about metadata that still exists after the data itself is deleted e.g. logs of request times, usage amounts, etc. I could be wrong, but the section it was a part of is relevant.\nlijianathome\nApril 7, 2025, 4:03am\n9\nSorry but I’d assume this has been a standard approach in the industry since Internet if not longer, whether end users or organizations like it or not? Or Im missing something obvious please?\nRelated topics\nTopic\nReplies\nViews\nActivity\nData Retention for Batches\nAPI\nbatch\n6\n2982\nMay 22, 2024\nContradiction between terms of use and policy docs\nAPI\n0\n3628\nJanuary 16, 2023\nIs OpenAI HIPAA-Compliant?",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/10/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        }
+      ],
+      "uncertainty_reason": "文本支持建议仍待来源日期和人工确认。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "unclear",
+      "ambiguity_flag": true,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "claim_review_id": "EIV2_FV_001-C004",
+      "evidence_ids": [
+        "ev_d2c625b8589d3de9"
+      ],
+      "exact_parent_report_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务;该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+      "exact_report_text": "该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+      "flags": [
+        "CITATION_SUPPORT_UNCERTAIN"
+      ],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "citation_support",
+      "proposed_relation": "unclear",
+      "reasoning": "只保存默认政策说明，没有争议发生或裁定内容。",
+      "report_span": [
+        289,
+        320
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-citation_support-009",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "exact_saved_evidence_excerpt": "数据使用政策 | OpenAI 官方帮助文档中文版\n跳到主要内容\n本页总览\n数据使用政策\n从2023年3月1日开始，我们对数据使用和保留政策做出了两项更改：\n除非您明确决定与我们共享您的数据，否则OpenAI将不会使用通过我们的API提交的数据来训练或改进我们的模型。您可以选择选择加入以共享数据。\n通过API发送的任何数据将被保留用于滥用和误用监控目的，最长时间为30天，之后将被删除（除非法律另有规定）。\nOpenAI API处理用户提示和完成请求，以及通过“Files”端点提交的训练数据以微调模型。我们将此类数据称为API数据。\n默认情况下，OpenAI不会使用通过我们的API提交的数据来训练OpenAI模型或改善OpenAI的服务提供。用户提交的用于微调的数据仅用于微调客户的模型。但是，OpenAI将允许用户选择选择加入共享他们的数据以提高模型性能。共享您的数据将确保模型的未来迭代针对您的用例得到改进。在此更改生效之前的2023年3月1日之前通过API提交的数据，如果客户之前没有选择退出共享数据，则可能已用于改进。\nOpenAI为了滥用和误用监控目的保留API数据30天。少数经过授权的OpenAI员工以及受保密和安全义务约束的专业第三方承包商可以访问此数据，仅用于调查和验证涉嫌滥用行为。部署低误用可能性用例的企业客户可以请求根本不存储API数据，包括用于安全监控和预防。OpenAI仍可能有内容分类器标记涉嫌包含平台滥用的数据。例如，通过“Files”端点由用户提交的用于微调模型的数据将保留，直到用户删除该文件。\n请注意，此数据政策不适用于OpenAI的非API消费者服务，如ChatGPT或DALL·E实验室。您可以在我们的\n消费者服务数据使用FAQ\n中了解更多信息。\n常见问题解答\n​\nOpenAI的公共API拥有哪些技术保护和安全认证？\n​\nOpenAI符合SOC 2 Type 1标准，并已经通过独立第三方审核，符合2017年安全信托服务标准。\nAPI数据存储在哪里？\n​\n内容存储在OpenAI系统和我们的子处理器系统中。我们还可能向第三方承包商发送部分去标识化的内容（受保密和安全义务约束）以确保安全。我们的30天数据保留政策也适用于我们的子处理器和承包商。您可以查看我们的子处理器列表以了解其位置和详细信息。\n当我调用API时，数据是否在传输过程中加密？\n​",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/6/content",
+          "source_reference": "https://openai.xiniushu.com/policies/api-data-usage-policies"
+        }
+      ],
+      "uncertainty_reason": "保存片段未建立完整范围；不给部分支持分。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "unclear",
+      "ambiguity_flag": true,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "claim_review_id": "EIV2_FV_001-C004",
+      "evidence_ids": [
+        "ev_2031367fc36e847d"
+      ],
+      "exact_parent_report_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务;该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+      "exact_report_text": "该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+      "flags": [
+        "CITATION_SUPPORT_UNCERTAIN"
+      ],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "citation_support",
+      "proposed_relation": "unclear",
+      "reasoning": "只保存默认政策说明，没有争议发生或裁定内容。",
+      "report_span": [
+        289,
+        320
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-citation_support-010",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_2031367fc36e847d",
+          "exact_saved_evidence_excerpt": "Try ChatGPT\nCopy Page\nUnderstand how OpenAI uses your data, and how you can control it.\nYour data is your data. As of March 1, 2023, data sent to the OpenAI API is not used to train or improve OpenAI models (unless you explicitly opt in to share data with us).\nTypes of data stored with the OpenAI API\nWhen using the OpenAI API, data may be stored as:\nAbuse monitoring logs:\nLogs generated from your use of the platform, necessary for OpenAI to enforce our\nUsage Policies\nand agreements and mitigate harmful uses of AI.\nApplication state:\nData persisted from some API features in order to fulfill the task or request.\nData retention controls for abuse monitoring",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/19/content",
+          "source_reference": "https://developers.openai.com/api/docs/guides/your-data"
+        }
+      ],
+      "uncertainty_reason": "保存片段未建立完整范围；不给部分支持分。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "support",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "claim_review_id": "EIV2_FV_001-C005",
+      "evidence_ids": [
+        "ev_2031367fc36e847d"
+      ],
+      "exact_parent_report_text": "OpenAI 平台文档称 API 数据可能以滥用监控日志和应用状态形式存储;某些 API 功能会为完成请求或任务而持久化数据。",
+      "exact_report_text": "OpenAI 平台文档称 API 数据可能以滥用监控日志和应用状态形式存储",
+      "flags": [],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "citation_support",
+      "proposed_relation": "support",
+      "reasoning": "保存片段分别列出 Abuse monitoring logs 与 Application state，并明示为 fulfill task or request 持久化。",
+      "report_span": [
+        759,
+        796
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-citation_support-011",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_2031367fc36e847d",
+          "exact_saved_evidence_excerpt": "Try ChatGPT\nCopy Page\nUnderstand how OpenAI uses your data, and how you can control it.\nYour data is your data. As of March 1, 2023, data sent to the OpenAI API is not used to train or improve OpenAI models (unless you explicitly opt in to share data with us).\nTypes of data stored with the OpenAI API\nWhen using the OpenAI API, data may be stored as:\nAbuse monitoring logs:\nLogs generated from your use of the platform, necessary for OpenAI to enforce our\nUsage Policies\nand agreements and mitigate harmful uses of AI.\nApplication state:\nData persisted from some API features in order to fulfill the task or request.\nData retention controls for abuse monitoring",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/19/content",
+          "source_reference": "https://developers.openai.com/api/docs/guides/your-data"
+        }
+      ],
+      "uncertainty_reason": "文本支持建议仍待来源日期和人工确认。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "support",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "claim_review_id": "EIV2_FV_001-C006",
+      "evidence_ids": [
+        "ev_2031367fc36e847d"
+      ],
+      "exact_parent_report_text": "OpenAI 平台文档称 API 数据可能以滥用监控日志和应用状态形式存储;某些 API 功能会为完成请求或任务而持久化数据。",
+      "exact_report_text": "某些 API 功能会为完成请求或任务而持久化数据。",
+      "flags": [],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "citation_support",
+      "proposed_relation": "support",
+      "reasoning": "保存片段分别列出 Abuse monitoring logs 与 Application state，并明示为 fulfill task or request 持久化。",
+      "report_span": [
+        797,
+        822
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-citation_support-012",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_2031367fc36e847d",
+          "exact_saved_evidence_excerpt": "Try ChatGPT\nCopy Page\nUnderstand how OpenAI uses your data, and how you can control it.\nYour data is your data. As of March 1, 2023, data sent to the OpenAI API is not used to train or improve OpenAI models (unless you explicitly opt in to share data with us).\nTypes of data stored with the OpenAI API\nWhen using the OpenAI API, data may be stored as:\nAbuse monitoring logs:\nLogs generated from your use of the platform, necessary for OpenAI to enforce our\nUsage Policies\nand agreements and mitigate harmful uses of AI.\nApplication state:\nData persisted from some API features in order to fulfill the task or request.\nData retention controls for abuse monitoring",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/19/content",
+          "source_reference": "https://developers.openai.com/api/docs/guides/your-data"
+        }
+      ],
+      "uncertainty_reason": "文本支持建议仍待来源日期和人工确认。"
     }
   ],
-  "evidence_strength_review": [],
-  "independence_review": [],
-  "freshness_cutoff_review": [],
-  "high_risk_review": [],
-  "conflict_adjudication_review_ids": [
-    "EIV2_FV_001-MATERIAL-001",
-    "EIV2_FV_001-RU-training_default",
-    "EIV2_FV_001-RU-exceptions",
-    "EIV2_FV_001-RU-retention"
+  "claim_segmentation_review": [
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "factual",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "evidence_ids": [
+        "ev_6f1b032c397627b6"
+      ],
+      "exact_parent_report_text": "OpenAI 的隐私政策不适用于其代表商业产品客户\\(例如 API 服务客户\\)处理的内容;此类数据的使用受相关客户协议约束。",
+      "exact_report_text": "OpenAI 的隐私政策不适用于其代表商业产品客户\\(例如 API 服务客户\\)处理的内容",
+      "factual_or_nonfactual": "factual",
+      "flags": [],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "claim_segmentation",
+      "materiality_if_required": true,
+      "output_mode": "factual",
+      "proposed_atomic_segmentation": "OpenAI 的隐私政策不适用于其代表商业产品客户(例如 API 服务客户)处理的内容",
+      "reasoning": "分开政策适用范围与客户协议约束两个可核查断言。",
+      "report_span": [
+        22,
+        67
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-C001",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "risk_types": [],
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "runtime_claim_id": "claim_ebb2fdf6b9007a9429ff7f8d63284da76592ee2e3156f6e5fa270975dd870922",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_6f1b032c397627b6",
+          "exact_saved_evidence_excerpt": "隐私政策 | OpenAI\nOpenAI\n输入语言\n…\nUpdated: 2026年2月6日\n隐私政策\n（\n先前版本\n⁠\n）\n如果您位于欧洲经济区、英国或瑞士，可以阅读\n此版本\n的隐私政策。如果您位于美国，可以阅读\n此版本\n的隐私政策。\n如果您位于韩国，请参阅\n韩国附录\n⁠\n。\n在 OpenAI，我们的使命是确保通用人工智能惠及全人类。我们打造了 ChatGPT 和 Sora 等工具，旨在帮助人们学习、创作并解决问题。OpenAI（连同我们的关联公司，统称为“OpenAI”、“我们”或“我方”）重视您的隐私，并坚定致力于保障我们从您处获得或与您相关的任何信息的安全。本隐私政策阐明了当您使用我们的网站、应用程序和服务（统称为“服务”）时，我们如何收集与您相关的个人数据以及如何使用这些数据。\n本隐私政策不适用于我们代表商业产品客户（例如我们的 API 服务客户）处理的内容。我们对该数据的使用受相关客户协议约束，此类协议涵盖了对相关产品的访问及使用规则。\n有关我们如何收集和使用训练信息以开发驱动 ChatGPT 及其他服务的语言模型，以及您在这些信息方面可以作出的选择，请参阅本政策以及\n这篇帮助中心文章\n⁠\n（在新窗口中打开）\n。\n1. 我们收集的个人数据\n我们收集与您相关的个人数据（“个人数据”）如下：\n您提供的个人数据：\n我们会在您创建帐户以使用我们的服务或与我们沟通时收集个人数据，具体如下：\n账户信息\n：当您创建账户时，我们会收集与您的账户相关的信息，包括您的姓名、联系信息、账户凭据、出生日期、支付信息和交易历史记录（统称为“账户信息”）。我们的一些服务还允许您上传个人资料照片、用户名或其他信息，作为账户信息的一部分。\n用户内容：\n我们会收集您在向我们的服务提供输入时提交的个人数据（“内容”），包括您的提示以及您上传的其他内容，例如\n文件\n⁠\n（在新窗口中打开）\n、\n图片\n⁠\n（在新窗口中打开）\n、\n音频和视频\n⁠\n（在新窗口中打开）\n、\nSora 角色\n⁠\n（在新窗口中打开）\n，以及来自\n连接服务\n⁠\n（在新窗口中打开）\n的数据，具体取决于您使用的功能。我们的一些服务允许您与其他用户互动，例如发帖、评论或发送消息，我们也将这些互动视为内容的一部分。\n通信信息：",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/1/content",
+          "source_reference": "https://openai.com/zh-Hans-CN/policies/row-privacy-policy"
+        }
+      ],
+      "uncertainty_reason": "预标注需人工确认，尚非 gold。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "factual",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "evidence_ids": [
+        "ev_6f1b032c397627b6"
+      ],
+      "exact_parent_report_text": "OpenAI 的隐私政策不适用于其代表商业产品客户\\(例如 API 服务客户\\)处理的内容;此类数据的使用受相关客户协议约束。",
+      "exact_report_text": "此类数据的使用受相关客户协议约束。",
+      "factual_or_nonfactual": "factual",
+      "flags": [],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "claim_segmentation",
+      "materiality_if_required": true,
+      "output_mode": "factual",
+      "proposed_atomic_segmentation": "此类数据的使用受相关客户协议约束。",
+      "reasoning": "分开政策适用范围与客户协议约束两个可核查断言。",
+      "report_span": [
+        68,
+        85
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-C002",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "risk_types": [],
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "runtime_claim_id": "claim_ebb2fdf6b9007a9429ff7f8d63284da76592ee2e3156f6e5fa270975dd870922",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_6f1b032c397627b6",
+          "exact_saved_evidence_excerpt": "隐私政策 | OpenAI\nOpenAI\n输入语言\n…\nUpdated: 2026年2月6日\n隐私政策\n（\n先前版本\n⁠\n）\n如果您位于欧洲经济区、英国或瑞士，可以阅读\n此版本\n的隐私政策。如果您位于美国，可以阅读\n此版本\n的隐私政策。\n如果您位于韩国，请参阅\n韩国附录\n⁠\n。\n在 OpenAI，我们的使命是确保通用人工智能惠及全人类。我们打造了 ChatGPT 和 Sora 等工具，旨在帮助人们学习、创作并解决问题。OpenAI（连同我们的关联公司，统称为“OpenAI”、“我们”或“我方”）重视您的隐私，并坚定致力于保障我们从您处获得或与您相关的任何信息的安全。本隐私政策阐明了当您使用我们的网站、应用程序和服务（统称为“服务”）时，我们如何收集与您相关的个人数据以及如何使用这些数据。\n本隐私政策不适用于我们代表商业产品客户（例如我们的 API 服务客户）处理的内容。我们对该数据的使用受相关客户协议约束，此类协议涵盖了对相关产品的访问及使用规则。\n有关我们如何收集和使用训练信息以开发驱动 ChatGPT 及其他服务的语言模型，以及您在这些信息方面可以作出的选择，请参阅本政策以及\n这篇帮助中心文章\n⁠\n（在新窗口中打开）\n。\n1. 我们收集的个人数据\n我们收集与您相关的个人数据（“个人数据”）如下：\n您提供的个人数据：\n我们会在您创建帐户以使用我们的服务或与我们沟通时收集个人数据，具体如下：\n账户信息\n：当您创建账户时，我们会收集与您的账户相关的信息，包括您的姓名、联系信息、账户凭据、出生日期、支付信息和交易历史记录（统称为“账户信息”）。我们的一些服务还允许您上传个人资料照片、用户名或其他信息，作为账户信息的一部分。\n用户内容：\n我们会收集您在向我们的服务提供输入时提交的个人数据（“内容”），包括您的提示以及您上传的其他内容，例如\n文件\n⁠\n（在新窗口中打开）\n、\n图片\n⁠\n（在新窗口中打开）\n、\n音频和视频\n⁠\n（在新窗口中打开）\n、\nSora 角色\n⁠\n（在新窗口中打开）\n，以及来自\n连接服务\n⁠\n（在新窗口中打开）\n的数据，具体取决于您使用的功能。我们的一些服务允许您与其他用户互动，例如发帖、评论或发送消息，我们也将这些互动视为内容的一部分。\n通信信息：",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/1/content",
+          "source_reference": "https://openai.com/zh-Hans-CN/policies/row-privacy-policy"
+        }
+      ],
+      "uncertainty_reason": "预标注需人工确认，尚非 gold。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "factual",
+      "ambiguity_flag": true,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "evidence_ids": [
+        "ev_b08a10e340e4cca0",
+        "ev_d384aee29a4051c8",
+        "ev_d2c625b8589d3de9",
+        "ev_2031367fc36e847d"
+      ],
+      "exact_parent_report_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务;该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+      "exact_report_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务",
+      "factual_or_nonfactual": "factual",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION"
+      ],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "claim_segmentation",
+      "materiality_if_required": true,
+      "output_mode": "hedged",
+      "proposed_atomic_segmentation": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务",
+      "reasoning": "保留‘社区帖子引用’归因；不能把带限定语的引述升级成已核实合同解释。",
+      "report_span": [
+        216,
+        288
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-C003",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "risk_types": [
+        "conflict_sensitive_claim"
+      ],
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "runtime_claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_b08a10e340e4cca0",
+          "exact_saved_evidence_excerpt": "API - Is our data really \"ours\"? Major Concern in Data Processing Addendum - Community - OpenAI Developer Community\nAPI - Is our data really \"ours\"? Major Concern in Data Processing Addendum\nCommunity\napi\n,\nprivacy\n,\nlegal\nnaferreira_7\nMay 22, 2024, 5:57pm\n1\nOpenAI clearly says that “\nWe do not train on your business data (data from ChatGPT Team, ChatGPT Enterprise, or our API Platform)\n”, and that “\nyou own your inputs and outputs\n”.\nHowever, in the data processing addendum at\nhttps://openai.com/policies/data-processing-addendum/\n, which regulates data processing for the API and ChatGPT Enterprise, there is a clause that says:\n“\nFor clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\n”",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/11/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        },
+        {
+          "evidence_id": "ev_d384aee29a4051c8",
+          "exact_saved_evidence_excerpt": "For clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\nIn context, it looks like they’re talking about metadata that still exists after the data itself is deleted e.g. logs of request times, usage amounts, etc. I could be wrong, but the section it was a part of is relevant.\nlijianathome\nApril 7, 2025, 4:03am\n9\nSorry but I’d assume this has been a standard approach in the industry since Internet if not longer, whether end users or organizations like it or not? Or Im missing something obvious please?\nRelated topics\nTopic\nReplies\nViews\nActivity\nData Retention for Batches\nAPI\nbatch\n6\n2982\nMay 22, 2024\nContradiction between terms of use and policy docs\nAPI\n0\n3628\nJanuary 16, 2023\nIs OpenAI HIPAA-Compliant?",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/10/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        },
+        {
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "exact_saved_evidence_excerpt": "数据使用政策 | OpenAI 官方帮助文档中文版\n跳到主要内容\n本页总览\n数据使用政策\n从2023年3月1日开始，我们对数据使用和保留政策做出了两项更改：\n除非您明确决定与我们共享您的数据，否则OpenAI将不会使用通过我们的API提交的数据来训练或改进我们的模型。您可以选择选择加入以共享数据。\n通过API发送的任何数据将被保留用于滥用和误用监控目的，最长时间为30天，之后将被删除（除非法律另有规定）。\nOpenAI API处理用户提示和完成请求，以及通过“Files”端点提交的训练数据以微调模型。我们将此类数据称为API数据。\n默认情况下，OpenAI不会使用通过我们的API提交的数据来训练OpenAI模型或改善OpenAI的服务提供。用户提交的用于微调的数据仅用于微调客户的模型。但是，OpenAI将允许用户选择选择加入共享他们的数据以提高模型性能。共享您的数据将确保模型的未来迭代针对您的用例得到改进。在此更改生效之前的2023年3月1日之前通过API提交的数据，如果客户之前没有选择退出共享数据，则可能已用于改进。\nOpenAI为了滥用和误用监控目的保留API数据30天。少数经过授权的OpenAI员工以及受保密和安全义务约束的专业第三方承包商可以访问此数据，仅用于调查和验证涉嫌滥用行为。部署低误用可能性用例的企业客户可以请求根本不存储API数据，包括用于安全监控和预防。OpenAI仍可能有内容分类器标记涉嫌包含平台滥用的数据。例如，通过“Files”端点由用户提交的用于微调模型的数据将保留，直到用户删除该文件。\n请注意，此数据政策不适用于OpenAI的非API消费者服务，如ChatGPT或DALL·E实验室。您可以在我们的\n消费者服务数据使用FAQ\n中了解更多信息。\n常见问题解答\n​\nOpenAI的公共API拥有哪些技术保护和安全认证？\n​\nOpenAI符合SOC 2 Type 1标准，并已经通过独立第三方审核，符合2017年安全信托服务标准。\nAPI数据存储在哪里？\n​\n内容存储在OpenAI系统和我们的子处理器系统中。我们还可能向第三方承包商发送部分去标识化的内容（受保密和安全义务约束）以确保安全。我们的30天数据保留政策也适用于我们的子处理器和承包商。您可以查看我们的子处理器列表以了解其位置和详细信息。\n当我调用API时，数据是否在传输过程中加密？\n​",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/6/content",
+          "source_reference": "https://openai.xiniushu.com/policies/api-data-usage-policies"
+        },
+        {
+          "evidence_id": "ev_2031367fc36e847d",
+          "exact_saved_evidence_excerpt": "Try ChatGPT\nCopy Page\nUnderstand how OpenAI uses your data, and how you can control it.\nYour data is your data. As of March 1, 2023, data sent to the OpenAI API is not used to train or improve OpenAI models (unless you explicitly opt in to share data with us).\nTypes of data stored with the OpenAI API\nWhen using the OpenAI API, data may be stored as:\nAbuse monitoring logs:\nLogs generated from your use of the platform, necessary for OpenAI to enforce our\nUsage Policies\nand agreements and mitigate harmful uses of AI.\nApplication state:\nData persisted from some API features in order to fulfill the task or request.\nData retention controls for abuse monitoring",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/19/content",
+          "source_reference": "https://developers.openai.com/api/docs/guides/your-data"
+        }
+      ],
+      "uncertainty_reason": "人工确认限定语与分句继承范围。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "factual",
+      "ambiguity_flag": true,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "evidence_ids": [
+        "ev_b08a10e340e4cca0",
+        "ev_d384aee29a4051c8",
+        "ev_d2c625b8589d3de9",
+        "ev_2031367fc36e847d"
+      ],
+      "exact_parent_report_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务;该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+      "exact_report_text": "该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+      "factual_or_nonfactual": "factual",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION"
+      ],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "claim_segmentation",
+      "materiality_if_required": true,
+      "output_mode": "hedged",
+      "proposed_atomic_segmentation": "该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+      "reasoning": "这是受 unconfirmed 前缀限定的争议存在断言，不是宣告实际训练违约。",
+      "report_span": [
+        289,
+        320
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-C004",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "risk_types": [
+        "conflict_sensitive_claim"
+      ],
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "runtime_claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_b08a10e340e4cca0",
+          "exact_saved_evidence_excerpt": "API - Is our data really \"ours\"? Major Concern in Data Processing Addendum - Community - OpenAI Developer Community\nAPI - Is our data really \"ours\"? Major Concern in Data Processing Addendum\nCommunity\napi\n,\nprivacy\n,\nlegal\nnaferreira_7\nMay 22, 2024, 5:57pm\n1\nOpenAI clearly says that “\nWe do not train on your business data (data from ChatGPT Team, ChatGPT Enterprise, or our API Platform)\n”, and that “\nyou own your inputs and outputs\n”.\nHowever, in the data processing addendum at\nhttps://openai.com/policies/data-processing-addendum/\n, which regulates data processing for the API and ChatGPT Enterprise, there is a clause that says:\n“\nFor clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\n”",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/11/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        },
+        {
+          "evidence_id": "ev_d384aee29a4051c8",
+          "exact_saved_evidence_excerpt": "For clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\nIn context, it looks like they’re talking about metadata that still exists after the data itself is deleted e.g. logs of request times, usage amounts, etc. I could be wrong, but the section it was a part of is relevant.\nlijianathome\nApril 7, 2025, 4:03am\n9\nSorry but I’d assume this has been a standard approach in the industry since Internet if not longer, whether end users or organizations like it or not? Or Im missing something obvious please?\nRelated topics\nTopic\nReplies\nViews\nActivity\nData Retention for Batches\nAPI\nbatch\n6\n2982\nMay 22, 2024\nContradiction between terms of use and policy docs\nAPI\n0\n3628\nJanuary 16, 2023\nIs OpenAI HIPAA-Compliant?",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/10/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        },
+        {
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "exact_saved_evidence_excerpt": "数据使用政策 | OpenAI 官方帮助文档中文版\n跳到主要内容\n本页总览\n数据使用政策\n从2023年3月1日开始，我们对数据使用和保留政策做出了两项更改：\n除非您明确决定与我们共享您的数据，否则OpenAI将不会使用通过我们的API提交的数据来训练或改进我们的模型。您可以选择选择加入以共享数据。\n通过API发送的任何数据将被保留用于滥用和误用监控目的，最长时间为30天，之后将被删除（除非法律另有规定）。\nOpenAI API处理用户提示和完成请求，以及通过“Files”端点提交的训练数据以微调模型。我们将此类数据称为API数据。\n默认情况下，OpenAI不会使用通过我们的API提交的数据来训练OpenAI模型或改善OpenAI的服务提供。用户提交的用于微调的数据仅用于微调客户的模型。但是，OpenAI将允许用户选择选择加入共享他们的数据以提高模型性能。共享您的数据将确保模型的未来迭代针对您的用例得到改进。在此更改生效之前的2023年3月1日之前通过API提交的数据，如果客户之前没有选择退出共享数据，则可能已用于改进。\nOpenAI为了滥用和误用监控目的保留API数据30天。少数经过授权的OpenAI员工以及受保密和安全义务约束的专业第三方承包商可以访问此数据，仅用于调查和验证涉嫌滥用行为。部署低误用可能性用例的企业客户可以请求根本不存储API数据，包括用于安全监控和预防。OpenAI仍可能有内容分类器标记涉嫌包含平台滥用的数据。例如，通过“Files”端点由用户提交的用于微调模型的数据将保留，直到用户删除该文件。\n请注意，此数据政策不适用于OpenAI的非API消费者服务，如ChatGPT或DALL·E实验室。您可以在我们的\n消费者服务数据使用FAQ\n中了解更多信息。\n常见问题解答\n​\nOpenAI的公共API拥有哪些技术保护和安全认证？\n​\nOpenAI符合SOC 2 Type 1标准，并已经通过独立第三方审核，符合2017年安全信托服务标准。\nAPI数据存储在哪里？\n​\n内容存储在OpenAI系统和我们的子处理器系统中。我们还可能向第三方承包商发送部分去标识化的内容（受保密和安全义务约束）以确保安全。我们的30天数据保留政策也适用于我们的子处理器和承包商。您可以查看我们的子处理器列表以了解其位置和详细信息。\n当我调用API时，数据是否在传输过程中加密？\n​",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/6/content",
+          "source_reference": "https://openai.xiniushu.com/policies/api-data-usage-policies"
+        },
+        {
+          "evidence_id": "ev_2031367fc36e847d",
+          "exact_saved_evidence_excerpt": "Try ChatGPT\nCopy Page\nUnderstand how OpenAI uses your data, and how you can control it.\nYour data is your data. As of March 1, 2023, data sent to the OpenAI API is not used to train or improve OpenAI models (unless you explicitly opt in to share data with us).\nTypes of data stored with the OpenAI API\nWhen using the OpenAI API, data may be stored as:\nAbuse monitoring logs:\nLogs generated from your use of the platform, necessary for OpenAI to enforce our\nUsage Policies\nand agreements and mitigate harmful uses of AI.\nApplication state:\nData persisted from some API features in order to fulfill the task or request.\nData retention controls for abuse monitoring",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/19/content",
+          "source_reference": "https://developers.openai.com/api/docs/guides/your-data"
+        }
+      ],
+      "uncertainty_reason": "人工确认限定语与分句继承范围。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "factual",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "evidence_ids": [
+        "ev_2031367fc36e847d"
+      ],
+      "exact_parent_report_text": "OpenAI 平台文档称 API 数据可能以滥用监控日志和应用状态形式存储;某些 API 功能会为完成请求或任务而持久化数据。",
+      "exact_report_text": "OpenAI 平台文档称 API 数据可能以滥用监控日志和应用状态形式存储",
+      "factual_or_nonfactual": "factual",
+      "flags": [],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "claim_segmentation",
+      "materiality_if_required": true,
+      "output_mode": "factual",
+      "proposed_atomic_segmentation": "OpenAI 平台文档称 API 数据可能以滥用监控日志和应用状态形式存储",
+      "reasoning": "将存储类型与部分功能持久化用途分成可核查断言。",
+      "report_span": [
+        759,
+        796
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-C005",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "risk_types": [],
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "runtime_claim_id": "claim_201ca07284694c08bc9b7009c05e80539b332b2cfc3a6d637fb459b301d052ad",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_2031367fc36e847d",
+          "exact_saved_evidence_excerpt": "Try ChatGPT\nCopy Page\nUnderstand how OpenAI uses your data, and how you can control it.\nYour data is your data. As of March 1, 2023, data sent to the OpenAI API is not used to train or improve OpenAI models (unless you explicitly opt in to share data with us).\nTypes of data stored with the OpenAI API\nWhen using the OpenAI API, data may be stored as:\nAbuse monitoring logs:\nLogs generated from your use of the platform, necessary for OpenAI to enforce our\nUsage Policies\nand agreements and mitigate harmful uses of AI.\nApplication state:\nData persisted from some API features in order to fulfill the task or request.\nData retention controls for abuse monitoring",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/19/content",
+          "source_reference": "https://developers.openai.com/api/docs/guides/your-data"
+        }
+      ],
+      "uncertainty_reason": "预标注需人工确认，尚非 gold。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "factual",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "evidence_ids": [
+        "ev_2031367fc36e847d"
+      ],
+      "exact_parent_report_text": "OpenAI 平台文档称 API 数据可能以滥用监控日志和应用状态形式存储;某些 API 功能会为完成请求或任务而持久化数据。",
+      "exact_report_text": "某些 API 功能会为完成请求或任务而持久化数据。",
+      "factual_or_nonfactual": "factual",
+      "flags": [],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "claim_segmentation",
+      "materiality_if_required": true,
+      "output_mode": "factual",
+      "proposed_atomic_segmentation": "某些 API 功能会为完成请求或任务而持久化数据。",
+      "reasoning": "将存储类型与部分功能持久化用途分成可核查断言。",
+      "report_span": [
+        797,
+        822
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-C006",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "risk_types": [],
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "runtime_claim_id": "claim_201ca07284694c08bc9b7009c05e80539b332b2cfc3a6d637fb459b301d052ad",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_2031367fc36e847d",
+          "exact_saved_evidence_excerpt": "Try ChatGPT\nCopy Page\nUnderstand how OpenAI uses your data, and how you can control it.\nYour data is your data. As of March 1, 2023, data sent to the OpenAI API is not used to train or improve OpenAI models (unless you explicitly opt in to share data with us).\nTypes of data stored with the OpenAI API\nWhen using the OpenAI API, data may be stored as:\nAbuse monitoring logs:\nLogs generated from your use of the platform, necessary for OpenAI to enforce our\nUsage Policies\nand agreements and mitigate harmful uses of AI.\nApplication state:\nData persisted from some API features in order to fulfill the task or request.\nData retention controls for abuse monitoring",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/19/content",
+          "source_reference": "https://developers.openai.com/api/docs/guides/your-data"
+        }
+      ],
+      "uncertainty_reason": "预标注需人工确认，尚非 gold。"
+    }
   ],
-  "empty_sections_mean": "Not assessable because report/evidence are missing; not absence of factual claims, risks or violations.",
-  "human_completion": {
-    "reviewer_identity": null,
-    "review_timestamp": null,
-    "rubric_version": "enterprise-insight-bench-v2/2.2.0",
-    "human_decision": null,
-    "adjudication_note": null
-  },
-  "review_item_template_reference": "../../REVIEW_ITEM_TEMPLATES.json",
-  "artifact_reference": "artifact_references.json"
+  "evidence_strength_review": [
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "PRIMARY",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "evidence_ids": [
+        "ev_6f1b032c397627b6"
+      ],
+      "flags": [
+        "EVIDENCE_STRENGTH_REVIEW"
+      ],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "evidence_strength",
+      "primary_source_status": "PRIMARY",
+      "reasoning": "openai.com 原站标题和以‘我们’说明自身政策的内容一致；只对自身隐私政策一手。",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-evidence_strength-001",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_6f1b032c397627b6",
+          "exact_saved_evidence_excerpt": "隐私政策 | OpenAI\nOpenAI\n输入语言\n…\nUpdated: 2026年2月6日\n隐私政策\n（\n先前版本\n⁠\n）\n如果您位于欧洲经济区、英国或瑞士，可以阅读\n此版本\n的隐私政策。如果您位于美国，可以阅读\n此版本\n的隐私政策。\n如果您位于韩国，请参阅\n韩国附录\n⁠\n。\n在 OpenAI，我们的使命是确保通用人工智能惠及全人类。我们打造了 ChatGPT 和 Sora 等工具，旨在帮助人们学习、创作并解决问题。OpenAI（连同我们的关联公司，统称为“OpenAI”、“我们”或“我方”）重视您的隐私，并坚定致力于保障我们从您处获得或与您相关的任何信息的安全。本隐私政策阐明了当您使用我们的网站、应用程序和服务（统称为“服务”）时，我们如何收集与您相关的个人数据以及如何使用这些数据。\n本隐私政策不适用于我们代表商业产品客户（例如我们的 API 服务客户）处理的内容。我们对该数据的使用受相关客户协议约束，此类协议涵盖了对相关产品的访问及使用规则。\n有关我们如何收集和使用训练信息以开发驱动 ChatGPT 及其他服务的语言模型，以及您在这些信息方面可以作出的选择，请参阅本政策以及\n这篇帮助中心文章\n⁠\n（在新窗口中打开）\n。\n1. 我们收集的个人数据\n我们收集与您相关的个人数据（“个人数据”）如下：\n您提供的个人数据：\n我们会在您创建帐户以使用我们的服务或与我们沟通时收集个人数据，具体如下：\n账户信息\n：当您创建账户时，我们会收集与您的账户相关的信息，包括您的姓名、联系信息、账户凭据、出生日期、支付信息和交易历史记录（统称为“账户信息”）。我们的一些服务还允许您上传个人资料照片、用户名或其他信息，作为账户信息的一部分。\n用户内容：\n我们会收集您在向我们的服务提供输入时提交的个人数据（“内容”），包括您的提示以及您上传的其他内容，例如\n文件\n⁠\n（在新窗口中打开）\n、\n图片\n⁠\n（在新窗口中打开）\n、\n音频和视频\n⁠\n（在新窗口中打开）\n、\nSora 角色\n⁠\n（在新窗口中打开）\n，以及来自\n连接服务\n⁠\n（在新窗口中打开）\n的数据，具体取决于您使用的功能。我们的一些服务允许您与其他用户互动，例如发帖、评论或发送消息，我们也将这些互动视为内容的一部分。\n通信信息：",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/1/content",
+          "source_reference": "https://openai.com/zh-Hans-CN/policies/row-privacy-policy"
+        }
+      ],
+      "source_identity_information": "OpenAI 隐私政策原站",
+      "uncertainty_reason": "一手性只限此片段可证实的来源角色，不等于真实性或 authority 分数。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "NOT_PRIMARY_FOR_POLICY",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "evidence_ids": [
+        "ev_b08a10e340e4cca0"
+      ],
+      "flags": [
+        "EVIDENCE_STRENGTH_REVIEW"
+      ],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "evidence_strength",
+      "primary_source_status": "NOT_PRIMARY_FOR_POLICY",
+      "reasoning": "片段显示用户发帖身份；是质疑存在的一手帖子，不能当 OpenAI 对 DPA 的权威解释。",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-evidence_strength-002",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_b08a10e340e4cca0",
+          "exact_saved_evidence_excerpt": "API - Is our data really \"ours\"? Major Concern in Data Processing Addendum - Community - OpenAI Developer Community\nAPI - Is our data really \"ours\"? Major Concern in Data Processing Addendum\nCommunity\napi\n,\nprivacy\n,\nlegal\nnaferreira_7\nMay 22, 2024, 5:57pm\n1\nOpenAI clearly says that “\nWe do not train on your business data (data from ChatGPT Team, ChatGPT Enterprise, or our API Platform)\n”, and that “\nyou own your inputs and outputs\n”.\nHowever, in the data processing addendum at\nhttps://openai.com/policies/data-processing-addendum/\n, which regulates data processing for the API and ChatGPT Enterprise, there is a clause that says:\n“\nFor clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\n”",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/11/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        }
+      ],
+      "source_identity_information": "OpenAI Community 用户 naferreira_7 的帖子",
+      "uncertainty_reason": "一手性只限此片段可证实的来源角色，不等于真实性或 authority 分数。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "NOT_PRIMARY_FOR_POLICY",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "evidence_ids": [
+        "ev_d384aee29a4051c8"
+      ],
+      "flags": [
+        "EVIDENCE_STRENGTH_REVIEW"
+      ],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "evidence_strength",
+      "primary_source_status": "NOT_PRIMARY_FOR_POLICY",
+      "reasoning": "是社区解释而非官方政策；与原帖同 URL，不能当独立机构佐证。",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-evidence_strength-003",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_d384aee29a4051c8",
+          "exact_saved_evidence_excerpt": "For clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\nIn context, it looks like they’re talking about metadata that still exists after the data itself is deleted e.g. logs of request times, usage amounts, etc. I could be wrong, but the section it was a part of is relevant.\nlijianathome\nApril 7, 2025, 4:03am\n9\nSorry but I’d assume this has been a standard approach in the industry since Internet if not longer, whether end users or organizations like it or not? Or Im missing something obvious please?\nRelated topics\nTopic\nReplies\nViews\nActivity\nData Retention for Batches\nAPI\nbatch\n6\n2982\nMay 22, 2024\nContradiction between terms of use and policy docs\nAPI\n0\n3628\nJanuary 16, 2023\nIs OpenAI HIPAA-Compliant?",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/10/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        }
+      ],
+      "source_identity_information": "同一 OpenAI Community 讨论的回复片段",
+      "uncertainty_reason": "一手性只限此片段可证实的来源角色，不等于真实性或 authority 分数。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "UNRESOLVED",
+      "ambiguity_flag": true,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "evidence_ids": [
+        "ev_d2c625b8589d3de9"
+      ],
+      "flags": [
+        "EVIDENCE_STRENGTH_REVIEW"
+      ],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "evidence_strength",
+      "primary_source_status": "UNRESOLVED",
+      "reasoning": "标题虽称官方帮助文档中文版，但保存内容未建立镜像运营者或 OpenAI 授权；不据标题/域名外观认定一手。",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-evidence_strength-004",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "exact_saved_evidence_excerpt": "数据使用政策 | OpenAI 官方帮助文档中文版\n跳到主要内容\n本页总览\n数据使用政策\n从2023年3月1日开始，我们对数据使用和保留政策做出了两项更改：\n除非您明确决定与我们共享您的数据，否则OpenAI将不会使用通过我们的API提交的数据来训练或改进我们的模型。您可以选择选择加入以共享数据。\n通过API发送的任何数据将被保留用于滥用和误用监控目的，最长时间为30天，之后将被删除（除非法律另有规定）。\nOpenAI API处理用户提示和完成请求，以及通过“Files”端点提交的训练数据以微调模型。我们将此类数据称为API数据。\n默认情况下，OpenAI不会使用通过我们的API提交的数据来训练OpenAI模型或改善OpenAI的服务提供。用户提交的用于微调的数据仅用于微调客户的模型。但是，OpenAI将允许用户选择选择加入共享他们的数据以提高模型性能。共享您的数据将确保模型的未来迭代针对您的用例得到改进。在此更改生效之前的2023年3月1日之前通过API提交的数据，如果客户之前没有选择退出共享数据，则可能已用于改进。\nOpenAI为了滥用和误用监控目的保留API数据30天。少数经过授权的OpenAI员工以及受保密和安全义务约束的专业第三方承包商可以访问此数据，仅用于调查和验证涉嫌滥用行为。部署低误用可能性用例的企业客户可以请求根本不存储API数据，包括用于安全监控和预防。OpenAI仍可能有内容分类器标记涉嫌包含平台滥用的数据。例如，通过“Files”端点由用户提交的用于微调模型的数据将保留，直到用户删除该文件。\n请注意，此数据政策不适用于OpenAI的非API消费者服务，如ChatGPT或DALL·E实验室。您可以在我们的\n消费者服务数据使用FAQ\n中了解更多信息。\n常见问题解答\n​\nOpenAI的公共API拥有哪些技术保护和安全认证？\n​\nOpenAI符合SOC 2 Type 1标准，并已经通过独立第三方审核，符合2017年安全信托服务标准。\nAPI数据存储在哪里？\n​\n内容存储在OpenAI系统和我们的子处理器系统中。我们还可能向第三方承包商发送部分去标识化的内容（受保密和安全义务约束）以确保安全。我们的30天数据保留政策也适用于我们的子处理器和承包商。您可以查看我们的子处理器列表以了解其位置和详细信息。\n当我调用API时，数据是否在传输过程中加密？\n​",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/6/content",
+          "source_reference": "https://openai.xiniushu.com/policies/api-data-usage-policies"
+        }
+      ],
+      "source_identity_information": "openai.xiniushu.com 中文政策镜像",
+      "uncertainty_reason": "一手性只限此片段可证实的来源角色，不等于真实性或 authority 分数。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "PRIMARY",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "evidence_ids": [
+        "ev_2031367fc36e847d"
+      ],
+      "flags": [
+        "EVIDENCE_STRENGTH_REVIEW"
+      ],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "evidence_strength",
+      "primary_source_status": "PRIMARY",
+      "reasoning": "OpenAI 官方 developer 文档用 your data/our models 说明自身 API 控制；是自身规则的一手资料。",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-evidence_strength-005",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_2031367fc36e847d",
+          "exact_saved_evidence_excerpt": "Try ChatGPT\nCopy Page\nUnderstand how OpenAI uses your data, and how you can control it.\nYour data is your data. As of March 1, 2023, data sent to the OpenAI API is not used to train or improve OpenAI models (unless you explicitly opt in to share data with us).\nTypes of data stored with the OpenAI API\nWhen using the OpenAI API, data may be stored as:\nAbuse monitoring logs:\nLogs generated from your use of the platform, necessary for OpenAI to enforce our\nUsage Policies\nand agreements and mitigate harmful uses of AI.\nApplication state:\nData persisted from some API features in order to fulfill the task or request.\nData retention controls for abuse monitoring",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/19/content",
+          "source_reference": "https://developers.openai.com/api/docs/guides/your-data"
+        }
+      ],
+      "source_identity_information": "OpenAI developer 文档 Data controls",
+      "uncertainty_reason": "一手性只限此片段可证实的来源角色，不等于真实性或 authority 分数。"
+    }
+  ],
+  "freshness_review": [
+    {
+      "adjudication_note": null,
+      "age_at_cutoff_days": 211,
+      "ai_recommendation": "verified",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "benchmark_cutoff": "2026-09-05",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "date_evidence_location": "selected evidence content",
+      "event_date": null,
+      "evidence_ids": [
+        "ev_6f1b032c397627b6"
+      ],
+      "exact_date_evidence_excerpt": "Updated: 2026年2月6日",
+      "flags": [],
+      "freshness_mode": "contextual",
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "freshness",
+      "max_age_days": 365,
+      "publication_date": "2026-02-06",
+      "reasoning": "保存页头明确 Updated 日期，早于截止且在本类别 365 天窗口内。",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-freshness-001",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_6f1b032c397627b6",
+          "exact_saved_evidence_excerpt": "隐私政策 | OpenAI\nOpenAI\n输入语言\n…\nUpdated: 2026年2月6日\n隐私政策\n（\n先前版本\n⁠\n）\n如果您位于欧洲经济区、英国或瑞士，可以阅读\n此版本\n的隐私政策。如果您位于美国，可以阅读\n此版本\n的隐私政策。\n如果您位于韩国，请参阅\n韩国附录\n⁠\n。\n在 OpenAI，我们的使命是确保通用人工智能惠及全人类。我们打造了 ChatGPT 和 Sora 等工具，旨在帮助人们学习、创作并解决问题。OpenAI（连同我们的关联公司，统称为“OpenAI”、“我们”或“我方”）重视您的隐私，并坚定致力于保障我们从您处获得或与您相关的任何信息的安全。本隐私政策阐明了当您使用我们的网站、应用程序和服务（统称为“服务”）时，我们如何收集与您相关的个人数据以及如何使用这些数据。\n本隐私政策不适用于我们代表商业产品客户（例如我们的 API 服务客户）处理的内容。我们对该数据的使用受相关客户协议约束，此类协议涵盖了对相关产品的访问及使用规则。\n有关我们如何收集和使用训练信息以开发驱动 ChatGPT 及其他服务的语言模型，以及您在这些信息方面可以作出的选择，请参阅本政策以及\n这篇帮助中心文章\n⁠\n（在新窗口中打开）\n。\n1. 我们收集的个人数据\n我们收集与您相关的个人数据（“个人数据”）如下：\n您提供的个人数据：\n我们会在您创建帐户以使用我们的服务或与我们沟通时收集个人数据，具体如下：\n账户信息\n：当您创建账户时，我们会收集与您的账户相关的信息，包括您的姓名、联系信息、账户凭据、出生日期、支付信息和交易历史记录（统称为“账户信息”）。我们的一些服务还允许您上传个人资料照片、用户名或其他信息，作为账户信息的一部分。\n用户内容：\n我们会收集您在向我们的服务提供输入时提交的个人数据（“内容”），包括您的提示以及您上传的其他内容，例如\n文件\n⁠\n（在新窗口中打开）\n、\n图片\n⁠\n（在新窗口中打开）\n、\n音频和视频\n⁠\n（在新窗口中打开）\n、\nSora 角色\n⁠\n（在新窗口中打开）\n，以及来自\n连接服务\n⁠\n（在新窗口中打开）\n的数据，具体取决于您使用的功能。我们的一些服务允许您与其他用户互动，例如发帖、评论或发送消息，我们也将这些互动视为内容的一部分。\n通信信息：",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/1/content",
+          "source_reference": "https://openai.com/zh-Hans-CN/policies/row-privacy-policy"
+        }
+      ],
+      "source_identity_information": "OpenAI 隐私政策原站",
+      "uncertainty_reason": "需确认发布日期归属与冻结 freshness 模式。",
+      "within_age_window": true
+    },
+    {
+      "adjudication_note": null,
+      "age_at_cutoff_days": 836,
+      "ai_recommendation": "verified",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "benchmark_cutoff": "2026-09-05",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "date_evidence_location": "selected evidence content",
+      "event_date": null,
+      "evidence_ids": [
+        "ev_b08a10e340e4cca0"
+      ],
+      "exact_date_evidence_excerpt": "May 22, 2024, 5:57pm",
+      "flags": [],
+      "freshness_mode": "contextual",
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "freshness",
+      "max_age_days": 365,
+      "publication_date": "2024-05-22",
+      "reasoning": "原帖日期明确，早于截止；超过 factual_verification 的 365 天指导窗口，当前适用性另需人工确认。",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-freshness-002",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_b08a10e340e4cca0",
+          "exact_saved_evidence_excerpt": "API - Is our data really \"ours\"? Major Concern in Data Processing Addendum - Community - OpenAI Developer Community\nAPI - Is our data really \"ours\"? Major Concern in Data Processing Addendum\nCommunity\napi\n,\nprivacy\n,\nlegal\nnaferreira_7\nMay 22, 2024, 5:57pm\n1\nOpenAI clearly says that “\nWe do not train on your business data (data from ChatGPT Team, ChatGPT Enterprise, or our API Platform)\n”, and that “\nyou own your inputs and outputs\n”.\nHowever, in the data processing addendum at\nhttps://openai.com/policies/data-processing-addendum/\n, which regulates data processing for the API and ChatGPT Enterprise, there is a clause that says:\n“\nFor clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\n”",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/11/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        }
+      ],
+      "source_identity_information": "OpenAI Community 用户 naferreira_7 的帖子",
+      "uncertainty_reason": "需确认发布日期归属与冻结 freshness 模式。",
+      "within_age_window": false
+    },
+    {
+      "adjudication_note": null,
+      "age_at_cutoff_days": null,
+      "ai_recommendation": "unverified",
+      "ambiguity_flag": true,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "benchmark_cutoff": "2026-09-05",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "date_evidence_location": "selected evidence content",
+      "event_date": null,
+      "evidence_ids": [
+        "ev_d384aee29a4051c8"
+      ],
+      "exact_date_evidence_excerpt": null,
+      "flags": [
+        "FRESHNESS_UNVERIFIED"
+      ],
+      "freshness_mode": "contextual",
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "freshness",
+      "max_age_days": 365,
+      "publication_date": null,
+      "reasoning": "片段的 April 7, 2025 位于后续 lijianathome 回复，不可安全归给前方引文；不伪造发布日期。",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-freshness-003",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_d384aee29a4051c8",
+          "exact_saved_evidence_excerpt": "For clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\nIn context, it looks like they’re talking about metadata that still exists after the data itself is deleted e.g. logs of request times, usage amounts, etc. I could be wrong, but the section it was a part of is relevant.\nlijianathome\nApril 7, 2025, 4:03am\n9\nSorry but I’d assume this has been a standard approach in the industry since Internet if not longer, whether end users or organizations like it or not? Or Im missing something obvious please?\nRelated topics\nTopic\nReplies\nViews\nActivity\nData Retention for Batches\nAPI\nbatch\n6\n2982\nMay 22, 2024\nContradiction between terms of use and policy docs\nAPI\n0\n3628\nJanuary 16, 2023\nIs OpenAI HIPAA-Compliant?",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/10/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        }
+      ],
+      "source_identity_information": "同一 OpenAI Community 讨论的回复片段",
+      "uncertainty_reason": "需确认发布日期归属与冻结 freshness 模式。",
+      "within_age_window": null
+    },
+    {
+      "adjudication_note": null,
+      "age_at_cutoff_days": null,
+      "ai_recommendation": "unverified",
+      "ambiguity_flag": true,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "benchmark_cutoff": "2026-09-05",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "date_evidence_location": "selected evidence content",
+      "event_date": null,
+      "evidence_ids": [
+        "ev_d2c625b8589d3de9"
+      ],
+      "exact_date_evidence_excerpt": null,
+      "flags": [
+        "FRESHNESS_UNVERIFIED"
+      ],
+      "freshness_mode": "contextual",
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "freshness",
+      "max_age_days": 365,
+      "publication_date": null,
+      "reasoning": "保存片段没有可明确归属于此页面/引用的发布日期。访问时间不是发布日期；事件日期不能代替发布日期。",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-freshness-004",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "exact_saved_evidence_excerpt": "数据使用政策 | OpenAI 官方帮助文档中文版\n跳到主要内容\n本页总览\n数据使用政策\n从2023年3月1日开始，我们对数据使用和保留政策做出了两项更改：\n除非您明确决定与我们共享您的数据，否则OpenAI将不会使用通过我们的API提交的数据来训练或改进我们的模型。您可以选择选择加入以共享数据。\n通过API发送的任何数据将被保留用于滥用和误用监控目的，最长时间为30天，之后将被删除（除非法律另有规定）。\nOpenAI API处理用户提示和完成请求，以及通过“Files”端点提交的训练数据以微调模型。我们将此类数据称为API数据。\n默认情况下，OpenAI不会使用通过我们的API提交的数据来训练OpenAI模型或改善OpenAI的服务提供。用户提交的用于微调的数据仅用于微调客户的模型。但是，OpenAI将允许用户选择选择加入共享他们的数据以提高模型性能。共享您的数据将确保模型的未来迭代针对您的用例得到改进。在此更改生效之前的2023年3月1日之前通过API提交的数据，如果客户之前没有选择退出共享数据，则可能已用于改进。\nOpenAI为了滥用和误用监控目的保留API数据30天。少数经过授权的OpenAI员工以及受保密和安全义务约束的专业第三方承包商可以访问此数据，仅用于调查和验证涉嫌滥用行为。部署低误用可能性用例的企业客户可以请求根本不存储API数据，包括用于安全监控和预防。OpenAI仍可能有内容分类器标记涉嫌包含平台滥用的数据。例如，通过“Files”端点由用户提交的用于微调模型的数据将保留，直到用户删除该文件。\n请注意，此数据政策不适用于OpenAI的非API消费者服务，如ChatGPT或DALL·E实验室。您可以在我们的\n消费者服务数据使用FAQ\n中了解更多信息。\n常见问题解答\n​\nOpenAI的公共API拥有哪些技术保护和安全认证？\n​\nOpenAI符合SOC 2 Type 1标准，并已经通过独立第三方审核，符合2017年安全信托服务标准。\nAPI数据存储在哪里？\n​\n内容存储在OpenAI系统和我们的子处理器系统中。我们还可能向第三方承包商发送部分去标识化的内容（受保密和安全义务约束）以确保安全。我们的30天数据保留政策也适用于我们的子处理器和承包商。您可以查看我们的子处理器列表以了解其位置和详细信息。\n当我调用API时，数据是否在传输过程中加密？\n​",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/6/content",
+          "source_reference": "https://openai.xiniushu.com/policies/api-data-usage-policies"
+        }
+      ],
+      "source_identity_information": "openai.xiniushu.com 中文政策镜像",
+      "uncertainty_reason": "需确认发布日期归属与冻结 freshness 模式。",
+      "within_age_window": null
+    },
+    {
+      "adjudication_note": null,
+      "age_at_cutoff_days": null,
+      "ai_recommendation": "unverified",
+      "ambiguity_flag": true,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "benchmark_cutoff": "2026-09-05",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "date_evidence_location": "selected evidence content",
+      "event_date": null,
+      "evidence_ids": [
+        "ev_2031367fc36e847d"
+      ],
+      "exact_date_evidence_excerpt": null,
+      "flags": [
+        "FRESHNESS_UNVERIFIED"
+      ],
+      "freshness_mode": "contextual",
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "freshness",
+      "max_age_days": 365,
+      "publication_date": null,
+      "reasoning": "March 1, 2023 是政策生效事件日期，不是当前文档发布日期；当前页日期仍未核实。",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-freshness-005",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_2031367fc36e847d",
+          "exact_saved_evidence_excerpt": "Try ChatGPT\nCopy Page\nUnderstand how OpenAI uses your data, and how you can control it.\nYour data is your data. As of March 1, 2023, data sent to the OpenAI API is not used to train or improve OpenAI models (unless you explicitly opt in to share data with us).\nTypes of data stored with the OpenAI API\nWhen using the OpenAI API, data may be stored as:\nAbuse monitoring logs:\nLogs generated from your use of the platform, necessary for OpenAI to enforce our\nUsage Policies\nand agreements and mitigate harmful uses of AI.\nApplication state:\nData persisted from some API features in order to fulfill the task or request.\nData retention controls for abuse monitoring",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/19/content",
+          "source_reference": "https://developers.openai.com/api/docs/guides/your-data"
+        }
+      ],
+      "source_identity_information": "OpenAI developer 文档 Data controls",
+      "uncertainty_reason": "需确认发布日期归属与冻结 freshness 模式。",
+      "within_age_window": null
+    }
+  ],
+  "high_risk_review": [
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "UNRESOLVED",
+      "ambiguity_flag": true,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "applicable_minimum_rules": [
+        "conflict_sides_plus_adjudicator"
+      ],
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "claim_review_id": "EIV2_FV_001-C003",
+      "combination_rule": "union_without_weakening",
+      "evidence_ids": [
+        "ev_b08a10e340e4cca0",
+        "ev_d384aee29a4051c8",
+        "ev_d2c625b8589d3de9",
+        "ev_2031367fc36e847d"
+      ],
+      "exact_parent_report_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务;该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+      "exact_report_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务",
+      "flags": [
+        "HIGH_RISK_REVIEW"
+      ],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "high_risk",
+      "observed_risk_types": [
+        "conflict_sensitive_claim"
+      ],
+      "reasoning": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+      "report_span": [
+        216,
+        288
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-high_risk-001",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_b08a10e340e4cca0",
+          "exact_saved_evidence_excerpt": "API - Is our data really \"ours\"? Major Concern in Data Processing Addendum - Community - OpenAI Developer Community\nAPI - Is our data really \"ours\"? Major Concern in Data Processing Addendum\nCommunity\napi\n,\nprivacy\n,\nlegal\nnaferreira_7\nMay 22, 2024, 5:57pm\n1\nOpenAI clearly says that “\nWe do not train on your business data (data from ChatGPT Team, ChatGPT Enterprise, or our API Platform)\n”, and that “\nyou own your inputs and outputs\n”.\nHowever, in the data processing addendum at\nhttps://openai.com/policies/data-processing-addendum/\n, which regulates data processing for the API and ChatGPT Enterprise, there is a clause that says:\n“\nFor clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\n”",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/11/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        },
+        {
+          "evidence_id": "ev_d384aee29a4051c8",
+          "exact_saved_evidence_excerpt": "For clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\nIn context, it looks like they’re talking about metadata that still exists after the data itself is deleted e.g. logs of request times, usage amounts, etc. I could be wrong, but the section it was a part of is relevant.\nlijianathome\nApril 7, 2025, 4:03am\n9\nSorry but I’d assume this has been a standard approach in the industry since Internet if not longer, whether end users or organizations like it or not? Or Im missing something obvious please?\nRelated topics\nTopic\nReplies\nViews\nActivity\nData Retention for Batches\nAPI\nbatch\n6\n2982\nMay 22, 2024\nContradiction between terms of use and policy docs\nAPI\n0\n3628\nJanuary 16, 2023\nIs OpenAI HIPAA-Compliant?",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/10/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        },
+        {
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "exact_saved_evidence_excerpt": "数据使用政策 | OpenAI 官方帮助文档中文版\n跳到主要内容\n本页总览\n数据使用政策\n从2023年3月1日开始，我们对数据使用和保留政策做出了两项更改：\n除非您明确决定与我们共享您的数据，否则OpenAI将不会使用通过我们的API提交的数据来训练或改进我们的模型。您可以选择选择加入以共享数据。\n通过API发送的任何数据将被保留用于滥用和误用监控目的，最长时间为30天，之后将被删除（除非法律另有规定）。\nOpenAI API处理用户提示和完成请求，以及通过“Files”端点提交的训练数据以微调模型。我们将此类数据称为API数据。\n默认情况下，OpenAI不会使用通过我们的API提交的数据来训练OpenAI模型或改善OpenAI的服务提供。用户提交的用于微调的数据仅用于微调客户的模型。但是，OpenAI将允许用户选择选择加入共享他们的数据以提高模型性能。共享您的数据将确保模型的未来迭代针对您的用例得到改进。在此更改生效之前的2023年3月1日之前通过API提交的数据，如果客户之前没有选择退出共享数据，则可能已用于改进。\nOpenAI为了滥用和误用监控目的保留API数据30天。少数经过授权的OpenAI员工以及受保密和安全义务约束的专业第三方承包商可以访问此数据，仅用于调查和验证涉嫌滥用行为。部署低误用可能性用例的企业客户可以请求根本不存储API数据，包括用于安全监控和预防。OpenAI仍可能有内容分类器标记涉嫌包含平台滥用的数据。例如，通过“Files”端点由用户提交的用于微调模型的数据将保留，直到用户删除该文件。\n请注意，此数据政策不适用于OpenAI的非API消费者服务，如ChatGPT或DALL·E实验室。您可以在我们的\n消费者服务数据使用FAQ\n中了解更多信息。\n常见问题解答\n​\nOpenAI的公共API拥有哪些技术保护和安全认证？\n​\nOpenAI符合SOC 2 Type 1标准，并已经通过独立第三方审核，符合2017年安全信托服务标准。\nAPI数据存储在哪里？\n​\n内容存储在OpenAI系统和我们的子处理器系统中。我们还可能向第三方承包商发送部分去标识化的内容（受保密和安全义务约束）以确保安全。我们的30天数据保留政策也适用于我们的子处理器和承包商。您可以查看我们的子处理器列表以了解其位置和详细信息。\n当我调用API时，数据是否在传输过程中加密？\n​",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/6/content",
+          "source_reference": "https://openai.xiniushu.com/policies/api-data-usage-policies"
+        },
+        {
+          "evidence_id": "ev_2031367fc36e847d",
+          "exact_saved_evidence_excerpt": "Try ChatGPT\nCopy Page\nUnderstand how OpenAI uses your data, and how you can control it.\nYour data is your data. As of March 1, 2023, data sent to the OpenAI API is not used to train or improve OpenAI models (unless you explicitly opt in to share data with us).\nTypes of data stored with the OpenAI API\nWhen using the OpenAI API, data may be stored as:\nAbuse monitoring logs:\nLogs generated from your use of the platform, necessary for OpenAI to enforce our\nUsage Policies\nand agreements and mitigate harmful uses of AI.\nApplication state:\nData persisted from some API features in order to fulfill the task or request.\nData retention controls for abuse monitoring",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/19/content",
+          "source_reference": "https://developers.openai.com/api/docs/guides/your-data"
+        }
+      ],
+      "uncertainty_reason": "适格的一手/独立来源或冲突裁定材料仍须人工确认。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "UNRESOLVED",
+      "ambiguity_flag": true,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "applicable_minimum_rules": [
+        "conflict_sides_plus_adjudicator"
+      ],
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "claim_review_id": "EIV2_FV_001-C004",
+      "combination_rule": "union_without_weakening",
+      "evidence_ids": [
+        "ev_b08a10e340e4cca0",
+        "ev_d384aee29a4051c8",
+        "ev_d2c625b8589d3de9",
+        "ev_2031367fc36e847d"
+      ],
+      "exact_parent_report_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务;该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+      "exact_report_text": "该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+      "flags": [
+        "HIGH_RISK_REVIEW"
+      ],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "high_risk",
+      "observed_risk_types": [
+        "conflict_sensitive_claim"
+      ],
+      "reasoning": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+      "report_span": [
+        289,
+        320
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-high_risk-002",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_b08a10e340e4cca0",
+          "exact_saved_evidence_excerpt": "API - Is our data really \"ours\"? Major Concern in Data Processing Addendum - Community - OpenAI Developer Community\nAPI - Is our data really \"ours\"? Major Concern in Data Processing Addendum\nCommunity\napi\n,\nprivacy\n,\nlegal\nnaferreira_7\nMay 22, 2024, 5:57pm\n1\nOpenAI clearly says that “\nWe do not train on your business data (data from ChatGPT Team, ChatGPT Enterprise, or our API Platform)\n”, and that “\nyou own your inputs and outputs\n”.\nHowever, in the data processing addendum at\nhttps://openai.com/policies/data-processing-addendum/\n, which regulates data processing for the API and ChatGPT Enterprise, there is a clause that says:\n“\nFor clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\n”",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/11/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        },
+        {
+          "evidence_id": "ev_d384aee29a4051c8",
+          "exact_saved_evidence_excerpt": "For clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\nIn context, it looks like they’re talking about metadata that still exists after the data itself is deleted e.g. logs of request times, usage amounts, etc. I could be wrong, but the section it was a part of is relevant.\nlijianathome\nApril 7, 2025, 4:03am\n9\nSorry but I’d assume this has been a standard approach in the industry since Internet if not longer, whether end users or organizations like it or not? Or Im missing something obvious please?\nRelated topics\nTopic\nReplies\nViews\nActivity\nData Retention for Batches\nAPI\nbatch\n6\n2982\nMay 22, 2024\nContradiction between terms of use and policy docs\nAPI\n0\n3628\nJanuary 16, 2023\nIs OpenAI HIPAA-Compliant?",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/10/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        },
+        {
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "exact_saved_evidence_excerpt": "数据使用政策 | OpenAI 官方帮助文档中文版\n跳到主要内容\n本页总览\n数据使用政策\n从2023年3月1日开始，我们对数据使用和保留政策做出了两项更改：\n除非您明确决定与我们共享您的数据，否则OpenAI将不会使用通过我们的API提交的数据来训练或改进我们的模型。您可以选择选择加入以共享数据。\n通过API发送的任何数据将被保留用于滥用和误用监控目的，最长时间为30天，之后将被删除（除非法律另有规定）。\nOpenAI API处理用户提示和完成请求，以及通过“Files”端点提交的训练数据以微调模型。我们将此类数据称为API数据。\n默认情况下，OpenAI不会使用通过我们的API提交的数据来训练OpenAI模型或改善OpenAI的服务提供。用户提交的用于微调的数据仅用于微调客户的模型。但是，OpenAI将允许用户选择选择加入共享他们的数据以提高模型性能。共享您的数据将确保模型的未来迭代针对您的用例得到改进。在此更改生效之前的2023年3月1日之前通过API提交的数据，如果客户之前没有选择退出共享数据，则可能已用于改进。\nOpenAI为了滥用和误用监控目的保留API数据30天。少数经过授权的OpenAI员工以及受保密和安全义务约束的专业第三方承包商可以访问此数据，仅用于调查和验证涉嫌滥用行为。部署低误用可能性用例的企业客户可以请求根本不存储API数据，包括用于安全监控和预防。OpenAI仍可能有内容分类器标记涉嫌包含平台滥用的数据。例如，通过“Files”端点由用户提交的用于微调模型的数据将保留，直到用户删除该文件。\n请注意，此数据政策不适用于OpenAI的非API消费者服务，如ChatGPT或DALL·E实验室。您可以在我们的\n消费者服务数据使用FAQ\n中了解更多信息。\n常见问题解答\n​\nOpenAI的公共API拥有哪些技术保护和安全认证？\n​\nOpenAI符合SOC 2 Type 1标准，并已经通过独立第三方审核，符合2017年安全信托服务标准。\nAPI数据存储在哪里？\n​\n内容存储在OpenAI系统和我们的子处理器系统中。我们还可能向第三方承包商发送部分去标识化的内容（受保密和安全义务约束）以确保安全。我们的30天数据保留政策也适用于我们的子处理器和承包商。您可以查看我们的子处理器列表以了解其位置和详细信息。\n当我调用API时，数据是否在传输过程中加密？\n​",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/6/content",
+          "source_reference": "https://openai.xiniushu.com/policies/api-data-usage-policies"
+        },
+        {
+          "evidence_id": "ev_2031367fc36e847d",
+          "exact_saved_evidence_excerpt": "Try ChatGPT\nCopy Page\nUnderstand how OpenAI uses your data, and how you can control it.\nYour data is your data. As of March 1, 2023, data sent to the OpenAI API is not used to train or improve OpenAI models (unless you explicitly opt in to share data with us).\nTypes of data stored with the OpenAI API\nWhen using the OpenAI API, data may be stored as:\nAbuse monitoring logs:\nLogs generated from your use of the platform, necessary for OpenAI to enforce our\nUsage Policies\nand agreements and mitigate harmful uses of AI.\nApplication state:\nData persisted from some API features in order to fulfill the task or request.\nData retention controls for abuse monitoring",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/19/content",
+          "source_reference": "https://developers.openai.com/api/docs/guides/your-data"
+        }
+      ],
+      "uncertainty_reason": "适格的一手/独立来源或冲突裁定材料仍须人工确认。"
+    }
+  ],
+  "human_review_status": "PENDING",
+  "independence_review": [
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "SAME_SOURCE_GROUP",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "editorial_control_information": null,
+      "evidence_ids": [
+        "ev_6f1b032c397627b6"
+      ],
+      "flags": [],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "independence",
+      "proposed_independence_grouping": "OpenAI",
+      "reasoning": "使用内容身份与来源角色建议分组；同一页面的多个 chunk 不重复计为独立来源。不同域名本身不证明独立性。openai.com 原站标题和以‘我们’说明自身政策的内容一致；只对自身隐私政策一手。",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-independence-001",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_6f1b032c397627b6",
+          "exact_saved_evidence_excerpt": "隐私政策 | OpenAI\nOpenAI\n输入语言\n…\nUpdated: 2026年2月6日\n隐私政策\n（\n先前版本\n⁠\n）\n如果您位于欧洲经济区、英国或瑞士，可以阅读\n此版本\n的隐私政策。如果您位于美国，可以阅读\n此版本\n的隐私政策。\n如果您位于韩国，请参阅\n韩国附录\n⁠\n。\n在 OpenAI，我们的使命是确保通用人工智能惠及全人类。我们打造了 ChatGPT 和 Sora 等工具，旨在帮助人们学习、创作并解决问题。OpenAI（连同我们的关联公司，统称为“OpenAI”、“我们”或“我方”）重视您的隐私，并坚定致力于保障我们从您处获得或与您相关的任何信息的安全。本隐私政策阐明了当您使用我们的网站、应用程序和服务（统称为“服务”）时，我们如何收集与您相关的个人数据以及如何使用这些数据。\n本隐私政策不适用于我们代表商业产品客户（例如我们的 API 服务客户）处理的内容。我们对该数据的使用受相关客户协议约束，此类协议涵盖了对相关产品的访问及使用规则。\n有关我们如何收集和使用训练信息以开发驱动 ChatGPT 及其他服务的语言模型，以及您在这些信息方面可以作出的选择，请参阅本政策以及\n这篇帮助中心文章\n⁠\n（在新窗口中打开）\n。\n1. 我们收集的个人数据\n我们收集与您相关的个人数据（“个人数据”）如下：\n您提供的个人数据：\n我们会在您创建帐户以使用我们的服务或与我们沟通时收集个人数据，具体如下：\n账户信息\n：当您创建账户时，我们会收集与您的账户相关的信息，包括您的姓名、联系信息、账户凭据、出生日期、支付信息和交易历史记录（统称为“账户信息”）。我们的一些服务还允许您上传个人资料照片、用户名或其他信息，作为账户信息的一部分。\n用户内容：\n我们会收集您在向我们的服务提供输入时提交的个人数据（“内容”），包括您的提示以及您上传的其他内容，例如\n文件\n⁠\n（在新窗口中打开）\n、\n图片\n⁠\n（在新窗口中打开）\n、\n音频和视频\n⁠\n（在新窗口中打开）\n、\nSora 角色\n⁠\n（在新窗口中打开）\n，以及来自\n连接服务\n⁠\n（在新窗口中打开）\n的数据，具体取决于您使用的功能。我们的一些服务允许您与其他用户互动，例如发帖、评论或发送消息，我们也将这些互动视为内容的一部分。\n通信信息：",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/1/content",
+          "source_reference": "https://openai.com/zh-Hans-CN/policies/row-privacy-policy"
+        }
+      ],
+      "source_identity_information": "OpenAI 隐私政策原站",
+      "source_producing_organization": "OpenAI",
+      "uncertainty_reason": "组内去重可确认，跨组独立性仍需人工审核。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "UNRESOLVED",
+      "ambiguity_flag": true,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "editorial_control_information": null,
+      "evidence_ids": [
+        "ev_b08a10e340e4cca0"
+      ],
+      "flags": [
+        "INDEPENDENCE_UNRESOLVED"
+      ],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "independence",
+      "proposed_independence_grouping": null,
+      "reasoning": "使用内容身份与来源角色建议分组；同一页面的多个 chunk 不重复计为独立来源。不同域名本身不证明独立性。片段显示用户发帖身份；是质疑存在的一手帖子，不能当 OpenAI 对 DPA 的权威解释。",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-independence-002",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_b08a10e340e4cca0",
+          "exact_saved_evidence_excerpt": "API - Is our data really \"ours\"? Major Concern in Data Processing Addendum - Community - OpenAI Developer Community\nAPI - Is our data really \"ours\"? Major Concern in Data Processing Addendum\nCommunity\napi\n,\nprivacy\n,\nlegal\nnaferreira_7\nMay 22, 2024, 5:57pm\n1\nOpenAI clearly says that “\nWe do not train on your business data (data from ChatGPT Team, ChatGPT Enterprise, or our API Platform)\n”, and that “\nyou own your inputs and outputs\n”.\nHowever, in the data processing addendum at\nhttps://openai.com/policies/data-processing-addendum/\n, which regulates data processing for the API and ChatGPT Enterprise, there is a clause that says:\n“\nFor clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\n”",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/11/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        }
+      ],
+      "source_identity_information": "OpenAI Community 用户 naferreira_7 的帖子",
+      "source_producing_organization": null,
+      "uncertainty_reason": "未证实跨组织独立编辑控制。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "UNRESOLVED",
+      "ambiguity_flag": true,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "editorial_control_information": null,
+      "evidence_ids": [
+        "ev_d384aee29a4051c8"
+      ],
+      "flags": [
+        "INDEPENDENCE_UNRESOLVED"
+      ],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "independence",
+      "proposed_independence_grouping": null,
+      "reasoning": "使用内容身份与来源角色建议分组；同一页面的多个 chunk 不重复计为独立来源。不同域名本身不证明独立性。是社区解释而非官方政策；与原帖同 URL，不能当独立机构佐证。",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-independence-003",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_d384aee29a4051c8",
+          "exact_saved_evidence_excerpt": "For clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\nIn context, it looks like they’re talking about metadata that still exists after the data itself is deleted e.g. logs of request times, usage amounts, etc. I could be wrong, but the section it was a part of is relevant.\nlijianathome\nApril 7, 2025, 4:03am\n9\nSorry but I’d assume this has been a standard approach in the industry since Internet if not longer, whether end users or organizations like it or not? Or Im missing something obvious please?\nRelated topics\nTopic\nReplies\nViews\nActivity\nData Retention for Batches\nAPI\nbatch\n6\n2982\nMay 22, 2024\nContradiction between terms of use and policy docs\nAPI\n0\n3628\nJanuary 16, 2023\nIs OpenAI HIPAA-Compliant?",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/10/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        }
+      ],
+      "source_identity_information": "同一 OpenAI Community 讨论的回复片段",
+      "source_producing_organization": null,
+      "uncertainty_reason": "未证实跨组织独立编辑控制。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "UNRESOLVED",
+      "ambiguity_flag": true,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "editorial_control_information": null,
+      "evidence_ids": [
+        "ev_d2c625b8589d3de9"
+      ],
+      "flags": [
+        "INDEPENDENCE_UNRESOLVED"
+      ],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "independence",
+      "proposed_independence_grouping": null,
+      "reasoning": "使用内容身份与来源角色建议分组；同一页面的多个 chunk 不重复计为独立来源。不同域名本身不证明独立性。标题虽称官方帮助文档中文版，但保存内容未建立镜像运营者或 OpenAI 授权；不据标题/域名外观认定一手。",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-independence-004",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "exact_saved_evidence_excerpt": "数据使用政策 | OpenAI 官方帮助文档中文版\n跳到主要内容\n本页总览\n数据使用政策\n从2023年3月1日开始，我们对数据使用和保留政策做出了两项更改：\n除非您明确决定与我们共享您的数据，否则OpenAI将不会使用通过我们的API提交的数据来训练或改进我们的模型。您可以选择选择加入以共享数据。\n通过API发送的任何数据将被保留用于滥用和误用监控目的，最长时间为30天，之后将被删除（除非法律另有规定）。\nOpenAI API处理用户提示和完成请求，以及通过“Files”端点提交的训练数据以微调模型。我们将此类数据称为API数据。\n默认情况下，OpenAI不会使用通过我们的API提交的数据来训练OpenAI模型或改善OpenAI的服务提供。用户提交的用于微调的数据仅用于微调客户的模型。但是，OpenAI将允许用户选择选择加入共享他们的数据以提高模型性能。共享您的数据将确保模型的未来迭代针对您的用例得到改进。在此更改生效之前的2023年3月1日之前通过API提交的数据，如果客户之前没有选择退出共享数据，则可能已用于改进。\nOpenAI为了滥用和误用监控目的保留API数据30天。少数经过授权的OpenAI员工以及受保密和安全义务约束的专业第三方承包商可以访问此数据，仅用于调查和验证涉嫌滥用行为。部署低误用可能性用例的企业客户可以请求根本不存储API数据，包括用于安全监控和预防。OpenAI仍可能有内容分类器标记涉嫌包含平台滥用的数据。例如，通过“Files”端点由用户提交的用于微调模型的数据将保留，直到用户删除该文件。\n请注意，此数据政策不适用于OpenAI的非API消费者服务，如ChatGPT或DALL·E实验室。您可以在我们的\n消费者服务数据使用FAQ\n中了解更多信息。\n常见问题解答\n​\nOpenAI的公共API拥有哪些技术保护和安全认证？\n​\nOpenAI符合SOC 2 Type 1标准，并已经通过独立第三方审核，符合2017年安全信托服务标准。\nAPI数据存储在哪里？\n​\n内容存储在OpenAI系统和我们的子处理器系统中。我们还可能向第三方承包商发送部分去标识化的内容（受保密和安全义务约束）以确保安全。我们的30天数据保留政策也适用于我们的子处理器和承包商。您可以查看我们的子处理器列表以了解其位置和详细信息。\n当我调用API时，数据是否在传输过程中加密？\n​",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/6/content",
+          "source_reference": "https://openai.xiniushu.com/policies/api-data-usage-policies"
+        }
+      ],
+      "source_identity_information": "openai.xiniushu.com 中文政策镜像",
+      "source_producing_organization": null,
+      "uncertainty_reason": "未证实跨组织独立编辑控制。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "SAME_SOURCE_GROUP",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "editorial_control_information": null,
+      "evidence_ids": [
+        "ev_2031367fc36e847d"
+      ],
+      "flags": [],
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "independence",
+      "proposed_independence_grouping": "OpenAI",
+      "reasoning": "使用内容身份与来源角色建议分组；同一页面的多个 chunk 不重复计为独立来源。不同域名本身不证明独立性。OpenAI 官方 developer 文档用 your data/our models 说明自身 API 控制；是自身规则的一手资料。",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-independence-005",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_2031367fc36e847d",
+          "exact_saved_evidence_excerpt": "Try ChatGPT\nCopy Page\nUnderstand how OpenAI uses your data, and how you can control it.\nYour data is your data. As of March 1, 2023, data sent to the OpenAI API is not used to train or improve OpenAI models (unless you explicitly opt in to share data with us).\nTypes of data stored with the OpenAI API\nWhen using the OpenAI API, data may be stored as:\nAbuse monitoring logs:\nLogs generated from your use of the platform, necessary for OpenAI to enforce our\nUsage Policies\nand agreements and mitigate harmful uses of AI.\nApplication state:\nData persisted from some API features in order to fulfill the task or request.\nData retention controls for abuse monitoring",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/19/content",
+          "source_reference": "https://developers.openai.com/api/docs/guides/your-data"
+        }
+      ],
+      "source_identity_information": "OpenAI developer 文档 Data controls",
+      "source_producing_organization": "OpenAI",
+      "uncertainty_reason": "组内去重可确认，跨组独立性仍需人工审核。"
+    }
+  ],
+  "required_unit_review": [
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "UNCERTAIN",
+      "ambiguity_flag": true,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "evidence_ids": [
+        "ev_b08a10e340e4cca0",
+        "ev_d384aee29a4051c8",
+        "ev_d2c625b8589d3de9",
+        "ev_2031367fc36e847d"
+      ],
+      "exact_report_text": "该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+      "exact_required_unit_text": "默认训练用途政策",
+      "flags": [
+        "REQUIRED_UNIT_REVIEW"
+      ],
+      "frozen_required_unit": {
+        "description": "默认训练用途政策",
+        "evidence_strength_rule": "primary_or_two_independent",
+        "high_risk_types": [
+          "release_status_availability"
+        ],
+        "id": "training_default"
+      },
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "required_unit",
+      "reasoning": "正文仅在被限定的争议句中提到默认不训练；官方片段支持默认规则，但报告缺少直接明确的默认政策陈述。人工裁定该隐含提及是否满足完整 Required Unit，不能自动计分。",
+      "report_span": [
+        289,
+        320
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "required_unit_id": "training_default",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-required_unit-001",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_b08a10e340e4cca0",
+          "exact_saved_evidence_excerpt": "API - Is our data really \"ours\"? Major Concern in Data Processing Addendum - Community - OpenAI Developer Community\nAPI - Is our data really \"ours\"? Major Concern in Data Processing Addendum\nCommunity\napi\n,\nprivacy\n,\nlegal\nnaferreira_7\nMay 22, 2024, 5:57pm\n1\nOpenAI clearly says that “\nWe do not train on your business data (data from ChatGPT Team, ChatGPT Enterprise, or our API Platform)\n”, and that “\nyou own your inputs and outputs\n”.\nHowever, in the data processing addendum at\nhttps://openai.com/policies/data-processing-addendum/\n, which regulates data processing for the API and ChatGPT Enterprise, there is a clause that says:\n“\nFor clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\n”",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/11/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        },
+        {
+          "evidence_id": "ev_d384aee29a4051c8",
+          "exact_saved_evidence_excerpt": "For clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\nIn context, it looks like they’re talking about metadata that still exists after the data itself is deleted e.g. logs of request times, usage amounts, etc. I could be wrong, but the section it was a part of is relevant.\nlijianathome\nApril 7, 2025, 4:03am\n9\nSorry but I’d assume this has been a standard approach in the industry since Internet if not longer, whether end users or organizations like it or not? Or Im missing something obvious please?\nRelated topics\nTopic\nReplies\nViews\nActivity\nData Retention for Batches\nAPI\nbatch\n6\n2982\nMay 22, 2024\nContradiction between terms of use and policy docs\nAPI\n0\n3628\nJanuary 16, 2023\nIs OpenAI HIPAA-Compliant?",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/10/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        },
+        {
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "exact_saved_evidence_excerpt": "数据使用政策 | OpenAI 官方帮助文档中文版\n跳到主要内容\n本页总览\n数据使用政策\n从2023年3月1日开始，我们对数据使用和保留政策做出了两项更改：\n除非您明确决定与我们共享您的数据，否则OpenAI将不会使用通过我们的API提交的数据来训练或改进我们的模型。您可以选择选择加入以共享数据。\n通过API发送的任何数据将被保留用于滥用和误用监控目的，最长时间为30天，之后将被删除（除非法律另有规定）。\nOpenAI API处理用户提示和完成请求，以及通过“Files”端点提交的训练数据以微调模型。我们将此类数据称为API数据。\n默认情况下，OpenAI不会使用通过我们的API提交的数据来训练OpenAI模型或改善OpenAI的服务提供。用户提交的用于微调的数据仅用于微调客户的模型。但是，OpenAI将允许用户选择选择加入共享他们的数据以提高模型性能。共享您的数据将确保模型的未来迭代针对您的用例得到改进。在此更改生效之前的2023年3月1日之前通过API提交的数据，如果客户之前没有选择退出共享数据，则可能已用于改进。\nOpenAI为了滥用和误用监控目的保留API数据30天。少数经过授权的OpenAI员工以及受保密和安全义务约束的专业第三方承包商可以访问此数据，仅用于调查和验证涉嫌滥用行为。部署低误用可能性用例的企业客户可以请求根本不存储API数据，包括用于安全监控和预防。OpenAI仍可能有内容分类器标记涉嫌包含平台滥用的数据。例如，通过“Files”端点由用户提交的用于微调模型的数据将保留，直到用户删除该文件。\n请注意，此数据政策不适用于OpenAI的非API消费者服务，如ChatGPT或DALL·E实验室。您可以在我们的\n消费者服务数据使用FAQ\n中了解更多信息。\n常见问题解答\n​\nOpenAI的公共API拥有哪些技术保护和安全认证？\n​\nOpenAI符合SOC 2 Type 1标准，并已经通过独立第三方审核，符合2017年安全信托服务标准。\nAPI数据存储在哪里？\n​\n内容存储在OpenAI系统和我们的子处理器系统中。我们还可能向第三方承包商发送部分去标识化的内容（受保密和安全义务约束）以确保安全。我们的30天数据保留政策也适用于我们的子处理器和承包商。您可以查看我们的子处理器列表以了解其位置和详细信息。\n当我调用API时，数据是否在传输过程中加密？\n​",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/6/content",
+          "source_reference": "https://openai.xiniushu.com/policies/api-data-usage-policies"
+        },
+        {
+          "evidence_id": "ev_2031367fc36e847d",
+          "exact_saved_evidence_excerpt": "Try ChatGPT\nCopy Page\nUnderstand how OpenAI uses your data, and how you can control it.\nYour data is your data. As of March 1, 2023, data sent to the OpenAI API is not used to train or improve OpenAI models (unless you explicitly opt in to share data with us).\nTypes of data stored with the OpenAI API\nWhen using the OpenAI API, data may be stored as:\nAbuse monitoring logs:\nLogs generated from your use of the platform, necessary for OpenAI to enforce our\nUsage Policies\nand agreements and mitigate harmful uses of AI.\nApplication state:\nData persisted from some API features in order to fulfill the task or request.\nData retention controls for abuse monitoring",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/19/content",
+          "source_reference": "https://developers.openai.com/api/docs/guides/your-data"
+        }
+      ],
+      "uncertainty_reason": "严格完整覆盖及证据强度需人工裁定；不计部分分。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "NOT_SATISFIED",
+      "ambiguity_flag": false,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "evidence_ids": [
+        "ev_b08a10e340e4cca0",
+        "ev_d384aee29a4051c8",
+        "ev_d2c625b8589d3de9",
+        "ev_2031367fc36e847d"
+      ],
+      "exact_report_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务",
+      "exact_required_unit_text": "明确适用例外",
+      "flags": [
+        "REQUIRED_UNIT_REVIEW"
+      ],
+      "frozen_required_unit": {
+        "description": "明确适用例外",
+        "evidence_strength_rule": "primary_or_two_independent",
+        "high_risk_types": [
+          "conflict_sensitive_claim"
+        ],
+        "id": "exceptions"
+      },
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "required_unit",
+      "reasoning": "报告保留社区争议，没有明确解释已适用的 opt-in 等例外。计划中被 OMIT 的内容不能用于报告覆盖。",
+      "report_span": [
+        216,
+        288
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "required_unit_id": "exceptions",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-required_unit-002",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_b08a10e340e4cca0",
+          "exact_saved_evidence_excerpt": "API - Is our data really \"ours\"? Major Concern in Data Processing Addendum - Community - OpenAI Developer Community\nAPI - Is our data really \"ours\"? Major Concern in Data Processing Addendum\nCommunity\napi\n,\nprivacy\n,\nlegal\nnaferreira_7\nMay 22, 2024, 5:57pm\n1\nOpenAI clearly says that “\nWe do not train on your business data (data from ChatGPT Team, ChatGPT Enterprise, or our API Platform)\n”, and that “\nyou own your inputs and outputs\n”.\nHowever, in the data processing addendum at\nhttps://openai.com/policies/data-processing-addendum/\n, which regulates data processing for the API and ChatGPT Enterprise, there is a clause that says:\n“\nFor clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\n”",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/11/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        },
+        {
+          "evidence_id": "ev_d384aee29a4051c8",
+          "exact_saved_evidence_excerpt": "For clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\nIn context, it looks like they’re talking about metadata that still exists after the data itself is deleted e.g. logs of request times, usage amounts, etc. I could be wrong, but the section it was a part of is relevant.\nlijianathome\nApril 7, 2025, 4:03am\n9\nSorry but I’d assume this has been a standard approach in the industry since Internet if not longer, whether end users or organizations like it or not? Or Im missing something obvious please?\nRelated topics\nTopic\nReplies\nViews\nActivity\nData Retention for Batches\nAPI\nbatch\n6\n2982\nMay 22, 2024\nContradiction between terms of use and policy docs\nAPI\n0\n3628\nJanuary 16, 2023\nIs OpenAI HIPAA-Compliant?",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/10/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        },
+        {
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "exact_saved_evidence_excerpt": "数据使用政策 | OpenAI 官方帮助文档中文版\n跳到主要内容\n本页总览\n数据使用政策\n从2023年3月1日开始，我们对数据使用和保留政策做出了两项更改：\n除非您明确决定与我们共享您的数据，否则OpenAI将不会使用通过我们的API提交的数据来训练或改进我们的模型。您可以选择选择加入以共享数据。\n通过API发送的任何数据将被保留用于滥用和误用监控目的，最长时间为30天，之后将被删除（除非法律另有规定）。\nOpenAI API处理用户提示和完成请求，以及通过“Files”端点提交的训练数据以微调模型。我们将此类数据称为API数据。\n默认情况下，OpenAI不会使用通过我们的API提交的数据来训练OpenAI模型或改善OpenAI的服务提供。用户提交的用于微调的数据仅用于微调客户的模型。但是，OpenAI将允许用户选择选择加入共享他们的数据以提高模型性能。共享您的数据将确保模型的未来迭代针对您的用例得到改进。在此更改生效之前的2023年3月1日之前通过API提交的数据，如果客户之前没有选择退出共享数据，则可能已用于改进。\nOpenAI为了滥用和误用监控目的保留API数据30天。少数经过授权的OpenAI员工以及受保密和安全义务约束的专业第三方承包商可以访问此数据，仅用于调查和验证涉嫌滥用行为。部署低误用可能性用例的企业客户可以请求根本不存储API数据，包括用于安全监控和预防。OpenAI仍可能有内容分类器标记涉嫌包含平台滥用的数据。例如，通过“Files”端点由用户提交的用于微调模型的数据将保留，直到用户删除该文件。\n请注意，此数据政策不适用于OpenAI的非API消费者服务，如ChatGPT或DALL·E实验室。您可以在我们的\n消费者服务数据使用FAQ\n中了解更多信息。\n常见问题解答\n​\nOpenAI的公共API拥有哪些技术保护和安全认证？\n​\nOpenAI符合SOC 2 Type 1标准，并已经通过独立第三方审核，符合2017年安全信托服务标准。\nAPI数据存储在哪里？\n​\n内容存储在OpenAI系统和我们的子处理器系统中。我们还可能向第三方承包商发送部分去标识化的内容（受保密和安全义务约束）以确保安全。我们的30天数据保留政策也适用于我们的子处理器和承包商。您可以查看我们的子处理器列表以了解其位置和详细信息。\n当我调用API时，数据是否在传输过程中加密？\n​",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/6/content",
+          "source_reference": "https://openai.xiniushu.com/policies/api-data-usage-policies"
+        },
+        {
+          "evidence_id": "ev_2031367fc36e847d",
+          "exact_saved_evidence_excerpt": "Try ChatGPT\nCopy Page\nUnderstand how OpenAI uses your data, and how you can control it.\nYour data is your data. As of March 1, 2023, data sent to the OpenAI API is not used to train or improve OpenAI models (unless you explicitly opt in to share data with us).\nTypes of data stored with the OpenAI API\nWhen using the OpenAI API, data may be stored as:\nAbuse monitoring logs:\nLogs generated from your use of the platform, necessary for OpenAI to enforce our\nUsage Policies\nand agreements and mitigate harmful uses of AI.\nApplication state:\nData persisted from some API features in order to fulfill the task or request.\nData retention controls for abuse monitoring",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/19/content",
+          "source_reference": "https://developers.openai.com/api/docs/guides/your-data"
+        }
+      ],
+      "uncertainty_reason": "严格完整覆盖及证据强度需人工裁定；不计部分分。"
+    },
+    {
+      "adjudication_note": null,
+      "ai_recommendation": "NOT_SATISFIED",
+      "ambiguity_flag": true,
+      "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "evidence_ids": [
+        "ev_2031367fc36e847d"
+      ],
+      "exact_report_text": "OpenAI 平台文档称 API 数据可能以滥用监控日志和应用状态形式存储;某些 API 功能会为完成请求或任务而持久化数据。",
+      "exact_required_unit_text": "数据保留或控制边界",
+      "flags": [
+        "REQUIRED_UNIT_REVIEW"
+      ],
+      "frozen_required_unit": {
+        "description": "数据保留或控制边界",
+        "evidence_strength_rule": "primary_or_two_independent",
+        "high_risk_types": [
+          "numeric_value",
+          "date_or_time_window"
+        ],
+        "id": "retention"
+      },
+      "human_decision": null,
+      "human_review_status": "PENDING",
+      "item_type": "required_unit",
+      "reasoning": "报告解释存储类型但未交代保留期限、删除或控制边界；该片段不足以确认完整边界覆盖。",
+      "report_span": [
+        759,
+        822
+      ],
+      "report_span_unit": "Unicode character offset in UTF-8 decoded report",
+      "required_unit_id": "retention",
+      "review_date": null,
+      "review_id": "EIV2_FV_001-required_unit-003",
+      "review_timestamp": null,
+      "reviewer_identity": null,
+      "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+      "saved_evidence": [
+        {
+          "evidence_id": "ev_2031367fc36e847d",
+          "exact_saved_evidence_excerpt": "Try ChatGPT\nCopy Page\nUnderstand how OpenAI uses your data, and how you can control it.\nYour data is your data. As of March 1, 2023, data sent to the OpenAI API is not used to train or improve OpenAI models (unless you explicitly opt in to share data with us).\nTypes of data stored with the OpenAI API\nWhen using the OpenAI API, data may be stored as:\nAbuse monitoring logs:\nLogs generated from your use of the platform, necessary for OpenAI to enforce our\nUsage Policies\nand agreements and mitigate harmful uses of AI.\nApplication state:\nData persisted from some API features in order to fulfill the task or request.\nData retention controls for abuse monitoring",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/19/content",
+          "source_reference": "https://developers.openai.com/api/docs/guides/your-data"
+        }
+      ],
+      "uncertainty_reason": "严格完整覆盖及证据强度需人工裁定；不计部分分。"
+    }
+  ],
+  "reviewer": null,
+  "rubric_version": "enterprise-insight-bench-v2/2.2.0",
+  "status": "READY_FOR_HUMAN_REVIEW"
 }

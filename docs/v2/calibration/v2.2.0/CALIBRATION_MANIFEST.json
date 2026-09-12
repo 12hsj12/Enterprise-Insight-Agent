@@ -1,12 +1,606 @@
 {
+  "actual_emitted_claim_risk_type_coverage": [
+    "benchmark_or_performance",
+    "comparative_claim",
+    "conflict_sensitive_claim",
+    "numeric_value",
+    "release_status_availability"
+  ],
+  "ai_preannotation_status": "COMPLETED",
+  "atomic_factual_claim_count": 115,
   "benchmark_schema": "enterprise-insight-bench-v2/2.2.0",
-  "dataset_sha256": "95a9718c7e16b5a5c1ee966ee89e217aba0b0368b6e6afc4cd7c5d6a071896fa",
+  "calibration_provider_cost_usd": null,
+  "cases": [
+    {
+      "ai_preannotation_status": "COMPLETED",
+      "artifacts": {
+        "candidate": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_FV_001\\candidate.json",
+          "original_runtime_sha256": "1df1d375c21d0d64d66d677bb106c73631f02628a0ed7858affef169bb5d109a",
+          "path": "outputs\\calibration-six-20260911\\EIV2_FV_001\\candidate.json",
+          "serialization_note": "original bytes",
+          "sha256": "1df1d375c21d0d64d66d677bb106c73631f02628a0ed7858affef169bb5d109a",
+          "tracked_portable": false
+        },
+        "execution": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\enterprise\\01b87b35-114e-49a3-9bf0-e551afd61a75\\execution.json",
+          "original_runtime_sha256": "4c1dcb077162af3dda3b6a60b01d333e0636cb2bd9191632db9590286e977921",
+          "path": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\execution.json",
+          "serialization_note": "LF-normalized JSON copy; original bytes retained",
+          "sha256": "824a5748b172375558c13174ec556a79d0c0cb7c98a6951ee54d5408ed4d67b2",
+          "tracked_portable": true
+        },
+        "report": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\enterprise\\01b87b35-114e-49a3-9bf0-e551afd61a75\\report.md",
+          "original_runtime_sha256": "1e34a96ff38b88f8b5f50583318e77ff89a456bc2780b706b9b8e1c1c4ca73e0",
+          "path": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\report.md",
+          "serialization_note": "original bytes",
+          "sha256": "1e34a96ff38b88f8b5f50583318e77ff89a456bc2780b706b9b8e1c1c4ca73e0",
+          "tracked_portable": true
+        },
+        "scoring": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_FV_001\\scoring.json",
+          "original_runtime_sha256": "01150cc0f117b74fbdc0e48b348d4f001e3b34c5b27d993ab04dbe4393c07c60",
+          "path": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\scoring.json",
+          "serialization_note": "original bytes",
+          "sha256": "01150cc0f117b74fbdc0e48b348d4f001e3b34c5b27d993ab04dbe4393c07c60",
+          "tracked_portable": true
+        },
+        "selected": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_FV_001\\selected.json",
+          "original_runtime_sha256": "54fc178c75e987dbadb707d99dd0b9b016fbf5794a94441c8f83a3a51b9c7084",
+          "path": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json",
+          "serialization_note": "original bytes",
+          "sha256": "54fc178c75e987dbadb707d99dd0b9b016fbf5794a94441c8f83a3a51b9c7084",
+          "tracked_portable": true
+        },
+        "task": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_FV_001\\task.json",
+          "original_runtime_sha256": "0ccbc137fe23156524db3f33363cf7926f15380aa0a2da51f31df9785e8738db",
+          "path": "outputs\\calibration-six-20260911\\EIV2_FV_001\\task.json",
+          "serialization_note": "original bytes",
+          "sha256": "0ccbc137fe23156524db3f33363cf7926f15380aa0a2da51f31df9785e8738db",
+          "tracked_portable": false
+        },
+        "trace": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\enterprise\\traces\\trace_b174afe151484652a2d765db7dfe1c56.json",
+          "original_runtime_sha256": "09ec4437e667821abea5064da5bac8ffed4e67f5db9a160e069f236d85440109",
+          "path": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\trace.json",
+          "serialization_note": "LF-normalized JSON copy; original bytes retained",
+          "sha256": "4389bacc24cdc3488fe2c76cdf6177b04090f098fc1c506dc8e7c3b6f3000a74",
+          "tracked_portable": true
+        }
+      },
+      "candidate_page_records": 12,
+      "capture_errors": [],
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "cost_usd_runtime_estimate": 0.47405991999999997,
+      "created_at": "2026-09-11T13:53:25.424864Z",
+      "elapsed_s": 148.81172819998756,
+      "eligible_chunk_records": 36,
+      "emitted_record_count": 3,
+      "execution": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\01b87b35-114e-49a3-9bf0-e551afd61a75\\execution.json",
+      "http_status": 200,
+      "human_review_status": "PENDING",
+      "provider_configuration": {
+        "EMBEDDING": "huggingface:sentence-transformers/all-MiniLM-L6-v2",
+        "FAST_LLM": "openai:deepseek-v4-flash",
+        "SMART_LLM": "openai:deepseek-v4-flash",
+        "STRATEGIC_LLM": "openai:deepseek-v4-flash",
+        "search": "TavilySearch",
+        "transport": "httpx.ASGITransport (real POST router; in-process)"
+      },
+      "report": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\01b87b35-114e-49a3-9bf0-e551afd61a75\\report.md",
+      "review_sheet": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\review_sheet.json",
+      "reviewer": null,
+      "search_calls": 4,
+      "search_count_scope": "ResearchConductor web searches; planning/MCP/provider internal retries excluded",
+      "selected_evidence_count": 26,
+      "status": "completed",
+      "task_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+      "token_usage": null,
+      "token_usage_availability": "not persisted by existing runtime",
+      "trace": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\traces\\trace_b174afe151484652a2d765db7dfe1c56.json",
+      "trace_id": "trace_b174afe151484652a2d765db7dfe1c56",
+      "updated_at": "2026-09-11T13:55:54.236895Z"
+    },
+    {
+      "ai_preannotation_status": "COMPLETED",
+      "artifacts": {
+        "candidate": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_TC_001\\candidate.json",
+          "original_runtime_sha256": "4495644cde1a75d8eeb9a6291359102f2e098bd1f8897ccb933ace39e6f5afa0",
+          "path": "outputs\\calibration-six-20260911\\EIV2_TC_001\\candidate.json",
+          "serialization_note": "original bytes",
+          "sha256": "4495644cde1a75d8eeb9a6291359102f2e098bd1f8897ccb933ace39e6f5afa0",
+          "tracked_portable": false
+        },
+        "execution": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\enterprise\\993797f0-7184-44b4-b0cf-8f0d390c530f\\execution.json",
+          "original_runtime_sha256": "e13cb09fb761192b4d13154222735f3de20a942e4e7f404454da3ea02524daba",
+          "path": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\execution.json",
+          "serialization_note": "LF-normalized JSON copy; original bytes retained",
+          "sha256": "f463772e1f3f33af985d4d836683b07246a8dcf934e1029389ca77334b360889",
+          "tracked_portable": true
+        },
+        "report": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\enterprise\\993797f0-7184-44b4-b0cf-8f0d390c530f\\report.md",
+          "original_runtime_sha256": "c5f1d1e8939f43402f1782961b24f646474cbcb11ef7672a12679096a9ced4c7",
+          "path": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\report.md",
+          "serialization_note": "original bytes",
+          "sha256": "c5f1d1e8939f43402f1782961b24f646474cbcb11ef7672a12679096a9ced4c7",
+          "tracked_portable": true
+        },
+        "scoring": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_TC_001\\scoring.json",
+          "original_runtime_sha256": "8b6564c43adf6a1041e9a664caebad417922e94c47e5d105a8216368e7139e21",
+          "path": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\scoring.json",
+          "serialization_note": "original bytes",
+          "sha256": "8b6564c43adf6a1041e9a664caebad417922e94c47e5d105a8216368e7139e21",
+          "tracked_portable": true
+        },
+        "selected": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_TC_001\\selected.json",
+          "original_runtime_sha256": "850ad96c87660df375f5749043908917aee8a49b5129f825b5350c9ec0aee8d1",
+          "path": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json",
+          "serialization_note": "original bytes",
+          "sha256": "850ad96c87660df375f5749043908917aee8a49b5129f825b5350c9ec0aee8d1",
+          "tracked_portable": true
+        },
+        "task": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_TC_001\\task.json",
+          "original_runtime_sha256": "803e4d0b7bbac6330e312c41a6316c555674cbde10b3833bdf242ada99a5a746",
+          "path": "outputs\\calibration-six-20260911\\EIV2_TC_001\\task.json",
+          "serialization_note": "original bytes",
+          "sha256": "803e4d0b7bbac6330e312c41a6316c555674cbde10b3833bdf242ada99a5a746",
+          "tracked_portable": false
+        },
+        "trace": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\enterprise\\traces\\trace_130c97530b80463f9c27e97af40155c9.json",
+          "original_runtime_sha256": "2f5ae6446df17e2fcccf0f009e6709eb47ba188bafbcbfd91f6aed26f8c7975e",
+          "path": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\trace.json",
+          "serialization_note": "LF-normalized JSON copy; original bytes retained",
+          "sha256": "5b6fab56da27f5376027c6ea51def81be2d43cd473370076a66faf1009697b44",
+          "tracked_portable": true
+        }
+      },
+      "candidate_page_records": 16,
+      "capture_errors": [],
+      "case_id": "EIV2_TC_001",
+      "category": "technical_capability_analysis",
+      "cost_usd_runtime_estimate": 0.6004559,
+      "created_at": "2026-09-11T13:55:54.956026Z",
+      "elapsed_s": 193.55746999999974,
+      "eligible_chunk_records": 80,
+      "emitted_record_count": 10,
+      "execution": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\993797f0-7184-44b4-b0cf-8f0d390c530f\\execution.json",
+      "http_status": 200,
+      "human_review_status": "PENDING",
+      "provider_configuration": {
+        "EMBEDDING": "huggingface:sentence-transformers/all-MiniLM-L6-v2",
+        "FAST_LLM": "openai:deepseek-v4-flash",
+        "SMART_LLM": "openai:deepseek-v4-flash",
+        "STRATEGIC_LLM": "openai:deepseek-v4-flash",
+        "search": "TavilySearch",
+        "transport": "httpx.ASGITransport (real POST router; in-process)"
+      },
+      "report": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\993797f0-7184-44b4-b0cf-8f0d390c530f\\report.md",
+      "review_sheet": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\review_sheet.json",
+      "reviewer": null,
+      "search_calls": 4,
+      "search_count_scope": "ResearchConductor web searches; planning/MCP/provider internal retries excluded",
+      "selected_evidence_count": 40,
+      "status": "completed",
+      "task_id": "993797f0-7184-44b4-b0cf-8f0d390c530f",
+      "token_usage": null,
+      "token_usage_availability": "not persisted by existing runtime",
+      "trace": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\traces\\trace_130c97530b80463f9c27e97af40155c9.json",
+      "trace_id": "trace_130c97530b80463f9c27e97af40155c9",
+      "updated_at": "2026-09-11T13:59:08.513151Z"
+    },
+    {
+      "ai_preannotation_status": "COMPLETED",
+      "artifacts": {
+        "candidate": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_CC_001\\candidate.json",
+          "original_runtime_sha256": "f9adf9eeb96586d0c9f9813e48ed6cd20222c2e19c561fae8daaf05e3a468f01",
+          "path": "outputs\\calibration-six-20260911\\EIV2_CC_001\\candidate.json",
+          "serialization_note": "original bytes",
+          "sha256": "f9adf9eeb96586d0c9f9813e48ed6cd20222c2e19c561fae8daaf05e3a468f01",
+          "tracked_portable": false
+        },
+        "execution": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\enterprise\\8b1f6902-92b1-40be-af1a-749e6a431b45\\execution.json",
+          "original_runtime_sha256": "2724af1a1764c54bd122068d4f3ca2b992389e73cc48fe8b33ac9118d074f1d1",
+          "path": "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\execution.json",
+          "serialization_note": "LF-normalized JSON copy; original bytes retained",
+          "sha256": "cd1412c8653fe468929b614914f05001077eb71ac057d86b72b732648a660ece",
+          "tracked_portable": true
+        },
+        "report": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\enterprise\\8b1f6902-92b1-40be-af1a-749e6a431b45\\report.md",
+          "original_runtime_sha256": "b62b0864f0f22ce06a6b162cf63bfc7c828fb967874bbe681a21ba6434a5ef8b",
+          "path": "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\report.md",
+          "serialization_note": "original bytes",
+          "sha256": "b62b0864f0f22ce06a6b162cf63bfc7c828fb967874bbe681a21ba6434a5ef8b",
+          "tracked_portable": true
+        },
+        "scoring": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_CC_001\\scoring.json",
+          "original_runtime_sha256": "83a2ace162ffb552f9dff1b50ca4d07d72cabf96a2a8659548eb413e39d6648b",
+          "path": "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\scoring.json",
+          "serialization_note": "original bytes",
+          "sha256": "83a2ace162ffb552f9dff1b50ca4d07d72cabf96a2a8659548eb413e39d6648b",
+          "tracked_portable": true
+        },
+        "selected": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_CC_001\\selected.json",
+          "original_runtime_sha256": "b0138cc16fad688ee232b6aed000aaf73ba64ea83554bc1fd8de4e743e304a48",
+          "path": "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\selected.json",
+          "serialization_note": "original bytes",
+          "sha256": "b0138cc16fad688ee232b6aed000aaf73ba64ea83554bc1fd8de4e743e304a48",
+          "tracked_portable": true
+        },
+        "task": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_CC_001\\task.json",
+          "original_runtime_sha256": "fc4534d9995b12d4504625059119f6df7a2f7ed924c530f0f94097c5a1cddccf",
+          "path": "outputs\\calibration-six-20260911\\EIV2_CC_001\\task.json",
+          "serialization_note": "original bytes",
+          "sha256": "fc4534d9995b12d4504625059119f6df7a2f7ed924c530f0f94097c5a1cddccf",
+          "tracked_portable": false
+        },
+        "trace": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\enterprise\\traces\\trace_96f0fa39f92e4d829c52e1735809b7fa.json",
+          "original_runtime_sha256": "5f2d66f1654ce6a9ac73503564c8bd01ea0f335d7708ddc9d7913b56e5245a91",
+          "path": "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\trace.json",
+          "serialization_note": "LF-normalized JSON copy; original bytes retained",
+          "sha256": "dab224bbe785f3dcf379e23395ca68d3bf04be0a8875b078999e34c74eb19ba5",
+          "tracked_portable": true
+        }
+      },
+      "candidate_page_records": 12,
+      "capture_errors": [],
+      "case_id": "EIV2_CC_001",
+      "category": "competitive_comparison",
+      "cost_usd_runtime_estimate": 0.5364882,
+      "created_at": "2026-09-11T13:59:09.913382Z",
+      "elapsed_s": 171.00375810000696,
+      "eligible_chunk_records": 60,
+      "emitted_record_count": 0,
+      "execution": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\8b1f6902-92b1-40be-af1a-749e6a431b45\\execution.json",
+      "http_status": 200,
+      "human_review_status": "PENDING",
+      "provider_configuration": {
+        "EMBEDDING": "huggingface:sentence-transformers/all-MiniLM-L6-v2",
+        "FAST_LLM": "openai:deepseek-v4-flash",
+        "SMART_LLM": "openai:deepseek-v4-flash",
+        "STRATEGIC_LLM": "openai:deepseek-v4-flash",
+        "search": "TavilySearch",
+        "transport": "httpx.ASGITransport (real POST router; in-process)"
+      },
+      "report": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\8b1f6902-92b1-40be-af1a-749e6a431b45\\report.md",
+      "review_sheet": "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\review_sheet.json",
+      "reviewer": null,
+      "search_calls": 4,
+      "search_count_scope": "ResearchConductor web searches; planning/MCP/provider internal retries excluded",
+      "selected_evidence_count": 30,
+      "status": "completed",
+      "task_id": "8b1f6902-92b1-40be-af1a-749e6a431b45",
+      "token_usage": null,
+      "token_usage_availability": "not persisted by existing runtime",
+      "trace": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\traces\\trace_96f0fa39f92e4d829c52e1735809b7fa.json",
+      "trace_id": "trace_96f0fa39f92e4d829c52e1735809b7fa",
+      "updated_at": "2026-09-11T14:02:00.917706Z"
+    },
+    {
+      "ai_preannotation_status": "COMPLETED",
+      "artifacts": {
+        "candidate": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_TM_003\\candidate.json",
+          "original_runtime_sha256": "d5e00ebcab6bff3220201b33fb2c67fb51b37f648cb94cd350dbfb6cba79ae91",
+          "path": "outputs\\calibration-six-20260911\\EIV2_TM_003\\candidate.json",
+          "serialization_note": "original bytes",
+          "sha256": "d5e00ebcab6bff3220201b33fb2c67fb51b37f648cb94cd350dbfb6cba79ae91",
+          "tracked_portable": false
+        },
+        "execution": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\enterprise\\f7246966-5232-4274-97d5-d4b3b3e976ac\\execution.json",
+          "original_runtime_sha256": "fc89d03b34b2a3496fdf473921ec8a242782be1c049503ecb835c212a0372461",
+          "path": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\execution.json",
+          "serialization_note": "LF-normalized JSON copy; original bytes retained",
+          "sha256": "89ce30209af4c22c1b2b4c4ccf735b6bc2b8eb9fe288bedae0e4d8d8e5e246b4",
+          "tracked_portable": true
+        },
+        "report": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\enterprise\\f7246966-5232-4274-97d5-d4b3b3e976ac\\report.md",
+          "original_runtime_sha256": "0f816f55c911340ab704d83ec232c34eeb1c90c08e1680d90b96dc16b994e139",
+          "path": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\report.md",
+          "serialization_note": "original bytes",
+          "sha256": "0f816f55c911340ab704d83ec232c34eeb1c90c08e1680d90b96dc16b994e139",
+          "tracked_portable": true
+        },
+        "scoring": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_TM_003\\scoring.json",
+          "original_runtime_sha256": "19ad0a70da9411307a577333eab13301cd957be205c801ceeb3eeaa3af1bc499",
+          "path": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\scoring.json",
+          "serialization_note": "original bytes",
+          "sha256": "19ad0a70da9411307a577333eab13301cd957be205c801ceeb3eeaa3af1bc499",
+          "tracked_portable": true
+        },
+        "selected": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_TM_003\\selected.json",
+          "original_runtime_sha256": "b9d2cc2f7ccaef2a645365a058c05c79ea00d5e0378569fd176c6bd13ab72e48",
+          "path": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\selected.json",
+          "serialization_note": "original bytes",
+          "sha256": "b9d2cc2f7ccaef2a645365a058c05c79ea00d5e0378569fd176c6bd13ab72e48",
+          "tracked_portable": true
+        },
+        "task": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_TM_003\\task.json",
+          "original_runtime_sha256": "58964209b6f36486c831cb1ab3f7744c6a4ee11b9d6a475354f5ecc278c6420d",
+          "path": "outputs\\calibration-six-20260911\\EIV2_TM_003\\task.json",
+          "serialization_note": "original bytes",
+          "sha256": "58964209b6f36486c831cb1ab3f7744c6a4ee11b9d6a475354f5ecc278c6420d",
+          "tracked_portable": false
+        },
+        "trace": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\enterprise\\traces\\trace_4f4d3bf1f35448a9a6b380c8a29c9190.json",
+          "original_runtime_sha256": "ee84e48fa4267417b6170f6d58bc6558df70edfd63c49026d6c93f7087dc52f5",
+          "path": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\trace.json",
+          "serialization_note": "LF-normalized JSON copy; original bytes retained",
+          "sha256": "48b3202313428bd642fbc5a58b076bf420cf7dc05bdb19a857f671a39d133b1c",
+          "tracked_portable": true
+        }
+      },
+      "candidate_page_records": 16,
+      "capture_errors": [],
+      "case_id": "EIV2_TM_003",
+      "category": "trend_market_intelligence",
+      "cost_usd_runtime_estimate": 0.63643392,
+      "created_at": "2026-09-11T14:02:01.722809Z",
+      "elapsed_s": 184.28861819999292,
+      "eligible_chunk_records": 60,
+      "emitted_record_count": 19,
+      "execution": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\f7246966-5232-4274-97d5-d4b3b3e976ac\\execution.json",
+      "http_status": 200,
+      "human_review_status": "PENDING",
+      "provider_configuration": {
+        "EMBEDDING": "huggingface:sentence-transformers/all-MiniLM-L6-v2",
+        "FAST_LLM": "openai:deepseek-v4-flash",
+        "SMART_LLM": "openai:deepseek-v4-flash",
+        "STRATEGIC_LLM": "openai:deepseek-v4-flash",
+        "search": "TavilySearch",
+        "transport": "httpx.ASGITransport (real POST router; in-process)"
+      },
+      "report": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\f7246966-5232-4274-97d5-d4b3b3e976ac\\report.md",
+      "review_sheet": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\review_sheet.json",
+      "reviewer": null,
+      "search_calls": 4,
+      "search_count_scope": "ResearchConductor web searches; planning/MCP/provider internal retries excluded",
+      "selected_evidence_count": 30,
+      "status": "completed",
+      "task_id": "f7246966-5232-4274-97d5-d4b3b3e976ac",
+      "token_usage": null,
+      "token_usage_availability": "not persisted by existing runtime",
+      "trace": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\traces\\trace_4f4d3bf1f35448a9a6b380c8a29c9190.json",
+      "trace_id": "trace_4f4d3bf1f35448a9a6b380c8a29c9190",
+      "updated_at": "2026-09-11T14:05:06.010654Z"
+    },
+    {
+      "ai_preannotation_status": "COMPLETED",
+      "artifacts": {
+        "candidate": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_CR_003\\candidate.json",
+          "original_runtime_sha256": "15ed412bf2a2237a4e3b003c09de25474fb9b784c733655e1b817ccaf61eb61d",
+          "path": "outputs\\calibration-six-20260911\\EIV2_CR_003\\candidate.json",
+          "serialization_note": "original bytes",
+          "sha256": "15ed412bf2a2237a4e3b003c09de25474fb9b784c733655e1b817ccaf61eb61d",
+          "tracked_portable": false
+        },
+        "execution": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\enterprise\\b2dadf7b-8489-439b-a7b5-9c9191b708f1\\execution.json",
+          "original_runtime_sha256": "22505104bbd2ab7653a98225344d03a3ec27ec102bcec1c37bd8a48ea7b7add4",
+          "path": "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\execution.json",
+          "serialization_note": "LF-normalized JSON copy; original bytes retained",
+          "sha256": "2c748caaa94f612a9d042a4e7c71f595da48f3119b1d050779d8193adef1918f",
+          "tracked_portable": true
+        },
+        "report": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\enterprise\\b2dadf7b-8489-439b-a7b5-9c9191b708f1\\report.md",
+          "original_runtime_sha256": "b62b0864f0f22ce06a6b162cf63bfc7c828fb967874bbe681a21ba6434a5ef8b",
+          "path": "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\report.md",
+          "serialization_note": "original bytes",
+          "sha256": "b62b0864f0f22ce06a6b162cf63bfc7c828fb967874bbe681a21ba6434a5ef8b",
+          "tracked_portable": true
+        },
+        "scoring": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_CR_003\\scoring.json",
+          "original_runtime_sha256": "a42b132f48017f2aa5ce914f6d50e7dd1f1e28d84f4cbab550d2ec4fd4780498",
+          "path": "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\scoring.json",
+          "serialization_note": "original bytes",
+          "sha256": "a42b132f48017f2aa5ce914f6d50e7dd1f1e28d84f4cbab550d2ec4fd4780498",
+          "tracked_portable": true
+        },
+        "selected": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_CR_003\\selected.json",
+          "original_runtime_sha256": "96b366f149d7d5d0a352d183b6345934c00fecc540680334ed341e74471d470f",
+          "path": "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\selected.json",
+          "serialization_note": "original bytes",
+          "sha256": "96b366f149d7d5d0a352d183b6345934c00fecc540680334ed341e74471d470f",
+          "tracked_portable": true
+        },
+        "task": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_CR_003\\task.json",
+          "original_runtime_sha256": "b8c26f89e1ecce3a69a9675b33a27807e7fbfa78b325acd7af6b3e1a9184f9a8",
+          "path": "outputs\\calibration-six-20260911\\EIV2_CR_003\\task.json",
+          "serialization_note": "original bytes",
+          "sha256": "b8c26f89e1ecce3a69a9675b33a27807e7fbfa78b325acd7af6b3e1a9184f9a8",
+          "tracked_portable": false
+        },
+        "trace": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\enterprise\\traces\\trace_8c06ef02714e406894f842d3a375ed91.json",
+          "original_runtime_sha256": "fe7586d3147de1fbf874f0716d7bda7fcdaa55683ad4cf2f5af2396b195c0b52",
+          "path": "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\trace.json",
+          "serialization_note": "LF-normalized JSON copy; original bytes retained",
+          "sha256": "a88969465ae133d5805167bd631928dcb854c93243ca41125ae393cd60b26399",
+          "tracked_portable": true
+        }
+      },
+      "candidate_page_records": 18,
+      "capture_errors": [],
+      "case_id": "EIV2_CR_003",
+      "category": "conflict_credibility_resolution",
+      "cost_usd_runtime_estimate": 0.5527396,
+      "created_at": "2026-09-11T14:05:07.406145Z",
+      "elapsed_s": 164.78397000000405,
+      "eligible_chunk_records": 68,
+      "emitted_record_count": 0,
+      "execution": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\b2dadf7b-8489-439b-a7b5-9c9191b708f1\\execution.json",
+      "http_status": 200,
+      "human_review_status": "PENDING",
+      "provider_configuration": {
+        "EMBEDDING": "huggingface:sentence-transformers/all-MiniLM-L6-v2",
+        "FAST_LLM": "openai:deepseek-v4-flash",
+        "SMART_LLM": "openai:deepseek-v4-flash",
+        "STRATEGIC_LLM": "openai:deepseek-v4-flash",
+        "search": "TavilySearch",
+        "transport": "httpx.ASGITransport (real POST router; in-process)"
+      },
+      "report": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\b2dadf7b-8489-439b-a7b5-9c9191b708f1\\report.md",
+      "review_sheet": "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\review_sheet.json",
+      "reviewer": null,
+      "search_calls": 4,
+      "search_count_scope": "ResearchConductor web searches; planning/MCP/provider internal retries excluded",
+      "selected_evidence_count": 38,
+      "status": "completed",
+      "task_id": "b2dadf7b-8489-439b-a7b5-9c9191b708f1",
+      "token_usage": null,
+      "token_usage_availability": "not persisted by existing runtime",
+      "trace": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\traces\\trace_8c06ef02714e406894f842d3a375ed91.json",
+      "trace_id": "trace_8c06ef02714e406894f842d3a375ed91",
+      "updated_at": "2026-09-11T14:07:52.190010Z"
+    },
+    {
+      "ai_preannotation_status": "COMPLETED",
+      "artifacts": {
+        "candidate": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_ED_002\\candidate.json",
+          "original_runtime_sha256": "e3c968005f592376b2c77bf988e893c70907c8766347630cfd74c8cc39aff3c0",
+          "path": "outputs\\calibration-six-20260911\\EIV2_ED_002\\candidate.json",
+          "serialization_note": "original bytes",
+          "sha256": "e3c968005f592376b2c77bf988e893c70907c8766347630cfd74c8cc39aff3c0",
+          "tracked_portable": false
+        },
+        "execution": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\enterprise\\43179a06-7c15-47f2-a1f8-fec242a5f1f4\\execution.json",
+          "original_runtime_sha256": "67edbdbbd8b20e10d9e95e65f6f865d53621a796d4258991fc9020a0862a993d",
+          "path": "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\execution.json",
+          "serialization_note": "LF-normalized JSON copy; original bytes retained",
+          "sha256": "2efe271e8d7864f97066d0c729f11e8dfd21a40d30d190dc881c81d5234b8eb1",
+          "tracked_portable": true
+        },
+        "report": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\enterprise\\43179a06-7c15-47f2-a1f8-fec242a5f1f4\\report.md",
+          "original_runtime_sha256": "67164249d67c25f51ec47c1391fbdaf4e6297e47c49496ffddc5c55880ca916a",
+          "path": "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\report.md",
+          "serialization_note": "original bytes",
+          "sha256": "67164249d67c25f51ec47c1391fbdaf4e6297e47c49496ffddc5c55880ca916a",
+          "tracked_portable": true
+        },
+        "scoring": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_ED_002\\scoring.json",
+          "original_runtime_sha256": "8d55d29115572c1f5f986fa16727c3d066a6045700c77a3a5e23685c22547b62",
+          "path": "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\scoring.json",
+          "serialization_note": "original bytes",
+          "sha256": "8d55d29115572c1f5f986fa16727c3d066a6045700c77a3a5e23685c22547b62",
+          "tracked_portable": true
+        },
+        "selected": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_ED_002\\selected.json",
+          "original_runtime_sha256": "17940df4ba1f17407ee60f3f7a5031466d272530c6b9f78bb97cc43a66fd3c20",
+          "path": "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\selected.json",
+          "serialization_note": "original bytes",
+          "sha256": "17940df4ba1f17407ee60f3f7a5031466d272530c6b9f78bb97cc43a66fd3c20",
+          "tracked_portable": true
+        },
+        "task": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\EIV2_ED_002\\task.json",
+          "original_runtime_sha256": "f87db96a31ed8b777c8f2e605902e1e0f9f824bfe579e8982286fd41e23128b8",
+          "path": "outputs\\calibration-six-20260911\\EIV2_ED_002\\task.json",
+          "serialization_note": "original bytes",
+          "sha256": "f87db96a31ed8b777c8f2e605902e1e0f9f824bfe579e8982286fd41e23128b8",
+          "tracked_portable": false
+        },
+        "trace": {
+          "original_runtime_path": "outputs\\calibration-six-20260911\\enterprise\\traces\\trace_657c5cec2ff54f39a86067ee63990ca0.json",
+          "original_runtime_sha256": "6e0f217358c3d45ff0161def292e0e8db4dcf88a73e640db605ec854255f8739",
+          "path": "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\trace.json",
+          "serialization_note": "LF-normalized JSON copy; original bytes retained",
+          "sha256": "9de5feac3132d903f5c2f83eefc114d2a37a2364904d2cd11343b37d12f4b4f6",
+          "tracked_portable": true
+        }
+      },
+      "candidate_page_records": 18,
+      "capture_errors": [],
+      "case_id": "EIV2_ED_002",
+      "category": "enterprise_decision_recommendation",
+      "cost_usd_runtime_estimate": 0.88105254,
+      "created_at": "2026-09-11T14:07:53.003011Z",
+      "elapsed_s": 166.16761669999687,
+      "eligible_chunk_records": 29,
+      "emitted_record_count": 8,
+      "execution": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\43179a06-7c15-47f2-a1f8-fec242a5f1f4\\execution.json",
+      "http_status": 200,
+      "human_review_status": "PENDING",
+      "provider_configuration": {
+        "EMBEDDING": "huggingface:sentence-transformers/all-MiniLM-L6-v2",
+        "FAST_LLM": "openai:deepseek-v4-flash",
+        "SMART_LLM": "openai:deepseek-v4-flash",
+        "STRATEGIC_LLM": "openai:deepseek-v4-flash",
+        "search": "TavilySearch",
+        "transport": "httpx.ASGITransport (real POST router; in-process)"
+      },
+      "report": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\43179a06-7c15-47f2-a1f8-fec242a5f1f4\\report.md",
+      "review_sheet": "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\review_sheet.json",
+      "reviewer": null,
+      "search_calls": 4,
+      "search_count_scope": "ResearchConductor web searches; planning/MCP/provider internal retries excluded",
+      "selected_evidence_count": 27,
+      "status": "completed",
+      "task_id": "43179a06-7c15-47f2-a1f8-fec242a5f1f4",
+      "token_usage": null,
+      "token_usage_availability": "not persisted by existing runtime",
+      "trace": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\traces\\trace_657c5cec2ff54f39a86067ee63990ca0.json",
+      "trace_id": "trace_657c5cec2ff54f39a86067ee63990ca0",
+      "updated_at": "2026-09-11T14:10:39.170984Z"
+    }
+  ],
+  "confident_recommendations_requiring_confirmation": 242,
+  "cost_note": "Runtime estimate is not provider billing; generic pricing/local embedding estimate may be inaccurate; search billing unavailable.",
+  "counts": {
+    "citation_support": 184,
+    "claim_segmentation": 118,
+    "evidence_strength": 45,
+    "freshness": 45,
+    "high_risk": 28,
+    "independence": 45,
+    "required_unit": 18
+  },
   "cutoff": "2026-09-05",
+  "dataset_sha256": "95a9718c7e16b5a5c1ee966ee89e217aba0b0368b6e6afc4cd7c5d6a071896fa",
+  "execution_code_commit": "fa385086",
+  "human_review_item_count": 483,
+  "human_review_status": "PENDING",
+  "nonfactual_segment_count": 3,
+  "official_benchmark_cost_usd": 0,
+  "official_holdout_executions": 0,
+  "package_status": "READY_FOR_HUMAN_REVIEW",
+  "portability": "Tracked review excerpts are portable; candidate and task references require the original ignored local outputs.",
+  "reviewer": null,
+  "rubric_reference": "docs/v2/V2_BENCHMARK_SPEC.md",
   "rubric_version": "enterprise-insight-bench-v2/2.2.0",
-  "rubric_reference": "docs/v2/V2_BENCHMARK_SPEC.md#4-annotation-protocol",
-  "source_head": "6f457b11a24c9b0a3eefe46559f737390b06f7f5",
-  "prepared_at": "2026-09-11T13:23:57.932458+00:00",
-  "package_status": "BLOCKED",
+  "runtime_estimated_cost_usd": 3.6812300799999997,
   "selected_development_case_ids": [
     "EIV2_FV_001",
     "EIV2_TC_001",
@@ -15,183 +609,10 @@
     "EIV2_CR_003",
     "EIV2_ED_002"
   ],
-  "category_mapping": {
-    "factual_verification": "EIV2_FV_001",
-    "technical_capability_analysis": "EIV2_TC_001",
-    "competitive_comparison": "EIV2_CC_001",
-    "trend_market_intelligence": "EIV2_TM_003",
-    "conflict_credibility_resolution": "EIV2_CR_003",
-    "enterprise_decision_recommendation": "EIV2_ED_002"
-  },
-  "cases": [
-    {
-      "case_id": "EIV2_FV_001",
-      "category": "factual_verification",
-      "split": "development",
-      "path": "factual_verification/EIV2_FV_001",
-      "hashes_reference": "factual_verification/EIV2_FV_001/hashes.json",
-      "report_artifact_hash": null,
-      "candidate_evidence_hash": null,
-      "selected_evidence_hash": null,
-      "ai_preannotation_status": "NOT_STARTED_MISSING_REPORT",
-      "human_review_status": "PENDING",
-      "reviewer": null,
-      "unresolved_review_item_count": 4
-    },
-    {
-      "case_id": "EIV2_TC_001",
-      "category": "technical_capability_analysis",
-      "split": "development",
-      "path": "technical_capability_analysis/EIV2_TC_001",
-      "hashes_reference": "technical_capability_analysis/EIV2_TC_001/hashes.json",
-      "report_artifact_hash": null,
-      "candidate_evidence_hash": null,
-      "selected_evidence_hash": null,
-      "ai_preannotation_status": "NOT_STARTED_MISSING_REPORT",
-      "human_review_status": "PENDING",
-      "reviewer": null,
-      "unresolved_review_item_count": 4
-    },
-    {
-      "case_id": "EIV2_CC_001",
-      "category": "competitive_comparison",
-      "split": "development",
-      "path": "competitive_comparison/EIV2_CC_001",
-      "hashes_reference": "competitive_comparison/EIV2_CC_001/hashes.json",
-      "report_artifact_hash": null,
-      "candidate_evidence_hash": null,
-      "selected_evidence_hash": null,
-      "ai_preannotation_status": "NOT_STARTED_MISSING_REPORT",
-      "human_review_status": "PENDING",
-      "reviewer": null,
-      "unresolved_review_item_count": 4
-    },
-    {
-      "case_id": "EIV2_TM_003",
-      "category": "trend_market_intelligence",
-      "split": "development",
-      "path": "trend_market_intelligence/EIV2_TM_003",
-      "hashes_reference": "trend_market_intelligence/EIV2_TM_003/hashes.json",
-      "report_artifact_hash": null,
-      "candidate_evidence_hash": null,
-      "selected_evidence_hash": null,
-      "ai_preannotation_status": "NOT_STARTED_MISSING_REPORT",
-      "human_review_status": "PENDING",
-      "reviewer": null,
-      "unresolved_review_item_count": 4
-    },
-    {
-      "case_id": "EIV2_CR_003",
-      "category": "conflict_credibility_resolution",
-      "split": "development",
-      "path": "conflict_credibility_resolution/EIV2_CR_003",
-      "hashes_reference": "conflict_credibility_resolution/EIV2_CR_003/hashes.json",
-      "report_artifact_hash": null,
-      "candidate_evidence_hash": null,
-      "selected_evidence_hash": null,
-      "ai_preannotation_status": "NOT_STARTED_MISSING_REPORT",
-      "human_review_status": "PENDING",
-      "reviewer": null,
-      "unresolved_review_item_count": 4
-    },
-    {
-      "case_id": "EIV2_ED_002",
-      "category": "enterprise_decision_recommendation",
-      "split": "development",
-      "path": "enterprise_decision_recommendation/EIV2_ED_002",
-      "hashes_reference": "enterprise_decision_recommendation/EIV2_ED_002/hashes.json",
-      "report_artifact_hash": null,
-      "candidate_evidence_hash": null,
-      "selected_evidence_hash": null,
-      "ai_preannotation_status": "NOT_STARTED_MISSING_REPORT",
-      "human_review_status": "PENDING",
-      "reviewer": null,
-      "unresolved_review_item_count": 4
-    }
-  ],
-  "ai_preannotation_status": "NOT_STARTED_MISSING_REPORTS; REQUIRED_UNIT_TEXT_AND_DEFERRAL_RECOMMENDATIONS_PREPARED",
-  "human_review_status": "PENDING",
-  "reviewer": null,
-  "reviewer_identity": null,
-  "review_timestamp": null,
-  "human_decision": null,
-  "adjudication_note": null,
-  "unresolved_review_item_count": 24,
-  "confident_ai_recommendations": 0,
-  "ambiguous_manual_review_required_items": 24,
-  "content_annotation_items": 0,
-  "report_risk_coverage": {
-    "numeric_value": null,
-    "date_or_time_window": null,
-    "release_status_availability": null,
-    "comparative_claim": null,
-    "superlative_or_ranking": null,
-    "market_metric": null,
-    "benchmark_or_performance": null,
-    "conflict_sensitive_claim": null
-  },
-  "coverage_status": "UNVERIFIED_NO_REPORTS",
-  "planned_required_unit_risk_types": [
-    "benchmark_or_performance",
-    "comparative_claim",
-    "conflict_sensitive_claim",
+  "uncovered_risk_types": [
     "date_or_time_window",
-    "numeric_value",
-    "release_status_availability"
-  ],
-  "unrepresented_required_unit_risk_types": [
     "market_metric",
     "superlative_or_ranking"
   ],
-  "development_execution_attempts": 0,
-  "development_calibration_provider_calls": 0,
-  "development_calibration_cost_usd": 0,
-  "official_benchmark_provider_calls": 0,
-  "official_benchmark_cost_usd": 0,
-  "final_benchmark_result": null,
-  "blockers": [
-    "No verified report/evidence artifacts linked to the selected frozen development cases.",
-    "Existing benchmark runner targets V0, not this dataset.",
-    "Existing workflow does not establish a frozen cutoff-eligible candidate pool before generation; cutoff instruction alone does not verify dates."
-  ],
-  "artifact_hashes": {
-    ".gitattributes": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9",
-    "CALIBRATION_CASE_SELECTION.md": "037eb7aea817528fa2cde91d209a3078efcfc528a9f0f7666bd30f7f74a26ecf",
-    "competitive_comparison/EIV2_CC_001/artifact_references.json": "b487a148b5bad280460a8792e57df17dc8f0f6379d7ddffe6534d2e7b9d5b868",
-    "competitive_comparison/EIV2_CC_001/case_input.json": "2dee559e19e2d395078d6b3692bd66ec2e68eee5ad2474c48361887e6e46b3bc",
-    "competitive_comparison/EIV2_CC_001/hashes.json": "cddd96cd4c8aaf2c84e15a54c40757034fe5836ab299af33bcf6fadbc515f042",
-    "competitive_comparison/EIV2_CC_001/review_sheet.json": "bf3a02ba6dbe40855c2508984c4e0608a6836151e12662df60ba4dcd2a067afe",
-    "competitive_comparison/EIV2_CC_001/scoring_input.json": "8566d4730f9f6ca116ed840c1caa4f5a5aadc2ea869d86cffefe685c5a2335b8",
-    "conflict_credibility_resolution/EIV2_CR_003/artifact_references.json": "1519bec8100d67291d95577392b5f26492ef42d96657a4a638f1ecd453e500e9",
-    "conflict_credibility_resolution/EIV2_CR_003/case_input.json": "8c289a9823587285c6f68ff66d373f6aea4233ba83401b3edc21554e8adaa127",
-    "conflict_credibility_resolution/EIV2_CR_003/hashes.json": "c75c41f0506ff4e5486119964b17a482a38d6c2a5b390f2c628e9cb761c052ff",
-    "conflict_credibility_resolution/EIV2_CR_003/review_sheet.json": "be00b1b59bd3127fbb8db1af58bfd2aca6bcec2d6f58caec28a29353f5dd6f10",
-    "conflict_credibility_resolution/EIV2_CR_003/scoring_input.json": "e0c0f1758e61b59ca3a07cc64257f1db833716c13169588fb163e96b92e94a9c",
-    "enterprise_decision_recommendation/EIV2_ED_002/artifact_references.json": "d4e9ca2c60378b8439e4aac0b47227ef8ab6d4740623f0660aa1cddc3a47c8f9",
-    "enterprise_decision_recommendation/EIV2_ED_002/case_input.json": "6925530fa4001cd8337d136cf6efaffdebe300ecffea0f24b3cf8f9691335195",
-    "enterprise_decision_recommendation/EIV2_ED_002/hashes.json": "79dc301817a6a80b1bd1ed9676203954d4d6af49c277a4f342a61f7b4adbb053",
-    "enterprise_decision_recommendation/EIV2_ED_002/review_sheet.json": "4b897c35157d3eb09d82d7235ab48d9fc48f63adfe678da8d3a76f9e548736bc",
-    "enterprise_decision_recommendation/EIV2_ED_002/scoring_input.json": "52c7adbb666a6462e29dd9889bc19721bcebe41ab59bb1024a4246b9eb1caad9",
-    "factual_verification/EIV2_FV_001/artifact_references.json": "5ea038febd596180070d987c63f1a8f35f43d537427691310c74fcc28835bf25",
-    "factual_verification/EIV2_FV_001/case_input.json": "344c868041cc74be3cb1e006eb53b03bc71a6dc238e95cc8052d048c78deca19",
-    "factual_verification/EIV2_FV_001/hashes.json": "5f8f873b1e3c4427b4663753b49a3519cf2ecf74e5db65f4e2035d533144e8cb",
-    "factual_verification/EIV2_FV_001/review_sheet.json": "438030d2fb27c5f5442244009d51a60b83be89d1b52268eae3c40e3995c55893",
-    "factual_verification/EIV2_FV_001/scoring_input.json": "0a0f74734cc5c2d27a281b5b8067871ad0d287a1e3d918a606caad29a0867aab",
-    "FROZEN_RULE_REFERENCES.json": "968c97fe12587312e702395e1819cff77210f49f091fefc344b3a9a829911c7c",
-    "HUMAN_REVIEW_QUEUE.json": "fd00bfe746e1f8d869cc39f7b336c173ad00fbac0af22e169e70d1eaaca47dd2",
-    "HUMAN_REVIEW_QUEUE.md": "42be0d2bb29967ddc0c54b9f1f2f2aee7549f326edc25d66159236c8c1c6f58f",
-    "README.md": "158dee632613c1210b122d951df58bb655d3b7329b776a419293c691ec7152ff",
-    "REVIEW_ITEM_TEMPLATES.json": "10c4e8e3c862e8bc82581e40e82fb18cc8d3b8262510a71fe1ae8fcd9016448e",
-    "technical_capability_analysis/EIV2_TC_001/artifact_references.json": "8f718d3091189e5fb265c1b1168c70b341fd6b1a30aecc81fa3351a4954004e6",
-    "technical_capability_analysis/EIV2_TC_001/case_input.json": "a116def4b429b318e47d27bdf137d0aca52076e88aca8bf6b5a0bb17ecdac30e",
-    "technical_capability_analysis/EIV2_TC_001/hashes.json": "93d9d1a6dfedf3a1fe376d71e14e0156f1e8a6981a175ef9da48a8c90f2bf8cc",
-    "technical_capability_analysis/EIV2_TC_001/review_sheet.json": "de995beb4a983a087d144d69a89b4028a9fcb584da4ec2d1ece53347543dc74a",
-    "technical_capability_analysis/EIV2_TC_001/scoring_input.json": "c72e7c839500931df811d0891469e927c266ab6e96c2a0fc52c73e488932110f",
-    "trend_market_intelligence/EIV2_TM_003/artifact_references.json": "9fda1ad4dc4b1c5b7fc35b039aa48bd7a00cc4410a2e3cbf4f526e89864278c8",
-    "trend_market_intelligence/EIV2_TM_003/case_input.json": "80b7f25ff41b69b61594babc767a2152bb1aec026e978f0056b2e2e1bbecf030",
-    "trend_market_intelligence/EIV2_TM_003/hashes.json": "336ef6cbc7e4f4d51bf84b5c277b47245d6d6fd73c0edafbcbe6f1dc3e02e735",
-    "trend_market_intelligence/EIV2_TM_003/review_sheet.json": "a142dbf04bdc3f6c81ac75eed3298846c9a8f2b366468e69e86038ad363d1075",
-    "trend_market_intelligence/EIV2_TM_003/scoring_input.json": "5ead31f5f5b47408423321fd81e1a090770ca3294c2ea3508cc3259eef083473",
-    "VALIDATION.json": "d99664cd1fb7e7a910002edccd4e6c6084ab964db440eceab9e2638da600a4c0"
-  }
+  "unresolved_count": 241
 }

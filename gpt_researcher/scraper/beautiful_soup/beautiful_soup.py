@@ -3,6 +3,8 @@ import time
 
 from bs4 import BeautifulSoup
 
+from gpt_researcher.evidence.metadata import extract_structured_html_metadata
+
 from ..utils import get_relevant_images, extract_title, get_text_from_soup, clean_soup
 
 logger = logging.getLogger(__name__)
@@ -17,6 +19,7 @@ class BeautifulSoupScraper:
     def __init__(self, link, session=None):
         self.link = link
         self.session = session
+        self.metadata = {}
 
     def scrape(self):
         """Fetch the page and extract cleaned text, images and title.
@@ -39,6 +42,17 @@ class BeautifulSoupScraper:
             soup = BeautifulSoup(
                 response.content, "lxml", from_encoding=declared_encoding
             )
+
+            # Read head/JSON-LD fields before clean_soup removes non-content nodes.
+            try:
+                self.metadata = extract_structured_html_metadata(
+                    str(soup), page_url=self.link
+                )
+            except Exception as exc:
+                # Metadata is optional and must never turn a successful page
+                # scrape into a content failure.
+                logger.warning(f"Metadata parsing failed for {self.link}: {exc}")
+                self.metadata = {}
 
             soup = clean_soup(soup)
 

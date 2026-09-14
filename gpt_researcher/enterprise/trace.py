@@ -193,6 +193,9 @@ class EvidenceSelectionEvent(ResearchTraceEvent):
     task_category: str | None = Field(default=None, max_length=100)
     candidate_evidence_count: int | None = Field(default=None, ge=0)
     selected_evidence_count: int = Field(ge=0)
+    publisher_resolved_count: int = Field(default=0, ge=0)
+    publication_date_resolved_count: int = Field(default=0, ge=0)
+    metadata_conflict_count: int = Field(default=0, ge=0)
     authority_weight: FiniteFloat | None = Field(default=None, ge=0, le=1)
     similarity_threshold: FiniteFloat | None = None
     selected_evidence_ids: tuple[str, ...] = Field(default=(), max_length=MAX_EVENT_IDS)
@@ -657,6 +660,15 @@ class ResearchTraceRecorder:
             task_category=task_category,
             candidate_evidence_count=candidate_evidence_count,
             selected_evidence_count=len(result.evidences),
+            publisher_resolved_count=sum(
+                bool(evidence.publisher) for evidence in result.evidences
+            ),
+            publication_date_resolved_count=sum(
+                bool(evidence.publication_date) for evidence in result.evidences
+            ),
+            metadata_conflict_count=sum(
+                evidence.metadata_conflict for evidence in result.evidences
+            ),
             authority_weight=authority_weight,
             similarity_threshold=similarity_threshold,
             selected_evidence_ids=selected_ids,

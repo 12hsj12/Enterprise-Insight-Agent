@@ -18,11 +18,15 @@ EXPLICIT_SOURCE_METADATA_FIELDS = (
     "source_owner",
     "author",
     "publication_date",
+    "updated_date",
+    "source_role",
+    "metadata_provenance",
+    "metadata_conflict",
     "source_type",
 )
 
 
-def document_metadata_from_page(page: Dict) -> Dict[str, str]:
+def document_metadata_from_page(page: Dict) -> Dict[str, Any]:
     """Copy only explicit source metadata into a Document.
 
     Hostnames and ranking scores are deliberately excluded.
@@ -36,6 +40,10 @@ def document_metadata_from_page(page: Dict) -> Dict[str, str]:
         value = page.get(field)
         if isinstance(value, str) and value.strip():
             metadata[field] = value.strip()
+        elif field == "metadata_provenance" and isinstance(value, dict):
+            metadata[field] = dict(value)
+        elif field == "metadata_conflict" and isinstance(value, bool):
+            metadata[field] = value
     return metadata
 
 

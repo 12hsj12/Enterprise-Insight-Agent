@@ -403,6 +403,19 @@ def register_proposal(
     source_by_id, resolutions, dropped = _resolve_source_identities(
         proposal, evidence_list, scope_id
     )
+    audit_metadata = []
+    for evidence in evidence_list:
+        raw_date = getattr(evidence, "publication_date", None)
+        if not isinstance(raw_date, str):
+            continue
+        try:
+            published = date.fromisoformat(raw_date)
+        except ValueError:
+            continue
+        audit_metadata.append(GroundingEvidenceAuditMetadata(
+            evidence_id=evidence.evidence_id,
+            publication_date=published,
+        ))
     # Construct ALL stable claim identities before binding ANY relation.
     claims = [
         Claim(
@@ -576,6 +589,7 @@ def register_proposal(
     return ClaimPlan(
         items=registered_items,
         requirements=requirement_list,
+        audit_metadata=audit_metadata,
         source_identity_resolutions=resolutions,
         qualification_provenance=provenance,
         claim_reference_resolutions=reference_resolutions,

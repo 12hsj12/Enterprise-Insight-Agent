@@ -58,50 +58,56 @@ def test_declared_scraping_keeps_long_snippets_scrapeable():
     R = _make("SnippetRetriever",
               [{"url": "https://example.com/a", "raw_content": LONG_SNIPPET}],
               requires_scraping=True)
-    urls, prefetched = _run(_conductor([R]))
+    urls, prefetched, metadata = _run(_conductor([R]))
     assert urls == ["https://example.com/a"]
     assert prefetched == []
+    assert metadata == {}
 
 
 def test_declared_content_is_used_without_scraping():
     R = _make("FullTextRetriever",
               [{"url": "https://example.com/b", "raw_content": "real article text"}],
               requires_scraping=False)
-    urls, prefetched = _run(_conductor([R]))
+    urls, prefetched, metadata = _run(_conductor([R]))
     assert urls == []
     assert prefetched == [{"url": "https://example.com/b", "raw_content": "real article text"}]
+    assert metadata == {}
 
 
 def test_declared_content_falls_back_to_scraping_when_empty():
     """requires_scraping=False but no content on this row -- still worth fetching."""
     R = _make("PartialRetriever", [{"url": "https://example.com/c"}], requires_scraping=False)
-    urls, prefetched = _run(_conductor([R]))
+    urls, prefetched, metadata = _run(_conductor([R]))
     assert urls == ["https://example.com/c"]
     assert prefetched == []
+    assert metadata == {}
 
 
 def test_undeclared_retriever_keeps_legacy_behaviour():
     """Third-party retrievers must be unaffected: >100 chars still means content."""
     R = _make("LegacyRetriever",
               [{"url": "https://example.com/d", "raw_content": LONG_SNIPPET}])
-    urls, prefetched = _run(_conductor([R]))
+    urls, prefetched, metadata = _run(_conductor([R]))
     assert urls == []
     assert prefetched and prefetched[0]["url"] == "https://example.com/d"
+    assert metadata == {}
 
 
 def test_undeclared_short_content_still_scrapes():
     R = _make("LegacyShort", [{"url": "https://example.com/e", "raw_content": "tiny"}])
-    urls, prefetched = _run(_conductor([R]))
+    urls, prefetched, metadata = _run(_conductor([R]))
     assert urls == ["https://example.com/e"]
     assert prefetched == []
+    assert metadata == {}
 
 
 def test_rows_without_a_url_are_skipped():
     R = _make("NoUrl", [{"raw_content": LONG_SNIPPET}, {"url": "https://example.com/f"}],
               requires_scraping=True)
-    urls, prefetched = _run(_conductor([R]))
+    urls, prefetched, metadata = _run(_conductor([R]))
     assert urls == ["https://example.com/f"]
     assert prefetched == []
+    assert metadata == {}
 
 
 def test_base_class_defaults_to_requiring_scraping():

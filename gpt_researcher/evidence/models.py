@@ -91,6 +91,40 @@ class GroundingRepairOperation(str, Enum):
     REMOVE_INVALID_CITATION = "remove_invalid_citation"
 
 
+class SourceRole(str, Enum):
+    """Coarse, descriptive role of the source publisher.
+
+    This is source metadata, not a claim-specific primary-source decision.
+    """
+
+    FIRST_PARTY = "FIRST_PARTY"
+    GOVERNMENT_OR_STANDARD_BODY = "GOVERNMENT_OR_STANDARD_BODY"
+    THIRD_PARTY = "THIRD_PARTY"
+    UNKNOWN = "UNKNOWN"
+
+
+class MetadataProvenanceKind(str, Enum):
+    """Closed provenance vocabulary for resolved source metadata."""
+
+    HTML_STRUCTURED_METADATA = "HTML_STRUCTURED_METADATA"
+    HTML_VISIBLE_DATE = "HTML_VISIBLE_DATE"
+    SEARCH_RESULT_METADATA = "SEARCH_RESULT_METADATA"
+    URL_PATTERN = "URL_PATTERN"
+    KNOWN_SITE_METADATA = "KNOWN_SITE_METADATA"
+    UNKNOWN = "UNKNOWN"
+
+
+class EvidenceMetadataProvenance(BaseModel):
+    """Field-level provenance; absent legacy metadata remains explicit."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    publisher: MetadataProvenanceKind = MetadataProvenanceKind.UNKNOWN
+    author: MetadataProvenanceKind = MetadataProvenanceKind.UNKNOWN
+    publication_date: MetadataProvenanceKind = MetadataProvenanceKind.UNKNOWN
+    updated_date: MetadataProvenanceKind = MetadataProvenanceKind.UNKNOWN
+
+
 def normalize_claim_text(text: str) -> str:
     """Normalize identity text with NFKC and collapsed Unicode whitespace."""
 
@@ -425,6 +459,12 @@ class Evidence(BaseModel):
     source_owner: str | None = None
     author: str | None = None
     publication_date: str | None = None
+    updated_date: str | None = None
+    source_role: SourceRole = SourceRole.UNKNOWN
+    metadata_provenance: EvidenceMetadataProvenance = Field(
+        default_factory=EvidenceMetadataProvenance
+    )
+    metadata_conflict: bool = False
 
     relevance_score: float | None = Field(
         default=None,

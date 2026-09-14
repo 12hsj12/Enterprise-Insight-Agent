@@ -20,7 +20,8 @@ def sha256(data: bytes) -> str:
 
 _active: ContextVar = ContextVar("development_calibration_capture", default=None)
 _FIELDS = ("url", "source", "title", "publisher", "source_organization",
-           "source_owner", "author", "publication_date", "source_type")
+           "source_owner", "author", "publication_date", "updated_date",
+           "source_role", "source_type")
 
 
 def scrub(text: str) -> str:
@@ -64,6 +65,15 @@ class CalibrationCapture:
                 content = _text(content)
                 record = {key: _text(metadata[key]) for key in _FIELDS
                           if isinstance(metadata.get(key), str)}
+                raw_provenance = metadata.get("metadata_provenance")
+                if isinstance(raw_provenance, dict):
+                    record["metadata_provenance"] = {
+                        key: _text(value)
+                        for key, value in raw_provenance.items()
+                        if isinstance(key, str) and isinstance(value, str)
+                    }
+                if isinstance(metadata.get("metadata_conflict"), bool):
+                    record["metadata_conflict"] = metadata["metadata_conflict"]
                 record["ignored_nontext_metadata_fields"] = [key for key in _FIELDS
                     if metadata.get(key) is not None and not isinstance(metadata.get(key), str)]
                 record.update(position=index, content=content[:50000],

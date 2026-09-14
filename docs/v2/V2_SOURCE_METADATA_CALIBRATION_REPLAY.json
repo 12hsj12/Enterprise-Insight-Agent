@@ -1,0 +1,164 @@
+{
+  "schema_version": "v2-source-metadata-replay-1",
+  "input": {
+    "directory": "E:/AIProjects/gpt-researcher/docs/v2/calibration/v2.2.0",
+    "case_count": 6,
+    "saved_evidence_only": true,
+    "live_web": false
+  },
+  "reference_date": "2026-09-14",
+  "freshness_diagnostic_window_days": 180,
+  "before": {
+    "evidence_count": 191,
+    "known_publisher": 0,
+    "unknown_publisher": 191,
+    "known_publication_date": 0,
+    "unknown_publication_date": 191,
+    "freshness_computable": 0,
+    "first_party_identifiable": 0
+  },
+  "after": {
+    "evidence_count": 191,
+    "known_publisher": 18,
+    "unknown_publisher": 173,
+    "known_publication_date": 1,
+    "unknown_publication_date": 190,
+    "freshness_computable": 1,
+    "first_party_identifiable": 16
+  },
+  "qualification_impact": {
+    "identity_newly_usable": 18,
+    "freshness_newly_computable": 1,
+    "first_party_newly_identifiable": 16,
+    "verified_within_180_days": 0,
+    "verified_older_than_180_days": 1
+  },
+  "by_case": {
+    "EIV2_CC_001": {
+      "before": {
+        "evidence_count": 30,
+        "known_publisher": 0,
+        "unknown_publisher": 30,
+        "known_publication_date": 0,
+        "unknown_publication_date": 30,
+        "freshness_computable": 0,
+        "first_party_identifiable": 0
+      },
+      "after": {
+        "evidence_count": 30,
+        "known_publisher": 0,
+        "unknown_publisher": 30,
+        "known_publication_date": 0,
+        "unknown_publication_date": 30,
+        "freshness_computable": 0,
+        "first_party_identifiable": 0
+      }
+    },
+    "EIV2_CR_003": {
+      "before": {
+        "evidence_count": 38,
+        "known_publisher": 0,
+        "unknown_publisher": 38,
+        "known_publication_date": 0,
+        "unknown_publication_date": 38,
+        "freshness_computable": 0,
+        "first_party_identifiable": 0
+      },
+      "after": {
+        "evidence_count": 38,
+        "known_publisher": 2,
+        "unknown_publisher": 36,
+        "known_publication_date": 0,
+        "unknown_publication_date": 38,
+        "freshness_computable": 0,
+        "first_party_identifiable": 0
+      }
+    },
+    "EIV2_ED_002": {
+      "before": {
+        "evidence_count": 27,
+        "known_publisher": 0,
+        "unknown_publisher": 27,
+        "known_publication_date": 0,
+        "unknown_publication_date": 27,
+        "freshness_computable": 0,
+        "first_party_identifiable": 0
+      },
+      "after": {
+        "evidence_count": 27,
+        "known_publisher": 3,
+        "unknown_publisher": 24,
+        "known_publication_date": 1,
+        "unknown_publication_date": 26,
+        "freshness_computable": 1,
+        "first_party_identifiable": 3
+      }
+    },
+    "EIV2_FV_001": {
+      "before": {
+        "evidence_count": 26,
+        "known_publisher": 0,
+        "unknown_publisher": 26,
+        "known_publication_date": 0,
+        "unknown_publication_date": 26,
+        "freshness_computable": 0,
+        "first_party_identifiable": 0
+      },
+      "after": {
+        "evidence_count": 26,
+        "known_publisher": 11,
+        "unknown_publisher": 15,
+        "known_publication_date": 0,
+        "unknown_publication_date": 26,
+        "freshness_computable": 0,
+        "first_party_identifiable": 11
+      }
+    },
+    "EIV2_TC_001": {
+      "before": {
+        "evidence_count": 40,
+        "known_publisher": 0,
+        "unknown_publisher": 40,
+        "known_publication_date": 0,
+        "unknown_publication_date": 40,
+        "freshness_computable": 0,
+        "first_party_identifiable": 0
+      },
+      "after": {
+        "evidence_count": 40,
+        "known_publisher": 0,
+        "unknown_publisher": 40,
+        "known_publication_date": 0,
+        "unknown_publication_date": 40,
+        "freshness_computable": 0,
+        "first_party_identifiable": 0
+      }
+    },
+    "EIV2_TM_003": {
+      "before": {
+        "evidence_count": 30,
+        "known_publisher": 0,
+        "unknown_publisher": 30,
+        "known_publication_date": 0,
+        "unknown_publication_date": 30,
+        "freshness_computable": 0,
+        "first_party_identifiable": 0
+      },
+      "after": {
+        "evidence_count": 30,
+        "known_publisher": 2,
+        "unknown_publisher": 28,
+        "known_publication_date": 0,
+        "unknown_publication_date": 30,
+        "freshness_computable": 0,
+        "first_party_identifiable": 2
+      }
+    }
+  },
+  "runtime_calls": {
+    "provider": 0,
+    "search": 0,
+    "development": 0,
+    "holdout": 0
+  }
+}

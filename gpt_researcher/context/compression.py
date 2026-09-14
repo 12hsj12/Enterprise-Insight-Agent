@@ -220,7 +220,7 @@ class ContextCompressor:
             **{
                 field: doc.metadata.get(field)
                 for field in EXPLICIT_SOURCE_METADATA_FIELDS
-                if field != "source_type" and doc.metadata.get(field)
+                if field != "source_type" and doc.metadata.get(field) is not None
             },
         )
 

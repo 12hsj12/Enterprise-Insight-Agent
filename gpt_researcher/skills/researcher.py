@@ -836,8 +836,11 @@ class ResearchConductor:
         return new_urls
 
     async def _search_relevant_source_urls(self, query, query_domains: list | None = None):
+        from gpt_researcher.evidence.metadata import search_result_metadata
+
         new_search_urls = []
         prefetched_content = []
+        search_metadata_by_url = {}
         if query_domains is None:
             query_domains = []
 
@@ -878,6 +881,17 @@ class ResearchConductor:
 
                     if not url:
                         continue
+
+                    explicit_search_metadata = search_result_metadata(result)
+                    if explicit_search_metadata:
+                        previous = search_metadata_by_url.get(url, {})
+                        merged = dict(previous)
+                        for key, value in explicit_search_metadata.items():
+                            if key in merged and merged[key] != value:
+                                merged["metadata_conflict"] = True
+                            else:
+                                merged[key] = value
+                        search_metadata_by_url[url] = merged
 
                     if requires_scraping is True:
                         # Declared: anything alongside the URL is a preview,
@@ -929,7 +943,7 @@ class ResearchConductor:
         new_search_urls = await self._get_new_urls(new_search_urls)
         random.shuffle(new_search_urls)
 
-        return new_search_urls, prefetched_content
+        return new_search_urls, prefetched_content, search_metadata_by_url
 
     async def _scrape_data_by_urls(self, sub_query, query_domains: list | None = None):
         """
@@ -946,7 +960,12 @@ class ResearchConductor:
         if query_domains is None:
             query_domains = []
 
-        new_search_urls, prefetched_content = await self._search_relevant_source_urls(sub_query, query_domains)
+        from gpt_researcher.evidence.metadata import enrich_page_metadata
+
+        (new_search_urls, prefetched_content,
+         search_metadata_by_url) = await self._search_relevant_source_urls(
+            sub_query, query_domains
+        )
 
         # Log the research process if verbose mode is on
         if self.researcher.verbose:
@@ -962,6 +981,13 @@ class ResearchConductor:
 
         # Merge pre-fetched content from retrievers that already provide full text
         scraped_content.extend(prefetched_content)
+        scraped_content = [
+            enrich_page_metadata(
+                item,
+                provider_metadata=search_metadata_by_url.get(item.get("url", "")),
+            )
+            for item in scraped_content
+        ]
 
         if self.researcher.vector_store:
             self.researcher.vector_store.load(scraped_content)
@@ -1070,11 +1096,21 @@ class ResearchConductor:
         """
         self.logger.info(f"Extracting content from {len(results)} search results")
         
-        # Get the URLs from the search results
+        from gpt_researcher.evidence.metadata import (
+            enrich_page_metadata,
+            search_result_metadata,
+        )
+
+        # Get the URLs and retain explicit provider metadata for the scrape merge.
         urls = []
+        metadata_by_url = {}
         for result in results:
             if isinstance(result, dict) and "href" in result:
-                urls.append(result["href"])
+                url = result["href"]
+                urls.append(url)
+                metadata = search_result_metadata(result)
+                if metadata:
+                    metadata_by_url[url] = metadata
         
         # Skip if no URLs found
         if not urls:
@@ -1089,6 +1125,13 @@ class ResearchConductor:
             
         # Scrape the content from the URLs
         scraped_content = await self.researcher.scraper_manager.browse_urls(new_urls)
+        scraped_content = [
+            enrich_page_metadata(
+                item,
+                provider_metadata=metadata_by_url.get(item.get("url", "")),
+            )
+            for item in scraped_content
+        ]
         
         # Add the URLs to visited_urls
         self.researcher.visited_urls.update(new_urls)

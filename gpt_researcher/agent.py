@@ -13,6 +13,7 @@ from typing import TYPE_CHECKING, Any, Optional
 
 if TYPE_CHECKING:
     from .enterprise.task_policy import EvidencePolicy, TaskClassification
+    from .enterprise.requirements import ResearchPlan
 
 from .actions import (
     add_references,
@@ -87,6 +88,7 @@ class GPTResearcher:
         mcp_strategy: str | None = None,
         task_classification: TaskClassification | None = None,
         evidence_policy: EvidencePolicy | None = None,
+        requirement_planning_context: dict[str, Any] | None = None,
         **kwargs
     ):
         """
@@ -162,6 +164,8 @@ class GPTResearcher:
         self.retrieval_diagnostics = []  # Content-free evidence-selection score components
         self.task_classification = task_classification
         self.evidence_policy = evidence_policy
+        self.requirement_planning_context = requirement_planning_context
+        self.research_plan: ResearchPlan | None = None
         self.research_images = []  # The list of selected research images
         self.documents = documents
         self.vector_store = VectorStoreWrapper(vector_store) if vector_store else None

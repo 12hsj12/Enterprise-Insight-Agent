@@ -13,6 +13,14 @@ from .task_policy import (
 )
 from .workflow import IntelligenceRequest, IntelligenceResult, IntelligenceWorkflow
 from .trace import ResearchTrace, ResearchTraceRecorder
+from .requirements import (
+    PlannedSubQuery,
+    RequirementCoverage,
+    RequirementCoverageStatus,
+    RequirementType,
+    ResearchPlan,
+    ResearchRequirement,
+)
 
 __all__ = [
     "EVIDENCE_SELECTION_LIMITATION_CODES",
@@ -26,6 +34,12 @@ __all__ = [
     "ResearchTaskClassifier",
     "ResearchTrace",
     "ResearchTraceRecorder",
+    "PlannedSubQuery",
+    "RequirementCoverage",
+    "RequirementCoverageStatus",
+    "RequirementType",
+    "ResearchPlan",
+    "ResearchRequirement",
     "TaskClassification",
     "adaptive_authority_weight",
     "evidence_policy_for",

@@ -47,6 +47,8 @@ def item(text="Acme builds widgets.", *, risks=(), support=True, qualification=F
 class FixtureResearcher:
     def __init__(self, **kwargs):
         self.query = kwargs["query"]
+        self.requirement_planning_context = kwargs.get("requirement_planning_context")
+        self.research_plan = None
         self.cfg = SimpleNamespace(smart_llm_model="fixture", smart_llm_provider="fixture",
                                   smart_token_limit=4000, llm_kwargs={})
         self.report_generator = object.__new__(ReportGenerator)
@@ -76,7 +78,7 @@ async def test_writer_workflow_artifacts_evaluation(tmp_path, monkeypatch):
         supplied = json.loads(kwargs["messages"][1]["content"])
         assert supplied["evidence"][0]["evidence_id"] == "ev_one"
         kwargs["cost_callback"](0.125)
-        return json.dumps({"claims": [{"text": "Acme builds widgets.", "risk_types": [],
+        return json.dumps({"claims": [{"requirement_id": "R1", "text": "Acme builds widgets.", "risk_types": [],
             "is_material": True, "relations": [{"evidence_id": "ev_one", "relation": "support"}],
             "cited_evidence_ids": ["ev_one"]}]})
     monkeypatch.setattr("gpt_researcher.utils.llm.create_chat_completion", author)
@@ -280,7 +282,7 @@ async def test_real_gpt_researcher_search_scrape_context_writer_path(tmp_path, m
         calls.append("write")
         data = json.loads(kwargs["messages"][1]["content"])
         eid = data["evidence"][0]["evidence_id"]
-        return json.dumps({"claims": [{"text": "Acme builds widgets.", "risk_types": [],
+        return json.dumps({"claims": [{"requirement_id": "R1", "text": "Acme builds widgets.", "risk_types": [],
             "is_material": True, "relations": [{"evidence_id": eid, "relation": "support"}],
             "cited_evidence_ids": [eid]}]})
 

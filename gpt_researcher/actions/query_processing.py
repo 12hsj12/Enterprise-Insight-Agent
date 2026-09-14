@@ -8,6 +8,13 @@ from ..config import Config
 from ..prompts import PromptFamily
 from ..utils.llm import create_chat_completion
 
+from gpt_researcher.enterprise.requirements import (
+    ResearchPlan,
+    fallback_research_plan,
+    planning_prompt_suffix,
+    validate_research_plan,
+)
+
 
 def _normalize_sub_queries(parsed: Any, fallback_query: str) -> List[str]:
     """Coerce a parsed LLM response into a flat list of query strings.
@@ -88,8 +95,9 @@ async def generate_sub_queries(
     cfg: Config,
     cost_callback: callable = None,
     prompt_family: type[PromptFamily] | PromptFamily = PromptFamily,
+    requirement_context: Dict[str, Any] | None = None,
     **kwargs
-) -> List[str]:
+) -> List[str] | ResearchPlan:
     """
     Generate sub-queries using the specified LLM model.
 
@@ -113,6 +121,8 @@ async def generate_sub_queries(
         max_iterations=cfg.max_iterations or 3,
         context=context,
     )
+    if requirement_context is not None:
+        gen_queries_prompt += planning_prompt_suffix(**requirement_context)
 
     try:
         response = await create_chat_completion(
@@ -153,7 +163,16 @@ async def generate_sub_queries(
                 **kwargs
             )
 
-    return _normalize_sub_queries(json_repair.loads(response), query)
+    if requirement_context is None:
+        return _normalize_sub_queries(json_repair.loads(response), query)
+
+    try:
+        parsed = json_repair.loads(response)
+        plan = ResearchPlan.model_validate(parsed)
+        return validate_research_plan(plan, requirement_context["dimensions"])
+    except Exception as exc:
+        logger.warning("Invalid structured research plan; using deterministic fallback: %s", exc)
+        return fallback_research_plan(**requirement_context, reason=type(exc).__name__)
 
 async def plan_research_outline(
     query: str,
@@ -164,8 +183,9 @@ async def plan_research_outline(
     report_type: str,
     cost_callback: callable = None,
     retriever_names: List[str] = None,
+    requirement_context: Dict[str, Any] | None = None,
     **kwargs
-) -> List[str]:
+) -> List[str] | ResearchPlan:
     """
     Plan the research outline by generating sub-queries.
 
@@ -196,6 +216,11 @@ async def plan_research_outline(
             # If MCP is the only retriever, skip sub-query generation
             logger.info("Using MCP retriever only - skipping sub-query generation")
             # Return the original query to prevent additional search iterations
+            if requirement_context is not None:
+                return fallback_research_plan(
+                    **requirement_context,
+                    reason="planning_call_skipped_for_mcp_only",
+                )
             return [query]
         else:
             # If MCP is one of multiple retrievers, generate sub-queries for the others
@@ -209,6 +234,7 @@ async def plan_research_outline(
         search_results,
         cfg,
         cost_callback,
+        requirement_context=requirement_context,
         **kwargs
     )
 

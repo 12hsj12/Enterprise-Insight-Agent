@@ -18,6 +18,7 @@ from ..actions.utils import stream_output
 from ..document import DocumentLoader, LangChainDocumentLoader, OnlineDocumentLoader
 from ..utils.enum import ReportSource, ReportType
 from ..utils.logging_config import get_json_handler
+from gpt_researcher.enterprise.requirements import ResearchPlan
 
 
 class ResearchConductor:
@@ -91,9 +92,15 @@ class ResearchConductor:
             report_type=self.researcher.report_type,
             cost_callback=self.researcher.add_costs,
             retriever_names=retriever_names,  # Pass retriever names for MCP optimization
+            requirement_context=getattr(
+                self.researcher, "requirement_planning_context", None
+            ),
             **self.researcher.kwargs
         )
         self.logger.info(f"Research outline planned: {outline}")
+        if isinstance(outline, ResearchPlan):
+            self.researcher.research_plan = outline
+            return [item.query for item in outline.sub_queries]
         return outline
 
     async def conduct_research(self):

@@ -197,6 +197,13 @@ class IntelligenceWorkflow:
             query=request.research_query(), report_type="research_report",
             report_source="web", config_path=self.config_path, verbose=False,
         )
+        if request.enable_v2_execution:
+            researcher_kwargs["requirement_planning_context"] = {
+                "target": request.target,
+                "topic": request.topic,
+                "dimensions": list(request.dimensions),
+                "cutoff_date": request.cutoff_date,
+            }
         if task_classification is not None and evidence_policy is not None:
             researcher_kwargs.update(
                 task_classification=task_classification,

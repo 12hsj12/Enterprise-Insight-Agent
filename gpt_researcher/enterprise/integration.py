@@ -23,6 +23,14 @@ from gpt_researcher.evidence.models import (
     GeneratedClaimOutputMode, GroundingEvidenceAuditMetadata, GroundingRepairPlan,
     GroundingStatus, normalize_claim_text,
 )
+from .requirements import (
+    RequirementCoverage,
+    RequirementCoverageStatus,
+    RequirementType,
+    ResearchRequirement,
+    canonical_label,
+    fallback_research_plan,
+)
 
 
 class StructuredModel(BaseModel):
@@ -66,6 +74,7 @@ class ProposedRelation(StructuredModel):
 
 
 class ProposedClaim(StructuredModel):
+    requirement_id: str | None = Field(default=None, max_length=20)
     text: str = Field(min_length=1, max_length=3000)
     risk_types: list[ClaimRiskType]
     is_material: bool
@@ -153,10 +162,12 @@ class RegisteredClaimInput(StructuredModel):
     qualifications: list[ClaimEvidenceQualification] = Field(default_factory=list, max_length=100)
     gate_context: ClaimGateContext = Field(default_factory=ClaimGateContext)
     cited_evidence_ids: list[str] = Field(default_factory=list, max_length=100)
+    requirement_id: str | None = Field(default=None, max_length=20)
 
 
 class ClaimPlan(StructuredModel):
     items: list[RegisteredClaimInput] = Field(max_length=60)
+    requirements: list[ResearchRequirement] = Field(default_factory=list, max_length=60)
     audit_metadata: list[GroundingEvidenceAuditMetadata] = Field(default_factory=list, max_length=1000)
     source_identity_resolutions: list[SourceIdentityResolution] = Field(default_factory=list, max_length=1000)
     qualification_provenance: list[QualificationProvenance] = Field(default_factory=list, max_length=6000)
@@ -167,10 +178,12 @@ class ClaimPlan(StructuredModel):
 class IntegratedExecution(StructuredModel):
     evidence_context: EvidenceContext
     claim_inputs: list[RegisteredClaimInput]
+    requirements: list[ResearchRequirement] = Field(default_factory=list, max_length=60)
     audit_metadata: list[GroundingEvidenceAuditMetadata]
     qualification_diagnostics: QualificationCoverageDiagnostics | None = None
     repair_plan: GroundingRepairPlan | None = None
     additional_retrieval_attempts: Literal[0] = 0
+    requirement_coverage: list[RequirementCoverage] = Field(default_factory=list)
     report_sha256: str = ""
 
 
@@ -365,10 +378,27 @@ def register_proposal(
     proposal: ClaimProposal,
     scope_id: str,
     evidences: list | tuple = (),
+    requirements: list[ResearchRequirement] | tuple[ResearchRequirement, ...] = (),
 ) -> ClaimPlan:
     """Validate bounded authoring and create existing Gate inputs fail-closed."""
 
     evidence_list = list(evidences)
+    requirement_list = list(requirements)
+    requirements_by_id = {
+        requirement.requirement_id: requirement for requirement in requirement_list
+    }
+    if len(requirements_by_id) != len(requirement_list):
+        raise ValueError("Duplicate requirement registration")
+    if requirements_by_id:
+        for item in proposal.claims:
+            if item.requirement_id not in requirements_by_id:
+                raise ValueError("Claim references an unknown requirement ID")
+            requirement = requirements_by_id[item.requirement_id]
+            if (
+                requirement.requirement_type is RequirementType.COMPARATIVE
+                and ClaimRiskType.COMPARATIVE_CLAIM not in item.risk_types
+            ):
+                raise ValueError("Comparative requirement claim lacks comparative risk type")
     evidence_by_id = {evidence.evidence_id: evidence for evidence in evidence_list}
     source_by_id, resolutions, dropped = _resolve_source_identities(
         proposal, evidence_list, scope_id
@@ -541,9 +571,11 @@ def register_proposal(
                 required_material_side_ids=required_sides,
             ),
             cited_evidence_ids=item.cited_evidence_ids,
+            requirement_id=item.requirement_id,
         ))
     return ClaimPlan(
         items=registered_items,
+        requirements=requirement_list,
         source_identity_resolutions=resolutions,
         qualification_provenance=provenance,
         claim_reference_resolutions=reference_resolutions,
@@ -625,6 +657,18 @@ async def propose_claims(researcher, context: EvidenceContext, scope_id: str) ->
 
     if not context.evidences:
         raise ValueError("No structured evidence collected")
+    research_plan = getattr(researcher, "research_plan", None)
+    if research_plan is None:
+        planning_context = getattr(researcher, "requirement_planning_context", None) or {
+            "target": researcher.query,
+            "topic": researcher.query,
+            "dimensions": [],
+            "cutoff_date": None,
+        }
+        research_plan = fallback_research_plan(
+            **planning_context,
+            reason="structured_plan_unavailable",
+        )
     response = await create_chat_completion(
         model=researcher.cfg.smart_llm_model,
         llm_provider=researcher.cfg.smart_llm_provider,
@@ -637,7 +681,9 @@ async def propose_claims(researcher, context: EvidenceContext, scope_id: str) ->
             "Use only supplied evidence content. Explicitly state support/conflict/unclear "
             "relations from that content; citation presence, URL and authority do not establish "
             "support. Preserve uncertainty. Include every applicable frozen risk type, and "
-            "is_material. Do not invent evidence IDs. Text must contain no citations or markup; "
+            "is_material. Bind every claim to exactly one supplied requirement_id. Do not invent "
+            "or modify requirements, requirement types, target entities, or evidence IDs. Text "
+            "must contain no citations or markup; "
             "put the actual chosen citation subset in cited_evidence_ids. For comparative claims, "
             "provide bounded entity_references only for explicitly identified comparison subjects, "
             "then associate each evidence relation only with the entity-specific part it explicitly "
@@ -661,18 +707,124 @@ async def propose_claims(researcher, context: EvidenceContext, scope_id: str) ->
             + json.dumps(ClaimProposal.model_json_schema())
         )}, {"role": "user", "content": json.dumps({
             "query": researcher.query,
+            "requirements": [
+                requirement.model_dump(mode="json")
+                for requirement in research_plan.requirements
+            ],
             "evidence": [e.model_dump(mode="json") for e in context.evidences],
         })}],
     )
     return register_proposal(
-        ClaimProposal.model_validate_json(response), scope_id, context.evidences
+        ClaimProposal.model_validate_json(response),
+        scope_id,
+        context.evidences,
+        research_plan.requirements,
     )
+
+
+def evaluate_requirement_coverage(
+    plan: ClaimPlan,
+    records: list[GeneratedClaimRecord],
+) -> list[RequirementCoverage]:
+    """Evaluate simple final-output coverage after grounding repair."""
+
+    if not plan.requirements:
+        return []
+    surviving_ids = {record.claim_id for record in records}
+    items_by_requirement: dict[str, list[RegisteredClaimInput]] = {}
+    for item in plan.items:
+        if item.requirement_id is not None and item.claim.claim_id in surviving_ids:
+            items_by_requirement.setdefault(item.requirement_id, []).append(item)
+    references_by_claim = {
+        resolution.claim_id: {
+            reference.stable_id: canonical_label(reference.label)
+            for reference in resolution.entity_references
+        }
+        for resolution in plan.claim_reference_resolutions
+    }
+
+    base_status: dict[str, RequirementCoverageStatus] = {}
+    for requirement in plan.requirements:
+        items = items_by_requirement.get(requirement.requirement_id, [])
+        if requirement.requirement_type is RequirementType.FACTUAL:
+            status = (
+                RequirementCoverageStatus.COVERED
+                if items else RequirementCoverageStatus.NOT_COVERED
+            )
+        elif requirement.requirement_type is RequirementType.COMPARATIVE:
+            target_labels = {
+                canonical_label(entity) for entity in requirement.target_entities
+            }
+            comparative_items = [
+                item for item in items
+                if ClaimRiskType.COMPARATIVE_CLAIM in item.claim.risk_types
+            ]
+            covered_target_sets = [
+                {
+                    canonical_label(target)
+                    for target in requirement.target_entities
+                    if (
+                        (stable_id := _opaque_id("entity", item.claim.scope_id, target))
+                        in item.gate_context.required_entity_ids
+                        and references_by_claim.get(item.claim.claim_id, {}).get(stable_id)
+                        == canonical_label(target)
+                    )
+                }
+                for item in comparative_items
+            ]
+            if any(target_labels <= covered for covered in covered_target_sets):
+                status = RequirementCoverageStatus.COVERED
+            elif any(target_labels & covered for covered in covered_target_sets):
+                status = RequirementCoverageStatus.PARTIALLY_COVERED
+            else:
+                status = RequirementCoverageStatus.NOT_COVERED
+        else:
+            status = (
+                RequirementCoverageStatus.COVERED
+                if items else RequirementCoverageStatus.NOT_COVERED
+            )
+        base_status[requirement.requirement_id] = status
+
+    results = []
+    for requirement in plan.requirements:
+        status = base_status[requirement.requirement_id]
+        if requirement.requirement_type is RequirementType.RECOMMENDATION and status is RequirementCoverageStatus.COVERED:
+            supporting = [
+                other for other in plan.requirements
+                if other.requirement_id != requirement.requirement_id
+                and other.requirement_type in (
+                    RequirementType.FACTUAL,
+                    RequirementType.COMPARATIVE,
+                )
+            ]
+            if supporting and not all(
+                base_status[item.requirement_id] is RequirementCoverageStatus.COVERED
+                for item in supporting
+            ):
+                status = RequirementCoverageStatus.PARTIALLY_COVERED
+        results.append(RequirementCoverage(
+            requirement_id=requirement.requirement_id,
+            status=status,
+            surviving_claim_ids=tuple(
+                item.claim.claim_id
+                for item in items_by_requirement.get(requirement.requirement_id, [])
+            ),
+        ))
+    return results
 
 
 def integrate_claims(context: EvidenceContext, plan: ClaimPlan, cutoff: date,
                      trace=None) -> IntegratedExecution:
     """Register, bind, gate, deterministically generate, and repair at most once."""
     context = context.model_copy(deep=True)
+    requirement_ids = [item.requirement_id for item in plan.requirements]
+    if len(set(requirement_ids)) != len(requirement_ids):
+        raise ValueError("Duplicate requirement registration")
+    known_requirement_ids = set(requirement_ids)
+    if requirement_ids and any(
+        item.requirement_id not in known_requirement_ids for item in plan.items
+    ):
+        raise ValueError("Claim references an unknown requirement ID")
     claims = [item.claim for item in plan.items]
     if len({c.claim_id for c in claims}) != len(claims):
         raise ValueError("Duplicate claim registration")
@@ -754,9 +906,11 @@ def integrate_claims(context: EvidenceContext, plan: ClaimPlan, cutoff: date,
     return IntegratedExecution(
         evidence_context=context,
         claim_inputs=plan.items,
+        requirements=plan.requirements,
         audit_metadata=plan.audit_metadata,
         qualification_diagnostics=_coverage_diagnostics(plan),
         repair_plan=repair_plan,
+        requirement_coverage=evaluate_requirement_coverage(plan, records),
     )
 
 
@@ -767,7 +921,8 @@ def render_report(execution: IntegratedExecution) -> str:
 
     evidence = {e.evidence_id: e for e in execution.evidence_context.evidences}
     lines = ["# Enterprise Insight", ""]
-    for record in execution.evidence_context.generated_claim_records:
+
+    def render_record(record):
         prefix = "Evidence limitation — unconfirmed assertion: " if record.output_mode is GeneratedClaimOutputMode.HEDGED else ""
         citations = []
         for eid in record.cited_evidence_ids:
@@ -779,7 +934,27 @@ def render_report(execution: IntegratedExecution) -> str:
             else:
                 citations.append(f"Evidence {escape(eid)} (source URL unavailable)")
         lines.extend([prefix + escape(record.rendered_text) + " " + " ".join(citations), ""])
-    if not execution.evidence_context.generated_claim_records:
+
+    records = execution.evidence_context.generated_claim_records
+    if execution.requirement_coverage:
+        records_by_id = {record.claim_id: record for record in records}
+        requirements = {
+            requirement.requirement_id: requirement
+            for requirement in execution.requirements
+        }
+        for coverage in execution.requirement_coverage:
+            requirement = requirements.get(coverage.requirement_id)
+            title = requirement.text if requirement else coverage.requirement_id
+            lines.extend([f"## {escape(title)}", ""])
+            for claim_id in coverage.surviving_claim_ids:
+                if claim_id in records_by_id:
+                    render_record(records_by_id[claim_id])
+            if not coverage.surviving_claim_ids:
+                lines.extend(["No evidence-backed claim survived for this requirement.", ""])
+    else:
+        for record in records:
+            render_record(record)
+    if not records:
         lines.append("No claims could be emitted from the available structured evidence.")
     report = "\n".join(lines)
     execution.report_sha256 = hashlib.sha256(report.encode("utf-8")).hexdigest()

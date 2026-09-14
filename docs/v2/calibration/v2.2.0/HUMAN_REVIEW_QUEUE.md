@@ -1,6 +1,6 @@
 # V2.2 compressed human review queue
 
-Status: **READY_FOR_HUMAN_REVIEW**. All recommendations remain AI-assisted; all human fields remain unset.
+Status: **HUMAN_REVIEW_COMPLETED**. Reviewer: `human-reviewer-calibration-001`. Review timestamp: `2026-09-14T03:08:01Z`.
 
 Full ledger: 483; machine-resolved/no-human-action: 227; calibration core: 51; adjudication queue: 36; human workload: 87 tasks.
 
@@ -25,7 +25,7 @@ Evidence: ev_d384aee29a4051c8 — https://community.openai.com/t/api-is-our-data
 Evidence: ev_d2c625b8589d3de9 — https://openai.xiniushu.com/policies/api-data-usage-policies (`docs\v2\calibration\v2.2.0\factual_verification\EIV2_FV_001\selected.json#/evidences/6/content`)
 Evidence: ev_2031367fc36e847d — https://developers.openai.com/api/docs/guides/your-data (`docs\v2\calibration\v2.2.0\factual_verification\EIV2_FV_001\selected.json#/evidences/19/content`)
 
-Human decision: PENDING
+Human decision: SATISFIED
 
 ### CORE-002 — EIV2_FV_001 / required_unit
 
@@ -44,7 +44,7 @@ Evidence: ev_d384aee29a4051c8 — https://community.openai.com/t/api-is-our-data
 Evidence: ev_d2c625b8589d3de9 — https://openai.xiniushu.com/policies/api-data-usage-policies (`docs\v2\calibration\v2.2.0\factual_verification\EIV2_FV_001\selected.json#/evidences/6/content`)
 Evidence: ev_2031367fc36e847d — https://developers.openai.com/api/docs/guides/your-data (`docs\v2\calibration\v2.2.0\factual_verification\EIV2_FV_001\selected.json#/evidences/19/content`)
 
-Human decision: PENDING
+Human decision: NOT_SATISFIED
 
 ### CORE-003 — EIV2_FV_001 / required_unit
 
@@ -60,7 +60,7 @@ Reason: 报告解释存储类型但未交代保留期限、删除或控制边界
 
 Evidence: ev_2031367fc36e847d — https://developers.openai.com/api/docs/guides/your-data (`docs\v2\calibration\v2.2.0\factual_verification\EIV2_FV_001\selected.json#/evidences/19/content`)
 
-Human decision: PENDING
+Human decision: NOT_SATISFIED
 
 ### CORE-004 — EIV2_TC_001 / required_unit
 
@@ -78,7 +78,7 @@ Evidence: ev_62fa0fb7bbfd9bb8 — https://www.instaclustr.com/education/vector-d
 Evidence: ev_7a6809120ded0e6a — https://www.instaclustr.com/education/vector-database/pgvector-hybrid-search-benefits-use-cases-and-quick-tutorial (`docs\v2\calibration\v2.2.0\technical_capability_analysis\EIV2_TC_001\selected.json#/evidences/32/content`)
 Evidence: ev_4426f461ab217c20 — https://medium.com/@aysebilgegunduz/all-you-need-to-know-about-pgvector-part-4-hybrid-search-8a655d3b0087 (`docs\v2\calibration\v2.2.0\technical_capability_analysis\EIV2_TC_001\selected.json#/evidences/35/content`)
 
-Human decision: PENDING
+Human decision: NOT_SATISFIED
 
 ### CORE-005 — EIV2_TC_001 / required_unit
 
@@ -95,7 +95,7 @@ Reason: 报告只说规划器可用索引，没有完成 HNSW/IVFFlat 选择与�
 Evidence: ev_9c01b4455145f8f5 — https://www.tigerdata.com/blog/the-postgres-developers-guide-to-vector-index-tradeoffs (`docs\v2\calibration\v2.2.0\technical_capability_analysis\EIV2_TC_001\selected.json#/evidences/7/content`)
 Evidence: ev_e38e6e3a23869cb1 — https://www.velodb.io/glossary/what-is-pgvector (`docs\v2\calibration\v2.2.0\technical_capability_analysis\EIV2_TC_001\selected.json#/evidences/18/content`)
 
-Human decision: PENDING
+Human decision: NOT_SATISFIED
 
 ### CORE-006 — EIV2_TC_001 / required_unit
 
@@ -113,7 +113,7 @@ Evidence: ev_648babff2ebe3058 — https://www.velodb.io/glossary/what-is-pgvecto
 Evidence: ev_24320d0559472fcb — https://www.velodb.io/glossary/what-is-pgvector (`docs\v2\calibration\v2.2.0\technical_capability_analysis\EIV2_TC_001\selected.json#/evidences/14/content`)
 Evidence: ev_4b2cc9add6171347 — https://www.paradedb.com/learn/postgresql/pgvector-limitations (`docs\v2\calibration\v2.2.0\technical_capability_analysis\EIV2_TC_001\selected.json#/evidences/10/content`)
 
-Human decision: PENDING
+Human decision: NOT_SATISFIED
 
 ### CORE-007 — EIV2_CC_001 / required_unit
 
@@ -129,7 +129,7 @@ Reason: 执行成功，最终报告仅有未能发出断言的固定说明。没
 
 Evidence: ev_f14e2f4e2cc2dac7 — https://www.vitoshainc.com/azure-openai-vs-aws-bedrock-enterprise-implementation-guide (`docs\v2\calibration\v2.2.0\competitive_comparison\EIV2_CC_001\selected.json#/evidences/10/content`)
 
-Human decision: PENDING
+Human decision: NOT_SATISFIED
 
 ### CORE-008 — EIV2_CC_001 / required_unit
 
@@ -145,7 +145,7 @@ Reason: 执行成功，最终报告仅有未能发出断言的固定说明。没
 
 Evidence: ev_5c77e2cd82a5f3f3 — https://pronix.ai/resources/compare/bedrock-vs-azure-openai (`docs\v2\calibration\v2.2.0\competitive_comparison\EIV2_CC_001\selected.json#/evidences/20/content`)
 
-Human decision: PENDING
+Human decision: NOT_SATISFIED
 
 ### CORE-009 — EIV2_CC_001 / required_unit
 
@@ -161,7 +161,7 @@ Reason: 执行成功，最终报告仅有未能发出断言的固定说明。没
 
 Evidence: ev_5c44f9c31b22f4b9 — https://www.nextgencodingcompany.com/insights/ai-cloud-services-pricing (`docs\v2\calibration\v2.2.0\competitive_comparison\EIV2_CC_001\selected.json#/evidences/7/content`)
 
-Human decision: PENDING
+Human decision: NOT_SATISFIED
 
 ### CORE-010 — EIV2_TM_003 / required_unit
 
@@ -178,7 +178,7 @@ Reason: 已写一般主权云/数据中心区域趋势，但这两条实为同�
 Evidence: ev_ba15efe17df67fc7 — https://infotechlead.com/data-center/global-data-center-market-splits-along-regional-lines-as-aws-microsoft-azure-google-cloud-equinix-drive-growth-95106 (`docs\v2\calibration\v2.2.0\trend_market_intelligence\EIV2_TM_003\selected.json#/evidences/13/content`)
 Evidence: ev_d804caf04b023668 — https://infotechlead.com/data-center/global-data-center-market-splits-along-regional-lines-as-aws-microsoft-azure-google-cloud-equinix-drive-growth-95106?amp=1 (`docs\v2\calibration\v2.2.0\trend_market_intelligence\EIV2_TM_003\selected.json#/evidences/12/content`)
 
-Human decision: PENDING
+Human decision: NOT_SATISFIED
 
 ### CORE-011 — EIV2_TM_003 / required_unit
 
@@ -195,7 +195,7 @@ Reason: 有模型接入清单，主要来自同一 Bits Lovers 页面；日期�
 Evidence: ev_bc4bb002e341d18a — https://www.bitslovers.com/bedrock-vs-azure-ai-foundry-vs-vertex-ai (`docs\v2\calibration\v2.2.0\trend_market_intelligence\EIV2_TM_003\selected.json#/evidences/25/content`)
 Evidence: ev_b7b08374bb8f37a2 — https://www.bitslovers.com/bedrock-vs-azure-ai-foundry-vs-vertex-ai (`docs\v2\calibration\v2.2.0\trend_market_intelligence\EIV2_TM_003\selected.json#/evidences/29/content`)
 
-Human decision: PENDING
+Human decision: NOT_SATISFIED
 
 ### CORE-012 — EIV2_TM_003 / required_unit
 
@@ -212,7 +212,7 @@ Reason: 有 AWS 治理建议和 Clarip 产品描述，但没有证实 strict fre
 Evidence: ev_f9d8189e3e096d02 — https://docs.aws.amazon.com/prescriptive-guidance/latest/gen-ai-lifecycle-operational-excellence/prod-monitoring-security.html (`docs\v2\calibration\v2.2.0\trend_market_intelligence\EIV2_TM_003\selected.json#/evidences/9/content`)
 Evidence: ev_734423ec37023d5b — https://www.clarip.com/privacy/aws-azure-cloud (`docs\v2\calibration\v2.2.0\trend_market_intelligence\EIV2_TM_003\selected.json#/evidences/6/content`)
 
-Human decision: PENDING
+Human decision: NOT_SATISFIED
 
 ### CORE-013 — EIV2_CR_003 / required_unit
 
@@ -228,7 +228,7 @@ Reason: 执行成功但最终报告没有发出任何断言；此 Required Unit 
 
 Evidence: ev_bc6de933035ce124 — https://github.com/deepseek-ai/deepseek-r1 (`docs\v2\calibration\v2.2.0\conflict_credibility_resolution\EIV2_CR_003\selected.json#/evidences/31/content`)
 
-Human decision: PENDING
+Human decision: NOT_SATISFIED
 
 ### CORE-014 — EIV2_CR_003 / required_unit
 
@@ -244,7 +244,7 @@ Reason: 执行成功但最终报告没有发出任何断言；此 Required Unit 
 
 Evidence: ev_143f3ca93d7564dd — https://huggingface.co/agentica-org/DeepScaleR-1.5B-Preview/discussions/13 (`docs\v2\calibration\v2.2.0\conflict_credibility_resolution\EIV2_CR_003\selected.json#/evidences/26/content`)
 
-Human decision: PENDING
+Human decision: NOT_SATISFIED
 
 ### CORE-015 — EIV2_CR_003 / required_unit
 
@@ -261,7 +261,7 @@ Reason: 执行成功但最终报告没有发出任何断言；此 Required Unit 
 Evidence: ev_e453919bda9288fe — https://github.com/deepseek-ai/deepseek-r1 (`docs\v2\calibration\v2.2.0\conflict_credibility_resolution\EIV2_CR_003\selected.json#/evidences/28/content`)
 Evidence: ev_143f3ca93d7564dd — https://huggingface.co/agentica-org/DeepScaleR-1.5B-Preview/discussions/13 (`docs\v2\calibration\v2.2.0\conflict_credibility_resolution\EIV2_CR_003\selected.json#/evidences/26/content`)
 
-Human decision: PENDING
+Human decision: NOT_SATISFIED
 
 ### CORE-016 — EIV2_ED_002 / required_unit
 
@@ -279,7 +279,7 @@ Evidence: ev_da115e732ec66537 — https://cloud.google.com/discover/what-is-pgve
 Evidence: ev_c9d5eadb6fa50bc7 — https://cloud.google.com/discover/what-is-pgvector?hl=zh-CN (`docs\v2\calibration\v2.2.0\enterprise_decision_recommendation\EIV2_ED_002\selected.json#/evidences/1/content`)
 Evidence: ev_00b4876769cb1a7f — https://intl.cloud.tencent.com/zh/document/product/409/80360 (`docs\v2\calibration\v2.2.0\enterprise_decision_recommendation\EIV2_ED_002\selected.json#/evidences/9/content`)
 
-Human decision: PENDING
+Human decision: NOT_SATISFIED
 
 ### CORE-017 — EIV2_ED_002 / required_unit
 
@@ -296,7 +296,7 @@ Reason: 主要运维比较仅来自同一社区文章；未建立 two_independen
 Evidence: ev_332ae8b15ef78f5f — https://developer.cloud.tencent.com/article/2658089 (`docs\v2\calibration\v2.2.0\enterprise_decision_recommendation\EIV2_ED_002\selected.json#/evidences/23/content`)
 Evidence: ev_332ae8b15ef78f5f — https://developer.cloud.tencent.com/article/2658089 (`docs\v2\calibration\v2.2.0\enterprise_decision_recommendation\EIV2_ED_002\selected.json#/evidences/23/content`)
 
-Human decision: PENDING
+Human decision: NOT_SATISFIED
 
 ### CORE-018 — EIV2_ED_002 / required_unit
 
@@ -312,7 +312,7 @@ Reason: 仅有按规模/查询模式选型的原则，未给制造企业的条�
 
 Evidence: ev_1f4a4d719a744227 — https://blog.csdn.net/afjkdajs/article/details/163944680 (`docs\v2\calibration\v2.2.0\enterprise_decision_recommendation\EIV2_ED_002\selected.json#/evidences/6/content`)
 
-Human decision: PENDING
+Human decision: NOT_SATISFIED
 
 ### CORE-019 — EIV2_FV_001 / claim_segmentation
 
@@ -328,7 +328,7 @@ Reason: 分开政策适用范围与客户协议约束两个可核查断言。
 
 Evidence: ev_6f1b032c397627b6 — https://openai.com/zh-Hans-CN/policies/row-privacy-policy (`docs\v2\calibration\v2.2.0\factual_verification\EIV2_FV_001\selected.json#/evidences/1/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-020 — EIV2_FV_001 / claim_segmentation
 
@@ -344,7 +344,7 @@ Reason: 分开政策适用范围与客户协议约束两个可核查断言。
 
 Evidence: ev_6f1b032c397627b6 — https://openai.com/zh-Hans-CN/policies/row-privacy-policy (`docs\v2\calibration\v2.2.0\factual_verification\EIV2_FV_001\selected.json#/evidences/1/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-021 — EIV2_FV_001 / citation_support
 
@@ -360,7 +360,7 @@ Reason: 保存的 OpenAI 隐私政策直接说明商业/API 客户内容的排�
 
 Evidence: ev_6f1b032c397627b6 — https://openai.com/zh-Hans-CN/policies/row-privacy-policy (`docs\v2\calibration\v2.2.0\factual_verification\EIV2_FV_001\selected.json#/evidences/1/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-022 — EIV2_FV_001 / citation_support
 
@@ -376,7 +376,7 @@ Reason: 保存的 OpenAI 隐私政策直接说明商业/API 客户内容的排�
 
 Evidence: ev_6f1b032c397627b6 — https://openai.com/zh-Hans-CN/policies/row-privacy-policy (`docs\v2\calibration\v2.2.0\factual_verification\EIV2_FV_001\selected.json#/evidences/1/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-023 — EIV2_FV_001 / evidence_strength
 
@@ -392,7 +392,7 @@ Reason: openai.com 原站标题和以‘我们’说明自身政策的内容一�
 
 Evidence: ev_6f1b032c397627b6 — https://openai.com/zh-Hans-CN/policies/row-privacy-policy (`docs\v2\calibration\v2.2.0\factual_verification\EIV2_FV_001\selected.json#/evidences/1/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-024 — EIV2_FV_001 / independence
 
@@ -408,7 +408,7 @@ Reason: 使用内容身份与来源角色建议分组；同一页面的多个 ch
 
 Evidence: ev_6f1b032c397627b6 — https://openai.com/zh-Hans-CN/policies/row-privacy-policy (`docs\v2\calibration\v2.2.0\factual_verification\EIV2_FV_001\selected.json#/evidences/1/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-025 — EIV2_FV_001 / freshness
 
@@ -424,7 +424,7 @@ Reason: 保存页头明确 Updated 日期，早于截止且在本类别 365 天�
 
 Evidence: ev_6f1b032c397627b6 — https://openai.com/zh-Hans-CN/policies/row-privacy-policy (`docs\v2\calibration\v2.2.0\factual_verification\EIV2_FV_001\selected.json#/evidences/1/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-026 — EIV2_TC_001 / claim_segmentation
 
@@ -442,7 +442,7 @@ Evidence: ev_62fa0fb7bbfd9bb8 — https://www.instaclustr.com/education/vector-d
 Evidence: ev_7a6809120ded0e6a — https://www.instaclustr.com/education/vector-database/pgvector-hybrid-search-benefits-use-cases-and-quick-tutorial (`docs\v2\calibration\v2.2.0\technical_capability_analysis\EIV2_TC_001\selected.json#/evidences/32/content`)
 Evidence: ev_4426f461ab217c20 — https://medium.com/@aysebilgegunduz/all-you-need-to-know-about-pgvector-part-4-hybrid-search-8a655d3b0087 (`docs\v2\calibration\v2.2.0\technical_capability_analysis\EIV2_TC_001\selected.json#/evidences/35/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-027 — EIV2_TC_001 / claim_segmentation
 
@@ -460,7 +460,7 @@ Evidence: ev_62fa0fb7bbfd9bb8 — https://www.instaclustr.com/education/vector-d
 Evidence: ev_7a6809120ded0e6a — https://www.instaclustr.com/education/vector-database/pgvector-hybrid-search-benefits-use-cases-and-quick-tutorial (`docs\v2\calibration\v2.2.0\technical_capability_analysis\EIV2_TC_001\selected.json#/evidences/32/content`)
 Evidence: ev_4426f461ab217c20 — https://medium.com/@aysebilgegunduz/all-you-need-to-know-about-pgvector-part-4-hybrid-search-8a655d3b0087 (`docs\v2\calibration\v2.2.0\technical_capability_analysis\EIV2_TC_001\selected.json#/evidences/35/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-028 — EIV2_TC_001 / citation_support
 
@@ -476,7 +476,7 @@ Reason: 保存片段直接包含此断言的对应机制/用途；不把文中�
 
 Evidence: ev_62fa0fb7bbfd9bb8 — https://www.instaclustr.com/education/vector-database/pgvector-hybrid-search-benefits-use-cases-and-quick-tutorial (`docs\v2\calibration\v2.2.0\technical_capability_analysis\EIV2_TC_001\selected.json#/evidences/38/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-029 — EIV2_TC_001 / citation_support
 
@@ -492,7 +492,7 @@ Reason: 保存片段直接包含此断言的对应机制/用途；不把文中�
 
 Evidence: ev_7a6809120ded0e6a — https://www.instaclustr.com/education/vector-database/pgvector-hybrid-search-benefits-use-cases-and-quick-tutorial (`docs\v2\calibration\v2.2.0\technical_capability_analysis\EIV2_TC_001\selected.json#/evidences/32/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-030 — EIV2_TC_001 / evidence_strength
 
@@ -508,7 +508,7 @@ Reason: 表格明确自身 pgvector on DanubeData；对一般 pgvector 性能不
 
 Evidence: ev_16e2a002c3dcd617 — https://danubedata.ro/blog/pgvector-rag-managed-postgres-2026 (`docs\v2\calibration\v2.2.0\technical_capability_analysis\EIV2_TC_001\selected.json#/evidences/24/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-031 — EIV2_TC_001 / independence
 
@@ -524,7 +524,7 @@ Reason: 使用内容身份与来源角色建议分组；同一页面的多个 ch
 
 Evidence: ev_16e2a002c3dcd617 — https://danubedata.ro/blog/pgvector-rag-managed-postgres-2026 (`docs\v2\calibration\v2.2.0\technical_capability_analysis\EIV2_TC_001\selected.json#/evidences/24/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-032 — EIV2_TC_001 / freshness
 
@@ -540,7 +540,7 @@ Reason: 保存候选页作者 Adrian Silaghi 之后有日期，早于截止。
 
 Evidence: ev_16e2a002c3dcd617 — https://danubedata.ro/blog/pgvector-rag-managed-postgres-2026 (`docs\v2\calibration\v2.2.0\technical_capability_analysis\EIV2_TC_001\selected.json#/evidences/24/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-033 — EIV2_CC_001 / evidence_strength
 
@@ -556,7 +556,7 @@ Reason: 来源是第三方实施指南，不是 AWS/Microsoft 的自身产品文
 
 Evidence: ev_f14e2f4e2cc2dac7 — https://www.vitoshainc.com/azure-openai-vs-aws-bedrock-enterprise-implementation-guide (`docs\v2\calibration\v2.2.0\competitive_comparison\EIV2_CC_001\selected.json#/evidences/10/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-034 — EIV2_CC_001 / independence
 
@@ -572,7 +572,7 @@ Reason: 使用内容身份与来源角色建议分组；同一页面的多个 ch
 
 Evidence: ev_f14e2f4e2cc2dac7 — https://www.vitoshainc.com/azure-openai-vs-aws-bedrock-enterprise-implementation-guide (`docs\v2\calibration\v2.2.0\competitive_comparison\EIV2_CC_001\selected.json#/evidences/10/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-035 — EIV2_TM_003 / claim_segmentation
 
@@ -588,7 +588,7 @@ Reason: 按并列能力/条件逐项拆分，短片段主语及归因继承 exac
 
 Evidence: ev_66b81b09c02cd2ae — https://infotechlead.com/data-center/global-data-center-market-splits-along-regional-lines-as-aws-microsoft-azure-google-cloud-equinix-drive-growth-95106?amp=1 (`docs\v2\calibration\v2.2.0\trend_market_intelligence\EIV2_TM_003\selected.json#/evidences/14/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-036 — EIV2_TM_003 / claim_segmentation
 
@@ -604,7 +604,7 @@ Reason: 按并列能力/条件逐项拆分，短片段主语及归因继承 exac
 
 Evidence: ev_ba15efe17df67fc7 — https://infotechlead.com/data-center/global-data-center-market-splits-along-regional-lines-as-aws-microsoft-azure-google-cloud-equinix-drive-growth-95106 (`docs\v2\calibration\v2.2.0\trend_market_intelligence\EIV2_TM_003\selected.json#/evidences/13/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-037 — EIV2_TM_003 / citation_support
 
@@ -620,7 +620,7 @@ Reason: 保存片段直接载明此内容，页面日期可归属且早于 cutof
 
 Evidence: ev_0e6422100fea0896 — https://readitquik.com/ai/ai-governance-2026-multi-cloud-compliance-rules (`docs\v2\calibration\v2.2.0\trend_market_intelligence\EIV2_TM_003\selected.json#/evidences/0/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-038 — EIV2_TM_003 / citation_support
 
@@ -636,7 +636,7 @@ Reason: 保存片段直接载明此内容，页面日期可归属且早于 cutof
 
 Evidence: ev_0e6422100fea0896 — https://readitquik.com/ai/ai-governance-2026-multi-cloud-compliance-rules (`docs\v2\calibration\v2.2.0\trend_market_intelligence\EIV2_TM_003\selected.json#/evidences/0/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-039 — EIV2_TM_003 / evidence_strength
 
@@ -652,7 +652,7 @@ Reason: 作者署名文章，未提供 SEC/FTC 原始政策材料。
 
 Evidence: ev_0e6422100fea0896 — https://readitquik.com/ai/ai-governance-2026-multi-cloud-compliance-rules (`docs\v2\calibration\v2.2.0\trend_market_intelligence\EIV2_TM_003\selected.json#/evidences/0/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-040 — EIV2_TM_003 / independence
 
@@ -668,7 +668,7 @@ Reason: 使用内容身份与来源角色建议分组；同一页面的多个 ch
 
 Evidence: ev_0e6422100fea0896 — https://readitquik.com/ai/ai-governance-2026-multi-cloud-compliance-rules (`docs\v2\calibration\v2.2.0\trend_market_intelligence\EIV2_TM_003\selected.json#/evidences/0/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-041 — EIV2_TM_003 / freshness
 
@@ -684,7 +684,7 @@ Reason: 文首明确日期，距离 cutoff 180 天；可供 strict 180 天边界
 
 Evidence: ev_0e6422100fea0896 — https://readitquik.com/ai/ai-governance-2026-multi-cloud-compliance-rules (`docs\v2\calibration\v2.2.0\trend_market_intelligence\EIV2_TM_003\selected.json#/evidences/0/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-042 — EIV2_CR_003 / evidence_strength
 
@@ -700,7 +700,7 @@ Reason: 仓库 namespace、项目名及 our models/our setting 第一人称一�
 
 Evidence: ev_bc6de933035ce124 — https://github.com/deepseek-ai/deepseek-r1 (`docs\v2\calibration\v2.2.0\conflict_credibility_resolution\EIV2_CR_003\selected.json#/evidences/31/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-043 — EIV2_CR_003 / independence
 
@@ -716,7 +716,7 @@ Reason: 使用内容身份与来源角色建议分组；同一页面的多个 ch
 
 Evidence: ev_bc6de933035ce124 — https://github.com/deepseek-ai/deepseek-r1 (`docs\v2\calibration\v2.2.0\conflict_credibility_resolution\EIV2_CR_003\selected.json#/evidences/31/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-044 — EIV2_CR_003 / freshness
 
@@ -732,7 +732,7 @@ Reason: 讨论 opened 日期明确，早于 cutoff；超过本类别 365 天指�
 
 Evidence: ev_143f3ca93d7564dd — https://huggingface.co/agentica-org/DeepScaleR-1.5B-Preview/discussions/13 (`docs\v2\calibration\v2.2.0\conflict_credibility_resolution\EIV2_CR_003\selected.json#/evidences/26/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-045 — EIV2_ED_002 / claim_segmentation
 
@@ -750,7 +750,7 @@ Evidence: ev_da115e732ec66537 — https://cloud.google.com/discover/what-is-pgve
 Evidence: ev_c9d5eadb6fa50bc7 — https://cloud.google.com/discover/what-is-pgvector?hl=zh-CN (`docs\v2\calibration\v2.2.0\enterprise_decision_recommendation\EIV2_ED_002\selected.json#/evidences/1/content`)
 Evidence: ev_00b4876769cb1a7f — https://intl.cloud.tencent.com/zh/document/product/409/80360 (`docs\v2\calibration\v2.2.0\enterprise_decision_recommendation\EIV2_ED_002\selected.json#/evidences/9/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-046 — EIV2_ED_002 / claim_segmentation
 
@@ -767,7 +767,7 @@ Reason: 搜索模式与各数据类型分别拆分，类型名继承原句支持
 Evidence: ev_00b4876769cb1a7f — https://intl.cloud.tencent.com/zh/document/product/409/80360 (`docs\v2\calibration\v2.2.0\enterprise_decision_recommendation\EIV2_ED_002\selected.json#/evidences/9/content`)
 Evidence: ev_42ac6ab50515841f — https://intl.cloud.tencent.com/zh/document/product/409/80360 (`docs\v2\calibration\v2.2.0\enterprise_decision_recommendation\EIV2_ED_002\selected.json#/evidences/5/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-047 — EIV2_ED_002 / citation_support
 
@@ -783,7 +783,7 @@ Reason: 保存片段直接支持此原子技术陈述；来源强度、版本与
 
 Evidence: ev_da115e732ec66537 — https://cloud.google.com/discover/what-is-pgvector?hl=zh-CN (`docs\v2\calibration\v2.2.0\enterprise_decision_recommendation\EIV2_ED_002\selected.json#/evidences/0/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-048 — EIV2_ED_002 / citation_support
 
@@ -799,7 +799,7 @@ Reason: 保存片段直接支持此原子技术陈述；来源强度、版本与
 
 Evidence: ev_00b4876769cb1a7f — https://intl.cloud.tencent.com/zh/document/product/409/80360 (`docs\v2\calibration\v2.2.0\enterprise_decision_recommendation\EIV2_ED_002\selected.json#/evidences/9/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-049 — EIV2_ED_002 / evidence_strength
 
@@ -815,7 +815,7 @@ Reason: 原站文档明确腾讯云已预置版本并提供 SQL；对本云产�
 
 Evidence: ev_00b4876769cb1a7f — https://intl.cloud.tencent.com/zh/document/product/409/80360 (`docs\v2\calibration\v2.2.0\enterprise_decision_recommendation\EIV2_ED_002\selected.json#/evidences/9/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-050 — EIV2_ED_002 / independence
 
@@ -831,7 +831,7 @@ Reason: 使用内容身份与来源角色建议分组；同一页面的多个 ch
 
 Evidence: ev_00b4876769cb1a7f — https://intl.cloud.tencent.com/zh/document/product/409/80360 (`docs\v2\calibration\v2.2.0\enterprise_decision_recommendation\EIV2_ED_002\selected.json#/evidences/9/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### CORE-051 — EIV2_ED_002 / freshness
 
@@ -847,7 +847,7 @@ Reason: 文档明确最后更新时间且早于 cutoff，处于 730 天窗口。
 
 Evidence: ev_00b4876769cb1a7f — https://intl.cloud.tencent.com/zh/document/product/409/80360 (`docs\v2\calibration\v2.2.0\enterprise_decision_recommendation\EIV2_ED_002\selected.json#/evidences/9/content`)
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ## Human adjudication queue
 
@@ -861,7 +861,7 @@ Report/source material: Milvus 需要 Docker Compose 或 Kubernetes 部署;单�
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-002 — EIV2_ED_002 / semantic_claim_bundle
 
@@ -873,7 +873,7 @@ Report/source material: pgvector 可直接集成到现有 PostgreSQL 数据库,�
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-003 — EIV2_ED_002 / semantic_claim_bundle
 
@@ -885,7 +885,7 @@ Report/source material: pgvector 提供 HNSW 和 IVFFlat 索引,支持 L2 欧氏
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-004 — EIV2_ED_002 / semantic_claim_bundle
 
@@ -897,7 +897,7 @@ Report/source material: pgvector 支持精确和近似最近邻搜索,并支持 
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-005 — EIV2_ED_002 / semantic_claim_bundle
 
@@ -909,7 +909,7 @@ Report/source material: pgvector 是 PostgreSQL 的开源扩展,用于在关系�
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-006 — EIV2_ED_002 / semantic_claim_bundle
 
@@ -921,7 +921,7 @@ Report/source material: pgvector 的备份可使用 pg\_dump,高可用可使用 
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-007 — EIV2_ED_002 / semantic_claim_bundle
 
@@ -933,7 +933,7 @@ Report/source material: 从架构选型看,向量检索不再是单一选型决�
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-008 — EIV2_FV_001 / semantic_claim_bundle
 
@@ -945,7 +945,7 @@ Report/source material: 社区帖子引用 OpenAI 数据保护附录称,OpenAI �
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-009 — EIV2_TC_001 / semantic_claim_bundle
 
@@ -957,7 +957,7 @@ Report/source material: Filtered vector query performance is a practical edge fo
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-010 — EIV2_TC_001 / semantic_claim_bundle
 
@@ -969,7 +969,7 @@ Report/source material: Hybrid retrieval can be assembled using PostgreSQL full\
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-011 — EIV2_TC_001 / semantic_claim_bundle
 
@@ -981,7 +981,7 @@ Report/source material: Hybrid search in pgvector contexts combines vector\-base
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-012 — EIV2_TC_001 / semantic_claim_bundle
 
@@ -993,7 +993,7 @@ Report/source material: Managing pgvector in production requires PostgreSQL expe
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-013 — EIV2_TC_001 / semantic_claim_bundle
 
@@ -1005,7 +1005,7 @@ Report/source material: Reciprocal rank fusion is mentioned as an available comp
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-014 — EIV2_TC_001 / semantic_claim_bundle
 
@@ -1017,7 +1017,7 @@ Report/source material: The PostgreSQL query planner can use pgvector indexes fo
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-015 — EIV2_TC_001 / semantic_claim_bundle
 
@@ -1029,7 +1029,7 @@ Report/source material: Vector columns increase backup sizes significantly, so t
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-016 — EIV2_TC_001 / semantic_claim_bundle
 
@@ -1041,7 +1041,7 @@ Report/source material: pgvector hybrid search is described as useful for enterp
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-017 — EIV2_TC_001 / semantic_claim_bundle
 
@@ -1053,7 +1053,7 @@ Report/source material: pgvector is the right choice when the dataset fits comfo
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-018 — EIV2_TC_001 / semantic_claim_bundle
 
@@ -1065,7 +1065,7 @@ Report/source material: pgvector search quality depends entirely on the upstream
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-019 — EIV2_TM_003 / semantic_claim_bundle
 
@@ -1077,7 +1077,7 @@ Report/source material: AI data residency compliance means LLM inference runs in
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-020 — EIV2_TM_003 / semantic_claim_bundle
 
@@ -1089,7 +1089,7 @@ Report/source material: AI services including Amazon Bedrock, Azure OpenAI, and 
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-021 — EIV2_TM_003 / semantic_claim_bundle
 
@@ -1101,7 +1101,7 @@ Report/source material: AWS Control Tower is described as a native AWS service f
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-022 — EIV2_TM_003 / semantic_claim_bundle
 
@@ -1113,7 +1113,7 @@ Report/source material: AWS Prescriptive Guidance recommends a governance framew
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-023 — EIV2_TM_003 / semantic_claim_bundle
 
@@ -1125,7 +1125,7 @@ Report/source material: Amazon Bedrock is described as allowing Claude, Llama, M
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-024 — EIV2_TM_003 / semantic_claim_bundle
 
@@ -1137,7 +1137,7 @@ Report/source material: Amazon Bedrock, Azure AI Foundry, and Google Vertex AI h
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-025 — EIV2_TM_003 / semantic_claim_bundle
 
@@ -1149,7 +1149,7 @@ Report/source material: Asia\-Pacific is also seeing strong growth in sovereign 
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-026 — EIV2_TM_003 / semantic_claim_bundle
 
@@ -1161,7 +1161,7 @@ Report/source material: Data residency and sovereignty rules, including GDPR, In
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-027 — EIV2_TM_003 / semantic_claim_bundle
 
@@ -1173,7 +1173,7 @@ Report/source material: For enterprises using US\-headquartered cloud providers,
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-028 — EIV2_TM_003 / semantic_claim_bundle
 
@@ -1185,7 +1185,7 @@ Report/source material: Gartner's Sid Nag emphasized that generative AI is pivot
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-029 — EIV2_TM_003 / semantic_claim_bundle
 
@@ -1197,7 +1197,7 @@ Report/source material: Google Vertex AI is described as suitable for data\-inte
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-030 — EIV2_TM_003 / semantic_claim_bundle
 
@@ -1209,7 +1209,7 @@ Report/source material: Governance tools are described as offering integrated da
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-031 — EIV2_TM_003 / semantic_claim_bundle
 
@@ -1221,7 +1221,7 @@ Report/source material: Governance tools can govern Amazon Bedrock, Azure OpenAI
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-032 — EIV2_TM_003 / semantic_claim_bundle
 
@@ -1233,7 +1233,7 @@ Report/source material: Model Garden provides access to third\-party models incl
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-033 — EIV2_TM_003 / semantic_claim_bundle
 
@@ -1245,7 +1245,7 @@ Report/source material: Stricter energy regulations and grid constraints in Euro
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-SEM-034 — EIV2_TM_003 / semantic_claim_bundle
 
@@ -1257,7 +1257,7 @@ Report/source material: US regulators including the SEC and FTC are focusing on 
 
 Reason: One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-IND-035 — EIV2_CR_003 / independence
 
@@ -1269,7 +1269,7 @@ Report/source material: AXCXEPT 在 DeepScaleR-1.5B-Preview 的 HF discussion
 
 Reason: Named author and project identities exist, but same-group versus independent experimental production requires semantic judgment.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
 
 ### ADJ-FRESH-036 — EIV2_ED_002 / freshness
 
@@ -1281,4 +1281,6 @@ Report/source material: CSDN afjkdajs 技术趋势文章
 
 Reason: Saved material contains a date clue, but publication/event/reply/sidebar attribution or cutoff relevance requires human judgment.
 
-Human decision: PENDING
+Human decision: ACCEPTED_AI_RECOMMENDATIONS
+
+Human decisions are finalized in the JSON layers and case review sheets. The full AI-assisted ledger remains unchanged.

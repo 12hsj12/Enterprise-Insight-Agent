@@ -1,6 +1,6 @@
 # Six-case development calibration review package
 
-**READY_FOR_HUMAN_REVIEW. Human review: PENDING. Reviewer: null.**
+**HUMAN_CALIBRATION_COMPLETED. Human review: COMPLETED. Reviewer: `human-reviewer-calibration-001`.**
 
 Six fixed development cases ran once through the production enterprise POST router,
 IntelligenceWorkflow, GPTResearcher, ResearchConductor, search/scrape, ContextManager
@@ -12,9 +12,10 @@ three explicit layers: [FULL_AI_ASSISTED_LEDGER.json](FULL_AI_ASSISTED_LEDGER.js
 preserves all 483 pre-annotation objects; [HUMAN_CALIBRATION_CORE.json](HUMAN_CALIBRATION_CORE.json)
 contains 51 bounded calibration tasks; and [HUMAN_ADJUDICATION_QUEUE.json](HUMAN_ADJUDICATION_QUEUE.json)
 contains 36 genuine semantic/adjudication tasks. [HUMAN_REVIEW_QUEUE.json](HUMAN_REVIEW_QUEUE.json)
-is the combined 87-task entry point. None is final gold and every human field remains unset.
+is the combined 87-task entry point. The full ledger remains AI-assisted and is not
+final gold; the 87 bounded human-review task records are finalized.
 
-The 483-object ledger still contains 115 proposed atomic factual claims, 3
+The 483-object AI-assisted ledger still contains 115 proposed atomic factual claims, 3
 non-factual segments, 184 citation pairs, 18 Required Units, 45 source-strength
 items, 45 independence items, 45 freshness items and 28 high-risk items. The
 compression changes triage only. It does not change any recommendation or label.
@@ -73,4 +74,9 @@ See [SIX_CASE_DELIVERY.md](SIX_CASE_DELIVERY.md),
 Frozen dataset SHA, cutoff, rubric and Agent semantics are unchanged. No holdout
 report was executed, opened for evaluation, annotated or used for tuning.
 
-Human reviewer reviews the compressed calibration core and adjudication queue.
+Human review is finalized for all 87 calibration/adjudication tasks. The final
+development Required Unit baseline is 1 SATISFIED / 17 NOT_SATISFIED (1/18).
+The full AI-assisted ledger remains unchanged and is not final gold. See
+[DEVELOPMENT_FAILURE_MAP.md](DEVELOPMENT_FAILURE_MAP.md) and
+[DEVELOPMENT_CALIBRATION_FREEZE.json](DEVELOPMENT_CALIBRATION_FREEZE.json) for
+the frozen baseline and failure mapping.

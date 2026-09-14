@@ -8,6 +8,11 @@
     "SEMANTIC_BOUNDARY_REVIEW": 34
   },
   "after_human_workload_items": 87,
+  "development_failure_map": {
+    "DEVELOPMENT_FAILURE_MAP.json": "180b48d48c3d5f71fef65fc88fffa81d1eee5b2829b8cbe084feb2cbf78f2560",
+    "DEVELOPMENT_FAILURE_MAP.md": "8e055831200bc458e30fb5a9346e9198bbac2b6b9ef4afaf279bd28ccbbfe38d"
+  },
+  "finalized_human_review_items": 87,
   "full_ledger_items": 483,
   "holdout_used": false,
   "human_adjudication_queue_items": 36,
@@ -45,6 +50,7 @@
     }
   },
   "human_linked_ledger_records": 256,
+  "human_review_status": "COMPLETED",
   "labels_or_recommendations_changed": false,
   "linked_ledger_records_by_type": {
     "citation_support": 93,
@@ -58,7 +64,10 @@
   "machine_resolved_no_human_action_items": 227,
   "official_benchmark_calls": 0,
   "provider_calls": 0,
+  "required_unit_result": "1/18",
   "required_units_human_reviewable": 18,
+  "review_timestamp": "2026-09-14T03:08:01Z",
+  "reviewer": "human-reviewer-calibration-001",
   "semantic_ambiguity_records_covered": 203,
   "status": "PASSED"
 }

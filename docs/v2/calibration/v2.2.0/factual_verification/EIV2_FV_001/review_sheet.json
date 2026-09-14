@@ -4,7 +4,7 @@
   "category": "factual_verification",
   "citation_support_review": [
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendation": "support",
       "ambiguity_flag": false,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -17,8 +17,8 @@
       "exact_parent_report_text": "OpenAI 的隐私政策不适用于其代表商业产品客户\\(例如 API 服务客户\\)处理的内容;此类数据的使用受相关客户协议约束。",
       "exact_report_text": "OpenAI 的隐私政策不适用于其代表商业产品客户\\(例如 API 服务客户\\)处理的内容",
       "flags": [],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "support",
+      "human_review_status": "COMPLETED",
       "item_type": "citation_support",
       "proposed_relation": "support",
       "reasoning": "保存的 OpenAI 隐私政策直接说明商业/API 客户内容的排除范围及客户协议约束。",
@@ -27,10 +27,10 @@
         67
       ],
       "report_span_unit": "Unicode character offset in UTF-8 decoded report",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_FV_001-citation_support-001",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "rubric_version": "enterprise-insight-bench-v2/2.2.0",
       "saved_evidence": [
         {
@@ -43,7 +43,7 @@
       "uncertainty_reason": "文本支持建议仍待来源日期和人工确认。"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendation": "support",
       "ambiguity_flag": false,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -56,8 +56,8 @@
       "exact_parent_report_text": "OpenAI 的隐私政策不适用于其代表商业产品客户\\(例如 API 服务客户\\)处理的内容;此类数据的使用受相关客户协议约束。",
       "exact_report_text": "此类数据的使用受相关客户协议约束。",
       "flags": [],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "support",
+      "human_review_status": "COMPLETED",
       "item_type": "citation_support",
       "proposed_relation": "support",
       "reasoning": "保存的 OpenAI 隐私政策直接说明商业/API 客户内容的排除范围及客户协议约束。",
@@ -66,10 +66,10 @@
         85
       ],
       "report_span_unit": "Unicode character offset in UTF-8 decoded report",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_FV_001-citation_support-002",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "rubric_version": "enterprise-insight-bench-v2/2.2.0",
       "saved_evidence": [
         {
@@ -160,7 +160,7 @@
       "uncertainty_reason": "文本支持建议仍待来源日期和人工确认。"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendation": "unclear",
       "ambiguity_flag": true,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -175,8 +175,8 @@
       "flags": [
         "CITATION_SUPPORT_UNCERTAIN"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "unclear",
+      "human_review_status": "COMPLETED",
       "item_type": "citation_support",
       "proposed_relation": "unclear",
       "reasoning": "镜像政策片段讨论默认训练与保留，未证明该 DPA 引述。",
@@ -185,10 +185,10 @@
         288
       ],
       "report_span_unit": "Unicode character offset in UTF-8 decoded report",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_FV_001-citation_support-005",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "rubric_version": "enterprise-insight-bench-v2/2.2.0",
       "saved_evidence": [
         {
@@ -201,7 +201,7 @@
       "uncertainty_reason": "保存片段未建立完整范围；不给部分支持分。"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendation": "unclear",
       "ambiguity_flag": true,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -216,8 +216,8 @@
       "flags": [
         "CITATION_SUPPORT_UNCERTAIN"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "unclear",
+      "human_review_status": "COMPLETED",
       "item_type": "citation_support",
       "proposed_relation": "unclear",
       "reasoning": "官方平台片段讨论默认训练和日志，未载该 DPA 引文。",
@@ -226,10 +226,10 @@
         288
       ],
       "report_span_unit": "Unicode character offset in UTF-8 decoded report",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_FV_001-citation_support-006",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "rubric_version": "enterprise-insight-bench-v2/2.2.0",
       "saved_evidence": [
         {
@@ -320,7 +320,7 @@
       "uncertainty_reason": "文本支持建议仍待来源日期和人工确认。"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendation": "unclear",
       "ambiguity_flag": true,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -335,8 +335,8 @@
       "flags": [
         "CITATION_SUPPORT_UNCERTAIN"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "unclear",
+      "human_review_status": "COMPLETED",
       "item_type": "citation_support",
       "proposed_relation": "unclear",
       "reasoning": "只保存默认政策说明，没有争议发生或裁定内容。",
@@ -345,10 +345,10 @@
         320
       ],
       "report_span_unit": "Unicode character offset in UTF-8 decoded report",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_FV_001-citation_support-009",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "rubric_version": "enterprise-insight-bench-v2/2.2.0",
       "saved_evidence": [
         {
@@ -361,7 +361,7 @@
       "uncertainty_reason": "保存片段未建立完整范围；不给部分支持分。"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendation": "unclear",
       "ambiguity_flag": true,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -376,8 +376,8 @@
       "flags": [
         "CITATION_SUPPORT_UNCERTAIN"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "unclear",
+      "human_review_status": "COMPLETED",
       "item_type": "citation_support",
       "proposed_relation": "unclear",
       "reasoning": "只保存默认政策说明，没有争议发生或裁定内容。",
@@ -386,10 +386,10 @@
         320
       ],
       "report_span_unit": "Unicode character offset in UTF-8 decoded report",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_FV_001-citation_support-010",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "rubric_version": "enterprise-insight-bench-v2/2.2.0",
       "saved_evidence": [
         {
@@ -482,7 +482,7 @@
   ],
   "claim_segmentation_review": [
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendation": "factual",
       "ambiguity_flag": false,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -495,8 +495,8 @@
       "exact_report_text": "OpenAI 的隐私政策不适用于其代表商业产品客户\\(例如 API 服务客户\\)处理的内容",
       "factual_or_nonfactual": "factual",
       "flags": [],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "factual",
+      "human_review_status": "COMPLETED",
       "item_type": "claim_segmentation",
       "materiality_if_required": true,
       "output_mode": "factual",
@@ -507,10 +507,10 @@
         67
       ],
       "report_span_unit": "Unicode character offset in UTF-8 decoded report",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_FV_001-C001",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "risk_types": [],
       "rubric_version": "enterprise-insight-bench-v2/2.2.0",
       "runtime_claim_id": "claim_ebb2fdf6b9007a9429ff7f8d63284da76592ee2e3156f6e5fa270975dd870922",
@@ -525,7 +525,7 @@
       "uncertainty_reason": "预标注需人工确认，尚非 gold。"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendation": "factual",
       "ambiguity_flag": false,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -538,8 +538,8 @@
       "exact_report_text": "此类数据的使用受相关客户协议约束。",
       "factual_or_nonfactual": "factual",
       "flags": [],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "factual",
+      "human_review_status": "COMPLETED",
       "item_type": "claim_segmentation",
       "materiality_if_required": true,
       "output_mode": "factual",
@@ -550,10 +550,10 @@
         85
       ],
       "report_span_unit": "Unicode character offset in UTF-8 decoded report",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_FV_001-C002",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "risk_types": [],
       "rubric_version": "enterprise-insight-bench-v2/2.2.0",
       "runtime_claim_id": "claim_ebb2fdf6b9007a9429ff7f8d63284da76592ee2e3156f6e5fa270975dd870922",
@@ -568,7 +568,7 @@
       "uncertainty_reason": "预标注需人工确认，尚非 gold。"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendation": "factual",
       "ambiguity_flag": true,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -586,8 +586,8 @@
       "flags": [
         "AMBIGUOUS_SEGMENTATION"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "factual",
+      "human_review_status": "COMPLETED",
       "item_type": "claim_segmentation",
       "materiality_if_required": true,
       "output_mode": "hedged",
@@ -598,10 +598,10 @@
         288
       ],
       "report_span_unit": "Unicode character offset in UTF-8 decoded report",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_FV_001-C003",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "risk_types": [
         "conflict_sensitive_claim"
       ],
@@ -636,7 +636,7 @@
       "uncertainty_reason": "人工确认限定语与分句继承范围。"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendation": "factual",
       "ambiguity_flag": true,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -654,8 +654,8 @@
       "flags": [
         "AMBIGUOUS_SEGMENTATION"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "factual",
+      "human_review_status": "COMPLETED",
       "item_type": "claim_segmentation",
       "materiality_if_required": true,
       "output_mode": "hedged",
@@ -666,10 +666,10 @@
         320
       ],
       "report_span_unit": "Unicode character offset in UTF-8 decoded report",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_FV_001-C004",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "risk_types": [
         "conflict_sensitive_claim"
       ],
@@ -792,7 +792,7 @@
   ],
   "evidence_strength_review": [
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendation": "PRIMARY",
       "ambiguity_flag": false,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -804,15 +804,15 @@
       "flags": [
         "EVIDENCE_STRENGTH_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "PRIMARY",
+      "human_review_status": "COMPLETED",
       "item_type": "evidence_strength",
       "primary_source_status": "PRIMARY",
       "reasoning": "openai.com 原站标题和以‘我们’说明自身政策的内容一致；只对自身隐私政策一手。",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_FV_001-evidence_strength-001",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "rubric_version": "enterprise-insight-bench-v2/2.2.0",
       "saved_evidence": [
         {
@@ -964,7 +964,7 @@
   ],
   "freshness_review": [
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "age_at_cutoff_days": 211,
       "ai_recommendation": "verified",
       "ambiguity_flag": false,
@@ -980,16 +980,16 @@
       "exact_date_evidence_excerpt": "Updated: 2026年2月6日",
       "flags": [],
       "freshness_mode": "contextual",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "verified",
+      "human_review_status": "COMPLETED",
       "item_type": "freshness",
       "max_age_days": 365,
       "publication_date": "2026-02-06",
       "reasoning": "保存页头明确 Updated 日期，早于截止且在本类别 365 天窗口内。",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_FV_001-freshness-001",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "rubric_version": "enterprise-insight-bench-v2/2.2.0",
       "saved_evidence": [
         {
@@ -1172,7 +1172,7 @@
   ],
   "high_risk_review": [
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendation": "UNRESOLVED",
       "ambiguity_flag": true,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -1194,8 +1194,8 @@
       "flags": [
         "HIGH_RISK_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "UNRESOLVED",
+      "human_review_status": "COMPLETED",
       "item_type": "high_risk",
       "observed_risk_types": [
         "conflict_sensitive_claim"
@@ -1206,10 +1206,10 @@
         288
       ],
       "report_span_unit": "Unicode character offset in UTF-8 decoded report",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_FV_001-high_risk-001",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "rubric_version": "enterprise-insight-bench-v2/2.2.0",
       "saved_evidence": [
         {
@@ -1240,7 +1240,7 @@
       "uncertainty_reason": "适格的一手/独立来源或冲突裁定材料仍须人工确认。"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendation": "UNRESOLVED",
       "ambiguity_flag": true,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -1262,8 +1262,8 @@
       "flags": [
         "HIGH_RISK_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "UNRESOLVED",
+      "human_review_status": "COMPLETED",
       "item_type": "high_risk",
       "observed_risk_types": [
         "conflict_sensitive_claim"
@@ -1274,10 +1274,10 @@
         320
       ],
       "report_span_unit": "Unicode character offset in UTF-8 decoded report",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_FV_001-high_risk-002",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "rubric_version": "enterprise-insight-bench-v2/2.2.0",
       "saved_evidence": [
         {
@@ -1308,10 +1308,10 @@
       "uncertainty_reason": "适格的一手/独立来源或冲突裁定材料仍须人工确认。"
     }
   ],
-  "human_review_status": "PENDING",
+  "human_review_status": "COMPLETED",
   "independence_review": [
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendation": "SAME_SOURCE_GROUP",
       "ambiguity_flag": false,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -1322,15 +1322,15 @@
         "ev_6f1b032c397627b6"
       ],
       "flags": [],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "SAME_SOURCE_GROUP",
+      "human_review_status": "COMPLETED",
       "item_type": "independence",
       "proposed_independence_grouping": "OpenAI",
       "reasoning": "使用内容身份与来源角色建议分组；同一页面的多个 chunk 不重复计为独立来源。不同域名本身不证明独立性。openai.com 原站标题和以‘我们’说明自身政策的内容一致；只对自身隐私政策一手。",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_FV_001-independence-001",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "rubric_version": "enterprise-insight-bench-v2/2.2.0",
       "saved_evidence": [
         {
@@ -1489,7 +1489,7 @@
   ],
   "required_unit_review": [
     {
-      "adjudication_note": null,
+      "adjudication_note": "human override + reason: saved official policy evidence supports the default no-training rule.",
       "ai_recommendation": "UNCERTAIN",
       "ambiguity_flag": true,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -1514,8 +1514,8 @@
         ],
         "id": "training_default"
       },
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "SATISFIED",
+      "human_review_status": "COMPLETED",
       "item_type": "required_unit",
       "reasoning": "正文仅在被限定的争议句中提到默认不训练；官方片段支持默认规则，但报告缺少直接明确的默认政策陈述。人工裁定该隐含提及是否满足完整 Required Unit，不能自动计分。",
       "report_span": [
@@ -1524,10 +1524,10 @@
       ],
       "report_span_unit": "Unicode character offset in UTF-8 decoded report",
       "required_unit_id": "training_default",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_FV_001-required_unit-001",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "rubric_version": "enterprise-insight-bench-v2/2.2.0",
       "saved_evidence": [
         {
@@ -1558,7 +1558,7 @@
       "uncertainty_reason": "严格完整覆盖及证据强度需人工裁定；不计部分分。"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendation": "NOT_SATISFIED",
       "ambiguity_flag": false,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -1583,8 +1583,8 @@
         ],
         "id": "exceptions"
       },
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "item_type": "required_unit",
       "reasoning": "报告保留社区争议，没有明确解释已适用的 opt-in 等例外。计划中被 OMIT 的内容不能用于报告覆盖。",
       "report_span": [
@@ -1593,10 +1593,10 @@
       ],
       "report_span_unit": "Unicode character offset in UTF-8 decoded report",
       "required_unit_id": "exceptions",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_FV_001-required_unit-002",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "rubric_version": "enterprise-insight-bench-v2/2.2.0",
       "saved_evidence": [
         {
@@ -1627,7 +1627,7 @@
       "uncertainty_reason": "严格完整覆盖及证据强度需人工裁定；不计部分分。"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendation": "NOT_SATISFIED",
       "ambiguity_flag": true,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -1650,8 +1650,8 @@
         ],
         "id": "retention"
       },
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "item_type": "required_unit",
       "reasoning": "报告解释存储类型但未交代保留期限、删除或控制边界；该片段不足以确认完整边界覆盖。",
       "report_span": [
@@ -1660,10 +1660,10 @@
       ],
       "report_span_unit": "Unicode character offset in UTF-8 decoded report",
       "required_unit_id": "retention",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_FV_001-required_unit-003",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "rubric_version": "enterprise-insight-bench-v2/2.2.0",
       "saved_evidence": [
         {
@@ -1676,7 +1676,8 @@
       "uncertainty_reason": "严格完整覆盖及证据强度需人工裁定；不计部分分。"
     }
   ],
-  "reviewer": null,
+  "review_timestamp": "2026-09-14T03:08:01Z",
+  "reviewer": "human-reviewer-calibration-001",
   "rubric_version": "enterprise-insight-bench-v2/2.2.0",
-  "status": "READY_FOR_HUMAN_REVIEW"
+  "status": "HUMAN_REVIEW_COMPLETED"
 }

@@ -2,7 +2,7 @@
 
 ## Decision
 
-**READY_FOR_HUMAN_REVIEW** — calibration itself is not complete. All human decisions remain pending.
+**HUMAN_CALIBRATION_COMPLETED** — all 87 bounded human review tasks are finalized. The Required Unit baseline is 1 SATISFIED / 17 NOT_SATISFIED (1/18).
 
 ## Code State
 
@@ -67,18 +67,21 @@ All items preserve AI_ASSISTED_RECOMMENDATION, reasons, exact saved text and hum
 ## Human Review Queue
 
 The complete 483-item AI-assisted ledger remains intact. Human work is compressed
-to 87 tasks: 51 representative calibration-core tasks and 36 adjudication tasks.
+to 87 finalized tasks: 51 representative calibration-core tasks and 36 adjudication tasks.
 The latter comprise 34 parent-report semantic bundles covering all 203 flagged
 segmentation/citation/high-risk ledger records, plus one publisher-relationship
 independence decision and one genuinely disputed date-attribution decision. All 18 Required Units remain directly reviewable in the
 calibration core. Missing dates, unavailable source organizations, domain-only
 differences and unqualified primary status remain deterministic ledger outcomes,
-not separate confirmation tasks. No recommendation changed and all human fields
-remain null.
+not separate confirmation tasks. No AI recommendation changed. Final human
+fields are written to the 87 task records and their 256 linked review-sheet
+records; the full AI-assisted ledger remains AI-only.
 
 ## Calibration Manifest
 
-`human_review_status = PENDING`; `reviewer = null`. `package_status = READY_FOR_HUMAN_REVIEW`, not calibration complete.
+`human_review_status = COMPLETED`; `reviewer = human-reviewer-calibration-001`.
+`package_status = HUMAN_CALIBRATION_COMPLETED`. The final Required Unit result is
+`1/18`. See `DEVELOPMENT_FAILURE_MAP.md` and `DEVELOPMENT_CALIBRATION_FREEZE.json`.
 
 ## Cost
 
@@ -101,4 +104,4 @@ Six development cases only; official holdout executions = 0. No holdout report w
 
 ## Next Step
 
-Human reviewer reviews the compressed calibration core and adjudication queue.
+Proceed to Batch 1 after independent review: requirement-driven research and generation.

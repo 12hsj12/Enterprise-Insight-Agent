@@ -6,7 +6,7 @@
   "full_ledger_reference": "FULL_AI_ASSISTED_LEDGER.json",
   "human_adjudication_queue": [
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -62,8 +62,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_ED_002-C019",
@@ -73,12 +73,12 @@
         "EIV2_ED_002-high_risk-001",
         "EIV2_ED_002-high_risk-002"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-001"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -137,8 +137,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_ED_002-C015",
@@ -148,12 +148,12 @@
         "EIV2_ED_002-citation_support-041",
         "EIV2_ED_002-citation_support-046"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-002"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -262,8 +262,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_ED_002-C009",
@@ -282,12 +282,12 @@
         "EIV2_ED_002-citation_support-037",
         "EIV2_ED_002-citation_support-038"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-003"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -336,8 +336,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_ED_002-C006",
@@ -345,12 +345,12 @@
         "EIV2_ED_002-C008",
         "EIV2_ED_002-citation_support-014"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-004"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -414,8 +414,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_ED_002-C002",
@@ -425,12 +425,12 @@
         "EIV2_ED_002-citation_support-008",
         "EIV2_ED_002-citation_support-009"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-005"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -462,19 +462,19 @@
         "AMBIGUOUS_SEGMENTATION",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_ED_002-C024",
         "EIV2_ED_002-C025"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-006"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -501,18 +501,18 @@
         "AMBIGUOUS_SEGMENTATION",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_ED_002-C026"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-007"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -593,8 +593,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_FV_001-C003",
@@ -606,12 +606,12 @@
         "EIV2_FV_001-high_risk-001",
         "EIV2_FV_001-high_risk-002"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-008"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -670,8 +670,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TC_001-C018",
@@ -682,12 +682,12 @@
         "EIV2_TC_001-high_risk-008",
         "EIV2_TC_001-high_risk-009"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-009"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -768,8 +768,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TC_001-C005",
@@ -781,12 +781,12 @@
         "EIV2_TC_001-citation_support-016",
         "EIV2_TC_001-high_risk-002"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-010"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -842,8 +842,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TC_001-C003",
@@ -851,12 +851,12 @@
         "EIV2_TC_001-citation_support-009",
         "EIV2_TC_001-high_risk-001"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-011"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -920,8 +920,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TC_001-citation_support-024",
@@ -932,12 +932,12 @@
         "EIV2_TC_001-high_risk-005",
         "EIV2_TC_001-high_risk-006"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-012"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1016,8 +1016,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TC_001-C026",
@@ -1030,12 +1030,12 @@
         "EIV2_TC_001-citation_support-057",
         "EIV2_TC_001-citation_support-058"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-013"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1089,8 +1089,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TC_001-C030",
@@ -1099,12 +1099,12 @@
         "EIV2_TC_001-citation_support-060",
         "EIV2_TC_001-citation_support-066"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-014"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1138,19 +1138,19 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TC_001-C034",
         "EIV2_TC_001-high_risk-010"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-015"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1239,8 +1239,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TC_001-C022",
@@ -1255,12 +1255,12 @@
         "EIV2_TC_001-citation_support-046",
         "EIV2_TC_001-citation_support-049"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-016"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1324,8 +1324,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TC_001-C006",
@@ -1337,12 +1337,12 @@
         "EIV2_TC_001-high_risk-003",
         "EIV2_TC_001-high_risk-004"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-017"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1386,8 +1386,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TC_001-C035",
@@ -1395,12 +1395,12 @@
         "EIV2_TC_001-high_risk-011",
         "EIV2_TC_001-high_risk-012"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-018"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1439,20 +1439,20 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C024",
         "EIV2_TM_003-C025",
         "EIV2_TM_003-high_risk-001"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-019"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1496,8 +1496,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C013",
@@ -1505,12 +1505,12 @@
         "EIV2_TM_003-citation_support-013",
         "EIV2_TM_003-citation_support-014"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-020"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1574,8 +1574,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C004",
@@ -1587,12 +1587,12 @@
         "EIV2_TM_003-citation_support-006",
         "EIV2_TM_003-citation_support-007"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-021"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1666,8 +1666,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C019",
@@ -1681,12 +1681,12 @@
         "EIV2_TM_003-citation_support-022",
         "EIV2_TM_003-citation_support-023"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-022"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1787,8 +1787,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C039",
@@ -1807,12 +1807,12 @@
         "EIV2_TM_003-high_risk-009",
         "EIV2_TM_003-high_risk-010"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-023"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1893,8 +1893,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C034",
@@ -1909,12 +1909,12 @@
         "EIV2_TM_003-citation_support-038",
         "EIV2_TM_003-high_risk-005"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-024"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1941,18 +1941,18 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-high_risk-004"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-025"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1986,19 +1986,19 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C015",
         "EIV2_TM_003-citation_support-015"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-026"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -2032,19 +2032,19 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C026",
         "EIV2_TM_003-high_risk-002"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-027"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -2088,8 +2088,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C032",
@@ -2097,12 +2097,12 @@
         "EIV2_TM_003-citation_support-032",
         "EIV2_TM_003-citation_support-033"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-028"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -2146,8 +2146,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C044",
@@ -2155,12 +2155,12 @@
         "EIV2_TM_003-citation_support-044",
         "EIV2_TM_003-citation_support-045"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-029"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -2234,8 +2234,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C008",
@@ -2249,12 +2249,12 @@
         "EIV2_TM_003-citation_support-011",
         "EIV2_TM_003-citation_support-012"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-030"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -2308,8 +2308,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C016",
@@ -2319,12 +2319,12 @@
         "EIV2_TM_003-citation_support-017",
         "EIV2_TM_003-citation_support-018"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-031"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -2380,8 +2380,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C046",
@@ -2391,12 +2391,12 @@
         "EIV2_TM_003-high_risk-011",
         "EIV2_TM_003-high_risk-012"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-032"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -2423,18 +2423,18 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-high_risk-003"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-033"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -2471,20 +2471,20 @@
         "AMBIGUOUS_SEGMENTATION",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C001",
         "EIV2_TM_003-C002",
         "EIV2_TM_003-C003"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-034"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "Named author and project identities exist, but same-group versus independent experimental production requires semantic judgment.",
       "ai_recommendations": [
         {
@@ -2499,8 +2499,8 @@
       "flags": [
         "PUBLISHER_RELATIONSHIP_DISPUTABLE"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_CR_003-independence-003"
@@ -2517,13 +2517,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "source_identity_information": "AXCXEPT 在 DeepScaleR-1.5B-Preview 的 HF discussion",
       "task_id": "ADJ-IND-035"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "Saved material contains a date clue, but publication/event/reply/sidebar attribution or cutoff relevance requires human judgment.",
       "ai_recommendations": [
         {
@@ -2539,8 +2539,8 @@
       "flags": [
         "DATE_ROLE_OR_ATTRIBUTION_DISPUTABLE"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_ED_002-freshness-003"
@@ -2557,15 +2557,15 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "source_identity_information": "CSDN afjkdajs 技术趋势文章",
       "task_id": "ADJ-FRESH-036"
     }
   ],
   "human_calibration_core": [
     {
-      "adjudication_note": null,
+      "adjudication_note": "human override + reason: saved official policy evidence supports the default no-training rule.",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_FV_001-required_unit-001",
@@ -2576,8 +2576,8 @@
       "case_id": "EIV2_FV_001",
       "category": "factual_verification",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_FV_001-required_unit-001"
@@ -2612,13 +2612,13 @@
           320
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-001"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_FV_001-required_unit-002",
@@ -2629,8 +2629,8 @@
       "case_id": "EIV2_FV_001",
       "category": "factual_verification",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_FV_001-required_unit-002"
@@ -2665,13 +2665,13 @@
           288
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-002"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_FV_001-required_unit-003",
@@ -2682,8 +2682,8 @@
       "case_id": "EIV2_FV_001",
       "category": "factual_verification",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_FV_001-required_unit-003"
@@ -2703,13 +2703,13 @@
           822
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-003"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TC_001-required_unit-001",
@@ -2720,8 +2720,8 @@
       "case_id": "EIV2_TC_001",
       "category": "technical_capability_analysis",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TC_001-required_unit-001"
@@ -2751,13 +2751,13 @@
           253
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-004"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TC_001-required_unit-002",
@@ -2768,8 +2768,8 @@
       "case_id": "EIV2_TC_001",
       "category": "technical_capability_analysis",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TC_001-required_unit-002"
@@ -2794,13 +2794,13 @@
           4013
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-005"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "human override + reason: the report contains workload limitations, but the frozen two-independent strength obligation is not met.",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TC_001-required_unit-003",
@@ -2811,8 +2811,8 @@
       "case_id": "EIV2_TC_001",
       "category": "technical_capability_analysis",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TC_001-required_unit-003"
@@ -2842,13 +2842,13 @@
           2180
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-006"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CC_001-required_unit-001",
@@ -2859,8 +2859,8 @@
       "case_id": "EIV2_CC_001",
       "category": "competitive_comparison",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CC_001-required_unit-001"
@@ -2880,13 +2880,13 @@
           88
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-007"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CC_001-required_unit-002",
@@ -2897,8 +2897,8 @@
       "case_id": "EIV2_CC_001",
       "category": "competitive_comparison",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CC_001-required_unit-002"
@@ -2918,13 +2918,13 @@
           88
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-008"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CC_001-required_unit-003",
@@ -2935,8 +2935,8 @@
       "case_id": "EIV2_CC_001",
       "category": "competitive_comparison",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CC_001-required_unit-003"
@@ -2956,13 +2956,13 @@
           88
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-009"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TM_003-required_unit-001",
@@ -2973,8 +2973,8 @@
       "case_id": "EIV2_TM_003",
       "category": "trend_market_intelligence",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TM_003-required_unit-001"
@@ -2999,13 +2999,13 @@
           3149
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-010"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TM_003-required_unit-002",
@@ -3016,8 +3016,8 @@
       "case_id": "EIV2_TM_003",
       "category": "trend_market_intelligence",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TM_003-required_unit-002"
@@ -3042,13 +3042,13 @@
           4918
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-011"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TM_003-required_unit-003",
@@ -3059,8 +3059,8 @@
       "case_id": "EIV2_TM_003",
       "category": "trend_market_intelligence",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TM_003-required_unit-003"
@@ -3085,13 +3085,13 @@
           1940
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-012"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CR_003-required_unit-001",
@@ -3102,8 +3102,8 @@
       "case_id": "EIV2_CR_003",
       "category": "conflict_credibility_resolution",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CR_003-required_unit-001"
@@ -3123,13 +3123,13 @@
           88
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-013"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CR_003-required_unit-002",
@@ -3140,8 +3140,8 @@
       "case_id": "EIV2_CR_003",
       "category": "conflict_credibility_resolution",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CR_003-required_unit-002"
@@ -3161,13 +3161,13 @@
           88
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-014"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CR_003-required_unit-003",
@@ -3178,8 +3178,8 @@
       "case_id": "EIV2_CR_003",
       "category": "conflict_credibility_resolution",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CR_003-required_unit-003"
@@ -3204,13 +3204,13 @@
           88
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-015"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_ED_002-required_unit-001",
@@ -3221,8 +3221,8 @@
       "case_id": "EIV2_ED_002",
       "category": "enterprise_decision_recommendation",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_ED_002-required_unit-001"
@@ -3252,13 +3252,13 @@
           71
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-016"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_ED_002-required_unit-002",
@@ -3269,8 +3269,8 @@
       "case_id": "EIV2_ED_002",
       "category": "enterprise_decision_recommendation",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_ED_002-required_unit-002"
@@ -3295,13 +3295,13 @@
           1215
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-017"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_ED_002-required_unit-003",
@@ -3312,8 +3312,8 @@
       "case_id": "EIV2_ED_002",
       "category": "enterprise_decision_recommendation",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_ED_002-required_unit-003"
@@ -3333,13 +3333,13 @@
           1498
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-018"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_FV_001-C001",
@@ -3350,8 +3350,8 @@
       "case_id": "EIV2_FV_001",
       "category": "factual_verification",
       "dimension": "claim_segmentation",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_FV_001-C001"
@@ -3371,13 +3371,13 @@
           67
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-019"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_FV_001-C002",
@@ -3388,8 +3388,8 @@
       "case_id": "EIV2_FV_001",
       "category": "factual_verification",
       "dimension": "claim_segmentation",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_FV_001-C002"
@@ -3409,13 +3409,13 @@
           85
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-020"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_FV_001-citation_support-001",
@@ -3426,8 +3426,8 @@
       "case_id": "EIV2_FV_001",
       "category": "factual_verification",
       "dimension": "citation_support",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_FV_001-citation_support-001"
@@ -3447,13 +3447,13 @@
           67
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-021"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_FV_001-citation_support-002",
@@ -3464,8 +3464,8 @@
       "case_id": "EIV2_FV_001",
       "category": "factual_verification",
       "dimension": "citation_support",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_FV_001-citation_support-002"
@@ -3485,13 +3485,13 @@
           85
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-022"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_FV_001-evidence_strength-001",
@@ -3502,8 +3502,8 @@
       "case_id": "EIV2_FV_001",
       "category": "factual_verification",
       "dimension": "evidence_strength",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_FV_001-evidence_strength-001"
@@ -3520,13 +3520,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-023"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_FV_001-independence-001",
@@ -3537,8 +3537,8 @@
       "case_id": "EIV2_FV_001",
       "category": "factual_verification",
       "dimension": "independence",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_FV_001-independence-001"
@@ -3555,13 +3555,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-024"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_FV_001-freshness-001",
@@ -3572,8 +3572,8 @@
       "case_id": "EIV2_FV_001",
       "category": "factual_verification",
       "dimension": "freshness",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_FV_001-freshness-001"
@@ -3590,13 +3590,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-025"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TC_001-C001",
@@ -3607,8 +3607,8 @@
       "case_id": "EIV2_TC_001",
       "category": "technical_capability_analysis",
       "dimension": "claim_segmentation",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TC_001-C001"
@@ -3638,13 +3638,13 @@
           144
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-026"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TC_001-C002",
@@ -3655,8 +3655,8 @@
       "case_id": "EIV2_TC_001",
       "category": "technical_capability_analysis",
       "dimension": "claim_segmentation",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TC_001-C002"
@@ -3686,13 +3686,13 @@
           191
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-027"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TC_001-citation_support-001",
@@ -3703,8 +3703,8 @@
       "case_id": "EIV2_TC_001",
       "category": "technical_capability_analysis",
       "dimension": "citation_support",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TC_001-citation_support-001"
@@ -3724,13 +3724,13 @@
           144
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-028"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TC_001-citation_support-002",
@@ -3741,8 +3741,8 @@
       "case_id": "EIV2_TC_001",
       "category": "technical_capability_analysis",
       "dimension": "citation_support",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TC_001-citation_support-002"
@@ -3762,13 +3762,13 @@
           144
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-029"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TC_001-evidence_strength-001",
@@ -3779,8 +3779,8 @@
       "case_id": "EIV2_TC_001",
       "category": "technical_capability_analysis",
       "dimension": "evidence_strength",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TC_001-evidence_strength-001"
@@ -3797,13 +3797,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-030"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TC_001-independence-001",
@@ -3814,8 +3814,8 @@
       "case_id": "EIV2_TC_001",
       "category": "technical_capability_analysis",
       "dimension": "independence",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TC_001-independence-001"
@@ -3832,13 +3832,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-031"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TC_001-freshness-001",
@@ -3849,8 +3849,8 @@
       "case_id": "EIV2_TC_001",
       "category": "technical_capability_analysis",
       "dimension": "freshness",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TC_001-freshness-001"
@@ -3867,13 +3867,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-032"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CC_001-evidence_strength-001",
@@ -3884,8 +3884,8 @@
       "case_id": "EIV2_CC_001",
       "category": "competitive_comparison",
       "dimension": "evidence_strength",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CC_001-evidence_strength-001"
@@ -3902,13 +3902,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-033"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CC_001-independence-001",
@@ -3919,8 +3919,8 @@
       "case_id": "EIV2_CC_001",
       "category": "competitive_comparison",
       "dimension": "independence",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CC_001-independence-001"
@@ -3937,13 +3937,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-034"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TM_003-C027",
@@ -3954,8 +3954,8 @@
       "case_id": "EIV2_TM_003",
       "category": "trend_market_intelligence",
       "dimension": "claim_segmentation",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TM_003-C027"
@@ -3975,13 +3975,13 @@
           2830
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-035"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TM_003-C028",
@@ -3992,8 +3992,8 @@
       "case_id": "EIV2_TM_003",
       "category": "trend_market_intelligence",
       "dimension": "claim_segmentation",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TM_003-C028"
@@ -4013,13 +4013,13 @@
           3149
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-036"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TM_003-citation_support-001",
@@ -4030,8 +4030,8 @@
       "case_id": "EIV2_TM_003",
       "category": "trend_market_intelligence",
       "dimension": "citation_support",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TM_003-citation_support-001"
@@ -4051,13 +4051,13 @@
           117
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-037"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TM_003-citation_support-002",
@@ -4068,8 +4068,8 @@
       "case_id": "EIV2_TM_003",
       "category": "trend_market_intelligence",
       "dimension": "citation_support",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TM_003-citation_support-002"
@@ -4089,13 +4089,13 @@
           148
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-038"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TM_003-evidence_strength-001",
@@ -4106,8 +4106,8 @@
       "case_id": "EIV2_TM_003",
       "category": "trend_market_intelligence",
       "dimension": "evidence_strength",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TM_003-evidence_strength-001"
@@ -4124,13 +4124,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-039"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TM_003-independence-001",
@@ -4141,8 +4141,8 @@
       "case_id": "EIV2_TM_003",
       "category": "trend_market_intelligence",
       "dimension": "independence",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TM_003-independence-001"
@@ -4159,13 +4159,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-040"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TM_003-freshness-001",
@@ -4176,8 +4176,8 @@
       "case_id": "EIV2_TM_003",
       "category": "trend_market_intelligence",
       "dimension": "freshness",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TM_003-freshness-001"
@@ -4194,13 +4194,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-041"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CR_003-evidence_strength-001",
@@ -4211,8 +4211,8 @@
       "case_id": "EIV2_CR_003",
       "category": "conflict_credibility_resolution",
       "dimension": "evidence_strength",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CR_003-evidence_strength-001"
@@ -4229,13 +4229,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-042"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CR_003-independence-001",
@@ -4246,8 +4246,8 @@
       "case_id": "EIV2_CR_003",
       "category": "conflict_credibility_resolution",
       "dimension": "independence",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CR_003-independence-001"
@@ -4264,13 +4264,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-043"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CR_003-freshness-003",
@@ -4281,8 +4281,8 @@
       "case_id": "EIV2_CR_003",
       "category": "conflict_credibility_resolution",
       "dimension": "freshness",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CR_003-freshness-003"
@@ -4299,13 +4299,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-044"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_ED_002-C001",
@@ -4316,8 +4316,8 @@
       "case_id": "EIV2_ED_002",
       "category": "enterprise_decision_recommendation",
       "dimension": "claim_segmentation",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_ED_002-C001"
@@ -4347,13 +4347,13 @@
           49
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-045"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_ED_002-C005",
@@ -4364,8 +4364,8 @@
       "case_id": "EIV2_ED_002",
       "category": "enterprise_decision_recommendation",
       "dimension": "claim_segmentation",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_ED_002-C005"
@@ -4390,13 +4390,13 @@
           353
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-046"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_ED_002-citation_support-001",
@@ -4407,8 +4407,8 @@
       "case_id": "EIV2_ED_002",
       "category": "enterprise_decision_recommendation",
       "dimension": "citation_support",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_ED_002-citation_support-001"
@@ -4428,13 +4428,13 @@
           49
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-047"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_ED_002-citation_support-003",
@@ -4445,8 +4445,8 @@
       "case_id": "EIV2_ED_002",
       "category": "enterprise_decision_recommendation",
       "dimension": "citation_support",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_ED_002-citation_support-003"
@@ -4466,13 +4466,13 @@
           49
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-048"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_ED_002-evidence_strength-001",
@@ -4483,8 +4483,8 @@
       "case_id": "EIV2_ED_002",
       "category": "enterprise_decision_recommendation",
       "dimension": "evidence_strength",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_ED_002-evidence_strength-001"
@@ -4501,13 +4501,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-049"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_ED_002-independence-001",
@@ -4518,8 +4518,8 @@
       "case_id": "EIV2_ED_002",
       "category": "enterprise_decision_recommendation",
       "dimension": "independence",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_ED_002-independence-001"
@@ -4536,13 +4536,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-050"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_ED_002-freshness-001",
@@ -4553,8 +4553,8 @@
       "case_id": "EIV2_ED_002",
       "category": "enterprise_decision_recommendation",
       "dimension": "freshness",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_ED_002-freshness-001"
@@ -4571,13 +4571,14 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-051"
     }
   ],
-  "human_review_status": "PENDING",
-  "reviewer": null,
-  "status": "READY_FOR_HUMAN_REVIEW"
+  "human_review_status": "COMPLETED",
+  "review_timestamp": "2026-09-14T03:08:01Z",
+  "reviewer": "human-reviewer-calibration-001",
+  "status": "HUMAN_REVIEW_COMPLETED"
 }

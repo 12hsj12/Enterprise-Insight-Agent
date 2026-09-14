@@ -1,10 +1,12 @@
 {
   "layer": "HUMAN_ADJUDICATION_QUEUE",
-  "status": "PENDING_HUMAN_REVIEW",
+  "review_timestamp": "2026-09-14T03:08:01Z",
+  "reviewer": "human-reviewer-calibration-001",
+  "status": "HUMAN_REVIEW_COMPLETED",
   "task_count": 36,
   "tasks": [
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -60,8 +62,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_ED_002-C019",
@@ -71,12 +73,12 @@
         "EIV2_ED_002-high_risk-001",
         "EIV2_ED_002-high_risk-002"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-001"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -135,8 +137,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_ED_002-C015",
@@ -146,12 +148,12 @@
         "EIV2_ED_002-citation_support-041",
         "EIV2_ED_002-citation_support-046"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-002"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -260,8 +262,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_ED_002-C009",
@@ -280,12 +282,12 @@
         "EIV2_ED_002-citation_support-037",
         "EIV2_ED_002-citation_support-038"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-003"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -334,8 +336,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_ED_002-C006",
@@ -343,12 +345,12 @@
         "EIV2_ED_002-C008",
         "EIV2_ED_002-citation_support-014"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-004"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -412,8 +414,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_ED_002-C002",
@@ -423,12 +425,12 @@
         "EIV2_ED_002-citation_support-008",
         "EIV2_ED_002-citation_support-009"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-005"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -460,19 +462,19 @@
         "AMBIGUOUS_SEGMENTATION",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_ED_002-C024",
         "EIV2_ED_002-C025"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-006"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -499,18 +501,18 @@
         "AMBIGUOUS_SEGMENTATION",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_ED_002-C026"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-007"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -591,8 +593,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_FV_001-C003",
@@ -604,12 +606,12 @@
         "EIV2_FV_001-high_risk-001",
         "EIV2_FV_001-high_risk-002"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-008"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -668,8 +670,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TC_001-C018",
@@ -680,12 +682,12 @@
         "EIV2_TC_001-high_risk-008",
         "EIV2_TC_001-high_risk-009"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-009"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -766,8 +768,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TC_001-C005",
@@ -779,12 +781,12 @@
         "EIV2_TC_001-citation_support-016",
         "EIV2_TC_001-high_risk-002"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-010"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -840,8 +842,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TC_001-C003",
@@ -849,12 +851,12 @@
         "EIV2_TC_001-citation_support-009",
         "EIV2_TC_001-high_risk-001"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-011"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -918,8 +920,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TC_001-citation_support-024",
@@ -930,12 +932,12 @@
         "EIV2_TC_001-high_risk-005",
         "EIV2_TC_001-high_risk-006"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-012"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1014,8 +1016,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TC_001-C026",
@@ -1028,12 +1030,12 @@
         "EIV2_TC_001-citation_support-057",
         "EIV2_TC_001-citation_support-058"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-013"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1087,8 +1089,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TC_001-C030",
@@ -1097,12 +1099,12 @@
         "EIV2_TC_001-citation_support-060",
         "EIV2_TC_001-citation_support-066"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-014"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1136,19 +1138,19 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TC_001-C034",
         "EIV2_TC_001-high_risk-010"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-015"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1237,8 +1239,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TC_001-C022",
@@ -1253,12 +1255,12 @@
         "EIV2_TC_001-citation_support-046",
         "EIV2_TC_001-citation_support-049"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-016"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1322,8 +1324,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TC_001-C006",
@@ -1335,12 +1337,12 @@
         "EIV2_TC_001-high_risk-003",
         "EIV2_TC_001-high_risk-004"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-017"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1384,8 +1386,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TC_001-C035",
@@ -1393,12 +1395,12 @@
         "EIV2_TC_001-high_risk-011",
         "EIV2_TC_001-high_risk-012"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-018"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1437,20 +1439,20 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C024",
         "EIV2_TM_003-C025",
         "EIV2_TM_003-high_risk-001"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-019"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1494,8 +1496,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C013",
@@ -1503,12 +1505,12 @@
         "EIV2_TM_003-citation_support-013",
         "EIV2_TM_003-citation_support-014"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-020"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1572,8 +1574,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C004",
@@ -1585,12 +1587,12 @@
         "EIV2_TM_003-citation_support-006",
         "EIV2_TM_003-citation_support-007"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-021"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1664,8 +1666,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C019",
@@ -1679,12 +1681,12 @@
         "EIV2_TM_003-citation_support-022",
         "EIV2_TM_003-citation_support-023"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-022"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1785,8 +1787,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C039",
@@ -1805,12 +1807,12 @@
         "EIV2_TM_003-high_risk-009",
         "EIV2_TM_003-high_risk-010"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-023"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1891,8 +1893,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C034",
@@ -1907,12 +1909,12 @@
         "EIV2_TM_003-citation_support-038",
         "EIV2_TM_003-high_risk-005"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-024"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1939,18 +1941,18 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-high_risk-004"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-025"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -1984,19 +1986,19 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C015",
         "EIV2_TM_003-citation_support-015"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-026"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -2030,19 +2032,19 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C026",
         "EIV2_TM_003-high_risk-002"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-027"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -2086,8 +2088,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C032",
@@ -2095,12 +2097,12 @@
         "EIV2_TM_003-citation_support-032",
         "EIV2_TM_003-citation_support-033"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-028"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -2144,8 +2146,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C044",
@@ -2153,12 +2155,12 @@
         "EIV2_TM_003-citation_support-044",
         "EIV2_TM_003-citation_support-045"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-029"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -2232,8 +2234,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C008",
@@ -2247,12 +2249,12 @@
         "EIV2_TM_003-citation_support-011",
         "EIV2_TM_003-citation_support-012"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-030"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -2306,8 +2308,8 @@
         "CITATION_SUPPORT_UNCERTAIN",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C016",
@@ -2317,12 +2319,12 @@
         "EIV2_TM_003-citation_support-017",
         "EIV2_TM_003-citation_support-018"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-031"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -2378,8 +2380,8 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C046",
@@ -2389,12 +2391,12 @@
         "EIV2_TM_003-high_risk-011",
         "EIV2_TM_003-high_risk-012"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-032"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -2421,18 +2423,18 @@
         "HIGH_RISK_REVIEW",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-high_risk-003"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-033"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
       "ai_recommendations": [
         {
@@ -2469,20 +2471,20 @@
         "AMBIGUOUS_SEGMENTATION",
         "SEMANTIC_BOUNDARY_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_TM_003-C001",
         "EIV2_TM_003-C002",
         "EIV2_TM_003-C003"
       ],
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "task_id": "ADJ-SEM-034"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "Named author and project identities exist, but same-group versus independent experimental production requires semantic judgment.",
       "ai_recommendations": [
         {
@@ -2497,8 +2499,8 @@
       "flags": [
         "PUBLISHER_RELATIONSHIP_DISPUTABLE"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_CR_003-independence-003"
@@ -2515,13 +2517,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "source_identity_information": "AXCXEPT 在 DeepScaleR-1.5B-Preview 的 HF discussion",
       "task_id": "ADJ-IND-035"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "adjudication_reason": "Saved material contains a date clue, but publication/event/reply/sidebar attribution or cutoff relevance requires human judgment.",
       "ai_recommendations": [
         {
@@ -2537,8 +2539,8 @@
       "flags": [
         "DATE_ROLE_OR_ATTRIBUTION_DISPUTABLE"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_ADJUDICATION_QUEUE",
       "ledger_review_ids": [
         "EIV2_ED_002-freshness-003"
@@ -2555,8 +2557,8 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "source_identity_information": "CSDN afjkdajs 技术趋势文章",
       "task_id": "ADJ-FRESH-036"
     }

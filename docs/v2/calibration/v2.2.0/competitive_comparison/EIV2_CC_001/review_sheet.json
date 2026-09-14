@@ -6,7 +6,7 @@
   "claim_segmentation_review": [],
   "evidence_strength_review": [
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendation": "NOT_PRIMARY_FOR_CLOUD_CAPABILITIES",
       "ambiguity_flag": false,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -18,15 +18,15 @@
       "flags": [
         "EVIDENCE_STRENGTH_REVIEW"
       ],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_PRIMARY_FOR_CLOUD_CAPABILITIES",
+      "human_review_status": "COMPLETED",
       "item_type": "evidence_strength",
       "primary_source_status": "NOT_PRIMARY_FOR_CLOUD_CAPABILITIES",
       "reasoning": "来源是第三方实施指南，不是 AWS/Microsoft 的自身产品文档；未展示可检验原始实验。",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_CC_001-evidence_strength-001",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "rubric_version": "enterprise-insight-bench-v2/2.2.0",
       "saved_evidence": [
         {
@@ -235,10 +235,10 @@
     }
   ],
   "high_risk_review": [],
-  "human_review_status": "PENDING",
+  "human_review_status": "COMPLETED",
   "independence_review": [
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendation": "SAME_SOURCE_GROUP",
       "ambiguity_flag": false,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -249,15 +249,15 @@
         "ev_f14e2f4e2cc2dac7"
       ],
       "flags": [],
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "SAME_SOURCE_GROUP",
+      "human_review_status": "COMPLETED",
       "item_type": "independence",
       "proposed_independence_grouping": "Vitosha",
       "reasoning": "使用内容身份与来源角色建议分组；同一页面的多个 chunk 不重复计为独立来源。不同域名本身不证明独立性。来源是第三方实施指南，不是 AWS/Microsoft 的自身产品文档；未展示可检验原始实验。",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_CC_001-independence-001",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "rubric_version": "enterprise-insight-bench-v2/2.2.0",
       "saved_evidence": [
         {
@@ -342,7 +342,7 @@
   ],
   "required_unit_review": [
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendation": "NOT_SATISFIED",
       "ambiguity_flag": false,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -366,8 +366,8 @@
         ],
         "id": "model_choice"
       },
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "item_type": "required_unit",
       "reasoning": "执行成功，最终报告仅有未能发出断言的固定说明。没有报告内容覆盖此 Required Unit。附证据用于检查省略原因，绝非该报告的支持引用。",
       "report_span": [
@@ -376,10 +376,10 @@
       ],
       "report_span_unit": "Unicode character offset in UTF-8 decoded report",
       "required_unit_id": "model_choice",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_CC_001-required_unit-001",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "rubric_version": "enterprise-insight-bench-v2/2.2.0",
       "saved_evidence": [
         {
@@ -392,7 +392,7 @@
       "uncertainty_reason": "严格完整覆盖及证据强度需人工裁定；不计部分分。"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendation": "NOT_SATISFIED",
       "ambiguity_flag": false,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -415,8 +415,8 @@
         ],
         "id": "governance_network"
       },
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "item_type": "required_unit",
       "reasoning": "执行成功，最终报告仅有未能发出断言的固定说明。没有报告内容覆盖此 Required Unit。附证据用于检查省略原因，绝非该报告的支持引用。",
       "report_span": [
@@ -425,10 +425,10 @@
       ],
       "report_span_unit": "Unicode character offset in UTF-8 decoded report",
       "required_unit_id": "governance_network",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_CC_001-required_unit-002",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "rubric_version": "enterprise-insight-bench-v2/2.2.0",
       "saved_evidence": [
         {
@@ -441,7 +441,7 @@
       "uncertainty_reason": "严格完整覆盖及证据强度需人工裁定；不计部分分。"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendation": "NOT_SATISFIED",
       "ambiguity_flag": false,
       "annotation_kind": "AI_ASSISTED_RECOMMENDATION",
@@ -465,8 +465,8 @@
         ],
         "id": "pricing"
       },
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "item_type": "required_unit",
       "reasoning": "执行成功，最终报告仅有未能发出断言的固定说明。没有报告内容覆盖此 Required Unit。附证据用于检查省略原因，绝非该报告的支持引用。",
       "report_span": [
@@ -475,10 +475,10 @@
       ],
       "report_span_unit": "Unicode character offset in UTF-8 decoded report",
       "required_unit_id": "pricing",
-      "review_date": null,
+      "review_date": "2026-09-14",
       "review_id": "EIV2_CC_001-required_unit-003",
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "rubric_version": "enterprise-insight-bench-v2/2.2.0",
       "saved_evidence": [
         {
@@ -491,7 +491,8 @@
       "uncertainty_reason": "严格完整覆盖及证据强度需人工裁定；不计部分分。"
     }
   ],
-  "reviewer": null,
+  "review_timestamp": "2026-09-14T03:08:01Z",
+  "reviewer": "human-reviewer-calibration-001",
   "rubric_version": "enterprise-insight-bench-v2/2.2.0",
-  "status": "READY_FOR_HUMAN_REVIEW"
+  "status": "HUMAN_REVIEW_COMPLETED"
 }

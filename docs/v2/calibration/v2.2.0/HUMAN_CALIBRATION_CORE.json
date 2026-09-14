@@ -1,10 +1,12 @@
 {
   "layer": "HUMAN_CALIBRATION_CORE",
-  "status": "PENDING_HUMAN_REVIEW",
+  "review_timestamp": "2026-09-14T03:08:01Z",
+  "reviewer": "human-reviewer-calibration-001",
+  "status": "HUMAN_REVIEW_COMPLETED",
   "task_count": 51,
   "tasks": [
     {
-      "adjudication_note": null,
+      "adjudication_note": "human override + reason: saved official policy evidence supports the default no-training rule.",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_FV_001-required_unit-001",
@@ -15,8 +17,8 @@
       "case_id": "EIV2_FV_001",
       "category": "factual_verification",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_FV_001-required_unit-001"
@@ -51,13 +53,13 @@
           320
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-001"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_FV_001-required_unit-002",
@@ -68,8 +70,8 @@
       "case_id": "EIV2_FV_001",
       "category": "factual_verification",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_FV_001-required_unit-002"
@@ -104,13 +106,13 @@
           288
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-002"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_FV_001-required_unit-003",
@@ -121,8 +123,8 @@
       "case_id": "EIV2_FV_001",
       "category": "factual_verification",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_FV_001-required_unit-003"
@@ -142,13 +144,13 @@
           822
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-003"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TC_001-required_unit-001",
@@ -159,8 +161,8 @@
       "case_id": "EIV2_TC_001",
       "category": "technical_capability_analysis",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TC_001-required_unit-001"
@@ -190,13 +192,13 @@
           253
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-004"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TC_001-required_unit-002",
@@ -207,8 +209,8 @@
       "case_id": "EIV2_TC_001",
       "category": "technical_capability_analysis",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TC_001-required_unit-002"
@@ -233,13 +235,13 @@
           4013
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-005"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "human override + reason: the report contains workload limitations, but the frozen two-independent strength obligation is not met.",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TC_001-required_unit-003",
@@ -250,8 +252,8 @@
       "case_id": "EIV2_TC_001",
       "category": "technical_capability_analysis",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TC_001-required_unit-003"
@@ -281,13 +283,13 @@
           2180
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-006"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CC_001-required_unit-001",
@@ -298,8 +300,8 @@
       "case_id": "EIV2_CC_001",
       "category": "competitive_comparison",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CC_001-required_unit-001"
@@ -319,13 +321,13 @@
           88
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-007"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CC_001-required_unit-002",
@@ -336,8 +338,8 @@
       "case_id": "EIV2_CC_001",
       "category": "competitive_comparison",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CC_001-required_unit-002"
@@ -357,13 +359,13 @@
           88
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-008"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CC_001-required_unit-003",
@@ -374,8 +376,8 @@
       "case_id": "EIV2_CC_001",
       "category": "competitive_comparison",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CC_001-required_unit-003"
@@ -395,13 +397,13 @@
           88
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-009"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TM_003-required_unit-001",
@@ -412,8 +414,8 @@
       "case_id": "EIV2_TM_003",
       "category": "trend_market_intelligence",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TM_003-required_unit-001"
@@ -438,13 +440,13 @@
           3149
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-010"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TM_003-required_unit-002",
@@ -455,8 +457,8 @@
       "case_id": "EIV2_TM_003",
       "category": "trend_market_intelligence",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TM_003-required_unit-002"
@@ -481,13 +483,13 @@
           4918
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-011"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TM_003-required_unit-003",
@@ -498,8 +500,8 @@
       "case_id": "EIV2_TM_003",
       "category": "trend_market_intelligence",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TM_003-required_unit-003"
@@ -524,13 +526,13 @@
           1940
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-012"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CR_003-required_unit-001",
@@ -541,8 +543,8 @@
       "case_id": "EIV2_CR_003",
       "category": "conflict_credibility_resolution",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CR_003-required_unit-001"
@@ -562,13 +564,13 @@
           88
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-013"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CR_003-required_unit-002",
@@ -579,8 +581,8 @@
       "case_id": "EIV2_CR_003",
       "category": "conflict_credibility_resolution",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CR_003-required_unit-002"
@@ -600,13 +602,13 @@
           88
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-014"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CR_003-required_unit-003",
@@ -617,8 +619,8 @@
       "case_id": "EIV2_CR_003",
       "category": "conflict_credibility_resolution",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CR_003-required_unit-003"
@@ -643,13 +645,13 @@
           88
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-015"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_ED_002-required_unit-001",
@@ -660,8 +662,8 @@
       "case_id": "EIV2_ED_002",
       "category": "enterprise_decision_recommendation",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_ED_002-required_unit-001"
@@ -691,13 +693,13 @@
           71
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-016"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_ED_002-required_unit-002",
@@ -708,8 +710,8 @@
       "case_id": "EIV2_ED_002",
       "category": "enterprise_decision_recommendation",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_ED_002-required_unit-002"
@@ -734,13 +736,13 @@
           1215
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-017"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_ED_002-required_unit-003",
@@ -751,8 +753,8 @@
       "case_id": "EIV2_ED_002",
       "category": "enterprise_decision_recommendation",
       "dimension": "required_unit",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "NOT_SATISFIED",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_ED_002-required_unit-003"
@@ -772,13 +774,13 @@
           1498
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "All frozen Required Units remain directly human reviewable.",
       "task_id": "CORE-018"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_FV_001-C001",
@@ -789,8 +791,8 @@
       "case_id": "EIV2_FV_001",
       "category": "factual_verification",
       "dimension": "claim_segmentation",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_FV_001-C001"
@@ -810,13 +812,13 @@
           67
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-019"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_FV_001-C002",
@@ -827,8 +829,8 @@
       "case_id": "EIV2_FV_001",
       "category": "factual_verification",
       "dimension": "claim_segmentation",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_FV_001-C002"
@@ -848,13 +850,13 @@
           85
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-020"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_FV_001-citation_support-001",
@@ -865,8 +867,8 @@
       "case_id": "EIV2_FV_001",
       "category": "factual_verification",
       "dimension": "citation_support",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_FV_001-citation_support-001"
@@ -886,13 +888,13 @@
           67
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-021"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_FV_001-citation_support-002",
@@ -903,8 +905,8 @@
       "case_id": "EIV2_FV_001",
       "category": "factual_verification",
       "dimension": "citation_support",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_FV_001-citation_support-002"
@@ -924,13 +926,13 @@
           85
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-022"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_FV_001-evidence_strength-001",
@@ -941,8 +943,8 @@
       "case_id": "EIV2_FV_001",
       "category": "factual_verification",
       "dimension": "evidence_strength",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_FV_001-evidence_strength-001"
@@ -959,13 +961,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-023"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_FV_001-independence-001",
@@ -976,8 +978,8 @@
       "case_id": "EIV2_FV_001",
       "category": "factual_verification",
       "dimension": "independence",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_FV_001-independence-001"
@@ -994,13 +996,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-024"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_FV_001-freshness-001",
@@ -1011,8 +1013,8 @@
       "case_id": "EIV2_FV_001",
       "category": "factual_verification",
       "dimension": "freshness",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_FV_001-freshness-001"
@@ -1029,13 +1031,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-025"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TC_001-C001",
@@ -1046,8 +1048,8 @@
       "case_id": "EIV2_TC_001",
       "category": "technical_capability_analysis",
       "dimension": "claim_segmentation",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TC_001-C001"
@@ -1077,13 +1079,13 @@
           144
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-026"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TC_001-C002",
@@ -1094,8 +1096,8 @@
       "case_id": "EIV2_TC_001",
       "category": "technical_capability_analysis",
       "dimension": "claim_segmentation",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TC_001-C002"
@@ -1125,13 +1127,13 @@
           191
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-027"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TC_001-citation_support-001",
@@ -1142,8 +1144,8 @@
       "case_id": "EIV2_TC_001",
       "category": "technical_capability_analysis",
       "dimension": "citation_support",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TC_001-citation_support-001"
@@ -1163,13 +1165,13 @@
           144
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-028"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TC_001-citation_support-002",
@@ -1180,8 +1182,8 @@
       "case_id": "EIV2_TC_001",
       "category": "technical_capability_analysis",
       "dimension": "citation_support",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TC_001-citation_support-002"
@@ -1201,13 +1203,13 @@
           144
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-029"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TC_001-evidence_strength-001",
@@ -1218,8 +1220,8 @@
       "case_id": "EIV2_TC_001",
       "category": "technical_capability_analysis",
       "dimension": "evidence_strength",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TC_001-evidence_strength-001"
@@ -1236,13 +1238,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-030"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TC_001-independence-001",
@@ -1253,8 +1255,8 @@
       "case_id": "EIV2_TC_001",
       "category": "technical_capability_analysis",
       "dimension": "independence",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TC_001-independence-001"
@@ -1271,13 +1273,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-031"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TC_001-freshness-001",
@@ -1288,8 +1290,8 @@
       "case_id": "EIV2_TC_001",
       "category": "technical_capability_analysis",
       "dimension": "freshness",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TC_001-freshness-001"
@@ -1306,13 +1308,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-032"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CC_001-evidence_strength-001",
@@ -1323,8 +1325,8 @@
       "case_id": "EIV2_CC_001",
       "category": "competitive_comparison",
       "dimension": "evidence_strength",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CC_001-evidence_strength-001"
@@ -1341,13 +1343,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-033"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CC_001-independence-001",
@@ -1358,8 +1360,8 @@
       "case_id": "EIV2_CC_001",
       "category": "competitive_comparison",
       "dimension": "independence",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CC_001-independence-001"
@@ -1376,13 +1378,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-034"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TM_003-C027",
@@ -1393,8 +1395,8 @@
       "case_id": "EIV2_TM_003",
       "category": "trend_market_intelligence",
       "dimension": "claim_segmentation",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TM_003-C027"
@@ -1414,13 +1416,13 @@
           2830
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-035"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TM_003-C028",
@@ -1431,8 +1433,8 @@
       "case_id": "EIV2_TM_003",
       "category": "trend_market_intelligence",
       "dimension": "claim_segmentation",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TM_003-C028"
@@ -1452,13 +1454,13 @@
           3149
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-036"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TM_003-citation_support-001",
@@ -1469,8 +1471,8 @@
       "case_id": "EIV2_TM_003",
       "category": "trend_market_intelligence",
       "dimension": "citation_support",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TM_003-citation_support-001"
@@ -1490,13 +1492,13 @@
           117
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-037"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TM_003-citation_support-002",
@@ -1507,8 +1509,8 @@
       "case_id": "EIV2_TM_003",
       "category": "trend_market_intelligence",
       "dimension": "citation_support",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TM_003-citation_support-002"
@@ -1528,13 +1530,13 @@
           148
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-038"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TM_003-evidence_strength-001",
@@ -1545,8 +1547,8 @@
       "case_id": "EIV2_TM_003",
       "category": "trend_market_intelligence",
       "dimension": "evidence_strength",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TM_003-evidence_strength-001"
@@ -1563,13 +1565,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-039"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TM_003-independence-001",
@@ -1580,8 +1582,8 @@
       "case_id": "EIV2_TM_003",
       "category": "trend_market_intelligence",
       "dimension": "independence",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TM_003-independence-001"
@@ -1598,13 +1600,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-040"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_TM_003-freshness-001",
@@ -1615,8 +1617,8 @@
       "case_id": "EIV2_TM_003",
       "category": "trend_market_intelligence",
       "dimension": "freshness",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_TM_003-freshness-001"
@@ -1633,13 +1635,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-041"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CR_003-evidence_strength-001",
@@ -1650,8 +1652,8 @@
       "case_id": "EIV2_CR_003",
       "category": "conflict_credibility_resolution",
       "dimension": "evidence_strength",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CR_003-evidence_strength-001"
@@ -1668,13 +1670,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-042"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CR_003-independence-001",
@@ -1685,8 +1687,8 @@
       "case_id": "EIV2_CR_003",
       "category": "conflict_credibility_resolution",
       "dimension": "independence",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CR_003-independence-001"
@@ -1703,13 +1705,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-043"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_CR_003-freshness-003",
@@ -1720,8 +1722,8 @@
       "case_id": "EIV2_CR_003",
       "category": "conflict_credibility_resolution",
       "dimension": "freshness",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_CR_003-freshness-003"
@@ -1738,13 +1740,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-044"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_ED_002-C001",
@@ -1755,8 +1757,8 @@
       "case_id": "EIV2_ED_002",
       "category": "enterprise_decision_recommendation",
       "dimension": "claim_segmentation",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_ED_002-C001"
@@ -1786,13 +1788,13 @@
           49
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-045"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_ED_002-C005",
@@ -1803,8 +1805,8 @@
       "case_id": "EIV2_ED_002",
       "category": "enterprise_decision_recommendation",
       "dimension": "claim_segmentation",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_ED_002-C005"
@@ -1829,13 +1831,13 @@
           353
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-046"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_ED_002-citation_support-001",
@@ -1846,8 +1848,8 @@
       "case_id": "EIV2_ED_002",
       "category": "enterprise_decision_recommendation",
       "dimension": "citation_support",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_ED_002-citation_support-001"
@@ -1867,13 +1869,13 @@
           49
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-047"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_ED_002-citation_support-003",
@@ -1884,8 +1886,8 @@
       "case_id": "EIV2_ED_002",
       "category": "enterprise_decision_recommendation",
       "dimension": "citation_support",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_ED_002-citation_support-003"
@@ -1905,13 +1907,13 @@
           49
         ]
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-048"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_ED_002-evidence_strength-001",
@@ -1922,8 +1924,8 @@
       "case_id": "EIV2_ED_002",
       "category": "enterprise_decision_recommendation",
       "dimension": "evidence_strength",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_ED_002-evidence_strength-001"
@@ -1940,13 +1942,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-049"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_ED_002-independence-001",
@@ -1957,8 +1959,8 @@
       "case_id": "EIV2_ED_002",
       "category": "enterprise_decision_recommendation",
       "dimension": "independence",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_ED_002-independence-001"
@@ -1975,13 +1977,13 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-050"
     },
     {
-      "adjudication_note": null,
+      "adjudication_note": "accepted AI recommendation",
       "ai_recommendations": [
         {
           "ledger_review_id": "EIV2_ED_002-freshness-001",
@@ -1992,8 +1994,8 @@
       "case_id": "EIV2_ED_002",
       "category": "enterprise_decision_recommendation",
       "dimension": "freshness",
-      "human_decision": null,
-      "human_review_status": "PENDING",
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
       "layer": "HUMAN_CALIBRATION_CORE",
       "ledger_review_ids": [
         "EIV2_ED_002-freshness-001"
@@ -2010,8 +2012,8 @@
         "exact_required_unit": null,
         "report_span": null
       },
-      "review_timestamp": null,
-      "reviewer_identity": null,
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
       "selection_reason": "Deterministic first-by-review-id clear sample; selected without regard to system score.",
       "task_id": "CORE-051"
     }

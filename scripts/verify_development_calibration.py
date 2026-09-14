@@ -23,7 +23,18 @@ def verify():
     manifest = read(PACKAGE / "CALIBRATION_MANIFEST.json")
     assert digest(ROOT / "benchmarks/dataset/enterprise_insight_bench_v2.json") == manifest["dataset_sha256"]
     assert manifest["dataset_sha256"] == "95a9718c7e16b5a5c1ee966ee89e217aba0b0368b6e6afc4cd7c5d6a071896fa"
-    assert manifest["human_review_status"] == "PENDING" and manifest["reviewer"] is None
+    finalized = manifest["human_review_status"] == "COMPLETED"
+    if finalized:
+        assert manifest["package_status"] == "HUMAN_CALIBRATION_COMPLETED"
+        assert manifest["reviewer"] == "human-reviewer-calibration-001"
+        assert manifest["required_unit_baseline"] == {
+            "completion": "1/18",
+            "not_satisfied": 17,
+            "satisfied": 1,
+            "total": 18,
+        }
+    else:
+        assert manifest["human_review_status"] == "PENDING" and manifest["reviewer"] is None
     ledger = read(PACKAGE / "FULL_AI_ASSISTED_LEDGER.json")
     queue = read(PACKAGE / "HUMAN_REVIEW_QUEUE.json")
     core = read(PACKAGE / "HUMAN_CALIBRATION_CORE.json")["tasks"]
@@ -42,8 +53,15 @@ def verify():
         linked = [ledger_by_id[review_id] for review_id in task["ledger_review_ids"]]
         assert {item["case_id"] for item in linked} == {task["case_id"]}
         assert {item["category"] for item in linked} == {task["category"]}
-        for human_field in ("reviewer_identity", "human_decision", "review_timestamp", "adjudication_note"):
-            assert task[human_field] is None
+        if finalized:
+            assert task["human_review_status"] == "COMPLETED"
+            assert task["reviewer_identity"] == manifest["reviewer"]
+            assert task["review_timestamp"] == manifest["review_timestamp"]
+            assert task["human_decision"] is not None
+            assert task["adjudication_note"]
+        else:
+            for human_field in ("reviewer_identity", "human_decision", "review_timestamp", "adjudication_note"):
+                assert task[human_field] is None
     hashes = selected_count = 0
     scan_paths = set(p for p in PACKAGE.rglob("*") if p.is_file())
     for case in manifest["cases"]:
@@ -77,6 +95,12 @@ def verify():
         case_items = [i for i in items if i["case_id"] == case["case_id"]]
         assert {i["required_unit_id"] for i in case_items if i["item_type"] == "required_unit"} == {u["id"] for u in meta["required_units"]}
         by_id = {e["evidence_id"]: e for e in selected}
+        human_task_ids = {
+            review_id
+            for task in human_tasks
+            if task["case_id"] == case["case_id"]
+            for review_id in task["ledger_review_ids"]
+        }
         for item in case_items:
             for name in ("reviewer_identity", "human_decision", "review_timestamp", "adjudication_note"):
                 assert item[name] is None
@@ -88,6 +112,16 @@ def verify():
                 evidence = by_id[saved["evidence_id"]]
                 assert saved["exact_saved_evidence_excerpt"] == evidence["content"]
                 assert saved["source_reference"] == evidence["url"]
+        if finalized:
+            sheet = read(directory / "review_sheet.json")
+            for section in ("claim_segmentation", "citation_support", "required_unit", "evidence_strength", "independence", "freshness", "high_risk"):
+                for item in sheet.get(section + "_review", []):
+                    if item["review_id"] in human_task_ids:
+                        assert item["human_review_status"] == "COMPLETED"
+                        assert item["reviewer_identity"] == manifest["reviewer"]
+                        assert item["human_decision"] is not None
+                        assert item["review_timestamp"] == manifest["review_timestamp"]
+                        assert item["adjudication_note"]
         records = execution["execution"]["evidence_context"]["generated_claim_records"]
         assert {i["runtime_claim_id"] for i in case_items if i["item_type"] == "claim_segmentation"} == {r["claim_id"] for r in records}
         for task in [task for task in human_tasks if task["case_id"] == case["case_id"]]:
@@ -114,9 +148,22 @@ def verify():
         assert not any(secret in data for secret in secrets), "Configured secret in " + str(path.relative_to(ROOT))
         if path.suffix == ".json":
             read(path)
+    if finalized:
+        freeze = read(PACKAGE / "DEVELOPMENT_CALIBRATION_FREEZE.json")
+        failure_map = read(PACKAGE / "DEVELOPMENT_FAILURE_MAP.json")
+        assert freeze["human_review_finalized_count"] == 87
+        assert freeze["required_unit_result"] == "1/18"
+        assert freeze["official_holdout_executions"] == 0
+        assert freeze["provider_calls"] == 0
+        assert len(failure_map["records"]) == 18
+        assert failure_map["summary"]["final_human_decision_counts"] == {
+            "NOT_SATISFIED": 17,
+            "SATISFIED": 1,
+        }
     result = {"status": "PASSED", "verified_artifact_hashes": hashes, "selected_candidate_matches": selected_count,
               "full_ledger_items": len(items), "human_review_items": len(human_tasks), "required_units": 18, "configured_secret_matches": 0,
-              "finite_utf8_json": True, "official_holdout_executions": 0}
+              "finite_utf8_json": True, "official_holdout_executions": 0,
+              "human_review_finalized": finalized}
     print(json.dumps(result))
     return result
 

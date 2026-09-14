@@ -1,0 +1,538 @@
+{
+  "benchmark_schema": "enterprise-insight-bench-v2/2.2.0",
+  "closed_failure_taxonomy": [
+    "EVIDENCE_SCOPE_MISMATCH",
+    "EVIDENCE_STRENGTH_FAILURE",
+    "FRESHNESS_GAP",
+    "GENERATION_ALIGNMENT_FAILURE",
+    "INDEPENDENCE_GAP",
+    "PRIMARY_SOURCE_GAP",
+    "QUALIFICATION_METADATA_GAP",
+    "SAFE_ABSTENTION",
+    "TASK_COVERAGE_FAILURE"
+  ],
+  "cutoff": "2026-09-05",
+  "dataset_sha256": "95a9718c7e16b5a5c1ee966ee89e217aba0b0368b6e6afc4cd7c5d6a071896fa",
+  "field_semantics": {
+    "final_report_coverage": "full means the report substantively addresses the unit; partial means related content omits an obligation; none means no emitted report claim.",
+    "freshness_status": "verified means a publication date was verified; it does not imply the age window is satisfied. not_required means the RU has no frozen freshness obligation; unverified means the saved record did not qualify a usable date.",
+    "gate_effect": "observed final report/gate outcome for the material linked to the Required Unit; it is not itself a human Required Unit decision.",
+    "independent_source_count": "deduplicated saved source references; repeated chunks and URL variants are collapsed, and this count does not by itself prove independent publisher organizations."
+  },
+  "record_count": 18,
+  "records": [
+    {
+      "case_id": "EIV2_CC_001",
+      "category": "competitive_comparison",
+      "concise_evidence_based_reason": "最终报告只有固定的无断言说明；Gate 因比较所需 two_independent 与每个实体的 comparable primary 未满足而 omit，selected evidence 仅用于解释省略原因。",
+      "dominant_failure_type": "SAFE_ABSTENTION",
+      "evidence_available": true,
+      "final_human_decision": "NOT_SATISFIED",
+      "final_report_coverage": "none",
+      "freshness_status": "unverified",
+      "gate_effect": "omit/no_claims_emitted",
+      "independent_source_count": 1,
+      "primary_source_available": false,
+      "required_unit": "模型选择对比",
+      "required_unit_id": "model_choice",
+      "secondary_failure_types": [
+        "EVIDENCE_STRENGTH_FAILURE",
+        "PRIMARY_SOURCE_GAP",
+        "INDEPENDENCE_GAP",
+        "QUALIFICATION_METADATA_GAP"
+      ],
+      "source_commit": "392f6e46ca7de753e39913326c035233488ad8bf"
+    },
+    {
+      "case_id": "EIV2_CC_001",
+      "category": "competitive_comparison",
+      "concise_evidence_based_reason": "最终报告没有治理或网络隔离比较内容；Gate/grounding artifacts 显示没有可发出的 claims，保存的第三方材料未满足比较来源义务。",
+      "dominant_failure_type": "SAFE_ABSTENTION",
+      "evidence_available": true,
+      "final_human_decision": "NOT_SATISFIED",
+      "final_report_coverage": "none",
+      "freshness_status": "unverified",
+      "gate_effect": "omit/no_claims_emitted",
+      "independent_source_count": 1,
+      "primary_source_available": false,
+      "required_unit": "治理与网络隔离对比",
+      "required_unit_id": "governance_network",
+      "secondary_failure_types": [
+        "EVIDENCE_STRENGTH_FAILURE",
+        "PRIMARY_SOURCE_GAP",
+        "INDEPENDENCE_GAP",
+        "QUALIFICATION_METADATA_GAP"
+      ],
+      "source_commit": "392f6e46ca7de753e39913326c035233488ad8bf"
+    },
+    {
+      "case_id": "EIV2_CC_001",
+      "category": "competitive_comparison",
+      "concise_evidence_based_reason": "最终报告没有定价透明度比较内容；Gate 对比较实体的一手来源与独立支持要求均未满足，因此没有 emitted claim 可覆盖该 Required Unit。",
+      "dominant_failure_type": "SAFE_ABSTENTION",
+      "evidence_available": true,
+      "final_human_decision": "NOT_SATISFIED",
+      "final_report_coverage": "none",
+      "freshness_status": "unverified",
+      "gate_effect": "omit/no_claims_emitted",
+      "independent_source_count": 1,
+      "primary_source_available": false,
+      "required_unit": "定价透明度对比",
+      "required_unit_id": "pricing",
+      "secondary_failure_types": [
+        "EVIDENCE_STRENGTH_FAILURE",
+        "PRIMARY_SOURCE_GAP",
+        "INDEPENDENCE_GAP",
+        "QUALIFICATION_METADATA_GAP"
+      ],
+      "source_commit": "392f6e46ca7de753e39913326c035233488ad8bf"
+    },
+    {
+      "case_id": "EIV2_CR_003",
+      "category": "conflict_credibility_resolution",
+      "concise_evidence_based_reason": "最终报告没有 emitted claim；保存材料中虽有 DeepSeek 官方项目来源，但分数需要更完整的厂商结果与冻结强度规则，Gate 因义务未满足而 omit。",
+      "dominant_failure_type": "SAFE_ABSTENTION",
+      "evidence_available": true,
+      "final_human_decision": "NOT_SATISFIED",
+      "final_report_coverage": "none",
+      "freshness_status": "not_required",
+      "gate_effect": "omit/no_claims_emitted",
+      "independent_source_count": 1,
+      "primary_source_available": true,
+      "required_unit": "厂商报告分数",
+      "required_unit_id": "vendor_score",
+      "secondary_failure_types": [
+        "EVIDENCE_STRENGTH_FAILURE",
+        "EVIDENCE_SCOPE_MISMATCH",
+        "QUALIFICATION_METADATA_GAP"
+      ],
+      "source_commit": "392f6e46ca7de753e39913326c035233488ad8bf"
+    },
+    {
+      "case_id": "EIV2_CR_003",
+      "category": "conflict_credibility_resolution",
+      "concise_evidence_based_reason": "最终报告没有 emitted claim；HF discussion 讨论的是 DeepScaleR-1.5B-Preview，不能直接替代目标完整 DeepSeek-R1 的第三方复现结果。",
+      "dominant_failure_type": "SAFE_ABSTENTION",
+      "evidence_available": true,
+      "final_human_decision": "NOT_SATISFIED",
+      "final_report_coverage": "none",
+      "freshness_status": "not_required",
+      "gate_effect": "omit/no_claims_emitted",
+      "independent_source_count": 1,
+      "primary_source_available": false,
+      "required_unit": "第三方复现结果",
+      "required_unit_id": "replication",
+      "secondary_failure_types": [
+        "EVIDENCE_SCOPE_MISMATCH",
+        "EVIDENCE_STRENGTH_FAILURE",
+        "INDEPENDENCE_GAP",
+        "QUALIFICATION_METADATA_GAP"
+      ],
+      "source_commit": "392f6e46ca7de753e39913326c035233488ad8bf"
+    },
+    {
+      "case_id": "EIV2_CR_003",
+      "category": "conflict_credibility_resolution",
+      "concise_evidence_based_reason": "最终报告没有 emitted claim；保存材料包含官方 R1 项目与 DeepScaleR 讨论，但对象/版本范围不一致，不能直接形成差异解释与可信判断。",
+      "dominant_failure_type": "SAFE_ABSTENTION",
+      "evidence_available": true,
+      "final_human_decision": "NOT_SATISFIED",
+      "final_report_coverage": "none",
+      "freshness_status": "not_required",
+      "gate_effect": "omit/no_claims_emitted",
+      "independent_source_count": 2,
+      "primary_source_available": true,
+      "required_unit": "差异解释与可信判断",
+      "required_unit_id": "explanation",
+      "secondary_failure_types": [
+        "EVIDENCE_SCOPE_MISMATCH",
+        "EVIDENCE_STRENGTH_FAILURE",
+        "INDEPENDENCE_GAP",
+        "QUALIFICATION_METADATA_GAP"
+      ],
+      "source_commit": "392f6e46ca7de753e39913326c035233488ad8bf"
+    },
+    {
+      "case_id": "EIV2_ED_002",
+      "category": "enterprise_decision_recommendation",
+      "concise_evidence_based_reason": "最终报告主要解释 pgvector 的定义与能力，没有围绕托管向量库和搜索引擎候选集合完成对比；已有材料不足以补齐未生成的候选侧内容。",
+      "dominant_failure_type": "TASK_COVERAGE_FAILURE",
+      "evidence_available": true,
+      "final_human_decision": "NOT_SATISFIED",
+      "final_report_coverage": "partial",
+      "freshness_status": "not_required",
+      "gate_effect": "emit",
+      "independent_source_count": 2,
+      "primary_source_available": true,
+      "required_unit": "候选技术能力",
+      "required_unit_id": "capabilities",
+      "secondary_failure_types": [
+        "GENERATION_ALIGNMENT_FAILURE",
+        "EVIDENCE_SCOPE_MISMATCH",
+        "INDEPENDENCE_GAP",
+        "QUALIFICATION_METADATA_GAP"
+      ],
+      "source_commit": "392f6e46ca7de753e39913326c035233488ad8bf"
+    },
+    {
+      "case_id": "EIV2_ED_002",
+      "category": "enterprise_decision_recommendation",
+      "concise_evidence_based_reason": "报告发出 Milvus 部署和 pgvector 运维相关内容，但主要运维比较来自同一社区文章，未建立 two_independent，规模与版本边界也不完整。",
+      "dominant_failure_type": "EVIDENCE_STRENGTH_FAILURE",
+      "evidence_available": true,
+      "final_human_decision": "NOT_SATISFIED",
+      "final_report_coverage": "partial",
+      "freshness_status": "not_required",
+      "gate_effect": "emit",
+      "independent_source_count": 1,
+      "primary_source_available": false,
+      "required_unit": "规模与运维条件",
+      "required_unit_id": "operations",
+      "secondary_failure_types": [
+        "INDEPENDENCE_GAP",
+        "TASK_COVERAGE_FAILURE",
+        "QUALIFICATION_METADATA_GAP"
+      ],
+      "source_commit": "392f6e46ca7de753e39913326c035233488ad8bf"
+    },
+    {
+      "case_id": "EIV2_ED_002",
+      "category": "enterprise_decision_recommendation",
+      "concise_evidence_based_reason": "最终报告只给出按向量规模、查询模式和架构偏好的选型原则，没有给中型制造企业的条件化迁移步骤或边界；关联 CSDN 材料的日期归属仍有疑点。",
+      "dominant_failure_type": "TASK_COVERAGE_FAILURE",
+      "evidence_available": true,
+      "final_human_decision": "NOT_SATISFIED",
+      "final_report_coverage": "partial",
+      "freshness_status": "unverified",
+      "gate_effect": "emit",
+      "independent_source_count": 1,
+      "primary_source_available": false,
+      "required_unit": "条件化迁移建议",
+      "required_unit_id": "migration",
+      "secondary_failure_types": [
+        "GENERATION_ALIGNMENT_FAILURE",
+        "EVIDENCE_SCOPE_MISMATCH",
+        "FRESHNESS_GAP",
+        "QUALIFICATION_METADATA_GAP"
+      ],
+      "source_commit": "392f6e46ca7de753e39913326c035233488ad8bf"
+    },
+    {
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "concise_evidence_based_reason": "人审接受该条报告中的限定性边界表述；保存的官方政策片段支持默认不训练规则，因此 UNCERTAIN 被覆盖为 SATISFIED。",
+      "dominant_failure_type": null,
+      "evidence_available": true,
+      "final_human_decision": "SATISFIED",
+      "final_report_coverage": "full",
+      "freshness_status": "not_required",
+      "gate_effect": "hedge",
+      "independent_source_count": 3,
+      "primary_source_available": true,
+      "required_unit": "默认训练用途政策",
+      "required_unit_id": "training_default",
+      "secondary_failure_types": [],
+      "source_commit": "392f6e46ca7de753e39913326c035233488ad8bf"
+    },
+    {
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "concise_evidence_based_reason": "报告只保留社区帖子提出的去标识化/匿名化例外争议，并明确标为未确认；保存材料未形成该例外的合格一手或足够独立支持。",
+      "dominant_failure_type": "EVIDENCE_STRENGTH_FAILURE",
+      "evidence_available": true,
+      "final_human_decision": "NOT_SATISFIED",
+      "final_report_coverage": "partial",
+      "freshness_status": "not_required",
+      "gate_effect": "hedge",
+      "independent_source_count": 3,
+      "primary_source_available": false,
+      "required_unit": "明确适用例外",
+      "required_unit_id": "exceptions",
+      "secondary_failure_types": [
+        "PRIMARY_SOURCE_GAP",
+        "INDEPENDENCE_GAP",
+        "QUALIFICATION_METADATA_GAP"
+      ],
+      "source_commit": "392f6e46ca7de753e39913326c035233488ad8bf"
+    },
+    {
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "concise_evidence_based_reason": "最终报告只说明滥用监控日志和应用状态等存储类型，没有覆盖保留期限、删除或控制边界；唯一关联证据的 publication_date 仍为空。",
+      "dominant_failure_type": "TASK_COVERAGE_FAILURE",
+      "evidence_available": true,
+      "final_human_decision": "NOT_SATISFIED",
+      "final_report_coverage": "partial",
+      "freshness_status": "unverified",
+      "gate_effect": "emit",
+      "independent_source_count": 1,
+      "primary_source_available": true,
+      "required_unit": "数据保留或控制边界",
+      "required_unit_id": "retention",
+      "secondary_failure_types": [
+        "EVIDENCE_SCOPE_MISMATCH",
+        "EVIDENCE_STRENGTH_FAILURE",
+        "FRESHNESS_GAP"
+      ],
+      "source_commit": "392f6e46ca7de753e39913326c035233488ad8bf"
+    },
+    {
+      "case_id": "EIV2_TC_001",
+      "category": "technical_capability_analysis",
+      "concise_evidence_based_reason": "报告清楚描述向量相似度与关键词/元数据过滤的混合机制，但保存引用是教程/文章组合，未建立 pgvector 一手材料加独立佐证。",
+      "dominant_failure_type": "PRIMARY_SOURCE_GAP",
+      "evidence_available": true,
+      "final_human_decision": "NOT_SATISFIED",
+      "final_report_coverage": "full",
+      "freshness_status": "not_required",
+      "gate_effect": "emit",
+      "independent_source_count": 2,
+      "primary_source_available": false,
+      "required_unit": "混合检索机制",
+      "required_unit_id": "hybrid",
+      "secondary_failure_types": [
+        "INDEPENDENCE_GAP",
+        "EVIDENCE_STRENGTH_FAILURE",
+        "QUALIFICATION_METADATA_GAP"
+      ],
+      "source_commit": "392f6e46ca7de753e39913326c035233488ad8bf"
+    },
+    {
+      "case_id": "EIV2_TC_001",
+      "category": "technical_capability_analysis",
+      "concise_evidence_based_reason": "报告相关段落只说明查询规划器可以使用索引和 SQL 组合，没有组织 HNSW/IVFFlat 的选择与权衡；相关证据也不是目标产品的一手文档。",
+      "dominant_failure_type": "TASK_COVERAGE_FAILURE",
+      "evidence_available": true,
+      "final_human_decision": "NOT_SATISFIED",
+      "final_report_coverage": "partial",
+      "freshness_status": "not_required",
+      "gate_effect": "emit",
+      "independent_source_count": 2,
+      "primary_source_available": false,
+      "required_unit": "索引选择与权衡",
+      "required_unit_id": "indexes",
+      "secondary_failure_types": [
+        "PRIMARY_SOURCE_GAP",
+        "EVIDENCE_STRENGTH_FAILURE",
+        "QUALIFICATION_METADATA_GAP"
+      ],
+      "source_commit": "392f6e46ca7de753e39913326c035233488ad8bf"
+    },
+    {
+      "case_id": "EIV2_TC_001",
+      "category": "technical_capability_analysis",
+      "concise_evidence_based_reason": "报告给出多项生产限制，但两条 VeloDB 证据属于同一页面，另一条 ParadeDB 文章未提供足以完成冻结 two_independent obligation 的资格化元数据。",
+      "dominant_failure_type": "INDEPENDENCE_GAP",
+      "evidence_available": true,
+      "final_human_decision": "NOT_SATISFIED",
+      "final_report_coverage": "full",
+      "freshness_status": "not_required",
+      "gate_effect": "emit",
+      "independent_source_count": 2,
+      "primary_source_available": false,
+      "required_unit": "企业工作负载限制",
+      "required_unit_id": "limits",
+      "secondary_failure_types": [
+        "EVIDENCE_STRENGTH_FAILURE",
+        "QUALIFICATION_METADATA_GAP"
+      ],
+      "source_commit": "392f6e46ca7de753e39913326c035233488ad8bf"
+    },
+    {
+      "case_id": "EIV2_TM_003",
+      "category": "trend_market_intelligence",
+      "concise_evidence_based_reason": "报告写到主权云与区域基础设施趋势，但两个关联片段是同一 InfotechLead/ABI Research 报道的 URL 变体，且未完整比较主要云厂商服务的区域扩张；strict freshness 也未资格化。",
+      "dominant_failure_type": "INDEPENDENCE_GAP",
+      "evidence_available": true,
+      "final_human_decision": "NOT_SATISFIED",
+      "final_report_coverage": "partial",
+      "freshness_status": "unverified",
+      "gate_effect": "emit",
+      "independent_source_count": 1,
+      "primary_source_available": false,
+      "required_unit": "区域扩张趋势",
+      "required_unit_id": "regions",
+      "secondary_failure_types": [
+        "EVIDENCE_STRENGTH_FAILURE",
+        "TASK_COVERAGE_FAILURE",
+        "FRESHNESS_GAP",
+        "QUALIFICATION_METADATA_GAP"
+      ],
+      "source_commit": "392f6e46ca7de753e39913326c035233488ad8bf"
+    },
+    {
+      "case_id": "EIV2_TM_003",
+      "category": "trend_market_intelligence",
+      "concise_evidence_based_reason": "报告提供模型接入清单，但两个引用来自同一 Bits Lovers 页面，publication_date 未验证，未形成 two_independent 的时效趋势证据。",
+      "dominant_failure_type": "INDEPENDENCE_GAP",
+      "evidence_available": true,
+      "final_human_decision": "NOT_SATISFIED",
+      "final_report_coverage": "partial",
+      "freshness_status": "unverified",
+      "gate_effect": "emit",
+      "independent_source_count": 1,
+      "primary_source_available": false,
+      "required_unit": "模型多样化趋势",
+      "required_unit_id": "models",
+      "secondary_failure_types": [
+        "FRESHNESS_GAP",
+        "EVIDENCE_STRENGTH_FAILURE",
+        "TASK_COVERAGE_FAILURE",
+        "QUALIFICATION_METADATA_GAP"
+      ],
+      "source_commit": "392f6e46ca7de753e39913326c035233488ad8bf"
+    },
+    {
+      "case_id": "EIV2_TM_003",
+      "category": "trend_market_intelligence",
+      "concise_evidence_based_reason": "报告同时引用 AWS 治理建议与 Clarip 产品描述，但没有完整建立主要云厂商控制能力的发展趋势，且 strict freshness 证据未确认。",
+      "dominant_failure_type": "FRESHNESS_GAP",
+      "evidence_available": true,
+      "final_human_decision": "NOT_SATISFIED",
+      "final_report_coverage": "partial",
+      "freshness_status": "unverified",
+      "gate_effect": "emit",
+      "independent_source_count": 2,
+      "primary_source_available": true,
+      "required_unit": "企业控制趋势",
+      "required_unit_id": "controls",
+      "secondary_failure_types": [
+        "TASK_COVERAGE_FAILURE",
+        "EVIDENCE_STRENGTH_FAILURE",
+        "QUALIFICATION_METADATA_GAP"
+      ],
+      "source_commit": "392f6e46ca7de753e39913326c035233488ad8bf"
+    }
+  ],
+  "schema_version": "enterprise-insight-v2-development-failure-map/1.0.0",
+  "source_commit": "392f6e46ca7de753e39913326c035233488ad8bf",
+  "summary": {
+    "category_distribution": {
+      "competitive_comparison": {
+        "SAFE_ABSTENTION": 3
+      },
+      "conflict_credibility_resolution": {
+        "SAFE_ABSTENTION": 3
+      },
+      "enterprise_decision_recommendation": {
+        "EVIDENCE_STRENGTH_FAILURE": 1,
+        "TASK_COVERAGE_FAILURE": 2
+      },
+      "factual_verification": {
+        "EVIDENCE_STRENGTH_FAILURE": 1,
+        "NO_FAILURE": 1,
+        "TASK_COVERAGE_FAILURE": 1
+      },
+      "technical_capability_analysis": {
+        "INDEPENDENCE_GAP": 1,
+        "PRIMARY_SOURCE_GAP": 1,
+        "TASK_COVERAGE_FAILURE": 1
+      },
+      "trend_market_intelligence": {
+        "FRESHNESS_GAP": 1,
+        "INDEPENDENCE_GAP": 2
+      }
+    },
+    "dominant_failure_type_counts": {
+      "EVIDENCE_STRENGTH_FAILURE": 2,
+      "FRESHNESS_GAP": 1,
+      "INDEPENDENCE_GAP": 3,
+      "PRIMARY_SOURCE_GAP": 1,
+      "SAFE_ABSTENTION": 6,
+      "TASK_COVERAGE_FAILURE": 4
+    },
+    "final_human_decision_counts": {
+      "NOT_SATISFIED": 17,
+      "SATISFIED": 1
+    },
+    "planned_utility_correction_work_packages": [
+      {
+        "addresses_failure_types": [
+          "TASK_COVERAGE_FAILURE",
+          "GENERATION_ALIGNMENT_FAILURE"
+        ],
+        "mapped_required_units": [
+          "EIV2_FV_001/retention",
+          "EIV2_TC_001/indexes",
+          "EIV2_TM_003/regions",
+          "EIV2_TM_003/controls",
+          "EIV2_ED_002/capabilities",
+          "EIV2_ED_002/migration"
+        ],
+        "name": "requirement-driven research/generation",
+        "scope": "mapping only; feature not implemented in Batch 0"
+      },
+      {
+        "addresses_failure_types": [
+          "PRIMARY_SOURCE_GAP",
+          "QUALIFICATION_METADATA_GAP",
+          "FRESHNESS_GAP"
+        ],
+        "mapped_required_units": [
+          "EIV2_FV_001/exceptions",
+          "EIV2_FV_001/retention",
+          "EIV2_TC_001/hybrid",
+          "EIV2_TC_001/indexes",
+          "EIV2_TC_001/limits",
+          "EIV2_CC_001/model_choice",
+          "EIV2_CC_001/governance_network",
+          "EIV2_CC_001/pricing",
+          "EIV2_TM_003/regions",
+          "EIV2_TM_003/models",
+          "EIV2_TM_003/controls",
+          "EIV2_ED_002/migration"
+        ],
+        "name": "source/date metadata enrichment",
+        "scope": "mapping only; feature not implemented in Batch 0"
+      },
+      {
+        "addresses_failure_types": [
+          "EVIDENCE_STRENGTH_FAILURE",
+          "PRIMARY_SOURCE_GAP",
+          "INDEPENDENCE_GAP",
+          "FRESHNESS_GAP",
+          "EVIDENCE_SCOPE_MISMATCH"
+        ],
+        "mapped_required_units": [
+          "EIV2_FV_001/exceptions",
+          "EIV2_FV_001/retention",
+          "EIV2_TC_001/hybrid",
+          "EIV2_TC_001/indexes",
+          "EIV2_TC_001/limits",
+          "EIV2_CC_001/model_choice",
+          "EIV2_CC_001/governance_network",
+          "EIV2_CC_001/pricing",
+          "EIV2_TM_003/regions",
+          "EIV2_TM_003/models",
+          "EIV2_TM_003/controls",
+          "EIV2_CR_003/vendor_score",
+          "EIV2_CR_003/replication",
+          "EIV2_CR_003/explanation",
+          "EIV2_ED_002/operations"
+        ],
+        "name": "one bounded evidence-gap retrieval",
+        "scope": "mapping only; feature not implemented in Batch 0"
+      },
+      {
+        "addresses_failure_types": [
+          "SAFE_ABSTENTION",
+          "GENERATION_ALIGNMENT_FAILURE",
+          "EVIDENCE_SCOPE_MISMATCH"
+        ],
+        "mapped_required_units": [
+          "EIV2_CC_001/model_choice",
+          "EIV2_CC_001/governance_network",
+          "EIV2_CC_001/pricing",
+          "EIV2_CR_003/vendor_score",
+          "EIV2_CR_003/replication",
+          "EIV2_CR_003/explanation",
+          "EIV2_ED_002/capabilities",
+          "EIV2_ED_002/migration"
+        ],
+        "name": "layered evidence disclosure + evidence-grounded AI inference",
+        "scope": "mapping only; feature not implemented in Batch 0"
+      }
+    ],
+    "required_unit_count": 18
+  }
+}

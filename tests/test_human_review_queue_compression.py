@@ -94,14 +94,21 @@ def test_calibration_sampling_is_stratified_where_material_exists():
             assert sample_counts[(category, dimension)] == (limit if available else 0)
 
 
-def test_human_tasks_only_reference_saved_material_and_leave_human_fields_unset():
+def test_human_tasks_reference_saved_material_and_have_valid_review_lifecycle():
     ledger = load("FULL_AI_ASSISTED_LEDGER.json")["items"]
     by_id = {item["review_id"]: item for item in ledger}
     tasks = load("HUMAN_CALIBRATION_CORE.json")["tasks"] + load("HUMAN_ADJUDICATION_QUEUE.json")["tasks"]
+    finalized = all(task["human_review_status"] == "COMPLETED" for task in tasks)
     for task in tasks:
-        assert task["human_review_status"] == "PENDING"
-        for field in ("reviewer_identity", "human_decision", "review_timestamp", "adjudication_note"):
-            assert task[field] is None
+        if finalized:
+            assert task["reviewer_identity"] == "human-reviewer-calibration-001"
+            assert task["human_decision"] is not None
+            assert task["review_timestamp"]
+            assert task["adjudication_note"]
+        else:
+            assert task["human_review_status"] == "PENDING"
+            for field in ("reviewer_identity", "human_decision", "review_timestamp", "adjudication_note"):
+                assert task[field] is None
         assert task["ledger_review_ids"]
         assert all(review_id in by_id for review_id in task["ledger_review_ids"])
         assert task.get("exact_report_passage") or task.get("material")

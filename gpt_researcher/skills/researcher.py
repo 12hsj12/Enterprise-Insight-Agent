@@ -516,7 +516,14 @@ class ResearchConductor:
         return all(isinstance(c, dict) and _is_tavily_mcp(c) for c in configs)
 
 
-    async def _process_sub_query(self, sub_query: str, scraped_data: list = [], query_domains: list = []):
+    async def _process_sub_query(
+        self,
+        sub_query: str,
+        scraped_data: list = [],
+        query_domains: list = [],
+        *,
+        allow_mcp: bool = True,
+    ):
         """Takes in a sub query and scrapes urls based on it and gathers context."""
         if self.json_handler:
             self.json_handler.log_event("sub_query", {
@@ -534,7 +541,10 @@ class ResearchConductor:
 
         try:
             # Identify MCP retrievers
-            mcp_retrievers = [r for r in self.researcher.retrievers if "mcpretriever" in r.__name__.lower()]
+            mcp_retrievers = [
+                r for r in self.researcher.retrievers
+                if allow_mcp and "mcpretriever" in r.__name__.lower()
+            ]
             non_mcp_retrievers = [r for r in self.researcher.retrievers if "mcpretriever" not in r.__name__.lower()]
 
             # Avoid dual Tavily path (direct retriever + tavily-mcp) under default RETRIEVER=tavily.
@@ -663,6 +673,34 @@ class ResearchConductor:
                     self.researcher.websocket,
                 )
             return ""
+
+    async def conduct_targeted_research(self, queries: list[str]):
+        """Run one caller-bounded query batch without another planning call.
+
+        The ordinary direct-retriever, scrape, metadata, ContextManager, and
+        source-aware selection path is reused. MCP is excluded because its tool
+        selection can introduce an additional provider planning call.
+        """
+
+        contexts = await asyncio.gather(*[
+            self._process_sub_query(
+                query,
+                [],
+                self.researcher.query_domains,
+                allow_mcp=False,
+            )
+            for query in queries
+        ])
+        additions = [item for item in contexts if item]
+        if additions:
+            existing = self.researcher.context
+            existing_text = (
+                "\n\n".join(existing) if isinstance(existing, list) else str(existing)
+            )
+            self.researcher.context = "\n\n".join(
+                item for item in (existing_text, *additions) if item
+            )
+        return additions
 
     async def _execute_mcp_research(self, retriever, query):
         """

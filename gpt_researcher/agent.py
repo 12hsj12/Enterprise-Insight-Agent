@@ -417,6 +417,11 @@ class GPTResearcher:
         
         return self.context
 
+    async def conduct_targeted_research(self, queries: list[str]):
+        """Execute one deterministic follow-up query batch without replanning."""
+
+        return await self.research_conductor.conduct_targeted_research(queries)
+
     async def _handle_deep_research(self, on_progress=None):
         """Handle deep research execution and logging.
 

@@ -7,6 +7,7 @@ from typing import Annotated, Callable
 from uuid import uuid4
 import json
 import re
+import time
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -26,6 +27,14 @@ from .task_policy import (
 from .trace import ResearchTraceRecorder
 from .integration import ClaimPlan, IntegratedExecution, integrate_claims, render_report
 from gpt_researcher.evidence.models import EvidenceContext
+from .readiness import (
+    SecondRetrievalDiagnostics,
+    build_second_retrieval_queries,
+    canonical_url,
+    evaluate_requirement_readiness,
+    extend_plan_with_second_queries,
+)
+from .requirements import fallback_research_plan
 
 
 class IntelligenceRequest(BaseModel):
@@ -75,6 +84,9 @@ class IntelligenceResult(BaseModel):
     output_artifact_reference: str | None = None
     execution_artifact_reference: str | None = None
     execution: IntegratedExecution | None = None
+    second_retrieval: SecondRetrievalDiagnostics = Field(
+        default_factory=SecondRetrievalDiagnostics
+    )
 
     def to_evaluation_case(self, case_id: str):
         """Expose runtime facts without manufacturing benchmark annotations."""
@@ -138,6 +150,7 @@ class IntelligenceWorkflow:
                     execution_path.write_text(json.dumps({
                         "run_id": run_id, "trace_id": trace.trace_id,
                         "output_artifact_reference": output_artifact_reference,
+                        "second_retrieval": result.second_retrieval.model_dump(mode="json"),
                         "execution": result.execution.model_dump(mode="json"),
                     }, ensure_ascii=False, indent=2), encoding="utf-8")
                     pending = directory / "report.pending"
@@ -212,6 +225,79 @@ class IntelligenceWorkflow:
         researcher = self.researcher_factory(**researcher_kwargs)
         with trace.stage("research") if trace else nullcontext():
             await researcher.conduct_research()
+        second_retrieval = SecondRetrievalDiagnostics()
+        initial_evidences = list(researcher.get_evidences())
+        effective_research_plan = getattr(researcher, "research_plan", None)
+        if request.enable_v2_execution:
+            if effective_research_plan is None:
+                effective_research_plan = fallback_research_plan(
+                    target=request.target,
+                    topic=request.topic,
+                    dimensions=list(request.dimensions),
+                    cutoff_date=request.cutoff_date,
+                    reason="structured_plan_unavailable",
+                )
+                researcher.research_plan = effective_research_plan
+            task_category = (
+                task_classification.category if task_classification is not None else None
+            )
+            readiness_before = evaluate_requirement_readiness(
+                effective_research_plan,
+                initial_evidences,
+                task_category=task_category,
+            )
+            second_queries, budget_exhausted = build_second_retrieval_queries(
+                effective_research_plan,
+                readiness_before,
+            )
+            targeted_research = getattr(researcher, "conduct_targeted_research", None)
+            triggered = bool(second_queries and targeted_research is not None)
+            elapsed = 0.0
+            additional_candidates = 0
+            if triggered:
+                effective_research_plan = extend_plan_with_second_queries(
+                    effective_research_plan, second_queries
+                )
+                researcher.research_plan = effective_research_plan
+                started = time.perf_counter()
+                with trace.stage("retrieval") if trace else nullcontext():
+                    await targeted_research([item.query for item in second_queries])
+                elapsed = time.perf_counter() - started
+                additional_candidates = max(
+                    0, len(researcher.get_evidences()) - len(initial_evidences)
+                )
+            merged_evidences = _deduplicate_second_round_evidence(
+                initial_evidences,
+                list(researcher.get_evidences()),
+            )
+            readiness_after = evaluate_requirement_readiness(
+                effective_research_plan,
+                merged_evidences,
+                task_category=task_category,
+            )
+            second_retrieval = SecondRetrievalDiagnostics(
+                triggered=triggered,
+                queries_count=(len(second_queries) if triggered else 0),
+                requirement_ids=(
+                    tuple(item.requirement_id for item in second_queries)
+                    if triggered else ()
+                ),
+                missing_target_entities=tuple(dict.fromkeys(
+                    target
+                    for item in readiness_before
+                    if item.requirement_id in {
+                        query.requirement_id for query in second_queries
+                    }
+                    for target in item.missing_target_entities
+                )),
+                readiness_before=readiness_before,
+                readiness_after=readiness_after,
+                retrieval_budget_exhausted=budget_exhausted,
+                additional_search_latency_s=elapsed,
+                additional_retrieved_candidates=additional_candidates,
+            )
+            if trace:
+                trace.try_record_second_retrieval(second_retrieval)
         if not request.enable_v2_execution:
             with trace.stage("report") if trace else nullcontext():
                 report = await researcher.write_report(custom_prompt=(
@@ -230,13 +316,22 @@ class IntelligenceWorkflow:
                 output_artifact_reference=output_artifact_reference
             )
         evidences_by_id = {}
-        for evidence in researcher.get_evidences():
+        evidence_source = (
+            _deduplicate_second_round_evidence(
+                initial_evidences, list(researcher.get_evidences())
+            )
+            if request.enable_v2_execution else list(researcher.get_evidences())
+        )
+        for evidence in evidence_source:
             previous = evidences_by_id.get(evidence.evidence_id)
             if previous is not None and previous != evidence:
                 raise ValueError("Conflicting evidence objects share an evidence_id")
             evidences_by_id[evidence.evidence_id] = evidence
         evidences = list(evidences_by_id.values())
-        assessments = {a.evidence_id: a for a in researcher.get_evidence_assessments()}
+        assessments = {
+            a.evidence_id: a for a in researcher.get_evidence_assessments()
+            if a.evidence_id in evidences_by_id
+        }
         if set(assessments) != set(evidences_by_id):
             raise ValueError("Evidence and reliability assessment IDs must match")
         source_urls = sorted({e.url for e in evidences if e.url})
@@ -251,7 +346,10 @@ class IntelligenceWorkflow:
             researcher, "get_retrieval_diagnostics", None
         )
         retrieval_diagnostics = (
-            list(retrieval_diagnostics_getter())
+            [
+                item for item in retrieval_diagnostics_getter()
+                if item.evidence_id in evidences_by_id
+            ]
             if retrieval_diagnostics_getter is not None
             else []
         )
@@ -284,4 +382,29 @@ class IntelligenceWorkflow:
             evidence_selection_limitation_codes=list(selection_limitations),
             trace_id=trace.trace_id if trace else None,
             execution=execution,
+            second_retrieval=second_retrieval,
         )
+
+
+def _deduplicate_second_round_evidence(
+    initial: list[Evidence],
+    all_evidence: list[Evidence],
+) -> list[Evidence]:
+    """Keep initial chunks, but reject a second-round page already represented."""
+
+    initial_ids = {item.evidence_id for item in initial}
+    seen_ids = set()
+    seen_urls = {canonical_url(item.url) for item in initial if item.url}
+    merged = []
+    for evidence in all_evidence:
+        if evidence.evidence_id in seen_ids:
+            continue
+        is_initial = evidence.evidence_id in initial_ids
+        page = canonical_url(evidence.url) if evidence.url else ""
+        if not is_initial and page and page in seen_urls:
+            continue
+        merged.append(evidence)
+        seen_ids.add(evidence.evidence_id)
+        if page:
+            seen_urls.add(page)
+    return merged

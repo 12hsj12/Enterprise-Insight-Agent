@@ -639,6 +639,33 @@ class ResearchTraceRecorder:
             )
         )
 
+    def record_second_retrieval(self, diagnostics) -> None:
+        """Record bounded, content-free minimum-readiness diagnostics."""
+
+        self._append_operational({
+            "stage": "second_retrieval",
+            "initial_requirement_readiness": [
+                item.model_dump(mode="json") for item in diagnostics.readiness_before
+            ],
+            "second_retrieval_triggered": diagnostics.triggered,
+            "second_retrieval_query_count": diagnostics.queries_count,
+            "requirement_ids": list(diagnostics.requirement_ids),
+            "missing_target_entities": list(diagnostics.missing_target_entities),
+            "post_retrieval_readiness": [
+                item.model_dump(mode="json") for item in diagnostics.readiness_after
+            ],
+            "retrieval_budget_exhausted": list(
+                diagnostics.retrieval_budget_exhausted
+            ),
+            "additional_search_latency_s": diagnostics.additional_search_latency_s,
+            "additional_retrieved_candidates": (
+                diagnostics.additional_retrieved_candidates
+            ),
+        })
+
+    def try_record_second_retrieval(self, diagnostics) -> bool:
+        return self._attempt(lambda: self.record_second_retrieval(diagnostics))
+
     def record_evidence_selection(
         self,
         result,

@@ -26,6 +26,7 @@ from .task_policy import (
 )
 from .trace import ResearchTraceRecorder
 from .integration import ClaimPlan, IntegratedExecution, integrate_claims, render_report
+from .report_diagnostics import active_capture, diagnostic_stage
 from gpt_researcher.evidence.models import EvidenceContext
 from .readiness import (
     SecondRetrievalDiagnostics,
@@ -364,13 +365,23 @@ class IntelligenceWorkflow:
             context = EvidenceContext(context="", evidences=evidences,
                                       retrieval_diagnostics=retrieval_diagnostics)
             with trace.stage("report"):
-                plan = request.claim_plan or (
-                    ClaimPlan(items=[], requirements=list(effective_research_plan.requirements))
-                    if not evidences else
-                    await researcher.report_generator.plan_enterprise_claims(context, run_id)
-                )
-                execution = integrate_claims(context, plan, request.cutoff_date, trace)
-                report = render_report(execution)
+                with diagnostic_stage("claim_plan"):
+                    plan = request.claim_plan or (
+                        ClaimPlan(items=[], requirements=list(effective_research_plan.requirements))
+                        if not evidences else
+                        await researcher.report_generator.plan_enterprise_claims(context, run_id)
+                    )
+                capture = active_capture()
+                if capture:
+                    capture.observe("registered_claim_plan", plan)
+                    capture.observe("integration_evidence_context", context)
+                    capture.set_current()
+                with diagnostic_stage("integrate_claims"):
+                    execution = integrate_claims(context, plan, request.cutoff_date, trace)
+                if capture:
+                    capture.observe("integrated_execution", execution)
+                with diagnostic_stage("render_report"):
+                    report = render_report(execution)
             limitations = [
                 "Structured writer relations and risk labels are authoring inputs, not independently verified semantic judgments.",
                 "Qualifications are explicit claim-scoped inputs; missing metadata remains unsatisfied.",
@@ -388,6 +399,8 @@ class IntelligenceWorkflow:
                 **({
                     "layered_output_summary": execution.layered_output_summary,
                     "inference_validation_summary": execution.inference_validation_summary.model_dump(),
+                    "invalid_comparative_claim_input_count": execution.invalid_comparative_claim_input_count,
+                    "resolved_writer_evidence_prefix_count": execution.resolved_writer_evidence_prefix_count,
                 } if execution else {}),
             } if (trace or execution) else None,
             task_classification=task_classification,

@@ -35,6 +35,7 @@ from .layered_output import (
     OutputMode, SourceExcerpt, EvidenceGroundedInference, LimitedDisclosure,
     InferenceValidationSummary, valid_limited_excerpt, validate_inferences,
 )
+from .report_diagnostics import active_capture, diagnostic_stage
 
 
 class StructuredModel(BaseModel):
@@ -196,6 +197,8 @@ class ClaimPlan(StructuredModel):
     source_excerpts: list[SourceExcerpt] = Field(default_factory=list, max_length=100)
     inferences: list[EvidenceGroundedInference] = Field(default_factory=list, max_length=40)
     invalid_inference_input_count: int = Field(default=0, ge=0)
+    invalid_comparative_claim_input_count: int = Field(default=0, ge=0)
+    resolved_writer_evidence_prefix_count: int = Field(default=0, ge=0)
 
 
 class IntegratedExecution(StructuredModel):
@@ -212,10 +215,23 @@ class IntegratedExecution(StructuredModel):
     surviving_inferences: list[EvidenceGroundedInference] = Field(default_factory=list)
     inference_validation_summary: InferenceValidationSummary = Field(default_factory=InferenceValidationSummary)
     layered_output_summary: dict[str, int] = Field(default_factory=dict)
+    invalid_comparative_claim_input_count: int = Field(default=0, ge=0)
+    resolved_writer_evidence_prefix_count: int = Field(default=0, ge=0)
 
 
 def _identity_key(value: str) -> str:
     return re.sub(r"[^\w]+", "", normalize_claim_text(value).casefold())
+
+
+def _resolve_writer_evidence_prefix(reference: str, known_ids: set[str]) -> str:
+    """Expand only a unique prefix of a runtime-generated opaque evidence ID."""
+    if reference in known_ids:
+        return reference
+    if not re.fullmatch(r"ev_[0-9a-f]{3,15}", reference):
+        return reference
+    matches = [item for item in known_ids
+               if re.fullmatch(r"ev_[0-9a-f]{16}", item) and item.startswith(reference)]
+    return matches[0] if len(matches) == 1 else reference
 
 
 def _opaque_id(kind: Literal["entity", "side", "source"], scope_id: str, value: str) -> str:
@@ -410,15 +426,41 @@ def register_proposal(
 ) -> ClaimPlan:
     """Validate bounded authoring and create existing Gate inputs fail-closed."""
 
+    capture = active_capture()
     evidence_list = list(evidences)
+    known_evidence_ids = {evidence.evidence_id for evidence in evidence_list}
+    proposal = proposal.model_copy(deep=True)
+    resolved_prefixes = 0
+
+    def resolve(reference: str) -> str:
+        nonlocal resolved_prefixes
+        resolved = _resolve_writer_evidence_prefix(reference, known_evidence_ids)
+        resolved_prefixes += resolved != reference
+        return resolved
+
+    for item in proposal.claims:
+        for relation in item.relations:
+            relation.evidence_id = resolve(relation.evidence_id)
+        item.cited_evidence_ids = [resolve(reference) for reference in item.cited_evidence_ids]
+    for identity in proposal.source_identities:
+        identity.evidence_id = resolve(identity.evidence_id)
+    for excerpt in proposal.source_excerpts:
+        excerpt.evidence_id = resolve(excerpt.evidence_id)
+    if capture:
+        capture.observe("normalized_proposal_before_registration", proposal)
     requirement_list = list(requirements)
     requirements_by_id = {
         requirement.requirement_id: requirement for requirement in requirement_list
     }
     if len(requirements_by_id) != len(requirement_list):
         raise ValueError("Duplicate requirement registration")
+    invalid_comparative_claim_count = 0
+    eligible_claims = []
     if requirements_by_id:
         for item in proposal.claims:
+            if capture:
+                capture.set_current(requirement_id=item.requirement_id,
+                                    proposal_id=item.claim_reference_id)
             if item.requirement_id not in requirements_by_id:
                 raise ValueError("Claim references an unknown requirement ID")
             requirement = requirements_by_id[item.requirement_id]
@@ -426,7 +468,14 @@ def register_proposal(
                 requirement.requirement_type is RequirementType.COMPARATIVE
                 and ClaimRiskType.COMPARATIVE_CLAIM not in item.risk_types
             ):
-                raise ValueError("Comparative requirement claim lacks comparative risk type")
+                # A writer risk-label omission must not abort unrelated valid
+                # claims. Exclude this atom before identity/link registration;
+                # no weaker Gate path may see it, and dependent inferences
+                # become invalid when their premise reference cannot resolve.
+                invalid_comparative_claim_count += 1
+                continue
+            eligible_claims.append(item)
+        proposal = proposal.model_copy(update={"claims": eligible_claims})
     evidence_by_id = {evidence.evidence_id: evidence for evidence in evidence_list}
     source_by_id, resolutions, dropped = _resolve_source_identities(
         proposal, evidence_list, scope_id
@@ -494,6 +543,10 @@ def register_proposal(
     provenance = []
     reference_resolutions = []
     for claim, item in zip(claims, proposal.claims):
+        if capture:
+            capture.set_current(requirement_id=item.requirement_id,
+                                proposal_id=item.claim_reference_id,
+                                claim_id=claim.claim_id)
         entity_map, invalid_entities = _reference_map(
             item.entity_references,
             value_field="name",
@@ -661,6 +714,8 @@ def register_proposal(
         source_excerpts=registered_excerpts,
         inferences=registered_inferences,
         invalid_inference_input_count=invalid_inference_inputs + invalid_inference_output_count,
+        invalid_comparative_claim_input_count=invalid_comparative_claim_count,
+        resolved_writer_evidence_prefix_count=resolved_prefixes,
     )
 
 
@@ -750,6 +805,11 @@ async def propose_claims(researcher, context: EvidenceContext, scope_id: str) ->
             **planning_context,
             reason="structured_plan_unavailable",
         )
+    capture = active_capture()
+    if capture:
+        capture.observe("writer_evidence_context", context)
+        capture.observe("writer_requirements", research_plan.requirements)
+        capture.observe("scope_id", scope_id)
     response = await create_chat_completion(
         model=researcher.cfg.smart_llm_model,
         llm_provider=researcher.cfg.smart_llm_provider,
@@ -813,12 +873,19 @@ async def propose_claims(researcher, context: EvidenceContext, scope_id: str) ->
             "evidence": [e.model_dump(mode="json") for e in context.evidences],
         })}],
     )
-    raw = json.loads(response)
-    if not isinstance(raw, dict):
-        raise ValueError("Structured writer response must be an object")
-    raw_inferences = raw.pop("inferences", [])
-    raw_excerpts = raw.pop("source_excerpts", [])
-    proposal = ClaimProposal.model_validate(raw)
+    with diagnostic_stage("writer_structured_validation"):
+        raw = json.loads(response)
+        if not isinstance(raw, dict):
+            raise ValueError("Structured writer response must be an object")
+        if capture:
+            capture.observe("writer_structured_response", raw)
+        raw_inferences = raw.pop("inferences", [])
+        raw_excerpts = raw.pop("source_excerpts", [])
+        proposal = ClaimProposal.model_validate(raw)
+    if capture:
+        capture.observe("validated_proposal", proposal)
+        capture.observe("writer_optional_inferences", raw_inferences)
+        capture.observe("writer_optional_excerpts", raw_excerpts)
     inferences = []
     invalid_inferences = 0
     if isinstance(raw_inferences, list) and len(raw_inferences) > 40:
@@ -837,13 +904,18 @@ async def propose_claims(researcher, context: EvidenceContext, scope_id: str) ->
         except Exception:
             pass
     proposal = proposal.model_copy(update={"inferences": inferences, "source_excerpts": excerpts})
-    return register_proposal(
-        proposal,
-        scope_id,
-        context.evidences,
-        research_plan.requirements,
-        invalid_inference_output_count=invalid_inferences,
-    )
+    with diagnostic_stage("register_proposal"):
+        registered = register_proposal(
+            proposal,
+            scope_id,
+            context.evidences,
+            research_plan.requirements,
+            invalid_inference_output_count=invalid_inferences,
+        )
+    if capture:
+        capture.observe("registered_claim_plan", registered)
+        capture.set_current()
+    return registered
 
 
 def evaluate_requirement_coverage(
@@ -1131,6 +1203,8 @@ def integrate_claims(context: EvidenceContext, plan: ClaimPlan, cutoff: date,
         surviving_inferences=surviving_inferences,
         inference_validation_summary=inference_summary,
         layered_output_summary=layered_summary,
+        invalid_comparative_claim_input_count=plan.invalid_comparative_claim_input_count,
+        resolved_writer_evidence_prefix_count=plan.resolved_writer_evidence_prefix_count,
     )
 
 

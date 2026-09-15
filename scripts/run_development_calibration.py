@@ -33,11 +33,43 @@ def write(path, value):
     path.write_bytes(canonical_bytes(safe(value)))
 
 
-def preflight():
+def validate_manifest(case_ids):
+    """Reject a malformed Batch 5 manifest before any live capability is used."""
+    if len(case_ids) != len(IDS):
+        raise ValueError(f"Batch 5 requires exactly {len(IDS)} cases")
+    if len(set(case_ids)) != len(case_ids):
+        raise ValueError("Batch 5 manifest contains duplicate case IDs")
+    if tuple(case_ids) != IDS:
+        raise ValueError("Batch 5 manifest must use the frozen development case order")
+
+
+def effective_payload(request):
+    """Return the exact POST payload after validating the required V2 mode."""
+    if not request.enable_v2_execution:
+        raise ValueError("Batch 5 requires enable_v2_execution=true")
+    if not request.enable_v2_evidence_selection:
+        raise ValueError("Batch 5 requires enable_v2_evidence_selection=true")
+    payload = request.model_dump(mode="json")
+    if payload.get("enable_v2_execution") is not True:
+        raise ValueError("Batch 5 execution flag was not propagated into the request payload")
+    if payload.get("enable_v2_evidence_selection") is not True:
+        raise ValueError("Batch 5 evidence-selection flag was not propagated into the request payload")
+    return payload
+
+
+def iter_manifest_requests(cases):
+    """Yield each validated future live request exactly once in manifest order."""
+    validate_manifest([case["id"] for case, _ in cases])
+    for case, request in cases:
+        yield case, effective_payload(request)
+
+
+def preflight(case_ids=IDS):
     from gpt_researcher.enterprise.workflow import IntelligenceRequest
     assert sha256((ROOT / "benchmarks/dataset/enterprise_insight_bench_v2.json").read_bytes()) == DATASET_SHA
+    validate_manifest(case_ids)
     cases = []
-    for cid in IDS:
+    for cid in case_ids:
         paths = list(PACKAGE.glob(f"*/{cid}/case_input.json"))
         assert len(paths) == 1
         case = json.loads(paths[0].read_text(encoding="utf-8"))
@@ -46,9 +78,11 @@ def preflight():
         # Preserve full query; no gold category or rule injected into classifier.
         request = IntelligenceRequest(target=case["query"], topic="Development research",
             cutoff_date=case["cutoff_date"], dimensions=[u["description"] for u in case["required_units"]],
-            enable_v2_execution=True)
+            enable_v2_execution=True, enable_v2_evidence_selection=True)
         cases.append((case, request))
     assert sum(len(c[0]["required_units"]) for c in cases) == 18
+    # Validate final serialized values, not merely constructor arguments.
+    list(iter_manifest_requests(cases))
     return cases
 
 
@@ -74,12 +108,12 @@ async def execute(output):
     write(output / "configuration.json", config)
     summaries = []
     async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://calibration.local", timeout=None) as client:
-        for case, request in cases:
+        for case, payload in iter_manifest_requests(cases):
             cid = case["id"]
             print(f"START {cid}", flush=True)
             capture = CalibrationCapture()
             with capture.activate():
-                response = await client.post("/api/enterprise/tasks", json=request.model_dump(mode="json"))
+                response = await client.post("/api/enterprise/tasks", json=payload)
             task = response.json()
             directory = output / cid
             write(directory / "task.json", task)
@@ -116,4 +150,16 @@ if __name__ == "__main__":
             parser.error("--output required for append-only live execution")
         asyncio.run(execute(args.output.resolve()))
     else:
-        print("PREFLIGHT_OK six development cases / 18 Required Units / dataset hash verified; no provider calls")
+        payloads = list(iter_manifest_requests(preflight()))
+        print(json.dumps({
+            "status": "PREFLIGHT_OK",
+            "provider_calls": 0,
+            "search_calls": 0,
+            "development_live_runs": 0,
+            "holdout_live_runs": 0,
+            "case_sequence": [case["id"] for case, _ in payloads],
+            "effective_v2_config": {
+                "enable_v2_execution": payloads[0][1]["enable_v2_execution"],
+                "enable_v2_evidence_selection": payloads[0][1]["enable_v2_evidence_selection"],
+            },
+        }, ensure_ascii=False))

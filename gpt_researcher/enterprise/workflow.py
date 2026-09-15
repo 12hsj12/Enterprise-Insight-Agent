@@ -184,7 +184,13 @@ class IntelligenceWorkflow:
                     "trace_artifact_reference": (
                         str(trace_path) if trace_path is not None else None
                     ),
-                    "diagnostics": trace.try_snapshot() or result.diagnostics,
+                    "diagnostics": {
+                        **(trace.try_snapshot() or result.diagnostics or {}),
+                        **({
+                            "layered_output_summary": result.execution.layered_output_summary,
+                            "inference_validation_summary": result.execution.inference_validation_summary.model_dump(),
+                        } if result.execution else {}),
+                    },
                 }
             )
         return result
@@ -357,10 +363,12 @@ class IntelligenceWorkflow:
         if request.enable_v2_execution:
             context = EvidenceContext(context="", evidences=evidences,
                                       retrieval_diagnostics=retrieval_diagnostics)
-            if not evidences:
-                raise ValueError("No structured evidence collected")
             with trace.stage("report"):
-                plan = request.claim_plan or await researcher.report_generator.plan_enterprise_claims(context, run_id)
+                plan = request.claim_plan or (
+                    ClaimPlan(items=[], requirements=list(effective_research_plan.requirements))
+                    if not evidences else
+                    await researcher.report_generator.plan_enterprise_claims(context, run_id)
+                )
                 execution = integrate_claims(context, plan, request.cutoff_date, trace)
                 report = render_report(execution)
             limitations = [
@@ -375,7 +383,13 @@ class IntelligenceWorkflow:
             consistency=EvidenceConsistencyEvaluator().evaluate(evidences),
             source_urls=source_urls, estimated_cost_usd=researcher.get_costs(),
             limitations=limitations,
-            diagnostics=trace.try_snapshot() if trace else None,
+            diagnostics={
+                **((trace.try_snapshot() or {}) if trace else {}),
+                **({
+                    "layered_output_summary": execution.layered_output_summary,
+                    "inference_validation_summary": execution.inference_validation_summary.model_dump(),
+                } if execution else {}),
+            } if (trace or execution) else None,
             task_classification=task_classification,
             evidence_policy=evidence_policy,
             retrieval_diagnostics=retrieval_diagnostics,

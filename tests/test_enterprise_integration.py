@@ -102,6 +102,23 @@ async def test_writer_workflow_artifacts_evaluation(tmp_path, monkeypatch):
     assert evaluated.benchmark_contract.passed is None
 
 
+async def test_no_evidence_requirement_is_unresolved_without_writer_call(tmp_path, monkeypatch):
+    class EmptyResearcher(FixtureResearcher):
+        def get_evidences(self):
+            return []
+
+        def get_evidence_assessments(self):
+            return []
+
+    writer = AsyncMock(side_effect=AssertionError("Writer must not run without evidence"))
+    monkeypatch.setattr("gpt_researcher.utils.llm.create_chat_completion", writer)
+    result = await IntelligenceWorkflow(EmptyResearcher, output_directory=tmp_path).run(
+        IntelligenceRequest(target="Acme", enable_v2_execution=True), run_id="empty")
+    assert result.execution.layered_output_summary["unresolved"] > 0
+    assert "当前证据不足以形成可靠结论" in result.report
+    writer.assert_not_called()
+
+
 @pytest.mark.parametrize("support,risk,primary,retry,decision,mode", [
     (True, (), False, False, "emit", "factual"),
     (True, (ClaimRiskType.NUMERIC_VALUE,), False, False, "omit", None),
@@ -234,8 +251,12 @@ def test_conflict_hedge_is_rendered_explicitly():
     execution = integrate_claims(EvidenceContext(context="", evidences=[evidence(), evidence("ev_two")]),
                                  ClaimPlan(items=[registered]), CUTOFF)
     assert execution.evidence_context.claim_gate_results[0].decision.value == "hedge"
-    assert execution.evidence_context.generated_claim_records[0].output_mode.value == "hedged"
-    assert "unconfirmed assertion" in render_report(execution)
+    # A HEDGE decision is preserved, but the rejected conclusion is not
+    # re-emitted as a factual record under a softer label. Without exact
+    # source passages, the report must explain that it remains unresolved.
+    assert execution.evidence_context.generated_claim_records == []
+    assert "Sources disagree about Acme" not in render_report(execution)
+    assert "当前证据不足以形成可靠结论" in render_report(execution)
 
 
 def test_failed_api_has_evaluation_and_trace(tmp_path):

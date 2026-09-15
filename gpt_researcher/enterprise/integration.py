@@ -31,6 +31,10 @@ from .requirements import (
     canonical_label,
     fallback_research_plan,
 )
+from .layered_output import (
+    OutputMode, SourceExcerpt, EvidenceGroundedInference, LimitedDisclosure,
+    InferenceValidationSummary, valid_limited_excerpt, validate_inferences,
+)
 
 
 class StructuredModel(BaseModel):
@@ -74,6 +78,7 @@ class ProposedRelation(StructuredModel):
 
 
 class ProposedClaim(StructuredModel):
+    claim_reference_id: str | None = Field(default=None, min_length=1, max_length=100)
     requirement_id: str | None = Field(default=None, max_length=20)
     text: str = Field(min_length=1, max_length=3000)
     risk_types: list[ClaimRiskType]
@@ -86,9 +91,24 @@ class ProposedClaim(StructuredModel):
     )
 
 
+class ProposedSourceExcerpt(StructuredModel):
+    claim_reference_id: str = Field(min_length=1, max_length=100)
+    evidence_id: str
+    excerpt: str = Field(min_length=1, max_length=500)
+
+
+class ProposedInference(StructuredModel):
+    inference_id: str = Field(min_length=1, max_length=100)
+    requirement_id: str
+    text: str = Field(min_length=1, max_length=1000)
+    premise_claim_ids: list[str] = Field(min_length=1, max_length=20)
+
+
 class ClaimProposal(StructuredModel):
     claims: list[ProposedClaim] = Field(max_length=60)
     source_identities: list[ProposedSourceIdentity] = Field(default_factory=list, max_length=100)
+    source_excerpts: list[ProposedSourceExcerpt] = Field(default_factory=list, max_length=100)
+    inferences: list[ProposedInference] = Field(default_factory=list, max_length=40)
 
 
 class SourceIdentityResolution(StructuredModel):
@@ -173,6 +193,9 @@ class ClaimPlan(StructuredModel):
     qualification_provenance: list[QualificationProvenance] = Field(default_factory=list, max_length=6000)
     claim_reference_resolutions: list[ClaimReferenceResolution] = Field(default_factory=list, max_length=60)
     dropped_qualification_input_count: int = Field(default=0, ge=0)
+    source_excerpts: list[SourceExcerpt] = Field(default_factory=list, max_length=100)
+    inferences: list[EvidenceGroundedInference] = Field(default_factory=list, max_length=40)
+    invalid_inference_input_count: int = Field(default=0, ge=0)
 
 
 class IntegratedExecution(StructuredModel):
@@ -185,6 +208,10 @@ class IntegratedExecution(StructuredModel):
     additional_retrieval_attempts: Literal[0] = 0
     requirement_coverage: list[RequirementCoverage] = Field(default_factory=list)
     report_sha256: str = ""
+    limited_disclosures: list[LimitedDisclosure] = Field(default_factory=list)
+    surviving_inferences: list[EvidenceGroundedInference] = Field(default_factory=list)
+    inference_validation_summary: InferenceValidationSummary = Field(default_factory=InferenceValidationSummary)
+    layered_output_summary: dict[str, int] = Field(default_factory=dict)
 
 
 def _identity_key(value: str) -> str:
@@ -379,6 +406,7 @@ def register_proposal(
     scope_id: str,
     evidences: list | tuple = (),
     requirements: list[ResearchRequirement] | tuple[ResearchRequirement, ...] = (),
+    invalid_inference_output_count: int = 0,
 ) -> ClaimPlan:
     """Validate bounded authoring and create existing Gate inputs fail-closed."""
 
@@ -426,6 +454,42 @@ def register_proposal(
         )
         for item in proposal.claims
     ]
+    reference_ids = [item.claim_reference_id for item in proposal.claims]
+    reference_map = {
+        reference_id: claim.claim_id
+        for reference_id, claim in zip(reference_ids, claims)
+        if reference_id is not None and reference_ids.count(reference_id) == 1
+    }
+    registered_excerpts = []
+    for source in proposal.source_excerpts:
+        claim_id = reference_map.get(source.claim_reference_id)
+        if claim_id is None:
+            continue
+        index = next(index for index, claim in enumerate(claims) if claim.claim_id == claim_id)
+        requirement_id = proposal.claims[index].requirement_id
+        if requirement_id is None:
+            continue
+        registered_excerpts.append(SourceExcerpt(
+            claim_id=claim_id, requirement_id=requirement_id,
+            evidence_id=source.evidence_id, excerpt=source.excerpt,
+        ))
+    registered_inferences = []
+    invalid_inference_inputs = 0
+    for proposed in proposal.inferences:
+        premises = [reference_map.get(reference) for reference in proposed.premise_claim_ids]
+        if (
+            proposed.requirement_id not in requirements_by_id
+            or not premises or any(premise is None for premise in premises)
+            or len(set(premises)) != len(premises)
+        ):
+            invalid_inference_inputs += 1
+            continue
+        registered_inferences.append(EvidenceGroundedInference(
+            inference_id=proposed.inference_id,
+            requirement_id=proposed.requirement_id,
+            text=proposed.text,
+            premise_claim_ids=tuple(premises),
+        ))
     registered_items = []
     provenance = []
     reference_resolutions = []
@@ -594,6 +658,9 @@ def register_proposal(
         qualification_provenance=provenance,
         claim_reference_resolutions=reference_resolutions,
         dropped_qualification_input_count=dropped,
+        source_excerpts=registered_excerpts,
+        inferences=registered_inferences,
+        invalid_inference_input_count=invalid_inference_inputs + invalid_inference_output_count,
     )
 
 
@@ -717,7 +784,25 @@ async def propose_claims(researcher, context: EvidenceContext, scope_id: str) ->
             "independence from every named conflict party. Do not infer independence from different "
             "URLs, domains, news status, or authority. Use at most one relation per claim/evidence "
             "pair. Unknown qualification information must be omitted. An empty claims list is valid "
-            "when evidence is insufficient. "
+            "when evidence is insufficient. Assign each proposed claim a unique "
+            "claim_reference_id. For each high-risk claim with direct supporting Evidence, "
+            "supply short source_excerpts quoting an exact, complete passage from each useful "
+            "source; runtime uses them only when strong factual Gate emission fails. Link each "
+            "excerpt by claim_reference_id and evidence_id. Never repeat a rejected "
+            "comparative conclusion as an excerpt or assert it as objectively true. "
+            "For RECOMMENDATION requirements only, inferences may express a bounded "
+            "recommendation tied to supplied factual claims. Use one short action: "
+            "consider, validate, evaluate, choose, test, pilot, or assess one single-token "
+            "entity, or compare two single-token entities. A permitted optional prefix is "
+            "'If [hypothetical decision condition], ' or 'Based on the verified premise, '. "
+            "Do not add factual explanation clauses after the action. Runtime rebuilds "
+            "the visible analysis from this bounded form rather than publishing free prose. "
+            "Every inference must name one or more proposed claim_reference_id values in "
+            "premise_claim_ids; these resolve to stable Claim IDs at runtime. Do not introduce "
+            "new numerical results, dates, product status, revenue, market share, benchmark "
+            "results, rankings, official policy, or other external-world facts in inference text. "
+            "Do not return confidence, evidence tiers, or reasoning traces. Inference and "
+            "source_excerpts are optional; their failure must not affect factual claims. "
             + json.dumps(ClaimProposal.model_json_schema())
         )}, {"role": "user", "content": json.dumps({
             "query": researcher.query,
@@ -728,11 +813,36 @@ async def propose_claims(researcher, context: EvidenceContext, scope_id: str) ->
             "evidence": [e.model_dump(mode="json") for e in context.evidences],
         })}],
     )
+    raw = json.loads(response)
+    if not isinstance(raw, dict):
+        raise ValueError("Structured writer response must be an object")
+    raw_inferences = raw.pop("inferences", [])
+    raw_excerpts = raw.pop("source_excerpts", [])
+    proposal = ClaimProposal.model_validate(raw)
+    inferences = []
+    invalid_inferences = 0
+    if isinstance(raw_inferences, list) and len(raw_inferences) > 40:
+        invalid_inferences += len(raw_inferences) - 40
+    for item in raw_inferences[:40] if isinstance(raw_inferences, list) else []:
+        try:
+            inferences.append(ProposedInference.model_validate(item))
+        except Exception:
+            invalid_inferences += 1
+    if not isinstance(raw_inferences, list):
+        invalid_inferences += 1
+    excerpts = []
+    for item in raw_excerpts[:100] if isinstance(raw_excerpts, list) else []:
+        try:
+            excerpts.append(ProposedSourceExcerpt.model_validate(item))
+        except Exception:
+            pass
+    proposal = proposal.model_copy(update={"inferences": inferences, "source_excerpts": excerpts})
     return register_proposal(
-        ClaimProposal.model_validate_json(response),
+        proposal,
         scope_id,
         context.evidences,
         research_plan.requirements,
+        invalid_inference_output_count=invalid_inferences,
     )
 
 
@@ -866,14 +976,12 @@ def integrate_claims(context: EvidenceContext, plan: ClaimPlan, cutoff: date,
     ) for item in plan.items]
     records = []
     for item, decision in zip(plan.items, context.claim_gate_results):
-        if decision.decision not in (ClaimGateDecision.EMIT, ClaimGateDecision.HEDGE):
+        if decision.decision is not ClaimGateDecision.EMIT:
             continue
         records.append(GeneratedClaimRecord(
             claim_id=item.claim.claim_id, rendered_text=item.claim.normalized_text,
             cited_evidence_ids=tuple(item.cited_evidence_ids),
-            output_mode=(GeneratedClaimOutputMode.HEDGED
-                         if decision.decision is ClaimGateDecision.HEDGE
-                         else GeneratedClaimOutputMode.FACTUAL),
+            output_mode=GeneratedClaimOutputMode.FACTUAL,
         ))
     if trace:
         trace.try_record_generation(records)
@@ -915,6 +1023,100 @@ def integrate_claims(context: EvidenceContext, plan: ClaimPlan, cutoff: date,
         if any(r.status is not GroundingStatus.PASS for r in validate(records, 1)):
             raise ValueError("Grounding failed after one repair pass")
     context.generated_claim_records = records
+    evidence_by_id = {evidence.evidence_id: evidence for evidence in context.evidences}
+    metadata_by_id = {metadata.evidence_id: metadata for metadata in plan.audit_metadata}
+    source_identity_by_id = {
+        resolution.evidence_id: resolution.source_organization
+        for resolution in plan.source_identity_resolutions
+        if resolution.status in {"resolved_explicit_metadata", "resolved_anchored_content"}
+        and resolution.source_organization
+        and resolution.evidence_id in evidence_by_id
+        and (
+            resolution.status == "resolved_anchored_content"
+            or resolution.provenance_field != "publisher"
+            or evidence_by_id[resolution.evidence_id].metadata_provenance.publisher.value != "UNKNOWN"
+        )
+    }
+    gates_by_id = {decision.claim_id: decision for decision in context.claim_gate_results}
+    items_by_id = {item.claim.claim_id: item for item in plan.items}
+    limited_disclosures: list[LimitedDisclosure] = []
+    seen_disclosures = set()
+    for source in plan.source_excerpts:
+        item = items_by_id.get(source.claim_id)
+        gate_result = gates_by_id.get(source.claim_id)
+        evidence = evidence_by_id.get(source.evidence_id)
+        if item is None or gate_result is None or evidence is None:
+            continue
+        if source.requirement_id != item.requirement_id:
+            continue
+        relations = {link.relation for link in item.links if link.evidence_id == source.evidence_id}
+        if relations != {"support"}:
+            continue
+        if normalize_claim_text(source.excerpt) == item.claim.normalized_text:
+            continue
+        if not valid_limited_excerpt(
+            source, evidence=evidence, gate=gate_result,
+            support_ids=set(gate_result.supporting_evidence_ids),
+            citation_ids=set(item.cited_evidence_ids),
+            metadata=metadata_by_id.get(source.evidence_id), cutoff=cutoff,
+        ):
+            continue
+        key = (source.requirement_id, source.claim_id, source.evidence_id, source.excerpt)
+        if key in seen_disclosures:
+            continue
+        seen_disclosures.add(key)
+        limited_disclosures.append(LimitedDisclosure(
+            requirement_id=source.requirement_id, claim_id=source.claim_id,
+            evidence_id=source.evidence_id, excerpt=normalize_claim_text(source.excerpt),
+            publisher=(
+                source_identity_by_id.get(source.evidence_id)
+                or (evidence.publisher if evidence.metadata_provenance.publisher.value != "UNKNOWN" else None)
+            ),
+            publication_date_unverified=(
+                metadata_by_id.get(source.evidence_id) is None
+                or metadata_by_id[source.evidence_id].publication_date is None
+            ),
+        ))
+    claim_requirements = {
+        item.claim.claim_id: item.requirement_id
+        for item in plan.items if item.requirement_id is not None
+    }
+    eligible_inference_requirements = {
+        requirement.requirement_id for requirement in plan.requirements
+        if requirement.requirement_type is RequirementType.RECOMMENDATION
+    }
+    surviving_inferences, inference_summary = validate_inferences(
+        plan.inferences, records, claim_requirements, eligible_inference_requirements,
+    )
+    inference_summary = inference_summary.model_copy(update={
+        "invalid_inference_count": (
+            inference_summary.invalid_inference_count + plan.invalid_inference_input_count
+        ),
+    })
+    requirements_with_output = (
+        {item.requirement_id for item in plan.items if item.claim.claim_id in {r.claim_id for r in records}}
+        | {item.requirement_id for item in limited_disclosures}
+        | {item.requirement_id for item in surviving_inferences}
+    )
+    conflict_unresolved_requirement_ids = {
+        item.requirement_id
+        for item in plan.items
+        if item.requirement_id is not None
+        and (gate_result := gates_by_id[item.claim.claim_id]).decision is ClaimGateDecision.HEDGE
+    }
+    unresolved_count = sum(
+        requirement.requirement_id not in requirements_with_output
+        or requirement.requirement_id in conflict_unresolved_requirement_ids
+        for requirement in plan.requirements
+    ) if plan.requirements else int(not records and not limited_disclosures)
+    layered_summary = {
+        mode.value.lower(): count for mode, count in (
+            (OutputMode.VERIFIED_FACT, len(records)),
+            (OutputMode.LIMITED_EVIDENCE, len(limited_disclosures)),
+            (OutputMode.AI_INFERENCE, len(surviving_inferences)),
+            (OutputMode.UNRESOLVED, unresolved_count),
+        )
+    }
     # Keep claim-scoped qualifications in claim_inputs, not a lossy global list.
     context.context = ""
     return IntegratedExecution(
@@ -925,11 +1127,15 @@ def integrate_claims(context: EvidenceContext, plan: ClaimPlan, cutoff: date,
         qualification_diagnostics=_coverage_diagnostics(plan),
         repair_plan=repair_plan,
         requirement_coverage=evaluate_requirement_coverage(plan, records),
+        limited_disclosures=limited_disclosures,
+        surviving_inferences=surviving_inferences,
+        inference_validation_summary=inference_summary,
+        layered_output_summary=layered_summary,
     )
 
 
 def render_report(execution: IntegratedExecution) -> str:
-    """The final body contains only audited structured records and fixed labels."""
+    """Render factual records, literal source disclosures, and bound analysis."""
     def escape(text):
         return re.sub(r"([\\`*_{}\[\]()<>#+.!|~-])", r"\\\1", text)
 
@@ -937,7 +1143,6 @@ def render_report(execution: IntegratedExecution) -> str:
     lines = ["# Enterprise Insight", ""]
 
     def render_record(record):
-        prefix = "Evidence limitation — unconfirmed assertion: " if record.output_mode is GeneratedClaimOutputMode.HEDGED else ""
         citations = []
         for eid in record.cited_evidence_ids:
             url = evidence[eid].url
@@ -947,11 +1152,36 @@ def render_report(execution: IntegratedExecution) -> str:
                 citations.append(f"[{escape(eid)}](<{url}>)")
             else:
                 citations.append(f"Evidence {escape(eid)} (source URL unavailable)")
-        lines.extend([prefix + escape(record.rendered_text) + " " + " ".join(citations), ""])
+        lines.extend([escape(record.rendered_text) + " " + " ".join(citations), ""])
+
+    def citation(eid):
+        source = evidence[eid]
+        if re.fullmatch(r"https?://[^\s<>]+", source.url):
+            url = source.url.replace("(", "%28").replace(")", "%29")
+            return f"[{escape(eid)}](<{url}>)"
+        return f"Evidence {escape(eid)} (source URL unavailable)"
+
+    def render_limited(disclosures, *, conflict_unresolved=False):
+        if not disclosures:
+            return
+        lines.extend(["**证据说明：**", ""])
+        for disclosure in disclosures:
+            publisher = disclosure.publisher or f"Source {disclosure.evidence_id}"
+            lines.extend([
+                f"{escape(publisher)} 的资料记载：“{escape(disclosure.excerpt)}” "
+                f"{citation(disclosure.evidence_id)}", "",
+            ])
+        if conflict_unresolved:
+            lines.extend(["双方说法存在冲突，当前缺少可靠的独立裁定材料。", ""])
+        else:
+            lines.extend(["这些来源材料尚不足以确认更强的独立或同条件结论。", ""])
+        if any(disclosure.publication_date_unverified for disclosure in disclosures):
+            lines.extend(["部分来源的发布日期未得到可靠验证，不能据此确认当前状态。", ""])
 
     records = execution.evidence_context.generated_claim_records
     if execution.requirement_coverage:
         records_by_id = {record.claim_id: record for record in records}
+        claim_inputs_by_id = {item.claim.claim_id: item for item in execution.claim_inputs}
         requirements = {
             requirement.requirement_id: requirement
             for requirement in execution.requirements
@@ -963,13 +1193,37 @@ def render_report(execution: IntegratedExecution) -> str:
             for claim_id in coverage.surviving_claim_ids:
                 if claim_id in records_by_id:
                     render_record(records_by_id[claim_id])
-            if not coverage.surviving_claim_ids:
-                lines.extend(["No evidence-backed claim survived for this requirement.", ""])
+            disclosures = [item for item in execution.limited_disclosures
+                           if item.requirement_id == coverage.requirement_id]
+            conflict_unresolved = any(
+                gate.claim_id in claim_inputs_by_id
+                and claim_inputs_by_id[gate.claim_id].requirement_id == coverage.requirement_id
+                and (
+                    gate.decision is ClaimGateDecision.HEDGE
+                    or (ClaimRiskType.CONFLICT_SENSITIVE_CLAIM in gate.applicable_risk_types
+                        and bool(gate.conflicting_evidence_ids))
+                )
+                for gate in execution.evidence_context.claim_gate_results
+            )
+            render_limited(disclosures, conflict_unresolved=conflict_unresolved)
+            if conflict_unresolved and not disclosures and coverage.surviving_claim_ids:
+                lines.extend(["**证据说明：**", "", "双方说法存在冲突，当前缺少可靠的独立裁定材料。", ""])
+            inferences = [item for item in execution.surviving_inferences
+                          if item.requirement_id == coverage.requirement_id]
+            if inferences:
+                lines.extend(["**AI 分析：**", ""])
+                for inference in inferences:
+                    lines.extend([escape(inference.text), ""])
+            if conflict_unresolved:
+                lines.extend(["当前无法确认哪一方结论更可靠。", ""])
+            elif not coverage.surviving_claim_ids and not disclosures and not inferences:
+                lines.extend(["当前证据不足以形成可靠结论。", ""])
     else:
         for record in records:
             render_record(record)
-    if not records:
-        lines.append("No claims could be emitted from the available structured evidence.")
+        render_limited(execution.limited_disclosures)
+    if not records and not execution.limited_disclosures and not execution.requirement_coverage:
+        lines.append("当前证据不足以形成可靠结论。")
     report = "\n".join(lines)
     execution.report_sha256 = hashlib.sha256(report.encode("utf-8")).hexdigest()
     return report

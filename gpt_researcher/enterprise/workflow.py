@@ -5,9 +5,9 @@ from contextlib import nullcontext
 from pathlib import Path
 from typing import Annotated, Callable
 from uuid import uuid4
+import hashlib
 import json
 import re
-import time
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -25,16 +25,13 @@ from .task_policy import (
     evidence_policy_for,
 )
 from .trace import ResearchTraceRecorder
-from .integration import ClaimPlan, IntegratedExecution, integrate_claims, render_report
+from .integration import (
+    ClaimPlan, IntegratedExecution, integrate_claims, render_report,
+    restrict_claim_plan_to_draft,
+)
 from .report_diagnostics import active_capture, diagnostic_stage
 from gpt_researcher.evidence.models import EvidenceContext
-from .readiness import (
-    SecondRetrievalDiagnostics,
-    build_second_retrieval_queries,
-    canonical_url,
-    evaluate_requirement_readiness,
-    extend_plan_with_second_queries,
-)
+from .readiness import SecondRetrievalDiagnostics, evaluate_requirement_readiness
 from .requirements import fallback_research_plan
 
 
@@ -84,6 +81,8 @@ class IntelligenceResult(BaseModel):
     trace_artifact_reference: str | None = None
     output_artifact_reference: str | None = None
     execution_artifact_reference: str | None = None
+    writer_draft_artifact_reference: str | None = None
+    writer_draft: str | None = Field(default=None, exclude=True)
     execution: IntegratedExecution | None = None
     second_retrieval: SecondRetrievalDiagnostics = Field(
         default_factory=SecondRetrievalDiagnostics
@@ -146,6 +145,8 @@ class IntelligenceWorkflow:
                     directory = self.output_directory / run_id
                     directory.mkdir(parents=True, exist_ok=False)
                     execution_path = directory / "execution.json"
+                    draft_path = directory / "writer_draft.md"
+                    draft_path.write_text(result.writer_draft or "", encoding="utf-8")
                     # Audit first, final report last. Failed export never advertises
                     # a final artifact through a successful result.
                     execution_path.write_text(json.dumps({
@@ -159,6 +160,7 @@ class IntelligenceWorkflow:
                     pending.replace(directory / "report.md")
                     result.output_artifact_reference = output_artifact_reference
                     result.execution_artifact_reference = str(execution_path)
+                    result.writer_draft_artifact_reference = str(draft_path)
         except BaseException as exc:
             if trace:
                 terminal_trace = trace.try_fail(
@@ -186,7 +188,8 @@ class IntelligenceWorkflow:
                         str(trace_path) if trace_path is not None else None
                     ),
                     "diagnostics": {
-                        **(trace.try_snapshot() or result.diagnostics or {}),
+                        **(result.diagnostics or {}),
+                        **(trace.try_snapshot() or {}),
                         **({
                             "layered_output_summary": result.execution.layered_output_summary,
                             "inference_validation_summary": result.execution.inference_validation_summary.model_dump(),
@@ -217,13 +220,6 @@ class IntelligenceWorkflow:
             query=request.research_query(), report_type="research_report",
             report_source="web", config_path=self.config_path, verbose=False,
         )
-        if request.enable_v2_execution:
-            researcher_kwargs["requirement_planning_context"] = {
-                "target": request.target,
-                "topic": request.topic,
-                "dimensions": list(request.dimensions),
-                "cutoff_date": request.cutoff_date,
-            }
         if task_classification is not None and evidence_policy is not None:
             researcher_kwargs.update(
                 task_classification=task_classification,
@@ -235,7 +231,15 @@ class IntelligenceWorkflow:
         second_retrieval = SecondRetrievalDiagnostics()
         initial_evidences = list(researcher.get_evidences())
         effective_research_plan = getattr(researcher, "research_plan", None)
+        coverage_plan = None
         if request.enable_v2_execution:
+            coverage_plan = fallback_research_plan(
+                target=request.target,
+                topic=request.topic,
+                dimensions=list(request.dimensions),
+                cutoff_date=request.cutoff_date,
+                reason="original_request_coverage_checklist",
+            )
             if effective_research_plan is None:
                 effective_research_plan = fallback_research_plan(
                     target=request.target,
@@ -248,64 +252,27 @@ class IntelligenceWorkflow:
             task_category = (
                 task_classification.category if task_classification is not None else None
             )
-            readiness_before = evaluate_requirement_readiness(
+            readiness = evaluate_requirement_readiness(
                 effective_research_plan,
                 initial_evidences,
                 task_category=task_category,
             )
-            second_queries, budget_exhausted = build_second_retrieval_queries(
-                effective_research_plan,
-                readiness_before,
-            )
-            targeted_research = getattr(researcher, "conduct_targeted_research", None)
-            triggered = bool(second_queries and targeted_research is not None)
-            elapsed = 0.0
-            additional_candidates = 0
-            if triggered:
-                effective_research_plan = extend_plan_with_second_queries(
-                    effective_research_plan, second_queries
-                )
-                researcher.research_plan = effective_research_plan
-                started = time.perf_counter()
-                with trace.stage("retrieval") if trace else nullcontext():
-                    await targeted_research([item.query for item in second_queries])
-                elapsed = time.perf_counter() - started
-                additional_candidates = max(
-                    0, len(researcher.get_evidences()) - len(initial_evidences)
-                )
-            merged_evidences = _deduplicate_second_round_evidence(
-                initial_evidences,
-                list(researcher.get_evidences()),
-            )
-            readiness_after = evaluate_requirement_readiness(
-                effective_research_plan,
-                merged_evidences,
-                task_category=task_category,
-            )
+            # Readiness is an observation, not a gate on the Writer or a
+            # mandatory second paid research pass. The original research
+            # context remains the source of the full report draft.
             second_retrieval = SecondRetrievalDiagnostics(
-                triggered=triggered,
-                queries_count=(len(second_queries) if triggered else 0),
-                requirement_ids=(
-                    tuple(item.requirement_id for item in second_queries)
-                    if triggered else ()
-                ),
-                missing_target_entities=tuple(dict.fromkeys(
-                    target
-                    for item in readiness_before
-                    if item.requirement_id in {
-                        query.requirement_id for query in second_queries
-                    }
-                    for target in item.missing_target_entities
-                )),
-                readiness_before=readiness_before,
-                readiness_after=readiness_after,
-                retrieval_budget_exhausted=budget_exhausted,
-                additional_search_latency_s=elapsed,
-                additional_retrieved_candidates=additional_candidates,
+                readiness_before=readiness,
+                readiness_after=readiness,
             )
             if trace:
                 trace.try_record_second_retrieval(second_retrieval)
-        if not request.enable_v2_execution:
+        writer_draft = None
+        if request.enable_v2_execution:
+            with trace.stage("report"):
+                writer_draft = await researcher.write_report()
+            if not isinstance(writer_draft, str) or not writer_draft.strip():
+                raise ValueError("Research provider returned an empty report")
+        else:
             with trace.stage("report") if trace else nullcontext():
                 report = await researcher.write_report(custom_prompt=(
                     request.research_query() + "\nWrite a competitive intelligence report with these sections: "
@@ -323,12 +290,7 @@ class IntelligenceWorkflow:
                 output_artifact_reference=output_artifact_reference
             )
         evidences_by_id = {}
-        evidence_source = (
-            _deduplicate_second_round_evidence(
-                initial_evidences, list(researcher.get_evidences())
-            )
-            if request.enable_v2_execution else list(researcher.get_evidences())
-        )
+        evidence_source = list(researcher.get_evidences())
         for evidence in evidence_source:
             previous = evidences_by_id.get(evidence.evidence_id)
             if previous is not None and previous != evidence:
@@ -367,10 +329,14 @@ class IntelligenceWorkflow:
             with trace.stage("report"):
                 with diagnostic_stage("claim_plan"):
                     plan = request.claim_plan or (
-                        ClaimPlan(items=[], requirements=list(effective_research_plan.requirements))
+                        ClaimPlan(items=[], requirements=list(coverage_plan.requirements))
                         if not evidences else
-                        await researcher.report_generator.plan_enterprise_claims(context, run_id)
+                        await researcher.report_generator.plan_enterprise_claims(
+                            context, run_id, writer_draft, coverage_plan
+                        )
                     )
+                    if request.claim_plan is None:
+                        plan = restrict_claim_plan_to_draft(plan, writer_draft)
                 capture = active_capture()
                 if capture:
                     capture.observe("registered_claim_plan", plan)
@@ -378,15 +344,19 @@ class IntelligenceWorkflow:
                     capture.set_current()
                 with diagnostic_stage("integrate_claims"):
                     execution = integrate_claims(context, plan, request.cutoff_date, trace)
+                    execution.writer_draft_sha256 = hashlib.sha256(
+                        writer_draft.encode("utf-8")
+                    ).hexdigest()
                 if capture:
                     capture.observe("integrated_execution", execution)
                 with diagnostic_stage("render_report"):
-                    report = render_report(execution)
+                    report = render_report(execution, writer_draft=writer_draft)
             limitations = [
                 "Structured writer relations and risk labels are authoring inputs, not independently verified semantic judgments.",
                 "Qualifications are explicit claim-scoped inputs; missing metadata remains unsatisfied.",
                 "No additional retrieval continuation is enabled; unresolved retrieve_more claims are excluded.",
                 "Only structured web evidence is eligible; publication dates without explicit audit metadata remain unverified.",
+                "The original Writer draft is audited; unaudited factual prose is not published as verified fact.",
             ]
         return IntelligenceResult(
             run_id=run_id or str(uuid4()), request=request, report=report,
@@ -400,6 +370,7 @@ class IntelligenceWorkflow:
                     "layered_output_summary": execution.layered_output_summary,
                     "inference_validation_summary": execution.inference_validation_summary.model_dump(),
                     "invalid_comparative_claim_input_count": execution.invalid_comparative_claim_input_count,
+                    "invalid_draft_claim_input_count": execution.invalid_draft_claim_input_count,
                     "resolved_writer_evidence_prefix_count": execution.resolved_writer_evidence_prefix_count,
                 } if execution else {}),
             } if (trace or execution) else None,
@@ -409,29 +380,6 @@ class IntelligenceWorkflow:
             evidence_selection_limitation_codes=list(selection_limitations),
             trace_id=trace.trace_id if trace else None,
             execution=execution,
+            writer_draft=writer_draft,
             second_retrieval=second_retrieval,
         )
-
-
-def _deduplicate_second_round_evidence(
-    initial: list[Evidence],
-    all_evidence: list[Evidence],
-) -> list[Evidence]:
-    """Keep initial chunks, but reject a second-round page already represented."""
-
-    initial_ids = {item.evidence_id for item in initial}
-    seen_ids = set()
-    seen_urls = {canonical_url(item.url) for item in initial if item.url}
-    merged = []
-    for evidence in all_evidence:
-        if evidence.evidence_id in seen_ids:
-            continue
-        is_initial = evidence.evidence_id in initial_ids
-        page = canonical_url(evidence.url) if evidence.url else ""
-        if not is_initial and page and page in seen_urls:
-            continue
-        merged.append(evidence)
-        seen_ids.add(evidence.evidence_id)
-        if page:
-            seen_urls.add(page)
-    return merged

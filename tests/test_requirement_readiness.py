@@ -341,7 +341,8 @@ class _BoundedResearcher:
 
     def __init__(self, **kwargs):
         self.query = kwargs["query"]
-        self.requirement_planning_context = kwargs["requirement_planning_context"]
+        assert "requirement_planning_context" not in kwargs
+        self.requirement_planning_context = None
         self.research_plan = self.__class__.research_plan
         self.evidences = list(self.__class__.initial)
         self.targeted_calls = []
@@ -349,6 +350,9 @@ class _BoundedResearcher:
 
     async def conduct_research(self):
         return None
+
+    async def write_report(self, **kwargs):
+        return "## Research findings\n\nResearch draft from the original context."
 
     async def conduct_targeted_research(self, queries):
         self.targeted_calls.append(tuple(queries))
@@ -368,7 +372,7 @@ class _BoundedResearcher:
 
 
 @pytest.mark.asyncio
-async def test_workflow_runs_only_one_second_round_and_persists_effect(tmp_path):
+async def test_workflow_observes_readiness_without_mandatory_second_round(tmp_path):
     req = requirement("R1", RequirementType.FACTUAL, "Verify Acme status")
     _BoundedResearcher.instances.clear()
     _BoundedResearcher.research_plan = plan(req)
@@ -392,17 +396,17 @@ async def test_workflow_runs_only_one_second_round_and_persists_effect(tmp_path)
         (tmp_path / "bounded" / "execution.json").read_text(encoding="utf-8")
     )
 
-    assert researcher.targeted_calls == [(req.text,)]
-    assert result.second_retrieval.triggered is True
-    assert result.second_retrieval.queries_count == 1
-    assert result.second_retrieval.readiness_after[0].status is RequirementAnswerReadinessStatus.READY
-    assert artifact["second_retrieval"]["triggered"] is True
-    assert artifact["second_retrieval"]["requirement_ids"] == ["R1"]
+    assert researcher.targeted_calls == []
+    assert result.second_retrieval.triggered is False
+    assert result.second_retrieval.queries_count == 0
+    assert result.second_retrieval.readiness_after[0].status is RequirementAnswerReadinessStatus.NEEDS_RETRIEVAL
+    assert artifact["second_retrieval"]["triggered"] is False
+    assert artifact["second_retrieval"]["requirement_ids"] == []
     assert result.execution.additional_retrieval_attempts == 0
 
 
 @pytest.mark.asyncio
-async def test_workflow_same_url_is_deduped_and_failure_does_not_trigger_third_round(tmp_path):
+async def test_workflow_does_not_fetch_another_page_for_unready_requirement(tmp_path):
     req = requirement("R1", RequirementType.FACTUAL, "Verify Beta status")
     _BoundedResearcher.instances.clear()
     _BoundedResearcher.research_plan = plan(req)
@@ -427,14 +431,14 @@ async def test_workflow_same_url_is_deduped_and_failure_does_not_trigger_third_r
         trace=ResearchTraceRecorder(run_id="dedup"),
     )
 
-    assert _BoundedResearcher.instances[-1].targeted_calls == [(req.text,)]
+    assert _BoundedResearcher.instances[-1].targeted_calls == []
     assert [item.evidence_id for item in result.evidences] == ["unmapped"]
     assert result.second_retrieval.readiness_after[0].status is RequirementAnswerReadinessStatus.NEEDS_RETRIEVAL
     second_event = next(
         item for item in result.diagnostics["events"]
         if item["stage"] == "second_retrieval"
     )
-    assert second_event["second_retrieval_query_count"] == 1
+    assert second_event["second_retrieval_query_count"] == 0
 
 
 @pytest.mark.asyncio

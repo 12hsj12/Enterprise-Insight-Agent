@@ -144,26 +144,57 @@ def fallback_research_plan(
     cutoff_date: date | str | None,
     reason: str,
 ) -> ResearchPlan:
-    """Lossless, deliberately low-inference fallback for invalid provider output."""
+    """Keep the user's target in every fallback question and search query."""
 
     requirements: list[ResearchRequirement] = []
     target_entities = (target,) if target.strip() else ()
+    comparison_body = re.sub(
+        r"^(?:比较|对比)\s*|^compare\s+", "", target.strip(),
+        flags=re.IGNORECASE,
+    )
+    comparison_parts = re.split(
+        r"\s*(?:与|和|及|\band\b|\bversus\b|\bvs\.?\b)\s*",
+        comparison_body, maxsplit=1, flags=re.IGNORECASE,
+    )
+    if len(comparison_parts) == 2:
+        left = comparison_parts[0].strip(" ,.:;，。：；")
+        right = re.split(r"(?:的|在|方面)|[,，。]", comparison_parts[1], maxsplit=1)[0]
+        right = right.strip(" ,.:;，。：；")
+        if left and right:
+            target_entities = (left, right)
+    generic_topic = canonical_label(topic) in {
+        "development research", "competitive intelligence", "research"
+    }
+
+    def requirement_type(text: str) -> RequirementType:
+        # Only the requested wording is inspected. A generic benchmark topic
+        # must never turn a decision request into a factual requirement.
+        if re.search(r"建议|选型|迁移|决策|recommend|choose|selection|decision",
+                     text, flags=re.IGNORECASE):
+            return RequirementType.RECOMMENDATION
+        if (len(target_entities) >= 2
+                and re.search(r"比较|对比|compare|comparison|versus|\bvs\.?\b",
+                              text, flags=re.IGNORECASE)):
+            return RequirementType.COMPARATIVE
+        return RequirementType.FACTUAL
+
     for dimension in dimensions:
         requirements.append(ResearchRequirement(
             requirement_id=f"R{len(requirements) + 1}",
-            text=f"Research {dimension} for {topic or target}",
-            requirement_type=RequirementType.FACTUAL,
+            text=f"{target}: {dimension}",
+            requirement_type=requirement_type(dimension),
             order=len(requirements) + 1,
             target_entities=target_entities,
             source_dimensions=(dimension,),
         ))
-    topic_key = canonical_label(topic)
+    effective_topic = target if generic_topic else (topic or target)
+    topic_key = canonical_label(effective_topic)
     dimension_keys = {canonical_label(dimension) for dimension in dimensions}
     if not requirements or topic_key not in dimension_keys:
         requirements.append(ResearchRequirement(
             requirement_id=f"R{len(requirements) + 1}",
-            text=topic or target,
-            requirement_type=RequirementType.FACTUAL,
+            text=effective_topic,
+            requirement_type=requirement_type(effective_topic),
             order=len(requirements) + 1,
             target_entities=target_entities,
         ))

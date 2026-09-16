@@ -26,7 +26,7 @@ class SourceExcerpt(BaseModel):
 
     model_config = ConfigDict(extra="forbid", frozen=True)
     claim_id: str
-    requirement_id: str
+    requirement_id: str | None = None
     evidence_id: str
     excerpt: str = Field(min_length=1, max_length=500)
 
@@ -45,7 +45,7 @@ class EvidenceGroundedInference(BaseModel):
 
 class LimitedDisclosure(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
-    requirement_id: str
+    requirement_id: str | None = None
     claim_id: str
     evidence_id: str
     excerpt: str
@@ -105,10 +105,14 @@ def _complete_source_passage(excerpt: str, content: str) -> bool:
         before = content[:start].rstrip()
         after = content[end:]
         starts_sentence = start == 0 or (
-            before.endswith((".", "!", "?")) and content[start - 1].isspace()
+            before.endswith((".", "!", "?", "。", "！", "？"))
+            and (content[start - 1].isspace()
+                 or before.endswith(("。", "！", "？")))
         )
         ends_sentence = end == len(content) or (
-            excerpt.endswith((".", "!", "?")) and (not after or after[0].isspace())
+            excerpt.endswith((".", "!", "?", "。", "！", "？"))
+            and (not after or after[0].isspace()
+                 or excerpt.endswith(("。", "！", "？")))
         )
         if starts_sentence and ends_sentence:
             return True

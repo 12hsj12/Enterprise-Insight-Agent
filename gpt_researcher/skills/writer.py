@@ -46,10 +46,14 @@ class ReportGenerator:
             "headers": self.researcher.headers,
         }
 
-    async def plan_enterprise_claims(self, evidence_context, scope_id):
-        """Author typed proposals for the opt-in Enterprise V2 final renderer."""
+    async def plan_enterprise_claims(self, evidence_context, scope_id,
+                                     writer_draft="", coverage_plan=None):
+        """Bind assertions from the complete Writer draft to typed evidence."""
         from gpt_researcher.enterprise.integration import propose_claims
-        return await propose_claims(self.researcher, evidence_context, scope_id)
+        return await propose_claims(
+            self.researcher, evidence_context, scope_id, writer_draft,
+            coverage_plan=coverage_plan,
+        )
 
     async def write_report(self, existing_headers: list = [], relevant_written_contents: list = [], ext_context=None, custom_prompt="", available_images: list = None) -> str:
         """

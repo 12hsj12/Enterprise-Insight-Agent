@@ -59,6 +59,10 @@ class FixtureResearcher:
     async def conduct_research(self):
         self.researched = True
 
+    async def write_report(self, **kwargs):
+        assert self.researched
+        return "## Widget business\n\nAcme builds widgets. ([source](https://example.org/ev_one))"
+
     def get_evidences(self):
         assert self.researched
         return [evidence()]
@@ -77,6 +81,7 @@ async def test_writer_workflow_artifacts_evaluation(tmp_path, monkeypatch):
     async def author(**kwargs):
         supplied = json.loads(kwargs["messages"][1]["content"])
         assert supplied["evidence"][0]["evidence_id"] == "ev_one"
+        assert "Acme builds widgets" in supplied["writer_draft"]
         kwargs["cost_callback"](0.125)
         return json.dumps({"claims": [{"requirement_id": "R1", "text": "Acme builds widgets.", "risk_types": [],
             "is_material": True, "relations": [{"evidence_id": "ev_one", "relation": "support"}],
@@ -300,8 +305,13 @@ async def test_real_gpt_researcher_search_scrape_context_writer_path(tmp_path, m
         return [{"url": urls[0], "raw_content": "Acme builds widgets."}]
 
     async def author(**kwargs):
-        calls.append("write")
-        data = json.loads(kwargs["messages"][1]["content"])
+        try:
+            data = json.loads(kwargs["messages"][1]["content"])
+        except json.JSONDecodeError:
+            calls.append("draft")
+            return "## Widget business\n\nAcme builds widgets. ([source](https://example.org/widget))"
+        calls.append("audit")
+        assert "Acme builds widgets" in data["writer_draft"]
         eid = data["evidence"][0]["evidence_id"]
         return json.dumps({"claims": [{"requirement_id": "R1", "text": "Acme builds widgets.", "risk_types": [],
             "is_material": True, "relations": [{"evidence_id": eid, "relation": "support"}],
@@ -322,9 +332,10 @@ async def test_real_gpt_researcher_search_scrape_context_writer_path(tmp_path, m
     monkeypatch.setattr(ContextCompressor, "_ContextCompressor__get_contextual_retriever",
                         lambda self: SimpleNamespace(invoke=lambda *args, **kwargs: docs))
     monkeypatch.setattr("gpt_researcher.utils.llm.create_chat_completion", author)
+    monkeypatch.setattr("gpt_researcher.actions.report_generation.create_chat_completion", author)
     result = await IntelligenceWorkflow(GPTResearcher, output_directory=tmp_path).run(
         IntelligenceRequest(target="Acme", topic="Verify widget business", enable_v2_execution=True), run_id="real-path")
-    assert calls.index("search") < calls.index("scrape") < calls.index("write")
+    assert calls.index("search") < calls.index("scrape") < calls.index("draft") < calls.index("audit")
     assert result.retrieval_diagnostics
     assert result.execution.evidence_context.generated_claim_records
     trace = ResearchTrace.model_validate_json(Path(result.trace_artifact_reference).read_text(encoding="utf-8"))

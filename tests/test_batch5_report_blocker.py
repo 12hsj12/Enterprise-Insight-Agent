@@ -35,7 +35,10 @@ def test_tc_real_comparative_shape_reaches_report_without_unlabelled_claim():
     data, proposal, requirements, evidences = diagnostic_inputs()
     # Before repair, R2_ivfflat_tuning caused ValueError:
     # "Comparative requirement claim lacks comparative risk type".
-    plan = register_proposal(proposal, data["scope_id"], evidences, requirements)
+    plan = register_proposal(
+        proposal, data["scope_id"], evidences, requirements,
+        isolate_invalid_model_atoms=True,
+    )
     assert plan.invalid_comparative_claim_input_count == 1
     assert plan.resolved_writer_evidence_prefix_count == 5
     assert len(plan.items) == 1
@@ -65,7 +68,10 @@ def test_rejected_comparative_atom_cannot_survive_as_excerpt_or_inference():
                         "text": "Consider IVFFlat.",
                         "premise_claim_ids": ["R2_ivfflat_tuning"]}],
     }).inferences
-    plan = register_proposal(proposal, data["scope_id"], evidences, requirements)
+    plan = register_proposal(
+        proposal, data["scope_id"], evidences, requirements,
+        isolate_invalid_model_atoms=True,
+    )
     assert len(plan.source_excerpts) == 1
     assert not plan.inferences
     assert plan.invalid_inference_input_count == 1
@@ -83,13 +89,19 @@ def test_prefix_resolution_requires_unique_runtime_id():
     assert _resolve_writer_evidence_prefix("ev_unknown", {actual}) == "ev_unknown"
 
 
-def test_unknown_evidence_reference_still_fails_closed():
+def test_unknown_model_authored_evidence_reference_isolated_from_report():
     data, proposal, requirements, evidences = diagnostic_inputs()
     proposal.claims[0].relations[0].evidence_id = "ev_dead"
     proposal.claims[0].cited_evidence_ids = ["ev_dead"]
-    plan = register_proposal(proposal, data["scope_id"], evidences, requirements)
-    with pytest.raises(ValueError, match="Unknown qualification evidence ID"):
-        integrate_claims(EvidenceContext(context="", evidences=evidences), plan, CUTOFF)
+    plan = register_proposal(
+        proposal, data["scope_id"], evidences, requirements,
+        isolate_invalid_model_atoms=True,
+    )
+    assert plan.invalid_structured_claim_input_count == 1
+    execution = integrate_claims(
+        EvidenceContext(context="", evidences=evidences), plan, CUTOFF
+    )
+    assert execution.evidence_context.generated_claim_records == []
 
 
 def test_report_diagnostic_saves_stage_message_traceback_without_secrets(tmp_path):

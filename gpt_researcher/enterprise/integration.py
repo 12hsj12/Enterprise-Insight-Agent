@@ -198,6 +198,8 @@ class ClaimPlan(StructuredModel):
     inferences: list[EvidenceGroundedInference] = Field(default_factory=list, max_length=40)
     invalid_inference_input_count: int = Field(default=0, ge=0)
     invalid_comparative_claim_input_count: int = Field(default=0, ge=0)
+    invalid_structured_claim_input_count: int = Field(default=0, ge=0)
+    invalid_source_identity_input_count: int = Field(default=0, ge=0)
     invalid_draft_claim_input_count: int = Field(default=0, ge=0)
     resolved_writer_evidence_prefix_count: int = Field(default=0, ge=0)
 
@@ -218,6 +220,8 @@ class IntegratedExecution(StructuredModel):
     inference_validation_summary: InferenceValidationSummary = Field(default_factory=InferenceValidationSummary)
     layered_output_summary: dict[str, int] = Field(default_factory=dict)
     invalid_comparative_claim_input_count: int = Field(default=0, ge=0)
+    invalid_structured_claim_input_count: int = Field(default=0, ge=0)
+    invalid_source_identity_input_count: int = Field(default=0, ge=0)
     invalid_draft_claim_input_count: int = Field(default=0, ge=0)
     resolved_writer_evidence_prefix_count: int = Field(default=0, ge=0)
 
@@ -426,8 +430,16 @@ def register_proposal(
     evidences: list | tuple = (),
     requirements: list[ResearchRequirement] | tuple[ResearchRequirement, ...] = (),
     invalid_inference_output_count: int = 0,
+    invalid_structured_claim_input_count: int = 0,
+    invalid_source_identity_input_count: int = 0,
+    isolate_invalid_model_atoms: bool = False,
 ) -> ClaimPlan:
-    """Validate bounded authoring and create existing Gate inputs fail-closed."""
+    """Validate bounded authoring and create existing Gate inputs fail-closed.
+
+    Explicit callers remain strict. The structured Writer path opts into
+    per-atom isolation because one malformed model-authored atom is not a
+    workflow invariant and must not discard unrelated valid claims.
+    """
 
     capture = active_capture()
     evidence_list = list(evidences)
@@ -459,6 +471,7 @@ def register_proposal(
         raise ValueError("Duplicate requirement registration")
     invalid_comparative_claim_count = 0
     eligible_claims = []
+    known_normalized_claims: set[str] = set()
     if requirements_by_id:
         for item in proposal.claims:
             if capture:
@@ -466,6 +479,9 @@ def register_proposal(
                                     proposal_id=item.claim_reference_id)
             if (item.requirement_id is not None
                     and item.requirement_id not in requirements_by_id):
+                if isolate_invalid_model_atoms:
+                    invalid_structured_claim_input_count += 1
+                    continue
                 raise ValueError("Claim references an unknown requirement ID")
             requirement = requirements_by_id.get(item.requirement_id)
             if (
@@ -479,6 +495,24 @@ def register_proposal(
                 # become invalid when their premise reference cannot resolve.
                 invalid_comparative_claim_count += 1
                 continue
+            referenced_evidence_ids = {
+                relation.evidence_id for relation in item.relations
+            } | set(item.cited_evidence_ids)
+            if (isolate_invalid_model_atoms
+                    and not referenced_evidence_ids <= known_evidence_ids):
+                # A malformed model-authored atom is not a workflow invariant.
+                # Isolate it before binding so unrelated claims still proceed.
+                invalid_structured_claim_input_count += 1
+                continue
+            if (isolate_invalid_model_atoms
+                    and re.search(r"https?://|www\.|[\[\]<>]", item.text)):
+                invalid_structured_claim_input_count += 1
+                continue
+            normalized = normalize_claim_text(item.text)
+            if isolate_invalid_model_atoms and normalized in known_normalized_claims:
+                invalid_structured_claim_input_count += 1
+                continue
+            known_normalized_claims.add(normalized)
             eligible_claims.append(item)
         proposal = proposal.model_copy(update={"claims": eligible_claims})
     evidence_by_id = {evidence.evidence_id: evidence for evidence in evidence_list}
@@ -718,6 +752,8 @@ def register_proposal(
         inferences=registered_inferences,
         invalid_inference_input_count=invalid_inference_inputs + invalid_inference_output_count,
         invalid_comparative_claim_input_count=invalid_comparative_claim_count,
+        invalid_structured_claim_input_count=invalid_structured_claim_input_count,
+        invalid_source_identity_input_count=invalid_source_identity_input_count,
         resolved_writer_evidence_prefix_count=resolved_prefixes,
     )
 
@@ -889,9 +925,35 @@ async def propose_claims(researcher, context: EvidenceContext, scope_id: str,
             raise ValueError("Structured writer response must be an object")
         if capture:
             capture.observe("writer_structured_response", raw)
+        raw_claims = raw.pop("claims", [])
+        raw_identities = raw.pop("source_identities", [])
         raw_inferences = raw.pop("inferences", [])
         raw_excerpts = raw.pop("source_excerpts", [])
-        proposal = ClaimProposal.model_validate(raw)
+        claims = []
+        invalid_claims = 0
+        if not isinstance(raw_claims, list):
+            raw_claims = []
+            invalid_claims += 1
+        if len(raw_claims) > 60:
+            invalid_claims += len(raw_claims) - 60
+        for item in raw_claims[:60]:
+            try:
+                claims.append(ProposedClaim.model_validate(item))
+            except Exception:
+                invalid_claims += 1
+        identities = []
+        invalid_identities = 0
+        if not isinstance(raw_identities, list):
+            raw_identities = []
+            invalid_identities += 1
+        if len(raw_identities) > 100:
+            invalid_identities += len(raw_identities) - 100
+        for item in raw_identities[:100]:
+            try:
+                identities.append(ProposedSourceIdentity.model_validate(item))
+            except Exception:
+                invalid_identities += 1
+        proposal = ClaimProposal(claims=claims, source_identities=identities)
     if capture:
         capture.observe("validated_proposal", proposal)
         capture.observe("writer_optional_inferences", raw_inferences)
@@ -921,6 +983,9 @@ async def propose_claims(researcher, context: EvidenceContext, scope_id: str,
             context.evidences,
             research_plan.requirements,
             invalid_inference_output_count=invalid_inferences,
+            invalid_structured_claim_input_count=invalid_claims,
+            invalid_source_identity_input_count=invalid_identities,
+            isolate_invalid_model_atoms=True,
         )
     if capture:
         capture.observe("registered_claim_plan", registered)
@@ -1162,6 +1227,7 @@ def integrate_claims(context: EvidenceContext, plan: ClaimPlan, cutoff: date,
     }
     gates_by_id = {decision.claim_id: decision for decision in context.claim_gate_results}
     items_by_id = {item.claim.claim_id: item for item in plan.items}
+    surviving_record_ids = {record.claim_id for record in records}
     limited_disclosures: list[LimitedDisclosure] = []
     seen_disclosures = set()
     for source in plan.source_excerpts:
@@ -1182,6 +1248,7 @@ def integrate_claims(context: EvidenceContext, plan: ClaimPlan, cutoff: date,
             support_ids=set(gate_result.supporting_evidence_ids),
             citation_ids=set(item.cited_evidence_ids),
             metadata=metadata_by_id.get(source.evidence_id), cutoff=cutoff,
+            factual_record_survived=source.claim_id in surviving_record_ids,
         ):
             continue
         key = (source.requirement_id, source.claim_id, source.evidence_id, source.excerpt)
@@ -1209,7 +1276,7 @@ def integrate_claims(context: EvidenceContext, plan: ClaimPlan, cutoff: date,
             disclosure.evidence_id
         )
     for item, gate_result in zip(plan.items, context.claim_gate_results):
-        if gate_result.decision is ClaimGateDecision.EMIT:
+        if item.claim.claim_id in surviving_record_ids:
             continue
         already = disclosed_evidence_by_claim.setdefault(item.claim.claim_id, set())
         shown_urls = {evidence_by_id[eid].url for eid in already if eid in evidence_by_id}
@@ -1239,6 +1306,7 @@ def integrate_claims(context: EvidenceContext, plan: ClaimPlan, cutoff: date,
                 support_ids=set(gate_result.supporting_evidence_ids),
                 citation_ids=set(item.cited_evidence_ids),
                 metadata=metadata_by_id.get(evidence_id), cutoff=cutoff,
+                factual_record_survived=False,
             ):
                 continue
             limited_disclosures.append(LimitedDisclosure(
@@ -1314,6 +1382,8 @@ def integrate_claims(context: EvidenceContext, plan: ClaimPlan, cutoff: date,
         inference_validation_summary=inference_summary,
         layered_output_summary=layered_summary,
         invalid_comparative_claim_input_count=plan.invalid_comparative_claim_input_count,
+        invalid_structured_claim_input_count=plan.invalid_structured_claim_input_count,
+        invalid_source_identity_input_count=plan.invalid_source_identity_input_count,
         invalid_draft_claim_input_count=plan.invalid_draft_claim_input_count,
         resolved_writer_evidence_prefix_count=plan.resolved_writer_evidence_prefix_count,
     )
@@ -1405,28 +1475,146 @@ def restrict_claim_plan_to_draft(plan: ClaimPlan, writer_draft: str) -> ClaimPla
     })
 
 
+def _alignment_with_offsets(value: str) -> tuple[str, list[int]]:
+    """Return draft-alignment text plus source offsets for local editing."""
+
+    aligned: list[str] = []
+    offsets: list[int] = []
+    for index, raw_char in enumerate(value):
+        for char in raw_char.casefold():
+            if char in ".!?。！？":
+                token = "\n"
+            elif char.isalnum() or char in "_%":
+                token = char
+            else:
+                token = " "
+            if token == " ":
+                if not aligned or aligned[-1] in {" ", "\n"}:
+                    continue
+            elif token == "\n":
+                while aligned and aligned[-1] == " ":
+                    aligned.pop()
+                    offsets.pop()
+                if not aligned or aligned[-1] == "\n":
+                    continue
+            aligned.append(token)
+            offsets.append(index)
+    while aligned and aligned[-1] in {" ", "\n"}:
+        aligned.pop()
+        offsets.pop()
+    start = 0
+    while start < len(aligned) and aligned[start] in {" ", "\n"}:
+        start += 1
+    return "".join(aligned[start:]), offsets[start:]
+
+
+def _claim_span(draft: str, claim_text: str) -> tuple[int, int] | None:
+    """Locate one audited atom without replacing its surrounding paragraph."""
+
+    aligned_draft, offsets = _alignment_with_offsets(draft)
+    aligned_claim, _ = _alignment_with_offsets(claim_text)
+    if not aligned_claim:
+        return None
+    start = aligned_draft.find(aligned_claim)
+    if start < 0:
+        return None
+    end = offsets[start + len(aligned_claim) - 1] + 1
+    begin = offsets[start]
+    while begin > 0 and draft[begin - 1] in "\\`*_":
+        begin -= 1
+    while end < len(draft) and draft[end] in "\\`*_":
+        end += 1
+    if end < len(draft) and draft[end] in ".!?。！？":
+        end += 1
+    citation = re.match(
+        r"\s*(?:\(\s*)?\[[^\]\n]+\]\((?:<)?https?://[^)\n]+\)\s*\)?",
+        draft[end:], flags=re.IGNORECASE,
+    )
+    if citation:
+        end += citation.end()
+    return begin, end
+
+
+_UNAUDITED_HIGH_RISK = re.compile(
+    r"(?<![\w])(?:\d+(?:[.,]\d+)+(?:%|ms|s)?|\d+(?:%|ms)|(?:19|20)\d{2})(?![\w])|"
+    r"\b(?:released?|launched?|available|availability|outperforms?|faster|slower|"
+    r"market\s+share|benchmark|rank(?:ed|ing)?|largest|smallest|best|worst)\b|"
+    r"(?:发布|上线|可用|不可用|市场份额|基准|跑分|领先|最快|最大|最小|排名)",
+    re.IGNORECASE,
+)
+
+
+def _scrub_unaudited_high_risk_prose(draft: str) -> str:
+    """Remove only conspicuous unaudited facts; retain structure and analysis."""
+
+    blocks = re.split(r"(\n\s*\n)", draft)
+    in_references = False
+    for index in range(0, len(blocks), 2):
+        block = blocks[index]
+        stripped = block.strip()
+        if stripped.startswith("#"):
+            title = re.sub(r"^#+\s*", "", stripped.splitlines()[0]).strip().casefold()
+            in_references = title in {"references", "sources", "bibliography", "参考文献"}
+            continue
+        if in_references or not stripped or stripped.startswith(("```", "|")):
+            continue
+        sentences = re.split(r"(?<=[.!?。！？])(?=\s|$)", block)
+        changed = False
+        for sentence_index, sentence in enumerate(sentences):
+            if "EIAAUDITPLACEHOLDER" in sentence:
+                continue
+            candidate = re.sub(
+                r"^\s*(?:[-*+]\s+|\d+[.)]\s+)", "", _draft_claim_text(sentence)
+            )
+            if _UNAUDITED_HIGH_RISK.search(candidate):
+                sentences[sentence_index] = (
+                    "**UNRESOLVED：** 原草稿中的一项高风险具体事实未被 Claim 审核覆盖，"
+                    "未通过逐句来源核查，未作为事实保留。"
+                )
+                changed = True
+        if changed:
+            blocks[index] = "".join(sentences)
+    return "".join(blocks)
+
+
+def _sanitize_draft_html(draft: str) -> str:
+    return re.sub(
+        r"<(?!https?://)[^>\n]+>",
+        lambda match: match.group(0).replace("<", "&lt;").replace(">", "&gt;"),
+        draft,
+    )
+
+
+def _redact_prose_without_evidence(draft: str) -> str:
+    """Preserve the outline when no structured source can support any prose."""
+
+    blocks = re.split(r"(\n\s*\n)", draft)
+    for index in range(0, len(blocks), 2):
+        stripped = blocks[index].strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        blocks[index] = (
+            "**UNRESOLVED：** 当前证据不足以形成可靠结论；"
+            "原草稿中的具体事实未通过逐句来源核查，未作为事实保留。"
+        )
+    return "".join(blocks)
+
+
 def _render_audited_writer_draft(execution: IntegratedExecution,
                                  writer_draft: str) -> str:
-    """Keep the original Writer outline while publishing only audited atoms.
+    """Apply Claim decisions in place to the complete Writer draft.
 
-    Unbound draft prose is not silently promoted to a sourced assertion. A
-    rejected atom is replaced with a literal, attributed source disclosure
-    when one survived; otherwise its section records the unresolved gap.
+    Gate and Grounding qualify only the audited factual atom. A rejected atom
+    is replaced locally by a weaker attributed source passage or UNRESOLVED;
+    the surrounding outline, explanation, comparison, and transitions remain.
     """
+
     evidence = {item.evidence_id: item for item in execution.evidence_context.evidences}
     records = execution.evidence_context.generated_claim_records
-    records_by_text = [(_draft_claim_text(item.rendered_text), item)
-                       for item in records]
-    inputs_by_text = [(_draft_claim_text(item.claim.normalized_text), item)
-                      for item in execution.claim_inputs]
+    records_by_id = {item.claim_id: item for item in records}
     limited_by_claim: dict[str, list[LimitedDisclosure]] = {}
     for disclosure in execution.limited_disclosures:
         limited_by_claim.setdefault(disclosure.claim_id, []).append(disclosure)
-    used_records: set[str] = set()
-    used_disclosures: set[tuple[str, str]] = set()
-    lines = ["# Enterprise Insight", ""]
-    omitted_in_section = False
-    in_references = False
 
     def citation(evidence_id: str) -> str:
         source = evidence[evidence_id]
@@ -1435,108 +1623,94 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
             return f"[{_escape_report_text(evidence_id)}](<{url}>)"
         return f"Evidence {_escape_report_text(evidence_id)} (source URL unavailable)"
 
-    def emit_record(record: GeneratedClaimRecord) -> None:
-        if record.claim_id in used_records:
-            return
-        used_records.add(record.claim_id)
-        refs = " ".join(citation(eid) for eid in record.cited_evidence_ids)
-        lines.extend([f"**VERIFIED_FACT：** {_escape_report_text(record.rendered_text)} {refs}", ""])
+    def audited_replacement(item: RegisteredClaimInput) -> str:
+        claim_id = item.claim.claim_id
+        record = records_by_id.get(claim_id)
+        if record is not None:
+            refs = " ".join(citation(eid) for eid in record.cited_evidence_ids)
+            return f"**VERIFIED_FACT：** {_escape_report_text(record.rendered_text)} {refs}".rstrip()
+        disclosures = limited_by_claim.get(claim_id, [])
+        if disclosures:
+            rendered = []
+            for disclosure in disclosures:
+                publisher = disclosure.publisher or f"Source {disclosure.evidence_id}"
+                date_note = (
+                    "；该来源发布日期未得到可靠验证，不能据此确认当前状态"
+                    if disclosure.publication_date_unverified else ""
+                )
+                rendered.append(
+                    f"{_escape_report_text(publisher)} 的材料记载：“"
+                    f"{_escape_report_text(disclosure.excerpt)}” "
+                    f"{citation(disclosure.evidence_id)}{date_note}"
+                )
+            return (
+                "**LIMITED_EVIDENCE：** " + "；".join(rendered)
+                + "。这些材料只支持上述较弱的来源归属表述，不能确认原草稿中的更强结论。"
+            )
+        return "**UNRESOLVED：** 此处具体事实缺乏可验证的直接支持，未作为事实保留。"
 
-    def emit_disclosure(disclosure: LimitedDisclosure) -> None:
-        key = (disclosure.claim_id, disclosure.evidence_id)
-        if key in used_disclosures:
-            return
-        used_disclosures.add(key)
-        publisher = disclosure.publisher or f"Source {disclosure.evidence_id}"
-        lines.extend([
-            f"**LIMITED_EVIDENCE：** {_escape_report_text(publisher)} 的材料记载：“"
-            f"{_escape_report_text(disclosure.excerpt)}” "
-            f"{citation(disclosure.evidence_id)}", "",
-            "这是来源陈述，不能据此确认更强的独立或同条件结论。",
-            *( ["该来源发布日期未得到可靠验证，不能据此确认当前状态。"]
-               if disclosure.publication_date_unverified else []),
-            "",
-        ])
+    audited = writer_draft
+    replacements: dict[str, str] = {}
+    placed_claim_ids: set[str] = set()
+    # Longer atoms first prevents a short atom from consuming part of a
+    # composite sentence. Each edit is local and offsets are recomputed.
+    ordered_inputs = sorted(
+        execution.claim_inputs,
+        key=lambda item: len(item.claim.normalized_text),
+        reverse=True,
+    )
+    for item in ordered_inputs:
+        occurrence = 0
+        while occurrence < 4:
+            span = _claim_span(audited, item.claim.normalized_text)
+            if span is None:
+                break
+            token = f"EIAAUDITPLACEHOLDER{len(replacements):06d}X"
+            replacements[token] = audited_replacement(item)
+            audited = audited[:span[0]] + token + audited[span[1]:]
+            placed_claim_ids.add(item.claim.claim_id)
+            occurrence += 1
 
-    def mark_unresolved() -> None:
-        nonlocal omitted_in_section
-        if not omitted_in_section:
-            lines.extend(["本节还有 Writer 草稿内容未通过逐句来源核查，未作为事实输出。", ""])
-            omitted_in_section = True
+    audited = _scrub_unaudited_high_risk_prose(audited)
+    if not evidence:
+        audited = _redact_prose_without_evidence(audited)
+    for token, replacement in replacements.items():
+        audited = audited.replace(token, replacement)
+    audited = _sanitize_draft_html(audited.strip())
 
-    for block in re.split(r"\n\s*\n", writer_draft.strip()):
-        block = block.strip()
-        if not block:
-            continue
-        if block.startswith("#"):
-            title = re.sub(r"^#+\s*", "", block.splitlines()[0]).strip()
-            if title.casefold() in {"references", "sources", "bibliography", "参考文献"}:
-                in_references = True
-                continue
-            in_references = False
-            # Titles organize the draft; they do not certify factual status.
-            if re.search(
-                r"\b(?:is|are|was|were|released|launches|leads|outperforms|supports)\b"
-                r"|已发布|领先|达到|最新|当前", title, flags=re.IGNORECASE
-            ):
-                title = "研究章节（原标题含待核查事实）"
-            lines.extend([f"## {_escape_report_text(title)}（章节标题未经事实核查）", ""])
-            omitted_in_section = False
-            continue
-        if in_references:
-            continue
-        text = _draft_claim_text(block)
-        if not text:
-            continue
-        matching_records = [record for claim_text, record in records_by_text
-                            if claim_text and _draft_contains_claim(text, claim_text)]
-        for record in matching_records:
-            emit_record(record)
-        matching_inputs = [item for claim_text, item in inputs_by_text
-                           if claim_text and _draft_contains_claim(text, claim_text)]
-        for item in matching_inputs:
-            for disclosure in limited_by_claim.get(item.claim.claim_id, []):
-                emit_disclosure(disclosure)
-        if not matching_records and not any(
-            limited_by_claim.get(item.claim.claim_id) for item in matching_inputs
-        ):
-            mark_unresolved()
-        elif not any(text == claim_text for claim_text, _ in records_by_text):
-            # A multi-assertion paragraph can contain unaudited extra prose.
-            mark_unresolved()
-
-    remaining_records = [item for item in records if item.claim_id not in used_records]
-    remaining_disclosures = [item for item in execution.limited_disclosures
-                             if (item.claim_id, item.evidence_id) not in used_disclosures]
-    if remaining_records or remaining_disclosures or execution.surviving_inferences:
-        lines.extend(["## 补充核查结果", ""])
-        for record in remaining_records:
-            emit_record(record)
-        for disclosure in remaining_disclosures:
-            emit_disclosure(disclosure)
-        if execution.surviving_inferences:
-            lines.extend(["**AI_INFERENCE：**", ""])
-            for inference in execution.surviving_inferences:
-                premise_records = [record for record in records
-                                   if record.claim_id in inference.premise_claim_ids]
-                refs = " ".join(citation(eid) for record in premise_records
-                                for eid in record.cited_evidence_ids)
-                lines.extend([f"{_escape_report_text(inference.text)} 前提来源：{refs}", ""])
-
+    unplaced = [item for item in ordered_inputs
+                if item.claim.claim_id not in placed_claim_ids]
+    appendices = []
+    if unplaced:
+        appendices.extend(["## 补充核查结果", ""])
+        appendices.extend(audited_replacement(item) + "\n" for item in unplaced)
+    if execution.surviving_inferences:
+        appendices.extend(["## 条件化分析", ""])
+        for inference in execution.surviving_inferences:
+            premise_records = [record for record in records
+                               if record.claim_id in inference.premise_claim_ids]
+            refs = " ".join(citation(eid) for record in premise_records
+                            for eid in record.cited_evidence_ids)
+            appendices.append(
+                f"**AI_INFERENCE：** {_escape_report_text(inference.text)} 前提来源：{refs}\n"
+            )
     produced_requirements = {
         item.requirement_id for item in execution.claim_inputs
-        if item.claim.claim_id in used_records
+        if item.claim.claim_id in records_by_id
     } | {item.requirement_id for item in execution.limited_disclosures} | {
         item.requirement_id for item in execution.surviving_inferences
     }
     missing = [item.text for item in execution.requirements
                if item.requirement_id not in produced_requirements]
     if missing:
-        lines.extend(["## 尚未解决的要求", ""])
-        lines.extend(f"- {_escape_report_text(title)}：当前证据不足以形成可靠结论。"
-                     for title in missing)
-        lines.append("")
-    return "\n".join(lines)
+        appendices.extend(["## 尚未解决的要求", ""])
+        appendices.extend(
+            f"- {_escape_report_text(title)}：当前证据不足以形成可靠结论。"
+            for title in missing
+        )
+    if appendices:
+        audited += "\n\n" + "\n".join(appendices).rstrip()
+    return audited + "\n"
 
 
 def render_report(execution: IntegratedExecution, *, writer_draft: str | None = None) -> str:

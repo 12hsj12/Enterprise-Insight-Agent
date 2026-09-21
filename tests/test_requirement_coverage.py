@@ -200,7 +200,7 @@ def test_coverage_is_recomputed_after_repair_removes_claim():
     assert execution.requirement_coverage[0].status is RequirementCoverageStatus.NOT_COVERED
 
 
-def test_writer_claim_unknown_requirement_fails_closed():
+def test_explicit_claim_plan_unknown_requirement_fails_closed():
     proposal = ClaimProposal.model_validate({
         "claims": [{
             "requirement_id": "R9",

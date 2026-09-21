@@ -79,6 +79,7 @@ class GroundingFindingCode(str, Enum):
     UNKNOWN_CITATION = "unknown_citation"
     CITATION_NOT_LINKED_TO_CLAIM = "citation_not_linked_to_claim"
     INSUFFICIENT_FINAL_CITATIONS = "insufficient_final_citations"
+    UNSUPPORTED_STRENGTHENING = "unsupported_strengthening"
     POST_CUTOFF_EVIDENCE = "post_cutoff_evidence"
     CUTOFF_UNVERIFIED = "cutoff_unverified"
 

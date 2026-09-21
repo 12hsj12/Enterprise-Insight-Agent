@@ -370,6 +370,8 @@ class IntelligenceWorkflow:
                     "layered_output_summary": execution.layered_output_summary,
                     "inference_validation_summary": execution.inference_validation_summary.model_dump(),
                     "invalid_comparative_claim_input_count": execution.invalid_comparative_claim_input_count,
+                    "invalid_structured_claim_input_count": execution.invalid_structured_claim_input_count,
+                    "invalid_source_identity_input_count": execution.invalid_source_identity_input_count,
                     "invalid_draft_claim_input_count": execution.invalid_draft_claim_input_count,
                     "resolved_writer_evidence_prefix_count": execution.resolved_writer_evidence_prefix_count,
                 } if execution else {}),

@@ -125,6 +125,74 @@ def test_emit_with_sufficient_cited_support_passes():
     assert result.findings == ()
 
 
+def test_private_network_features_do_not_support_stronger_public_path_claim():
+    item = claim("Traffic never traverses the public internet.")
+    ev = Evidence(
+        evidence_id="ev-1", sub_query="fixture",
+        content="The service supports private endpoints and VNet integration.",
+    )
+    links = [link(item, ev.evidence_id)]
+    approved = gate(item, [ev], links)
+    result = validate(
+        [record(item, "ev-1")], claims=[item], evidences=[ev], links=links,
+        gate_results=[approved], audit_metadata=[metadata("ev-1")],
+    )
+    assert approved.decision is ClaimGateDecision.EMIT
+    assert result.status is GroundingStatus.REPAIR_REQUIRED
+    assert GroundingFindingCode.UNSUPPORTED_STRENGTHENING in result.reason_codes
+    plan = GroundingValidator.create_repair_plan(result)
+    assert plan.actions[0].operation is GroundingRepairOperation.REMOVE_CLAIM
+
+
+def test_cc_keep_traffic_off_public_internet_wording_requires_direct_support():
+    item = claim(
+        "On Azure, private endpoints and VNet integration keep traffic off the public internet."
+    )
+    ev = Evidence(
+        evidence_id="ev-1", sub_query="fixture",
+        content="Azure supports private endpoints and VNet integration.",
+    )
+    links = [link(item, ev.evidence_id)]
+    approved = gate(item, [ev], links)
+    result = validate(
+        [record(item, "ev-1")], claims=[item], evidences=[ev], links=links,
+        gate_results=[approved], audit_metadata=[metadata("ev-1")],
+    )
+    assert result.status is GroundingStatus.REPAIR_REQUIRED
+    assert GroundingFindingCode.UNSUPPORTED_STRENGTHENING in result.reason_codes
+
+
+def test_private_endpoint_and_vnet_do_not_entail_chinese_public_path_exclusion():
+    item = claim("该配置下流量不会经过公网。")
+    ev = Evidence(
+        evidence_id="ev-1", sub_query="fixture",
+        content="该服务支持专用终结点，并可与 VNet 集成。",
+    )
+    links = [link(item, ev.evidence_id)]
+    approved = gate(item, [ev], links)
+    result = validate(
+        [record(item, "ev-1")], claims=[item], evidences=[ev], links=links,
+        gate_results=[approved], audit_metadata=[metadata("ev-1")],
+    )
+    assert result.status is GroundingStatus.REPAIR_REQUIRED
+    assert GroundingFindingCode.UNSUPPORTED_STRENGTHENING in result.reason_codes
+
+
+def test_direct_public_path_statement_allows_same_strength_wording():
+    item = claim("Traffic never traverses the public internet.")
+    ev = Evidence(
+        evidence_id="ev-1", sub_query="fixture",
+        content="Traffic never traverses the public internet when this mode is enabled.",
+    )
+    links = [link(item, ev.evidence_id)]
+    approved = gate(item, [ev], links)
+    result = validate(
+        [record(item, "ev-1")], claims=[item], evidences=[ev], links=links,
+        gate_results=[approved], audit_metadata=[metadata("ev-1")],
+    )
+    assert result.status is GroundingStatus.PASS
+
+
 def test_emit_dropped_required_citation_reapplies_gate_and_requires_repair():
     item = claim("Product A outperforms Product B.", ClaimRiskType.COMPARATIVE_CLAIM)
     evidences = [evidence("ev-a"), evidence("ev-b")]

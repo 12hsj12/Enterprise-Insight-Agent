@@ -5,6 +5,7 @@ from __future__ import annotations
 from collections.abc import Iterable, Mapping
 from contextlib import nullcontext
 from datetime import date
+import re
 
 from .gate import ClaimGate
 from .models import (
@@ -31,12 +32,55 @@ from .models import (
 DEFAULT_INFORMATION_CUTOFF = date(2026, 9, 5)
 
 
+_STRENGTHENING_PATTERNS = (
+    # A private endpoint or VNet reference does not, by itself, establish the
+    # stronger transport-path assertion that traffic never uses a public path.
+    re.compile(
+        r"(?:\b(?:never|not|does\s+not|do\s+not|without|bypasses?|avoids?)\b"
+        r"[^.!?]{0,80}\b(?:public\s+(?:internet|network)|internet)\b|"
+        r"\bkeeps?\b[^.!?]{0,80}\boff\b[^.!?]{0,30}"
+        r"\b(?:the\s+)?public\s+(?:internet|network)\b|"
+        r"\b(?:public\s+(?:internet|network)|internet)\b[^.!?]{0,80}"
+        r"\b(?:never|not|bypasses?|avoids?)\b|"
+        r"(?:不|未|无需|不会|从不|避免)[^。！？；]{0,40}(?:公网|公共互联网)|"
+        r"(?:公网|公共互联网)[^。！？；]{0,40}(?:不|未|无需|不会|从不|隔离))",
+        re.IGNORECASE,
+    ),
+    # Absolute assurance language must itself be present in a supporting
+    # passage; adjacent capability descriptions cannot be composed into it.
+    re.compile(
+        r"\b(?:guarantees?|guaranteed|eliminates?|eliminated|always|zero[- ]risk)\b|"
+        r"(?:保证|确保|完全消除|杜绝|零风险)",
+        re.IGNORECASE,
+    ),
+)
+
+
+def wording_strength_supported(claim_text: str, evidence_texts: Iterable[str]) -> bool:
+    """Reject a small closed set of stronger-than-source formulations.
+
+    This is deliberately not a semantic judge. It only prevents known
+    high-consequence strengthening forms unless one cited supporting passage
+    states the same strength class directly.
+    """
+
+    matched = [pattern for pattern in _STRENGTHENING_PATTERNS
+               if pattern.search(claim_text)]
+    if not matched:
+        return True
+    return all(
+        any(pattern.search(text) for text in evidence_texts)
+        for pattern in matched
+    )
+
+
 class GroundingValidator:
     """Audit whether structured final output preserved Claim Gate decisions.
 
-    The validator performs no claim extraction, semantic entailment, hedging
-    inference, source classification, or retrieval. Report generation must supply
-    the emitted factual assertions and their citations as typed records.
+    The validator performs no claim extraction, open-ended semantic judging,
+    source classification, or retrieval. It does enforce a closed deterministic
+    guard against a few stronger-than-source formulations. Report generation
+    must supply emitted factual assertions and citations as typed records.
     """
 
     def __init__(self, claim_gate: ClaimGate | None = None):
@@ -191,6 +235,17 @@ class GroundingValidator:
                 if link.claim_id == record.claim_id
                 and link.evidence_id in effective_evidence_ids
             ]
+            supporting_texts = [
+                evidences_by_id[link.evidence_id].content
+                for link in effective_links
+                if link.relation == "support"
+            ]
+            if not wording_strength_supported(record.rendered_text, supporting_texts):
+                findings.append(
+                    self._finding(
+                        GroundingFindingCode.UNSUPPORTED_STRENGTHENING, record
+                    )
+                )
             try:
                 from gpt_researcher.enterprise.trace import (
                     ClaimGateTracePhase,
@@ -310,6 +365,7 @@ class GroundingValidator:
             GroundingFindingCode.OMITTED_CLAIM_EMITTED,
             GroundingFindingCode.RETRIEVE_MORE_CLAIM_EMITTED,
             GroundingFindingCode.INSUFFICIENT_FINAL_CITATIONS,
+            GroundingFindingCode.UNSUPPORTED_STRENGTHENING,
         }
         remove_claim_ids = {
             finding.claim_id

@@ -70,6 +70,30 @@ def test_t01_gate_emit_grounding_pass_is_normal_verified_fact():
     assert "A documentation describes widgets" in report
 
 
+def test_grounding_strength_failure_downgrades_to_literal_limited_evidence():
+    registered = item(
+        "Traffic never traverses the public internet.", risks=()
+    )
+    source = ev(content="Vendor documentation states that traffic uses a private endpoint.")
+    result, _ = run(
+        [registered], [source],
+        excerpts=[quote(
+            registered,
+            "Vendor documentation states that traffic uses a private endpoint.",
+        )],
+    )
+    report = render_report(
+        result,
+        writer_draft="## Networking\n\nTraffic never traverses the public internet.",
+    )
+    assert result.evidence_context.claim_gate_results[0].decision.value == "emit"
+    assert result.layered_output_summary["verified_fact"] == 0
+    assert result.layered_output_summary["limited_evidence"] == 1
+    assert "Traffic never traverses" not in report
+    assert "traffic uses a private endpoint" in report
+    assert "LIMITED_EVIDENCE" in report
+
+
 def test_t02_direct_support_missing_independent_is_limited_not_verified():
     registered = item()
     result, report = run([registered], [ev()], excerpts=[quote(registered)])
@@ -460,3 +484,42 @@ async def test_malformed_writer_inference_is_isolated_from_fact_path(monkeypatch
     assert calls == 1
     assert result.layered_output_summary["verified_fact"] == 1
     assert result.inference_validation_summary.invalid_inference_count == 1
+
+
+@pytest.mark.asyncio
+async def test_malformed_writer_claim_and_source_identity_do_not_abort_valid_claim(monkeypatch):
+    async def author(**kwargs):
+        return json.dumps({
+            "claims": [
+                {"claim_reference_id": "good", "requirement_id": "R1",
+                 "text": "A documentation describes widgets.", "risk_types": [],
+                 "is_material": True,
+                 "relations": [{"evidence_id": "e1", "relation": "support"}],
+                 "cited_evidence_ids": ["e1"]},
+                {"claim_reference_id": "bad", "requirement_id": "R1",
+                 "text": "Malformed atom has no material flag.", "risk_types": [],
+                 "relations": [], "cited_evidence_ids": []},
+            ],
+            "source_identities": [{
+                "evidence_id": "e1", "source_organization": "Vendor A",
+                "basis_field": "publisher", "basis_kind": "publisher_statement",
+                "basis_text": "Published by Vendor A",
+            }],
+        })
+
+    monkeypatch.setattr("gpt_researcher.utils.llm.create_chat_completion", author)
+    researcher = SimpleNamespace(
+        query="fixture",
+        cfg=SimpleNamespace(smart_llm_model="fixture", smart_llm_provider="fixture",
+                            smart_token_limit=5000, llm_kwargs={}),
+        add_costs=lambda value: None,
+        research_plan=SimpleNamespace(requirements=(req(),)),
+    )
+    context = EvidenceContext(
+        context="", evidences=[ev(content="A documentation describes widgets.")]
+    )
+    plan = await propose_claims(researcher, context, "layered")
+    result = integrate_claims(context, plan, CUTOFF)
+    assert plan.invalid_structured_claim_input_count == 1
+    assert plan.invalid_source_identity_input_count == 1
+    assert result.layered_output_summary["verified_fact"] == 1

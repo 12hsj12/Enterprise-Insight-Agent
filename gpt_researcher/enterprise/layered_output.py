@@ -68,13 +68,16 @@ def valid_limited_excerpt(
     source: SourceExcerpt, *, evidence: Evidence, gate: ClaimGateResult,
     support_ids: set[str], citation_ids: set[str],
     metadata: GroundingEvidenceAuditMetadata | None, cutoff: date,
+    factual_record_survived: bool = True,
 ) -> bool:
     """Audit a source quote independently of factual Grounding validation.
 
     A literal quote can disclose what a source said. It cannot authorize the
     rejected Claim as a factual assertion, even if the source has high authority.
+    An initially emitted Claim may use this path only after Grounding removed
+    its factual record.
     """
-    if gate.decision is ClaimGateDecision.EMIT:
+    if gate.decision is ClaimGateDecision.EMIT and factual_record_survived:
         return False
     if source.evidence_id not in support_ids or source.evidence_id not in citation_ids:
         return False

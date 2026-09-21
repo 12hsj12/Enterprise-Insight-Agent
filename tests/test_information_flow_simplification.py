@@ -210,6 +210,66 @@ def test_unbound_high_risk_draft_fact_is_not_published():
     assert "<script>" not in escaped
 
 
+def test_writer_draft_structure_and_analysis_survive_local_claim_audit():
+    source = Evidence(
+        evidence_id="one", sub_query="fixture", url="https://example.test/one",
+        content="Vendor documentation states that Acme traffic uses private endpoints.",
+    )
+    rejected = linked_claim(
+        "Acme guarantees that traffic never traverses the public internet.",
+        "R1", [source], risks=(ClaimRiskType.COMPARATIVE_CLAIM,),
+    )
+    draft = (
+        "# Network comparison\n\n"
+        "This section frames the decision around connectivity, operations, and risk.\n\n"
+        "## Connectivity\n\n"
+        "Acme guarantees that traffic never traverses the public internet. "
+        "That distinction matters when teams compare deployment boundaries and controls.\n\n"
+        "## Operating interpretation\n\n"
+        + "The practical trade-off depends on the customer's control model and review process. " * 40
+    )
+    execution = integrate_claims(
+        EvidenceContext(context="", evidences=[source]),
+        ClaimPlan(items=[rejected], requirements=[requirement(
+            "R1", "网络对比", RequirementType.FACTUAL, 1
+        )]), CUTOFF,
+    )
+    report = render_report(execution, writer_draft=draft)
+    assert "# Network comparison" in report
+    assert "## Connectivity" in report and "## Operating interpretation" in report
+    assert "That distinction matters" in report
+    assert "practical trade-off depends" in report
+    assert "guarantees that traffic never traverses" not in report
+    assert "LIMITED_EVIDENCE" in report
+    assert len(report) >= len(draft) * 0.8
+
+
+def test_gate_reject_replaces_only_the_claim_not_its_paragraph():
+    source = Evidence(
+        evidence_id="one", sub_query="fixture", url="https://example.test/one",
+        content="Vendor documentation states that Acme supports private endpoints.",
+    )
+    rejected = linked_claim(
+        "Acme is objectively safer than Beta.", "R1", [source],
+        risks=(ClaimRiskType.COMPARATIVE_CLAIM,),
+    )
+    report = render_report(
+        integrate_claims(
+            EvidenceContext(context="", evidences=[source]),
+            ClaimPlan(items=[rejected]), CUTOFF,
+        ),
+        writer_draft=(
+            "## Comparison\n\nBefore choosing, define the relevant threat model. "
+            "Acme is objectively safer than Beta. The comparison should also account "
+            "for operational ownership and incident response."
+        ),
+    )
+    assert "Before choosing" in report
+    assert "operational ownership and incident response" in report
+    assert "objectively safer" not in report
+    assert "UNRESOLVED" in report
+
+
 @pytest.mark.asyncio
 async def test_workflow_uses_complete_research_context_before_existing_audit(tmp_path):
     class Researcher:

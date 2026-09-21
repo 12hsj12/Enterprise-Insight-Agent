@@ -374,6 +374,7 @@ class IntelligenceWorkflow:
                     "invalid_source_identity_input_count": execution.invalid_source_identity_input_count,
                     "invalid_draft_claim_input_count": execution.invalid_draft_claim_input_count,
                     "resolved_writer_evidence_prefix_count": execution.resolved_writer_evidence_prefix_count,
+                    "final_render_audit_summary": execution.final_render_audit_summary,
                 } if execution else {}),
             } if (trace or execution) else None,
             task_classification=task_classification,

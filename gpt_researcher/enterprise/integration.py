@@ -226,6 +226,7 @@ class IntegratedExecution(StructuredModel):
     invalid_claim_texts: list[str] = Field(default_factory=list, max_length=120)
     invalid_draft_claim_input_count: int = Field(default=0, ge=0)
     resolved_writer_evidence_prefix_count: int = Field(default=0, ge=0)
+    final_render_audit_summary: dict[str, int] = Field(default_factory=dict)
 
 
 def _identity_key(value: str) -> str:
@@ -1220,8 +1221,17 @@ def integrate_claims(context: EvidenceContext, plan: ClaimPlan, cutoff: date,
         return results
 
     initial = validate(records, 0)
-    if any(r.status is GroundingStatus.FAIL for r in initial):
-        raise ValueError("Grounding validation failed")
+    failed_initial = [result for result in initial if result.status is GroundingStatus.FAIL]
+    if failed_initial:
+        # Grounding is claim-scoped above. A terminal validation problem must
+        # therefore fail closed for the affected factual record, not destroy
+        # the complete Writer report. Validators normally identify failed
+        # claim IDs; an older/custom validator that does not is handled by the
+        # conservative fallback of removing every candidate record.
+        failed_ids = {
+            claim_id for result in failed_initial for claim_id in result.failed_claim_ids
+        } or {record.claim_id for record in records}
+        records = [record for record in records if record.claim_id not in failed_ids]
     repairable = [r for r in initial if r.status is GroundingStatus.REPAIR_REQUIRED]
     repair_plan = None
     if repairable:
@@ -1230,8 +1240,17 @@ def integrate_claims(context: EvidenceContext, plan: ClaimPlan, cutoff: date,
             for action in validator.create_repair_plan(result).actions
         ))
         records = validator.apply_repair_plan(records, repair_plan)
-        if any(r.status is not GroundingStatus.PASS for r in validate(records, 1)):
-            raise ValueError("Grounding failed after one repair pass")
+        after_repair = validate(records, 1)
+        failed_after_repair = [
+            result for result in after_repair if result.status is not GroundingStatus.PASS
+        ]
+        if failed_after_repair:
+            failed_ids = {
+                claim_id
+                for result in failed_after_repair
+                for claim_id in (*result.failed_claim_ids, *result.repairable_claim_ids)
+            } or {record.claim_id for record in records}
+            records = [record for record in records if record.claim_id not in failed_ids]
     context.generated_claim_records = records
     evidence_by_id = {evidence.evidence_id: evidence for evidence in context.evidences}
     metadata_by_id = {metadata.evidence_id: metadata for metadata in plan.audit_metadata}
@@ -1582,21 +1601,44 @@ _UNAUDITED_HIGH_RISK = re.compile(
     r"\b(?:released?|launched?|available|availability|outperforms?|faster|slower|"
     r"market\s+share|benchmarks?|rank(?:ed|ing)?|largest|smallest|best|worst|"
     r"prices?|pricing|costs?|sla|uptime|throughput|latency|context\s+window|"
-    r"supports?|offers?|provides?|accepts?|handles?|guarantees?|always|never|"
-    r"eliminates?|zero[- ]risk)\b|"
+    r"supports?|offers?|provides?|accepts?|handles?|guarantees?|integrates?|"
+    r"includes?|enables?|allows?|lacks?|compatible|capable\s+of|"
+    r"always|never|eliminates?|zero[- ]risk|causes?|because|due\s+to|"
+    r"leads?\s+to|results?\s+in|drives?|reduces?|increases?)\b|"
     r"(?:发布|上线|可用|不可用|市场份额|基准|跑分|领先|最快|最大|最小|排名|"
-    r"价格|费用|成本|服务等级|吞吐|延迟|上下文窗口|支持|提供|模型能力)",
+    r"价格|费用|成本|服务等级|吞吐|延迟|上下文窗口|支持|提供|模型能力|"
+    r"能够|具备|兼容|需要|缺少|保证|始终|从不|导致|因为|由于|因此|"
+    r"带来|降低|提高|增加)",
     re.IGNORECASE,
+)
+
+
+_UNAUDITED_FACTUAL_ASSERTION = re.compile(
+    r"\b(?:[A-Z][A-Za-z0-9_.+-]*(?:\s+[A-Z][A-Za-z0-9_.+-]*){0,4})\s+"
+    r"(?:is|are|was|were|has|have|had|uses?|used|builds?|built|stores?|stored|"
+    r"runs?|ran|processes?|processed|delivers?|delivered|contains?|contained|"
+    r"operates?|ships?|shipped|reports?|reported|states?|stated|claims?|claimed)\b|"
+    r"(?:平台|产品|模型|服务|公司|厂商|系统)[^。！？\n]{0,30}"
+    r"(?:是|为|采用|包含|属于|拥有|运行|存储|处理|交付|声称|表示)",
 )
 
 
 _RECOMMENDATION = re.compile(
-    r"\b(?:we\s+(?:recommend|advise|suggest)|recommend(?:ed|ation)?|"
-    r"should\s+(?:choose|select|adopt|use|migrate|prefer|consider|pilot|deploy)|"
-    r"(?:choose|select|adopt|prefer|consider|pilot|migrate\s+to|deploy)\b)|"
-    r"(?:建议|推荐|应当|应该|宜|优先选择|可考虑|选择.+作为)",
+    r"\b(?:we\s+(?:recommend|advise|suggest)|(?:our\s+)?recommendation\s+is|"
+    r"(?:you|teams?|enterprises?|organizations?|customers?)\s+should\s+|"
+    r"(?:should|must|ought\s+to)\s+(?:choose|select|adopt|use|migrate|move|"
+    r"switch|replace|prefer|consider|pilot|deploy|standardize|prioritize)|"
+    r"(?:choose|select|adopt|prefer|consider|pilot|deploy|standardize|prioritize|"
+    r"migrate\s+to|move\s+to|switch\s+to|replace\s+.+\s+with)\b|"
+    r"(?:is|are)\s+(?:the\s+)?(?:best|preferred|right|ideal)\s+(?:choice|option|fit)|"
+    r"(?:is|are)\s+better\s+suited\b|go\s+with\b)|"
+    r"(?:建议|推荐|应当|应该|宜(?:采用|选择|部署|迁移)|优先选择|首选|可考虑|"
+    r"选用|采用.+作为|迁移(?:至|到)|切换(?:至|到)|替换为|部署|开展试点)",
     re.IGNORECASE,
 )
+
+
+_AUDIT_PLACEHOLDER = re.compile(r"EIAAUDITPLACEHOLDER\d{6}X")
 
 
 _TABLE_SEPARATOR = re.compile(r"^\s*:?-{3,}:?\s*$")
@@ -1611,39 +1653,47 @@ def _is_table_separator_row(line: str) -> bool:
     return len(cells) >= 2 and all(_TABLE_SEPARATOR.fullmatch(cell) for cell in cells)
 
 
-def _is_markdown_table_block(value: str) -> bool:
-    lines = value.splitlines()
-    return (
-        len(lines) >= 2
-        and _is_table_row(lines[0])
-        and _is_table_separator_row(lines[1])
-    )
+def _matching_unprotected_parts(value: str, pattern: re.Pattern) -> list[str]:
+    """Return risky text outside already audited claim placeholders."""
+
+    return [
+        part for part in _AUDIT_PLACEHOLDER.split(value)
+        if pattern.search(_draft_claim_text(part))
+    ]
 
 
-def _replace_table_cells(
-    line: str, pattern: re.Pattern, replacement: str,
-) -> tuple[str, int]:
-    """Replace only matching Markdown table cells, preserving the row."""
+def _replace_table_cells(line: str, pattern: re.Pattern) -> tuple[str, int]:
+    """Remove only unaudited table-cell material, preserving audited atoms."""
 
     newline = "\n" if line.endswith("\n") else ""
     body = line[:-1] if newline else line
     cells = re.split(r"(?<!\\)\|", body)
     replaced = 0
     for index, cell in enumerate(cells):
-        if not cell.strip() or "EIAAUDITPLACEHOLDER" in cell:
+        if not cell.strip():
             continue
-        candidate = _draft_claim_text(cell)
-        if pattern.search(candidate):
-            leading = cell[:len(cell) - len(cell.lstrip())]
-            trailing = cell[len(cell.rstrip()):]
-            cells[index] = leading + replacement + trailing
-            replaced += 1
+        risky_parts = _matching_unprotected_parts(cell, pattern)
+        if not risky_parts:
+            continue
+        leading = cell[:len(cell) - len(cell.lstrip())]
+        trailing = cell[len(cell.rstrip()):]
+        if _AUDIT_PLACEHOLDER.search(cell):
+            pieces = _AUDIT_PLACEHOLDER.split(cell)
+            tokens = _AUDIT_PLACEHOLDER.findall(cell)
+            safe: list[str] = []
+            for position, piece in enumerate(pieces):
+                safe.append(" — " if pattern.search(_draft_claim_text(piece)) else piece)
+                if position < len(tokens):
+                    safe.append(tokens[position])
+            value = "".join(safe).strip()
+            cells[index] = leading + (value or "—") + trailing
+        else:
+            cells[index] = leading + "—" + trailing
+        replaced += len(risky_parts)
     return "|".join(cells) + newline, replaced
 
 
-def _scrub_table_data_cells(
-    draft: str, pattern: re.Pattern, replacement: str,
-) -> tuple[str, int]:
+def _scrub_table_data_cells(draft: str, pattern: re.Pattern) -> tuple[str, int]:
     lines = draft.splitlines(keepends=True)
     in_table = False
     replaced = 0
@@ -1657,7 +1707,7 @@ def _scrub_table_data_cells(
         if _is_table_separator_row(line):
             continue
         if in_table and _is_table_row(line):
-            lines[index], count = _replace_table_cells(line, pattern, replacement)
+            lines[index], count = _replace_table_cells(line, pattern)
             replaced += count
             continue
         if line.strip():
@@ -1665,80 +1715,97 @@ def _scrub_table_data_cells(
     return "".join(lines), replaced
 
 
-def _scrub_unaudited_high_risk_prose(draft: str) -> tuple[str, int]:
-    """Remove conspicuous unaudited facts from prose and table cells locally."""
+def _scrub_matching_prose(draft: str, pattern: re.Pattern) -> tuple[str, int]:
+    """Remove matching sentences/clauses without disturbing report structure."""
 
-    draft, removed = _scrub_table_data_cells(
-        draft, _UNAUDITED_HIGH_RISK, "—（未核实）",
-    )
-    blocks = re.split(r"(\n\s*\n)", draft)
+    draft, removed = _scrub_table_data_cells(draft, pattern)
+    lines = draft.splitlines(keepends=True)
     in_references = False
-    for index in range(0, len(blocks), 2):
-        block = blocks[index]
-        stripped = block.strip()
+    in_code_fence = False
+    in_table = False
+    for index, line in enumerate(lines):
+        stripped = line.strip()
+        if stripped.startswith("```"):
+            in_code_fence = not in_code_fence
+            continue
         if stripped.startswith("#"):
-            title = re.sub(r"^#+\s*", "", stripped.splitlines()[0]).strip().casefold()
+            title = re.sub(r"^#+\s*", "", stripped).strip().casefold()
             in_references = title in {"references", "sources", "bibliography", "参考文献"}
             continue
-        if (
-            in_references or not stripped or stripped.startswith("```")
-            or _is_markdown_table_block(stripped)
-        ):
+        next_is_separator = (
+            index + 1 < len(lines) and _is_table_separator_row(lines[index + 1])
+        )
+        if _is_table_row(line) and next_is_separator:
+            in_table = True
             continue
-        sentences = re.split(r"(?<=[.!?。！？])(?=\s|$)", block)
-        changed = False
+        if _is_table_separator_row(line):
+            continue
+        if in_table and _is_table_row(line):
+            continue
+        if stripped:
+            in_table = False
+        if in_references or in_code_fence or not stripped:
+            continue
+        newline = "\n" if line.endswith("\n") else ""
+        body = line[:-1] if newline else line
+        sentences = re.split(r"(?<=[.!?。！？])(?=\s|$)", body)
         for sentence_index, sentence in enumerate(sentences):
-            if "EIAAUDITPLACEHOLDER" in sentence:
+            risky_parts = _matching_unprotected_parts(sentence, pattern)
+            if not risky_parts:
                 continue
-            candidate = re.sub(
-                r"^\s*(?:[-*+]\s+|\d+[.)]\s+)", "", _draft_claim_text(sentence)
-            )
-            if _UNAUDITED_HIGH_RISK.search(candidate):
-                # Mask only the risky value/predicate. The same sentence may
-                # also carry useful framing or comparison logic that is not a
-                # factual assertion and must remain in the Writer skeleton.
-                sentences[sentence_index] = _UNAUDITED_HIGH_RISK.sub(
-                    "〔未核实〕", sentence,
-                )
-                changed = True
-                removed += 1
-        if changed:
-            blocks[index] = "".join(sentences)
-    return "".join(blocks), removed
+            removed += len(risky_parts)
+            if _AUDIT_PLACEHOLDER.search(sentence):
+                pieces = _AUDIT_PLACEHOLDER.split(sentence)
+                tokens = _AUDIT_PLACEHOLDER.findall(sentence)
+                safe: list[str] = []
+                for position, piece in enumerate(pieces):
+                    safe.append("" if pattern.search(_draft_claim_text(piece)) else piece)
+                    if position < len(tokens):
+                        safe.append(tokens[position])
+                sentences[sentence_index] = "".join(safe)
+                continue
+            clauses = re.split(r"(?<=[,;，；])", sentence)
+            safe_clauses = [
+                clause for clause in clauses
+                if not pattern.search(_draft_claim_text(clause))
+            ]
+            sentences[sentence_index] = "".join(safe_clauses) if safe_clauses else ""
+        lines[index] = "".join(sentences) + newline
+    return "".join(lines), removed
+
+
+def _scrub_unaudited_high_risk_prose(draft: str) -> tuple[str, int]:
+    """Fail closed for high-risk facts omitted by the structured extractor."""
+
+    return _scrub_matching_prose(draft, _UNAUDITED_HIGH_RISK)
 
 
 def _scrub_unbound_recommendations(draft: str) -> tuple[str, int]:
-    """Remove draft advice; only premise-bound AI_INFERENCE is re-added."""
+    """Remove Writer advice; only premise-bound inferences are re-added."""
 
-    draft, removed = _scrub_table_data_cells(
-        draft, _RECOMMENDATION, "—（建议缺少可见证据前提）",
-    )
-    blocks = re.split(r"(\n\s*\n)", draft)
-    in_references = False
-    for index in range(0, len(blocks), 2):
-        block = blocks[index]
-        stripped = block.strip()
-        if stripped.startswith("#"):
-            title = re.sub(r"^#+\s*", "", stripped.splitlines()[0]).strip().casefold()
-            in_references = title in {"references", "sources", "bibliography", "参考文献"}
-            continue
-        if (
-            in_references or not stripped or stripped.startswith("```")
-            or _is_markdown_table_block(stripped)
-        ):
-            continue
-        sentences = re.split(r"(?<=[.!?。！？])(?=\s|$)", block)
-        for sentence_index, sentence in enumerate(sentences):
-            if "EIAAUDITPLACEHOLDER" in sentence:
-                continue
-            candidate = re.sub(
-                r"^\s*(?:[-*+]\s+|\d+[.)]\s+)", "", _draft_claim_text(sentence)
-            )
-            if _RECOMMENDATION.search(candidate):
-                sentences[sentence_index] = ""
-                removed += 1
-        blocks[index] = "".join(sentences)
-    return "".join(blocks), removed
+    return _scrub_matching_prose(draft, _RECOMMENDATION)
+
+
+def _is_authored_recommendation(text: str) -> bool:
+    """Separate Writer advice from factual reports of a source's advice."""
+
+    candidate = _draft_claim_text(text).strip()
+    if not candidate:
+        return False
+    if re.match(
+        r"^(?:[-*+]\s+|\d+[.)]\s+)?(?:we\s+)?(?:recommend|advise|suggest|"
+        r"choose|select|adopt|prefer|consider|pilot|deploy|standardize|prioritize|"
+        r"migrate\s+to|move\s+to|switch\s+to|建议|推荐|应当|应该|宜|优先|"
+        r"首选|可考虑|选用|迁移(?:至|到)|切换(?:至|到)|部署|开展试点)",
+        candidate, flags=re.IGNORECASE,
+    ):
+        return True
+    return bool(re.search(
+        r"\b(?:should|must|ought\s+to)\s+(?:choose|select|adopt|use|migrate|"
+        r"move|switch|replace|prefer|consider|pilot|deploy|standardize|prioritize)\b|"
+        r"(?:应当|应该|宜(?:采用|选择|部署|迁移)|优先选择|可考虑)",
+        candidate, flags=re.IGNORECASE,
+    ))
 
 
 def _sanitize_draft_html(draft: str) -> str:
@@ -1749,19 +1816,19 @@ def _sanitize_draft_html(draft: str) -> str:
     )
 
 
-def _redact_prose_without_evidence(draft: str) -> str:
-    """Preserve the outline when no structured source can support any prose."""
+def _source_attribution(publisher: str | None) -> str:
+    if publisher:
+        return f"根据 {_escape_report_text(publisher)} 发布的材料"
+    return "根据该来源的材料"
 
-    blocks = re.split(r"(\n\s*\n)", draft)
-    for index in range(0, len(blocks), 2):
-        stripped = blocks[index].strip()
-        if not stripped or stripped.startswith("#"):
-            continue
-        blocks[index] = (
-            "**UNRESOLVED：** 当前证据不足以形成可靠结论；"
-            "原草稿中的具体事实未通过逐句来源核查，未作为事实保留。"
-        )
-    return "".join(blocks)
+
+def _visible_recommendation_text(text: str) -> str:
+    """Remove an internal premise-strength phrase from user-facing advice."""
+
+    return re.sub(
+        r"^Based on the verified premises?,\s*", "", text.strip(),
+        flags=re.IGNORECASE,
+    )
 
 
 def _render_audited_writer_draft(execution: IntegratedExecution,
@@ -1769,8 +1836,8 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
     """Apply Claim decisions in place to the complete Writer draft.
 
     Gate and Grounding qualify only the audited factual atom. A rejected atom
-    is replaced locally by a weaker attributed source passage or UNRESOLVED;
-    the surrounding outline, explanation, comparison, and transitions remain.
+    is replaced locally by a weaker attributed source passage or omitted; the
+    surrounding outline, explanation, comparison, and transitions remain.
     """
 
     evidence = {item.evidence_id: item for item in execution.evidence_context.evidences}
@@ -1781,37 +1848,45 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
         limited_by_claim.setdefault(disclosure.claim_id, []).append(disclosure)
 
     def citation(evidence_id: str) -> str:
-        source = evidence[evidence_id]
+        source = evidence.get(evidence_id)
+        if source is None:
+            return f"Evidence {_escape_report_text(evidence_id)} (source URL unavailable)"
         if re.fullmatch(r"https?://[^\s<>]+", source.url):
             url = source.url.replace("(", "%28").replace(")", "%29")
             return f"[{_escape_report_text(evidence_id)}](<{url}>)"
         return f"Evidence {_escape_report_text(evidence_id)} (source URL unavailable)"
 
-    def audited_replacement(item: RegisteredClaimInput) -> str:
+    def audited_replacement(item: RegisteredClaimInput, *, table_cell: bool = False) -> str:
         claim_id = item.claim.claim_id
         record = records_by_id.get(claim_id)
         if record is not None:
             refs = " ".join(citation(eid) for eid in record.cited_evidence_ids)
-            return f"**VERIFIED_FACT：** {_escape_report_text(record.rendered_text)} {refs}".rstrip()
+            return f"{_escape_report_text(record.rendered_text)} {refs}".rstrip()
         disclosures = limited_by_claim.get(claim_id, [])
         if disclosures:
             rendered = []
             for disclosure in disclosures:
-                publisher = disclosure.publisher or f"Source {disclosure.evidence_id}"
                 date_note = (
-                    "；该来源发布日期未得到可靠验证，不能据此确认当前状态"
+                    "；其发布日期尚未得到可靠验证，因此不能据此确认当前状态"
                     if disclosure.publication_date_unverified else ""
                 )
                 rendered.append(
-                    f"{_escape_report_text(publisher)} 的材料记载：“"
+                    f"{_source_attribution(disclosure.publisher)}，“"
                     f"{_escape_report_text(disclosure.excerpt)}” "
                     f"{citation(disclosure.evidence_id)}{date_note}"
                 )
             return (
-                "**LIMITED_EVIDENCE：** " + "；".join(rendered)
-                + "。这些材料只支持上述较弱的来源归属表述，不能确认原草稿中的更强结论。"
+                "；".join(rendered)
+                + "。当前缺少独立验证，因此这里只保留来源归属，不延伸为原草稿中的更强结论。"
             )
-        return "**UNRESOLVED：** 此处具体事实缺乏可验证的直接支持，未作为事实保留。"
+        return "—" if table_cell else ""
+
+    def span_is_table_cell(value: str, span: tuple[int, int]) -> bool:
+        line_start = value.rfind("\n", 0, span[0]) + 1
+        line_end = value.find("\n", span[1])
+        if line_end < 0:
+            line_end = len(value)
+        return _is_table_row(value[line_start:line_end])
 
     audited = writer_draft
     replacements: dict[str, str] = {}
@@ -1823,99 +1898,118 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
         key=lambda item: len(item.claim.normalized_text),
         reverse=True,
     )
+    verified_replacements = limited_replacements = omitted_replacements = 0
     for item in ordered_inputs:
-        occurrence = 0
-        while occurrence < 4:
+        # A recommendation proposed in the factual claims array remains visible
+        # in Gate diagnostics, but cannot use a factual placeholder to bypass
+        # the premise-bound inference path in the final report.
+        if _is_authored_recommendation(item.claim.normalized_text):
+            continue
+        while True:
             span = _claim_span(audited, item.claim.normalized_text)
             if span is None:
                 break
             token = f"EIAAUDITPLACEHOLDER{len(replacements):06d}X"
-            replacements[token] = audited_replacement(item)
+            replacements[token] = audited_replacement(
+                item, table_cell=span_is_table_cell(audited, span)
+            )
             audited = audited[:span[0]] + token + audited[span[1]:]
             placed_claim_ids.add(item.claim.claim_id)
-            occurrence += 1
+            if item.claim.claim_id in records_by_id:
+                verified_replacements += 1
+            elif item.claim.claim_id in limited_by_claim:
+                limited_replacements += 1
+            else:
+                omitted_replacements += 1
 
     # A malformed structured atom may not enter Gate, but its recoverable text
     # still identifies the exact draft fact that must fail closed. Never let
     # that local validation failure delete its paragraph, row, or table.
     for invalid_text in sorted(execution.invalid_claim_texts, key=len, reverse=True):
-        occurrence = 0
-        while occurrence < 4:
+        while True:
             span = _claim_span(audited, invalid_text)
             if span is None:
                 break
             token = f"EIAAUDITPLACEHOLDER{len(replacements):06d}X"
-            replacements[token] = (
-                "**UNRESOLVED：** 此处事实的审核输入无效，未作为事实保留。"
-            )
+            replacements[token] = "—" if span_is_table_cell(audited, span) else ""
             audited = audited[:span[0]] + token + audited[span[1]:]
-            occurrence += 1
+            omitted_replacements += 1
 
     audited, removed_recommendation_count = _scrub_unbound_recommendations(audited)
     audited, removed_high_risk_count = _scrub_unaudited_high_risk_prose(audited)
+    audited, removed_factual_count = _scrub_matching_prose(
+        audited, _UNAUDITED_FACTUAL_ASSERTION,
+    )
+    # A second pass is intentionally cheap and makes the invariant explicit:
+    # no unprotected high-risk/recommendation fragment may survive due to an
+    # adjacent placeholder or a Markdown-cell boundary.
+    audited, second_recommendation_count = _scrub_unbound_recommendations(audited)
+    audited, second_high_risk_count = _scrub_unaudited_high_risk_prose(audited)
+    audited, second_factual_count = _scrub_matching_prose(
+        audited, _UNAUDITED_FACTUAL_ASSERTION,
+    )
+    removed_recommendation_count += second_recommendation_count
+    removed_high_risk_count += second_high_risk_count
+    removed_factual_count += second_factual_count
     for token, replacement in replacements.items():
         audited = audited.replace(token, replacement)
     audited = _sanitize_draft_html(audited.strip())
 
-    unplaced = [item for item in ordered_inputs
-                if item.claim.claim_id not in placed_claim_ids]
     appendices = []
-    if removed_high_risk_count or removed_recommendation_count:
-        appendices.extend(["## 审核说明", ""])
-        if removed_high_risk_count:
-            appendices.append(
-                f"**UNRESOLVED：** 原草稿中 {removed_high_risk_count} 项高风险具体事实"
-                "未被有效 Claim 覆盖，已在原位删除或标记为未核实；"
-                "它们未通过逐句来源核查，未作为事实保留。\n"
-            )
-        if removed_recommendation_count:
-            appendices.append(
-                f"原草稿中 {removed_recommendation_count} 项建议缺少最终可见的审核后前提，"
-                "已在原位删除或标记；未作为可靠建议保留。\n"
-            )
-    if unplaced:
-        appendices.extend(["## 补充核查结果", ""])
-        appendices.extend(audited_replacement(item) + "\n" for item in unplaced)
-    if execution.surviving_inferences:
-        appendices.extend(["## 条件化分析", ""])
-        for inference in execution.surviving_inferences:
-            strengths = []
-            premise_texts = []
+    if not evidence:
+        appendices.append("当前可用证据不足以支持具体事实结论。")
+    visible_inferences = [
+        inference for inference in execution.surviving_inferences
+        if set(inference.premise_claim_ids).issubset(placed_claim_ids)
+    ]
+    if visible_inferences:
+        appendices.extend(["## 条件化建议", ""])
+        for inference in visible_inferences:
             refs = []
+            limited_premises: list[LimitedDisclosure] = []
             for claim_id in inference.premise_claim_ids:
                 record = records_by_id.get(claim_id)
                 if record is not None:
-                    strengths.append("VERIFIED_FACT")
-                    premise_texts.append(record.rendered_text)
                     refs.extend(citation(eid) for eid in record.cited_evidence_ids)
                     continue
                 disclosures = limited_by_claim.get(claim_id, [])
                 if disclosures:
-                    strengths.append("LIMITED_EVIDENCE")
-                    premise_texts.extend(disclosure.excerpt for disclosure in disclosures)
+                    limited_premises.extend(disclosures)
                     refs.extend(citation(disclosure.evidence_id) for disclosure in disclosures)
-            appendices.append(
-                f"**AI_INFERENCE：** {_escape_report_text(inference.text)} "
-                f"前提强度：{' + '.join(dict.fromkeys(strengths))}；"
-                f"可见前提：{_escape_report_text('；'.join(premise_texts))}；"
-                f"前提来源：{' '.join(dict.fromkeys(refs))}\n"
-            )
-    produced_requirements = {
-        item.requirement_id for item in execution.claim_inputs
-        if item.claim.claim_id in records_by_id
-    } | {item.requirement_id for item in execution.limited_disclosures} | {
-        item.requirement_id for item in execution.surviving_inferences
-    }
-    missing = [item.text for item in execution.requirements
-               if item.requirement_id not in produced_requirements]
-    if missing:
-        appendices.extend(["## 尚未解决的要求", ""])
-        appendices.extend(
-            f"- {_escape_report_text(title)}：当前证据不足以形成可靠结论。"
-            for title in missing
-        )
+            if limited_premises:
+                source_notes = []
+                for premise in limited_premises:
+                    source_notes.append(
+                        f"{_source_attribution(premise.publisher)}“"
+                        f"{_escape_report_text(premise.excerpt)}” "
+                        f"{citation(premise.evidence_id)}"
+                    )
+                appendices.append(
+                    "；".join(dict.fromkeys(source_notes))
+                    + "，但当前缺少独立验证。在这一信息边界下，"
+                    + _escape_report_text(_visible_recommendation_text(inference.text)) + "\n"
+                )
+            else:
+                appendices.append(
+                    "基于上述有引文支持的信息，"
+                    + _escape_report_text(_visible_recommendation_text(inference.text)) + " "
+                    + " ".join(dict.fromkeys(refs)) + "\n"
+                )
     if appendices:
         audited += "\n\n" + "\n".join(appendices).rstrip()
+    execution.final_render_audit_summary = {
+        "verified_claim_occurrence_count": verified_replacements,
+        "limited_claim_occurrence_count": limited_replacements,
+        "omitted_claim_occurrence_count": omitted_replacements,
+        "unaudited_high_risk_fragment_removed_count": removed_high_risk_count,
+        "unaudited_factual_fragment_removed_count": removed_factual_count,
+        "unbound_recommendation_removed_count": removed_recommendation_count,
+        "premise_bound_recommendation_count": len(visible_inferences),
+        "recommendation_hidden_premise_suppressed_count": (
+            len(execution.surviving_inferences) - len(visible_inferences)
+        ),
+        "unplaced_audit_claim_count": len(ordered_inputs) - len(placed_claim_ids),
+    }
     return audited + "\n"
 
 

@@ -91,7 +91,8 @@ def test_grounding_strength_failure_downgrades_to_literal_limited_evidence():
     assert result.layered_output_summary["limited_evidence"] == 1
     assert "Traffic never traverses" not in report
     assert "traffic uses a private endpoint" in report
-    assert "LIMITED_EVIDENCE" in report
+    assert "当前缺少独立验证" in report
+    assert "LIMITED_EVIDENCE" not in report
 
 
 def test_limited_premise_can_support_conditional_inference_with_visible_strength():
@@ -126,8 +127,9 @@ def test_limited_premise_can_support_conditional_inference_with_visible_strength
     assert result.layered_output_summary["ai_inference"] == 1
     assert "pgvector has unlimited scale" not in report
     assert "Choose pgvector for production" not in report
-    assert "AI_INFERENCE" in report
-    assert "前提强度：LIMITED_EVIDENCE" in report
+    assert "AI_INFERENCE" not in report
+    assert "但当前缺少独立验证" in report
+    assert "verified premise" not in report.casefold()
     assert "Vendor documentation states that pgvector is a PostgreSQL extension" in report
 
 
@@ -571,4 +573,4 @@ async def test_malformed_writer_claim_and_source_identity_do_not_abort_valid_cla
     )
     assert "Malformed atom has no material flag" not in report
     assert "surrounding comparison remains readable" in report
-    assert report.count("UNRESOLVED") == 1
+    assert "UNRESOLVED" not in report

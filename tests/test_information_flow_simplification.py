@@ -1,5 +1,6 @@
 """Offline boundaries for the restored Writer-first Enterprise V2 flow."""
 
+import json
 from datetime import date
 from pathlib import Path
 
@@ -131,7 +132,8 @@ def test_comparison_discloses_both_literal_sources_without_reviving_gate_claim()
     assert "AWS Bedrock lists models" in report
     assert "Azure OpenAI lists models" in report
     assert "AWS Bedrock and Azure OpenAI differ in model choice" not in report
-    assert "LIMITED_EVIDENCE" in report
+    assert "当前缺少独立验证" in report
+    assert "LIMITED_EVIDENCE" not in report
 
 
 def test_chinese_direct_source_passage_can_be_disclosed_safely():
@@ -191,9 +193,9 @@ def test_ed_conditional_advice_requires_surviving_premise_and_cites_it():
     report = render_report(execution, writer_draft=(
         "## Candidate capability\n\npgvector offers HNSW indexing."
     ))
-    assert "AI_INFERENCE" in report
+    assert "AI_INFERENCE" not in report
     assert "consider pgvector" in report
-    assert "前提来源" in report and "https://example.test/pg" in report
+    assert "有引文支持的信息" in report and "https://example.test/pg" in report
 
 
 def test_unbound_high_risk_draft_fact_is_not_published():
@@ -203,7 +205,7 @@ def test_unbound_high_risk_draft_fact_is_not_published():
         "## Market overview\n\nAcme captured 87% market share in 2026."
     ))
     assert "87%" not in report
-    assert "未通过逐句来源核查" in report
+    assert "当前可用证据不足" in report
     escaped = render_report(execution, writer_draft=(
         "## <script>alert(1)</script>\n\nAcme captured 87% market share in 2026."
     ))
@@ -240,7 +242,7 @@ def test_writer_draft_structure_and_analysis_survive_local_claim_audit():
     assert "That distinction matters" in report
     assert "practical trade-off depends" in report
     assert "guarantees that traffic never traverses" not in report
-    assert "LIMITED_EVIDENCE" in report
+    assert "当前缺少独立验证" in report
     assert len(report) >= len(draft) * 0.8
 
 
@@ -267,7 +269,7 @@ def test_gate_reject_replaces_only_the_claim_not_its_paragraph():
     assert "Before choosing" in report
     assert "operational ownership and incident response" in report
     assert "objectively safer" not in report
-    assert "UNRESOLVED" in report
+    assert "UNRESOLVED" not in report
 
 
 def test_table_fact_failure_changes_only_its_cell_and_preserves_comparison():
@@ -299,7 +301,8 @@ def test_table_fact_failure_changes_only_its_cell_and_preserves_comparison():
     assert "Review incident ownership" in report
     assert "separates source claims" in report
     assert "99.99%" not in report
-    assert report.count("UNRESOLVED") == 1
+    assert "| Acme | — |" in report
+    assert "UNRESOLVED" not in report
 
 
 def test_table_stronger_wording_runs_through_grounding_and_cannot_be_verified():
@@ -323,7 +326,7 @@ def test_table_stronger_wording_runs_through_grounding_and_cannot_be_verified():
     assert execution.layered_output_summary["verified_fact"] == 0
     assert execution.layered_output_summary["limited_evidence"] == 1
     assert "guarantees traffic never" not in report
-    assert "LIMITED_EVIDENCE" in report
+    assert "当前缺少独立验证" in report
     assert "Keep deployment assumptions explicit" in report
     assert report.count("| --- | --- | --- |") == 1
 
@@ -347,7 +350,8 @@ def test_unaudited_table_price_is_scrubbed_without_deleting_row_or_table():
     assert "Acme |" in report and "Beta | Unknown |" in report
     assert "Product | Price | Analysis" in report
     assert "Fits teams that value simplicity" in report
-    assert report.count("UNRESOLVED") == 1
+    assert "Acme | — |" in report
+    assert "Requires a deployment-specific quote" in report
 
 
 def test_unbound_draft_recommendation_is_removed_but_analysis_survives():
@@ -369,6 +373,193 @@ def test_unbound_draft_recommendation_is_removed_but_analysis_survives():
     assert "AI_INFERENCE" not in report
 
 
+@pytest.mark.parametrize("advice", [
+    "Teams should migrate to Milvus.",
+    "We recommend pgvector.",
+    "Milvus is the best choice for production.",
+    "建议优先选择 pgvector。",
+])
+def test_selection_and_migration_advice_never_bypasses_premises(advice):
+    source = Evidence(
+        evidence_id="one", sub_query="fixture", url="https://example.test/one",
+        content="The decision depends on the operating model.",
+    )
+    execution = integrate_claims(
+        EvidenceContext(context="", evidences=[source]), ClaimPlan(items=[]), CUTOFF,
+    )
+    report = render_report(
+        execution,
+        writer_draft=f"## Decision\n\n{advice} The operating-model trade-off remains.",
+    )
+    assert advice not in report
+    assert "operating-model trade-off remains" in report
+    assert execution.final_render_audit_summary[
+        "unbound_recommendation_removed_count"
+    ] == 1
+
+
+def test_high_risk_fact_adjacent_to_audited_placeholder_cannot_bypass_review():
+    source = Evidence(
+        evidence_id="one", sub_query="fixture", url="https://example.test/one",
+        content="Acme supports private endpoints.",
+    )
+    verified = linked_claim("Acme supports private endpoints", "R1", [source])
+    execution = integrate_claims(
+        EvidenceContext(context="", evidences=[source]), ClaimPlan(items=[verified]), CUTOFF,
+    )
+    report = render_report(execution, writer_draft=(
+        "## Network\n\nAcme supports private endpoints and guarantees a 99.99% SLA in 2026. "
+        "The comparison frame remains useful."
+    ))
+    assert "Acme supports private endpoints" in report
+    assert "99.99%" not in report and "2026" not in report and "guarantees" not in report
+    assert "comparison frame remains useful" in report
+    assert execution.final_render_audit_summary[
+        "unaudited_high_risk_fragment_removed_count"
+    ] >= 1
+
+
+def test_table_cell_adjacent_to_audited_placeholder_cannot_bypass_review():
+    source = Evidence(
+        evidence_id="one", sub_query="fixture", url="https://example.test/one",
+        content="Acme supports private endpoints.",
+    )
+    verified = linked_claim("Acme supports private endpoints", "R1", [source])
+    execution = integrate_claims(
+        EvidenceContext(context="", evidences=[source]), ClaimPlan(items=[verified]), CUTOFF,
+    )
+    report = render_report(execution, writer_draft=(
+        "| Product | Network and price | Interpretation |\n"
+        "| --- | --- | --- |\n"
+        "| Acme | Acme supports private endpoints; price is $12/month | Keep scope explicit. |"
+    ))
+    assert "Acme supports private endpoints" in report
+    assert "$12" not in report and "price is" not in report
+    assert "Keep scope explicit" in report
+    assert report.count("| --- | --- | --- |") == 1
+
+
+def test_unaudited_benchmark_capability_and_causal_claims_are_removed_locally():
+    source = Evidence(
+        evidence_id="one", sub_query="fixture", url="https://example.test/one",
+        content="The section uses a common comparison frame.",
+    )
+    execution = integrate_claims(
+        EvidenceContext(context="", evidences=[source]), ClaimPlan(items=[]), CUTOFF,
+    )
+    report = render_report(execution, writer_draft=(
+        "## Findings\n\nAcme benchmark latency is 12 ms. "
+        "Acme supports 1 million users. Because it uses Model X, it reduces cost by 40%. "
+        "The section still explains how to compare operating boundaries."
+    ))
+    for unsafe in ("12 ms", "1 million", "Because it uses", "40%"):
+        assert unsafe not in report
+    assert "explains how to compare operating boundaries" in report
+    assert execution.final_render_audit_summary[
+        "unaudited_high_risk_fragment_removed_count"
+    ] >= 3
+
+
+def test_ordinary_factual_assertion_omitted_by_extractor_is_not_left_verbatim():
+    source = Evidence(
+        evidence_id="one", sub_query="fixture", url="https://example.test/one",
+        content="The evidence uses a bounded comparison frame.",
+    )
+    execution = integrate_claims(
+        EvidenceContext(context="", evidences=[source]), ClaimPlan(items=[]), CUTOFF,
+    )
+    report = render_report(execution, writer_draft=(
+        "## Business\n\nAcme builds widgets. "
+        "The comparison separates facts from decision interpretation."
+    ))
+    assert "Acme builds widgets" not in report
+    assert "separates facts from decision interpretation" in report
+    assert execution.final_render_audit_summary[
+        "unaudited_factual_fragment_removed_count"
+    ] == 1
+
+
+def test_writer_recommendation_cannot_hide_in_factual_claim_array():
+    source = Evidence(
+        evidence_id="one", sub_query="fixture", url="https://example.test/one",
+        content="Choose Milvus for production.",
+    )
+    misclassified = linked_claim("Choose Milvus for production.", "R1", [source])
+    execution = integrate_claims(
+        EvidenceContext(context="", evidences=[source]),
+        ClaimPlan(items=[misclassified]), CUTOFF,
+    )
+    assert execution.evidence_context.generated_claim_records
+    report = render_report(
+        execution,
+        writer_draft="## Decision\n\nChoose Milvus for production. Keep the decision reversible.",
+    )
+    assert "Choose Milvus" not in report
+    assert "decision reversible" in report
+    assert execution.final_render_audit_summary[
+        "unbound_recommendation_removed_count"
+    ] == 1
+
+
+def test_recommendation_is_suppressed_when_its_premise_is_not_visible_in_draft():
+    source = Evidence(
+        evidence_id="one", sub_query="fixture", url="https://example.test/one",
+        content="pgvector offers HNSW indexing.",
+    )
+    hidden = linked_claim("pgvector offers HNSW indexing.", "R1", [source])
+    inference = EvidenceGroundedInference(
+        inference_id="hidden-premise", requirement_id="R2",
+        text="Consider pgvector.", premise_claim_ids=(hidden.claim.claim_id,),
+    )
+    execution = integrate_claims(
+        EvidenceContext(context="", evidences=[source]),
+        ClaimPlan(items=[hidden], inferences=[inference], requirements=[
+            requirement("R1", "Capability", RequirementType.FACTUAL, 1),
+            requirement("R2", "Recommendation", RequirementType.RECOMMENDATION, 2),
+        ]), CUTOFF,
+    )
+    assert execution.surviving_inferences
+    report = render_report(
+        execution,
+        writer_draft="## Decision\n\nThe decision depends on operational ownership.",
+    )
+    assert "Consider pgvector" not in report
+    assert execution.final_render_audit_summary[
+        "recommendation_hidden_premise_suppressed_count"
+    ] == 1
+
+
+@pytest.mark.parametrize("case_name", ["CC", "CR", "ED"])
+def test_priority_case_writer_structure_and_explanation_are_preserved(case_name):
+    source = Evidence(
+        evidence_id="one", sub_query=case_name, url="https://example.test/one",
+        content="The evidence uses a bounded comparison frame.",
+    )
+    explanation = (
+        "The comparison separates source statements from operating interpretation and "
+        "keeps deployment assumptions explicit. "
+    )
+    draft = (
+        f"# {case_name} report\n\n## Evidence frame\n\n"
+        + explanation * 20
+        + "Acme reports a 99.99% SLA in 2026. "
+        + "\n\n## Decision logic\n\n"
+        + explanation * 10
+    )
+    execution = integrate_claims(
+        EvidenceContext(context="", evidences=[source]), ClaimPlan(items=[]), CUTOFF,
+    )
+    report = render_report(execution, writer_draft=draft)
+    assert f"# {case_name} report" in report
+    assert "## Evidence frame" in report and "## Decision logic" in report
+    assert report.count("keeps deployment assumptions explicit") == 30
+    assert "99.99%" not in report and "2026" not in report
+    assert len(report) >= len(draft) * 0.9
+    assert not any(label in report for label in (
+        "VERIFIED_FACT", "LIMITED_EVIDENCE", "UNRESOLVED", "AI_INFERENCE",
+    ))
+
+
 def test_malformed_atom_is_removed_locally_without_losing_surrounding_prose():
     source = Evidence(
         evidence_id="one", sub_query="fixture", url="https://example.test/one",
@@ -387,10 +578,11 @@ def test_malformed_atom_is_removed_locally_without_losing_surrounding_prose():
         "Malformed atom states Beta has unlimited scale. "
         "Capacity still depends on the workload envelope."
     ))
-    assert "VERIFIED_FACT" in report
+    assert "Acme builds widgets" in report
+    assert "VERIFIED_FACT" not in report
     assert "Malformed atom states" not in report
     assert "comparison frame" in report and "workload envelope" in report
-    assert report.count("UNRESOLVED") == 1
+    assert "UNRESOLVED" not in report
 
 
 def test_approximately_29k_writer_draft_does_not_collapse_after_local_audit():
@@ -479,7 +671,17 @@ async def test_workflow_uses_complete_research_context_before_existing_audit(tmp
     )
     assert Researcher.targeted_calls == 0
     assert result.second_retrieval.queries_count == 0
-    assert "VERIFIED_FACT" in result.report
+    assert "Acme builds widgets" in result.report
+    assert "VERIFIED_FACT" not in result.report
     assert Path(result.writer_draft_artifact_reference).read_text(encoding="utf-8")
     assert result.execution.writer_draft_sha256
     assert result.diagnostics["invalid_draft_claim_input_count"] == 0
+    assert result.diagnostics["final_render_audit_summary"][
+        "verified_claim_occurrence_count"
+    ] == 1
+    execution_artifact = json.loads(
+        Path(result.execution_artifact_reference).read_text(encoding="utf-8")
+    )
+    assert execution_artifact["execution"]["final_render_audit_summary"] == (
+        result.execution.final_render_audit_summary
+    )

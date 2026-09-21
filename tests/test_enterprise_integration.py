@@ -120,7 +120,7 @@ async def test_no_evidence_requirement_is_unresolved_without_writer_call(tmp_pat
     result = await IntelligenceWorkflow(EmptyResearcher, output_directory=tmp_path).run(
         IntelligenceRequest(target="Acme", enable_v2_execution=True), run_id="empty")
     assert result.execution.layered_output_summary["unresolved"] > 0
-    assert "当前证据不足以形成可靠结论" in result.report
+    assert "当前可用证据不足以支持具体事实结论" in result.report
     writer.assert_not_called()
 
 
@@ -342,19 +342,21 @@ async def test_real_gpt_researcher_search_scrape_context_writer_path(tmp_path, m
     assert "evidence_selection" in [e.event_type.value for e in trace.events]
 
 
-async def test_grounding_failure_fails_workflow(tmp_path, monkeypatch):
+async def test_grounding_failure_is_local_and_preserves_writer_report(tmp_path, monkeypatch):
     from gpt_researcher.evidence.models import GroundingValidationResult, GroundingStatus
     monkeypatch.setattr("gpt_researcher.enterprise.integration.GroundingValidator.validate",
         lambda *args, **kwargs: GroundingValidationResult(status=GroundingStatus.FAIL, repair_attempt=0))
     trace = ResearchTraceRecorder(run_id="ground-failed")
-    with pytest.raises(ValueError, match="Grounding validation failed"):
-        await IntelligenceWorkflow(FixtureResearcher, output_directory=tmp_path).run(
-            IntelligenceRequest(target="Acme", enable_v2_execution=True,
-                                claim_plan=ClaimPlan(items=[item()])), trace=trace)
+    result = await IntelligenceWorkflow(FixtureResearcher, output_directory=tmp_path).run(
+        IntelligenceRequest(target="Acme", enable_v2_execution=True,
+                            claim_plan=ClaimPlan(items=[item()])), trace=trace)
     saved = ResearchTrace.model_validate_json(
         (tmp_path / "traces" / f"{trace.trace_id}.json").read_text(encoding="utf-8"))
-    assert saved.execution_status.value == "failed"
-    assert not (tmp_path / "ground-failed" / "report.md").exists()
+    assert saved.execution_status.value == "completed"
+    assert (tmp_path / "ground-failed" / "report.md").exists()
+    assert result.execution.evidence_context.generated_claim_records == []
+    assert "Acme builds widgets" not in result.report
+    assert "## Widget business" in result.report
 
 
 async def test_report_export_error_has_no_final_artifact(tmp_path, monkeypatch):

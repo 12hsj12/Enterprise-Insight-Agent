@@ -207,8 +207,16 @@ def canonical_inference_text(text: str, premise_texts: tuple[str, ...]) -> str |
 def validate_inferences(
     candidates: list[EvidenceGroundedInference], records: list[GeneratedClaimRecord],
     claim_requirements: dict[str, str], eligible_requirement_ids: set[str],
+    *, limited_premise_texts: dict[str, str] | None = None,
 ) -> tuple[list[EvidenceGroundedInference], InferenceValidationSummary]:
+    """Accept recommendations only when every premise is visible and audited.
+
+    A premise may be a grounded factual record or a final, source-attributed
+    LIMITED_EVIDENCE disclosure. The latter remains explicitly limited at
+    rendering time; it never becomes a verified factual record here.
+    """
     surviving = {record.claim_id: record for record in records}
+    limited = limited_premise_texts or {}
     accepted: list[EvidenceGroundedInference] = []
     invalid = missing = 0
     seen_ids: set[str] = set()
@@ -220,7 +228,10 @@ def validate_inferences(
         if inference.requirement_id not in eligible_requirement_ids:
             invalid += 1
             continue
-        if any(claim_id not in surviving for claim_id in inference.premise_claim_ids):
+        if any(
+            claim_id not in surviving and claim_id not in limited
+            for claim_id in inference.premise_claim_ids
+        ):
             invalid += 1
             missing += 1
             continue
@@ -228,7 +239,11 @@ def validate_inferences(
             invalid += 1
             missing += 1
             continue
-        premise_texts = tuple(surviving[claim_id].rendered_text for claim_id in inference.premise_claim_ids)
+        premise_texts = tuple(
+            surviving[claim_id].rendered_text
+            if claim_id in surviving else limited[claim_id]
+            for claim_id in inference.premise_claim_ids
+        )
         canonical = canonical_inference_text(inference.text, premise_texts)
         if canonical is None:
             invalid += 1

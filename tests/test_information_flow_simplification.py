@@ -270,6 +270,161 @@ def test_gate_reject_replaces_only_the_claim_not_its_paragraph():
     assert "UNRESOLVED" in report
 
 
+def test_table_fact_failure_changes_only_its_cell_and_preserves_comparison():
+    source = Evidence(
+        evidence_id="one", sub_query="fixture", url="https://example.test/one",
+        content="Vendor documentation states that Acme traffic uses private endpoints.",
+    )
+    rejected = linked_claim(
+        "Acme guarantees 99.99% SLA.", "R1", [source],
+        risks=(ClaimRiskType.NUMERIC_VALUE,),
+    )
+    draft = (
+        "## Service comparison\n\n"
+        "| Product | SLA | Operating interpretation |\n"
+        "| --- | --- | --- |\n"
+        "| Acme | Acme guarantees 99.99% SLA. | Review incident ownership. |\n"
+        "| Beta | Evidence varies by deployment. | Preserve the comparison boundary. |\n\n"
+        "The table separates source claims from decision interpretation."
+    )
+    report = render_report(
+        integrate_claims(
+            EvidenceContext(context="", evidences=[source]),
+            ClaimPlan(items=[rejected]), CUTOFF,
+        ),
+        writer_draft=draft,
+    )
+    assert "| Product | SLA | Operating interpretation |" in report
+    assert "| Beta | Evidence varies by deployment." in report
+    assert "Review incident ownership" in report
+    assert "separates source claims" in report
+    assert "99.99%" not in report
+    assert report.count("UNRESOLVED") == 1
+
+
+def test_table_stronger_wording_runs_through_grounding_and_cannot_be_verified():
+    source = Evidence(
+        evidence_id="one", sub_query="fixture", url="https://example.test/one",
+        content="Vendor documentation states that Acme traffic uses private endpoints.",
+    )
+    claim = linked_claim(
+        "Acme guarantees traffic never traverses the public internet.",
+        "R1", [source], risks=(),
+    )
+    execution = integrate_claims(
+        EvidenceContext(context="", evidences=[source]), ClaimPlan(items=[claim]), CUTOFF,
+    )
+    report = render_report(execution, writer_draft=(
+        "| Product | Network claim | Analysis |\n"
+        "| --- | --- | --- |\n"
+        "| Acme | Acme guarantees traffic never traverses the public internet. "
+        "| Keep deployment assumptions explicit. |"
+    ))
+    assert execution.layered_output_summary["verified_fact"] == 0
+    assert execution.layered_output_summary["limited_evidence"] == 1
+    assert "guarantees traffic never" not in report
+    assert "LIMITED_EVIDENCE" in report
+    assert "Keep deployment assumptions explicit" in report
+    assert report.count("| --- | --- | --- |") == 1
+
+
+def test_unaudited_table_price_is_scrubbed_without_deleting_row_or_table():
+    source = Evidence(
+        evidence_id="one", sub_query="fixture", url="https://example.test/one",
+        content="The comparison uses a common decision frame.",
+    )
+    report = render_report(
+        integrate_claims(EvidenceContext(context="", evidences=[source]),
+                         ClaimPlan(items=[]), CUTOFF),
+        writer_draft=(
+            "Product | Price | Analysis\n"
+            "--- | --- | ---\n"
+            "Acme | $12 per month | Fits teams that value simplicity.\n"
+            "Beta | Unknown | Requires a deployment-specific quote."
+        ),
+    )
+    assert "$12" not in report
+    assert "Acme |" in report and "Beta | Unknown |" in report
+    assert "Product | Price | Analysis" in report
+    assert "Fits teams that value simplicity" in report
+    assert report.count("UNRESOLVED") == 1
+
+
+def test_unbound_draft_recommendation_is_removed_but_analysis_survives():
+    source = Evidence(
+        evidence_id="one", sub_query="fixture", url="https://example.test/one",
+        content="The decision depends on the operating model.",
+    )
+    report = render_report(
+        integrate_claims(EvidenceContext(context="", evidences=[source]),
+                         ClaimPlan(items=[]), CUTOFF),
+        writer_draft=(
+            "## Decision\n\nThe trade-off depends on operational ownership. "
+            "Choose pgvector for production. Preserve a reversible migration path."
+        ),
+    )
+    assert "Choose pgvector" not in report
+    assert "operational ownership" in report
+    assert "reversible migration path" in report
+    assert "AI_INFERENCE" not in report
+
+
+def test_malformed_atom_is_removed_locally_without_losing_surrounding_prose():
+    source = Evidence(
+        evidence_id="one", sub_query="fixture", url="https://example.test/one",
+        content="Acme builds widgets.",
+    )
+    valid = linked_claim("Acme builds widgets.", "R1", [source])
+    execution = integrate_claims(
+        EvidenceContext(context="", evidences=[source]),
+        ClaimPlan(
+            items=[valid], invalid_structured_claim_input_count=1,
+            invalid_claim_texts=["Malformed atom states Beta has unlimited scale."],
+        ), CUTOFF,
+    )
+    report = render_report(execution, writer_draft=(
+        "## Capacity\n\nAcme builds widgets. The section keeps its comparison frame. "
+        "Malformed atom states Beta has unlimited scale. "
+        "Capacity still depends on the workload envelope."
+    ))
+    assert "VERIFIED_FACT" in report
+    assert "Malformed atom states" not in report
+    assert "comparison frame" in report and "workload envelope" in report
+    assert report.count("UNRESOLVED") == 1
+
+
+def test_approximately_29k_writer_draft_does_not_collapse_after_local_audit():
+    source = Evidence(
+        evidence_id="one", sub_query="fixture", url="https://example.test/one",
+        content="Vendor documentation states that Acme uses private endpoints.",
+    )
+    rejected = linked_claim(
+        "Acme guarantees that traffic never traverses the public internet.",
+        "R1", [source], risks=(ClaimRiskType.COMPARATIVE_CLAIM,),
+    )
+    analysis = (
+        "The comparison should preserve deployment context, operating ownership, "
+        "and the distinction between source statements and decision interpretation. "
+    )
+    draft = (
+        "# Complete comparison\n\n## Connectivity\n\n"
+        "Acme guarantees that traffic never traverses the public internet. "
+        + analysis * 210
+        + "\n\n## Decision frame\n\n"
+        + analysis * 20
+    )
+    assert 28_000 <= len(draft) <= 35_000
+    report = render_report(
+        integrate_claims(
+            EvidenceContext(context="", evidences=[source]),
+            ClaimPlan(items=[rejected]), CUTOFF,
+        ), writer_draft=draft,
+    )
+    assert "# Complete comparison" in report and "## Decision frame" in report
+    assert report.count("decision interpretation") == 230
+    assert len(report) >= len(draft) * 0.95
+
+
 @pytest.mark.asyncio
 async def test_workflow_uses_complete_research_context_before_existing_audit(tmp_path):
     class Researcher:

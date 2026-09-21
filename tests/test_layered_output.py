@@ -94,6 +94,43 @@ def test_grounding_strength_failure_downgrades_to_literal_limited_evidence():
     assert "LIMITED_EVIDENCE" in report
 
 
+def test_limited_premise_can_support_conditional_inference_with_visible_strength():
+    premise = item("pgvector has unlimited scale.")
+    source = ev(content="Vendor documentation states that pgvector is a PostgreSQL extension.")
+    candidate = EvidenceGroundedInference(
+        inference_id="i-limited", requirement_id="R2",
+        text="If operational simplicity is the priority, consider pgvector.",
+        premise_claim_ids=(premise.claim.claim_id,),
+    )
+    plan = ClaimPlan(
+        items=[premise],
+        requirements=[req(), req("R2", RequirementType.RECOMMENDATION)],
+        source_excerpts=[quote(
+            premise,
+            "Vendor documentation states that pgvector is a PostgreSQL extension.",
+        )],
+        inferences=[candidate],
+    )
+    result = integrate_claims(
+        EvidenceContext(context="", evidences=[source]), plan, CUTOFF,
+    )
+    report = render_report(
+        result,
+        writer_draft=(
+            "## Candidate\n\npgvector has unlimited scale.\n\n"
+            "## Decision\n\nChoose pgvector for production."
+        ),
+    )
+    assert result.layered_output_summary["verified_fact"] == 0
+    assert result.layered_output_summary["limited_evidence"] == 1
+    assert result.layered_output_summary["ai_inference"] == 1
+    assert "pgvector has unlimited scale" not in report
+    assert "Choose pgvector for production" not in report
+    assert "AI_INFERENCE" in report
+    assert "前提强度：LIMITED_EVIDENCE" in report
+    assert "Vendor documentation states that pgvector is a PostgreSQL extension" in report
+
+
 def test_t02_direct_support_missing_independent_is_limited_not_verified():
     registered = item()
     result, report = run([registered], [ev()], excerpts=[quote(registered)])
@@ -521,5 +558,17 @@ async def test_malformed_writer_claim_and_source_identity_do_not_abort_valid_cla
     plan = await propose_claims(researcher, context, "layered")
     result = integrate_claims(context, plan, CUTOFF)
     assert plan.invalid_structured_claim_input_count == 1
+    assert plan.invalid_claim_texts == ["Malformed atom has no material flag."]
     assert plan.invalid_source_identity_input_count == 1
     assert result.layered_output_summary["verified_fact"] == 1
+    report = render_report(
+        result,
+        writer_draft=(
+            "A documentation describes widgets. "
+            "Malformed atom has no material flag. "
+            "The surrounding comparison remains readable."
+        ),
+    )
+    assert "Malformed atom has no material flag" not in report
+    assert "surrounding comparison remains readable" in report
+    assert report.count("UNRESOLVED") == 1

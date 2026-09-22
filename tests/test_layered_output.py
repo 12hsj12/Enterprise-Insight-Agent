@@ -91,7 +91,7 @@ def test_grounding_strength_failure_downgrades_to_literal_limited_evidence():
     assert result.layered_output_summary["limited_evidence"] == 1
     assert "Traffic never traverses" not in report
     assert "traffic uses a private endpoint" in report
-    assert "当前缺少独立验证" in report
+    assert "当前证据强度有限" in report
     assert "LIMITED_EVIDENCE" not in report
 
 
@@ -128,7 +128,7 @@ def test_limited_premise_can_support_conditional_inference_with_visible_strength
     assert "pgvector has unlimited scale" not in report
     assert "Choose pgvector for production" not in report
     assert "AI_INFERENCE" not in report
-    assert "但当前缺少独立验证" in report
+    assert "但当前证据强度有限" in report
     assert "verified premise" not in report.casefold()
     assert "Vendor documentation states that pgvector is a PostgreSQL extension" in report
 

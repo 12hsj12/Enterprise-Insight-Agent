@@ -15,6 +15,9 @@ from gpt_researcher.enterprise.requirements import (
     RequirementType, ResearchRequirement, fallback_research_plan,
 )
 from gpt_researcher.enterprise.workflow import IntelligenceRequest, IntelligenceWorkflow
+from gpt_researcher.enterprise.unit_audit import (
+    AuditUnitState, AuditUnitType, split_markdown_audit_units,
+)
 from gpt_researcher.evidence.models import (
     Claim, ClaimEvidenceLink, ClaimRiskType, Evidence, EvidenceContext,
 )
@@ -41,6 +44,25 @@ def linked_claim(text: str, requirement_id: str, evidences: list[Evidence],
                                  relation="support") for source in evidences],
         cited_evidence_ids=[source.evidence_id for source in evidences],
     )
+
+
+def test_markdown_audit_units_have_stable_ids_types_and_original_positions():
+    draft = (
+        "# Comparison\n\nAcme supports private networking. Analysis remains useful.\n\n"
+        "| Product | Price |\n| --- | --- |\n| Acme | $12/month |\n\n"
+        "- Migrate to Acme only after a pilot.\n"
+    )
+    first = split_markdown_audit_units(draft)
+    second = split_markdown_audit_units(draft)
+    assert [unit.unit_id for unit in first] == [unit.unit_id for unit in second]
+    assert {unit.unit_type for unit in first} >= {
+        AuditUnitType.PROSE_SENTENCE,
+        AuditUnitType.TABLE_CELL,
+        AuditUnitType.LIST_ITEM,
+    }
+    for unit in first:
+        assert draft[unit.start_offset:unit.end_offset] == unit.text
+        assert unit.start_line >= 1 and unit.end_line >= unit.start_line
 
 
 def test_generic_topic_cannot_replace_cc_question_or_ed_recommendation():
@@ -132,7 +154,7 @@ def test_comparison_discloses_both_literal_sources_without_reviving_gate_claim()
     assert "AWS Bedrock lists models" in report
     assert "Azure OpenAI lists models" in report
     assert "AWS Bedrock and Azure OpenAI differ in model choice" not in report
-    assert "当前缺少独立验证" in report
+    assert "当前证据强度有限" in report
     assert "LIMITED_EVIDENCE" not in report
 
 
@@ -194,8 +216,10 @@ def test_ed_conditional_advice_requires_surviving_premise_and_cites_it():
         "## Candidate capability\n\npgvector offers HNSW indexing."
     ))
     assert "AI_INFERENCE" not in report
-    assert "consider pgvector" in report
-    assert "有引文支持的信息" in report and "https://example.test/pg" in report
+    assert "consider pgvector" not in report
+    assert execution.final_render_audit_summary[
+        "recommendation_hidden_premise_suppressed_count"
+    ] == 1
 
 
 def test_unbound_high_risk_draft_fact_is_not_published():
@@ -242,7 +266,7 @@ def test_writer_draft_structure_and_analysis_survive_local_claim_audit():
     assert "That distinction matters" in report
     assert "practical trade-off depends" in report
     assert "guarantees that traffic never traverses" not in report
-    assert "当前缺少独立验证" in report
+    assert "Vendor documentation states" in report
     assert len(report) >= len(draft) * 0.8
 
 
@@ -297,7 +321,7 @@ def test_table_fact_failure_changes_only_its_cell_and_preserves_comparison():
         writer_draft=draft,
     )
     assert "| Product | SLA | Operating interpretation |" in report
-    assert "| Beta | Evidence varies by deployment." in report
+    assert "| Beta | — | Preserve the comparison boundary. |" in report
     assert "Review incident ownership" in report
     assert "separates source claims" in report
     assert "99.99%" not in report
@@ -326,7 +350,7 @@ def test_table_stronger_wording_runs_through_grounding_and_cannot_be_verified():
     assert execution.layered_output_summary["verified_fact"] == 0
     assert execution.layered_output_summary["limited_evidence"] == 1
     assert "guarantees traffic never" not in report
-    assert "当前缺少独立验证" in report
+    assert "Vendor documentation states" in report
     assert "Keep deployment assumptions explicit" in report
     assert report.count("| --- | --- | --- |") == 1
 
@@ -347,7 +371,7 @@ def test_unaudited_table_price_is_scrubbed_without_deleting_row_or_table():
         ),
     )
     assert "$12" not in report
-    assert "Acme |" in report and "Beta | Unknown |" in report
+    assert "Acme |" in report and "Beta | — |" in report
     assert "Product | Price | Analysis" in report
     assert "Fits teams that value simplicity" in report
     assert "Acme | — |" in report
@@ -369,7 +393,7 @@ def test_unbound_draft_recommendation_is_removed_but_analysis_survives():
     )
     assert "Choose pgvector" not in report
     assert "operational ownership" in report
-    assert "reversible migration path" in report
+    assert "reversible migration path" not in report
     assert "AI_INFERENCE" not in report
 
 
@@ -398,6 +422,27 @@ def test_selection_and_migration_advice_never_bypasses_premises(advice):
     ] == 1
 
 
+def test_imperative_migration_list_items_are_removed_as_complete_units():
+    source = Evidence(
+        evidence_id="one", sub_query="fixture", url="https://example.test/one",
+        content="Migration requires workload-specific validation.",
+    )
+    execution = integrate_claims(
+        EvidenceContext(context="", evidences=[source]), ClaimPlan(items=[]), CUTOFF,
+    )
+    report = render_report(execution, writer_draft=(
+        "## Migration\n\n"
+        "1. Pin the embedding model version before migration.\n"
+        "2. Run shadow reads against the new vector store.\n\n"
+        "The sequence remains a workload-specific design exercise."
+    ))
+    assert "Pin the embedding model" not in report
+    assert "Run shadow reads" not in report
+    assert "workload-specific design exercise" in report
+    assert execution.final_render_audit_summary["recommendation_bypass_count"] == 0
+    assert execution.final_render_audit_summary["substring_fragment_deletion_count"] == 0
+
+
 def test_high_risk_fact_adjacent_to_audited_placeholder_cannot_bypass_review():
     source = Evidence(
         evidence_id="one", sub_query="fixture", url="https://example.test/one",
@@ -414,9 +459,12 @@ def test_high_risk_fact_adjacent_to_audited_placeholder_cannot_bypass_review():
     assert "Acme supports private endpoints" in report
     assert "99.99%" not in report and "2026" not in report and "guarantees" not in report
     assert "comparison frame remains useful" in report
-    assert execution.final_render_audit_summary[
-        "unaudited_high_risk_fragment_removed_count"
-    ] >= 1
+    assert any(
+        record.state is AuditUnitState.LIMITED
+        and "UNIT_COVERAGE_GAP_REMOVED_BY_WHOLE_UNIT_REWRITE" in record.reason_codes
+        for record in execution.unit_audit_records
+    )
+    assert execution.final_render_audit_summary["substring_fragment_deletion_count"] == 0
 
 
 def test_table_cell_adjacent_to_audited_placeholder_cannot_bypass_review():
@@ -456,7 +504,7 @@ def test_unaudited_benchmark_capability_and_causal_claims_are_removed_locally():
         assert unsafe not in report
     assert "explains how to compare operating boundaries" in report
     assert execution.final_render_audit_summary[
-        "unaudited_high_risk_fragment_removed_count"
+        "unaudited_high_risk_unit_omitted_count"
     ] >= 3
 
 
@@ -475,7 +523,7 @@ def test_ordinary_factual_assertion_omitted_by_extractor_is_not_left_verbatim():
     assert "Acme builds widgets" not in report
     assert "separates facts from decision interpretation" in report
     assert execution.final_render_audit_summary[
-        "unaudited_factual_fragment_removed_count"
+        "unresolved_unit_count"
     ] == 1
 
 
@@ -527,6 +575,40 @@ def test_recommendation_is_suppressed_when_its_premise_is_not_visible_in_draft()
     assert execution.final_render_audit_summary[
         "recommendation_hidden_premise_suppressed_count"
     ] == 1
+
+
+def test_validated_recommendation_reenters_at_original_recommendation_unit():
+    source = Evidence(
+        evidence_id="one", sub_query="fixture", url="https://example.test/one",
+        content="pgvector offers HNSW indexing.",
+    )
+    premise = linked_claim("pgvector offers HNSW indexing.", "R1", [source])
+    inference = EvidenceGroundedInference(
+        inference_id="bounded-pgvector", requirement_id="R2",
+        text="Consider pgvector.", premise_claim_ids=(premise.claim.claim_id,),
+    )
+    execution = integrate_claims(
+        EvidenceContext(context="", evidences=[source]),
+        ClaimPlan(items=[premise], inferences=[inference], requirements=[
+            requirement("R1", "Capability", RequirementType.FACTUAL, 1),
+            requirement("R2", "Recommendation", RequirementType.RECOMMENDATION, 2),
+        ]), CUTOFF,
+    )
+    report = render_report(execution, writer_draft=(
+        "## Capability\n\npgvector offers HNSW indexing.\n\n"
+        "## Decision\n\nChoose pgvector for production.\n\n"
+        "The decision remains reversible."
+    ))
+    assert "Choose pgvector for production" not in report
+    assert "Consider pgvector" in report
+    assert report.index("Consider pgvector") < report.index("decision remains reversible")
+    recommendation_records = [
+        record for record in execution.unit_audit_records if record.recommendation
+    ]
+    assert len(recommendation_records) == 1
+    assert recommendation_records[0].state is AuditUnitState.KEEP
+    assert recommendation_records[0].inference_id == "bounded-pgvector"
+    assert execution.final_render_audit_summary["recommendation_bypass_count"] == 0
 
 
 @pytest.mark.parametrize("case_name", ["CC", "CR", "ED"])

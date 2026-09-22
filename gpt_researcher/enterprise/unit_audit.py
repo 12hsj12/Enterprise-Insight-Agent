@@ -150,6 +150,40 @@ _STRONG_COMPARISON_PATTERN = re.compile(
     re.IGNORECASE,
 )
 
+# Cutoff-sensitive state and superlative assertions need a deterministic
+# full-unit backstop even when structured claim extraction does not classify
+# the unit as claim-bearing.  Keep these signals narrow: ``current`` only
+# applies to an explicit product/state noun, while ``currently``/``now`` must
+# introduce an objective product-state predicate.  This avoids turning phrases
+# such as "the current analysis" into high-risk factual claims.
+_TEMPORAL_STATUS_PATTERN = re.compile(
+    r"\b(?:as\s+of|latest)\b|"
+    r"\bcurrent\s+(?:release|version|status|availability|offering|catalog|"
+    r"model|product|service|feature|capability|endpoint|runtime|pricing|price)\b|"
+    r"\b(?:currently|now)\s+(?:is|are|runs?|uses?|offers?|provides?|supports?|"
+    r"includes?|hosts?|operates?|ships?|deploys?|serves?|remains?|became|becomes?|"
+    r"available|unavailable|released?|launched?|in\s+(?:public\s+|private\s+)?"
+    r"(?:preview|general\s+availability|ga|production))\b|"
+    r"\b(?:is|are|was|were|remains?)\s+(?:currently|now)\b",
+    re.IGNORECASE,
+)
+
+_PRODUCT_STATUS_PATTERN = re.compile(
+    r"\b(?:release|released?|launch|launched?|availability|available|unavailable|"
+    r"generally\s+available|general\s+availability|public\s+preview|private\s+preview|"
+    r"preview|production[- ]ready)\b|"
+    r"(?<![A-Za-z])GA(?![A-Za-z])|"
+    r"\b(?:product|service|feature|release|availability|deployment|model)\s+status\b|"
+    r"\bstatus\s+(?:is|was|remains?|changed|became|becomes?)\b",
+    re.IGNORECASE,
+)
+
+_SUPERLATIVE_PATTERN = re.compile(
+    r"\b(?:fastest|cheapest|best|worst|lowest|highest|largest|smallest)\b|"
+    r"\bthe\s+(?:most|least)\b",
+    re.IGNORECASE,
+)
+
 RECOMMENDATION_PATTERN = re.compile(
     r"\b(?:we\s+(?:recommend|advise|suggest)|(?:our\s+)?recommendation\s+is|"
     r"should\s+(?:therefore\s+)?(?:be\s+)?(?:choose|chosen|select|selected|adopt|adopted|use|used|"
@@ -291,6 +325,9 @@ def is_high_risk(value: str) -> bool:
         or _CAPABILITY_PATTERN.search(candidate)
         or _COMPANY_ACTION_PATTERN.search(candidate)
         or _STRONG_COMPARISON_PATTERN.search(candidate)
+        or _TEMPORAL_STATUS_PATTERN.search(candidate)
+        or _PRODUCT_STATUS_PATTERN.search(candidate)
+        or _SUPERLATIVE_PATTERN.search(candidate)
     )
 
 

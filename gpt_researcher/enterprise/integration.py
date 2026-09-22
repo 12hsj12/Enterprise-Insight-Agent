@@ -950,7 +950,9 @@ async def propose_claims(researcher, context: EvidenceContext, scope_id: str,
             "query": researcher.query,
             "writer_draft": writer_draft,
             "audit_units": [
-                unit.model_dump(mode="json") for unit in audit_units if unit.claim_bearing
+                unit.model_dump(mode="json")
+                for unit in audit_units
+                if unit.claim_bearing or unit.high_risk
             ],
             "requirements": [
                 requirement.model_dump(mode="json")

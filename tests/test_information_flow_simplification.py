@@ -21,6 +21,7 @@ from gpt_researcher.enterprise.unit_audit import (
 )
 from gpt_researcher.evidence.models import (
     Claim, ClaimEvidenceLink, ClaimRiskType, Evidence, EvidenceContext,
+    GroundingEvidenceAuditMetadata,
 )
 from gpt_researcher.evidence.reliability import EvidenceReliabilityEvaluator
 
@@ -92,6 +93,64 @@ def test_numbered_list_markers_and_citation_years_are_not_risk_facts():
     assert is_high_risk("Acme supports private networking.")
     assert is_high_risk("Acme is faster because it uses a distributed index.")
     assert is_high_risk("Acme announced a production release.")
+
+
+@pytest.mark.parametrize("fact", [
+    "Agent development now runs through Amazon Bedrock AgentCore.",
+    "The service is currently in preview.",
+    "As of September 5, the feature remains unavailable.",
+    "The latest release has general availability status.",
+    "Vertex AI is the fastest and cheapest route to Gemini models.",
+    "Acme has the lowest latency and the highest throughput.",
+    "This is the most capable option and the least expensive one.",
+])
+def test_cutoff_sensitive_status_and_superlative_units_are_high_risk(fact):
+    assert is_high_risk(fact)
+
+
+@pytest.mark.parametrize("analysis", [
+    "The current analysis explains the decision framework.",
+    "The current research material remains incomplete.",
+    "Most teams should begin with a reversible pilot.",
+    "The discussion compares operational trade-offs.",
+])
+def test_temporal_and_superlative_backstop_does_not_absorb_ordinary_analysis(analysis):
+    assert not is_high_risk(analysis)
+
+
+def test_post_cutoff_current_status_cannot_survive_as_a_strong_writer_claim():
+    text = (
+        "Agent development now runs through Amazon Bedrock AgentCore, "
+        "a purpose-built runtime for operating agents in production."
+    )
+    source = Evidence(
+        evidence_id="late", sub_query="fixture", url="https://example.test/late",
+        content=text,
+    )
+    registered = linked_claim(text, "R1", [source], risks=())
+    execution = integrate_claims(
+        EvidenceContext(context="", evidences=[source]),
+        ClaimPlan(
+            items=[registered],
+            audit_metadata=[GroundingEvidenceAuditMetadata(
+                evidence_id="late", publication_date=date(2026, 9, 8),
+            )],
+        ),
+        CUTOFF,
+    )
+    report = render_report(execution, writer_draft=f"## Status\n\n{text}")
+    status_unit = next(
+        unit for unit in split_markdown_audit_units(f"## Status\n\n{text}")
+        if "AgentCore" in unit.text
+    )
+    status_record = next(
+        record for record in execution.unit_audit_records
+        if record.unit_id == status_unit.unit_id
+    )
+    assert status_unit.high_risk
+    assert status_record.state is AuditUnitState.UNRESOLVED
+    assert "insufficient to verify the following conclusion" in report
+    assert execution.final_render_audit_summary["high_risk_unaudited_unit_count"] == 0
 
 
 @pytest.mark.parametrize("advice", [

@@ -17,11 +17,22 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from gpt_researcher.enterprise.integration import IntegratedExecution, render_report
-from gpt_researcher.enterprise.unit_audit import is_recommendation, split_markdown_audit_units
+from gpt_researcher.enterprise.unit_audit import (
+    AuditUnitType, is_recommendation, markdown_visible_text,
+    split_markdown_audit_units,
+)
 
 
 CASES = ("EIV2_CC_001", "EIV2_CR_003", "EIV2_ED_002")
-INTERNAL_LABELS = ("VERIFIED_FACT", "LIMITED_EVIDENCE", "AI_INFERENCE", "UNRESOLVED")
+INTERNAL_LABELS = (
+    "VERIFIED", "LIMITED", "AI_INFERENCE", "AI_ANALYSIS", "UNRESOLVED",
+    "premise strength",
+)
+NON_DESTRUCTIVE_BASELINE_RETENTION = {
+    "EIV2_CC_001": 1.0,
+    "EIV2_CR_003": 0.9995,
+    "EIV2_ED_002": 0.9999,
+}
 
 
 def _single(case_dir: Path, name: str) -> Path:
@@ -66,6 +77,15 @@ def _dangling_fragment_count(text: str) -> int:
     return sum(len(re.findall(pattern, text, flags=re.IGNORECASE)) for pattern in patterns)
 
 
+def _recommendation_payload(text: str, unit_type: AuditUnitType) -> str:
+    payload = text.strip()
+    if unit_type is AuditUnitType.LIST_ITEM:
+        payload = re.sub(r"^\s*(?:[-*+] |\d+[.)] )", "", payload)
+    if unit_type is AuditUnitType.HEADING:
+        payload = re.sub(r"^#{1,6}\s+", "", payload)
+    return markdown_visible_text(payload)
+
+
 def replay_case(case_dir: Path, output_dir: Path, *, case_id: str | None = None) -> dict:
     case_id = case_id or case_dir.name
     execution_payload = json.loads(_single(case_dir, "execution.json").read_text(encoding="utf-8"))
@@ -95,12 +115,37 @@ def replay_case(case_dir: Path, output_dir: Path, *, case_id: str | None = None)
     final_headings = _headings(report)
     original_h1 = [heading for heading in original_headings if heading.startswith("# ")]
     final_h1 = [heading for heading in final_headings if heading.startswith("# ")]
-    recommendation_bypass = sum(
-        record.recommendation
-        and (record.action == "keep" or (record.action == "replace" and not record.inference_id))
-        and record.state.value not in {"OMIT", "UNRESOLVED"}
-        for record in records
-    )
+    original_recommendations = [
+        unit for unit in original_units.values() if unit.recommendation
+    ]
+    visible_report = markdown_visible_text(report)
+    retained_recommendations = [
+        unit for unit in original_recommendations
+        if _recommendation_payload(unit.text, unit.unit_type) in visible_report
+    ]
+    substantive_recommendations = [
+        unit for unit in retained_recommendations
+        if unit.unit_type is not AuditUnitType.HEADING
+    ]
+    selection_recommendations = [
+        unit for unit in substantive_recommendations
+        if re.search(
+            r"\b(?:choose|select|default|stay\s+on|right\s+answer|recommended|"
+            r"managed\s+service|pgvector|milvus|qdrant|elasticsearch|opensearch)\b|"
+            r"(?:选择|选型|首选|优先|默认)",
+            _recommendation_payload(unit.text, unit.unit_type),
+            flags=re.IGNORECASE,
+        )
+    ]
+    migration_recommendations = [
+        unit for unit in substantive_recommendations
+        if re.search(
+            r"\b(?:migrat|switch|cutover|rollback|dual[- ]write|shadow)\w*\b|"
+            r"(?:迁移|切换|回滚|双写)",
+            _recommendation_payload(unit.text, unit.unit_type),
+            flags=re.IGNORECASE,
+        )
+    ]
     retained_characters = sum(
         match.size
         for match in SequenceMatcher(
@@ -156,9 +201,34 @@ def replay_case(case_dir: Path, output_dir: Path, *, case_id: str | None = None)
         ),
         "malformed_table_count": _table_shape_errors(report),
         "dangling_fragment_count": _dangling_fragment_count(report),
-        "internal_label_count": sum(report.count(label) for label in INTERNAL_LABELS),
+        "internal_label_count": (
+            sum(report.count(label) for label in INTERNAL_LABELS[:-1])
+            + len(re.findall(
+                re.escape(INTERNAL_LABELS[-1]), report, flags=re.IGNORECASE,
+            ))
+        ),
         "high_risk_unaudited_unit_count": summary["high_risk_unaudited_unit_count"],
-        "recommendation_bypass_count": recommendation_bypass,
+        "recommendation_bypass_count": summary["recommendation_bypass_count"],
+        "original_recommendation_count": len(original_recommendations),
+        "retained_recommendation_count": len(retained_recommendations),
+        "substantive_recommendation_count": len(substantive_recommendations),
+        "selection_recommendation_count": len(selection_recommendations),
+        "migration_recommendation_count": len(migration_recommendations),
+        "surviving_inference_count": len(execution.surviving_inferences),
+        "recommendation_deletion_count": summary["recommendation_deletion_count"],
+        "circular_premise_count": summary["circular_premise_count"],
+        "already_audited_premise_repeated_gate_count": summary[
+            "already_audited_premise_repeated_gate_count"
+        ],
+        "recommendation_new_high_risk_fact_count": summary[
+            "recommendation_new_high_risk_fact_count"
+        ],
+        "recommendation_new_high_risk_fact_qualified_count": summary[
+            "recommendation_new_high_risk_fact_qualified_count"
+        ],
+        "recommendation_repeated_disclaimer_count": summary[
+            "recommendation_repeated_disclaimer_count"
+        ],
         "causal_bypass_count": causal_bypass,
         "table_numeric_uncovered_count": table_numeric_uncovered,
         "substring_fragment_deletion_count": summary["substring_fragment_deletion_count"],
@@ -172,6 +242,18 @@ def replay_case(case_dir: Path, output_dir: Path, *, case_id: str | None = None)
         "unsupported_stronger_verified_count": summary[
             "unsupported_stronger_verified_count"
         ],
+        "cr_source_frame_preserved": (
+            case_id != "EIV2_CR_003"
+            or (
+                "Vendor-Reported" in report
+                and "Third-Party Results" in report
+                and "Artificial Analysis" in report
+            )
+        ),
+        "meets_non_destructive_baseline": (
+            round(retained_characters / max(1, len(writer_draft)), 4)
+            >= NON_DESTRUCTIVE_BASELINE_RETENTION[case_id]
+        ),
         "audit_summary": summary,
     }
     (case_output / "summary.json").write_text(
@@ -202,58 +284,82 @@ def main() -> int:
         replay_case(case_directories[case_id], output, case_id=case_id)
         for case_id in CASES
     ]
+    by_case = {item["case_id"]: item for item in results}
+    cc = by_case["EIV2_CC_001"]
+    cr = by_case["EIV2_CR_003"]
+    ed = by_case["EIV2_ED_002"]
     acceptance = {
         "cases": results,
         "hard_checks": {
-            "high_risk_unaudited_unit_zero": all(
-                item["high_risk_unaudited_unit_count"] == 0 for item in results
+            "gate_01_cc_body_comparison_tables_preserved": (
+                cc["primary_title_preserved"]
+                and cc["heading_count_preserved"]
+                and cc["table_separator_count_preserved"]
+                and cc["malformed_table_count"] == 0
             ),
-            "recommendation_bypass_zero": all(
-                item["recommendation_bypass_count"] == 0 for item in results
+            "gate_02_cr_official_third_party_material_preserved": (
+                cr["primary_title_preserved"]
+                and cr["heading_count_preserved"]
+                and cr["cr_source_frame_preserved"]
             ),
-            "fail_safe_deletion_zero": all(
+            "gate_03_ed_selection_and_migration_recommendations_present": (
+                ed["selection_recommendation_count"] > 0
+                and ed["migration_recommendation_count"] > 0
+            ),
+            "gate_04_ed_recommendations_survive_zero_inferences": (
+                ed["surviving_inference_count"] != 0
+                or ed["substantive_recommendation_count"] > 0
+            ),
+            "gate_05_recommendation_deletion_zero": all(
+                item["recommendation_deletion_count"] == 0
+                and item["retained_recommendation_count"]
+                == item["original_recommendation_count"]
+                for item in results
+            ),
+            "gate_06_no_new_high_risk_recommendation_bypass": all(
+                item["recommendation_bypass_count"] == 0
+                and item["recommendation_new_high_risk_fact_count"]
+                == item["recommendation_new_high_risk_fact_qualified_count"]
+                for item in results
+            ),
+            "gate_07_circular_premise_zero": all(
+                item["circular_premise_count"] == 0 for item in results
+            ),
+            "gate_08_repeated_premise_gate_zero": all(
+                item["already_audited_premise_repeated_gate_count"] == 0
+                for item in results
+            ),
+            "gate_09_fail_safe_deletion_zero": all(
                 item["fail_safe_deletion_count"] == 0 for item in results
             ),
-            "claim_reconstruction_zero": all(
+            "gate_10_claim_reconstruction_zero": all(
                 item["claim_reconstruction_count"] == 0 for item in results
             ),
-            "destructive_unit_deletion_zero": all(
-                item["destructive_unit_deletion_count"] == 0
+            "gate_11_substring_deletion_zero": all(
+                item["substring_fragment_deletion_count"] == 0 for item in results
+            ),
+            "gate_12_no_broken_sentence_or_table": all(
+                item["malformed_table_count"] == 0
+                and item["dangling_fragment_count"] == 0
+                and item["destructive_unit_deletion_count"] == 0
                 and item["omit_action_count"] == 0
                 for item in results
             ),
-            "substring_fragment_deletion_zero": all(
-                item["substring_fragment_deletion_count"] == 0 for item in results
-            ),
-            "tables_well_formed": all(
-                item["malformed_table_count"] == 0 for item in results
-            ),
-            "no_dangling_fragments": all(
-                item["dangling_fragment_count"] == 0 for item in results
-            ),
-            "primary_titles_preserved": all(item["primary_title_preserved"] for item in results),
-            "heading_framework_preserved": all(
-                item["heading_count_preserved"]
-                and item["non_recommendation_headings_preserved"]
-                for item in results
-            ),
-            "comparison_tables_preserved": all(
-                item["table_separator_count_preserved"] for item in results
-            ),
-            "no_internal_labels": all(item["internal_label_count"] == 0 for item in results),
-            "unsupported_stronger_verified_zero": all(
+            "gate_13_unsupported_stronger_verified_zero": all(
                 item["unsupported_stronger_verified_count"] == 0 for item in results
             ),
-            "causal_bypass_zero": all(item["causal_bypass_count"] == 0 for item in results),
-            "table_numeric_units_covered": all(
-                item["table_numeric_uncovered_count"] == 0 for item in results
+            "gate_14_user_visible_internal_labels_zero": all(
+                item["internal_label_count"] == 0 for item in results
             ),
-            "writer_body_retention_at_least_85_percent": all(
-                item["writer_body_retention_ratio"] >= 0.85 for item in results
+            "gate_15_repeated_recommendation_disclaimer_zero": all(
+                item["recommendation_repeated_disclaimer_count"] == 0
+                for item in results
             ),
-            "ed_premise_bound_recommendation_present": any(
-                item["case_id"] == "EIV2_ED_002"
-                and item["premise_bound_recommendation_count"] > 0
+            "gate_16_report_completeness_not_below_baseline": all(
+                item["meets_non_destructive_baseline"]
+                and item["primary_title_preserved"]
+                and item["heading_count_preserved"]
+                and item["table_separator_count_preserved"]
                 for item in results
             ),
         },

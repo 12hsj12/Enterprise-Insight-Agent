@@ -127,6 +127,20 @@ _COMPANY_ACTION_PATTERN = re.compile(
     re.IGNORECASE,
 )
 
+# Recommendation wording is an analytical decision, not a factual claim.  This
+# narrower pattern is used only at finalization to find objective facts newly
+# embedded in advice (numbers, status, capability, benchmarks, or company
+# actions) without treating words such as "choose" or "best fit" as facts.
+_RECOMMENDATION_OBJECTIVE_FACT_PATTERN = re.compile(
+    r"\b(?:released?|launched?|available|availability|market\s+share|benchmarks?|"
+    r"prices?|pricing|sla|uptime|throughput|latency|outperforms?|faster|slower|"
+    r"supports?|offers?|provides?|accepts?|handles?|integrates?|includes?|enables?|"
+    r"allows?|lacks?|guarantees?)\b|"
+    r"(?:发布|上线|可用|不可用|市场份额|基准|跑分|价格|费用|服务等级|吞吐|延迟|"
+    r"支持|提供|能够|具备|兼容|缺少|保证)",
+    re.IGNORECASE,
+)
+
 _STRONG_COMPARISON_PATTERN = re.compile(
     r"\b(?:is|are|was|were)\s+(?:(?:objectively|materially|significantly|"
     r"demonstrably)\s+)?(?:more|less|higher|lower|stronger|weaker|better|"
@@ -673,6 +687,43 @@ def has_uncovered_claim_signal(unit: WriterAuditUnit, claim_texts: Iterable[str]
         RECOMMENDATION_PATTERN.search(residue)
         or _IMPERATIVE_MIGRATION.search(residue)
         or is_high_risk(residue)
+    )
+
+
+def has_uncovered_recommendation_fact_signal(
+    unit: WriterAuditUnit,
+    audited_fact_texts: Iterable[str],
+) -> bool:
+    """Detect only new objective facts inside an authored recommendation.
+
+    Already-audited factual text is masked for this diagnostic only.  The
+    function never returns an edit span and never sends the recommendation or
+    its premises through ClaimGate or Grounding a second time.
+    """
+
+    aligned = alignment_text(unit.text)
+    if not aligned:
+        return False
+    covered = [False] * len(aligned)
+    for fact_text in audited_fact_texts:
+        fact = alignment_text(fact_text)
+        if not fact:
+            continue
+        start = aligned.find(fact)
+        while start >= 0:
+            for index in range(start, min(len(aligned), start + len(fact))):
+                covered[index] = True
+            start = aligned.find(fact, start + 1)
+    residue = "".join(
+        " " if covered[index] else char for index, char in enumerate(aligned)
+    )
+    residue = re.sub(r"\s+", " ", residue).strip()
+    if not residue:
+        return False
+    return bool(
+        _NUMERIC_FACT_PATTERN.search(residue)
+        or _RECOMMENDATION_OBJECTIVE_FACT_PATTERN.search(residue)
+        or _COMPANY_ACTION_PATTERN.search(residue)
     )
 
 

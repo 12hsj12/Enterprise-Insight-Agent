@@ -45,6 +45,7 @@ from .unit_audit import (
     apply_unit_replacements,
     find_claim_unit,
     has_uncovered_claim_signal,
+    has_uncovered_recommendation_fact_signal,
     is_recommendation,
     split_markdown_audit_units,
 )
@@ -1526,21 +1527,6 @@ def _sanitize_draft_html(draft: str) -> str:
     )
 
 
-def _source_attribution(publisher: str | None) -> str:
-    if publisher:
-        return f"根据 {_escape_report_text(publisher)} 发布的材料"
-    return "根据该来源的材料"
-
-
-def _visible_recommendation_text(text: str) -> str:
-    """Remove an internal premise-strength phrase from user-facing advice."""
-
-    return re.sub(
-        r"^Based on the verified premises?,\s*", "", text.strip(),
-        flags=re.IGNORECASE,
-    )
-
-
 def _render_audited_writer_draft(execution: IntegratedExecution,
                                  writer_draft: str) -> str:
     """Keep the Writer draft and qualify only unsafe high-risk assertions.
@@ -1646,37 +1632,6 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
             )
         suffix = f" {refs}" if refs else ""
         return f"{prefix}{original}{suffix}"
-
-    def render_inference(
-        inference: EvidenceGroundedInference,
-    ) -> tuple[str, AuditUnitState]:
-        refs = []
-        limited_premises: list[LimitedDisclosure] = []
-        for claim_id in inference.premise_claim_ids:
-            record = records_by_id.get(claim_id)
-            if record is not None:
-                refs.extend(citation(eid) for eid in record.cited_evidence_ids)
-            else:
-                disclosures = limited_by_claim.get(claim_id, [])
-                limited_premises.extend(disclosures)
-                refs.extend(citation(item.evidence_id) for item in disclosures)
-        visible_text = _escape_report_text(_visible_recommendation_text(inference.text))
-        if limited_premises:
-            source_notes = [
-                f"{_source_attribution(item.publisher)}“{_escape_report_text(item.excerpt)}” "
-                f"{citation(item.evidence_id)}"
-                for item in limited_premises
-            ]
-            return (
-                "；".join(dict.fromkeys(source_notes))
-                + "，但当前证据强度有限。在这一信息边界下，" + visible_text,
-                AuditUnitState.LIMITED,
-            )
-        return (
-            "基于上述有引文支持的信息，" + visible_text + " "
-            + " ".join(dict.fromkeys(refs)),
-            AuditUnitState.KEEP,
-        )
 
     units = split_markdown_audit_units(writer_draft)
     units_by_id = {unit.unit_id: unit for unit in units}
@@ -1839,9 +1794,29 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
                 unit, state, "replace", claim_ids=claim_ids, reason_codes=reasons,
             )
 
+    def premise_texts(inference: EvidenceGroundedInference) -> tuple[str, ...]:
+        texts: list[str] = []
+        for claim_id in inference.premise_claim_ids:
+            record = records_by_id.get(claim_id)
+            if record is not None:
+                texts.append(record.rendered_text)
+                continue
+            disclosures = limited_by_claim.get(claim_id, [])
+            texts.extend(item.excerpt for item in disclosures)
+        return tuple(texts)
+
+    # A recommendation may never prove another recommendation.  This is a
+    # finalization safety boundary, not a second evidence evaluation: no Gate,
+    # Grounding, or qualification call is made here.
+    circular_inference_ids = {
+        inference.inference_id
+        for inference in execution.surviving_inferences
+        if any(_is_authored_recommendation(text) for text in premise_texts(inference))
+    }
     eligible_inferences = [
         inference for inference in execution.surviving_inferences
-        if set(inference.premise_claim_ids).issubset(visible_premise_ids)
+        if inference.inference_id not in circular_inference_ids
+        and set(inference.premise_claim_ids).issubset(visible_premise_ids)
     ]
     unmatched_units = list(recommendation_units)
     placed_inference_ids: set[str] = set()
@@ -1881,30 +1856,142 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
         unmatched_units.remove(unit)
         placed_inference_ids.add(inference.inference_id)
 
+    audited_fact_texts = [
+        item.claim.normalized_text
+        for item in execution.claim_inputs
+        if item.claim.claim_id in visible_premise_ids
+        and not _is_authored_recommendation(item.claim.normalized_text)
+    ]
+    heading_starts = [
+        match.start()
+        for match in re.finditer(r"(?m)^#{1,6}\s+.+$", writer_draft)
+    ]
+
+    def section_key(unit: WriterAuditUnit) -> int:
+        return max(
+            (start for start in heading_starts if start <= unit.start_offset),
+            default=-1,
+        )
+
+    recommendation_state: dict[str, dict[str, object]] = {}
+    section_state: dict[int, dict[str, object]] = {}
     for unit in recommendation_units:
         inference = inference_by_unit.get(unit.unit_id)
-        claim_ids = tuple(
-            item.claim.claim_id for item in inputs_by_unit.get(unit.unit_id, [])
-        )
-        if inference is None:
-            replacements[unit.unit_id] = qualify_unit(unit, "recommendation")
-            unresolved_units += 1
-            record_unit(
-                unit, AuditUnitState.UNRESOLVED, "replace",
-                claim_ids=claim_ids,
-                reason_codes=("WRITER_RECOMMENDATION_QUALIFIED_WITHOUT_VISIBLE_PREMISES",),
+        has_limited_premise = bool(
+            inference
+            and any(
+                claim_id in limited_by_claim
+                for claim_id in inference.premise_claim_ids
             )
-            continue
-        replacement, state = render_inference(inference)
-        replacements[unit.unit_id] = replacement
-        if state is AuditUnitState.LIMITED:
-            limited_units += 1
+        )
+        has_new_high_risk_fact = has_uncovered_recommendation_fact_signal(
+            unit, audited_fact_texts,
+        )
+        key = section_key(unit)
+        recommendation_state[unit.unit_id] = {
+            "inference": inference,
+            "limited": has_limited_premise,
+            "new_high_risk_fact": has_new_high_risk_fact,
+            "section": key,
+        }
+        section = section_state.setdefault(key, {
+            "first_unit_id": unit.unit_id,
+            "missing_premise": False,
+            "limited_premise": False,
+            "new_high_risk_fact": False,
+        })
+        section["missing_premise"] = bool(section["missing_premise"] or inference is None)
+        section["limited_premise"] = bool(
+            section["limited_premise"] or has_limited_premise
+        )
+        section["new_high_risk_fact"] = bool(
+            section["new_high_risk_fact"] or has_new_high_risk_fact
+        )
+
+    def recommendation_section_note(unit: WriterAuditUnit, section: dict[str, object]) -> str:
+        if section["missing_premise"]:
+            note = localized(
+                unit.text,
+                "The recommendations in this section are analytical judgments based on "
+                "the current research material; the available evidence is insufficient "
+                "to independently validate them.",
+                "本节建议属于基于当前研究材料的分析判断，现有证据不足以独立验证这些建议。",
+            )
+        elif section["limited_premise"]:
+            note = localized(
+                unit.text,
+                "The recommendations in this section are based on the source material "
+                "currently available; their factual premises retain the limitations of "
+                "those sources.",
+                "本节建议基于目前可获得的来源材料，其事实前提仍保留相应来源局限。",
+            )
         else:
+            note = ""
+        if section["new_high_risk_fact"]:
+            boundary = localized(
+                unit.text,
+                "The decision direction does not rely on any newly introduced objective "
+                "detail that has not already been audited in the report.",
+                "建议的决策方向不依赖报告中此前未完成审核的新增客观细节。",
+            )
+            note = f"{note} {boundary}".strip()
+        return note
+
+    section_notes = {
+        key: recommendation_section_note(
+            units_by_id[str(section["first_unit_id"])], section,
+        )
+        for key, section in section_state.items()
+    }
+    disclaimer_counts: Counter[int] = Counter()
+
+    def preserve_with_note(unit: WriterAuditUnit, note: str) -> str:
+        if unit.unit_type is AuditUnitType.HEADING:
+            return f"{unit.text.strip()}\n\n{note}"
+        return f"{note} {original_payload(unit)}".strip()
+
+    for unit in recommendation_units:
+        state_info = recommendation_state[unit.unit_id]
+        inference = state_info["inference"]
+        assert inference is None or isinstance(inference, EvidenceGroundedInference)
+        claim_ids = (
+            tuple(inference.premise_claim_ids)
+            if inference is not None else tuple(
+                item.claim.claim_id for item in inputs_by_unit.get(unit.unit_id, [])
+            )
+        )
+        reasons: list[str] = []
+        if inference is None:
+            state = AuditUnitState.UNRESOLVED
+            unresolved_units += 1
+            reasons.append("WRITER_RECOMMENDATION_PRESERVED_AS_ANALYTICAL_JUDGMENT")
+        elif state_info["limited"]:
+            state = AuditUnitState.LIMITED
+            limited_units += 1
+            reasons.append("WRITER_RECOMMENDATION_REUSED_VISIBLE_LIMITED_PREMISE")
+        else:
+            state = AuditUnitState.KEEP
             verified_units += 1
+            reasons.append("WRITER_RECOMMENDATION_REUSED_VISIBLE_VERIFIED_PREMISE")
+        if state_info["new_high_risk_fact"]:
+            if state is AuditUnitState.KEEP:
+                state = AuditUnitState.LIMITED
+                verified_units -= 1
+                limited_units += 1
+            reasons.append("NEW_HIGH_RISK_FACT_EXCLUDED_FROM_RECOMMENDATION_BASIS")
+
+        key = int(state_info["section"])
+        note = section_notes[key]
+        first_unit_id = str(section_state[key]["first_unit_id"])
+        action = "keep"
+        if note and unit.unit_id == first_unit_id:
+            replacements[unit.unit_id] = preserve_with_note(unit, note)
+            disclaimer_counts[key] += 1
+            action = "replace"
         record_unit(
-            unit, state, "replace", claim_ids=tuple(inference.premise_claim_ids),
-            inference_id=inference.inference_id,
-            reason_codes=("VALIDATED_INFERENCE_REINSERTED",),
+            unit, state, action, claim_ids=claim_ids,
+            inference_id=inference.inference_id if inference is not None else None,
+            reason_codes=tuple(reasons),
         )
 
     audited = apply_unit_replacements(writer_draft, replacements, units)
@@ -1925,7 +2012,14 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
         unit.high_risk and unit.unit_id not in records_by_unit_id for unit in units
     )
     recommendation_bypass_count = sum(
-        unit.recommendation and unit.unit_id not in records_by_unit_id for unit in units
+        unit.recommendation and (
+            unit.unit_id not in records_by_unit_id
+            or (
+                bool(recommendation_state.get(unit.unit_id, {}).get("new_high_risk_fact"))
+                and not section_notes.get(section_key(unit))
+            )
+        )
+        for unit in units
     )
     execution.unit_audit_records = sorted(records_out, key=lambda item: item.ordinal)
     verified_claim_count = len({
@@ -1968,6 +2062,7 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
             for record in records_out
         ),
         "malformed_atom_isolated_unit_count": len(invalid_unit_ids),
+        "recommendation_deletion_count": 0,
         "unbound_recommendation_removed_count": 0,
         "unbound_recommendation_qualified_count": sum(
             record.recommendation and record.state is AuditUnitState.UNRESOLVED
@@ -1978,6 +2073,23 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
             len(execution.surviving_inferences) - len(placed_inference_ids)
         ),
         "unplaced_audit_claim_count": len(unplaced_claim_ids),
+        "circular_premise_count": 0,
+        "circular_premise_rejected_count": len(circular_inference_ids),
+        "already_audited_premise_repeated_gate_count": 0,
+        "recommendation_new_high_risk_fact_count": sum(
+            bool(item["new_high_risk_fact"])
+            for item in recommendation_state.values()
+        ),
+        "recommendation_new_high_risk_fact_qualified_count": sum(
+            bool(item["new_high_risk_fact"])
+            and bool(section_notes.get(int(item["section"])))
+            for item in recommendation_state.values()
+        ),
+        "writer_recommendation_retained_count": len(recommendation_units),
+        "recommendation_disclaimer_count": sum(disclaimer_counts.values()),
+        "recommendation_repeated_disclaimer_count": sum(
+            max(0, count - 1) for count in disclaimer_counts.values()
+        ),
         "unsupported_stronger_verified_count": sum(
             record.high_risk
             and record.state is AuditUnitState.KEEP

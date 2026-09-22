@@ -459,7 +459,7 @@ def test_unaudited_table_price_is_qualified_without_deleting_row_or_table():
     assert "Requires a deployment-specific quote" in report
 
 
-def test_unbound_draft_recommendation_is_qualified_and_analysis_survives():
+def test_unbound_draft_recommendation_is_preserved_with_one_section_boundary():
     source = Evidence(
         evidence_id="one", sub_query="fixture", url="https://example.test/one",
         content="The decision depends on the operating model.",
@@ -473,7 +473,9 @@ def test_unbound_draft_recommendation_is_qualified_and_analysis_survives():
         ),
     )
     assert "Choose pgvector" in report
-    assert "insufficient to support the following selection or migration recommendation" in report
+    assert report.count(
+        "recommendations in this section are analytical judgments"
+    ) == 1
     assert "operational ownership" in report
     assert "reversible migration path" in report
     assert "AI_INFERENCE" not in report
@@ -499,9 +501,9 @@ def test_selection_and_migration_advice_never_bypasses_premises(advice):
     )
     assert advice in report
     if "pgvector" in advice and not advice.startswith("We"):
-        assert "当前证据不足以支持以下选型或迁移建议" in report
+        assert "本节建议属于基于当前研究材料的分析判断" in report
     else:
-        assert "insufficient to support the following selection or migration recommendation" in report
+        assert "recommendations in this section are analytical judgments" in report
     assert "operating-model trade-off remains" in report
     assert execution.final_render_audit_summary[
         "unbound_recommendation_removed_count"
@@ -509,9 +511,13 @@ def test_selection_and_migration_advice_never_bypasses_premises(advice):
     assert execution.final_render_audit_summary[
         "unbound_recommendation_qualified_count"
     ] == 1
+    assert execution.final_render_audit_summary["recommendation_disclaimer_count"] == 1
+    assert execution.final_render_audit_summary[
+        "recommendation_repeated_disclaimer_count"
+    ] == 0
 
 
-def test_imperative_migration_list_items_are_qualified_as_complete_units():
+def test_imperative_migration_list_items_share_one_section_boundary():
     source = Evidence(
         evidence_id="one", sub_query="fixture", url="https://example.test/one",
         content="Migration requires workload-specific validation.",
@@ -527,11 +533,10 @@ def test_imperative_migration_list_items_are_qualified_as_complete_units():
     ))
     assert "Pin the embedding model" in report
     assert "Run shadow reads" in report
-    assert report.count(
-        "insufficient to support the following selection or migration recommendation"
-    ) == 2
+    assert report.count("recommendations in this section are analytical judgments") == 1
     assert "workload-specific design exercise" in report
     assert execution.final_render_audit_summary["recommendation_bypass_count"] == 0
+    assert execution.final_render_audit_summary["recommendation_deletion_count"] == 0
     assert execution.final_render_audit_summary["substring_fragment_deletion_count"] == 0
 
 
@@ -641,7 +646,7 @@ def test_writer_recommendation_cannot_hide_in_factual_claim_array():
         writer_draft="## Decision\n\nChoose Milvus for production. Keep the decision reversible.",
     )
     assert "Choose Milvus" in report
-    assert "insufficient to support the following selection or migration recommendation" in report
+    assert "recommendations in this section are analytical judgments" in report
     assert "decision reversible" in report
     assert execution.final_render_audit_summary[
         "unbound_recommendation_removed_count"
@@ -676,7 +681,7 @@ def test_recommendation_is_suppressed_when_its_premise_is_not_visible_in_draft()
     ] == 1
 
 
-def test_validated_recommendation_reenters_at_original_recommendation_unit():
+def test_validated_premise_preserves_original_writer_recommendation_without_regating():
     source = Evidence(
         evidence_id="one", sub_query="fixture", url="https://example.test/one",
         content="pgvector offers HNSW indexing.",
@@ -698,9 +703,9 @@ def test_validated_recommendation_reenters_at_original_recommendation_unit():
         "## Decision\n\nChoose pgvector for production.\n\n"
         "The decision remains reversible."
     ))
-    assert "Choose pgvector for production" not in report
-    assert "Consider pgvector" in report
-    assert report.index("Consider pgvector") < report.index("decision remains reversible")
+    assert "Choose pgvector for production" in report
+    assert "Consider pgvector" not in report
+    assert report.index("Choose pgvector") < report.index("decision remains reversible")
     recommendation_records = [
         record for record in execution.unit_audit_records if record.recommendation
     ]
@@ -708,6 +713,91 @@ def test_validated_recommendation_reenters_at_original_recommendation_unit():
     assert recommendation_records[0].state is AuditUnitState.KEEP
     assert recommendation_records[0].inference_id == "bounded-pgvector"
     assert execution.final_render_audit_summary["recommendation_bypass_count"] == 0
+    assert execution.final_render_audit_summary[
+        "already_audited_premise_repeated_gate_count"
+    ] == 0
+    assert execution.final_render_audit_summary["recommendation_disclaimer_count"] == 0
+
+
+def test_repeated_audited_fact_is_reused_without_a_second_high_risk_audit():
+    source = Evidence(
+        evidence_id="one", sub_query="fixture", url="https://example.test/one",
+        content="Acme supports private endpoints.",
+    )
+    premise = linked_claim("Acme supports private endpoints.", "R1", [source])
+    inference = EvidenceGroundedInference(
+        inference_id="bounded-acme", requirement_id="R2", text="Choose Acme.",
+        premise_claim_ids=(premise.claim.claim_id,),
+    )
+    execution = integrate_claims(
+        EvidenceContext(context="", evidences=[source]),
+        ClaimPlan(items=[premise], inferences=[inference], requirements=[
+            requirement("R1", "Capability", RequirementType.FACTUAL, 1),
+            requirement("R2", "Decision", RequirementType.RECOMMENDATION, 2),
+        ]), CUTOFF,
+    )
+    advice = "Because Acme supports private endpoints, choose Acme."
+    report = render_report(
+        execution,
+        writer_draft=(
+            "## Capability\n\nAcme supports private endpoints.\n\n"
+            f"## Decision\n\n{advice}"
+        ),
+    )
+    assert advice in report
+    summary = execution.final_render_audit_summary
+    assert summary["recommendation_new_high_risk_fact_count"] == 0
+    assert summary["already_audited_premise_repeated_gate_count"] == 0
+    assert summary["recommendation_disclaimer_count"] == 0
+
+
+def test_new_high_risk_fact_does_not_delete_recommendation_direction():
+    source = Evidence(
+        evidence_id="one", sub_query="fixture", url="https://example.test/one",
+        content="The decision remains workload-specific.",
+    )
+    execution = integrate_claims(
+        EvidenceContext(context="", evidences=[source]), ClaimPlan(items=[]), CUTOFF,
+    )
+    advice = "Choose Acme because it guarantees a 99.99% SLA in 2026."
+    report = render_report(execution, writer_draft=f"## Decision\n\n{advice}")
+    assert advice in report
+    assert "does not rely on any newly introduced objective detail" in report
+    summary = execution.final_render_audit_summary
+    assert summary["recommendation_new_high_risk_fact_count"] == 1
+    assert summary["recommendation_new_high_risk_fact_qualified_count"] == 1
+    assert summary["recommendation_bypass_count"] == 0
+    assert summary["recommendation_deletion_count"] == 0
+
+
+def test_recommendation_premise_is_rejected_as_circular_without_losing_writer_advice():
+    source = Evidence(
+        evidence_id="one", sub_query="fixture", url="https://example.test/one",
+        content="Choose pgvector for production.",
+    )
+    premise = linked_claim("Choose pgvector for production.", "R1", [source])
+    inference = EvidenceGroundedInference(
+        inference_id="circular", requirement_id="R2", text="Consider pgvector.",
+        premise_claim_ids=(premise.claim.claim_id,),
+    )
+    execution = integrate_claims(
+        EvidenceContext(context="", evidences=[source]),
+        ClaimPlan(items=[premise], inferences=[inference], requirements=[
+            requirement("R1", "Source recommendation", RequirementType.FACTUAL, 1),
+            requirement("R2", "Decision", RequirementType.RECOMMENDATION, 2),
+        ]), CUTOFF,
+    )
+    assert execution.surviving_inferences
+    report = render_report(
+        execution,
+        writer_draft="## Decision\n\nChoose pgvector for production.",
+    )
+    assert "Choose pgvector for production" in report
+    assert "Consider pgvector" not in report
+    summary = execution.final_render_audit_summary
+    assert summary["circular_premise_count"] == 0
+    assert summary["circular_premise_rejected_count"] == 1
+    assert summary["premise_bound_recommendation_count"] == 0
 
 
 @pytest.mark.parametrize("case_name", ["CC", "CR", "ED"])

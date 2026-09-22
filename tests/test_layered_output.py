@@ -126,11 +126,13 @@ def test_limited_premise_can_support_conditional_inference_with_visible_strength
     assert result.layered_output_summary["limited_evidence"] == 1
     assert result.layered_output_summary["ai_inference"] == 1
     assert "pgvector has unlimited scale" in report
-    assert "Choose pgvector for production" not in report
+    assert "Choose pgvector for production" in report
     assert "AI_INFERENCE" not in report
-    assert "但当前证据强度有限" in report
+    assert "source material currently available" in report
     assert "verified premise" not in report.casefold()
-    assert "Vendor documentation states that pgvector is a PostgreSQL extension" in report
+    assert result.final_render_audit_summary[
+        "already_audited_premise_repeated_gate_count"
+    ] == 0
 
 
 def test_t02_direct_support_missing_independent_is_limited_not_verified():

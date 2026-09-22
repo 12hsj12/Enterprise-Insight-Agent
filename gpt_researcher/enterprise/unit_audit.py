@@ -301,6 +301,18 @@ def is_recommendation(value: str, section_title: str = "") -> bool:
     )
 
 
+def _has_claim_bearing_risk_signal(candidate: str) -> bool:
+    """Keep the established claim-bearing boundary independent of new backstops."""
+
+    return bool(
+        _NUMERIC_FACT_PATTERN.search(candidate)
+        or _OBJECTIVE_RISK_PATTERN.search(candidate)
+        or _CAPABILITY_PATTERN.search(candidate)
+        or _COMPANY_ACTION_PATTERN.search(candidate)
+        or _STRONG_COMPARISON_PATTERN.search(candidate)
+    )
+
+
 def is_high_risk(value: str) -> bool:
     """Identify only assertions that need the strict final-output gate.
 
@@ -320,11 +332,7 @@ def is_high_risk(value: str) -> bool:
     ):
         return False
     return bool(
-        _NUMERIC_FACT_PATTERN.search(candidate)
-        or _OBJECTIVE_RISK_PATTERN.search(candidate)
-        or _CAPABILITY_PATTERN.search(candidate)
-        or _COMPANY_ACTION_PATTERN.search(candidate)
-        or _STRONG_COMPARISON_PATTERN.search(candidate)
+        _has_claim_bearing_risk_signal(candidate)
         or _TEMPORAL_STATUS_PATTERN.search(candidate)
         or _PRODUCT_STATUS_PATTERN.search(candidate)
         or _SUPERLATIVE_PATTERN.search(candidate)
@@ -373,7 +381,7 @@ def is_claim_bearing(value: str, section_title: str = "") -> bool:
         return False
     return bool(
         is_recommendation(visible, section_title)
-        or is_high_risk(visible)
+        or _has_claim_bearing_risk_signal(visible)
     )
 
 

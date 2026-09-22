@@ -16,8 +16,8 @@ from gpt_researcher.enterprise.requirements import (
 )
 from gpt_researcher.enterprise.workflow import IntelligenceRequest, IntelligenceWorkflow
 from gpt_researcher.enterprise.unit_audit import (
-    AuditUnitState, AuditUnitType, is_high_risk, is_recommendation,
-    split_markdown_audit_units,
+    AuditUnitState, AuditUnitType, is_claim_bearing, is_high_risk,
+    is_recommendation, split_markdown_audit_units,
 )
 from gpt_researcher.evidence.models import (
     Claim, ClaimEvidenceLink, ClaimRiskType, Evidence, EvidenceContext,
@@ -108,6 +108,17 @@ def test_cutoff_sensitive_status_and_superlative_units_are_high_risk(fact):
     assert is_high_risk(fact)
 
 
+@pytest.mark.parametrize("continuation", [
+    "Agent development now runs through Amazon Bedrock AgentCore.",
+    "Vertex AI remains the fastest and cheapest route to Gemini models.",
+])
+def test_high_risk_continuation_is_independent_of_claim_bearing(continuation):
+    unit = split_markdown_audit_units(continuation)[0]
+    assert not is_claim_bearing(continuation)
+    assert not unit.claim_bearing
+    assert unit.high_risk
+
+
 @pytest.mark.parametrize("analysis", [
     "The current analysis explains the decision framework.",
     "The current research material remains incomplete.",
@@ -147,6 +158,7 @@ def test_post_cutoff_current_status_cannot_survive_as_a_strong_writer_claim():
         record for record in execution.unit_audit_records
         if record.unit_id == status_unit.unit_id
     )
+    assert not status_unit.claim_bearing
     assert status_unit.high_risk
     assert status_record.state is AuditUnitState.UNRESOLVED
     assert "insufficient to verify the following conclusion" in report

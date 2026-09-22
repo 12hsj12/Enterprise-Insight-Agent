@@ -16,7 +16,8 @@ from gpt_researcher.enterprise.requirements import (
 )
 from gpt_researcher.enterprise.workflow import IntelligenceRequest, IntelligenceWorkflow
 from gpt_researcher.enterprise.unit_audit import (
-    AuditUnitState, AuditUnitType, split_markdown_audit_units,
+    AuditUnitState, AuditUnitType, is_high_risk, is_recommendation,
+    split_markdown_audit_units,
 )
 from gpt_researcher.evidence.models import (
     Claim, ClaimEvidenceLink, ClaimRiskType, Evidence, EvidenceContext,
@@ -63,6 +64,78 @@ def test_markdown_audit_units_have_stable_ids_types_and_original_positions():
     for unit in first:
         assert draft[unit.start_offset:unit.end_offset] == unit.text
         assert unit.start_line >= 1 and unit.end_line >= unit.start_line
+
+
+def test_sentence_units_protect_abbreviations_and_split_lowercase_product_names():
+    draft = (
+        "The U.S. Government publishes guidance. Teams should consult it. "
+        "Multiple sources agree. pgvector is suitable below five million vectors."
+    )
+    units = split_markdown_audit_units(draft)
+    assert [unit.text for unit in units] == [
+        "The U.S. Government publishes guidance.",
+        "Teams should consult it.",
+        "Multiple sources agree.",
+        "pgvector is suitable below five million vectors.",
+    ]
+
+
+def test_numbered_list_markers_and_citation_years_are_not_risk_facts():
+    units = split_markdown_audit_units(
+        "1. Prepare the migration discussion.\n"
+        "2. Document the operating trade-off.\n\n"
+        "The analysis remains useful ([Example, 2026](https://example.test/source))."
+    )
+    assert not any(unit.high_risk for unit in units)
+    assert is_high_risk("Acme reports a 99.99% SLA in 2026.")
+    assert is_high_risk("Acme supports private networking.")
+    assert is_high_risk("Acme is faster because it uses a distributed index.")
+
+
+@pytest.mark.parametrize("advice", [
+    "The rate figures should be replaced with official vendor rate cards.",
+    "Any benchmark figure should be reported with its checkpoint attached.",
+    "Any benchmark figure should therefore be treated as a pointer.",
+    "Bedrock is the better-supported choice.",
+    "Migration becomes justified when volume exceeds ten million vectors.",
+    "Milvus is the correct destination for large workloads.",
+    "A firm with no DBA should collapse this to a single managed service.",
+])
+def test_confirmed_recommendation_forms_are_detected(advice):
+    assert is_recommendation(advice)
+
+
+@pytest.mark.parametrize("fact", [
+    "Batch inference is 50% off on select models.",
+    "50% off on select models",
+])
+def test_select_models_is_not_a_recommendation(fact):
+    assert not is_recommendation(fact)
+
+
+def test_decision_sections_promote_conditional_selection_candidates_only():
+    draft = (
+        "## Conclusion\n\n"
+        "Where no operations capacity exists, Qdrant Cloud is the middle path. "
+        "The evidence table remains available for review."
+    )
+    units = split_markdown_audit_units(draft)
+    assert units[0].recommendation
+    assert not units[1].recommendation
+
+
+@pytest.mark.parametrize("leading_pipe", [True, False])
+def test_table_cells_keep_exact_offsets_after_classifier_hardening(leading_pipe):
+    if leading_pipe:
+        draft = "| Product | Price |\n| --- | --- |\n| Acme | $12/month |"
+    else:
+        draft = "Product | Price\n--- | ---\nAcme | $12/month"
+    first = split_markdown_audit_units(draft)
+    second = split_markdown_audit_units(draft)
+    assert [unit.unit_id for unit in first] == [unit.unit_id for unit in second]
+    assert [unit.text for unit in first] == ["Product", "Price", "Acme", "$12/month"]
+    assert all(draft[unit.start_offset:unit.end_offset] == unit.text for unit in first)
+    assert not any(unit.high_risk for unit in first if unit.table_header)
 
 
 def test_generic_topic_cannot_replace_cc_question_or_ed_recommendation():

@@ -79,23 +79,39 @@ _TABLE_SEPARATOR = re.compile(r"^\s*:?-{3,}:?\s*$")
 _LIST_ITEM = re.compile(r"^(?P<indent>\s*)(?P<marker>(?:[-*+] |\d+[.)] ))")
 _REFERENCE_TITLES = {"references", "sources", "bibliography", "参考文献"}
 
-# These signals are intentionally conservative.  They do not decide truth;
-# they only decide that a complete unit requires an audit state.
-HIGH_RISK_PATTERN = re.compile(
-    r"(?<![\w])(?:[$€£¥]\s*)?\d+(?:[.,:/-]\d+)*(?:\s*(?:%|ms|s|sec(?:onds?)?|"
-    r"minutes?|hours?|days?|k|m|b|tb|gb|mb|tokens?|users?|requests?|qps|tps|"
-    r"vectors?|parameters?|params?))?(?![\w])|"
+# These signals identify factual propositions, not presentation metadata.  The
+# input is normalized by ``classification_text`` before these patterns run, so
+# citation years and ordered-list markers cannot manufacture a risk signal.
+_NUMERIC_FACT_PATTERN = re.compile(
+    r"(?:[$€£¥]\s*\d)|"
+    r"(?<![\w-])\d+(?:[.,:/-]\d+)*(?:\s*(?:%|ms|sec(?:onds?)?|minutes?|"
+    r"hours?|days?|k|m|b|tb|gb|mb|tokens?|users?|requests?|qps|tps|vectors?|"
+    r"parameters?|params?|dimensions?|points?|samples?|problems?|rows?|nodes?))?(?!\w)|"
+    r"\b(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|"
+    r"jul(?:y)?|aug(?:ust)?|sep(?:tember)?|oct(?:ober)?|nov(?:ember)?|"
+    r"dec(?:ember)?)\s+\d{1,2}(?:,\s*\d{4})?\b",
+    re.IGNORECASE,
+)
+
+_OBJECTIVE_RISK_PATTERN = re.compile(
     r"\b(?:released?|launched?|available|availability|outperforms?|faster|slower|"
     r"market\s+share|benchmarks?|rank(?:ed|ing)?|largest|smallest|best|worst|"
     r"prices?|pricing|costs?|sla|uptime|throughput|latency|context\s+window|"
-    r"supports?|offers?|provides?|accepts?|handles?|guarantees?|integrates?|"
-    r"includes?|enables?|allows?|lacks?|compatible|capable\s+of|"
-    r"always|never|eliminates?|zero[- ]risk|causes?|because|due\s+to|"
+    r"guarantees?|always|never|eliminates?|zero[- ]risk|causes?|because|due\s+to|"
     r"leads?\s+to|results?\s+in|drives?|reduces?|increases?)\b|"
     r"(?:发布|上线|可用|不可用|市场份额|基准|跑分|领先|最快|最大|最小|排名|"
-    r"价格|费用|成本|服务等级|吞吐|延迟|上下文窗口|支持|提供|模型能力|"
-    r"能够|具备|兼容|需要|缺少|保证|始终|从不|导致|因为|由于|因此|"
-    r"带来|降低|提高|增加)",
+    r"价格|费用|成本|服务等级|吞吐|延迟|上下文窗口|模型能力|"
+    r"保证|始终|从不|导致|因为|由于|因此|带来|降低|提高|增加)",
+    re.IGNORECASE,
+)
+
+_CAPABILITY_PATTERN = re.compile(
+    r"\b(?!evidence\b|analysis\b|report\b|section\b|table\b|source\b)"
+    r"[A-Z][A-Za-z0-9_.+/-]*(?:\s+[A-Z][A-Za-z0-9_.+/-]*){0,5}\s+"
+    r"(?:supports?|offers?|provides?|accepts?|handles?|integrates?|includes?|"
+    r"enables?|allows?|lacks?|is\s+compatible|is\s+capable\s+of)\b|"
+    r"(?:平台|产品|模型|服务|公司|厂商|系统)[^\u3002！？\n]{0,40}"
+    r"(?:支持|提供|能够|具备|兼容|缺少)",
     re.IGNORECASE,
 )
 
@@ -115,15 +131,22 @@ FACTUAL_PATTERN = re.compile(
 
 RECOMMENDATION_PATTERN = re.compile(
     r"\b(?:we\s+(?:recommend|advise|suggest)|(?:our\s+)?recommendation\s+is|"
-    r"(?:you|teams?|enterprises?|organizations?|customers?|firms?)\s+should\s+|"
-    r"(?:should|must|ought\s+to)\s+(?:choose|select|adopt|use|migrate|move|"
-    r"switch|replace|prefer|consider|pilot|deploy|standardize|prioritize)|"
-    r"(?:choose|select|adopt|prefer|consider|pilot|deploy|standardize|prioritize|"
-    r"migrate\s+to|move\s+to|switch\s+to|replace\s+.+\s+with)\b|"
-    r"(?:is|are)\s+(?:the\s+)?(?:best|preferred|right|correct|ideal|honest)\s+"
-    r"(?:choice|option|fit|answer|starting\s+point)|"
+    r"should\s+(?:therefore\s+)?(?:be\s+)?(?:choose|chosen|select|selected|adopt|adopted|use|used|"
+    r"migrate|migrated|move|moved|switch|switched|replace|replaced|prefer|preferred|"
+    r"consider|considered|pilot|piloted|deploy|deployed|standardize|standardized|"
+    r"prioritize|prioritized|report|reported|treat|treated|verify|verified|consult|"
+    r"collapse|collapsed|map|mapped|attach|attached|state|stated)|"
+    r"(?:must|ought\s+to)\s+(?:choose|select|adopt|use|migrate|move|switch|replace|"
+    r"prefer|consider|pilot|deploy|standardize|prioritize|verify|report)|"
+    r"(?:^|[;:—-]\s*)(?:choose|select|adopt|prefer|consider|pilot|deploy|"
+    r"standardize|prioritize|migrate\s+to|move\s+to|switch\s+to|"
+    r"replace\s+.+\s+with)\b|"
+    r"\b(?:only\s+)?consider\s+(?:migrating|adopting|using|deploying|switching)\b|"
+    r"(?:is|are|remains?)\s+(?:the\s+)?(?:best|preferred|right|correct|ideal|honest|"
+    r"better[- ]supported)\s+(?:choice|option|fit|answer|destination|starting\s+point)|"
+    r"becomes?\s+(?:more\s+)?(?:justified|attractive|appropriate|preferable)\s+when|"
     r"(?:is|are)\s+better\s+suited\b|go\s+with\b|sensible\s+default|"
-    r"defensible\s+architecture|recommended\s+for|more\s+attractive|"
+    r"defensible\s+architecture|recommended\s+(?:default|for)|more\s+attractive|"
     r"this\s+recommendation\b)|"
     r"(?:建议|推荐|应当|应该|宜(?:采用|选择|部署|迁移)|优先选择|首选|可考虑|"
     r"选用|采用.+作为|迁移(?:至|到)|切换(?:至|到)|替换为|部署|开展试点)",
@@ -151,6 +174,21 @@ _TABLE_FACT_CONTEXT = re.compile(
     re.IGNORECASE,
 )
 
+_DECISION_SECTION = re.compile(
+    r"recommend|migration|decision|selection|conclusion|synthesis|judg(?:e)?ment|"
+    r"operating\s+posture|选型|迁移|建议|决策|结论",
+    re.IGNORECASE,
+)
+
+_SECTION_SELECTION_PATTERN = re.compile(
+    r"\b(?:is|are|remains?|becomes?)\b[^.!?]{0,100}\b(?:choice|option|default|"
+    r"destination|answer|starting\s+point|alternative|middle\s+path|safer\s+position)\b|"
+    r"\b(?:where|if|when|for)\b[^.!?]{0,180}\b(?:preferentially|favou?rs?|earns?|"
+    r"choose|select|adopt|use|migrate|managed\s+service|search\s+engine|pgvector|"
+    r"milvus|qdrant|weaviate|bedrock|azure\s+openai)\b",
+    re.IGNORECASE,
+)
+
 
 def markdown_visible_text(value: str) -> str:
     """Remove presentation-only Markdown while retaining the authored words."""
@@ -163,14 +201,33 @@ def markdown_visible_text(value: str) -> str:
     return re.sub(r"\s+", " ", value).strip()
 
 
+def classification_text(value: str) -> str:
+    """Return authored prose without citation or Markdown numbering metadata."""
+
+    # Linked citations deliberately retain their author/year label in rendered
+    # prose, but those labels are provenance metadata rather than claim values.
+    value = re.sub(
+        r"\[[^\]]*(?:(?:19|20)\d{2}|n\.d\.)[^\]]*\]\([^)]*\)",
+        " ", value, flags=re.IGNORECASE,
+    )
+    # The ED golden artifacts use compact, unlinked author-year citations.
+    value = re.sub(
+        r"\([^()\n]*(?:(?:19|20)\d{2}|n\.d\.)[^()\n]*\)",
+        " ", value, flags=re.IGNORECASE,
+    )
+    visible = markdown_visible_text(value)
+    return re.sub(
+        r"^(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+)", "", visible,
+    ).strip()
+
+
 def alignment_text(value: str) -> str:
     visible = markdown_visible_text(value).casefold()
     return " ".join(re.findall(r"[\w%]+", visible, flags=re.UNICODE))
 
 
-def is_recommendation(value: str) -> bool:
-    visible = markdown_visible_text(value)
-    candidate = re.sub(r"^(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+)", "", visible).strip()
+def is_recommendation(value: str, section_title: str = "") -> bool:
+    candidate = classification_text(value)
     if RECOMMENDATION_PATTERN.search(candidate):
         return True
     if re.match(
@@ -180,32 +237,51 @@ def is_recommendation(value: str) -> bool:
         flags=re.IGNORECASE,
     ):
         return True
-    return bool(_IMPERATIVE_MIGRATION.search(candidate))
+    if _IMPERATIVE_MIGRATION.search(candidate):
+        return True
+    return bool(
+        section_title
+        and _DECISION_SECTION.search(section_title)
+        and _SECTION_SELECTION_PATTERN.search(candidate)
+    )
 
 
 def is_high_risk(value: str) -> bool:
-    return bool(HIGH_RISK_PATTERN.search(markdown_visible_text(value)))
+    candidate = classification_text(value)
+    if not candidate:
+        return False
+    if re.match(
+        r"^(?:this|the)\s+(?:section|table|comparison|analysis|report|discussion)\b",
+        candidate,
+        flags=re.IGNORECASE,
+    ):
+        return False
+    return bool(
+        _NUMERIC_FACT_PATTERN.search(candidate)
+        or _OBJECTIVE_RISK_PATTERN.search(candidate)
+        or _CAPABILITY_PATTERN.search(candidate)
+        or FACTUAL_PATTERN.search(candidate)
+    )
 
 
-def is_claim_bearing(value: str) -> bool:
-    visible = markdown_visible_text(value)
+def is_claim_bearing(value: str, section_title: str = "") -> bool:
+    visible = classification_text(value)
     if re.match(
         r"^(?:this|the)\s+(?:section|table|comparison|analysis|report|discussion)\b",
         visible,
         flags=re.IGNORECASE,
-    ) and not is_recommendation(visible):
+    ) and not is_recommendation(visible, section_title):
         return False
     if re.search(
         r"\b(?:supplied (?:source|corpus)|information cutoff|source set|references|"
         r"methodological note|evidence base|scope of (?:this|the) analysis)\b",
         visible,
         flags=re.IGNORECASE,
-    ) and not is_recommendation(visible):
+    ) and not is_recommendation(visible, section_title):
         return False
     return bool(
-        is_recommendation(visible)
-        or HIGH_RISK_PATTERN.search(visible)
-        or FACTUAL_PATTERN.search(visible)
+        is_recommendation(visible, section_title)
+        or is_high_risk(visible)
     )
 
 
@@ -226,6 +302,7 @@ def _unit(
     table_row: int | None = None,
     table_column: int | None = None,
     table_header: bool = False,
+    section_title: str = "",
 ) -> WriterAuditUnit:
     text = draft[start:end]
     payload = f"unit-audit:v1\0{unit_type.value}\0{start}\0{end}\0{text}"
@@ -243,9 +320,15 @@ def _unit(
         end_line=end_line,
         start_column=start - line_start + 1,
         text=text,
-        claim_bearing=is_claim_bearing(text) if claim_bearing is None else claim_bearing,
+        claim_bearing=(
+            is_claim_bearing(text, section_title)
+            if claim_bearing is None else claim_bearing
+        ),
         high_risk=is_high_risk(text) if high_risk is None else high_risk,
-        recommendation=is_recommendation(text) if recommendation is None else recommendation,
+        recommendation=(
+            is_recommendation(text, section_title)
+            if recommendation is None else recommendation
+        ),
         table_row=table_row,
         table_column=table_column,
         table_header=table_header,
@@ -284,10 +367,33 @@ def _sentence_spans(draft: str, start: int, end: int) -> Iterable[tuple[int, int
     block = draft[start:end]
     cursor = 0
     boundary = re.compile(
-        r"(?<=[.!?。！？])\s+(?=(?:[\"'“‘(\[*_`]*[A-Z0-9\u3400-\u9fff]))"
+        r"(?P<terminal>[.!?。！？])(?P<closers>[\"'”’)\]]*)\s+"
+        r"(?=(?:[\"'“‘(\[*_`]*[A-Za-z0-9\u3400-\u9fff]))"
     )
+
+    def protected_period(match: re.Match[str]) -> bool:
+        if match.group("terminal") != ".":
+            return False
+        prefix = block[:match.start("terminal") + 1]
+        token_match = re.search(r"([A-Za-z.]+)\s*$", prefix)
+        token = token_match.group(1).casefold() if token_match else ""
+        if token == "ms." and token_match:
+            before_token = prefix[:token_match.start(1)].rstrip()
+            if before_token and before_token[-1].isdigit():
+                return False
+        if re.fullmatch(r"(?:[a-z]\.){2,}", token):
+            return True
+        if re.fullmatch(r"[a-z]\.", token):
+            return True
+        return token in {
+            "dr.", "mr.", "mrs.", "ms.", "prof.", "sr.", "jr.",
+            "st.", "vs.", "fig.", "eq.", "no.", "approx.", "dept.",
+        }
+
     for match in boundary.finditer(block):
-        raw_start, raw_end = cursor, match.start()
+        if protected_period(match):
+            continue
+        raw_start, raw_end = cursor, match.end("closers")
         while raw_start < raw_end and block[raw_start].isspace():
             raw_start += 1
         while raw_end > raw_start and block[raw_end - 1].isspace():
@@ -345,9 +451,11 @@ def split_markdown_audit_units(draft: str) -> list[WriterAuditUnit]:
     ordinal = 0
     in_fence = False
     in_references = False
+    current_section_title = ""
 
     def add(unit_type: AuditUnitType, start: int, end: int, **kwargs) -> None:
         nonlocal ordinal
+        kwargs.setdefault("section_title", current_section_title)
         units.append(_unit(draft, unit_type, ordinal, start, end, **kwargs))
         ordinal += 1
 
@@ -368,9 +476,13 @@ def split_markdown_audit_units(draft: str) -> list[WriterAuditUnit]:
             heading_level = len(stripped) - len(stripped.lstrip("#"))
             # The report title is frozen Writer structure, not a factual body
             # assertion even when it names a benchmark, model, or pricing topic.
-            if not in_references and heading_level > 1 and is_recommendation(title):
+            if not in_references and heading_level > 1 and is_recommendation(
+                title, current_section_title
+            ):
                 end = line.end - len(line.text) + len(line.text.rstrip("\r\n"))
                 add(AuditUnitType.HEADING, line.start, end)
+            if not in_references:
+                current_section_title = title
             index += 1
             continue
         if in_references:
@@ -386,17 +498,17 @@ def split_markdown_audit_units(draft: str) -> list[WriterAuditUnit]:
                     row_label,
                 ))
                 bearing = False if is_header else (
-                    is_claim_bearing(text)
+                    is_claim_bearing(text, current_section_title)
                     or (column > 0 and bool(_TABLE_FACT_CONTEXT.search(context)))
                 )
                 add(
                     AuditUnitType.TABLE_CELL, start, end,
                     claim_bearing=bearing,
-                    high_risk=(
+                    high_risk=False if is_header else (
                         is_high_risk(text)
-                        or (bearing and bool(HIGH_RISK_PATTERN.search(context)))
+                        or (bearing and is_high_risk(context))
                     ),
-                    recommendation=is_recommendation(text),
+                    recommendation=is_recommendation(text, current_section_title),
                     table_row=index,
                     table_column=column,
                     table_header=is_header,
@@ -522,8 +634,7 @@ def has_uncovered_claim_signal(unit: WriterAuditUnit, claim_texts: Iterable[str]
     return bool(
         RECOMMENDATION_PATTERN.search(residue)
         or _IMPERATIVE_MIGRATION.search(residue)
-        or HIGH_RISK_PATTERN.search(residue)
-        or FACTUAL_PATTERN.search(residue)
+        or is_high_risk(residue)
     )
 
 

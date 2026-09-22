@@ -1,9 +1,10 @@
 """Stable Markdown audit units for writer-first evidence enforcement.
 
 This module deliberately separates *finding* factual/recommendation coverage
-from *editing* the report.  Claim text may be aligned to a unit for audit
-bookkeeping, but final rendering is allowed to keep, replace, or omit only a
-complete unit.  It never returns a claim-sized edit span.
+from *editing* the report. Claim text may be aligned to a unit for audit
+bookkeeping, but it is never returned as an edit span. Final rendering keeps
+the Writer draft as the report body and may only qualify a complete high-risk
+or recommendation unit.
 """
 
 from __future__ import annotations
@@ -115,17 +116,23 @@ _CAPABILITY_PATTERN = re.compile(
     re.IGNORECASE,
 )
 
-FACTUAL_PATTERN = re.compile(
-    r"\b(?:[A-Z][A-Za-z0-9_.+/-]*(?:\s+[A-Z][A-Za-z0-9_.+/-]*){0,5})\s+"
-    r"(?:is|are|was|were|has|have|had|uses?|used|builds?|built|stores?|stored|"
-    r"runs?|ran|processes?|processed|delivers?|delivered|contains?|contained|"
-    r"operates?|ships?|shipped|reports?|reported|states?|stated|claims?|claimed|"
-    r"scores?|scored|achieves?|achieved|requires?|required)\b|"
-    r"\b(?:is|are|was|were)\s+(?:more|less|higher|lower|stronger|weaker|better|"
-    r"worse|different|similar|equivalent)\b|"
+_COMPANY_ACTION_PATTERN = re.compile(
+    r"\b(?:[A-Z][A-Za-z0-9_.&+/-]*(?:\s+[A-Z][A-Za-z0-9_.&+/-]*){0,5})\s+"
+    r"(?:announced?|acquired?|merged|partnered|invested|raised|filed|sued|"
+    r"discontinued?|deprecated?|withdrew|suspended|resumed|committed|promised|"
+    r"changed|increased|decreased|cut|reduced|expanded|closed|opened)\b|"
+    r"(?:公司|企业|厂商|供应商)[^。！？\n]{0,50}"
+    r"(?:宣布|收购|合并|合作|投资|融资|起诉|停止|下线|弃用|撤回|暂停|恢复|"
+    r"承诺|调整|上调|下调|削减|扩张|关闭|开放)",
+    re.IGNORECASE,
+)
+
+_STRONG_COMPARISON_PATTERN = re.compile(
+    r"\b(?:is|are|was|were)\s+(?:(?:objectively|materially|significantly|"
+    r"demonstrably)\s+)?(?:more|less|higher|lower|stronger|weaker|better|"
+    r"worse|faster|slower|safer|cheaper|costlier)\b|"
     r"\b(?:compared\s+with|compared\s+to|versus|vs\.?|differs?\s+(?:from|in))\b|"
-    r"(?:平台|产品|模型|服务|公司|厂商|系统)[^。！？\n]{0,40}"
-    r"(?:是|为|采用|包含|属于|拥有|运行|存储|处理|交付|声称|表示|达到)",
+    r"(?:优于|劣于|高于|低于|强于|弱于|快于|慢于|相比|不同于)",
     re.IGNORECASE,
 )
 
@@ -247,6 +254,14 @@ def is_recommendation(value: str, section_title: str = "") -> bool:
 
 
 def is_high_risk(value: str) -> bool:
+    """Identify only assertions that need the strict final-output gate.
+
+    Ordinary background facts and explanatory analysis intentionally stay out
+    of this classifier. The strict boundary is reserved for objective numeric,
+    status, ranking, comparison, causal, company-action, and strong product
+    capability assertions.
+    """
+
     candidate = classification_text(value)
     if not candidate:
         return False
@@ -260,7 +275,33 @@ def is_high_risk(value: str) -> bool:
         _NUMERIC_FACT_PATTERN.search(candidate)
         or _OBJECTIVE_RISK_PATTERN.search(candidate)
         or _CAPABILITY_PATTERN.search(candidate)
-        or FACTUAL_PATTERN.search(candidate)
+        or _COMPANY_ACTION_PATTERN.search(candidate)
+        or _STRONG_COMPARISON_PATTERN.search(candidate)
+    )
+
+
+def is_high_risk_table_value(value: str, context: str) -> bool:
+    """Classify terse table assertions without gating uncertainty placeholders."""
+
+    candidate = classification_text(value)
+    if not candidate or re.fullmatch(
+        r"(?:unknown|varies|depends|not specified|not available|n/?a|tbd|"
+        r"deployment[- ]specific|未知|不确定|视情况而定|未说明|暂无)",
+        candidate,
+        flags=re.IGNORECASE,
+    ):
+        return False
+    if is_high_risk(candidate):
+        return True
+    return bool(
+        _TABLE_FACT_CONTEXT.search(context)
+        and re.fullmatch(
+            r"(?:yes|no|supported|unsupported|available|unavailable|required|"
+            r"optional|included|excluded|primary|secondary|native|managed|"
+            r"是|否|支持|不支持|可用|不可用|必需|可选|包含|不包含|原生|托管)",
+            candidate,
+            flags=re.IGNORECASE,
+        )
     )
 
 
@@ -504,10 +545,7 @@ def split_markdown_audit_units(draft: str) -> list[WriterAuditUnit]:
                 add(
                     AuditUnitType.TABLE_CELL, start, end,
                     claim_bearing=bearing,
-                    high_risk=False if is_header else (
-                        is_high_risk(text)
-                        or (bearing and is_high_risk(context))
-                    ),
+                    high_risk=False if is_header else is_high_risk_table_value(text, context),
                     recommendation=is_recommendation(text, current_section_title),
                     table_row=index,
                     table_column=column,

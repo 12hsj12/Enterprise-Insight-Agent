@@ -87,9 +87,11 @@ def test_numbered_list_markers_and_citation_years_are_not_risk_facts():
         "The analysis remains useful ([Example, 2026](https://example.test/source))."
     )
     assert not any(unit.high_risk for unit in units)
+    assert not is_high_risk("Acme builds widgets.")
     assert is_high_risk("Acme reports a 99.99% SLA in 2026.")
     assert is_high_risk("Acme supports private networking.")
     assert is_high_risk("Acme is faster because it uses a distributed index.")
+    assert is_high_risk("Acme announced a production release.")
 
 
 @pytest.mark.parametrize("advice", [
@@ -226,8 +228,8 @@ def test_comparison_discloses_both_literal_sources_without_reviving_gate_claim()
     ))
     assert "AWS Bedrock lists models" in report
     assert "Azure OpenAI lists models" in report
-    assert "AWS Bedrock and Azure OpenAI differ in model choice" not in report
-    assert "当前证据强度有限" in report
+    assert "AWS Bedrock and Azure OpenAI differ in model choice" in report
+    assert "lacks sufficient independent verification" in report
     assert "LIMITED_EVIDENCE" not in report
 
 
@@ -295,14 +297,16 @@ def test_ed_conditional_advice_requires_surviving_premise_and_cites_it():
     ] == 1
 
 
-def test_unbound_high_risk_draft_fact_is_not_published():
+def test_unbound_high_risk_draft_fact_is_preserved_as_unverified():
     execution = integrate_claims(EvidenceContext(context="", evidences=[]),
                                  ClaimPlan(items=[]), CUTOFF)
     report = render_report(execution, writer_draft=(
         "## Market overview\n\nAcme captured 87% market share in 2026."
     ))
-    assert "87%" not in report
-    assert "当前可用证据不足" in report
+    assert "87%" in report
+    assert "insufficient to verify the following conclusion" in report
+    assert execution.final_render_audit_summary["fail_safe_deletion_count"] == 0
+    assert execution.final_render_audit_summary["claim_reconstruction_count"] == 0
     escaped = render_report(execution, writer_draft=(
         "## <script>alert(1)</script>\n\nAcme captured 87% market share in 2026."
     ))
@@ -338,7 +342,8 @@ def test_writer_draft_structure_and_analysis_survive_local_claim_audit():
     assert "## Connectivity" in report and "## Operating interpretation" in report
     assert "That distinction matters" in report
     assert "practical trade-off depends" in report
-    assert "guarantees that traffic never traverses" not in report
+    assert "guarantees that traffic never traverses" in report
+    assert "lacks sufficient independent verification" in report
     assert "Vendor documentation states" in report
     assert len(report) >= len(draft) * 0.8
 
@@ -365,7 +370,8 @@ def test_gate_reject_replaces_only_the_claim_not_its_paragraph():
     )
     assert "Before choosing" in report
     assert "operational ownership and incident response" in report
-    assert "objectively safer" not in report
+    assert "objectively safer" in report
+    assert "insufficient to verify the following conclusion" in report
     assert "UNRESOLVED" not in report
 
 
@@ -394,11 +400,11 @@ def test_table_fact_failure_changes_only_its_cell_and_preserves_comparison():
         writer_draft=draft,
     )
     assert "| Product | SLA | Operating interpretation |" in report
-    assert "| Beta | — | Preserve the comparison boundary. |" in report
+    assert "| Beta | Evidence varies by deployment. | Preserve the comparison boundary. |" in report
     assert "Review incident ownership" in report
     assert "separates source claims" in report
-    assert "99.99%" not in report
-    assert "| Acme | — |" in report
+    assert "99.99%" in report
+    assert "| Acme | The available evidence is insufficient to verify" in report
     assert "UNRESOLVED" not in report
 
 
@@ -422,13 +428,14 @@ def test_table_stronger_wording_runs_through_grounding_and_cannot_be_verified():
     ))
     assert execution.layered_output_summary["verified_fact"] == 0
     assert execution.layered_output_summary["limited_evidence"] == 1
-    assert "guarantees traffic never" not in report
+    assert "guarantees traffic never" in report
+    assert "lacks sufficient independent verification" in report
     assert "Vendor documentation states" in report
     assert "Keep deployment assumptions explicit" in report
     assert report.count("| --- | --- | --- |") == 1
 
 
-def test_unaudited_table_price_is_scrubbed_without_deleting_row_or_table():
+def test_unaudited_table_price_is_qualified_without_deleting_row_or_table():
     source = Evidence(
         evidence_id="one", sub_query="fixture", url="https://example.test/one",
         content="The comparison uses a common decision frame.",
@@ -443,15 +450,16 @@ def test_unaudited_table_price_is_scrubbed_without_deleting_row_or_table():
             "Beta | Unknown | Requires a deployment-specific quote."
         ),
     )
-    assert "$12" not in report
-    assert "Acme |" in report and "Beta | — |" in report
+    assert "$12" in report
+    assert "insufficient to verify the following conclusion: $12 per month" in report
+    assert "Acme |" in report and "Beta | Unknown |" in report
     assert "Product | Price | Analysis" in report
     assert "Fits teams that value simplicity" in report
-    assert "Acme | — |" in report
+    assert "Acme | The available evidence is insufficient" in report
     assert "Requires a deployment-specific quote" in report
 
 
-def test_unbound_draft_recommendation_is_removed_but_analysis_survives():
+def test_unbound_draft_recommendation_is_qualified_and_analysis_survives():
     source = Evidence(
         evidence_id="one", sub_query="fixture", url="https://example.test/one",
         content="The decision depends on the operating model.",
@@ -464,9 +472,10 @@ def test_unbound_draft_recommendation_is_removed_but_analysis_survives():
             "Choose pgvector for production. Preserve a reversible migration path."
         ),
     )
-    assert "Choose pgvector" not in report
+    assert "Choose pgvector" in report
+    assert "insufficient to support the following selection or migration recommendation" in report
     assert "operational ownership" in report
-    assert "reversible migration path" not in report
+    assert "reversible migration path" in report
     assert "AI_INFERENCE" not in report
 
 
@@ -488,14 +497,21 @@ def test_selection_and_migration_advice_never_bypasses_premises(advice):
         execution,
         writer_draft=f"## Decision\n\n{advice} The operating-model trade-off remains.",
     )
-    assert advice not in report
+    assert advice in report
+    if "pgvector" in advice and not advice.startswith("We"):
+        assert "当前证据不足以支持以下选型或迁移建议" in report
+    else:
+        assert "insufficient to support the following selection or migration recommendation" in report
     assert "operating-model trade-off remains" in report
     assert execution.final_render_audit_summary[
         "unbound_recommendation_removed_count"
+    ] == 0
+    assert execution.final_render_audit_summary[
+        "unbound_recommendation_qualified_count"
     ] == 1
 
 
-def test_imperative_migration_list_items_are_removed_as_complete_units():
+def test_imperative_migration_list_items_are_qualified_as_complete_units():
     source = Evidence(
         evidence_id="one", sub_query="fixture", url="https://example.test/one",
         content="Migration requires workload-specific validation.",
@@ -509,8 +525,11 @@ def test_imperative_migration_list_items_are_removed_as_complete_units():
         "2. Run shadow reads against the new vector store.\n\n"
         "The sequence remains a workload-specific design exercise."
     ))
-    assert "Pin the embedding model" not in report
-    assert "Run shadow reads" not in report
+    assert "Pin the embedding model" in report
+    assert "Run shadow reads" in report
+    assert report.count(
+        "insufficient to support the following selection or migration recommendation"
+    ) == 2
     assert "workload-specific design exercise" in report
     assert execution.final_render_audit_summary["recommendation_bypass_count"] == 0
     assert execution.final_render_audit_summary["substring_fragment_deletion_count"] == 0
@@ -530,11 +549,12 @@ def test_high_risk_fact_adjacent_to_audited_placeholder_cannot_bypass_review():
         "The comparison frame remains useful."
     ))
     assert "Acme supports private endpoints" in report
-    assert "99.99%" not in report and "2026" not in report and "guarantees" not in report
+    assert "99.99%" in report and "2026" in report and "guarantees" in report
+    assert "insufficient to verify the following conclusion" in report
     assert "comparison frame remains useful" in report
     assert any(
         record.state is AuditUnitState.LIMITED
-        and "UNIT_COVERAGE_GAP_REMOVED_BY_WHOLE_UNIT_REWRITE" in record.reason_codes
+        and "UNIT_COVERAGE_GAP_QUALIFIED" in record.reason_codes
         for record in execution.unit_audit_records
     )
     assert execution.final_render_audit_summary["substring_fragment_deletion_count"] == 0
@@ -555,12 +575,13 @@ def test_table_cell_adjacent_to_audited_placeholder_cannot_bypass_review():
         "| Acme | Acme supports private endpoints; price is $12/month | Keep scope explicit. |"
     ))
     assert "Acme supports private endpoints" in report
-    assert "$12" not in report and "price is" not in report
+    assert "$12" in report and "price is" in report
+    assert "insufficient to verify the following conclusion" in report
     assert "Keep scope explicit" in report
     assert report.count("| --- | --- | --- |") == 1
 
 
-def test_unaudited_benchmark_capability_and_causal_claims_are_removed_locally():
+def test_unaudited_benchmark_capability_and_causal_claims_are_qualified_locally():
     source = Evidence(
         evidence_id="one", sub_query="fixture", url="https://example.test/one",
         content="The section uses a common comparison frame.",
@@ -574,14 +595,18 @@ def test_unaudited_benchmark_capability_and_causal_claims_are_removed_locally():
         "The section still explains how to compare operating boundaries."
     ))
     for unsafe in ("12 ms", "1 million", "Because it uses", "40%"):
-        assert unsafe not in report
+        assert unsafe in report
+    assert report.count("insufficient to verify the following conclusion") >= 3
     assert "explains how to compare operating boundaries" in report
     assert execution.final_render_audit_summary[
-        "unaudited_high_risk_unit_omitted_count"
+        "unaudited_high_risk_unit_qualified_count"
     ] >= 3
+    assert execution.final_render_audit_summary[
+        "unaudited_high_risk_unit_omitted_count"
+    ] == 0
 
 
-def test_ordinary_factual_assertion_omitted_by_extractor_is_not_left_verbatim():
+def test_ordinary_factual_assertion_stays_outside_strict_gate():
     source = Evidence(
         evidence_id="one", sub_query="fixture", url="https://example.test/one",
         content="The evidence uses a bounded comparison frame.",
@@ -593,11 +618,11 @@ def test_ordinary_factual_assertion_omitted_by_extractor_is_not_left_verbatim():
         "## Business\n\nAcme builds widgets. "
         "The comparison separates facts from decision interpretation."
     ))
-    assert "Acme builds widgets" not in report
+    assert "Acme builds widgets" in report
     assert "separates facts from decision interpretation" in report
     assert execution.final_render_audit_summary[
         "unresolved_unit_count"
-    ] == 1
+    ] == 0
 
 
 def test_writer_recommendation_cannot_hide_in_factual_claim_array():
@@ -615,11 +640,12 @@ def test_writer_recommendation_cannot_hide_in_factual_claim_array():
         execution,
         writer_draft="## Decision\n\nChoose Milvus for production. Keep the decision reversible.",
     )
-    assert "Choose Milvus" not in report
+    assert "Choose Milvus" in report
+    assert "insufficient to support the following selection or migration recommendation" in report
     assert "decision reversible" in report
     assert execution.final_render_audit_summary[
         "unbound_recommendation_removed_count"
-    ] == 1
+    ] == 0
 
 
 def test_recommendation_is_suppressed_when_its_premise_is_not_visible_in_draft():
@@ -708,14 +734,15 @@ def test_priority_case_writer_structure_and_explanation_are_preserved(case_name)
     assert f"# {case_name} report" in report
     assert "## Evidence frame" in report and "## Decision logic" in report
     assert report.count("keeps deployment assumptions explicit") == 30
-    assert "99.99%" not in report and "2026" not in report
+    assert "99.99%" in report and "2026" in report
+    assert "insufficient to verify the following conclusion" in report
     assert len(report) >= len(draft) * 0.9
     assert not any(label in report for label in (
         "VERIFIED_FACT", "LIMITED_EVIDENCE", "UNRESOLVED", "AI_INFERENCE",
     ))
 
 
-def test_malformed_atom_is_removed_locally_without_losing_surrounding_prose():
+def test_malformed_atom_is_qualified_locally_without_losing_surrounding_prose():
     source = Evidence(
         evidence_id="one", sub_query="fixture", url="https://example.test/one",
         content="Acme builds widgets.",
@@ -735,7 +762,8 @@ def test_malformed_atom_is_removed_locally_without_losing_surrounding_prose():
     ))
     assert "Acme builds widgets" in report
     assert "VERIFIED_FACT" not in report
-    assert "Malformed atom states" not in report
+    assert "Malformed atom states" in report
+    assert "insufficient to verify the following conclusion" in report
     assert "comparison frame" in report and "workload envelope" in report
     assert "UNRESOLVED" not in report
 

@@ -120,7 +120,7 @@ async def test_no_evidence_requirement_is_unresolved_without_writer_call(tmp_pat
     result = await IntelligenceWorkflow(EmptyResearcher, output_directory=tmp_path).run(
         IntelligenceRequest(target="Acme", enable_v2_execution=True), run_id="empty")
     assert result.execution.layered_output_summary["unresolved"] > 0
-    assert "当前可用证据不足以支持具体事实结论" in result.report
+    assert "No source material is currently available" in result.report
     writer.assert_not_called()
 
 
@@ -355,7 +355,9 @@ async def test_grounding_failure_is_local_and_preserves_writer_report(tmp_path, 
     assert saved.execution_status.value == "completed"
     assert (tmp_path / "ground-failed" / "report.md").exists()
     assert result.execution.evidence_context.generated_claim_records == []
-    assert "Acme builds widgets" not in result.report
+    assert "Acme builds widgets" in result.report
+    assert result.execution.final_render_audit_summary["fail_safe_deletion_count"] == 0
+    assert result.execution.final_render_audit_summary["claim_reconstruction_count"] == 0
     assert "## Widget business" in result.report
 
 

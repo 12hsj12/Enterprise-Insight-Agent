@@ -89,9 +89,9 @@ def test_grounding_strength_failure_downgrades_to_literal_limited_evidence():
     assert result.evidence_context.claim_gate_results[0].decision.value == "emit"
     assert result.layered_output_summary["verified_fact"] == 0
     assert result.layered_output_summary["limited_evidence"] == 1
-    assert "Traffic never traverses" not in report
+    assert "Traffic never traverses" in report
     assert "traffic uses a private endpoint" in report
-    assert "当前证据强度有限" in report
+    assert "lacks sufficient independent verification" in report
     assert "LIMITED_EVIDENCE" not in report
 
 
@@ -125,7 +125,7 @@ def test_limited_premise_can_support_conditional_inference_with_visible_strength
     assert result.layered_output_summary["verified_fact"] == 0
     assert result.layered_output_summary["limited_evidence"] == 1
     assert result.layered_output_summary["ai_inference"] == 1
-    assert "pgvector has unlimited scale" not in report
+    assert "pgvector has unlimited scale" in report
     assert "Choose pgvector for production" not in report
     assert "AI_INFERENCE" not in report
     assert "但当前证据强度有限" in report
@@ -199,6 +199,14 @@ def test_t05_two_vendor_sides_visible_without_adjudicator():
     assert "10 ms" in report and "12 ms" in report
     assert "A is faster than B" not in report and "B is faster than A" not in report
     assert "双方说法存在冲突" in report and "当前无法确认哪一方" in report
+    writer_report = render_report(
+        result,
+        writer_draft="A is faster than B. B is faster than A.",
+    )
+    assert "A is faster than B" in writer_report
+    assert "B is faster than A" in writer_report
+    assert "Available sources conflict" in writer_report
+    assert "does not establish which side is more reliable" in writer_report
 
 
 def test_t06_no_support_is_unresolved_even_with_literal_excerpt():
@@ -571,6 +579,7 @@ async def test_malformed_writer_claim_and_source_identity_do_not_abort_valid_cla
             "The surrounding comparison remains readable."
         ),
     )
-    assert "Malformed atom has no material flag" not in report
+    assert "Malformed atom has no material flag" in report
+    assert "insufficient to verify the following conclusion" in report
     assert "surrounding comparison remains readable" in report
     assert "UNRESOLVED" not in report

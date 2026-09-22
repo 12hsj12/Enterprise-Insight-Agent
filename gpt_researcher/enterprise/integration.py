@@ -1543,7 +1543,13 @@ def _visible_recommendation_text(text: str) -> str:
 
 def _render_audited_writer_draft(execution: IntegratedExecution,
                                  writer_draft: str) -> str:
-    """Render the Writer skeleton using only complete Markdown audit units."""
+    """Keep the Writer draft and qualify only unsafe high-risk assertions.
+
+    Claim Gate and Grounding keep their existing internal semantics. At the
+    report boundary, however, a failed audit never deletes text and never
+    reconstructs a unit from surviving claims. The complete original unit is
+    retained inside a natural attribution, conflict, or insufficiency frame.
+    """
 
     evidence = {item.evidence_id: item for item in execution.evidence_context.evidences}
     records = execution.evidence_context.generated_claim_records
@@ -1561,40 +1567,85 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
             return f"[{_escape_report_text(evidence_id)}](<{url}>)"
         return f"Evidence {_escape_report_text(evidence_id)} (source URL unavailable)"
 
-    def limited_replacement(claim_ids: list[str]) -> str:
-        disclosures = []
-        seen = set()
+    gates_by_id = {
+        result.claim_id: result
+        for result in execution.evidence_context.claim_gate_results
+    }
+
+    def localized(original: str, english: str, chinese: str) -> str:
+        return chinese if re.search(r"[\u3400-\u9fff]", original) else english
+
+    def original_payload(unit: WriterAuditUnit) -> str:
+        text = unit.text.strip()
+        if unit.unit_type is AuditUnitType.LIST_ITEM:
+            text = re.sub(r"^\s*(?:[-*+] |\d+[.)] )", "", text)
+        if unit.unit_type is AuditUnitType.HEADING:
+            text = re.sub(r"^#{1,6}\s+", "", text)
+        return text
+
+    def source_references(claim_ids: list[str]) -> list[str]:
+        rendered: list[str] = []
+        seen: set[tuple[str | None, str]] = set()
         for claim_id in claim_ids:
             for disclosure in limited_by_claim.get(claim_id, []):
-                key = (disclosure.evidence_id, disclosure.excerpt)
+                key = (disclosure.publisher, disclosure.evidence_id)
                 if key in seen:
                     continue
                 seen.add(key)
-                date_note = (
-                    "；其发布日期尚未得到可靠验证，因此不能据此确认当前状态"
-                    if disclosure.publication_date_unverified else ""
-                )
-                disclosures.append(
-                    f"{_source_attribution(disclosure.publisher)}，“"
+                publisher = disclosure.publisher or "the cited source"
+                rendered.append(
+                    f"{_escape_report_text(publisher)} states “"
                     f"{_escape_report_text(disclosure.excerpt)}” "
-                    f"{citation(disclosure.evidence_id)}{date_note}"
+                    f"{citation(disclosure.evidence_id)}"
                 )
-        if not disclosures:
-            return ""
-        return (
-            "；".join(disclosures)
-            + "。当前证据强度有限，因此这里只保留来源归属，不延伸为原草稿中的更强结论。"
-        )
+        return rendered
 
-    def verified_replacement(claim_ids: list[str]) -> str:
-        rendered = []
+    def conflict_references(claim_ids: list[str]) -> list[str]:
+        evidence_ids: list[str] = []
         for claim_id in claim_ids:
-            record = records_by_id.get(claim_id)
-            if record is None:
-                continue
-            refs = " ".join(citation(eid) for eid in record.cited_evidence_ids)
-            rendered.append(f"{_escape_report_text(record.rendered_text)} {refs}".rstrip())
-        return " ".join(dict.fromkeys(rendered))
+            gate = gates_by_id.get(claim_id)
+            if gate is not None:
+                evidence_ids.extend(gate.supporting_evidence_ids)
+                evidence_ids.extend(gate.conflicting_evidence_ids)
+        return [citation(item) for item in dict.fromkeys(evidence_ids)]
+
+    def qualify_unit(
+        unit: WriterAuditUnit,
+        kind: Literal["limited", "conflict", "insufficient", "recommendation"],
+        *,
+        references: list[str] | None = None,
+    ) -> str:
+        original = original_payload(unit)
+        refs = " ".join(references or [])
+        if kind == "limited":
+            prefix = localized(
+                original,
+                "According to the cited source material, the following statement has "
+                "direct support, but currently lacks sufficient independent verification: ",
+                "根据所引来源材料，以下表述有直接来源，但当前缺少充分的独立验证：",
+            )
+        elif kind == "conflict":
+            prefix = localized(
+                original,
+                "Available sources conflict on the following point, and the current "
+                "record does not establish which side is more reliable: ",
+                "现有来源对以下问题存在冲突，当前材料无法确认哪一方更可靠：",
+            )
+        elif kind == "recommendation":
+            prefix = localized(
+                original,
+                "The available evidence is insufficient to support the following "
+                "selection or migration recommendation: ",
+                "当前证据不足以支持以下选型或迁移建议：",
+            )
+        else:
+            prefix = localized(
+                original,
+                "The available evidence is insufficient to verify the following conclusion: ",
+                "当前证据不足以核实以下结论：",
+            )
+        suffix = f" {refs}" if refs else ""
+        return f"{prefix}{original}{suffix}"
 
     def render_inference(
         inference: EvidenceGroundedInference,
@@ -1653,17 +1704,6 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
     verified_units = limited_units = omitted_units = unresolved_units = 0
     unaudited_high_risk_unit_count = 0
 
-    def fail_safe_replacement(unit: WriterAuditUnit) -> str | None:
-        if unit.unit_type is AuditUnitType.HEADING:
-            if unit.recommendation:
-                condition = re.search(r"\bCondition\s+([A-Z0-9]+)\b", unit.text, re.IGNORECASE)
-                return (
-                    f"Decision condition {condition.group(1).upper()}"
-                    if condition else "Decision consideration"
-                )
-            return "Evidence context"
-        return None
-
     def record_unit(
         unit: WriterAuditUnit,
         state: AuditUnitState,
@@ -1691,12 +1731,9 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
             reason_codes=reason_codes,
         ))
 
-    # Factual pass. Recommendation units are withheld until validated inference
-    # premises have themselves become visible through a factual unit.
+    # Ordinary narrative is never subjected to the strict output gate.
+    # Recommendation units wait until their premises have become visible.
     for unit in units:
-        if not unit.claim_bearing:
-            record_unit(unit, AuditUnitState.KEEP, "keep", reason_codes=("NOT_CLAIM_BEARING",))
-            continue
         if unit.recommendation:
             recommendation_units.append(unit)
             continue
@@ -1705,86 +1742,101 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
             if not _is_authored_recommendation(item.claim.normalized_text)
         ]
         claim_ids = tuple(item.claim.claim_id for item in items)
-        coverage_gap = has_uncovered_claim_signal(
-            unit, (item.claim.normalized_text for item in items)
-        ) if items else False
         safe_record_ids = [
             claim_id for claim_id in claim_ids if claim_id in records_by_id
         ]
         safe_limited_ids = [
             claim_id for claim_id in claim_ids if claim_id in limited_by_claim
         ]
+        if unit.unit_id in invalid_unit_ids:
+            state = AuditUnitState.UNRESOLVED
+            reasons = ("MALFORMED_ATOM_IN_UNIT",)
+            replacements[unit.unit_id] = qualify_unit(unit, "insufficient")
+            unresolved_units += 1
+            record_unit(
+                unit, state, "replace", claim_ids=claim_ids, reason_codes=reasons,
+            )
+            continue
+        if not unit.high_risk:
+            visible_premise_ids.update(safe_record_ids + safe_limited_ids)
+            record_unit(
+                unit, AuditUnitState.KEEP, "keep", claim_ids=claim_ids,
+                reason_codes=("OUTSIDE_HIGH_RISK_GATE",),
+            )
+            continue
+
+        coverage_gap = has_uncovered_claim_signal(
+            unit, (item.claim.normalized_text for item in items)
+        ) if items else False
         rejected_ids = [
             claim_id for claim_id in claim_ids
             if claim_id not in records_by_id and claim_id not in limited_by_claim
         ]
-        replacement: str | None = None
-        force_replace = False
-        if unit.unit_id in invalid_unit_ids:
+        conflict_ids = [
+            claim_id for claim_id in claim_ids
+            if (
+                (gate := gates_by_id.get(claim_id)) is not None
+                and (
+                    bool(gate.conflicting_evidence_ids)
+                    or any(
+                        getattr(code, "value", str(code)) == "conflict_unadjudicated"
+                        for code in gate.reason_codes
+                    )
+                )
+            )
+        ]
+        if not items:
             state = AuditUnitState.UNRESOLVED
-            reasons = ("MALFORMED_ATOM_IN_UNIT",)
-        elif not items:
-            state = AuditUnitState.UNRESOLVED
-            reasons = ("EXTRACTOR_MISSED_CLAIM_BEARING_UNIT",)
+            reasons = ("EXTRACTOR_MISSED_HIGH_RISK_UNIT",)
+            replacement = qualify_unit(unit, "insufficient")
+        elif conflict_ids:
+            state = AuditUnitState.LIMITED
+            reasons = ("CONFLICT_PRESERVED_WITHOUT_ADJUDICATION",)
+            replacement = qualify_unit(
+                unit, "conflict", references=conflict_references(conflict_ids),
+            )
         elif safe_limited_ids:
             state = AuditUnitState.LIMITED
-            replacement = limited_replacement(safe_limited_ids)
-            force_replace = True
             reasons = tuple(filter(None, (
-                "LIMITED_SOURCE_DISCLOSURE",
-                "UNIT_COVERAGE_GAP_REMOVED_BY_WHOLE_UNIT_REWRITE" if coverage_gap else "",
-                "REJECTED_ATOM_REMOVED_BY_WHOLE_UNIT_REWRITE" if rejected_ids else "",
+                "LIMITED_SOURCE_ATTRIBUTION",
+                "UNIT_COVERAGE_GAP_QUALIFIED" if coverage_gap else "",
+                "REJECTED_ATOM_QUALIFIED" if rejected_ids else "",
             )))
+            replacement = qualify_unit(
+                unit, "limited", references=source_references(safe_limited_ids),
+            )
         elif safe_record_ids and (coverage_gap or rejected_ids):
             state = AuditUnitState.LIMITED
-            replacement = verified_replacement(safe_record_ids)
-            force_replace = True
             reasons = tuple(filter(None, (
-                "PARTIALLY_VERIFIED_WHOLE_UNIT_REWRITE",
-                "UNIT_COVERAGE_GAP_REMOVED_BY_WHOLE_UNIT_REWRITE" if coverage_gap else "",
-                "REJECTED_ATOM_REMOVED_BY_WHOLE_UNIT_REWRITE" if rejected_ids else "",
+                "PARTIALLY_VERIFIED_UNIT_QUALIFIED",
+                "UNIT_COVERAGE_GAP_QUALIFIED" if coverage_gap else "",
+                "REJECTED_ATOM_QUALIFIED" if rejected_ids else "",
             )))
+            replacement = qualify_unit(unit, "insufficient")
         elif rejected_ids:
-            state = AuditUnitState.OMIT
-            reasons = ("CLAIM_GATE_OR_GROUNDING_REJECTED",)
+            state = AuditUnitState.UNRESOLVED
+            reasons = ("CLAIM_GATE_OR_GROUNDING_REJECTED_AND_QUALIFIED",)
+            replacement = qualify_unit(unit, "insufficient")
         else:
             state = AuditUnitState.KEEP
             reasons = ("GATE_AND_GROUNDING_PASSED",)
+            replacement = None
 
         if state is AuditUnitState.KEEP:
             verified_units += 1
             visible_premise_ids.update(safe_record_ids)
-            if force_replace:
-                replacements[unit.unit_id] = replacement
             record_unit(
-                unit, state, "replace" if force_replace else "keep",
-                claim_ids=claim_ids, reason_codes=reasons,
+                unit, state, "keep", claim_ids=claim_ids, reason_codes=reasons,
             )
-        elif state is AuditUnitState.LIMITED:
-            if replacement:
-                limited_units += 1
-                replacements[unit.unit_id] = replacement
-                visible_premise_ids.update(safe_record_ids + safe_limited_ids)
-                record_unit(unit, state, "replace", claim_ids=claim_ids, reason_codes=reasons)
-            else:
-                omitted_units += 1
-                replacements[unit.unit_id] = fail_safe_replacement(unit)
-                record_unit(
-                    unit, AuditUnitState.UNRESOLVED,
-                    "replace" if unit.unit_type is AuditUnitType.HEADING else "omit",
-                    claim_ids=claim_ids,
-                    reason_codes=("LIMITED_DISCLOSURE_UNAVAILABLE",),
-                )
         else:
-            if state is AuditUnitState.UNRESOLVED:
-                unresolved_units += 1
+            if state is AuditUnitState.LIMITED:
+                limited_units += 1
+                visible_premise_ids.update(safe_record_ids + safe_limited_ids)
             else:
-                omitted_units += 1
-            replacements[unit.unit_id] = fail_safe_replacement(unit)
+                unresolved_units += 1
+            replacements[unit.unit_id] = replacement
             record_unit(
-                unit, state,
-                "replace" if unit.unit_type is AuditUnitType.HEADING else "omit",
-                claim_ids=claim_ids, reason_codes=reasons,
+                unit, state, "replace", claim_ids=claim_ids, reason_codes=reasons,
             )
 
     eligible_inferences = [
@@ -1835,13 +1887,12 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
             item.claim.claim_id for item in inputs_by_unit.get(unit.unit_id, [])
         )
         if inference is None:
-            replacements[unit.unit_id] = fail_safe_replacement(unit)
-            omitted_units += 1
+            replacements[unit.unit_id] = qualify_unit(unit, "recommendation")
+            unresolved_units += 1
             record_unit(
-                unit, AuditUnitState.OMIT,
-                "replace" if unit.unit_type is AuditUnitType.HEADING else "omit",
+                unit, AuditUnitState.UNRESOLVED, "replace",
                 claim_ids=claim_ids,
-                reason_codes=("WRITER_RECOMMENDATION_WITHOUT_VISIBLE_VALIDATED_PREMISES",),
+                reason_codes=("WRITER_RECOMMENDATION_QUALIFIED_WITHOUT_VISIBLE_PREMISES",),
             )
             continue
         replacement, state = render_inference(inference)
@@ -1861,10 +1912,14 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
     audited = re.sub(r"\n{3,}", "\n\n", audited)
     audited = _sanitize_draft_html(audited.strip())
     if not evidence:
-        audited += "\n\n当前可用证据不足以支持具体事实结论。"
+        audited += "\n\n" + localized(
+            writer_draft,
+            "No source material is currently available to support specific factual conclusions.",
+            "当前可用证据不足以支持具体事实结论。",
+        )
 
-    # Every original claim-bearing unit has exactly one final record. A unit
-    # that the extractor missed is UNRESOLVED and has already failed closed.
+    # Every original unit has exactly one final record. High-risk audit failure
+    # is represented as qualified prose, never absence from the report.
     records_by_unit_id = {record.unit_id: record for record in records_out}
     unaudited_high_risk_unit_count = sum(
         unit.high_risk and unit.unit_id not in records_by_unit_id for unit in units
@@ -1897,20 +1952,25 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
         "unresolved_unit_count": unresolved_units,
         "high_risk_unaudited_unit_count": unaudited_high_risk_unit_count,
         "recommendation_bypass_count": recommendation_bypass_count,
+        "fail_safe_deletion_count": 0,
+        "claim_reconstruction_count": 0,
+        "destructive_unit_deletion_count": 0,
         "substring_fragment_deletion_count": 0,
         "verified_claim_occurrence_count": verified_claim_count,
         "limited_claim_occurrence_count": limited_claim_count,
         "omitted_claim_occurrence_count": omitted_claim_count,
         "unaudited_high_risk_fragment_removed_count": 0,
         "unaudited_factual_fragment_removed_count": 0,
-        "unaudited_high_risk_unit_omitted_count": sum(
+        "unaudited_high_risk_unit_omitted_count": 0,
+        "unaudited_high_risk_unit_qualified_count": sum(
             record.high_risk
-            and record.state in {AuditUnitState.OMIT, AuditUnitState.UNRESOLVED}
+            and record.state is AuditUnitState.UNRESOLVED
             for record in records_out
         ),
         "malformed_atom_isolated_unit_count": len(invalid_unit_ids),
-        "unbound_recommendation_removed_count": sum(
-            record.recommendation and record.state is AuditUnitState.OMIT
+        "unbound_recommendation_removed_count": 0,
+        "unbound_recommendation_qualified_count": sum(
+            record.recommendation and record.state is AuditUnitState.UNRESOLVED
             for record in records_out
         ),
         "premise_bound_recommendation_count": len(placed_inference_ids),
@@ -1918,6 +1978,12 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
             len(execution.surviving_inferences) - len(placed_inference_ids)
         ),
         "unplaced_audit_claim_count": len(unplaced_claim_ids),
+        "unsupported_stronger_verified_count": sum(
+            record.high_risk
+            and record.state is AuditUnitState.KEEP
+            and any(claim_id not in records_by_id for claim_id in record.claim_ids)
+            for record in records_out
+        ),
     }
     return audited + "\n"
 

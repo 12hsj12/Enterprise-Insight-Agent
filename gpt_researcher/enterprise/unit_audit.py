@@ -75,6 +75,9 @@ class UnitAuditRecord(BaseModel):
     semantic_high_risk: bool = False
     semantic_risk_category: str | None = None
     conservative_fallback_audit: bool = False
+    answer_critical: bool = False
+    answer_critical_reasons: tuple[str, ...] = ()
+    requirement_ids: tuple[str, ...] = ()
     claim_ids: tuple[str, ...] = ()
     inference_id: str | None = None
     reason_codes: tuple[str, ...] = ()

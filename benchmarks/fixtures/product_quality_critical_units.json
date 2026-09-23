@@ -1,0 +1,80 @@
+[
+  {
+    "case_id": "EIV2_CC_001",
+    "contains": "Bedrock's defining characteristic is multi-provider access behind a single API",
+    "reason": "PRODUCT_DECISION_FACT",
+    "requirement_ids": ["R1"]
+  },
+  {
+    "case_id": "EIV2_CC_001",
+    "contains": "Bedrock now lists **OpenAI** among its model providers",
+    "reason": "PRODUCT_DECISION_FACT",
+    "requirement_ids": ["R1"]
+  },
+  {
+    "case_id": "EIV2_CC_001",
+    "contains": "AI21, Anthropic, Cohere, DeepSeek, Luma, Meta, Mistral, OpenAI",
+    "reason": "COMPARISON_DIFFERENTIATOR",
+    "requirement_ids": ["R1"]
+  },
+  {
+    "case_id": "EIV2_CC_001",
+    "contains": "Bedrock holds a genuine structural advantage in catalogue breadth",
+    "reason": "EXECUTIVE_DECISION",
+    "requirement_ids": ["R1", "R4"]
+  },
+  {
+    "case_id": "EIV2_TM_003",
+    "contains": "It is increasingly a three-way contest to **localize AI infrastructure**",
+    "reason": "EXECUTIVE_DECISION",
+    "requirement_ids": ["R1", "R2", "R3"]
+  },
+  {
+    "case_id": "EIV2_TM_003",
+    "contains": "The most important regional trend is the rise of sovereign AI clouds",
+    "reason": "CONCLUSION_DECISION",
+    "requirement_ids": ["R1"]
+  },
+  {
+    "case_id": "EIV2_TM_003",
+    "contains": "This means cloud providers are increasingly expected to offer model choice",
+    "reason": "CONCLUSION_DECISION",
+    "requirement_ids": ["R2"]
+  },
+  {
+    "case_id": "EIV2_TM_003",
+    "contains": "Enterprise control is shifting from static role-based access control",
+    "reason": "PRODUCT_DECISION_FACT",
+    "requirement_ids": ["R3"]
+  },
+  {
+    "case_id": "EIV2_TM_003",
+    "contains": "the generative AI cloud market had entered a **sovereign-by-default",
+    "reason": "CONCLUSION_DECISION",
+    "requirement_ids": ["R1", "R2", "R3", "R4"]
+  },
+  {
+    "case_id": "EIV2_CR_003",
+    "contains": "The most important takeaway is that **version and evaluation settings are not minor details**",
+    "reason": "CONCLUSION_DECISION",
+    "requirement_ids": ["R4"]
+  },
+  {
+    "case_id": "EIV2_ED_002",
+    "contains": "the evidence supports a **default posture of pgvector",
+    "reason": "EXECUTIVE_DECISION",
+    "requirement_ids": ["R4"]
+  },
+  {
+    "case_id": "EIV2_ED_002",
+    "contains": "Migration should be governed by an explicit trigger indicator system",
+    "reason": "RECOMMENDATION_PREMISE",
+    "requirement_ids": ["R3", "R4"]
+  },
+  {
+    "case_id": "EIV2_ED_002",
+    "contains": "The recommended sequence is to validate the full retrieval chain on pgvector",
+    "reason": "CONCLUSION_DECISION",
+    "requirement_ids": ["R4"]
+  }
+]

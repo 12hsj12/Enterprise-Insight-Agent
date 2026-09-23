@@ -354,7 +354,7 @@ class IntelligenceWorkflow:
                 "Qualifications are explicit claim-scoped inputs; missing metadata remains unsatisfied.",
                 "No additional retrieval continuation is enabled; unresolved retrieve_more claims are excluded.",
                 "Only structured web evidence is eligible; publication dates without explicit audit metadata remain unverified.",
-                "The original Writer draft is audited; unaudited factual prose is not published as verified fact.",
+                "The original Writer draft is preserved; strict support review is bounded to answer-critical claims, while ordinary context may remain outside that review.",
             ]
         return IntelligenceResult(
             run_id=run_id or str(uuid4()), request=request, report=report,

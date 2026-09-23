@@ -582,6 +582,6 @@ async def test_malformed_writer_claim_and_source_identity_do_not_abort_valid_cla
         ),
     )
     assert "Malformed atom has no material flag" in report
-    assert "insufficient to verify the following conclusion" in report
+    assert "Current evidence does not establish" in report
     assert "surrounding comparison remains readable" in report
     assert "UNRESOLVED" not in report

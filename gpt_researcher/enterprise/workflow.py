@@ -329,8 +329,6 @@ class IntelligenceWorkflow:
             with trace.stage("report"):
                 with diagnostic_stage("claim_plan"):
                     plan = request.claim_plan or (
-                        ClaimPlan(items=[], requirements=list(coverage_plan.requirements))
-                        if not evidences else
                         await researcher.report_generator.plan_enterprise_claims(
                             context, run_id, writer_draft, coverage_plan
                         )
@@ -374,6 +372,10 @@ class IntelligenceWorkflow:
                     "invalid_source_identity_input_count": execution.invalid_source_identity_input_count,
                     "invalid_draft_claim_input_count": execution.invalid_draft_claim_input_count,
                     "resolved_writer_evidence_prefix_count": execution.resolved_writer_evidence_prefix_count,
+                    "semantic_risk_routing": (
+                        execution.semantic_risk_routing.model_dump(mode="json")
+                        if execution.semantic_risk_routing else None
+                    ),
                     "final_render_audit_summary": execution.final_render_audit_summary,
                 } if execution else {}),
             } if (trace or execution) else None,

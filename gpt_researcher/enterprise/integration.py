@@ -36,6 +36,12 @@ from .layered_output import (
     InferenceValidationSummary, valid_limited_excerpt, validate_inferences,
 )
 from .report_diagnostics import active_capture, diagnostic_stage
+from .semantic_risk import (
+    SemanticRiskRouting,
+    is_structural_unit,
+    objective_candidate_unit_ids,
+    route_semantic_risk,
+)
 from .unit_audit import (
     AuditUnitState,
     AuditUnitType,
@@ -43,6 +49,7 @@ from .unit_audit import (
     WriterAuditUnit,
     alignment_text,
     apply_unit_replacements,
+    claim_text_span_in_unit,
     find_claim_unit,
     has_uncovered_claim_signal,
     has_uncovered_recommendation_fact_signal,
@@ -219,6 +226,7 @@ class ClaimPlan(StructuredModel):
     invalid_unit_ids: list[str] = Field(default_factory=list, max_length=120)
     invalid_draft_claim_input_count: int = Field(default=0, ge=0)
     resolved_writer_evidence_prefix_count: int = Field(default=0, ge=0)
+    semantic_risk_routing: SemanticRiskRouting | None = None
 
 
 class IntegratedExecution(StructuredModel):
@@ -245,6 +253,7 @@ class IntegratedExecution(StructuredModel):
     resolved_writer_evidence_prefix_count: int = Field(default=0, ge=0)
     final_render_audit_summary: dict[str, int] = Field(default_factory=dict)
     unit_audit_records: list[UnitAuditRecord] = Field(default_factory=list, max_length=4000)
+    semantic_risk_routing: SemanticRiskRouting | None = None
 
 
 def _identity_key(value: str) -> str:
@@ -863,8 +872,6 @@ async def propose_claims(researcher, context: EvidenceContext, scope_id: str,
     """Bind the complete Writer draft through the existing structured call."""
     from gpt_researcher.utils.llm import create_chat_completion
 
-    if not context.evidences:
-        raise ValueError("No structured evidence collected")
     research_plan = coverage_plan or getattr(researcher, "research_plan", None)
     if research_plan is None:
         planning_context = getattr(researcher, "requirement_planning_context", None) or {
@@ -883,6 +890,17 @@ async def propose_claims(researcher, context: EvidenceContext, scope_id: str,
         capture.observe("writer_requirements", research_plan.requirements)
         capture.observe("scope_id", scope_id)
     audit_units = split_markdown_audit_units(writer_draft)
+    with diagnostic_stage("semantic_risk_routing"):
+        semantic_routing = await route_semantic_risk(researcher, audit_units)
+    if capture:
+        capture.observe("semantic_risk_routing", semantic_routing)
+    if not context.evidences:
+        return ClaimPlan(
+            items=[],
+            requirements=list(research_plan.requirements),
+            semantic_risk_routing=semantic_routing,
+        )
+    semantic_audit_ids = semantic_routing.strict_audit_unit_ids()
     response = await create_chat_completion(
         model=researcher.cfg.smart_llm_model,
         llm_provider=researcher.cfg.smart_llm_provider,
@@ -953,6 +971,7 @@ async def propose_claims(researcher, context: EvidenceContext, scope_id: str,
                 unit.model_dump(mode="json")
                 for unit in audit_units
                 if unit.claim_bearing or unit.high_risk
+                or unit.unit_id in semantic_audit_ids
             ],
             "requirements": [
                 requirement.model_dump(mode="json")
@@ -1035,6 +1054,9 @@ async def propose_claims(researcher, context: EvidenceContext, scope_id: str,
             invalid_claim_texts=invalid_claim_texts,
             isolate_invalid_model_atoms=True,
         )
+        registered = registered.model_copy(update={
+            "semantic_risk_routing": semantic_routing,
+        })
     if capture:
         capture.observe("registered_claim_plan", registered)
         capture.set_current()
@@ -1462,6 +1484,7 @@ def integrate_claims(context: EvidenceContext, plan: ClaimPlan, cutoff: date,
         invalid_unit_ids=plan.invalid_unit_ids,
         invalid_draft_claim_input_count=plan.invalid_draft_claim_input_count,
         resolved_writer_evidence_prefix_count=plan.resolved_writer_evidence_prefix_count,
+        semantic_risk_routing=plan.semantic_risk_routing,
     )
 
 
@@ -1637,6 +1660,23 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
 
     units = split_markdown_audit_units(writer_draft)
     units_by_id = {unit.unit_id: unit for unit in units}
+    semantic_routing = execution.semantic_risk_routing
+    semantic_categories = (
+        semantic_routing.category_by_unit() if semantic_routing is not None else {}
+    )
+    deterministic_high_risk_ids = {
+        unit.unit_id for unit in units if unit.high_risk
+    }
+    semantic_high_risk_ids = (
+        semantic_routing.semantic_high_risk_unit_ids()
+        if semantic_routing is not None else set()
+    )
+    fallback_audit_ids = (
+        set(semantic_routing.fallback_audit_unit_ids)
+        if semantic_routing is not None else set()
+    )
+    union_high_risk_ids = deterministic_high_risk_ids | semantic_high_risk_ids
+    strict_audit_ids = union_high_risk_ids | fallback_audit_ids
     inputs_by_unit: dict[str, list[RegisteredClaimInput]] = {}
     unplaced_claim_ids: list[str] = []
     for item in execution.claim_inputs:
@@ -1679,7 +1719,14 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
             start_line=unit.start_line,
             end_line=unit.end_line,
             claim_bearing=unit.claim_bearing,
-            high_risk=unit.high_risk,
+            high_risk=unit.unit_id in strict_audit_ids,
+            deterministic_high_risk=unit.high_risk,
+            semantic_high_risk=unit.unit_id in semantic_high_risk_ids,
+            semantic_risk_category=(
+                semantic_categories[unit.unit_id].value
+                if unit.unit_id in semantic_categories else None
+            ),
+            conservative_fallback_audit=unit.unit_id in fallback_audit_ids,
             recommendation=unit.recommendation,
             state=state,
             action=action,
@@ -1714,7 +1761,7 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
                 unit, state, "replace", claim_ids=claim_ids, reason_codes=reasons,
             )
             continue
-        if not unit.high_risk:
+        if unit.unit_id not in strict_audit_ids:
             visible_premise_ids.update(safe_record_ids + safe_limited_ids)
             record_unit(
                 unit, AuditUnitState.KEEP, "keep", claim_ids=claim_ids,
@@ -1744,7 +1791,11 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
         ]
         if not items:
             state = AuditUnitState.UNRESOLVED
-            reasons = ("EXTRACTOR_MISSED_HIGH_RISK_UNIT",)
+            reasons = ((
+                "SEMANTIC_ROUTER_FALLBACK_AUDIT"
+                if unit.unit_id in fallback_audit_ids
+                else "EXTRACTOR_MISSED_HIGH_RISK_UNIT"
+            ),)
             replacement = qualify_unit(unit, "insufficient")
         elif conflict_ids:
             state = AuditUnitState.LIMITED
@@ -1886,9 +1937,39 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
                 for claim_id in inference.premise_claim_ids
             )
         )
-        has_new_high_risk_fact = has_uncovered_recommendation_fact_signal(
-            unit, audited_fact_texts,
+        recommendation_fact_items = [
+            item for item in inputs_by_unit.get(unit.unit_id, [])
+            if not _is_authored_recommendation(item.claim.normalized_text)
+        ]
+        safely_audited_fact_items = [
+            item for item in recommendation_fact_items
+            if item.claim.claim_id in records_by_id
+            or item.claim.claim_id in limited_by_claim
+        ]
+        local_audited_fact_texts = [
+            *audited_fact_texts,
+            *[item.claim.normalized_text for item in safely_audited_fact_items],
+        ]
+        deterministic_new_fact = has_uncovered_recommendation_fact_signal(
+            unit, local_audited_fact_texts,
         )
+        semantic_or_fallback_fact_route = unit.unit_id in (
+            semantic_high_risk_ids | fallback_audit_ids
+        )
+        repeated_audited_fact = any(
+            claim_text_span_in_unit(unit, text) is not None
+            for text in audited_fact_texts
+        )
+        semantic_new_fact = semantic_or_fallback_fact_route and (
+            deterministic_new_fact
+            or any(
+                item.claim.claim_id not in records_by_id
+                and item.claim.claim_id not in limited_by_claim
+                for item in recommendation_fact_items
+            )
+            or (not recommendation_fact_items and not repeated_audited_fact)
+        )
+        has_new_high_risk_fact = deterministic_new_fact or semantic_new_fact
         key = section_key(unit)
         recommendation_state[unit.unit_id] = {
             "inference": inference,
@@ -2010,9 +2091,12 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
     # Every original unit has exactly one final record. High-risk audit failure
     # is represented as qualified prose, never absence from the report.
     records_by_unit_id = {record.unit_id: record for record in records_out}
-    unaudited_high_risk_unit_count = sum(
-        unit.high_risk and unit.unit_id not in records_by_unit_id for unit in units
-    )
+    high_risk_bypass_ids = {
+        unit_id for unit_id in strict_audit_ids
+        if unit_id not in records_by_unit_id
+        or "OUTSIDE_HIGH_RISK_GATE" in records_by_unit_id[unit_id].reason_codes
+    }
+    unaudited_high_risk_unit_count = len(high_risk_bypass_ids)
     recommendation_bypass_count = sum(
         unit.recommendation and (
             unit.unit_id not in records_by_unit_id
@@ -2042,6 +2126,21 @@ def _render_audited_writer_draft(execution: IntegratedExecution,
     execution.final_render_audit_summary = {
         "audit_unit_count": len(units),
         "claim_bearing_unit_count": sum(unit.claim_bearing for unit in units),
+        "total_content_units": len(units),
+        "structural_units": sum(is_structural_unit(unit) for unit in units),
+        "recommendation_units": sum(unit.recommendation for unit in units),
+        "objective_candidate_units": len(objective_candidate_unit_ids(units)),
+        "deterministic_high_risk_units": len(deterministic_high_risk_ids),
+        "semantic_high_risk_units": len(semantic_high_risk_ids),
+        "union_high_risk_units": len(union_high_risk_ids),
+        "conservative_fallback_audit_units": len(fallback_audit_ids),
+        "strict_audit_candidate_units": len(strict_audit_ids),
+        "audited_high_risk_units": len(strict_audit_ids - high_risk_bypass_ids),
+        "unrouted_candidate_units": len(
+            set(semantic_routing.unrouted_unit_ids)
+            & objective_candidate_unit_ids(units)
+        ) if semantic_routing is not None else 0,
+        "high_risk_bypass_units": len(high_risk_bypass_ids),
         "verified_unit_count": verified_units,
         "limited_unit_count": limited_units,
         "omitted_unit_count": omitted_units,

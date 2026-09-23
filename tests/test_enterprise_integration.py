@@ -115,13 +115,22 @@ async def test_no_evidence_requirement_is_unresolved_without_writer_call(tmp_pat
         def get_evidence_assessments(self):
             return []
 
-    writer = AsyncMock(side_effect=AssertionError("Writer must not run without evidence"))
+    async def router_only(**kwargs):
+        payload = json.loads(kwargs["messages"][1]["content"])
+        assert "units" in payload
+        assert "evidence" not in payload and "writer_draft" not in payload
+        return json.dumps({"routes": [
+            {"unit_id": unit["unit_id"], "category": "ORDINARY_CONTEXT"}
+            for unit in payload["units"]
+        ]})
+
+    writer = AsyncMock(side_effect=router_only)
     monkeypatch.setattr("gpt_researcher.utils.llm.create_chat_completion", writer)
     result = await IntelligenceWorkflow(EmptyResearcher, output_directory=tmp_path).run(
         IntelligenceRequest(target="Acme", enable_v2_execution=True), run_id="empty")
     assert result.execution.layered_output_summary["unresolved"] > 0
     assert "No source material is currently available" in result.report
-    writer.assert_not_called()
+    writer.assert_called_once()
 
 
 @pytest.mark.parametrize("support,risk,primary,retry,decision,mode", [

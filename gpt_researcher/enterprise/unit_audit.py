@@ -71,6 +71,10 @@ class UnitAuditRecord(BaseModel):
     recommendation: bool
     state: AuditUnitState
     action: Literal["keep", "replace", "omit"]
+    deterministic_high_risk: bool = False
+    semantic_high_risk: bool = False
+    semantic_risk_category: str | None = None
+    conservative_fallback_audit: bool = False
     claim_ids: tuple[str, ...] = ()
     inference_id: str | None = None
     reason_codes: tuple[str, ...] = ()

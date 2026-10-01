@@ -45,14 +45,14 @@ The Writer drafts from the complete research context first. The audit examines a
 
 The [frozen Enterprise Research Benchmark V2](docs/v2/V2_BENCHMARK_SPEC.md) defines **30 cases** across six task categories: **18 development** and **12 reserved holdout** cases, with a 2026-09-05 information cutoff. Its planned quality review covers citation correctness and completeness, strong evidence coverage, reliability of sources actually supporting claims, and high-risk claim corroboration. These require item-level reviewed annotations; runtime counters are diagnostics, not accuracy scores.
 
-After the implementation freeze, the 12 unseen holdout cases were run once through the V2 Enterprise API: **12/12 completed, 0 case-level runtime failures, 0 quality reruns**. Reports, traces, execution records, and hashes were retained. This demonstrates basic **execution-level generalization** to unseen enterprise research tasks. It does **not** establish a quality pass or a measured improvement over GPT Researcher: the run was V2-only, the paired Baseline/V1 comparison and human-adjudicated claim/Required Unit scores are unavailable, and cutoff compatibility concerns were found. See the [one-pass holdout evaluation and category review](docs/v2/V2_HOLDOUT_ONE_PASS_EVALUATION.md).
+After the implementation freeze, the 12 unseen holdout cases were run once through the V2 Enterprise API: **12/12 completed, 0 case-level runtime failures, 0 quality reruns**. A subsequent human Product Generalization Review of the saved artifacts found **basic product generalization**, with an overall **MIXED** result. Engineering stability passed; evidence-aware behavior was mixed and readability acceptable. This does not mean every report passed a product-quality bar. The run was V2-only, so it establishes no quantitative improvement over Original GPT Researcher or V1. See the [final holdout evaluation and category review](docs/v2/V2_HOLDOUT_ONE_PASS_EVALUATION.md).
 
 ## Known Limitations
 
 - High-quality first-party sources, independent corroboration, publication dates, and comparable competitor evidence are often unavailable. A source prior cannot fill those gaps.
 - Complex comparisons, market trends, and decision recommendations can still rest on weak or incompatible evidence. The final holdout review found conclusions and recommendation premises that need source-level human review before enterprise use.
 - The information cutoff is not reliably enforced for all generated content: post-cutoff source metadata appeared in holdout reports. Long reports also repeat qualification language and can be hard to scan.
-- The frozen quality acceptance criteria remain unevaluated without the required adjudication and paired comparison. Local SQLite task history and synchronous execution are not a production access-control or distributed job system.
+- The frozen quantitative acceptance criteria remain unevaluated without a complete formal metric ledger and paired comparison. Local SQLite task history and synchronous execution are not a production access-control or distributed job system.
 
 ## Quick Start
 

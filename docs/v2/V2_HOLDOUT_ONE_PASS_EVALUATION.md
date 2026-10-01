@@ -1,4 +1,4 @@
-# V2 holdout: one-pass execution and validity review
+# V2 holdout: one-pass execution and final product review
 
 **Run date:** 2026-09-30
 
@@ -10,11 +10,13 @@
 
 **Raw artifacts:** [`outputs/v2-holdout-final-20260930-d6cb50f7`](../../outputs/v2-holdout-final-20260930-d6cb50f7/) (local, ignored by Git)
 
+**Review status:** Final human Product Generalization Review completed after the one-pass run; its aggregate verdicts were supplied for this documentation update. The case-level product rating worksheet is not tracked in this repository, so no per-case PASS/PARTIAL assignment is reconstructed here.
+
 ## Decision
 
 The 12 specified holdout cases were each submitted **once** through the real V2 Enterprise API. All 12 completed and produced a report, execution record, trace, task response, retrieval capture, runtime evaluation record, and verified artifact hashes. No code, prompt, parameter, policy, dataset, or benchmark rule was changed during the run. No holdout-based tuning or quality rerun occurred.
 
-**This run is not a valid final frozen V2 benchmark result.** It is a complete one-pass V2 holdout execution with useful failure evidence. The frozen protocol requires item-level reviewed annotations for all completed reports, a paired Baseline/V1/V2 comparison on a shared eligible candidate fixture, and cutoff-safe scoring. This run is V2-only, has no completed human adjudication of the 36 holdout Required Units or claim/citation links, and has observed cutoff-compatibility concerns. Do not substitute runtime Gate/Grounding counters for those missing quality scores or claim final acceptance.
+The completed human Product Generalization Review supports **basic product generalization on unseen enterprise research tasks**, with an overall **MIXED** result. It does not assert that all cases passed, that factual correctness is perfect, or that V2 quantitatively improves on Original GPT Researcher or V1. This was a V2-only run; the same-codebase Baseline/V1/V2 paired comparison specified by the frozen benchmark protocol was not performed. The product review and the frozen quantitative acceptance test must therefore remain separate conclusions.
 
 ## Execution integrity and stability
 
@@ -32,22 +34,38 @@ The 12 specified holdout cases were each submitted **once** through the real V2 
 
 The run used the same request construction as the existing development operator path: full frozen query in `target`, `Development research` in `topic`, frozen Required Unit descriptions in `dimensions`, cutoff `2026-09-05`, and both V2 flags enabled. The effective models were `openai:deepseek-v4-flash` for fast/smart/strategic calls and `huggingface:sentence-transformers/all-MiniLM-L6-v2` for embeddings; search was Tavily. The run manifest recorded a USD 60 stop-review threshold and USD 75 hard cap. The estimate stayed below both. Provider billing and token totals are unavailable. The request topic is recorded for reproducibility; it was not altered after seeing outputs.
 
-The [manifest](../../outputs/v2-holdout-final-20260930-d6cb50f7/manifest.json) records one attempt per ID and the locked configuration. Each case directory contains `case_input.json`, `request.json`, `task.json`, `candidate.json`, `selected.json`, `scoring.json`, `evaluation.json`, `report.md`, `execution.json`, `trace.json`, and `artifact_hashes.json`. The [diagnostic audit](../../outputs/v2-holdout-final-20260930-d6cb50f7/evaluation_diagnostics.json) is a deterministic summary of those files; it explicitly leaves unreviewed formal quality metrics null.
+The [manifest](../../outputs/v2-holdout-final-20260930-d6cb50f7/manifest.json) records one attempt per ID and the locked configuration. Each case directory contains `case_input.json`, `request.json`, `task.json`, `candidate.json`, `selected.json`, `scoring.json`, `evaluation.json`, `report.md`, `execution.json`, `trace.json`, and `artifact_hashes.json`. The [diagnostic audit](../../outputs/v2-holdout-final-20260930-d6cb50f7/evaluation_diagnostics.json) is a deterministic summary of those original runtime files; its formal quality fields remain null and were not retroactively changed by the later product review.
+
+## Final human Product Generalization Review
+
+The review used the existing reports and saved evidence artifacts; it did not change them or cause a quality rerun. The following are **product-level human verdicts**, not claim-level factual accuracy rates or frozen benchmark metric values:
+
+| Review result | Final verdict |
+|---|---:|
+| Case outcome: PASS | **2/12** |
+| Case outcome: PARTIAL | **10/12** |
+| Case outcome: FAIL | **0/12** |
+| Engineering Stability | **PASS** — 12/12 completed, 0 runtime failures, 0 quality reruns |
+| Product Generalization | **MIXED** — basic capability on unseen tasks, with substantial partial outcomes |
+| Evidence-aware Behavior | **MIXED** |
+| Readability | **ACCEPTABLE** |
+
+These verdicts support a bounded product claim: V2 can complete and provide partly useful research across unseen enterprise task categories. They do not make every report decision-ready. The review identifies evidence-strength and presentation limits, especially in complex comparisons, trends, and recommendations. No case-level product verdicts are inferred from the earlier category notes below; their aggregate counts are the supplied final human review result.
 
 ## Quality dimensions
 
 | Dimension | Result and limit |
 |---|---|
-| User Utility | Qualitative case review below. The frozen V2 dataset does not define a numerical User Utility metric or a score threshold, so none was invented after holdout exposure. Reports often address the requested headings but are long and difficult to use directly. |
-| Answer-Critical Claim quality | Runtime reported 1,450/1,450 answer-critical units reviewed and 0 `answer_critical_unsupported_strong_claims`. This is an internal diagnostic, not an independent correctness rate. Review found potentially overstrong conclusions and premise gaps described below. Atomic claim segmentation and citation-support adjudication are incomplete. |
-| Evidence Reliability | Uneven. First-party Microsoft/Kubernetes material appears in some cases; both competitive-comparison cases lack a balanced first-party source set. Sources with metadata after the cutoff occur in 10 report bodies, and six cases have at least one such source linked to a runtime `LIMITED` unit. The frozen Source Reliability Score is null because valid supporting links and distinct normalized supporting sources have not been independently reviewed. |
-| Strict RU | The denominator is the frozen 36 units, three per case. The runtime `COVERED` label is not a strict `SATISFIED` adjudication. No 36-item human-reviewed annotation ledger was completed, so Strict RU is **N/A**, not 0/36 or a guessed percentage. It remains diagnostic only. |
+| User Utility | Final human product review: 2 PASS, 10 PARTIAL, 0 FAIL. The frozen V2 dataset defines no numerical User Utility metric or score threshold. Reports often address the requested headings, but long or weakly sourced answers limit direct use. |
+| Answer-Critical Claim quality | Runtime reported 1,450/1,450 answer-critical units reviewed and 0 `answer_critical_unsupported_strong_claims`. This is an internal diagnostic, not an independent correctness rate. Human review found potentially overstrong conclusions and premise gaps described below; this does not establish 100% factual correctness. |
+| Evidence-aware Behavior and source reliability | Evidence-aware Behavior is **MIXED** in the product review. Source reliability remains uneven: first-party Microsoft/Kubernetes material appears in some cases, while both competitive-comparison cases lack a balanced first-party source set. Sources with metadata after the cutoff occur in 10 report bodies, and six cases have at least one such source linked to a runtime `LIMITED` unit. The stored frozen Source Reliability Score remains null; the product verdict is not a substitute for that metric. |
+| Strict Evidence Satisfaction | **9/36** frozen Required Units in the final human review, retained here as an internal diagnostic. It is neither factual accuracy nor a product success rate and does not change the 2/10/0 case verdicts. Runtime `COVERED` labels are not strict `SATISFIED` adjudications. The per-unit review ledger is not tracked here, so this aggregate cannot be independently recalculated from committed files. |
 
 The 12 reports together contain 447,695 characters and 678 occurrences of the two repeated qualification prefixes beginning “Current evidence does not establish” or “The cited sources support the following claim”. Runtime audit records contain 33 `VERIFIED`, 231 `LIMITED`, and 1,210 `UNRESOLVED` units; these are implementation states, not independent claim-quality or Strict RU scores. The prefixes often appear inside paragraphs and tables, increasing reading burden and sometimes leaving an unsupported assertion visible after a warning.
 
 ## Six-category review
 
-This is a bounded, AI-assisted review of the saved reports and selected evidence. It does not replace the frozen item-level human annotation protocol. Every category has two completed cases.
+These category notes are the earlier bounded, AI-assisted artifact audit of saved reports and selected evidence. They describe concrete issues, not final per-case product ratings; the subsequent human Product Generalization Review is summarized above. Every category has two completed cases.
 
 | Category | Cases | User-facing and evidence observation |
 |---|---|---|
@@ -70,6 +88,6 @@ The cutoff audit uses saved `publication_date` and `updated_date` fields. A late
 
 ## Frozen acceptance status
 
-The frozen five headline quality metrics—Citation Correctness, Citation Completeness, Strong Evidence Coverage, Source Reliability Score, and High-Risk Claim Corroboration—are **null** for this run. The same is true of the formal Strict RU diagnostic. The 12 reports have no completed item-level, human-adjudicated holdout annotations; there is no paired Baseline/V1 result on the shared candidate fixture; and the cutoff audit raises compatibility concerns. The frozen 12/12 *completed and fully annotated* condition is therefore not met even though execution completion is 12/12. The comparison thresholds, all-30 classification threshold, and dev-to-holdout generalization gap cannot be evaluated.
+The saved runtime evaluation artifacts leave the frozen five headline quality metrics—Citation Correctness, Citation Completeness, Strong Evidence Coverage, Source Reliability Score, and High-Risk Claim Corroboration—**null**. The final human Product Generalization Review and its 9/36 strict-evidence diagnostic do not provide the paired same-codebase Baseline/V1/V2 results or all formal metric inputs and audit records required to evaluate those frozen acceptance thresholds. No separate original-upstream GPT Researcher comparison was run. The cutoff audit also raises protocol-compatibility concerns. The all-30 classification threshold and dev-to-holdout quality gap cannot be evaluated from this V2-only holdout execution. These missing formal comparisons do not undo the completed human product review.
 
-**Conclusion:** the system ran stably on unseen holdout tasks, but the evidence does not establish reliable generalization of answer quality or source reliability. This one-pass observation should be retained as an unfavorable, audit-ready holdout execution. It is **insufficient as the final frozen experimental result**. Do not tune on these cases, rerun them for a favorable outcome, infer missing metrics from runtime diagnostics, or declare V2 qualified from this execution.
+**Conclusion:** Engineering Stability **PASS**; Product Generalization **MIXED**, with basic capability on unseen enterprise research tasks; Evidence-aware Behavior **MIXED**; Readability **ACCEPTABLE**. This is the final product review of the one-pass holdout artifacts, not a claim that product quality passed comprehensively or that the frozen paired benchmark demonstrated a quantitative improvement. Preserve the one-pass record and its unfavorable findings; do not tune on these cases, rerun them for a favorable outcome, or infer missing formal metrics from runtime diagnostics.

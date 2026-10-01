@@ -1,47 +1,62 @@
-# Enterprise Insight Agent v1
+# Enterprise Insight Agent
 
-An evidence-centric competitive-intelligence application built by extending **GPT Researcher**.
-It preserves source provenance, applies an optional source reliability prior after semantic
-retrieval, and exposes inspectable reports through a typed API with local task history.
+**Evidence-Centric Enterprise Deep Research Agent** — built on [GPT Researcher](https://github.com/assafelovic/gpt-researcher).
 
-This is a portfolio-grade local reference implementation. Its three engineering pillars
-are **Evidence Reliability**, **Source-aware RAG & Context Engineering**, and
-**Evaluation + Observability**. Competitive intelligence is the business workflow that uses them.
+> Evidence Reliability controls assertion strength, not information presence.
 
-## Why extend GPT Researcher?
+## Overview
 
-GPT Researcher already provides planning, search, scraping, compression and report generation.
-For enterprise analysis, a cited report alone is insufficient: an analyst also needs the
-underlying evidence, an explanation of source selection, visible uncertainty, reproducible
-experiments, and retrievable task history. This project extends the existing pipeline rather
-than replacing it with a second agent stack.
+Enterprise research needs more than a plausible report with links. An analyst must see which sources support a finding, where evidence conflicts or falls short, and whether a recommendation depends on an unverified premise. Enterprise Insight Agent extends GPT Researcher's research and writing flow with source-aware retrieval, claim-level evidence checks, and inspectable evaluation artifacts. It is a local reference implementation for competitive intelligence and related enterprise research tasks.
 
-## Implemented capabilities
+## Why Enterprise Insight Agent
 
-| Area | Behavior |
+GPT Researcher already plans research, searches and scrapes sources, compresses context, and writes reports. This project adds an evidence layer around that flow:
+
+| Engineering change | Purpose |
 |---|---|
-| Evidence reliability | Separate raw evidence, source-prior assessments, explicit claim links and consistency assessments |
-| Source-aware RAG | Normal JSON/environment configuration; reranking after semantic filtering; zero-weight baseline preserved |
-| Competitive intelligence | Typed company/topic/cutoff request; structured provenance alongside a generated report |
-| Evaluation | Frozen 12 cases (8 dev / 4 holdout), reproducible manifests/raw outputs, retained failures, hash-bound reviewed metrics |
-| Observability | Optional bounded traces with stage timing, scoped search counts and selected evidence scores |
-| API and persistence | Execute/list/get tasks, health/readiness, SQLite history and interrupted-task recovery |
-| Deployment | Python 3.11 local path and a non-root Docker image with a readiness health check |
+| Source-aware Evidence / RAG | Keep semantic relevance dominant while using source reliability as a ranking prior; preserve provenance and conflicting evidence. |
+| Claim Qualification, Claim Gate, Grounding | Bind draft assertions to evidence, check source qualifications and risk-specific support, then validate the citations actually used. |
+| Answer-Critical Claim Review | Focus the audit on findings, comparisons, numerical justifications, conclusions, and recommendation premises that shape the user's answer. |
+| Evidence-aware Recommendation | Allow conditional analysis tied to surviving, cited premises; disclose weak evidence instead of presenting it as a verified fact. |
+| Trace, Evaluation, Observability | Record ranking components, gate decisions, grounding and repair outcomes, report hashes, costs where available, and bounded stage traces. |
 
-The ranking rule is:
+## Architecture
 
 ```text
-final_score = (1 - w) * similarity_score + w * authority_score
+User question → GPT Researcher planning, search, scraping, context compression
+              → semantic eligibility + task-aware source reranking → EvidenceContext
+              → GPT Researcher Writer draft
+              → answer-critical review + draft-claim extraction
+              → Claim/Evidence binding + source qualification
+              → Claim Gate → citation grounding → bounded repair
+              → final report + evidence, trace, and evaluation artifacts
 ```
 
-`SOURCE_RELIABILITY_WEIGHT=0.0` is the default. The measured candidate uses `0.2`; it is
-not an optimized value. Authority is a **source-level reliability prior**, not factual
-correctness or claim confidence. Consistency is not fact checking. See the
-[architecture and data flow](docs/enterprise_architecture.md).
+The Writer drafts from the complete research context first. The audit examines assertions in that draft; audit-generated assertions absent from it are discarded. `Evidence`, source-level `EvidenceAssessment`, cross-source `EvidenceConsistencyAssessment`, and `ClaimEvidenceLink` remain separate records. The source `authority_score` is a reliability **prior**, never a probability that a claim is true. Task classification selects an interpretable authority weight after semantic eligibility; other `EvidencePolicy` fields are recorded as guidance and are not all enforced as retrieval filters. [Architecture and information flow](docs/v2/INFORMATION_FLOW_SIMPLIFICATION.md) · [Frozen V2 policy](docs/v2/V2_ARCHITECTURE_SPEC.md)
 
-## Quickstart
+## Core Capabilities
 
-From this repository on Windows / Python 3.11:
+- **Non-destructive evidence handling:** uncertain or conflicting source material remains available for attributed, limited disclosure when validated; it is not silently promoted to a verified assertion or erased from the audit record.
+- **Risk-aware factual output:** the Claim Gate can emit, hedge, omit, or leave a claim unresolved. Grounding checks the final citation subset and permits at most one bounded local repair pass. Unresolved claims do not trigger automatic extra retrieval.
+- **Decision-focused review:** answer-critical locations and recommendation premises receive explicit review and coverage diagnostics. This review identifies where support must be checked; it does not itself certify truth.
+- **Inspectable execution:** the Enterprise API returns persisted reports and evidence diagnostics; each V2 run can retain its Writer draft, structured execution record, report hash, and trace. The existing GPT Researcher routes remain available.
+
+## Evaluation
+
+The [frozen Enterprise Research Benchmark V2](docs/v2/V2_BENCHMARK_SPEC.md) defines **30 cases** across six task categories: **18 development** and **12 reserved holdout** cases, with a 2026-09-05 information cutoff. Its planned quality review covers citation correctness and completeness, strong evidence coverage, reliability of sources actually supporting claims, and high-risk claim corroboration. These require item-level reviewed annotations; runtime counters are diagnostics, not accuracy scores.
+
+After the implementation freeze, the 12 unseen holdout cases were run once through the V2 Enterprise API: **12/12 completed, 0 case-level runtime failures, 0 quality reruns**. Reports, traces, execution records, and hashes were retained. This demonstrates basic **execution-level generalization** to unseen enterprise research tasks. It does **not** establish a quality pass or a measured improvement over GPT Researcher: the run was V2-only, the paired Baseline/V1 comparison and human-adjudicated claim/Required Unit scores are unavailable, and cutoff compatibility concerns were found. See the [one-pass holdout evaluation and category review](docs/v2/V2_HOLDOUT_ONE_PASS_EVALUATION.md).
+
+## Known Limitations
+
+- High-quality first-party sources, independent corroboration, publication dates, and comparable competitor evidence are often unavailable. A source prior cannot fill those gaps.
+- Complex comparisons, market trends, and decision recommendations can still rest on weak or incompatible evidence. The final holdout review found conclusions and recommendation premises that need source-level human review before enterprise use.
+- The information cutoff is not reliably enforced for all generated content: post-cutoff source metadata appeared in holdout reports. Long reports also repeat qualification language and can be hard to scan.
+- The frozen quality acceptance criteria remain unevaluated without the required adjudication and paired comparison. Local SQLite task history and synchronous execution are not a production access-control or distributed job system.
+
+## Quick Start
+
+On Windows with Python 3.11, from the repository root:
 
 ```powershell
 python -m venv .venv
@@ -49,119 +64,23 @@ python -m venv .venv
 .venv/Scripts/python -m gpt_researcher.enterprise.demo --output outputs/enterprise-demo.json
 ```
 
-The last command is a credential-free **synthetic** demonstration through the actual
-compression/evidence/workflow code. It is not a research benchmark.
-
-For real research, create a local `.env` with `OPENAI_API_KEY` and `TAVILY_API_KEY`.
-For an OpenAI-compatible provider, also configure `OPENAI_BASE_URL` and supported
-`FAST_LLM`, `SMART_LLM` and `STRATEGIC_LLM` values. Never commit credentials. Use an
-installed embedding provider; the benchmark's Hugging Face setup additionally needs
-`langchain-huggingface`, `sentence-transformers` and the cached model.
+The last command is a credential-free **synthetic** workflow demonstration, not a V2 research run or benchmark. For real research, configure working LLM, embedding, and search providers in a local uncommitted `.env` (for the default providers, `OPENAI_API_KEY` and `TAVILY_API_KEY`), then start the API:
 
 ```powershell
 .venv/Scripts/python -m uvicorn main:app --host 127.0.0.1 --port 8000 --workers 1
-# In another terminal:
-Invoke-RestMethod http://127.0.0.1:8000/api/enterprise/ready
 ```
 
-Open `http://127.0.0.1:8000/docs` for the API. Follow the [demo request/retrieval flow](docs/demo.md)
-and [deployment guide](docs/deployment.md). Real tasks call paid providers when configured.
-
-| Method | Endpoint | Purpose |
-|---|---|---|
-| GET | `/api/enterprise/health` | Application liveness |
-| GET | `/api/enterprise/ready` | Local store readiness; no provider probe |
-| POST | `/api/enterprise/tasks` | Synchronously execute a typed intelligence request |
-| GET | `/api/enterprise/tasks` | List persisted local history |
-| GET | `/api/enterprise/tasks/{uuid}` | Retrieve report, evidence and diagnostics |
-
-Existing GPT Researcher report, chat, WebSocket and UI routes remain available.
-
-## Docker
+In another terminal, submit a V2 request (provider calls may incur cost):
 
 ```powershell
-docker compose -f docker-compose.enterprise.yml config --quiet
-docker compose -f docker-compose.enterprise.yml up -d --build
-Invoke-RestMethod http://127.0.0.1:8000/api/enterprise/ready
+$body = @{
+    target = 'Microsoft'
+    topic = 'Verify the business purpose of Azure OpenAI Service'
+    cutoff_date = '2026-09-05'
+    dimensions = @('Supported findings', 'Evidence limitations')
+    enable_v2_execution = $true
+} | ConvertTo-Json -Depth 20
+Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/api/enterprise/tasks -ContentType 'application/json' -Body $body
 ```
 
-Compose loads `.env` at runtime and binds localhost. Outputs and logs persist in mounted
-local directories. The image excludes `.env`, virtual environments, generated runs and
-private notes. Use one worker for startup recovery. Build, startup, health checks and a
-container SQLite recovery smoke test were actually exercised; details are in the
-[validation report](docs/v1_validation.md).
-
-## Evaluation
-
-The cutoff remains **2026-09-05**. Both variants use the same frozen case/query/model/
-retriever settings, with source weight 0 versus 0.2. This is a same-version ablation,
-not a rerun of the historical upstream baseline.
-
-| Development set (8 cases) | Weight 0 | Weight 0.2 |
-|---|---:|---:|
-| Completed / attempted | 8 / 8 | 8 / 8 |
-| Task failures | 0 | 0 |
-| Mean observed latency | 250.08 s | 231.58 s |
-| Total provider-estimated cost | $4.20498034 | $3.89534760 |
-| Four evidence/citation quality metrics | Unreviewed | Unreviewed |
-
-| Reserved holdout (4 cases) | Weight 0 | Weight 0.2 |
-|---|---:|---:|
-| Completed / attempted | 4 / 4 | 4 / 4 |
-| Task failures | 0 | 0 |
-| Mean observed latency | 270.36 s | 259.60 s |
-| Total provider-estimated cost | $2.20439738 | $2.13402480 |
-| Four evidence/citation quality metrics | Unreviewed | Unreviewed |
-
-These values are real runs at `9004478d`; [curated manifests/results](benchmarks/results/v1/)
-include per-case hashes, costs, counts and failures. Runs overlapped other local work, and
-live search/model output varies. **No controlled latency, cost or quality improvement is claimed.**
-Quality metrics remain null pending reviewed annotations rather than being inferred from
-URL counts. Final holdout results and limitations are recorded in the validation report.
-
-```powershell
-# Non-billable dry run; choose a fresh output directory.
-.venv/Scripts/python -m benchmarks.run --variant baseline --split development --output outputs/baseline-dry
-# Add --live for actual provider calls; reserve --split holdout for final evaluation.
-```
-
-See [benchmark execution and scoring](benchmarks/README.md) and the
-[original metric definitions](docs/baseline_protocol.md).
-
-## Tests
-
-```powershell
-.venv/Scripts/python -m pip install pytest pytest-asyncio pytest-timeout
-$env:GPTR_BLOCK_NETWORK="1"
-.venv/Scripts/python -m pytest tests/test_enterprise_workflow.py tests/test_enterprise_api.py tests/test_enterprise_persistence.py tests/test_source_aware.py -q
-# Windows-compatible process isolation for the broad offline suite:
-.venv/Scripts/python scripts/run_offline_tests.py --output outputs/offline-tests --workers 4
-```
-
-The isolation runner preserves CI's three live-module exclusions and every test assertion.
-It exists because inherited tests mutate global module state; a monolithic process is not
-a reliable regression signal. Exact commands, counts and remaining warnings appear in
-[validation](docs/v1_validation.md).
-
-## Limitations and next work
-
-- Reviewed claim/citation annotations are still required to measure research quality.
-- Date cutoff is a research instruction, not a verified publication-date filter.
-- Structured evidence coverage is currently strongest on the web compression path; MCP
-  and vector-store paths can still contribute context without evidence objects.
-- Source rules are incomplete and official sources may be biased. Freshness is not scored.
-- Requests are synchronous; cancellation cannot forcibly stop every blocking provider call.
-- SQLite history/restart marking is not a durable task queue. No distributed execution,
-  multi-tenant authorization or production access-control system was added.
-- Dependencies follow upstream ranges; builds are not fully hermetic. Local cost estimates
-  are not reconciled with provider invoices.
-
-Next priorities are a reviewed evaluation corpus, broader provenance coverage, dated-source
-validation and controlled paired retrieval experiments. See [resume and interview notes](docs/career.md)
-for an engineering explanation grounded in what is implemented.
-
-## Attribution
-
-Built on [GPT Researcher](https://github.com/assafelovic/gpt-researcher). Existing planning,
-search, scraping, writing and UI functionality are reused; enterprise-specific changes are
-in this repository's feature history. See [LICENSE](LICENSE) for repository license terms.
+The POST is synchronous. Open `http://127.0.0.1:8000/docs` for the API, or follow the [local deployment guide](docs/deployment.md) and [request walkthrough](docs/demo.md). See [LICENSE](LICENSE) for license terms.

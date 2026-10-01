@@ -22,7 +22,7 @@ $env:GPTR_BLOCK_NETWORK="1"
 .venv/Scripts/python -m pytest tests/test_enterprise_persistence.py -q
 ```
 
-## Real competitive-intelligence task
+## Real V2 research task
 
 Start the server using [deployment instructions](deployment.md). Its normal `.env`
 must configure a working LLM and search provider; these requests can incur charges.
@@ -32,6 +32,7 @@ $body = @{
     target = "Xiaomi"
     topic = "Publicly disclosed mobile AI agent capabilities"
     cutoff_date = "2026-09-05"
+    enable_v2_execution = $true
 } | ConvertTo-Json
 $task = Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/api/enterprise/tasks -ContentType "application/json" -Body $body
 $task.status
@@ -39,6 +40,7 @@ $task.result.report
 Invoke-RestMethod "http://127.0.0.1:8000/api/enterprise/tasks/$($task.task_id)"
 ```
 
+`enable_v2_execution` opts into the V2 evidence-selection and claim-audit path.
 The POST waits for completion. The returned task ID addresses the persisted result;
 history can also be listed with GET `/api/enterprise/tasks`. Evidence and diagnostics
 are embedded in the typed response. OpenAPI is available at `/docs`. Change the company

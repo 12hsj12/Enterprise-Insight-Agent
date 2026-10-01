@@ -1,6 +1,6 @@
 # Local deployment
 
-Enterprise Insight Agent v1 is a portfolio local deployment on top of GPT Researcher.
+Enterprise Insight Agent is a portfolio local deployment on top of GPT Researcher.
 Use one application worker: startup marks previously running tasks interrupted. It does
 not recover an execution stack or automatically replay provider calls.
 
@@ -24,6 +24,8 @@ neither makes paid calls or guarantees provider availability. The default store 
 `ENTERPRISE_TASK_TIMEOUT` for the positive task timeout in seconds (default 900).
 
 POST `/api/enterprise/tasks` executes synchronously and returns a structured task record.
+Set `enable_v2_execution=true` in the request to use the V2 Writer-first evidence audit;
+the default request preserves the earlier workflow.
 GET `/api/enterprise/tasks/{uuid}` retrieves persisted evidence, report and diagnostics;
 GET `/api/enterprise/tasks` lists local history. The existing UI/report/chat routes remain
 available. A failed request returns a safe task record (502 provider/research failure,

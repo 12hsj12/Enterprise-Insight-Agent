@@ -1,4 +1,8 @@
-# Enterprise Insight Agent v1 architecture
+# Historical V1 architecture
+
+This is the V1 implementation record. The integrated V2 product flow is documented in the
+[V2 architecture specification](v2/V2_ARCHITECTURE_SPEC.md) and the current
+[repository README](../README.md).
 
 The business problem is making competitive-intelligence findings inspectable: an analyst
 needs the source behind a finding, the reason a source was preferred, and the limitations

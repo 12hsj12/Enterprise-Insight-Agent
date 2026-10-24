@@ -1,31 +1,20 @@
-# Website
+# Enterprise Insight Agent documentation site
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+The documentation site is built with Docusaurus 3.10.2. Start with [`docs/docs/welcome.md`](docs/welcome.md), then use the sidebar's Enterprise Insight Agent section for the product guide. The separately labeled GPT Researcher reference sections retain upstream material and are not the current product overview.
 
-## Prerequisites
+## Local development
 
-To build and test documentation locally, begin by downloading and installing [Node.js](https://nodejs.org/en/download/), and then installing [Yarn](https://classic.yarnpkg.com/en/).
-On Windows, you can install via the npm package manager (npm) which comes bundled with Node.js:
-
-```console
-npm install --global yarn
-```
-
-## Installation
+Install a supported Node.js release with npm, then from this directory:
 
 ```console
-pip install pydoc-markdown
-cd website
-yarn install
+npm install
+npm run start
 ```
 
-## Local Development
-
-Navigate to the website folder and run:
+Build the static site with:
 
 ```console
-pydoc-markdown
-yarn start
+npm run build
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+Repository content and edit links point to [12hsj12/Enterprise-Insight-Agent](https://github.com/12hsj12/Enterprise-Insight-Agent). The existing `docs.gptr.dev` custom domain is retained pending confirmation of the project's documentation domain.

@@ -1,4 +1,8 @@
-# Enterprise Insight Agent — Baseline Evaluation Protocol
+# Historical V1 Baseline Evaluation Protocol
+
+This protocol records the earlier 12-case V1 baseline comparison. The current frozen V2
+scope is defined in [V2_BENCHMARK_SPEC.md](v2/V2_BENCHMARK_SPEC.md); the V1 protocol and
+results remain available for provenance and historical comparison.
 
 ## 1. Purpose
 

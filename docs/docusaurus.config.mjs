@@ -6,28 +6,25 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 
 export default {
-  title: 'GPT Researcher',
-  tagline: 'The leading autonomous AI research agent',
+  title: 'Enterprise Insight Agent',
+  tagline: 'Evidence-grounded research for enterprise decisions',
   url: 'https://docs.gptr.dev',
   baseUrl: '/',
   onBrokenLinks: 'ignore',
   //deploymentBranch: 'master',
-  onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/gptr-logo.png',
-  organizationName: 'assafelovic',
+  organizationName: '12hsj12',
   trailingSlash: false,
-  projectName: 'gpt-researcher',
+  projectName: 'Enterprise-Insight-Agent',
   markdown: {
     mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
   },
   themes: ['@docusaurus/theme-mermaid'],
   themeConfig: {
     navbar: {
-      title: 'GPT Researcher',
-      logo: {
-        alt: 'GPT Researcher',
-        src: 'img/gptr-logo.png',
-      },
+      title: 'Enterprise Insight Agent',
       items: [
         {
           type: 'doc',
@@ -36,22 +33,10 @@ export default {
           label: 'Docs',
         },
 
-        {to: 'blog', label: 'Blog', position: 'left'},
         {
-          type: 'doc',
-          docId: 'faq',
-          position: 'left',
-          label: 'FAQ',
-        },
-        {
-            href: 'mailto:assaf.elovic@gmail.com',
-            position: 'left',
-            label: 'Contact',
-        },
-        {
-          href: 'https://github.com/assafelovic/gpt-researcher',
-          label: 'GitHub',
+          href: 'https://github.com/12hsj12/Enterprise-Insight-Agent',
           position: 'right',
+          label: 'GitHub',
         },
       ],
     },
@@ -59,37 +44,20 @@ export default {
       style: 'dark',
       links: [
         {
-          title: 'Community',
+          title: 'Project',
           items: [
             {
-              label: 'Discord',
-              href: 'https://discord.gg/8YkBcCED5y',
+              label: 'GitHub repository',
+              href: 'https://github.com/12hsj12/Enterprise-Insight-Agent',
             },
             {
-              label: 'Twitter',
-              href: 'https://twitter.com/assaf_elovic',
-            },
-            {
-              label: 'LinkedIn',
-              href: 'https://www.linkedin.com/in/assafe/',
-            },
-          ],
-        },
-        {
-          title: 'Company',
-          items: [
-            {
-              label: 'Homepage',
-              href: 'https://gptr.dev',
-            },
-            {
-              label: 'Contact',
-              href: 'mailto:assafelovic@gmail.com',
+              label: 'Apache License 2.0',
+              href: 'https://github.com/12hsj12/Enterprise-Insight-Agent/blob/main/LICENSE',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} GPT Researcher.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Enterprise Insight Agent.`,
     },
   },
   presets: [
@@ -99,7 +67,7 @@ export default {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
-            'https://github.com/assafelovic/gpt-researcher/tree/master/docs',
+            'https://github.com/12hsj12/Enterprise-Insight-Agent/tree/main/docs',
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
         },

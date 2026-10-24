@@ -1,4 +1,8 @@
-# Enterprise Insight Agent v1 validation
+# Historical V1 validation log
+
+This file records V1 checkpoint runs from September 2026; it is not a current test status.
+Use the [repository README](../README.md) for the current offline test command and V2
+evaluation summary. The detailed records below are retained as validation history.
 
 This file records what was executed, not expected performance. Benchmark cutoff remains
 2026-09-05. Live runs began on 2026-09-06 UTC and continued into September 7 local time.

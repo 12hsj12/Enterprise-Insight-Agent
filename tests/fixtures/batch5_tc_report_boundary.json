@@ -1,0 +1,143 @@
+{
+  "source": "TC_001 diagnostic report_diagnostic.json; two actual R2 writer atoms and one source passage",
+  "scope_id": "88355f13-ff2f-46ea-8f88-15e2305c35be",
+  "requirements": [
+    {
+      "constraints": [
+        "Information cutoff: 2026-09-05",
+        "Exclude developments after 2026-09-05",
+        "Flag uncertain publication dates"
+      ],
+      "order": 1,
+      "requirement_id": "R1",
+      "requirement_type": "FACTUAL",
+      "source_dimensions": [
+        "混合检索机制"
+      ],
+      "target_entities": [
+        "PostgreSQL",
+        "pgvector",
+        "enterprise RAG workloads"
+      ],
+      "text": "Analyze the hybrid retrieval mechanisms available in PostgreSQL pgvector for enterprise RAG, including how vector similarity search can be combined with lexical search and how fusion methods such as reciprocal rank fusion and weighted fusion are supported or implemented."
+    },
+    {
+      "constraints": [
+        "Information cutoff: 2026-09-05",
+        "Exclude developments after 2026-09-05",
+        "Flag uncertain publication dates"
+      ],
+      "order": 2,
+      "requirement_id": "R2",
+      "requirement_type": "COMPARATIVE",
+      "source_dimensions": [
+        "索引选择与权衡"
+      ],
+      "target_entities": [
+        "PostgreSQL",
+        "pgvector",
+        "enterprise RAG workloads"
+      ],
+      "text": "Analyze index selection and tradeoffs in PostgreSQL pgvector for enterprise RAG, comparing index types such as HNSW and IVFFlat on recall, latency, memory usage, build time, filtered search behavior, update costs, and suitability for different workload scales."
+    },
+    {
+      "constraints": [
+        "Information cutoff: 2026-09-05",
+        "Exclude developments after 2026-09-05",
+        "Flag uncertain publication dates"
+      ],
+      "order": 3,
+      "requirement_id": "R3",
+      "requirement_type": "FACTUAL",
+      "source_dimensions": [
+        "企业工作负载限制"
+      ],
+      "target_entities": [
+        "PostgreSQL",
+        "pgvector",
+        "enterprise RAG workloads"
+      ],
+      "text": "Analyze engineering limitations of PostgreSQL pgvector in enterprise RAG workloads, including scalability, concurrency, multi-tenancy, access control filtering, index maintenance, operational complexity, cost, and reliability constraints."
+    }
+  ],
+  "evidences": [
+    {
+      "evidence_id": "ev_87d217fa2e07e448",
+      "title": "The Postgres Developer's Guide to Vector Index Tradeoffs | Tiger Data",
+      "url": "https://www.tigerdata.com/blog/the-postgres-developers-guide-to-vector-index-tradeoffs",
+      "publisher": "https://www.facebook.com/timescaledb",
+      "publication_date": "2026-05-26",
+      "source_role": "THIRD_PARTY",
+      "metadata_provenance": {
+        "author": "HTML_STRUCTURED_METADATA",
+        "publication_date": "HTML_STRUCTURED_METADATA",
+        "publisher": "HTML_STRUCTURED_METADATA",
+        "updated_date": "HTML_STRUCTURED_METADATA"
+      },
+      "sub_query": "diagnostic structured fixture",
+      "content": "Compared with HNSW, IVFFlat is usually lighter to build and maintain. Inserts are simpler because adding a vector means assigning it to a list rather than updating a graph of neighboring nodes."
+    }
+  ],
+  "proposal": {
+    "claims": [
+      {
+        "cited_evidence_ids": [
+          "ev_87d2"
+        ],
+        "claim_reference_id": "R2_ivfflat_lighter",
+        "entity_references": [
+          {
+            "name": "IVFFlat",
+            "reference_id": "ivfflat"
+          },
+          {
+            "name": "HNSW",
+            "reference_id": "hnsw"
+          }
+        ],
+        "is_material": true,
+        "material_side_references": [],
+        "relations": [
+          {
+            "evidence_id": "ev_87d2",
+            "relation": "support",
+            "supported_entity_reference_ids": [
+              "ivfflat",
+              "hnsw"
+            ]
+          }
+        ],
+        "requirement_id": "R2",
+        "risk_types": [
+          "comparative_claim"
+        ],
+        "text": "In pgvector, IVFFlat is described as usually lighter to build and maintain than HNSW, with simpler inserts because adding a vector means assigning it to a list rather than updating a graph of neighboring nodes."
+      },
+      {
+        "cited_evidence_ids": [
+          "ev_87d2"
+        ],
+        "claim_reference_id": "R2_ivfflat_tuning",
+        "entity_references": [],
+        "is_material": true,
+        "material_side_references": [],
+        "relations": [
+          {
+            "evidence_id": "ev_87d2",
+            "relation": "support"
+          }
+        ],
+        "requirement_id": "R2",
+        "risk_types": [],
+        "text": "IVFFlat recall is described as more sensitive to tuning; increasing probes gives the query more chances to find true nearest neighbors but pushes it closer to a broader scan, so tuning involves finding the lowest probes value that still meets a recall target."
+      }
+    ],
+    "source_excerpts": [
+      {
+        "claim_reference_id": "R2_ivfflat_lighter",
+        "evidence_id": "ev_87d2",
+        "excerpt": "Compared with HNSW, IVFFlat is usually lighter to build and maintain. Inserts are simpler because adding a vector means assigning it to a list rather than updating a graph of neighboring nodes."
+      }
+    ]
+  }
+}

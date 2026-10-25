@@ -1,5 +1,7 @@
 # Hybrid Research
 
+> This is upstream GPT Researcher reference material. For the current Enterprise Insight Agent workflow, start with the [project overview](../enterprise-insight-agent.md).
+
 ## Introduction
 
 GPT Researcher can combine web search capabilities with local document analysis to provide comprehensive, context-aware research results. 
@@ -10,10 +12,10 @@ This guide will walk you through the process of setting up and running hybrid re
 
 Before you begin, ensure you have the following:
 
-- Python 3.10 or higher installed on your system
+- Python 3.11 or higher installed on your system
 - pip (Python package installer)
 - An OpenAI API key (you can also choose other supported [LLMs](../gpt-researcher/llms/llms.md))
-- A Tavily API key (you can also choose other supported [Retrievers](../gpt-researcher/search-engines/retrievers.md))
+- A Tavily API key (you can also choose other supported [search engines and retrievers](../gpt-researcher/search-engines/search-engines.md))
 
 ## Installation
 

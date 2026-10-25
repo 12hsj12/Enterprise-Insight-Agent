@@ -1,0 +1,72 @@
+[
+  {
+    "cited_evidence_ids": [
+      "ev_da115e732ec66537",
+      "ev_c9d5eadb6fa50bc7",
+      "ev_00b4876769cb1a7f"
+    ],
+    "claim_id": "claim_32970b58417e8ad3290b1244cb422c751a81a1206c0d1eb7b193c117cbf2394d",
+    "output_mode": "factual",
+    "rendered_text": "pgvector 是 PostgreSQL 的开源扩展,用于在关系型数据库中存储、索引和检索向量。"
+  },
+  {
+    "cited_evidence_ids": [
+      "ev_00b4876769cb1a7f",
+      "ev_42ac6ab50515841f"
+    ],
+    "claim_id": "claim_8232e089e877b4a7a8a2b85cfcb5a36048f7c0e494ed58bebe70a15218323344",
+    "output_mode": "factual",
+    "rendered_text": "pgvector 支持精确和近似最近邻搜索,并支持 vector、halfvec、sparsevec 等向量类型。"
+  },
+  {
+    "cited_evidence_ids": [
+      "ev_00b4876769cb1a7f",
+      "ev_42ac6ab50515841f",
+      "ev_1ef8b48068fe5e84"
+    ],
+    "claim_id": "claim_a8efcbf4423a67c7074c0117360d60908711216c39cdcd48d7483f7fec5f8681",
+    "output_mode": "factual",
+    "rendered_text": "pgvector 提供 HNSW 和 IVFFlat 索引,支持 L2 欧氏距离、余弦相似度、内积、L1 曼哈顿距离等距离度量。"
+  },
+  {
+    "cited_evidence_ids": [
+      "ev_da115e732ec66537",
+      "ev_c9d5eadb6fa50bc7"
+    ],
+    "claim_id": "claim_69501627e724b4723de3f2f7752ad0799459de91504dc883662000bebd0d0296",
+    "output_mode": "factual",
+    "rendered_text": "pgvector 可直接集成到现有 PostgreSQL 数据库,无需单独基础设施或迁移数据,也无需更改应用架构。"
+  },
+  {
+    "cited_evidence_ids": [
+      "ev_332ae8b15ef78f5f"
+    ],
+    "claim_id": "claim_499a49939d85d87e76f88dad91e5235ebdeaca3173a56422dcd96516ce068325",
+    "output_mode": "factual",
+    "rendered_text": "Milvus 需要 Docker Compose 或 Kubernetes 部署;单机版也需要同时运行 etcd、MinIO 和 Milvus 三个容器;生产集群还需配置 Pulsar 或 Kafka。"
+  },
+  {
+    "cited_evidence_ids": [
+      "ev_332ae8b15ef78f5f"
+    ],
+    "claim_id": "claim_65acee2a7d9ed51b7d981e8bd16097777416c8feb6a856dafc765502ce679e96",
+    "output_mode": "factual",
+    "rendered_text": "pgvector 的备份可使用 pg_dump,高可用可使用 repmgr 或 Patroni,全部复用 PostgreSQL 生态,不需要学习新工具。"
+  },
+  {
+    "cited_evidence_ids": [
+      "ev_1f4a4d719a744227"
+    ],
+    "claim_id": "claim_0320eef4f57889c49b994847e8c9890afa93a32d5ae4edf203de16eacdfa3f8b",
+    "output_mode": "factual",
+    "rendered_text": "从架构选型看,向量检索不再是单一选型决策,而需根据向量规模、查询模式、架构偏好选择不同方案。"
+  },
+  {
+    "cited_evidence_ids": [
+      "ev_49d96459d8fbcd3d"
+    ],
+    "claim_id": "claim_fb7f8cf18c331d3d10e9db0324ebb57d31bfe186c2a182dea864f017105accaf",
+    "output_mode": "factual",
+    "rendered_text": "在 PolarDB PostgreSQL 版中,创建向量扩展、测试表、为 embedding 列创建 ivfflat 索引,并存储知识库内容,可用于企业专属 Chatbot。"
+  }
+]

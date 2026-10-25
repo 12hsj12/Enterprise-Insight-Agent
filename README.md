@@ -1,369 +1,102 @@
-<div align="center" id="top">
+# Enterprise Insight Agent
 
-<img src="https://github.com/assafelovic/gpt-researcher/assets/13554167/20af8286-b386-44a5-9a83-3be1365139c3" alt="Logo" width="80">
+**Evidence-grounded enterprise research for competitive intelligence and related decision tasks.** This product builds on the research and writing foundations of [GPT Researcher](https://github.com/assafelovic/gpt-researcher).
 
-####
+[English](README.md) · [简体中文](README-zh_CN.md)
 
-[![Website](https://img.shields.io/badge/Official%20Website-gptr.dev-teal?style=for-the-badge&logo=world&logoColor=white&color=0891b2)](https://gptr.dev)
-[![Documentation](https://img.shields.io/badge/Documentation-DOCS-f472b6?logo=googledocs&logoColor=white&style=for-the-badge)](https://docs.gptr.dev)
-[![Discord](https://img.shields.io/discord/1127851779011391548?logo=discord&logoColor=white&label=Discord&color=34b76a&style=for-the-badge)](https://discord.gg/QgZXvJAccX)
+> Evidence reliability controls how strongly a claim is stated; it does not decide whether information is present.
 
+## Project positioning
 
-[![PyPI version](https://img.shields.io/pypi/v/gpt-researcher?logo=pypi&logoColor=white&style=flat)](https://badge.fury.io/py/gpt-researcher)
-![GitHub Release](https://img.shields.io/github/v/release/assafelovic/gpt-researcher?style=flat&logo=github)
-[![Open In Colab](https://img.shields.io/static/v1?message=Open%20in%20Colab&logo=googlecolab&labelColor=grey&color=yellow&label=%20&style=flat&logoSize=40)](https://colab.research.google.com/github/assafelovic/gpt-researcher/blob/master/docs/docs/examples/pip-run.ipynb)
-[![Docker Image Version](https://img.shields.io/docker/v/elestio/gpt-researcher/latest?arch=amd64&style=flat&logo=docker&logoColor=white&color=1D63ED)](https://hub.docker.com/r/gptresearcher/gpt-researcher)
-[![Skill](https://img.shields.io/badge/Claude%20Skill-skills.sh-blueviolet?style=flat&logo=anthropic&logoColor=white)](https://skills.sh/assafelovic/gpt-researcher/gpt-researcher)
-[![Twitter Follow](https://img.shields.io/twitter/follow/assaf_elovic?style=social)](https://twitter.com/assaf_elovic)
+Enterprise Insight Agent is a local reference implementation for research that must show how findings are supported, where sources disagree, and which recommendation premises remain uncertain. Its product flow combines research planning, web retrieval, evidence assessment, claim review, citation grounding, and an inspectable report record.
 
-[English](README.md) | [中文](README-zh_CN.md) | [日本語](README-ja_JP.md) | [한국어](README-ko_KR.md)
+The codebase retains GPT Researcher's research and writing foundations. The project attribution and applicable license are described in [License and attribution](#license-and-attribution).
 
-</div>
+## Technical architecture
 
-# 🔎 GPT Researcher
-
-**GPT Researcher the first open deep research agent designed for both web and local research on any given task.** 
-
-The agent produces detailed, factual, and unbiased research reports with citations. GPT Researcher provides a full suite of customization options to create tailor made and domain specific research agents. Inspired by the recent [Plan-and-Solve](https://arxiv.org/abs/2305.04091) and [RAG](https://arxiv.org/abs/2005.11401) papers, GPT Researcher addresses misinformation, speed, determinism, and reliability by offering stable performance and increased speed through parallelized agent work.
-
-**Our mission is to empower individuals and organizations with accurate, unbiased, and factual information through AI.**
-
-## Why GPT Researcher?
-
-- Objective conclusions for manual research can take weeks, requiring vast resources and time.
-- LLMs trained on outdated information can hallucinate, becoming irrelevant for current research tasks.
-- Current LLMs have token limitations, insufficient for generating long research reports.
-- Limited web sources in existing services lead to misinformation and shallow results.
-- Selective web sources can introduce bias into research tasks.
-
-## Demo
-<a href="https://www.youtube.com/watch?v=f60rlc_QCxE" target="_blank" rel="noopener">
-  <img src="https://github.com/user-attachments/assets/ac2ec55f-b487-4b3f-ae6f-b8743ad296e4" alt="Demo video" width="800" target="_blank" />
-</a>
-
-## Install as Claude Skill
-
-Extend Claude's deep research capabilities by installing GPT Researcher as a [Claude Skill](https://skills.sh/assafelovic/gpt-researcher/gpt-researcher):
-
-```bash
-npx skills add assafelovic/gpt-researcher
+```text
+Research request
+  → planning, search, scraping, and context compression
+  → semantic eligibility and task-aware source reranking
+  → structured EvidenceContext with provenance and diagnostics
+  → report draft and answer-critical claim review
+  → claim/evidence binding, qualification, Claim Gate, and citation grounding
+  → bounded local repair, final report, trace, and evaluation record
 ```
 
-Once installed, Claude can leverage GPT Researcher's deep research capabilities directly within your conversations.
+The writer drafts from the research context before the evidence audit. The audit reviews claims in that draft; audit-generated claims absent from it are discarded. `Evidence`, source-level `EvidenceAssessment`, cross-source `EvidenceConsistencyAssessment`, and `ClaimEvidenceLink` are separate records. `authority_score` is a source reliability prior, not a probability that a claim is true. Task classification selects the authority weight after semantic eligibility; other `EvidencePolicy` fields are guidance and are not all enforced as retrieval filters. See the [architecture specification](docs/v2/V2_ARCHITECTURE_SPEC.md) and [information-flow note](docs/v2/INFORMATION_FLOW_SIMPLIFICATION.md).
 
-## Architecture
+## Core modules
 
-The core idea is to utilize 'planner' and 'execution' agents. The planner generates research questions, while the execution agents gather relevant information. The publisher then aggregates all findings into a comprehensive report.
+| Module | Responsibility |
+|---|---|
+| `gpt_researcher/skills/researcher.py`, `gpt_researcher/context/` | Research planning, retrieval, compression, source-aware context, and provenance. |
+| `gpt_researcher/evidence/` | Evidence records, metadata, reliability priors, claim binding, consistency, qualification, and grounding. |
+| `gpt_researcher/enterprise/` | Request workflow, task policy, answer-critical review, report diagnostics, trace, and structured results. |
+| `backend/server/enterprise_api.py`, `backend/server/sqlite_report_store.py` | Local enterprise task API and SQLite task history. |
+| `benchmarks/`, `tests/`, `scripts/run_offline_tests.py` | Frozen evaluation inputs and outputs, regression coverage, and module-isolated offline test runner. |
 
-<div align="center">
-<img align="center" height="600" src="https://github.com/assafelovic/gpt-researcher/assets/13554167/4ac896fd-63ab-4b77-9688-ff62aafcc527">
-</div>
+## Run
 
-Steps:
-* Create a task-specific agent based on a research query.
-* Generate questions that collectively form an objective opinion on the task.
-* Use a crawler agent for gathering information for each question.
-* Summarize and source-track each resource.
-* Filter and aggregate summaries into a final research report.
+The project targets Python 3.11 or later. Dependency files specify minimum versions rather than a fully locked environment; the Docker build uses the same requirements files. From the repository root on Windows:
 
-## Tutorials
- - [How it Works](https://docs.gptr.dev/blog/building-gpt-researcher)
- - [How to Install](https://www.loom.com/share/04ebffb6ed2a4520a27c3e3addcdde20?sid=da1848e8-b1f1-42d1-93c3-5b0b9c3b24ea)
- - [Live Demo](https://www.loom.com/share/6a3385db4e8747a1913dd85a7834846f?sid=a740fd5b-2aa3-457e-8fb7-86976f59f9b8)
-
-## Features
-
-- 📝 Generate detailed research reports using web and local documents.
-- 🖼️ Smart image scraping and filtering for reports.
-- 🍌 **AI-generated inline images** using Google Gemini (Nano Banana) for visual illustrations.
-- 📜 Generate detailed reports exceeding 2,000 words.
-- 🌐 Aggregate over 20 sources for objective conclusions.
-- 🖥️ Frontend available in lightweight (HTML/CSS/JS) and production-ready (NextJS + Tailwind) versions.
-- 🔍 JavaScript-enabled web scraping.
-- 📂 Maintains memory and context throughout research.
-- 📄 Export reports to PDF, Word, and other formats.
-
-## 📖 Documentation
-
-See the [Documentation](https://docs.gptr.dev/docs/gpt-researcher/getting-started) for:
-- Installation and setup guides
-- Configuration and customization options
-- How-To examples
-- Full API references
-
-## ⚙️ Getting Started
-
-### Installation
-
-1. Install Python 3.11 or later. [Guide](https://www.tutorialsteacher.com/python/install-python).
-2. Clone the project and navigate to the directory:
-
-    ```bash
-    git clone https://github.com/assafelovic/gpt-researcher.git
-    cd gpt-researcher
-    ```
-
-3. Set up API keys by exporting them or storing them in a `.env` file.
-
-    ```bash
-    export OPENAI_API_KEY={Your OpenAI API Key here}
-    export TAVILY_API_KEY={Your Tavily API Key here}
-    ```
-
-    (Optional) For enhanced tracing and observability, you can also set:
-    
-    ```bash
-    # export LANGCHAIN_TRACING_V2=true
-    # export LANGCHAIN_API_KEY={Your LangChain API Key here}
-    ```
-
-    For custom OpenAI-compatible APIs (e.g., local models, other providers), you can also set:
-    
-    ```bash
-    export OPENAI_BASE_URL={Your custom API base URL here}
-    ```
-
-4. Install dependencies and start the server:
-
-    ```bash
-    pip install -r requirements.txt
-    python -m uvicorn main:app --reload
-    ```
-
-Visit [http://localhost:8000](http://localhost:8000) to start.
-
-For other setups (e.g., Poetry or virtual environments), check the [Getting Started page](https://docs.gptr.dev/docs/gpt-researcher/getting-started).
-
-## Run as PIP package
-```bash
-pip install gpt-researcher
-
-```
-### Example Usage:
-```python
-...
-from gpt_researcher import GPTResearcher
-
-query = "why is Nvidia stock going up?"
-researcher = GPTResearcher(query=query)
-# Conduct research on the given query
-research_result = await researcher.conduct_research()
-# Write the report
-report = await researcher.write_report()
-...
+```powershell
+python -m venv .venv
+.venv/Scripts/python -m pip install -r requirements.txt -r multi_agents/requirements.txt
+.venv/Scripts/python -m gpt_researcher.enterprise.demo --output outputs/enterprise-demo.json
 ```
 
-**For more examples and configurations, please refer to the [PIP documentation](https://docs.gptr.dev/docs/gpt-researcher/gptr/pip-package) page.**
+The demo uses synthetic fixture data and makes no provider calls. It demonstrates software behavior; it is not a live research run or benchmark.
 
-### 🔧 MCP Client
-GPT Researcher supports MCP integration to connect with specialized data sources like GitHub repositories, databases, and custom APIs. This enables research from data sources alongside web search.
+For a real research request, configure working LLM, embedding, and search providers in an uncommitted local `.env` (the default setup uses `OPENAI_API_KEY` and `TAVILY_API_KEY`) and start the API:
 
-```bash
-export RETRIEVER=tavily,mcp  # Enable hybrid web + MCP research
+```powershell
+.venv/Scripts/python -m uvicorn main:app --host 127.0.0.1 --port 8000 --workers 1
 ```
 
-```python
-from gpt_researcher import GPTResearcher
-import asyncio
-import os
+Submit an enterprise research task from another PowerShell terminal. Provider calls may incur cost:
 
-async def mcp_research_example():
-    # Enable MCP with web search
-    os.environ["RETRIEVER"] = "tavily,mcp"
-    
-    researcher = GPTResearcher(
-        query="What are the top open source web research agents?",
-        mcp_configs=[
-            {
-                "name": "github",
-                "command": "npx",
-                "args": ["-y", "@modelcontextprotocol/server-github"],
-                "env": {"GITHUB_TOKEN": os.getenv("GITHUB_TOKEN")}
-            }
-        ]
-    )
-    
-    research_result = await researcher.conduct_research()
-    report = await researcher.write_report()
-    return report
+The local API currently exposes the evidence workflow through the `enable_v2_execution` request field.
+
+```powershell
+$body = @{
+    target = 'Microsoft'
+    topic = 'Verify the business purpose of Azure OpenAI Service'
+    dimensions = @('Supported findings', 'Evidence limitations')
+    enable_v2_execution = $true
+} | ConvertTo-Json -Depth 20
+Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/api/enterprise/tasks -ContentType 'application/json' -Body $body
 ```
 
-> For comprehensive MCP documentation and advanced examples, visit the [MCP Integration Guide](https://docs.gptr.dev/docs/gpt-researcher/retrievers/mcp-configs).
+The request runs synchronously. Open `http://127.0.0.1:8000/docs` for the API. The [deployment guide](docs/deployment.md) and [request walkthrough](docs/demo.md) cover local operation and persistence.
 
-## 🍌 Inline Image Generation
+## Tests and evaluation
 
-GPT Researcher can automatically generate and embed AI-created illustrations in your research reports using Google's Gemini models (Nano Banana).
+Install the test extra with `python -m pip install -e ".[test]"`, then run the module-isolated offline suite with a new output directory:
 
-```bash
-# Enable in your .env file
-IMAGE_GENERATION_ENABLED=true
-GOOGLE_API_KEY=your_google_api_key
-IMAGE_GENERATION_MODEL=models/gemini-2.5-flash-image
+```powershell
+.venv/Scripts/python scripts/run_offline_tests.py --output outputs/offline-run --workers 4
 ```
 
-When enabled, the system will:
-1. Analyze your research context to identify visualization opportunities
-2. Pre-generate 2-3 relevant images during the research phase
-3. Embed them inline as the report is written
+The runner sets `GPTR_BLOCK_NETWORK=1` and excludes the three provider/live modules `test_researcher_logging.py`, `test_logging_output.py`, and `test_mcp.py`. Choose a different output directory for each run.
 
-Images are generated with dark-mode styling that matches the GPT Researcher UI, featuring professional infographic aesthetics with teal accents.
+The frozen benchmark specification defines 30 cases in six categories: 18 development cases and 12 reserved holdout cases, with a 2026-09-05 information cutoff. A one-pass run of the 12 holdout cases completed **12/12 with zero case-level runtime failures and zero quality reruns**. Human review of the saved reports rated product generalization **MIXED**: engineering stability passed, evidence-aware behavior was mixed, and readability was acceptable. This completion count is not a report-quality score, and no paired quantitative comparison has established an improvement over the upstream project. See the [benchmark specification](docs/v2/V2_BENCHMARK_SPEC.md) and [holdout evaluation](docs/v2/V2_HOLDOUT_ONE_PASS_EVALUATION.md) for methods and detailed results.
 
-[Learn more about Image Generation](https://docs.gptr.dev/docs/gpt-researcher/gptr/image_generation) in our documentation.
+## Known limitations
 
-## ✨ Deep Research
+- First-party sources, independent corroboration, publication dates, and comparable competitor evidence may be unavailable. A source reliability prior cannot fill those gaps.
+- Complex comparisons, trend analysis, and recommendations can rely on weak or incompatible evidence. The holdout review found conclusions and recommendation premises requiring source-level human review before enterprise use.
+- The 2026-09-05 information cutoff was not reliably enforced in all generated content; post-cutoff source metadata appeared in holdout reports. Long reports can repeat qualification language and be difficult to scan.
+- The frozen quantitative acceptance criteria remain unevaluated without a complete formal metric ledger and paired comparison. Runtime counters are diagnostics, not accuracy scores.
+- The local API uses synchronous execution and SQLite history. It has no authentication, multi-tenant isolation, durable distributed queue, or distributed job coordination.
 
-GPT Researcher now includes Deep Research - an advanced recursive research workflow that explores topics with agentic depth and breadth. This feature employs a tree-like exploration pattern, diving deeper into subtopics while maintaining a comprehensive view of the research subject.
+## License and attribution
 
-- 🌳 Tree-like exploration with configurable depth and breadth
-- ⚡️ Concurrent processing for faster results
-- 🤝 Smart context management across research branches
-- ⏱️ Takes ~5 minutes per deep research
-- 💰 Costs ~$0.4 per research (using `o3-mini` on "high" reasoning effort)
+This repository is built on [GPT Researcher](https://github.com/assafelovic/gpt-researcher), whose research and writing foundations are retained and extended as one product. The repository's license is [Apache License 2.0](LICENSE); retain applicable upstream notices and consult the upstream repository for its own terms. The Python distribution keeps the `gpt-researcher` package identifier for compatibility.
 
-[Learn more about Deep Research](https://docs.gptr.dev/docs/gpt-researcher/gptr/deep_research) in our documentation.
+## Documentation map
 
-## Run with Docker
-
-> **Step 1** - [Install Docker](https://docs.gptr.dev/docs/gpt-researcher/getting-started/getting-started-with-docker)
-
-> **Step 2** - Clone the '.env.example' file, add your API Keys to the cloned file and save the file as '.env'
-
-> **Step 3** - Within the docker-compose file comment out services that you don't want to run with Docker.
-
-```bash
-docker-compose up --build
-```
-
-If that doesn't work, try running it without the dash:
-```bash
-docker compose up --build
-```
-
-> **Step 4** - By default, if you haven't uncommented anything in your docker-compose file, this flow will start 2 processes:
- - the Python server running on localhost:8000<br>
- - the React app running on localhost:3000<br>
-
-Visit localhost:3000 on any browser and enjoy researching!
-
-
-## 📄 Research on Local Documents
-
-You can instruct the GPT Researcher to run research tasks based on your local documents. Currently supported file formats are: PDF, plain text, CSV, Excel, Markdown, PowerPoint, and Word documents.
-
-Step 1: Add the env variable `DOC_PATH` pointing to the folder where your documents are located.
-
-```bash
-export DOC_PATH="./my-docs"
-```
-
-Step 2: 
- - If you're running the frontend app on localhost:8000, simply select "My Documents" from the "Report Source" Dropdown Options.
- - If you're running GPT Researcher with the [PIP package](https://docs.tavily.com/guides/gpt-researcher/gpt-researcher#pip-package), pass the `report_source` argument as "local" when you instantiate the `GPTResearcher` class [code sample here](https://docs.gptr.dev/docs/gpt-researcher/context/tailored-research).
-
-
-## 🤖 MCP Server
-
-We've moved our MCP server to a dedicated repository: [gptr-mcp](https://github.com/assafelovic/gptr-mcp).
-
-The GPT Researcher MCP Server enables AI applications like Claude to conduct deep research. While LLM apps can access web search tools with MCP, GPT Researcher MCP delivers deeper, more reliable research results.
-
-Features:
-- Deep research capabilities for AI assistants
-- Higher quality information with optimized context usage
-- Comprehensive results with better reasoning for LLMs
-- Claude Desktop integration
-
-For detailed installation and usage instructions, please visit the [official repository](https://github.com/assafelovic/gptr-mcp).
-
-
-## 👪 Multi-Agent Assistant
-As AI evolves from prompt engineering and RAG to multi-agent systems, we're excited to introduce multi-agent assistants built with [LangGraph](https://python.langchain.com/v0.1/docs/langgraph/) and [AG2](https://github.com/ag2ai/ag2).
-
-By using multi-agent frameworks, the research process can be significantly improved in depth and quality by leveraging multiple agents with specialized skills. Inspired by the recent [STORM](https://arxiv.org/abs/2402.14207) paper, this project showcases how a team of AI agents can work together to conduct research on a given topic, from planning to publication.
-
-An average run generates a 5-6 page research report in multiple formats such as PDF, Docx and Markdown.
-
-Check it out [here](https://github.com/assafelovic/gpt-researcher/tree/master/multi_agents) or head over to our documentation for [LangGraph](https://docs.gptr.dev/docs/gpt-researcher/multi_agents/langgraph) and [AG2](https://docs.gptr.dev/docs/gpt-researcher/multi_agents/ag2) for more information.
-
-## 🔍 Observability
-
-GPT Researcher supports **LangSmith** for enhanced tracing and observability, making it easier to debug and optimize complex multi-agent workflows.
-
-To enable tracing:
-1. Set the following environment variables:
-   ```bash
-   export LANGCHAIN_TRACING_V2=true
-   export LANGCHAIN_API_KEY=your_api_key
-   export LANGCHAIN_PROJECT="gpt-researcher"
-   ```
-2. Run your research tasks as usual. All LangGraph-based agent interactions will be automatically traced and visualized in your LangSmith dashboard.
-
-#### Monocle Tracing
-
-GPT Researcher also supports [Monocle](https://github.com/monocle2ai/monocle), an OpenTelemetry-based tracer for agentic applications. It records each run end-to-end: LLM calls, agent steps, and tool invocations, with their inputs, outputs, timings, and token counts.
-
-Monocle is an opt-in extra and is off by default. Install it, then add the following to your `.env` file:
-
-```bash
-pip install "gpt-researcher[monocle]"
-```
-
-```bash
-MONOCLE_TRACING=true
-MONOCLE_EXPORTERS=file          # file, console, okahu, s3, blob, gcs (default: file)
-OKAHU_API_KEY=okh_xxxxxxxx      # required only for the `okahu` exporter
-```
-
-Each run writes one trace file to `.monocle/`; open it in the [Monocle VS Code extension](https://marketplace.visualstudio.com/items?itemName=OkahuAI.monocle-apptrace). Connect to [Okahu](https://www.okahu.ai) to analyze traces across runs (via the `okahu` exporter).
-
-## 🖥️ Frontend Applications
-
-GPT-Researcher now features an enhanced frontend to improve the user experience and streamline the research process. The frontend offers:
-
-- An intuitive interface for inputting research queries
-- Real-time progress tracking of research tasks
-- Interactive display of research findings
-- Customizable settings for tailored research experiences
-
-Two deployment options are available:
-1. A lightweight static frontend served by FastAPI
-2. A feature-rich NextJS application for advanced functionality
-
-For detailed setup instructions and more information about the frontend features, please visit our [documentation page](https://docs.gptr.dev/docs/gpt-researcher/frontend/introduction).
-
-## 🚀 Contributing
-We highly welcome contributions! Please check out [contributing](https://github.com/assafelovic/gpt-researcher/blob/master/CONTRIBUTING.md) if you're interested.
-
-Please check out our [roadmap](https://trello.com/b/3O7KBePw/gpt-researcher-roadmap) page and reach out to us via our [Discord community](https://discord.gg/QgZXvJAccX) if you're interested in joining our mission.
-<a href="https://github.com/assafelovic/gpt-researcher/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=assafelovic/gpt-researcher&max=1000" />
-</a>
-## ✉️ Support / Contact us
-- [Community Discord](https://discord.gg/spBgZmm3Xe)
-- Author Email: assaf.elovic@gmail.com
-
-## 🛡 Disclaimer
-
-This project, GPT Researcher, is an experimental application and is provided "as-is" without any warranty, express or implied. We are sharing codes for academic purposes under the Apache 2 license. Nothing herein is academic advice, and NOT a recommendation to use in academic or research papers.
-
-Our view on unbiased research claims:
-1. The main goal of GPT Researcher is to reduce incorrect and biased facts. How? We assume that the more sites we scrape the less chances of incorrect data. By scraping multiple sites per research, and choosing the most frequent information, the chances that they are all wrong is extremely low.
-2. We do not aim to eliminate biases; we aim to reduce it as much as possible. **We are here as a community to figure out the most effective human/llm interactions.**
-3. In research, people also tend towards biases as most have already opinions on the topics they research about. This tool scrapes many opinions and will evenly explain diverse views that a biased person would never have read.
-
----
-
-<p align="center">
-<a href="https://star-history.dera.page/#assafelovic/gpt-researcher">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://star-history.dera.page/svg?repos=assafelovic/gpt-researcher&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://star-history.dera.page/svg?repos=assafelovic/gpt-researcher&type=Date" />
-    <img alt="Star History Chart" src="https://star-history.dera.page/svg?repos=assafelovic/gpt-researcher&type=Date" />
-  </picture>
-</a>
-</p>
-
-
-<p align="right">
-  <a href="#top">⬆️ Back to Top</a>
-</p>
+- [Documentation home](docs/docs/welcome.md)
+- [Architecture specification](docs/v2/V2_ARCHITECTURE_SPEC.md) · [Frozen benchmark specification](docs/v2/V2_BENCHMARK_SPEC.md) · [Holdout evaluation](docs/v2/V2_HOLDOUT_ONE_PASS_EVALUATION.md)
+- [Baseline benchmark protocol](docs/baseline_protocol.md) · [Validation log](docs/v1_validation.md)
+- [License](LICENSE) · [Contribution guide](CONTRIBUTING.md)

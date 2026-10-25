@@ -1,31 +1,28 @@
-# Website
+# Enterprise Insight Agent documentation site
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+The documentation site is built with Docusaurus 3.10.2. Start with [`docs/docs/welcome.md`](docs/welcome.md), then use the sidebar's Enterprise Insight Agent section for the product guide. The separately labeled GPT Researcher reference sections retain upstream material and are not the current product overview.
 
-## Prerequisites
+## Local development
 
-To build and test documentation locally, begin by downloading and installing [Node.js](https://nodejs.org/en/download/), and then installing [Yarn](https://classic.yarnpkg.com/en/).
-On Windows, you can install via the npm package manager (npm) which comes bundled with Node.js:
-
-```console
-npm install --global yarn
-```
-
-## Installation
+Use Node.js 20.x or 22.x and later releases with npm, then from this directory. The pinned documentation build security updates require Node.js 20 or newer; Node.js 21 is outside the dependency engine ranges:
 
 ```console
-pip install pydoc-markdown
-cd website
-yarn install
+npm install
+npm run start
 ```
 
-## Local Development
-
-Navigate to the website folder and run:
+Build locally with a local-only canonical URL. In PowerShell:
 
 ```console
-pydoc-markdown
-yarn start
+$env:DOCS_SITE_URL = 'http://localhost:3000'
+$env:DOCS_BASE_URL = '/'
+npm run build
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+In Bash:
+
+```console
+DOCS_SITE_URL=http://localhost:3000 DOCS_BASE_URL=/ npm run build
+```
+
+For a production build, set `DOCS_SITE_URL` and `DOCS_BASE_URL` to the confirmed documentation host and path. The repository has no documentation deployment workflow or public domain configured. Repository content and edit links point to [12hsj12/Enterprise-Insight-Agent](https://github.com/12hsj12/Enterprise-Insight-Agent).

@@ -1,0 +1,2566 @@
+{
+  "layer": "HUMAN_ADJUDICATION_QUEUE",
+  "review_timestamp": "2026-09-14T03:08:01Z",
+  "reviewer": "human-reviewer-calibration-001",
+  "status": "HUMAN_REVIEW_COMPLETED",
+  "task_count": 36,
+  "tasks": [
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_ED_002-C019",
+          "reason": "部署依赖按单机/集群及数量分别拆分；用户社区教程不是所有 Milvus 版本的完整要求。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-C020",
+          "reason": "部署依赖按单机/集群及数量分别拆分；用户社区教程不是所有 Milvus 版本的完整要求。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-C021",
+          "reason": "部署依赖按单机/集群及数量分别拆分；用户社区教程不是所有 Milvus 版本的完整要求。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-citation_support-049",
+          "reason": "片段随后明确 Milvus 2.6 内置 Woodpecker、降低 Kafka 依赖；报告省略版本限定后绝对说生产集群还需 Pulsar/Kafka，完整范围未建立。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-high_risk-001",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-high_risk-002",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        }
+      ],
+      "case_id": "EIV2_ED_002",
+      "category": "enterprise_decision_recommendation",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation",
+        "high_risk"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_332ae8b15ef78f5f",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\selected.json#/evidences/23/content",
+          "source_reference": "https://developer.cloud.tencent.com/article/2658089"
+        }
+      ],
+      "exact_report_passage": "Milvus 需要 Docker Compose 或 Kubernetes 部署;单机版也需要同时运行 etcd、MinIO 和 Milvus 三个容器;生产集群还需配置 Pulsar 或 Kafka。",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "HIGH_RISK_REVIEW",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_ED_002-C019",
+        "EIV2_ED_002-C020",
+        "EIV2_ED_002-C021",
+        "EIV2_ED_002-citation_support-049",
+        "EIV2_ED_002-high_risk-001",
+        "EIV2_ED_002-high_risk-002"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-001"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_ED_002-C015",
+          "reason": "分别拆分集成、基础设施、无需迁移与架构范围；‘迁移数据’继承‘无需…或’否定，需人工确认否定作用域。绝对无需改架构不外推所有应用。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-C016",
+          "reason": "分别拆分集成、基础设施、无需迁移与架构范围；‘迁移数据’继承‘无需…或’否定，需人工确认否定作用域。绝对无需改架构不外推所有应用。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-C017",
+          "reason": "分别拆分集成、基础设施、无需迁移与架构范围；‘迁移数据’继承‘无需…或’否定，需人工确认否定作用域。绝对无需改架构不外推所有应用。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-C018",
+          "reason": "分别拆分集成、基础设施、无需迁移与架构范围；‘迁移数据’继承‘无需…或’否定，需人工确认否定作用域。绝对无需改架构不外推所有应用。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-citation_support-041",
+          "reason": "此引用片段未包含该原子陈述的完整依据；不从同 URL 的其他片段自动转移支持，不给部分分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-citation_support-046",
+          "reason": "此引用片段未包含该原子陈述的完整依据；不从同 URL 的其他片段自动转移支持，不给部分分。",
+          "recommendation": "unclear"
+        }
+      ],
+      "case_id": "EIV2_ED_002",
+      "category": "enterprise_decision_recommendation",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_da115e732ec66537",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\selected.json#/evidences/0/content",
+          "source_reference": "https://cloud.google.com/discover/what-is-pgvector?hl=zh-CN"
+        },
+        {
+          "evidence_id": "ev_c9d5eadb6fa50bc7",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\selected.json#/evidences/1/content",
+          "source_reference": "https://cloud.google.com/discover/what-is-pgvector?hl=zh-CN"
+        }
+      ],
+      "exact_report_passage": "pgvector 可直接集成到现有 PostgreSQL 数据库,无需单独基础设施或迁移数据,也无需更改应用架构。",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_ED_002-C015",
+        "EIV2_ED_002-C016",
+        "EIV2_ED_002-C017",
+        "EIV2_ED_002-C018",
+        "EIV2_ED_002-citation_support-041",
+        "EIV2_ED_002-citation_support-046"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-002"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_ED_002-C009",
+          "reason": "分别评估索引/距离度量；不能让只说明索引的引用支持全部距离函数。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-C010",
+          "reason": "分别评估索引/距离度量；不能让只说明索引的引用支持全部距离函数。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-C011",
+          "reason": "分别评估索引/距离度量；不能让只说明索引的引用支持全部距离函数。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-C012",
+          "reason": "分别评估索引/距离度量；不能让只说明索引的引用支持全部距离函数。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-C013",
+          "reason": "分别评估索引/距离度量；不能让只说明索引的引用支持全部距离函数。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-C014",
+          "reason": "分别评估索引/距离度量；不能让只说明索引的引用支持全部距离函数。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-citation_support-022",
+          "reason": "此引用片段未包含该原子陈述的完整依据；不从同 URL 的其他片段自动转移支持，不给部分分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-citation_support-025",
+          "reason": "此引用片段未包含该原子陈述的完整依据；不从同 URL 的其他片段自动转移支持，不给部分分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-citation_support-029",
+          "reason": "此引用片段未包含该原子陈述的完整依据；不从同 URL 的其他片段自动转移支持，不给部分分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-citation_support-031",
+          "reason": "此引用片段未包含该原子陈述的完整依据；不从同 URL 的其他片段自动转移支持，不给部分分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-citation_support-032",
+          "reason": "此引用片段未包含该原子陈述的完整依据；不从同 URL 的其他片段自动转移支持，不给部分分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-citation_support-034",
+          "reason": "此引用片段未包含该原子陈述的完整依据；不从同 URL 的其他片段自动转移支持，不给部分分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-citation_support-035",
+          "reason": "此引用片段未包含该原子陈述的完整依据；不从同 URL 的其他片段自动转移支持，不给部分分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-citation_support-037",
+          "reason": "此引用片段未包含该原子陈述的完整依据；不从同 URL 的其他片段自动转移支持，不给部分分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-citation_support-038",
+          "reason": "此引用片段未包含该原子陈述的完整依据；不从同 URL 的其他片段自动转移支持，不给部分分。",
+          "recommendation": "unclear"
+        }
+      ],
+      "case_id": "EIV2_ED_002",
+      "category": "enterprise_decision_recommendation",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_00b4876769cb1a7f",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\selected.json#/evidences/9/content",
+          "source_reference": "https://intl.cloud.tencent.com/zh/document/product/409/80360"
+        },
+        {
+          "evidence_id": "ev_42ac6ab50515841f",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\selected.json#/evidences/5/content",
+          "source_reference": "https://intl.cloud.tencent.com/zh/document/product/409/80360"
+        },
+        {
+          "evidence_id": "ev_1ef8b48068fe5e84",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\selected.json#/evidences/24/content",
+          "source_reference": "https://developer.cloud.tencent.com/article/2658089"
+        }
+      ],
+      "exact_report_passage": "pgvector 提供 HNSW 和 IVFFlat 索引,支持 L2 欧氏距离、余弦相似度、内积、L1 曼哈顿距离等距离度量。",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_ED_002-C009",
+        "EIV2_ED_002-C010",
+        "EIV2_ED_002-C011",
+        "EIV2_ED_002-C012",
+        "EIV2_ED_002-C013",
+        "EIV2_ED_002-C014",
+        "EIV2_ED_002-citation_support-022",
+        "EIV2_ED_002-citation_support-025",
+        "EIV2_ED_002-citation_support-029",
+        "EIV2_ED_002-citation_support-031",
+        "EIV2_ED_002-citation_support-032",
+        "EIV2_ED_002-citation_support-034",
+        "EIV2_ED_002-citation_support-035",
+        "EIV2_ED_002-citation_support-037",
+        "EIV2_ED_002-citation_support-038"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-003"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_ED_002-C006",
+          "reason": "搜索模式与各数据类型分别拆分，类型名继承原句支持关系。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-C007",
+          "reason": "搜索模式与各数据类型分别拆分，类型名继承原句支持关系。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-C008",
+          "reason": "搜索模式与各数据类型分别拆分，类型名继承原句支持关系。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-citation_support-014",
+          "reason": "此引用片段未包含该原子陈述的完整依据；不从同 URL 的其他片段自动转移支持，不给部分分。",
+          "recommendation": "unclear"
+        }
+      ],
+      "case_id": "EIV2_ED_002",
+      "category": "enterprise_decision_recommendation",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_00b4876769cb1a7f",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\selected.json#/evidences/9/content",
+          "source_reference": "https://intl.cloud.tencent.com/zh/document/product/409/80360"
+        },
+        {
+          "evidence_id": "ev_42ac6ab50515841f",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\selected.json#/evidences/5/content",
+          "source_reference": "https://intl.cloud.tencent.com/zh/document/product/409/80360"
+        }
+      ],
+      "exact_report_passage": "pgvector 支持精确和近似最近邻搜索,并支持 vector、halfvec、sparsevec 等向量类型。",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_ED_002-C006",
+        "EIV2_ED_002-C007",
+        "EIV2_ED_002-C008",
+        "EIV2_ED_002-citation_support-014"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-004"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_ED_002-C002",
+          "reason": "定义与各项向量操作分别核对；短语继承原句关系型数据库/pgvector 主语。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-C003",
+          "reason": "定义与各项向量操作分别核对；短语继承原句关系型数据库/pgvector 主语。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-C004",
+          "reason": "定义与各项向量操作分别核对；短语继承原句关系型数据库/pgvector 主语。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-citation_support-002",
+          "reason": "此引用片段未包含该原子陈述的完整依据；不从同 URL 的其他片段自动转移支持，不给部分分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-citation_support-008",
+          "reason": "此引用片段未包含该原子陈述的完整依据；不从同 URL 的其他片段自动转移支持，不给部分分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-citation_support-009",
+          "reason": "此引用片段未包含该原子陈述的完整依据；不从同 URL 的其他片段自动转移支持，不给部分分。",
+          "recommendation": "unclear"
+        }
+      ],
+      "case_id": "EIV2_ED_002",
+      "category": "enterprise_decision_recommendation",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_da115e732ec66537",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\selected.json#/evidences/0/content",
+          "source_reference": "https://cloud.google.com/discover/what-is-pgvector?hl=zh-CN"
+        },
+        {
+          "evidence_id": "ev_c9d5eadb6fa50bc7",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\selected.json#/evidences/1/content",
+          "source_reference": "https://cloud.google.com/discover/what-is-pgvector?hl=zh-CN"
+        },
+        {
+          "evidence_id": "ev_00b4876769cb1a7f",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\selected.json#/evidences/9/content",
+          "source_reference": "https://intl.cloud.tencent.com/zh/document/product/409/80360"
+        }
+      ],
+      "exact_report_passage": "pgvector 是 PostgreSQL 的开源扩展,用于在关系型数据库中存储、索引和检索向量。",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_ED_002-C002",
+        "EIV2_ED_002-C003",
+        "EIV2_ED_002-C004",
+        "EIV2_ED_002-citation_support-002",
+        "EIV2_ED_002-citation_support-008",
+        "EIV2_ED_002-citation_support-009"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-005"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_ED_002-C024",
+          "reason": "工具能力与全部复用/学习负担分别核对；最后一句取决于团队已有技能，应人工确认绝对表述。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_ED_002-C025",
+          "reason": "工具能力与全部复用/学习负担分别核对；最后一句取决于团队已有技能，应人工确认绝对表述。",
+          "recommendation": "factual"
+        }
+      ],
+      "case_id": "EIV2_ED_002",
+      "category": "enterprise_decision_recommendation",
+      "covered_dimensions": [
+        "claim_segmentation"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_332ae8b15ef78f5f",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\selected.json#/evidences/23/content",
+          "source_reference": "https://developer.cloud.tencent.com/article/2658089"
+        }
+      ],
+      "exact_report_passage": "pgvector 的备份可使用 pg\\_dump,高可用可使用 repmgr 或 Patroni,全部复用 PostgreSQL 生态,不需要学习新工具。",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_ED_002-C024",
+        "EIV2_ED_002-C025"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-006"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_ED_002-C026",
+          "reason": "这是条件化选型原则/建议，不是可直接评分的测量事实；保留非事实建议条目和来源日期疑点。",
+          "recommendation": "non-factual"
+        }
+      ],
+      "case_id": "EIV2_ED_002",
+      "category": "enterprise_decision_recommendation",
+      "covered_dimensions": [
+        "claim_segmentation"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_1f4a4d719a744227",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\selected.json#/evidences/6/content",
+          "source_reference": "https://blog.csdn.net/afjkdajs/article/details/163944680"
+        }
+      ],
+      "exact_report_passage": "从架构选型看,向量检索不再是单一选型决策,而需根据向量规模、查询模式、架构偏好选择不同方案。",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_ED_002-C026"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-007"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_FV_001-C003",
+          "reason": "保留‘社区帖子引用’归因；不能把带限定语的引述升级成已核实合同解释。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_FV_001-C004",
+          "reason": "这是受 unconfirmed 前缀限定的争议存在断言，不是宣告实际训练违约。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_FV_001-citation_support-005",
+          "reason": "镜像政策片段讨论默认训练与保留，未证明该 DPA 引述。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_FV_001-citation_support-006",
+          "reason": "官方平台片段讨论默认训练和日志，未载该 DPA 引文。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_FV_001-citation_support-009",
+          "reason": "只保存默认政策说明，没有争议发生或裁定内容。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_FV_001-citation_support-010",
+          "reason": "只保存默认政策说明，没有争议发生或裁定内容。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_FV_001-high_risk-001",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        },
+        {
+          "ledger_review_id": "EIV2_FV_001-high_risk-002",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        }
+      ],
+      "case_id": "EIV2_FV_001",
+      "category": "factual_verification",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation",
+        "high_risk"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_b08a10e340e4cca0",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/11/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        },
+        {
+          "evidence_id": "ev_d384aee29a4051c8",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/10/content",
+          "source_reference": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047"
+        },
+        {
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/6/content",
+          "source_reference": "https://openai.xiniushu.com/policies/api-data-usage-policies"
+        },
+        {
+          "evidence_id": "ev_2031367fc36e847d",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\factual_verification\\EIV2_FV_001\\selected.json#/evidences/19/content",
+          "source_reference": "https://developers.openai.com/api/docs/guides/your-data"
+        }
+      ],
+      "exact_report_passage": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务;该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "HIGH_RISK_REVIEW",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_FV_001-C003",
+        "EIV2_FV_001-C004",
+        "EIV2_FV_001-citation_support-005",
+        "EIV2_FV_001-citation_support-006",
+        "EIV2_FV_001-citation_support-009",
+        "EIV2_FV_001-citation_support-010",
+        "EIV2_FV_001-high_risk-001",
+        "EIV2_FV_001-high_risk-002"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-008"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TC_001-C018",
+          "reason": "分别审查来源的条件化推荐及各限制；主语与归因继承 exact_parent_report_text，存在先前内容重复，人工确认去重。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-C019",
+          "reason": "分别审查来源的条件化推荐及各限制；主语与归因继承 exact_parent_report_text，存在先前内容重复，人工确认去重。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-C020",
+          "reason": "分别审查来源的条件化推荐及各限制；主语与归因继承 exact_parent_report_text，存在先前内容重复，人工确认去重。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-C021",
+          "reason": "分别审查来源的条件化推荐及各限制；主语与归因继承 exact_parent_report_text，存在先前内容重复，人工确认去重。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-high_risk-007",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-high_risk-008",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-high_risk-009",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        }
+      ],
+      "case_id": "EIV2_TC_001",
+      "category": "technical_capability_analysis",
+      "covered_dimensions": [
+        "claim_segmentation",
+        "high_risk"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_4b2cc9add6171347",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json#/evidences/10/content",
+          "source_reference": "https://www.paradedb.com/learn/postgresql/pgvector-limitations"
+        }
+      ],
+      "exact_report_passage": "Filtered vector query performance is a practical edge for pgvector; one source recommends pgvector when filter selectivity is moderate and warns that filtered query performance, index build cost, and missing hybrid primitives are limits\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "HIGH_RISK_REVIEW",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TC_001-C018",
+        "EIV2_TC_001-C019",
+        "EIV2_TC_001-C020",
+        "EIV2_TC_001-C021",
+        "EIV2_TC_001-high_risk-007",
+        "EIV2_TC_001-high_risk-008",
+        "EIV2_TC_001-high_risk-009"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-009"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TC_001-C005",
+          "reason": "保留 one source 归因及 unconfirmed 限定；这是对内置能力与外部组合的争议性表述。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-011",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-012",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-013",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-014",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-015",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-016",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-high_risk-002",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        }
+      ],
+      "case_id": "EIV2_TC_001",
+      "category": "technical_capability_analysis",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation",
+        "high_risk"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_16e2a002c3dcd617",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json#/evidences/24/content",
+          "source_reference": "https://danubedata.ro/blog/pgvector-rag-managed-postgres-2026"
+        },
+        {
+          "evidence_id": "ev_7a6809120ded0e6a",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json#/evidences/32/content",
+          "source_reference": "https://www.instaclustr.com/education/vector-database/pgvector-hybrid-search-benefits-use-cases-and-quick-tutorial"
+        },
+        {
+          "evidence_id": "ev_4426f461ab217c20",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json#/evidences/35/content",
+          "source_reference": "https://medium.com/@aysebilgegunduz/all-you-need-to-know-about-pgvector-part-4-hybrid-search-8a655d3b0087"
+        },
+        {
+          "evidence_id": "ev_4b2cc9add6171347",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json#/evidences/10/content",
+          "source_reference": "https://www.paradedb.com/learn/postgresql/pgvector-limitations"
+        }
+      ],
+      "exact_report_passage": "Hybrid retrieval can be assembled using PostgreSQL full\\-text search, pg\\_trgm, and reciprocal rank fusion, but one source characterizes pgvector as lacking built\\-in hybrid and reranking primitives, recommending pairing with full\\-text search instead\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "HIGH_RISK_REVIEW",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TC_001-C005",
+        "EIV2_TC_001-citation_support-011",
+        "EIV2_TC_001-citation_support-012",
+        "EIV2_TC_001-citation_support-013",
+        "EIV2_TC_001-citation_support-014",
+        "EIV2_TC_001-citation_support-015",
+        "EIV2_TC_001-citation_support-016",
+        "EIV2_TC_001-high_risk-002"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-010"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TC_001-C003",
+          "reason": "失败范围同时包含关键词与结构化限制，不能只凭一部分匹配给全分。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-008",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-009",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-high_risk-001",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        }
+      ],
+      "case_id": "EIV2_TC_001",
+      "category": "technical_capability_analysis",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation",
+        "high_risk"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_62fa0fb7bbfd9bb8",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json#/evidences/38/content",
+          "source_reference": "https://www.instaclustr.com/education/vector-database/pgvector-hybrid-search-benefits-use-cases-and-quick-tutorial"
+        },
+        {
+          "evidence_id": "ev_7a6809120ded0e6a",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json#/evidences/32/content",
+          "source_reference": "https://www.instaclustr.com/education/vector-database/pgvector-hybrid-search-benefits-use-cases-and-quick-tutorial"
+        },
+        {
+          "evidence_id": "ev_4426f461ab217c20",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json#/evidences/35/content",
+          "source_reference": "https://medium.com/@aysebilgegunduz/all-you-need-to-know-about-pgvector-part-4-hybrid-search-8a655d3b0087"
+        }
+      ],
+      "exact_report_passage": "Hybrid search in pgvector contexts combines vector\\-based similarity search with traditional keyword or metadata filtering because vector search handles semantic meaning but can fail on specific keywords or structured constraints\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "HIGH_RISK_REVIEW",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TC_001-C003",
+        "EIV2_TC_001-citation_support-008",
+        "EIV2_TC_001-citation_support-009",
+        "EIV2_TC_001-high_risk-001"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-011"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-024",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-026",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-028",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-030",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-032",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-high_risk-005",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-high_risk-006",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        }
+      ],
+      "case_id": "EIV2_TC_001",
+      "category": "technical_capability_analysis",
+      "covered_dimensions": [
+        "citation_support",
+        "high_risk"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_24320d0559472fcb",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json#/evidences/14/content",
+          "source_reference": "https://www.velodb.io/glossary/what-is-pgvector"
+        },
+        {
+          "evidence_id": "ev_648babff2ebe3058",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json#/evidences/13/content",
+          "source_reference": "https://www.velodb.io/glossary/what-is-pgvector"
+        }
+      ],
+      "exact_report_passage": "Managing pgvector in production requires PostgreSQL expertise: vacuum operations become more complex with large vector tables, index maintenance requires downtime or careful online rebuilding, monitoring vector\\-specific performance requires custom instrumentation, and backup and restore times increase significantly with vector data\\.",
+      "flags": [
+        "CITATION_SUPPORT_UNCERTAIN",
+        "HIGH_RISK_REVIEW",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TC_001-citation_support-024",
+        "EIV2_TC_001-citation_support-026",
+        "EIV2_TC_001-citation_support-028",
+        "EIV2_TC_001-citation_support-030",
+        "EIV2_TC_001-citation_support-032",
+        "EIV2_TC_001-high_risk-005",
+        "EIV2_TC_001-high_risk-006"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-012"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TC_001-C026",
+          "reason": "把三个组件分别核对，继承原句 available component for hybrid search with pgvector；Medium 标签本身不足以证明可用实现。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-C027",
+          "reason": "把三个组件分别核对，继承原句 available component for hybrid search with pgvector；Medium 标签本身不足以证明可用实现。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-C028",
+          "reason": "把三个组件分别核对，继承原句 available component for hybrid search with pgvector；Medium 标签本身不足以证明可用实现。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-051",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-052",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-054",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-055",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-057",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-058",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        }
+      ],
+      "case_id": "EIV2_TC_001",
+      "category": "technical_capability_analysis",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_16e2a002c3dcd617",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json#/evidences/24/content",
+          "source_reference": "https://danubedata.ro/blog/pgvector-rag-managed-postgres-2026"
+        },
+        {
+          "evidence_id": "ev_4426f461ab217c20",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json#/evidences/35/content",
+          "source_reference": "https://medium.com/@aysebilgegunduz/all-you-need-to-know-about-pgvector-part-4-hybrid-search-8a655d3b0087"
+        },
+        {
+          "evidence_id": "ev_274ff76c3275e1d6",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json#/evidences/34/content",
+          "source_reference": "https://medium.com/@aysebilgegunduz/all-you-need-to-know-about-pgvector-part-4-hybrid-search-8a655d3b0087"
+        }
+      ],
+      "exact_report_passage": "Reciprocal rank fusion is mentioned as an available component for hybrid search with pgvector, alongside tsvector and pg\\_trgm\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TC_001-C026",
+        "EIV2_TC_001-C027",
+        "EIV2_TC_001-C028",
+        "EIV2_TC_001-citation_support-051",
+        "EIV2_TC_001-citation_support-052",
+        "EIV2_TC_001-citation_support-054",
+        "EIV2_TC_001-citation_support-055",
+        "EIV2_TC_001-citation_support-057",
+        "EIV2_TC_001-citation_support-058"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-013"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TC_001-C030",
+          "reason": "逐项拆分可与向量查询结合的 SQL 特性，继承原句同一 query 的范围。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-C031",
+          "reason": "逐项拆分可与向量查询结合的 SQL 特性，继承原句同一 query 的范围。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-C032",
+          "reason": "逐项拆分可与向量查询结合的 SQL 特性，继承原句同一 query 的范围。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-060",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-066",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        }
+      ],
+      "case_id": "EIV2_TC_001",
+      "category": "technical_capability_analysis",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_9c01b4455145f8f5",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json#/evidences/7/content",
+          "source_reference": "https://www.tigerdata.com/blog/the-postgres-developers-guide-to-vector-index-tradeoffs"
+        },
+        {
+          "evidence_id": "ev_e38e6e3a23869cb1",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json#/evidences/18/content",
+          "source_reference": "https://www.velodb.io/glossary/what-is-pgvector"
+        }
+      ],
+      "exact_report_passage": "The PostgreSQL query planner can use pgvector indexes for nearest\\-neighbor queries, and vector search can be combined with standard SQL filters, joins, and CTEs in the same query\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TC_001-C030",
+        "EIV2_TC_001-C031",
+        "EIV2_TC_001-C032",
+        "EIV2_TC_001-citation_support-060",
+        "EIV2_TC_001-citation_support-066"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-014"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TC_001-C034",
+          "reason": "备份策略是条件化建议，标为非事实，保留人工确认。",
+          "recommendation": "non-factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-high_risk-010",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        }
+      ],
+      "case_id": "EIV2_TC_001",
+      "category": "technical_capability_analysis",
+      "covered_dimensions": [
+        "claim_segmentation",
+        "high_risk"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_24320d0559472fcb",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json#/evidences/14/content",
+          "source_reference": "https://www.velodb.io/glossary/what-is-pgvector"
+        }
+      ],
+      "exact_report_passage": "Vector columns increase backup sizes significantly, so teams may need incremental backup strategies, separate tablespaces for vector data, and restore\\-time testing with realistic data volumes\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "HIGH_RISK_REVIEW",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TC_001-C034",
+        "EIV2_TC_001-high_risk-010"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-015"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TC_001-C022",
+          "reason": "拆分有用场景列表；每项继承原句 pgvector hybrid search is described as useful for 限定。RAG 只有截断小节标题，不能确认完整论据。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-C023",
+          "reason": "拆分有用场景列表；每项继承原句 pgvector hybrid search is described as useful for 限定。RAG 只有截断小节标题，不能确认完整论据。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-C024",
+          "reason": "拆分有用场景列表；每项继承原句 pgvector hybrid search is described as useful for 限定。RAG 只有截断小节标题，不能确认完整论据。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-038",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-040",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-042",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-043",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-044",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-045",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-046",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-citation_support-049",
+          "reason": "此引用 chunk 未建立该原子断言的完整技术范围；不给部分支持分。",
+          "recommendation": "unclear"
+        }
+      ],
+      "case_id": "EIV2_TC_001",
+      "category": "technical_capability_analysis",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_a68505e19318d340",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json#/evidences/37/content",
+          "source_reference": "https://www.instaclustr.com/education/vector-database/pgvector-hybrid-search-benefits-use-cases-and-quick-tutorial"
+        },
+        {
+          "evidence_id": "ev_c87ab4cb76d42dd2",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json#/evidences/33/content",
+          "source_reference": "https://www.instaclustr.com/education/vector-database/pgvector-hybrid-search-benefits-use-cases-and-quick-tutorial"
+        },
+        {
+          "evidence_id": "ev_62fa0fb7bbfd9bb8",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json#/evidences/38/content",
+          "source_reference": "https://www.instaclustr.com/education/vector-database/pgvector-hybrid-search-benefits-use-cases-and-quick-tutorial"
+        }
+      ],
+      "exact_report_passage": "pgvector hybrid search is described as useful for enterprise search, document retrieval in knowledge bases, and RAG because it can filter by structured attributes such as department, author, date, or document type while using vector embeddings for semantic ranking\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TC_001-C022",
+        "EIV2_TC_001-C023",
+        "EIV2_TC_001-C024",
+        "EIV2_TC_001-citation_support-038",
+        "EIV2_TC_001-citation_support-040",
+        "EIV2_TC_001-citation_support-042",
+        "EIV2_TC_001-citation_support-043",
+        "EIV2_TC_001-citation_support-044",
+        "EIV2_TC_001-citation_support-045",
+        "EIV2_TC_001-citation_support-046",
+        "EIV2_TC_001-citation_support-049"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-016"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TC_001-C006",
+          "reason": "条件化技术选型建议，建议本身不计事实断言；其条件在其他限制条目审核。",
+          "recommendation": "non-factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-C007",
+          "reason": "从同一句的 limits 列表分离一个限制，主语及限定范围继承原句。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-C008",
+          "reason": "从同一句的 limits 列表分离一个限制，主语及限定范围继承原句。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-C009",
+          "reason": "从同一句的 limits 列表分离一个限制，主语及限定范围继承原句。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-C010",
+          "reason": "从同一句的 limits 列表分离一个限制，主语及限定范围继承原句。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-C011",
+          "reason": "从同一句的 limits 列表分离一个限制，主语及限定范围继承原句。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-high_risk-003",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-high_risk-004",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        }
+      ],
+      "case_id": "EIV2_TC_001",
+      "category": "technical_capability_analysis",
+      "covered_dimensions": [
+        "claim_segmentation",
+        "high_risk"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_4b2cc9add6171347",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json#/evidences/10/content",
+          "source_reference": "https://www.paradedb.com/learn/postgresql/pgvector-limitations"
+        }
+      ],
+      "exact_report_passage": "pgvector is the right choice when the dataset fits comfortably on one PostgreSQL instance, filter selectivity is moderate, and transactional consistency with relational data is valued; the edges to watch include index build cost, filtered query performance, missing hybrid and reranking primitives, and absence of horizontal scaling\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "HIGH_RISK_REVIEW",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TC_001-C006",
+        "EIV2_TC_001-C007",
+        "EIV2_TC_001-C008",
+        "EIV2_TC_001-C009",
+        "EIV2_TC_001-C010",
+        "EIV2_TC_001-C011",
+        "EIV2_TC_001-high_risk-003",
+        "EIV2_TC_001-high_risk-004"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-017"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TC_001-C035",
+          "reason": "entirely 是绝对化因果范围，源文虽如此说仍须人工审核，不能当独立验证。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-C038",
+          "reason": "拆分扩展职责与检索质量因果断言。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-high_risk-011",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        },
+        {
+          "ledger_review_id": "EIV2_TC_001-high_risk-012",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        }
+      ],
+      "case_id": "EIV2_TC_001",
+      "category": "technical_capability_analysis",
+      "covered_dimensions": [
+        "claim_segmentation",
+        "high_risk"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_648babff2ebe3058",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json#/evidences/13/content",
+          "source_reference": "https://www.velodb.io/glossary/what-is-pgvector"
+        }
+      ],
+      "exact_report_passage": "pgvector search quality depends entirely on the upstream embedding model; the extension stores and retrieves vectors but does not understand or improve semantic quality, so poor embeddings produce poor results regardless of database performance\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "HIGH_RISK_REVIEW",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TC_001-C035",
+        "EIV2_TC_001-C038",
+        "EIV2_TC_001-high_risk-011",
+        "EIV2_TC_001-high_risk-012"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-018"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TM_003-C024",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C025",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-high_risk-001",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        }
+      ],
+      "case_id": "EIV2_TM_003",
+      "category": "trend_market_intelligence",
+      "covered_dimensions": [
+        "claim_segmentation",
+        "high_risk"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_9562fe5d87acd2c0",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\selected.json#/evidences/5/content",
+          "source_reference": "https://beyondscale.tech/blog/ai-data-residency-sovereignty-gdpr-cloud-act"
+        }
+      ],
+      "exact_report_passage": "AI data residency compliance means LLM inference runs in a specified location such as Frankfurt, while data sovereignty means data in that location stays outside the reach of US law enforcement\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "HIGH_RISK_REVIEW",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TM_003-C024",
+        "EIV2_TM_003-C025",
+        "EIV2_TM_003-high_risk-001"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-019"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TM_003-C013",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C014",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-013",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-014",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        }
+      ],
+      "case_id": "EIV2_TM_003",
+      "category": "trend_market_intelligence",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_734423ec37023d5b",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\selected.json#/evidences/6/content",
+          "source_reference": "https://www.clarip.com/privacy/aws-azure-cloud"
+        }
+      ],
+      "exact_report_passage": "AI services including Amazon Bedrock, Azure OpenAI, and Google Vertex AI are said to accelerate AI usage while also increasing the risk of regulated data leakage into models\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TM_003-C013",
+        "EIV2_TM_003-C014",
+        "EIV2_TM_003-citation_support-013",
+        "EIV2_TM_003-citation_support-014"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-020"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TM_003-C004",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C005",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C006",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C007",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-004",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-005",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-006",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-007",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        }
+      ],
+      "case_id": "EIV2_TM_003",
+      "category": "trend_market_intelligence",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_e8e6f0fe473c541a",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\selected.json#/evidences/4/content",
+          "source_reference": "https://www.ovaledge.com/blog/cloud-access-governance-tools"
+        }
+      ],
+      "exact_report_passage": "AWS Control Tower is described as a native AWS service for governing secure multi\\-account environments with automated account provisioning, policy enforcement, and compliance management\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TM_003-C004",
+        "EIV2_TM_003-C005",
+        "EIV2_TM_003-C006",
+        "EIV2_TM_003-C007",
+        "EIV2_TM_003-citation_support-004",
+        "EIV2_TM_003-citation_support-005",
+        "EIV2_TM_003-citation_support-006",
+        "EIV2_TM_003-citation_support-007"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-021"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TM_003-C019",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C020",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C021",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C022",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C023",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-019",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-020",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-021",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-022",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-023",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        }
+      ],
+      "case_id": "EIV2_TM_003",
+      "category": "trend_market_intelligence",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_f9d8189e3e096d02",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\selected.json#/evidences/9/content",
+          "source_reference": "https://docs.aws.amazon.com/prescriptive-guidance/latest/gen-ai-lifecycle-operational-excellence/prod-monitoring-security.html"
+        }
+      ],
+      "exact_report_passage": "AWS Prescriptive Guidance recommends a governance framework including compliance monitoring, standardized regulatory documentation, metadata tagging for training data, controls for cross\\-border data and service utilization, and regular third\\-party audits\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TM_003-C019",
+        "EIV2_TM_003-C020",
+        "EIV2_TM_003-C021",
+        "EIV2_TM_003-C022",
+        "EIV2_TM_003-C023",
+        "EIV2_TM_003-citation_support-019",
+        "EIV2_TM_003-citation_support-020",
+        "EIV2_TM_003-citation_support-021",
+        "EIV2_TM_003-citation_support-022",
+        "EIV2_TM_003-citation_support-023"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-022"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TM_003-C039",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C040",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C041",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C042",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C043",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-039",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-040",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-041",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-042",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-043",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-high_risk-006",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-high_risk-007",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-high_risk-008",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-high_risk-009",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-high_risk-010",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        }
+      ],
+      "case_id": "EIV2_TM_003",
+      "category": "trend_market_intelligence",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation",
+        "high_risk"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_bc4bb002e341d18a",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\selected.json#/evidences/25/content",
+          "source_reference": "https://www.bitslovers.com/bedrock-vs-azure-ai-foundry-vs-vertex-ai"
+        }
+      ],
+      "exact_report_passage": "Amazon Bedrock is described as allowing Claude, Llama, Mistral, and Nova to be run behind a single API endpoint\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "HIGH_RISK_REVIEW",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TM_003-C039",
+        "EIV2_TM_003-C040",
+        "EIV2_TM_003-C041",
+        "EIV2_TM_003-C042",
+        "EIV2_TM_003-C043",
+        "EIV2_TM_003-citation_support-039",
+        "EIV2_TM_003-citation_support-040",
+        "EIV2_TM_003-citation_support-041",
+        "EIV2_TM_003-citation_support-042",
+        "EIV2_TM_003-citation_support-043",
+        "EIV2_TM_003-high_risk-006",
+        "EIV2_TM_003-high_risk-007",
+        "EIV2_TM_003-high_risk-008",
+        "EIV2_TM_003-high_risk-009",
+        "EIV2_TM_003-high_risk-010"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-023"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TM_003-C034",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C035",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C036",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C037",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C038",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-034",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-035",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-036",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-037",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-038",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-high_risk-005",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        }
+      ],
+      "case_id": "EIV2_TM_003",
+      "category": "trend_market_intelligence",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation",
+        "high_risk"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_84a2a763024f482f",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\selected.json#/evidences/20/content",
+          "source_reference": "https://www.bitslovers.com/bedrock-vs-azure-ai-foundry-vs-vertex-ai"
+        }
+      ],
+      "exact_report_passage": "Amazon Bedrock, Azure AI Foundry, and Google Vertex AI have matured from model hosting services into full\\-stack AI development platforms with agent orchestration, retrieval\\-augmented generation pipelines, fine\\-tuning workflows, and enterprise compliance controls\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "HIGH_RISK_REVIEW",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TM_003-C034",
+        "EIV2_TM_003-C035",
+        "EIV2_TM_003-C036",
+        "EIV2_TM_003-C037",
+        "EIV2_TM_003-C038",
+        "EIV2_TM_003-citation_support-034",
+        "EIV2_TM_003-citation_support-035",
+        "EIV2_TM_003-citation_support-036",
+        "EIV2_TM_003-citation_support-037",
+        "EIV2_TM_003-citation_support-038",
+        "EIV2_TM_003-high_risk-005"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-024"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TM_003-high_risk-004",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        }
+      ],
+      "case_id": "EIV2_TM_003",
+      "category": "trend_market_intelligence",
+      "covered_dimensions": [
+        "high_risk"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_ba15efe17df67fc7",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\selected.json#/evidences/13/content",
+          "source_reference": "https://infotechlead.com/data-center/global-data-center-market-splits-along-regional-lines-as-aws-microsoft-azure-google-cloud-equinix-drive-growth-95106"
+        }
+      ],
+      "exact_report_passage": "Asia\\-Pacific is also seeing strong growth in sovereign cloud initiatives driven by data residency and cybersecurity requirements\\.",
+      "flags": [
+        "HIGH_RISK_REVIEW",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TM_003-high_risk-004"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-025"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TM_003-C015",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-015",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        }
+      ],
+      "case_id": "EIV2_TM_003",
+      "category": "trend_market_intelligence",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_734423ec37023d5b",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\selected.json#/evidences/6/content",
+          "source_reference": "https://www.clarip.com/privacy/aws-azure-cloud"
+        }
+      ],
+      "exact_report_passage": "Data residency and sovereignty rules, including GDPR, India DPDP, and emerging sovereignty rules, are described as requiring regional control across hyperscaler regions and availability zones\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TM_003-C015",
+        "EIV2_TM_003-citation_support-015"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-026"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TM_003-C026",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-high_risk-002",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        }
+      ],
+      "case_id": "EIV2_TM_003",
+      "category": "trend_market_intelligence",
+      "covered_dimensions": [
+        "claim_segmentation",
+        "high_risk"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_9562fe5d87acd2c0",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\selected.json#/evidences/5/content",
+          "source_reference": "https://beyondscale.tech/blog/ai-data-residency-sovereignty-gdpr-cloud-act"
+        }
+      ],
+      "exact_report_passage": "For enterprises using US\\-headquartered cloud providers, data residency compliance and data sovereignty can be in direct legal conflict\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "HIGH_RISK_REVIEW",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TM_003-C026",
+        "EIV2_TM_003-high_risk-002"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-027"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TM_003-C032",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C033",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-032",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-033",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        }
+      ],
+      "case_id": "EIV2_TM_003",
+      "category": "trend_market_intelligence",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_2af3d1ca37cb6fdf",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\selected.json#/evidences/16/content",
+          "source_reference": "https://www.linkedin.com/posts/optimnow_aws-and-azure-dominate-120b-cloud-infrastructure-activity-7089592694355746816-aNUB"
+        }
+      ],
+      "exact_report_passage": "Gartner's Sid Nag emphasized that generative AI is pivotal in driving cloud market expansion, with new opportunities related to sovereignty, ethics, privacy, and sustainability\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TM_003-C032",
+        "EIV2_TM_003-C033",
+        "EIV2_TM_003-citation_support-032",
+        "EIV2_TM_003-citation_support-033"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-028"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TM_003-C044",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C045",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-044",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-045",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        }
+      ],
+      "case_id": "EIV2_TM_003",
+      "category": "trend_market_intelligence",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_bc22fbd114afea97",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\selected.json#/evidences/26/content",
+          "source_reference": "https://xenoss.io/blog/aws-bedrock-vs-azure-ai-vs-google-vertex-ai"
+        }
+      ],
+      "exact_report_passage": "Google Vertex AI is described as suitable for data\\-intensive, analytics\\-driven enterprises because native integrations into BigQuery, Dataflow, and Looker allow AI training, deployment, and querying without transferring data across systems\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TM_003-C044",
+        "EIV2_TM_003-C045",
+        "EIV2_TM_003-citation_support-044",
+        "EIV2_TM_003-citation_support-045"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-029"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TM_003-C008",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C009",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C010",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C011",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C012",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-008",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-009",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-010",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-011",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-012",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        }
+      ],
+      "case_id": "EIV2_TM_003",
+      "category": "trend_market_intelligence",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_bcf458ac6aaf1146",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\selected.json#/evidences/2/content",
+          "source_reference": "https://www.ovaledge.com/blog/cloud-access-governance-tools"
+        }
+      ],
+      "exact_report_passage": "Governance tools are described as offering integrated data governance, AI\\-powered automation, metadata and catalog management, hybrid cloud compatibility, and built\\-in compliance templates for frameworks such as GDPR and HIPAA\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TM_003-C008",
+        "EIV2_TM_003-C009",
+        "EIV2_TM_003-C010",
+        "EIV2_TM_003-C011",
+        "EIV2_TM_003-C012",
+        "EIV2_TM_003-citation_support-008",
+        "EIV2_TM_003-citation_support-009",
+        "EIV2_TM_003-citation_support-010",
+        "EIV2_TM_003-citation_support-011",
+        "EIV2_TM_003-citation_support-012"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-030"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TM_003-C016",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C017",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C018",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-016",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-017",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-018",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        }
+      ],
+      "case_id": "EIV2_TM_003",
+      "category": "trend_market_intelligence",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_734423ec37023d5b",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\selected.json#/evidences/6/content",
+          "source_reference": "https://www.clarip.com/privacy/aws-azure-cloud"
+        }
+      ],
+      "exact_report_passage": "Governance tools can govern Amazon Bedrock, Azure OpenAI, and Vertex AI usage, redact regulated fields before they reach a foundation model, and provide per\\-prompt audit logs for EU AI Act and internal review\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TM_003-C016",
+        "EIV2_TM_003-C017",
+        "EIV2_TM_003-C018",
+        "EIV2_TM_003-citation_support-016",
+        "EIV2_TM_003-citation_support-017",
+        "EIV2_TM_003-citation_support-018"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-031"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TM_003-C046",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C047",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-046",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-citation_support-047",
+          "reason": "保存片段有相关文字，但页面发布日期未验证；本类别 strict freshness 不能因文字相似就计为有效支持。",
+          "recommendation": "unclear"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-high_risk-011",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-high_risk-012",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        }
+      ],
+      "case_id": "EIV2_TM_003",
+      "category": "trend_market_intelligence",
+      "covered_dimensions": [
+        "citation_support",
+        "claim_segmentation",
+        "high_risk"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_b7b08374bb8f37a2",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\selected.json#/evidences/29/content",
+          "source_reference": "https://www.bitslovers.com/bedrock-vs-azure-ai-foundry-vs-vertex-ai"
+        }
+      ],
+      "exact_report_passage": "Model Garden provides access to third\\-party models including Anthropic's Claude via a partnership, and Google's Agent Builder powered by the Vertex AI Agent Development Kit handles agentic workflows\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "CITATION_SUPPORT_UNCERTAIN",
+        "HIGH_RISK_REVIEW",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TM_003-C046",
+        "EIV2_TM_003-C047",
+        "EIV2_TM_003-citation_support-046",
+        "EIV2_TM_003-citation_support-047",
+        "EIV2_TM_003-high_risk-011",
+        "EIV2_TM_003-high_risk-012"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-032"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TM_003-high_risk-003",
+          "reason": "需满足冻结风险规则的并集；现有引用不等于独立且适格的完整佐证。请结合来源、日期和引用支持条目裁定，不能复制 Gate verdict。",
+          "recommendation": "UNRESOLVED"
+        }
+      ],
+      "case_id": "EIV2_TM_003",
+      "category": "trend_market_intelligence",
+      "covered_dimensions": [
+        "high_risk"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_66b81b09c02cd2ae",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\selected.json#/evidences/14/content",
+          "source_reference": "https://infotechlead.com/data-center/global-data-center-market-splits-along-regional-lines-as-aws-microsoft-azure-google-cloud-equinix-drive-growth-95106?amp=1"
+        }
+      ],
+      "exact_report_passage": "Stricter energy regulations and grid constraints in Europe are described as pushing hyperscalers toward consolidation and high\\-efficiency deployments\\.",
+      "flags": [
+        "HIGH_RISK_REVIEW",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TM_003-high_risk-003"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-033"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "One report boundary jointly determines atomic segmentation, citation entailment, and any applicable high-risk obligation. Review once without dropping any pair.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_TM_003-C001",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C002",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        },
+        {
+          "ledger_review_id": "EIV2_TM_003-C003",
+          "reason": "按并列能力/条件逐项拆分，短片段主语及归因继承 exact_parent_report_text；引述的厂商/作者观点不能升级为已独立验证的规则。",
+          "recommendation": "factual"
+        }
+      ],
+      "case_id": "EIV2_TM_003",
+      "category": "trend_market_intelligence",
+      "covered_dimensions": [
+        "claim_segmentation"
+      ],
+      "dimension": "semantic_claim_bundle",
+      "evidence": [
+        {
+          "evidence_id": "ev_0e6422100fea0896",
+          "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\trend_market_intelligence\\EIV2_TM_003\\selected.json#/evidences/0/content",
+          "source_reference": "https://readitquik.com/ai/ai-governance-2026-multi-cloud-compliance-rules"
+        }
+      ],
+      "exact_report_passage": "US regulators including the SEC and FTC are focusing on regulatory compliance for generative AI, particularly algorithmic bias and financial data transparency\\.",
+      "flags": [
+        "AMBIGUOUS_SEGMENTATION",
+        "SEMANTIC_BOUNDARY_REVIEW"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_TM_003-C001",
+        "EIV2_TM_003-C002",
+        "EIV2_TM_003-C003"
+      ],
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "task_id": "ADJ-SEM-034"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "Named author and project identities exist, but same-group versus independent experimental production requires semantic judgment.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_CR_003-independence-003",
+          "reason": "使用内容身份与来源角色建议分组；同一页面的多个 chunk 不重复计为独立来源。不同域名本身不证明独立性。发帖人叙述自己的实验，但对象是 DeepScaleR/base model，片段未给最终数字且不等于目标 full R1 复现。",
+          "recommendation": "UNRESOLVED"
+        }
+      ],
+      "case_id": "EIV2_CR_003",
+      "category": "conflict_credibility_resolution",
+      "dimension": "independence",
+      "flags": [
+        "PUBLISHER_RELATIONSHIP_DISPUTABLE"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_CR_003-independence-003"
+      ],
+      "material": {
+        "evidence": [
+          {
+            "evidence_id": "ev_143f3ca93d7564dd",
+            "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\conflict_credibility_resolution\\EIV2_CR_003\\selected.json#/evidences/26/content",
+            "source_reference": "https://huggingface.co/agentica-org/DeepScaleR-1.5B-Preview/discussions/13"
+          }
+        ],
+        "exact_report_passage": null,
+        "exact_required_unit": null,
+        "report_span": null
+      },
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "source_identity_information": "AXCXEPT 在 DeepScaleR-1.5B-Preview 的 HF discussion",
+      "task_id": "ADJ-IND-035"
+    },
+    {
+      "adjudication_note": "accepted AI recommendation",
+      "adjudication_reason": "Saved material contains a date clue, but publication/event/reply/sidebar attribution or cutoff relevance requires human judgment.",
+      "ai_recommendations": [
+        {
+          "ledger_review_id": "EIV2_ED_002-freshness-003",
+          "reason": "候选页显示‘最新推荐文章于 2026-09-10 23:04:11 发布’，晚于 cutoff，但‘最新推荐’是否当前文章发布日期不明确。保持 unverified 并升级人工核对，不能编造确切文章日期。",
+          "recommendation": "unverified"
+        }
+      ],
+      "case_id": "EIV2_ED_002",
+      "category": "enterprise_decision_recommendation",
+      "date_clue_reason": "候选页显示‘最新推荐文章于 2026-09-10 23:04:11 发布’，晚于 cutoff，但‘最新推荐’是否当前文章发布日期不明确。保持 unverified 并升级人工核对，不能编造确切文章日期。",
+      "dimension": "freshness",
+      "flags": [
+        "DATE_ROLE_OR_ATTRIBUTION_DISPUTABLE"
+      ],
+      "human_decision": "ACCEPTED_AI_RECOMMENDATIONS",
+      "human_review_status": "COMPLETED",
+      "layer": "HUMAN_ADJUDICATION_QUEUE",
+      "ledger_review_ids": [
+        "EIV2_ED_002-freshness-003"
+      ],
+      "material": {
+        "evidence": [
+          {
+            "evidence_id": "ev_1f4a4d719a744227",
+            "excerpt_location": "docs\\v2\\calibration\\v2.2.0\\enterprise_decision_recommendation\\EIV2_ED_002\\selected.json#/evidences/6/content",
+            "source_reference": "https://blog.csdn.net/afjkdajs/article/details/163944680"
+          }
+        ],
+        "exact_report_passage": null,
+        "exact_required_unit": null,
+        "report_span": null
+      },
+      "review_timestamp": "2026-09-14T03:08:01Z",
+      "reviewer_identity": "human-reviewer-calibration-001",
+      "source_identity_information": "CSDN afjkdajs 技术趋势文章",
+      "task_id": "ADJ-FRESH-036"
+    }
+  ]
+}

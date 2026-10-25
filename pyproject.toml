@@ -1,9 +1,9 @@
 [tool.poetry]
 name = "gpt-researcher"
 version = "0.14.7"
-description = "GPT Researcher is an autonomous agent designed for comprehensive online research on a variety of tasks."
+description = "Evidence-centric enterprise research agent built on GPT Researcher."
 authors = ["Assaf Elovic <assaf.elovic@gmail.com>"]
-license = "MIT"
+license = "Apache-2.0"
 readme = "README.md"
 
 [build-system]
@@ -23,9 +23,9 @@ gpt-researcher = { workspace = true }
 [project]
 name = "gpt-researcher"
 version = "0.14.7"
-description = "GPT Researcher is an autonomous agent designed for comprehensive online research on a variety of tasks."
+description = "Evidence-centric enterprise research agent built on GPT Researcher."
 authors = [{ name = "Assaf Elovic", email = "assaf.elovic@gmail.com" }]
-license = { text = "MIT" }
+license = "Apache-2.0"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

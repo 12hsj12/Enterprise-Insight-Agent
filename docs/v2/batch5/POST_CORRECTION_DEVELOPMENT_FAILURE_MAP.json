@@ -1,0 +1,13 @@
+{
+  "schema_version": "enterprise-insight-v2-post-correction-failure-map/1.0.0",
+  "status": "BLOCKED_INVALID_EXECUTION_PROTOCOL",
+  "source_commit": "ab1473d44cf056e1c8d3ae0187cad0f4d718ab98",
+  "frozen_before_map": "docs/v2/calibration/v2.2.0/DEVELOPMENT_FAILURE_MAP.json",
+  "required_unit_record_count": 18,
+  "records": [],
+  "summary": {
+    "post_correction_required_units_scored": 0,
+    "not_scored_reason": "Two completed FV artifacts exist, but FV was executed twice and the other five cases lack final artifacts. Reclassifying frozen failures without a valid single-run six-case set would fabricate evaluation results.",
+    "user_utility_recovered_but_strict_ru_unsatisfied": 0
+  }
+}

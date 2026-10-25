@@ -1,0 +1,29 @@
+[
+  {
+    "cited_evidence_ids": [
+      "ev_6f1b032c397627b6"
+    ],
+    "claim_id": "claim_ebb2fdf6b9007a9429ff7f8d63284da76592ee2e3156f6e5fa270975dd870922",
+    "output_mode": "factual",
+    "rendered_text": "OpenAI 的隐私政策不适用于其代表商业产品客户(例如 API 服务客户)处理的内容;此类数据的使用受相关客户协议约束。"
+  },
+  {
+    "cited_evidence_ids": [
+      "ev_b08a10e340e4cca0",
+      "ev_d384aee29a4051c8",
+      "ev_d2c625b8589d3de9",
+      "ev_2031367fc36e847d"
+    ],
+    "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+    "output_mode": "hedged",
+    "rendered_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务;该条款与 API 默认不用于训练或改进的表述之间存在边界争议。"
+  },
+  {
+    "cited_evidence_ids": [
+      "ev_2031367fc36e847d"
+    ],
+    "claim_id": "claim_201ca07284694c08bc9b7009c05e80539b332b2cfc3a6d637fb459b301d052ad",
+    "output_mode": "factual",
+    "rendered_text": "OpenAI 平台文档称 API 数据可能以滥用监控日志和应用状态形式存储;某些 API 功能会为完成请求或任务而持久化数据。"
+  }
+]

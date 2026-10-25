@@ -1,0 +1,35 @@
+{
+  "id": "EIV2_CC_001",
+  "split": "development",
+  "category": "competitive_comparison",
+  "query": "比较 AWS Bedrock 与 Azure OpenAI 在模型选择、企业治理、网络隔离和定价透明度方面的差异。",
+  "cutoff_date": "2026-09-05",
+  "required_units": [
+    {
+      "id": "model_choice",
+      "description": "模型选择对比",
+      "evidence_strength_rule": "primary_plus_independent",
+      "high_risk_types": [
+        "comparative_claim",
+        "release_status_availability"
+      ]
+    },
+    {
+      "id": "governance_network",
+      "description": "治理与网络隔离对比",
+      "evidence_strength_rule": "primary_plus_independent",
+      "high_risk_types": [
+        "comparative_claim"
+      ]
+    },
+    {
+      "id": "pricing",
+      "description": "定价透明度对比",
+      "evidence_strength_rule": "primary_plus_independent",
+      "high_risk_types": [
+        "comparative_claim",
+        "numeric_value"
+      ]
+    }
+  ]
+}

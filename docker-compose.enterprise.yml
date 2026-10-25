@@ -1,0 +1,17 @@
+services:
+  enterprise-insight:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: enterprise-insight-agent:v1
+    env_file:
+      - .env
+    environment:
+      ENTERPRISE_STORE_PATH: /usr/src/app/outputs/enterprise_tasks.sqlite3
+      ENTERPRISE_TASK_TIMEOUT: ${ENTERPRISE_TASK_TIMEOUT:-900}
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ./outputs:/usr/src/app/outputs
+      - ./logs:/usr/src/app/logs
+    restart: unless-stopped

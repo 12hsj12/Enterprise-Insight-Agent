@@ -1,0 +1,31 @@
+{
+  "id": "EIV2_TC_001",
+  "split": "development",
+  "category": "technical_capability_analysis",
+  "query": "分析 PostgreSQL pgvector 的混合检索能力、索引选择和企业 RAG 工作负载中的工程限制。",
+  "cutoff_date": "2026-09-05",
+  "required_units": [
+    {
+      "id": "hybrid",
+      "description": "混合检索机制",
+      "evidence_strength_rule": "primary_plus_independent",
+      "high_risk_types": []
+    },
+    {
+      "id": "indexes",
+      "description": "索引选择与权衡",
+      "evidence_strength_rule": "primary_plus_independent",
+      "high_risk_types": [
+        "comparative_claim"
+      ]
+    },
+    {
+      "id": "limits",
+      "description": "企业工作负载限制",
+      "evidence_strength_rule": "two_independent",
+      "high_risk_types": [
+        "benchmark_or_performance"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "comparison": "same-version weight ablation",
+  "split": "development",
+  "baseline_commit": "9004478dc52b4ccdca4cc9bb03c6d86c3e6d1624",
+  "source_aware_commit": "9004478dc52b4ccdca4cc9bb03c6d86c3e6d1624",
+  "baseline": {
+    "cases": 8,
+    "attempted": 8,
+    "failures": 0,
+    "failure_rate": 0.0,
+    "mean_latency_s": 250.08453686245775,
+    "quality_reviewed_cases": 0,
+    "total_estimated_cost_usd": 4.2049803400000005,
+    "cost_known_cases": 8,
+    "evidence_coverage": null,
+    "citation_correctness": null,
+    "citation_completeness": null,
+    "unsupported_claim_rate": null
+  },
+  "source_aware": {
+    "cases": 8,
+    "attempted": 8,
+    "failures": 0,
+    "failure_rate": 0.0,
+    "mean_latency_s": 231.5821663125098,
+    "quality_reviewed_cases": 0,
+    "total_estimated_cost_usd": 3.8953476000000005,
+    "cost_known_cases": 8,
+    "evidence_coverage": null,
+    "citation_correctness": null,
+    "citation_completeness": null,
+    "unsupported_claim_rate": null
+  },
+  "limitations": [
+    "Live web results are not a fixed corpus.",
+    "Latency includes failed attempts and local resource contention.",
+    "Quality means require annotations for every case; null is unavailable."
+  ]
+}

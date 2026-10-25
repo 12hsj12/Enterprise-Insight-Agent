@@ -16,6 +16,7 @@ from colorama import Fore, init
 
 from gpt_researcher.utils.workers import WorkerPool
 from gpt_researcher.utils.url_security import UnsafeURLError, validate_url
+from gpt_researcher.evidence.metadata import enrich_page_metadata
 
 from . import (
     ArxivScraper,
@@ -262,12 +263,12 @@ class Scraper:
                         "title": title,
                     }
 
-                return {
+                return enrich_page_metadata({
                     "url": link,
                     "raw_content": content,
                     "image_urls": image_urls,
                     "title": title,
-                }
+                }, structured_metadata=getattr(scraper, "metadata", None))
 
             except Exception as e:
                 self.logger.error(f"Error processing {link}: {str(e)}")
@@ -297,12 +298,12 @@ class Scraper:
         if not content or len(content) < 100:
             return None
         self.logger.info(f"PyMuPDFScraper retry recovered {len(content)} characters for {link}")
-        return {
+        return enrich_page_metadata({
             "url": link,
             "raw_content": content,
             "image_urls": image_urls,
             "title": title,
-        }
+        })
 
     def get_scraper(self, link):
         """

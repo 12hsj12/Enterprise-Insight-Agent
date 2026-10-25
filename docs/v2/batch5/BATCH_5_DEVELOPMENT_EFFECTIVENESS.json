@@ -1,0 +1,77 @@
+{
+  "schema_version": "enterprise-insight-v2-batch5-effectiveness/1.0.0",
+  "status": "BLOCKED_INVALID_EXECUTION_PROTOCOL",
+  "source_commit": "ab1473d44cf056e1c8d3ae0187cad0f4d718ab98",
+  "benchmark_schema": "enterprise-insight-bench-v2/2.2.0",
+  "dataset_sha256": "95a9718c7e16b5a5c1ee966ee89e217aba0b0368b6e6afc4cd7c5d6a071896fa",
+  "cutoff": "2026-09-05",
+  "case_ids": ["EIV2_FV_001", "EIV2_TC_001", "EIV2_CC_001", "EIV2_TM_003", "EIV2_CR_003", "EIV2_ED_002"],
+  "frozen_before_required_units": {"satisfied": 1, "not_satisfied": 17, "total": 18, "completion": "1/18"},
+  "after_required_units": null,
+  "provider_configuration": {
+    "FAST_LLM": "openai:deepseek-v4-flash",
+    "SMART_LLM": "openai:deepseek-v4-flash",
+    "STRATEGIC_LLM": "openai:deepseek-v4-flash",
+    "EMBEDDING": "huggingface:sentence-transformers/all-MiniLM-L6-v2",
+    "search": "TavilySearch",
+    "transport": "httpx.ASGITransport (real POST router; in-process)"
+  },
+  "execution_configuration_noncompliance": {
+    "observed_request_flag": "enable_v2_evidence_selection=false",
+    "observed_execution_flag": "enable_v2_execution=true",
+    "effect": "Both completed FV requests fail the Batch 5 requirement to run the current official V2 full chain with its final evidence-selection path enabled. They are non-evaluable for this acceptance experiment."
+  },
+  "preflight": {"provider_calls": 0, "result": "PREFLIGHT_OK six development cases / 18 Required Units / dataset hash verified"},
+  "invalid_execution_attempts": [
+    {
+      "attempt": 1,
+      "output_directory": "outputs/batch5-development-effectiveness-20260915T000000Z",
+      "case_started": "EIV2_FV_001",
+      "fv_task_id": "559c8f61-94a8-45ae-97aa-77e47c08f93d",
+      "fv_result": "COMPLETED_NON_EVALUABLE",
+      "fv_started_at": "2026-09-15T10:22:42.851393Z",
+      "fv_completed_at": "2026-09-15T10:25:43.638668Z",
+      "fv_latency_seconds": 180.78108030000294,
+      "fv_cost_usd_runtime_estimate": 0.68677524,
+      "then_started_case": "EIV2_TC_001",
+      "then_started_at": "2026-09-15T10:25:44.944995Z",
+      "interruption_state": "TC_RUNNING_NO_FINAL_ARTIFACT",
+      "task_store_sha256": "0458d8519614b5bd7756803e7e93e7315a7bcfa690d030ae513c90859c87a506"
+    },
+    {
+      "attempt": 2,
+      "kind": "INVALID_DUPLICATE_FV_EXECUTION",
+      "output_directory": "outputs/batch5-development-effectiveness-infra-retry-20260915T102500Z",
+      "case_started": "EIV2_FV_001",
+      "fv_task_id": "75bd5da5-486e-4b24-b451-59c33a2cb06e",
+      "fv_result": "COMPLETED_NON_EVALUABLE",
+      "fv_started_at": "2026-09-15T10:23:34.517479Z",
+      "fv_completed_at": "2026-09-15T10:26:27.544098Z",
+      "fv_latency_seconds": 173.01047259999905,
+      "fv_cost_usd_runtime_estimate": 1.0144089,
+      "then_started_case": "EIV2_TC_001",
+      "then_started_at": "2026-09-15T10:26:30.470555Z",
+      "interruption_state": "TC_RUNNING_NO_FINAL_ARTIFACT",
+      "protocol_failure": "The first FV execution had completed; therefore this was not an allowed no-artifact infrastructure retry.",
+      "task_store_sha256": "ba99637a7e07bdb0f3df0102a0b3096b3ade3890f22a395f1c6e471dd6450bb4"
+    }
+  ],
+  "evaluation": {
+    "required_unit_scoring": "NOT_PERFORMED: a complete, single-run six-case set does not exist. Two FV artifacts are preserved as non-evaluable protocol-violating runs.",
+    "user_visible_utility": "NOT_MEASURABLE",
+    "layered_output_utility": "NOT_MEASURABLE",
+    "second_retrieval_effect": "NOT_MEASURABLE",
+    "safety": "NOT_ESTABLISHED_FOR_THE_SIX_CASE_EXPERIMENT",
+    "readability": "NOT_MEASURABLE",
+    "cost_latency": {"actual_provider_bill": "unavailable", "completed_fv_runtime_estimates_usd": [0.68677524, 1.0144089], "completed_fv_latency_seconds": [180.78108030000294, 173.01047259999905], "second_retrieval_overhead": "not aggregated; experiment invalid"}
+  },
+  "integrity": {
+    "holdout_execution": 0,
+    "holdout_evaluation": 0,
+    "holdout_annotation": 0,
+    "quality_reruns": 0,
+    "protocol_violating_duplicate_case_executions": 1,
+    "runtime_code_modified": false,
+    "runner_sha256": "78abc85968721650dce269ad85ddbfcbb5d2ceff40edecfe22b486a10aa2afa5"
+  }
+}

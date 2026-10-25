@@ -1,0 +1,3152 @@
+{
+  "run_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+  "trace_id": "trace_b174afe151484652a2d765db7dfe1c56",
+  "output_artifact_reference": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\01b87b35-114e-49a3-9bf0-e551afd61a75\\report.md",
+  "execution": {
+    "evidence_context": {
+      "context": "",
+      "evidences": [
+        {
+          "evidence_id": "ev_52708fb711c7deaa",
+          "sub_query": "Analyze 截至信息截止日，核实 OpenAI API 客户数据是否默认用于训练模型，并说明适用例外与数据保留边界。: Development research. Information cutoff: 2026-09-05. Exclude developments after the cutoff; flag uncertain publication dates. Cover: 默认训练用途政策; 明确适用例外; 数据保留或控制边界",
+          "title": "Offering Zero Data Retention for frontier models | OpenAI",
+          "url": "https://openai.com/index/offering-zero-data-retention-for-frontier-models",
+          "content": "The organizations we work with handle some of the most sensitive information in their sectors, including financial records, health data, confidential business plans, and proprietary research. Protecting that information is essential to meeting regulatory obligations, maintaining customer trust, and preserving their competitive advantage.\nTheir feedback is helping us build stronger safeguards while keeping their information under their control.\nWe will continue working with customers on the technical and operational details of our approach. We plan to start rolling out Private Safety Processing, and share a technical white paper, in September. We’ll keep customers informed every step of the way, sharing updates early, explaining what they mean for existing commitments, and providing the time and support customers need to plan ahead.\n2026\nAPI Platform\nAuthor\nOpenAI\n1\nLike other frontier model providers, OpenAI is\nrequired by law\n⁠\n(opens in a new window)",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_6f1b032c397627b6",
+          "sub_query": "Analyze 截至信息截止日，核实 OpenAI API 客户数据是否默认用于训练模型，并说明适用例外与数据保留边界。: Development research. Information cutoff: 2026-09-05. Exclude developments after the cutoff; flag uncertain publication dates. Cover: 默认训练用途政策; 明确适用例外; 数据保留或控制边界",
+          "title": "隐私政策 | OpenAI",
+          "url": "https://openai.com/zh-Hans-CN/policies/row-privacy-policy",
+          "content": "隐私政策 | OpenAI\nOpenAI\n输入语言\n…\nUpdated: 2026年2月6日\n隐私政策\n（\n先前版本\n⁠\n）\n如果您位于欧洲经济区、英国或瑞士，可以阅读\n此版本\n的隐私政策。如果您位于美国，可以阅读\n此版本\n的隐私政策。\n如果您位于韩国，请参阅\n韩国附录\n⁠\n。\n在 OpenAI，我们的使命是确保通用人工智能惠及全人类。我们打造了 ChatGPT 和 Sora 等工具，旨在帮助人们学习、创作并解决问题。OpenAI（连同我们的关联公司，统称为“OpenAI”、“我们”或“我方”）重视您的隐私，并坚定致力于保障我们从您处获得或与您相关的任何信息的安全。本隐私政策阐明了当您使用我们的网站、应用程序和服务（统称为“服务”）时，我们如何收集与您相关的个人数据以及如何使用这些数据。\n本隐私政策不适用于我们代表商业产品客户（例如我们的 API 服务客户）处理的内容。我们对该数据的使用受相关客户协议约束，此类协议涵盖了对相关产品的访问及使用规则。\n有关我们如何收集和使用训练信息以开发驱动 ChatGPT 及其他服务的语言模型，以及您在这些信息方面可以作出的选择，请参阅本政策以及\n这篇帮助中心文章\n⁠\n（在新窗口中打开）\n。\n1. 我们收集的个人数据\n我们收集与您相关的个人数据（“个人数据”）如下：\n您提供的个人数据：\n我们会在您创建帐户以使用我们的服务或与我们沟通时收集个人数据，具体如下：\n账户信息\n：当您创建账户时，我们会收集与您的账户相关的信息，包括您的姓名、联系信息、账户凭据、出生日期、支付信息和交易历史记录（统称为“账户信息”）。我们的一些服务还允许您上传个人资料照片、用户名或其他信息，作为账户信息的一部分。\n用户内容：\n我们会收集您在向我们的服务提供输入时提交的个人数据（“内容”），包括您的提示以及您上传的其他内容，例如\n文件\n⁠\n（在新窗口中打开）\n、\n图片\n⁠\n（在新窗口中打开）\n、\n音频和视频\n⁠\n（在新窗口中打开）\n、\nSora 角色\n⁠\n（在新窗口中打开）\n，以及来自\n连接服务\n⁠\n（在新窗口中打开）\n的数据，具体取决于您使用的功能。我们的一些服务允许您与其他用户互动，例如发帖、评论或发送消息，我们也将这些互动视为内容的一部分。\n通信信息：",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_ca517d5eb273d496",
+          "sub_query": "Analyze 截至信息截止日，核实 OpenAI API 客户数据是否默认用于训练模型，并说明适用例外与数据保留边界。: Development research. Information cutoff: 2026-09-05. Exclude developments after the cutoff; flag uncertain publication dates. Cover: 默认训练用途政策; 明确适用例外; 数据保留或控制边界",
+          "title": "Offering Zero Data Retention for frontier models | OpenAI",
+          "url": "https://openai.com/index/offering-zero-data-retention-for-frontier-models",
+          "content": "OpenAI\n1\nLike other frontier model providers, OpenAI is\nrequired by law\n⁠\n(opens in a new window)\nto report apparent child sexual abuse material (CSAM). Images flagged for potential CSAM will continue to be retained for manual review and reporting purposes, even in Zero Data Retention deployments, as they are today.\nKeep reading\nView all\nPaul Christiano joins OpenAI Foundation Board\nCompany\nSep 9, 2026\nThe Work Now Within Reach\nCompany\nSep 8, 2026\nFunding grants for new research into AI and teen development\nSafety\nSep 8, 2026\n“Enterprise AI adoption depends solely on customer control of data, with no direct or derivative use beyond the chosen service. OpenAI’s no-training commitment and ZDR give Glean confidence to build with OpenAI. As models become more capable, OpenAI shows safety can advance without compromising the privacy and control that sustain enterprise trust.”\n—Sunil Agrawal, Chief Information Security Officer, Glean",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_4fdf910968f25851",
+          "sub_query": "Analyze 截至信息截止日，核实 OpenAI API 客户数据是否默认用于训练模型，并说明适用例外与数据保留边界。: Development research. Information cutoff: 2026-09-05. Exclude developments after the cutoff; flag uncertain publication dates. Cover: 默认训练用途政策; 明确适用例外; 数据保留或控制边界",
+          "title": "隐私政策 | OpenAI",
+          "url": "https://openai.com/zh-Hans-CN/policies/row-privacy-policy",
+          "content": "⁠\n（在新窗口中打开）\n了解详情。\n6.您的权利\n根据您的居住地，您可能对您的个人数据享有某些法定权利。例如，您可能享有以下权利：\n访问您的个人数据及与其处理方式相关的信息。\n更正或更新您的个人数据\n从我们的记录中删除您的个人数据。\n限制我们对您个人数据的处理方式。\n将您的个人数据转移至第三方（数据可携权）。\n在我们以同意作为处理的法律依据时，您可以撤回该同意。\n向您所在地区的数据保护机构提交投诉。\n您可以通过您的 OpenAI 帐户，使用\n“数据控制”部分\n⁠\n所述工具行使部分权利，或者通过\nprivacy.openai.com\n⁠\n（在新窗口中打开）\n网站或发送电子邮件至\ndsar@openai.com\n⁠\n提交您的请求。您可以通过\ndpo@openai.com\n⁠\n联系我们的数据保护官。\n关于准确性的说明：ChatGPT 等服务会先读取用户请求，再通过预测最可能出现的后续词汇来生成回复。在某些情况下，最可能出现的后续词汇可能并非最符合事实的准确表述。因此，您不应依赖我们模型输出内容的事实准确性。如果您发现 ChatGPT 的输出包含与您相关的事实性错误信息，并希望请求更正或删除该信息，可通过\nprivacy.openai.com\n⁠\n（在新窗口中打开）\n或发送电子邮件至\ndsar@openai.com\n⁠\n提交相关请求。我们将根据适用法律及模型的技术能力，对您的请求进行评估。\n针对我们从互联网收集并用于模型训练的数据，如需了解如何行使您所享有的相关权利，请参阅\n这篇帮助中心文章\n。\nOpenAI 会在多个司法管辖区的服务器上为实现本政策所述目的处理您的个人数据，包括在我们位于美国的设施及服务器中处理并存储您的个人数据，或在我们的关联机构、合作伙伴、供应商及服务提供商所在的国家或地区的设施及服务器中处理并存储您的个人数据。尽管各国数据保护法律存在差异，但无论您的个人数据在何处处理，我们均会按照本政策所述保护措施对其予以保护，且仅依据合法有效的数据转移机制进行数据转移。\n7. 儿童",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_88dde0d8c1251d4e",
+          "sub_query": "Analyze 截至信息截止日，核实 OpenAI API 客户数据是否默认用于训练模型，并说明适用例外与数据保留边界。: Development research. Information cutoff: 2026-09-05. Exclude developments after the cutoff; flag uncertain publication dates. Cover: 默认训练用途政策; 明确适用例外; 数据保留或控制边界",
+          "title": "Offering Zero Data Retention for frontier models | OpenAI",
+          "url": "https://openai.com/index/offering-zero-data-retention-for-frontier-models",
+          "content": "Offering Zero Data Retention for frontier models | OpenAI\nOpenAI\nAugust 19, 2026\nCompany\nSafety\nOffering Zero Data Retention for frontier models\nPreviewing Private Safety Processing, which strengthens safeguards across interactions while remaining compatible with ZDR.\nLoading…\nShare\nZero Data Retention gives eligible API customers a clear promise: OpenAI does not retain their prompts or model responses after a request is processed. Customer content is not available to OpenAI personnel for review\n1\n, and enterprise customer data is not used to train our models unless customers explicitly opt-in.\nAs models take on longer, more complex tasks, some serious risks may only become visible across multiple interactions. Existing ZDR-compatible safety systems evaluate each interaction individually. Today, we’re previewing Private Safety Processing, which is designed to identify patterns across related interactions without giving OpenAI personnel access to the underlying content.",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_3c96a4fb19211b4f",
+          "sub_query": "Analyze 截至信息截止日，核实 OpenAI API 客户数据是否默认用于训练模型，并说明适用例外与数据保留边界。: Development research. Information cutoff: 2026-09-05. Exclude developments after the cutoff; flag uncertain publication dates. Cover: 默认训练用途政策; 明确适用例外; 数据保留或控制边界",
+          "title": "隐私政策 | OpenAI",
+          "url": "https://openai.com/zh-Hans-CN/policies/row-privacy-policy",
+          "content": "7. 儿童\n我们的服务不面向，亦不适用于 13 岁以下的儿童。我们不会在明知对方未满 13 岁的情况下收集其个人数据。如您有理由相信有 13 岁以下儿童通过我们的服务向 OpenAI 提供了个人数据，请发送电子邮件至 privacy@openai.com。我们会调查任何此类通知，并在适当情况下从我们的系统中删除相关个人数据。未满 18 岁的用户必须获得其父母或监护人的许可，方可使用我们的服务。\n详细了解\n⁠\n（在新窗口中打开）\n青少年及其父母或监护人如何选择关联各自账户。\n8. 安全\n我们实施商业上合理的技术措施、管理措施及组织措施，旨在保护个人数据免受丢失、滥用，以及未经授权的访问、披露、篡改或破坏。然而，任何互联网或电子邮件传输都无法实现完全安全或无差错。因此，您在决定向我们的服务提供哪些信息时，应格外谨慎。此外，对于规避我们服务或第三方网站中包含的任何隐私设置或安全措施的行为，我们不承担责任。\n9. 美国各州的隐私披露补充信息\n部分美国州的隐私法\n⁠\n（在新窗口中打开）\n要求进行特定披露。下表提供了关于我们收集的个人数据类别、使用方式及披露情况的补充信息。您可以在上文“\n我们收集的个人数据\n⁠\n”中了解更多关于我们收集的个人数据及其来源的信息，在上文“\n我们如何使用个人数据\n⁠\n”中了解我们使用个人数据的方式，在上文“\n个人数据披露\n⁠\n”中了解我们披露个人数据的情形，并在上文“\n留存\n⁠\n”中了解我们留存个人数据的方式。\n个人数据类别\n个人数据的使用\n个人数据的披露\n如上文所述，我们收集以下信息：\n标识符，例如您的姓名、联系方式、IP 地址及其他设备标识符\n商业信息，例如您的交易记录\n网络活动信息，例如您与我们服务的互动方式，包括日志数据、使用数据，以及您用于访问服务的设备相关信息\n内容，包括您的提示、您上传至服务的内容，以及您与其他用户之间的互动和消息\n通信信息，例如您在向我们发送电子邮件时提供的联系信息\n联系人数据，例如当您选择连接设备联系人时收集的数据\n地理位置数据，例如基于设备 IP 地址等信息确定的设备访问我们服务的大致区域，或您选择提供的精确位置信息\n其他账户信息，例如您的账户凭据、支付信息、出生日期和个人资料照片\n您提供的其他信息，例如您选择参加我们的活动或调查，或当您向我们或代表我们运营的供应商提供信息以核实您的身份或年龄时。",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "sub_query": "Analyze 截至信息截止日，核实 OpenAI API 客户数据是否默认用于训练模型，并说明适用例外与数据保留边界。: Development research. Information cutoff: 2026-09-05. Exclude developments after the cutoff; flag uncertain publication dates. Cover: 默认训练用途政策; 明确适用例外; 数据保留或控制边界",
+          "title": "数据使用政策 | OpenAI 官方帮助文档中文版",
+          "url": "https://openai.xiniushu.com/policies/api-data-usage-policies",
+          "content": "数据使用政策 | OpenAI 官方帮助文档中文版\n跳到主要内容\n本页总览\n数据使用政策\n从2023年3月1日开始，我们对数据使用和保留政策做出了两项更改：\n除非您明确决定与我们共享您的数据，否则OpenAI将不会使用通过我们的API提交的数据来训练或改进我们的模型。您可以选择选择加入以共享数据。\n通过API发送的任何数据将被保留用于滥用和误用监控目的，最长时间为30天，之后将被删除（除非法律另有规定）。\nOpenAI API处理用户提示和完成请求，以及通过“Files”端点提交的训练数据以微调模型。我们将此类数据称为API数据。\n默认情况下，OpenAI不会使用通过我们的API提交的数据来训练OpenAI模型或改善OpenAI的服务提供。用户提交的用于微调的数据仅用于微调客户的模型。但是，OpenAI将允许用户选择选择加入共享他们的数据以提高模型性能。共享您的数据将确保模型的未来迭代针对您的用例得到改进。在此更改生效之前的2023年3月1日之前通过API提交的数据，如果客户之前没有选择退出共享数据，则可能已用于改进。\nOpenAI为了滥用和误用监控目的保留API数据30天。少数经过授权的OpenAI员工以及受保密和安全义务约束的专业第三方承包商可以访问此数据，仅用于调查和验证涉嫌滥用行为。部署低误用可能性用例的企业客户可以请求根本不存储API数据，包括用于安全监控和预防。OpenAI仍可能有内容分类器标记涉嫌包含平台滥用的数据。例如，通过“Files”端点由用户提交的用于微调模型的数据将保留，直到用户删除该文件。\n请注意，此数据政策不适用于OpenAI的非API消费者服务，如ChatGPT或DALL·E实验室。您可以在我们的\n消费者服务数据使用FAQ\n中了解更多信息。\n常见问题解答\n​\nOpenAI的公共API拥有哪些技术保护和安全认证？\n​\nOpenAI符合SOC 2 Type 1标准，并已经通过独立第三方审核，符合2017年安全信托服务标准。\nAPI数据存储在哪里？\n​\n内容存储在OpenAI系统和我们的子处理器系统中。我们还可能向第三方承包商发送部分去标识化的内容（受保密和安全义务约束）以确保安全。我们的30天数据保留政策也适用于我们的子处理器和承包商。您可以查看我们的子处理器列表以了解其位置和详细信息。\n当我调用API时，数据是否在传输过程中加密？\n​",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_cdd0967ac6c58fe5",
+          "sub_query": "Analyze 截至信息截止日，核实 OpenAI API 客户数据是否默认用于训练模型，并说明适用例外与数据保留边界。: Development research. Information cutoff: 2026-09-05. Exclude developments after the cutoff; flag uncertain publication dates. Cover: 默认训练用途政策; 明确适用例外; 数据保留或控制边界",
+          "title": "数据使用政策 | OpenAI 官方帮助文档中文版",
+          "url": "https://openai.xiniushu.com/policies/api-data-usage-policies",
+          "content": "当我调用API时，数据是否在传输过程中加密？\n​\nOpenAI API只能通过传输层安全性（TLS）使用，因此客户与OpenAI的请求和响应都是加密的。\nOpenAI有欧洲数据中心吗？\n​\n所有客户数据都在美国处理和存储。我们目前不在欧洲或其他国家存储数据。\n我可以将API用于HIPAA工作负载吗？\n​\n我们可以签署业务关联协议，以支持客户遵守《健康保险可移植性和责任法案》（HIPAA）的合规性要求。要符合此要求，您必须与OpenAI签订企业协议，并具有符合条件的使用案例。如果您有兴趣，请联系我们的销售团队。\n我收到了数据删除请求，如何要求OpenAI删除数据？\n​\n我们只保留通过API发送的数据，用于滥用和监控目的，最多30天。如果您希望在此之前删除您的帐户，请按照以下步骤操作。\nOpenAI是否有数据处理附加协议（DPA）？\n​\n是的。请填写我们的DPA表格以执行我们的数据处理附加协议。\n我们可以自己托管吗？\n​\n我们不提供本地托管服务。您可以通过联系我们的销售团队购买专用容量。\n常见问题解答\nOpenAI的公共API拥有哪些技术保护和安全认证？\nAPI数据存储在哪里？\n当我调用API时，数据是否在传输过程中加密？\nOpenAI有欧洲数据中心吗？\n我可以将API用于HIPAA工作负载吗？\n我收到了数据删除请求，如何要求OpenAI删除数据？\nOpenAI是否有数据处理附加协议（DPA）？\n我们可以自己托管吗？",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_13c584f468449ffc",
+          "sub_query": "Analyze 截至信息截止日，核实 OpenAI API 客户数据是否默认用于训练模型，并说明适用例外与数据保留边界。: Development research. Information cutoff: 2026-09-05. Exclude developments after the cutoff; flag uncertain publication dates. Cover: 默认训练用途政策; 明确适用例外; 数据保留或控制边界",
+          "title": "OpenAI's data usage policies",
+          "url": "https://www.patentclaimmaster.com/help/OpenAIsdatausagepolicies.html",
+          "content": "OpenAI will not use data submitted by customers via API to train or improve their models\n, unless you explicitly decide to share your data with OpenAI for this purpose (emphasis added). You can opt-in to share data.\nNote\n: ClaimMaster has not opted-in to share data and will never do so in the future.\nAny data sent through the API will be retained for abuse and misuse monitoring purposes for a maximum of 30 days, after which it will be deleted (unless otherwise required by law).\nA limited number of authorized OpenAI employees, as well as specialized third-party contractors that are subject to confidentiality and security obligations, can access this data solely to investigate and verify suspected abuse.\nOpenAI website's states that its servers are currently located in the US\n.\nPlease contact OpenAI for any further information/questions about OpenAI GPT or their data usage policies. A list of all OpenAI policies is available\nhere\n.\nAzure OpenAI Data, Privacy, and Security Policies",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_d09ccbf8429a4b40",
+          "sub_query": "OpenAI API customer data default training use policy as of September 5 2026",
+          "title": "API - Is our data really \"ours\"? Major Concern in Data Processing Addendum - Community - OpenAI Developer Community",
+          "url": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047",
+          "content": "”\nSo, OpenAI apparently DOES use our data sent to the API after deidentifying it, and this data can be used to improve their systems and that can cause a lot of problems from a Legal perspective. Did anyone have to go through this issue?\nDiet\nMay 22, 2024, 6:39pm\n2\nIANAL obviously, but I think that pertains mostly to things like geographical usage data and such.\nHowever it’s understandable that there’s a concern that this vague language can open up a lot of unwanted doors - if customer data privacy is a high concern (which it rightly should be) then I’d recommend you take a look at the Azure offerings for your API needs\nscharleswatson\nMay 22, 2024, 7:16pm\n3",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_d384aee29a4051c8",
+          "sub_query": "OpenAI API customer data default training use policy as of September 5 2026",
+          "title": "API - Is our data really \"ours\"? Major Concern in Data Processing Addendum - Community - OpenAI Developer Community",
+          "url": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047",
+          "content": "For clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\nIn context, it looks like they’re talking about metadata that still exists after the data itself is deleted e.g. logs of request times, usage amounts, etc. I could be wrong, but the section it was a part of is relevant.\nlijianathome\nApril 7, 2025, 4:03am\n9\nSorry but I’d assume this has been a standard approach in the industry since Internet if not longer, whether end users or organizations like it or not? Or Im missing something obvious please?\nRelated topics\nTopic\nReplies\nViews\nActivity\nData Retention for Batches\nAPI\nbatch\n6\n2982\nMay 22, 2024\nContradiction between terms of use and policy docs\nAPI\n0\n3628\nJanuary 16, 2023\nIs OpenAI HIPAA-Compliant?",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_b08a10e340e4cca0",
+          "sub_query": "OpenAI API customer data default training use policy as of September 5 2026",
+          "title": "API - Is our data really \"ours\"? Major Concern in Data Processing Addendum - Community - OpenAI Developer Community",
+          "url": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047",
+          "content": "API - Is our data really \"ours\"? Major Concern in Data Processing Addendum - Community - OpenAI Developer Community\nAPI - Is our data really \"ours\"? Major Concern in Data Processing Addendum\nCommunity\napi\n,\nprivacy\n,\nlegal\nnaferreira_7\nMay 22, 2024, 5:57pm\n1\nOpenAI clearly says that “\nWe do not train on your business data (data from ChatGPT Team, ChatGPT Enterprise, or our API Platform)\n”, and that “\nyou own your inputs and outputs\n”.\nHowever, in the data processing addendum at\nhttps://openai.com/policies/data-processing-addendum/\n, which regulates data processing for the API and ChatGPT Enterprise, there is a clause that says:\n“\nFor clarity, OpenAI may continue to process information derived from Customer Data that has been deidentified, anonymized, and/or aggregated such that the data is no longer considered Personal Data under applicable Data Protection Laws and in a manner that does not identify individuals or Customer to improve OpenAI’s systems and services.\n”",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_a8ef44309475cd9a",
+          "sub_query": "OpenAI API customer data default training use policy as of September 5 2026",
+          "title": "API - Is our data really \"ours\"? Major Concern in Data Processing Addendum - Community - OpenAI Developer Community",
+          "url": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047",
+          "content": "API\n0\n3628\nJanuary 16, 2023\nIs OpenAI HIPAA-Compliant?\nCommunity\nmlem\n14\n1627\nJune 6, 2025\nOpenAI and The Concerns Over API Data Privacy: A Call for Transparency\nChatGPT\napi\n0\n3425\nAugust 29, 2023\nChatGPT API - Data Privacy\nAPI\n2\n2538\nMay 29, 2024",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_8f8e52e6d185ea05",
+          "sub_query": "OpenAI API customer data default training use policy as of September 5 2026",
+          "title": "API - Is our data really \"ours\"? Major Concern in Data Processing Addendum - Community - OpenAI Developer Community",
+          "url": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047",
+          "content": "8. Term; Data Return and Deletion\nThis DPA shall remain in effect as long as OpenAI carries out Customer Data processing operations on Customer’s behalf or until the termination of the Agreement (and all Customer Data has been returned or deleted in accordance with this DPA). OpenAI will retain API Service Customer Data sent through the API for a maximum of thirty (30) days, after which it will be deleted, except where OpenAI is required to retain copies under applicable laws, in which case OpenAI will isolate and protect that Customer Data from any further processing except to the extent required by applicable laws. OpenAI will retain ChatGPT Enterprise Service Customer Data during the term of the Agreement, unless otherwise stated in the Agreement or Order Form. On the termination of the DPA, OpenAI will direct each Subprocessor to delete the Customer Data within thirty (30) days of the DPA’s termination, unless prohibited by law.",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_5c8af3b3740a96e1",
+          "sub_query": "OpenAI API customer data default training use policy as of September 5 2026",
+          "title": "API - Is our data really \"ours\"? Major Concern in Data Processing Addendum - Community - OpenAI Developer Community",
+          "url": "https://community.openai.com/t/api-is-our-data-really-ours-major-concern-in-data-processing-addendum/773047",
+          "content": "scharleswatson\nMay 22, 2024, 7:16pm\n3\nI’d guess there are lots of people that will soon be dealing with this. I agree with looking for an alternate option, especially if legality and private proprietary information is involved. Right now there are so many people doing development and pumping their employer’s data and user’s personal chats into the openAI system, without understanding the reality of what they are doing, there is for sure going to be a fallout at some point.\nwclayf\nMay 22, 2024, 8:59pm\n4\nWhy would anyone actually believe any Tech Company who says they’re not going to milk as much value out of your data as possible? Of course they will. You can ignore whatever any of their “agreements” say, and if you plan to keep any of your data genuinely private don’t send it out over the web to one of these cloud companies. The only truly “private” LLMs are ones you run locally.\nnaferreira_7\nMay 22, 2024, 9:18pm\n5",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_b84c6e8b2fc512bc",
+          "sub_query": "OpenAI API customer data default training use policy as of September 5 2026",
+          "title": "OpenAI to stop using customer data to train its system by default - PrivacyRules",
+          "url": "https://privacyrules.com/openai-to-stop-using-customer-data-to-train-its-system-by-default",
+          "content": "OpenAI to stop using customer data to train its system by default - PrivacyRules\nStarting from March 1, 2023, OpenAI has declared it won’t use any data submitted through its API for “service improvements”. Additionally, the company its implementing additional features to have a more privacy-compliant data-retention policy.\nRead more\nhere\nAPI\nautomation\ncompliant\ndata\nopenAI\nprivacy\nretention\nstop\nsubmitted\nShare\nprevious\nEU-U.S. Data Privacy Framework: EDPB happy... but not enough\nnext\nThe latest Biden's cyber strategy is more aggressive in its regulatory approach\nUpcoming Events\nRecent Posts\nCanada´s New Privacy Law (Bill C-36) ad Its Impact on Businesses\nArgentina’s Data Protection Reform, AI Regulation & Cross-Border Data Transfers\nCyber Resilience and Crisis Leadership Conference 2026 – July 24, 2026\nAmerican Headquarters:\nPrivacyRules Ltd.\n201 East Fifth Street\nSuite 1900 – #1362\nCincinnati, OH 45202, USA\nEuropean Office:\nVia dei Della Robbia 112\n50132, Firenze\nItaly (IT)",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_6a7e4f9a786055aa",
+          "sub_query": "OpenAI API data training exceptions opt-in sharing 30 day abuse monitoring retention",
+          "title": "Data controls in the OpenAI platform",
+          "url": "https://developers.openai.com/api/docs/guides/your-data",
+          "content": "Data retention controls for abuse monitoring\nAbuse monitoring logs may contain certain customer content, such as prompts and responses, as well as metadata derived from that customer content, such as classifier outputs. By default, abuse monitoring logs are generated for all API feature usage and retained for up to 30 days, unless longer retention is required by law, or is reasonably necessary to protect our services or any third party from harm.\nEligible customers may have their customer content excluded from these abuse monitoring logs, subject to the limitations below, by getting approved for the\nZero Data Retention\nor\nModified Abuse Monitoring\ncontrols. Currently, these controls are subject to prior approval by OpenAI and acceptance of additional requirements. Approved customers may select between Modified Abuse Monitoring or Zero Data Retention for their API Organization or project.",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_983d48d235f7e446",
+          "sub_query": "OpenAI API data training exceptions opt-in sharing 30 day abuse monitoring retention",
+          "title": "Data controls in the OpenAI platform",
+          "url": "https://developers.openai.com/api/docs/guides/your-data",
+          "content": "Customers who enable Modified Abuse Monitoring or Zero Data Retention are responsible for ensuring their users abide by OpenAI’s policies for safe and responsible use of AI and complying with any moderation and reporting requirements under applicable law.\nGet in touch with our\nsales team\nto learn more about these offerings and inquire about eligibility.\nModified Abuse Monitoring\nModified Abuse Monitoring excludes customer content (other than image and file inputs in rare cases, as described\nbelow\n) from abuse monitoring logs across all API endpoints, while still allowing the customer to take advantage of the full capabilities of the OpenAI platform.\nZero Data Retention\nZero Data Retention excludes customer content from abuse monitoring logs in the same way as Modified Abuse Monitoring.\nAdditionally, Zero Data Retention changes some endpoint behavior: the\nstore\nparameter for\n/v1/responses\nand\nv1/chat/completions\nwill always be treated as\nfalse",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_458848dc112b41ef",
+          "sub_query": "OpenAI API data training exceptions opt-in sharing 30 day abuse monitoring retention",
+          "title": "Openai data retention policy - API - OpenAI Developer Community",
+          "url": "https://community.openai.com/t/openai-data-retention-policy/391946",
+          "content": "Openai data retention policy - API - OpenAI Developer Community\nOpenai data retention policy\nAPI\ngpt-4\n,\ngpt-35-turbo\n,\nchatgpt\n,\nplugin-development\n,\napi\nmohamedgpt1\nSeptember 24, 2023, 7:23am\n1\nI am going to integrate openai APIs into my application and want to know how to enable ZDR to secure my data.\nZero Data Retention Information\nPaulBellow\nSeptember 24, 2023, 7:31am\n2\nmohamedgpt1:\nenable ZDR to secure my data\nWelcome to the forum…\nQuick Google search gave me this…\nEnterprise privacy\nTrust and privacy are at the core of our mission at OpenAI. We’re committed to privacy and security for ChatGPT Enterprise and our API Platform.\nOpenAI may securely retain API inputs and outputs for up to 30 days to identify abuse. You can also request zero data retention (ZDR) for eligible endpoints if you have a qualifying use-case. For details on data handling, visit our\nPlatform Docs\npage.\nInnovatix\nSeptember 24, 2023, 7:31am\n3",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_2031367fc36e847d",
+          "sub_query": "OpenAI API data training exceptions opt-in sharing 30 day abuse monitoring retention",
+          "title": "Data controls in the OpenAI platform",
+          "url": "https://developers.openai.com/api/docs/guides/your-data",
+          "content": "Try ChatGPT\nCopy Page\nUnderstand how OpenAI uses your data, and how you can control it.\nYour data is your data. As of March 1, 2023, data sent to the OpenAI API is not used to train or improve OpenAI models (unless you explicitly opt in to share data with us).\nTypes of data stored with the OpenAI API\nWhen using the OpenAI API, data may be stored as:\nAbuse monitoring logs:\nLogs generated from your use of the platform, necessary for OpenAI to enforce our\nUsage Policies\nand agreements and mitigate harmful uses of AI.\nApplication state:\nData persisted from some API features in order to fulfill the task or request.\nData retention controls for abuse monitoring",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_21acce915f4d0bc6",
+          "sub_query": "OpenAI API data training exceptions opt-in sharing 30 day abuse monitoring retention",
+          "title": "Openai data retention policy - API - OpenAI Developer Community",
+          "url": "https://community.openai.com/t/openai-data-retention-policy/391946",
+          "content": "@Innovatix\nInnovatix\nSeptember 24, 2023, 7:38am\n8\nAs per my knowledge, there wasn’t a specific “button” to enable Zero Data Retention (ZDR) for OpenAI’s API. it is a policy that OpenAI adhered to for all users of the API.\nmohamedgpt1\nSeptember 24, 2023, 7:40am\n9\nNo, the data retention is 30 days by default, but it can be 0, I am asking about how to make it 0\nPlease check this “\nOpenAI Platform\n”\nPaulBellow\nSeptember 24, 2023, 7:58am\n10\nYou likely need to reach out to\nhelp.openai.com\nand explain what you want and see what they need.\nGood luck. Feel free to come back and let us know how it goes…\nPaulBellow\nSeptember 24, 2023, 7:59am\n11\nAh, I didn’t read down far enough. Good on OpenAI for cross-linking them, though!\nThanks for the assist.\nInnovatix\nSeptember 24, 2023, 8:33am\n12\nimage|100x00\n820×871 86.8 KB\nimage|100x00\n450×783 38.2 KB\nOpenAI Help Center\nOpenAI Help Center\nZero Data Retention Information\nshubham.gupta\nOctober 4, 2023, 2:01pm\n13\n@Innovatix",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_3b15c9132d8b3c18",
+          "sub_query": "OpenAI API data training exceptions opt-in sharing 30 day abuse monitoring retention",
+          "title": "Data controls in the OpenAI platform",
+          "url": "https://developers.openai.com/api/docs/guides/your-data",
+          "content": "Safety Retention\nFor customers approved for Zero Data Retention or Modified Abuse Monitoring, we reserve the right to make models ineligible for Zero Data Retention or Modified Abuse Monitoring for specific customers if reasonably necessary to investigate or prevent severe risk activity, as notified in advance to the impacted customers in writing. In this instance, we may retain and human review customer content when using these models that our classifiers detect as potentially violating our\nUsage Policies\nor your agreement. Otherwise retention will not be affected. For customers who have executed an OpenAI Business Associate and Healthcare Addendum, once your org ID is provisioned with Safety Retention, BAA-eligible endpoints can be used for processing PHI, even if data is retained.\nConfiguring data retention controls\nOnce your organization has been approved for data retention controls, you’ll see a\nData Retention\ntab within\nSettings → Organization → Data controls",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_c448ef1c49789b46",
+          "sub_query": "OpenAI API data training exceptions opt-in sharing 30 day abuse monitoring retention",
+          "title": "Data controls in the OpenAI platform",
+          "url": "https://developers.openai.com/api/docs/guides/your-data",
+          "content": "Eyes Off\nFor customers approved for Zero Data Retention or Modified Abuse Monitoring, we reserve the right to make models ineligible for Zero Data Retention or Modified Abuse Monitoring for specific customers, as notified in advance to the impacted customers in writing. In this instance, customer content will be retained in abuse monitoring logs, but such content will be excluded from human review unless required by applicable law. For customers who have executed an OpenAI Business Associate and Healthcare Addendum, once your org ID is provisioned with Eyes Off, BAA-eligible endpoints can be used for processing PHI, even if data is retained.\nSafety Retention",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_91e440e9eb3064ba",
+          "sub_query": "OpenAI API data training exceptions opt-in sharing 30 day abuse monitoring retention",
+          "title": "OpenAI Data Retention Policy 2026 - Does OpenAI Train on Your API Data? | Meetily",
+          "url": "https://meetily.ai/llm-privacy/openai",
+          "content": "Retention\nOpenAI's documented default for API inputs and outputs is short-term retention for abuse monitoring (up to 30 days as published by OpenAI), after which the data is deleted unless legal obligations require longer retention. Specific endpoints such as fine-tuning, Assistants, and Stored Completions have their own retention semantics that you opt into when you use those features.\nFor exact retention windows, consult OpenAI's enterprise privacy documentation and your Business Associate Agreement (if applicable). Reviewing those before deployment is recommended for regulated workloads.\nZero data retention",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_ad6decdf71e91b0b",
+          "sub_query": "OpenAI API data training exceptions opt-in sharing 30 day abuse monitoring retention",
+          "title": "OpenAI Data Retention Policy 2026 - Does OpenAI Train on Your API Data? | Meetily",
+          "url": "https://meetily.ai/llm-privacy/openai",
+          "content": "OpenAI Data Retention Policy 2026 - Does OpenAI Train on Your API Data? | Meetily\nSkip to main content\nQuick policy snapshot\nDefault retention\n30 days (default)\nZero data retention available\nYes\nTrains on API customer data by default\nNo\nOpenAI's API training default\nOpenAI's enterprise privacy page commits that data submitted through the OpenAI API, ChatGPT Enterprise, and ChatGPT Team is not used to train OpenAI's models. The consumer ChatGPT free and Plus tiers default differently and are out of scope for this page.\nWhen Meetily users select OpenAI as their summary provider via BYOK, the request hits api.openai.com under your API key and your account's contract. The defaults on this page apply unless you have a separate enterprise arrangement.\nRetention",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        },
+        {
+          "evidence_id": "ev_21f28db677e049fe",
+          "sub_query": "OpenAI API data training exceptions opt-in sharing 30 day abuse monitoring retention",
+          "title": "GPT-5 Training Data Opt-Out: How to Control Your Data and Prevent Model Training | Secure Privacy Blog",
+          "url": "https://secureprivacy.ai/blog/gpt-5-training-data-opt-out",
+          "content": "SIEM integration:\nExport logs to BigQuery, Snowflake, or security platforms\nEvidence preservation:\nMaintain records even if users delete conversations in ChatGPT interface\nCompliance documentation:\nPeriodic screenshots of Data Controls settings, confirmation emails from Privacy Portal, DPA execution records\nVendor Risk Management\nThird-party GPTs and apps:\nCustom GPTs may have independent privacy policies. Vet each connected app before approval.\nSub-processor assessment:\nUnderstand which OpenAI sub-processors handle data (hosting, security, support)\nContract review:\nEnsure DPAs cover your specific use cases and jurisdictional requirements\nCommon Mistakes Companies Make\nMistake #1: Assuming Opt-Out Equals Zero Retention\nThe error:\nBelieving that disabling training removes all data from OpenAI's servers immediately.\nThe reality:\nStandard 30-day retention for abuse monitoring persists even with opt-out. Only Zero Data Retention (ZDR) eliminates this storage.\nImpact:",
+          "source_type": "unknown",
+          "publisher": null,
+          "source_organization": null,
+          "source_owner": null,
+          "author": null,
+          "publication_date": null,
+          "relevance_score": null
+        }
+      ],
+      "retrieval_diagnostics": [
+        {
+          "evidence_id": "ev_52708fb711c7deaa",
+          "similarity_score": 0.562285424685231,
+          "authority_score": 1.0,
+          "final_score": 0.6935997972796617
+        },
+        {
+          "evidence_id": "ev_6f1b032c397627b6",
+          "similarity_score": 0.5614592823423489,
+          "authority_score": 1.0,
+          "final_score": 0.6930214976396442
+        },
+        {
+          "evidence_id": "ev_ca517d5eb273d496",
+          "similarity_score": 0.47645348459967213,
+          "authority_score": 1.0,
+          "final_score": 0.6335174392197704
+        },
+        {
+          "evidence_id": "ev_4fdf910968f25851",
+          "similarity_score": 0.4676192104583478,
+          "authority_score": 1.0,
+          "final_score": 0.6273334473208434
+        },
+        {
+          "evidence_id": "ev_88dde0d8c1251d4e",
+          "similarity_score": 0.43059031103264345,
+          "authority_score": 1.0,
+          "final_score": 0.6014132177228504
+        },
+        {
+          "evidence_id": "ev_3c96a4fb19211b4f",
+          "similarity_score": 0.4228604134007618,
+          "authority_score": 1.0,
+          "final_score": 0.5960022893805332
+        },
+        {
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "similarity_score": 0.5848093993998007,
+          "authority_score": 0.6,
+          "final_score": 0.5893665795798604
+        },
+        {
+          "evidence_id": "ev_cdd0967ac6c58fe5",
+          "similarity_score": 0.518310013777173,
+          "authority_score": 0.6,
+          "final_score": 0.542817009644021
+        },
+        {
+          "evidence_id": "ev_13c584f468449ffc",
+          "similarity_score": 0.4536577107681913,
+          "authority_score": 0.6,
+          "final_score": 0.49756039753773385
+        },
+        {
+          "evidence_id": "ev_d09ccbf8429a4b40",
+          "similarity_score": 0.6419744010846278,
+          "authority_score": 1.0,
+          "final_score": 0.7493820807592394
+        },
+        {
+          "evidence_id": "ev_d384aee29a4051c8",
+          "similarity_score": 0.6397535095688037,
+          "authority_score": 1.0,
+          "final_score": 0.7478274566981626
+        },
+        {
+          "evidence_id": "ev_b08a10e340e4cca0",
+          "similarity_score": 0.596858189186399,
+          "authority_score": 1.0,
+          "final_score": 0.7178007324304793
+        },
+        {
+          "evidence_id": "ev_a8ef44309475cd9a",
+          "similarity_score": 0.5652793570423905,
+          "authority_score": 1.0,
+          "final_score": 0.6956955499296733
+        },
+        {
+          "evidence_id": "ev_8f8e52e6d185ea05",
+          "similarity_score": 0.564352650607858,
+          "authority_score": 1.0,
+          "final_score": 0.6950468554255005
+        },
+        {
+          "evidence_id": "ev_5c8af3b3740a96e1",
+          "similarity_score": 0.5516649361122867,
+          "authority_score": 1.0,
+          "final_score": 0.6861654552786007
+        },
+        {
+          "evidence_id": "ev_b84c6e8b2fc512bc",
+          "similarity_score": 0.6253516997943798,
+          "authority_score": 0.6,
+          "final_score": 0.6177461898560658
+        },
+        {
+          "evidence_id": "ev_6a7e4f9a786055aa",
+          "similarity_score": 0.7151892840216773,
+          "authority_score": 1.0,
+          "final_score": 0.8006324988151741
+        },
+        {
+          "evidence_id": "ev_983d48d235f7e446",
+          "similarity_score": 0.7076291028288358,
+          "authority_score": 1.0,
+          "final_score": 0.795340371980185
+        },
+        {
+          "evidence_id": "ev_458848dc112b41ef",
+          "similarity_score": 0.6810236562107156,
+          "authority_score": 1.0,
+          "final_score": 0.776716559347501
+        },
+        {
+          "evidence_id": "ev_2031367fc36e847d",
+          "similarity_score": 0.6646797925281167,
+          "authority_score": 1.0,
+          "final_score": 0.7652758547696816
+        },
+        {
+          "evidence_id": "ev_21acce915f4d0bc6",
+          "similarity_score": 0.5693185737410758,
+          "authority_score": 1.0,
+          "final_score": 0.6985230016187529
+        },
+        {
+          "evidence_id": "ev_3b15c9132d8b3c18",
+          "similarity_score": 0.5667209522025961,
+          "authority_score": 1.0,
+          "final_score": 0.6967046665418173
+        },
+        {
+          "evidence_id": "ev_c448ef1c49789b46",
+          "similarity_score": 0.5547549083274491,
+          "authority_score": 1.0,
+          "final_score": 0.6883284358292143
+        },
+        {
+          "evidence_id": "ev_91e440e9eb3064ba",
+          "similarity_score": 0.7037005968929912,
+          "authority_score": 0.6,
+          "final_score": 0.6725904178250939
+        },
+        {
+          "evidence_id": "ev_ad6decdf71e91b0b",
+          "similarity_score": 0.665358438394739,
+          "authority_score": 0.6,
+          "final_score": 0.6457509068763172
+        },
+        {
+          "evidence_id": "ev_21f28db677e049fe",
+          "similarity_score": 0.6638104639366411,
+          "authority_score": 0.6,
+          "final_score": 0.6446673247556487
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "claim_9e4f778a70cb164c7b82acb8c348c0c09ea399873ae1ca73eb864cca2afe254c",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "OpenAI 表示,自 2023 年 3 月 1 日起,发送到 OpenAI API 的数据默认不会用于训练或改进 OpenAI 模型,除非客户明确选择加入共享数据。",
+          "risk_types": [
+            "date_or_time_window"
+          ],
+          "is_material": true
+        },
+        {
+          "claim_id": "claim_b111342508621cf1ebc17039358afda79e3df0f18be0b369c56f8f29eb8d7979",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "对于符合条件的 API 客户,Zero Data Retention 承诺在请求处理完成后不保留其提示和模型响应,客户内容不会由 OpenAI 人员审核,且企业客户数据除非客户明确选择加入,否则不会用于训练 OpenAI 模型。",
+          "risk_types": [
+            "release_status_availability"
+          ],
+          "is_material": true
+        },
+        {
+          "claim_id": "claim_1d418dc0cf0c8bc29d152736410812bb927a99eabaf39219e6b8989d6bcaf18e",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "Zero Data Retention 和 Modified Abuse Monitoring 不是默认自动适用于所有 API 用户,而是需要 OpenAI 事先批准并接受附加要求,获批客户可在组织或项目级别选择适用。",
+          "risk_types": [
+            "release_status_availability"
+          ],
+          "is_material": true
+        },
+        {
+          "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "API 输入和输出默认会作为滥用监控日志保留最多三十天,之后删除,除非法律要求更长保留或为保护服务或第三方合理必要而延长。",
+          "risk_types": [
+            "numeric_value",
+            "date_or_time_window"
+          ],
+          "is_material": true
+        },
+        {
+          "claim_id": "claim_61f44467bd2695b35e816914596f36995cbc93410258a9d65038c9ed4cdea531",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "所给材料列出的保留例外包括:通过 Files 端点提交用于微调的数据会保留到用户删除该文件;经批准的低误用可能性企业客户可请求不存储 API 数据;法律要求可导致超过三十天的保留。",
+          "risk_types": [
+            "numeric_value",
+            "release_status_availability",
+            "date_or_time_window"
+          ],
+          "is_material": true
+        },
+        {
+          "claim_id": "claim_968eec4326e1928d8d79aa0b8e22ee05c30bbb988a30c01aee9a28b0ec24925a",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "即使部署了 Zero Data Retention,被标记为潜在儿童性虐待材料的图像仍会因人工审核和报告目的而被保留,因为 OpenAI 称其依法需要报告明显的儿童性虐待材料。",
+          "risk_types": [
+            "release_status_availability"
+          ],
+          "is_material": true
+        },
+        {
+          "claim_id": "claim_aa46749e8f03033db725d2f59febf4beb38d2a651956126d96049428f4ed15c2",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "对于已获批 Zero Data Retention 或 Modified Abuse Monitoring 的客户,OpenAI 保留在合理必要调查或防止严重风险活动时,经事先书面通知使特定客户或模型不适用这些控制的权利;此时可能保留并由人工审核被分类器判定可能违反使用政策的内容。对于已执行业务关联协议且配置 Safety Retention 或 Eyes Off 的组织,BAA 合格端点即使数据被保留也可用于处理受保护健康信息。",
+          "risk_types": [
+            "release_status_availability"
+          ],
+          "is_material": true
+        },
+        {
+          "claim_id": "claim_ebb2fdf6b9007a9429ff7f8d63284da76592ee2e3156f6e5fa270975dd870922",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "OpenAI 的隐私政策不适用于其代表商业产品客户(例如 API 服务客户)处理的内容;此类数据的使用受相关客户协议约束。",
+          "risk_types": [],
+          "is_material": true
+        },
+        {
+          "claim_id": "claim_2234a515da950c6ed95ff539775056780d8e5c9b59a3e39d5228d3c5576230d4",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "OpenAI 的企业隐私承诺称 API、ChatGPT Enterprise 和 ChatGPT Team 提交的数据不用于训练 OpenAI 模型;消费者 ChatGPT 免费版和 Plus 版的默认政策不同,不在该 API 页面范围内。",
+          "risk_types": [
+            "comparative_claim"
+          ],
+          "is_material": true
+        },
+        {
+          "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务;该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+          "risk_types": [
+            "conflict_sensitive_claim"
+          ],
+          "is_material": true
+        },
+        {
+          "claim_id": "claim_a5a49627af874a5f45b351f96d2636bf49cbef914d18bc8c6976977035a23500",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "所给材料称所有客户数据在美国处理和存储,OpenAI 目前不在欧洲或其他国家存储数据。",
+          "risk_types": [
+            "comparative_claim"
+          ],
+          "is_material": true
+        },
+        {
+          "claim_id": "claim_a4df22e9bd24cfad909896d750a814a883f3dcdb87c1bec5436376addfa17de5",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "OpenAI 表示可以签署业务关联协议以支持客户遵守 HIPAA,但客户必须与 OpenAI 签署企业协议并具有符合条件的使用案例;OpenAI 不提供本地托管服务,客户可通过销售团队购买专用容量。",
+          "risk_types": [
+            "release_status_availability"
+          ],
+          "is_material": true
+        },
+        {
+          "claim_id": "claim_201ca07284694c08bc9b7009c05e80539b332b2cfc3a6d637fb459b301d052ad",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "OpenAI 平台文档称 API 数据可能以滥用监控日志和应用状态形式存储;某些 API 功能会为完成请求或任务而持久化数据。",
+          "risk_types": [],
+          "is_material": true
+        },
+        {
+          "claim_id": "claim_05d9a11718fe40b25469d2a37c50ea36f45c0fda08d940d1f8d967ad89d5904f",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "Modified Abuse Monitoring 在大多数情况下将客户内容从滥用监控日志中排除,但图像和文件输入在少数情况下仍可能被保留;Zero Data Retention 同样排除客户内容并将相关存储参数视为 false。",
+          "risk_types": [
+            "release_status_availability"
+          ],
+          "is_material": true
+        },
+        {
+          "claim_id": "claim_fea8f15ffc198a7eb75756b451aa7ba351bf11e6e13464387a196826f1f04e66",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "所给证据中,Zero Data Retention 页面标注日期为 2026 年 8 月 19 日;隐私政策页面标注更新于 2026 年 2 月 6 日;另一相关页面仅显示 2026 年,具体日期不明确。",
+          "risk_types": [
+            "date_or_time_window"
+          ],
+          "is_material": false
+        },
+        {
+          "claim_id": "claim_223dce122b3ef4d9c38c748c94cc754d57f40b1f62535e95b0c2028f826124c4",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "数据保护附录文本称,OpenAI 会在协议期限内保留 ChatGPT Enterprise 服务客户数据,除非协议或订单另有规定;API 服务客户数据通过 API 发送后最多保留三十天,除非法律要求保留副本。",
+          "risk_types": [
+            "numeric_value",
+            "date_or_time_window"
+          ],
+          "is_material": true
+        }
+      ],
+      "claim_evidence_links": [
+        {
+          "claim_id": "claim_05d9a11718fe40b25469d2a37c50ea36f45c0fda08d940d1f8d967ad89d5904f",
+          "evidence_id": "ev_983d48d235f7e446",
+          "relation": "support",
+          "claim": "Modified Abuse Monitoring 在大多数情况下将客户内容从滥用监控日志中排除,但图像和文件输入在少数情况下仍可能被保留;Zero Data Retention 同样排除客户内容并将相关存储参数视为 false。"
+        },
+        {
+          "claim_id": "claim_1d418dc0cf0c8bc29d152736410812bb927a99eabaf39219e6b8989d6bcaf18e",
+          "evidence_id": "ev_458848dc112b41ef",
+          "relation": "support",
+          "claim": "Zero Data Retention 和 Modified Abuse Monitoring 不是默认自动适用于所有 API 用户,而是需要 OpenAI 事先批准并接受附加要求,获批客户可在组织或项目级别选择适用。"
+        },
+        {
+          "claim_id": "claim_1d418dc0cf0c8bc29d152736410812bb927a99eabaf39219e6b8989d6bcaf18e",
+          "evidence_id": "ev_6a7e4f9a786055aa",
+          "relation": "support",
+          "claim": "Zero Data Retention 和 Modified Abuse Monitoring 不是默认自动适用于所有 API 用户,而是需要 OpenAI 事先批准并接受附加要求,获批客户可在组织或项目级别选择适用。"
+        },
+        {
+          "claim_id": "claim_1d418dc0cf0c8bc29d152736410812bb927a99eabaf39219e6b8989d6bcaf18e",
+          "evidence_id": "ev_88dde0d8c1251d4e",
+          "relation": "support",
+          "claim": "Zero Data Retention 和 Modified Abuse Monitoring 不是默认自动适用于所有 API 用户,而是需要 OpenAI 事先批准并接受附加要求,获批客户可在组织或项目级别选择适用。"
+        },
+        {
+          "claim_id": "claim_1d418dc0cf0c8bc29d152736410812bb927a99eabaf39219e6b8989d6bcaf18e",
+          "evidence_id": "ev_983d48d235f7e446",
+          "relation": "support",
+          "claim": "Zero Data Retention 和 Modified Abuse Monitoring 不是默认自动适用于所有 API 用户,而是需要 OpenAI 事先批准并接受附加要求,获批客户可在组织或项目级别选择适用。"
+        },
+        {
+          "claim_id": "claim_201ca07284694c08bc9b7009c05e80539b332b2cfc3a6d637fb459b301d052ad",
+          "evidence_id": "ev_2031367fc36e847d",
+          "relation": "support",
+          "claim": "OpenAI 平台文档称 API 数据可能以滥用监控日志和应用状态形式存储;某些 API 功能会为完成请求或任务而持久化数据。"
+        },
+        {
+          "claim_id": "claim_2234a515da950c6ed95ff539775056780d8e5c9b59a3e39d5228d3c5576230d4",
+          "evidence_id": "ev_2031367fc36e847d",
+          "relation": "support",
+          "claim": "OpenAI 的企业隐私承诺称 API、ChatGPT Enterprise 和 ChatGPT Team 提交的数据不用于训练 OpenAI 模型;消费者 ChatGPT 免费版和 Plus 版的默认政策不同,不在该 API 页面范围内。"
+        },
+        {
+          "claim_id": "claim_2234a515da950c6ed95ff539775056780d8e5c9b59a3e39d5228d3c5576230d4",
+          "evidence_id": "ev_ad6decdf71e91b0b",
+          "relation": "support",
+          "claim": "OpenAI 的企业隐私承诺称 API、ChatGPT Enterprise 和 ChatGPT Team 提交的数据不用于训练 OpenAI 模型;消费者 ChatGPT 免费版和 Plus 版的默认政策不同,不在该 API 页面范围内。"
+        },
+        {
+          "claim_id": "claim_2234a515da950c6ed95ff539775056780d8e5c9b59a3e39d5228d3c5576230d4",
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "relation": "support",
+          "claim": "OpenAI 的企业隐私承诺称 API、ChatGPT Enterprise 和 ChatGPT Team 提交的数据不用于训练 OpenAI 模型;消费者 ChatGPT 免费版和 Plus 版的默认政策不同,不在该 API 页面范围内。"
+        },
+        {
+          "claim_id": "claim_223dce122b3ef4d9c38c748c94cc754d57f40b1f62535e95b0c2028f826124c4",
+          "evidence_id": "ev_8f8e52e6d185ea05",
+          "relation": "support",
+          "claim": "数据保护附录文本称,OpenAI 会在协议期限内保留 ChatGPT Enterprise 服务客户数据,除非协议或订单另有规定;API 服务客户数据通过 API 发送后最多保留三十天,除非法律要求保留副本。"
+        },
+        {
+          "claim_id": "claim_61f44467bd2695b35e816914596f36995cbc93410258a9d65038c9ed4cdea531",
+          "evidence_id": "ev_6a7e4f9a786055aa",
+          "relation": "support",
+          "claim": "所给材料列出的保留例外包括:通过 Files 端点提交用于微调的数据会保留到用户删除该文件;经批准的低误用可能性企业客户可请求不存储 API 数据;法律要求可导致超过三十天的保留。"
+        },
+        {
+          "claim_id": "claim_61f44467bd2695b35e816914596f36995cbc93410258a9d65038c9ed4cdea531",
+          "evidence_id": "ev_8f8e52e6d185ea05",
+          "relation": "support",
+          "claim": "所给材料列出的保留例外包括:通过 Files 端点提交用于微调的数据会保留到用户删除该文件;经批准的低误用可能性企业客户可请求不存储 API 数据;法律要求可导致超过三十天的保留。"
+        },
+        {
+          "claim_id": "claim_61f44467bd2695b35e816914596f36995cbc93410258a9d65038c9ed4cdea531",
+          "evidence_id": "ev_91e440e9eb3064ba",
+          "relation": "support",
+          "claim": "所给材料列出的保留例外包括:通过 Files 端点提交用于微调的数据会保留到用户删除该文件;经批准的低误用可能性企业客户可请求不存储 API 数据;法律要求可导致超过三十天的保留。"
+        },
+        {
+          "claim_id": "claim_61f44467bd2695b35e816914596f36995cbc93410258a9d65038c9ed4cdea531",
+          "evidence_id": "ev_983d48d235f7e446",
+          "relation": "support",
+          "claim": "所给材料列出的保留例外包括:通过 Files 端点提交用于微调的数据会保留到用户删除该文件;经批准的低误用可能性企业客户可请求不存储 API 数据;法律要求可导致超过三十天的保留。"
+        },
+        {
+          "claim_id": "claim_61f44467bd2695b35e816914596f36995cbc93410258a9d65038c9ed4cdea531",
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "relation": "support",
+          "claim": "所给材料列出的保留例外包括:通过 Files 端点提交用于微调的数据会保留到用户删除该文件;经批准的低误用可能性企业客户可请求不存储 API 数据;法律要求可导致超过三十天的保留。"
+        },
+        {
+          "claim_id": "claim_968eec4326e1928d8d79aa0b8e22ee05c30bbb988a30c01aee9a28b0ec24925a",
+          "evidence_id": "ev_ca517d5eb273d496",
+          "relation": "support",
+          "claim": "即使部署了 Zero Data Retention,被标记为潜在儿童性虐待材料的图像仍会因人工审核和报告目的而被保留,因为 OpenAI 称其依法需要报告明显的儿童性虐待材料。"
+        },
+        {
+          "claim_id": "claim_9e4f778a70cb164c7b82acb8c348c0c09ea399873ae1ca73eb864cca2afe254c",
+          "evidence_id": "ev_13c584f468449ffc",
+          "relation": "support",
+          "claim": "OpenAI 表示,自 2023 年 3 月 1 日起,发送到 OpenAI API 的数据默认不会用于训练或改进 OpenAI 模型,除非客户明确选择加入共享数据。"
+        },
+        {
+          "claim_id": "claim_9e4f778a70cb164c7b82acb8c348c0c09ea399873ae1ca73eb864cca2afe254c",
+          "evidence_id": "ev_2031367fc36e847d",
+          "relation": "support",
+          "claim": "OpenAI 表示,自 2023 年 3 月 1 日起,发送到 OpenAI API 的数据默认不会用于训练或改进 OpenAI 模型,除非客户明确选择加入共享数据。"
+        },
+        {
+          "claim_id": "claim_9e4f778a70cb164c7b82acb8c348c0c09ea399873ae1ca73eb864cca2afe254c",
+          "evidence_id": "ev_88dde0d8c1251d4e",
+          "relation": "support",
+          "claim": "OpenAI 表示,自 2023 年 3 月 1 日起,发送到 OpenAI API 的数据默认不会用于训练或改进 OpenAI 模型,除非客户明确选择加入共享数据。"
+        },
+        {
+          "claim_id": "claim_9e4f778a70cb164c7b82acb8c348c0c09ea399873ae1ca73eb864cca2afe254c",
+          "evidence_id": "ev_ad6decdf71e91b0b",
+          "relation": "support",
+          "claim": "OpenAI 表示,自 2023 年 3 月 1 日起,发送到 OpenAI API 的数据默认不会用于训练或改进 OpenAI 模型,除非客户明确选择加入共享数据。"
+        },
+        {
+          "claim_id": "claim_9e4f778a70cb164c7b82acb8c348c0c09ea399873ae1ca73eb864cca2afe254c",
+          "evidence_id": "ev_b84c6e8b2fc512bc",
+          "relation": "support",
+          "claim": "OpenAI 表示,自 2023 年 3 月 1 日起,发送到 OpenAI API 的数据默认不会用于训练或改进 OpenAI 模型,除非客户明确选择加入共享数据。"
+        },
+        {
+          "claim_id": "claim_9e4f778a70cb164c7b82acb8c348c0c09ea399873ae1ca73eb864cca2afe254c",
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "relation": "support",
+          "claim": "OpenAI 表示,自 2023 年 3 月 1 日起,发送到 OpenAI API 的数据默认不会用于训练或改进 OpenAI 模型,除非客户明确选择加入共享数据。"
+        },
+        {
+          "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+          "evidence_id": "ev_13c584f468449ffc",
+          "relation": "support",
+          "claim": "API 输入和输出默认会作为滥用监控日志保留最多三十天,之后删除,除非法律要求更长保留或为保护服务或第三方合理必要而延长。"
+        },
+        {
+          "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+          "evidence_id": "ev_21f28db677e049fe",
+          "relation": "support",
+          "claim": "API 输入和输出默认会作为滥用监控日志保留最多三十天,之后删除,除非法律要求更长保留或为保护服务或第三方合理必要而延长。"
+        },
+        {
+          "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+          "evidence_id": "ev_458848dc112b41ef",
+          "relation": "support",
+          "claim": "API 输入和输出默认会作为滥用监控日志保留最多三十天,之后删除,除非法律要求更长保留或为保护服务或第三方合理必要而延长。"
+        },
+        {
+          "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+          "evidence_id": "ev_6a7e4f9a786055aa",
+          "relation": "support",
+          "claim": "API 输入和输出默认会作为滥用监控日志保留最多三十天,之后删除,除非法律要求更长保留或为保护服务或第三方合理必要而延长。"
+        },
+        {
+          "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+          "evidence_id": "ev_8f8e52e6d185ea05",
+          "relation": "support",
+          "claim": "API 输入和输出默认会作为滥用监控日志保留最多三十天,之后删除,除非法律要求更长保留或为保护服务或第三方合理必要而延长。"
+        },
+        {
+          "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+          "evidence_id": "ev_91e440e9eb3064ba",
+          "relation": "support",
+          "claim": "API 输入和输出默认会作为滥用监控日志保留最多三十天,之后删除,除非法律要求更长保留或为保护服务或第三方合理必要而延长。"
+        },
+        {
+          "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+          "evidence_id": "ev_ad6decdf71e91b0b",
+          "relation": "support",
+          "claim": "API 输入和输出默认会作为滥用监控日志保留最多三十天,之后删除,除非法律要求更长保留或为保护服务或第三方合理必要而延长。"
+        },
+        {
+          "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+          "evidence_id": "ev_cdd0967ac6c58fe5",
+          "relation": "support",
+          "claim": "API 输入和输出默认会作为滥用监控日志保留最多三十天,之后删除,除非法律要求更长保留或为保护服务或第三方合理必要而延长。"
+        },
+        {
+          "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "relation": "support",
+          "claim": "API 输入和输出默认会作为滥用监控日志保留最多三十天,之后删除,除非法律要求更长保留或为保护服务或第三方合理必要而延长。"
+        },
+        {
+          "claim_id": "claim_a4df22e9bd24cfad909896d750a814a883f3dcdb87c1bec5436376addfa17de5",
+          "evidence_id": "ev_cdd0967ac6c58fe5",
+          "relation": "support",
+          "claim": "OpenAI 表示可以签署业务关联协议以支持客户遵守 HIPAA,但客户必须与 OpenAI 签署企业协议并具有符合条件的使用案例;OpenAI 不提供本地托管服务,客户可通过销售团队购买专用容量。"
+        },
+        {
+          "claim_id": "claim_a5a49627af874a5f45b351f96d2636bf49cbef914d18bc8c6976977035a23500",
+          "evidence_id": "ev_13c584f468449ffc",
+          "relation": "support",
+          "claim": "所给材料称所有客户数据在美国处理和存储,OpenAI 目前不在欧洲或其他国家存储数据。"
+        },
+        {
+          "claim_id": "claim_a5a49627af874a5f45b351f96d2636bf49cbef914d18bc8c6976977035a23500",
+          "evidence_id": "ev_cdd0967ac6c58fe5",
+          "relation": "support",
+          "claim": "所给材料称所有客户数据在美国处理和存储,OpenAI 目前不在欧洲或其他国家存储数据。"
+        },
+        {
+          "claim_id": "claim_aa46749e8f03033db725d2f59febf4beb38d2a651956126d96049428f4ed15c2",
+          "evidence_id": "ev_3b15c9132d8b3c18",
+          "relation": "support",
+          "claim": "对于已获批 Zero Data Retention 或 Modified Abuse Monitoring 的客户,OpenAI 保留在合理必要调查或防止严重风险活动时,经事先书面通知使特定客户或模型不适用这些控制的权利;此时可能保留并由人工审核被分类器判定可能违反使用政策的内容。对于已执行业务关联协议且配置 Safety Retention 或 Eyes Off 的组织,BAA 合格端点即使数据被保留也可用于处理受保护健康信息。"
+        },
+        {
+          "claim_id": "claim_aa46749e8f03033db725d2f59febf4beb38d2a651956126d96049428f4ed15c2",
+          "evidence_id": "ev_c448ef1c49789b46",
+          "relation": "support",
+          "claim": "对于已获批 Zero Data Retention 或 Modified Abuse Monitoring 的客户,OpenAI 保留在合理必要调查或防止严重风险活动时,经事先书面通知使特定客户或模型不适用这些控制的权利;此时可能保留并由人工审核被分类器判定可能违反使用政策的内容。对于已执行业务关联协议且配置 Safety Retention 或 Eyes Off 的组织,BAA 合格端点即使数据被保留也可用于处理受保护健康信息。"
+        },
+        {
+          "claim_id": "claim_b111342508621cf1ebc17039358afda79e3df0f18be0b369c56f8f29eb8d7979",
+          "evidence_id": "ev_6a7e4f9a786055aa",
+          "relation": "support",
+          "claim": "对于符合条件的 API 客户,Zero Data Retention 承诺在请求处理完成后不保留其提示和模型响应,客户内容不会由 OpenAI 人员审核,且企业客户数据除非客户明确选择加入,否则不会用于训练 OpenAI 模型。"
+        },
+        {
+          "claim_id": "claim_b111342508621cf1ebc17039358afda79e3df0f18be0b369c56f8f29eb8d7979",
+          "evidence_id": "ev_88dde0d8c1251d4e",
+          "relation": "support",
+          "claim": "对于符合条件的 API 客户,Zero Data Retention 承诺在请求处理完成后不保留其提示和模型响应,客户内容不会由 OpenAI 人员审核,且企业客户数据除非客户明确选择加入,否则不会用于训练 OpenAI 模型。"
+        },
+        {
+          "claim_id": "claim_b111342508621cf1ebc17039358afda79e3df0f18be0b369c56f8f29eb8d7979",
+          "evidence_id": "ev_983d48d235f7e446",
+          "relation": "support",
+          "claim": "对于符合条件的 API 客户,Zero Data Retention 承诺在请求处理完成后不保留其提示和模型响应,客户内容不会由 OpenAI 人员审核,且企业客户数据除非客户明确选择加入,否则不会用于训练 OpenAI 模型。"
+        },
+        {
+          "claim_id": "claim_b111342508621cf1ebc17039358afda79e3df0f18be0b369c56f8f29eb8d7979",
+          "evidence_id": "ev_ca517d5eb273d496",
+          "relation": "support",
+          "claim": "对于符合条件的 API 客户,Zero Data Retention 承诺在请求处理完成后不保留其提示和模型响应,客户内容不会由 OpenAI 人员审核,且企业客户数据除非客户明确选择加入,否则不会用于训练 OpenAI 模型。"
+        },
+        {
+          "claim_id": "claim_ebb2fdf6b9007a9429ff7f8d63284da76592ee2e3156f6e5fa270975dd870922",
+          "evidence_id": "ev_6f1b032c397627b6",
+          "relation": "support",
+          "claim": "OpenAI 的隐私政策不适用于其代表商业产品客户(例如 API 服务客户)处理的内容;此类数据的使用受相关客户协议约束。"
+        },
+        {
+          "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+          "evidence_id": "ev_2031367fc36e847d",
+          "relation": "support",
+          "claim": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务;该条款与 API 默认不用于训练或改进的表述之间存在边界争议。"
+        },
+        {
+          "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+          "evidence_id": "ev_b08a10e340e4cca0",
+          "relation": "support",
+          "claim": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务;该条款与 API 默认不用于训练或改进的表述之间存在边界争议。"
+        },
+        {
+          "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "relation": "support",
+          "claim": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务;该条款与 API 默认不用于训练或改进的表述之间存在边界争议。"
+        },
+        {
+          "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+          "evidence_id": "ev_d384aee29a4051c8",
+          "relation": "support",
+          "claim": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务;该条款与 API 默认不用于训练或改进的表述之间存在边界争议。"
+        },
+        {
+          "claim_id": "claim_fea8f15ffc198a7eb75756b451aa7ba351bf11e6e13464387a196826f1f04e66",
+          "evidence_id": "ev_52708fb711c7deaa",
+          "relation": "support",
+          "claim": "所给证据中,Zero Data Retention 页面标注日期为 2026 年 8 月 19 日;隐私政策页面标注更新于 2026 年 2 月 6 日;另一相关页面仅显示 2026 年,具体日期不明确。"
+        },
+        {
+          "claim_id": "claim_fea8f15ffc198a7eb75756b451aa7ba351bf11e6e13464387a196826f1f04e66",
+          "evidence_id": "ev_6f1b032c397627b6",
+          "relation": "support",
+          "claim": "所给证据中,Zero Data Retention 页面标注日期为 2026 年 8 月 19 日;隐私政策页面标注更新于 2026 年 2 月 6 日;另一相关页面仅显示 2026 年,具体日期不明确。"
+        },
+        {
+          "claim_id": "claim_fea8f15ffc198a7eb75756b451aa7ba351bf11e6e13464387a196826f1f04e66",
+          "evidence_id": "ev_88dde0d8c1251d4e",
+          "relation": "support",
+          "claim": "所给证据中,Zero Data Retention 页面标注日期为 2026 年 8 月 19 日;隐私政策页面标注更新于 2026 年 2 月 6 日;另一相关页面仅显示 2026 年,具体日期不明确。"
+        }
+      ],
+      "claim_support_summaries": [
+        {
+          "claim_id": "claim_05d9a11718fe40b25469d2a37c50ea36f45c0fda08d940d1f8d967ad89d5904f",
+          "supporting_evidence_ids": [
+            "ev_983d48d235f7e446"
+          ],
+          "conflicting_evidence_ids": [],
+          "unclear_evidence_ids": [],
+          "has_valid_support": true,
+          "publisher_independence_verified": false,
+          "limitation_codes": [
+            "publisher_independence_metadata_unavailable"
+          ]
+        },
+        {
+          "claim_id": "claim_1d418dc0cf0c8bc29d152736410812bb927a99eabaf39219e6b8989d6bcaf18e",
+          "supporting_evidence_ids": [
+            "ev_458848dc112b41ef",
+            "ev_6a7e4f9a786055aa",
+            "ev_88dde0d8c1251d4e",
+            "ev_983d48d235f7e446"
+          ],
+          "conflicting_evidence_ids": [],
+          "unclear_evidence_ids": [],
+          "has_valid_support": true,
+          "publisher_independence_verified": false,
+          "limitation_codes": [
+            "publisher_independence_metadata_unavailable"
+          ]
+        },
+        {
+          "claim_id": "claim_201ca07284694c08bc9b7009c05e80539b332b2cfc3a6d637fb459b301d052ad",
+          "supporting_evidence_ids": [
+            "ev_2031367fc36e847d"
+          ],
+          "conflicting_evidence_ids": [],
+          "unclear_evidence_ids": [],
+          "has_valid_support": true,
+          "publisher_independence_verified": false,
+          "limitation_codes": [
+            "publisher_independence_metadata_unavailable"
+          ]
+        },
+        {
+          "claim_id": "claim_2234a515da950c6ed95ff539775056780d8e5c9b59a3e39d5228d3c5576230d4",
+          "supporting_evidence_ids": [
+            "ev_2031367fc36e847d",
+            "ev_ad6decdf71e91b0b",
+            "ev_d2c625b8589d3de9"
+          ],
+          "conflicting_evidence_ids": [],
+          "unclear_evidence_ids": [],
+          "has_valid_support": true,
+          "publisher_independence_verified": false,
+          "limitation_codes": [
+            "publisher_independence_metadata_unavailable"
+          ]
+        },
+        {
+          "claim_id": "claim_223dce122b3ef4d9c38c748c94cc754d57f40b1f62535e95b0c2028f826124c4",
+          "supporting_evidence_ids": [
+            "ev_8f8e52e6d185ea05"
+          ],
+          "conflicting_evidence_ids": [],
+          "unclear_evidence_ids": [],
+          "has_valid_support": true,
+          "publisher_independence_verified": false,
+          "limitation_codes": [
+            "publisher_independence_metadata_unavailable"
+          ]
+        },
+        {
+          "claim_id": "claim_61f44467bd2695b35e816914596f36995cbc93410258a9d65038c9ed4cdea531",
+          "supporting_evidence_ids": [
+            "ev_6a7e4f9a786055aa",
+            "ev_8f8e52e6d185ea05",
+            "ev_91e440e9eb3064ba",
+            "ev_983d48d235f7e446",
+            "ev_d2c625b8589d3de9"
+          ],
+          "conflicting_evidence_ids": [],
+          "unclear_evidence_ids": [],
+          "has_valid_support": true,
+          "publisher_independence_verified": false,
+          "limitation_codes": [
+            "publisher_independence_metadata_unavailable"
+          ]
+        },
+        {
+          "claim_id": "claim_968eec4326e1928d8d79aa0b8e22ee05c30bbb988a30c01aee9a28b0ec24925a",
+          "supporting_evidence_ids": [
+            "ev_ca517d5eb273d496"
+          ],
+          "conflicting_evidence_ids": [],
+          "unclear_evidence_ids": [],
+          "has_valid_support": true,
+          "publisher_independence_verified": false,
+          "limitation_codes": [
+            "publisher_independence_metadata_unavailable"
+          ]
+        },
+        {
+          "claim_id": "claim_9e4f778a70cb164c7b82acb8c348c0c09ea399873ae1ca73eb864cca2afe254c",
+          "supporting_evidence_ids": [
+            "ev_13c584f468449ffc",
+            "ev_2031367fc36e847d",
+            "ev_88dde0d8c1251d4e",
+            "ev_ad6decdf71e91b0b",
+            "ev_b84c6e8b2fc512bc",
+            "ev_d2c625b8589d3de9"
+          ],
+          "conflicting_evidence_ids": [],
+          "unclear_evidence_ids": [],
+          "has_valid_support": true,
+          "publisher_independence_verified": false,
+          "limitation_codes": [
+            "publisher_independence_metadata_unavailable"
+          ]
+        },
+        {
+          "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+          "supporting_evidence_ids": [
+            "ev_13c584f468449ffc",
+            "ev_21f28db677e049fe",
+            "ev_458848dc112b41ef",
+            "ev_6a7e4f9a786055aa",
+            "ev_8f8e52e6d185ea05",
+            "ev_91e440e9eb3064ba",
+            "ev_ad6decdf71e91b0b",
+            "ev_cdd0967ac6c58fe5",
+            "ev_d2c625b8589d3de9"
+          ],
+          "conflicting_evidence_ids": [],
+          "unclear_evidence_ids": [],
+          "has_valid_support": true,
+          "publisher_independence_verified": false,
+          "limitation_codes": [
+            "publisher_independence_metadata_unavailable"
+          ]
+        },
+        {
+          "claim_id": "claim_a4df22e9bd24cfad909896d750a814a883f3dcdb87c1bec5436376addfa17de5",
+          "supporting_evidence_ids": [
+            "ev_cdd0967ac6c58fe5"
+          ],
+          "conflicting_evidence_ids": [],
+          "unclear_evidence_ids": [],
+          "has_valid_support": true,
+          "publisher_independence_verified": false,
+          "limitation_codes": [
+            "publisher_independence_metadata_unavailable"
+          ]
+        },
+        {
+          "claim_id": "claim_a5a49627af874a5f45b351f96d2636bf49cbef914d18bc8c6976977035a23500",
+          "supporting_evidence_ids": [
+            "ev_13c584f468449ffc",
+            "ev_cdd0967ac6c58fe5"
+          ],
+          "conflicting_evidence_ids": [],
+          "unclear_evidence_ids": [],
+          "has_valid_support": true,
+          "publisher_independence_verified": false,
+          "limitation_codes": [
+            "publisher_independence_metadata_unavailable"
+          ]
+        },
+        {
+          "claim_id": "claim_aa46749e8f03033db725d2f59febf4beb38d2a651956126d96049428f4ed15c2",
+          "supporting_evidence_ids": [
+            "ev_3b15c9132d8b3c18",
+            "ev_c448ef1c49789b46"
+          ],
+          "conflicting_evidence_ids": [],
+          "unclear_evidence_ids": [],
+          "has_valid_support": true,
+          "publisher_independence_verified": false,
+          "limitation_codes": [
+            "publisher_independence_metadata_unavailable"
+          ]
+        },
+        {
+          "claim_id": "claim_b111342508621cf1ebc17039358afda79e3df0f18be0b369c56f8f29eb8d7979",
+          "supporting_evidence_ids": [
+            "ev_6a7e4f9a786055aa",
+            "ev_88dde0d8c1251d4e",
+            "ev_983d48d235f7e446",
+            "ev_ca517d5eb273d496"
+          ],
+          "conflicting_evidence_ids": [],
+          "unclear_evidence_ids": [],
+          "has_valid_support": true,
+          "publisher_independence_verified": false,
+          "limitation_codes": [
+            "publisher_independence_metadata_unavailable"
+          ]
+        },
+        {
+          "claim_id": "claim_ebb2fdf6b9007a9429ff7f8d63284da76592ee2e3156f6e5fa270975dd870922",
+          "supporting_evidence_ids": [
+            "ev_6f1b032c397627b6"
+          ],
+          "conflicting_evidence_ids": [],
+          "unclear_evidence_ids": [],
+          "has_valid_support": true,
+          "publisher_independence_verified": false,
+          "limitation_codes": [
+            "publisher_independence_metadata_unavailable"
+          ]
+        },
+        {
+          "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+          "supporting_evidence_ids": [
+            "ev_2031367fc36e847d",
+            "ev_b08a10e340e4cca0",
+            "ev_d2c625b8589d3de9",
+            "ev_d384aee29a4051c8"
+          ],
+          "conflicting_evidence_ids": [],
+          "unclear_evidence_ids": [],
+          "has_valid_support": true,
+          "publisher_independence_verified": false,
+          "limitation_codes": [
+            "publisher_independence_metadata_unavailable"
+          ]
+        },
+        {
+          "claim_id": "claim_fea8f15ffc198a7eb75756b451aa7ba351bf11e6e13464387a196826f1f04e66",
+          "supporting_evidence_ids": [
+            "ev_52708fb711c7deaa",
+            "ev_6f1b032c397627b6",
+            "ev_88dde0d8c1251d4e"
+          ],
+          "conflicting_evidence_ids": [],
+          "unclear_evidence_ids": [],
+          "has_valid_support": true,
+          "publisher_independence_verified": false,
+          "limitation_codes": [
+            "publisher_independence_metadata_unavailable"
+          ]
+        }
+      ],
+      "claim_evidence_qualifications": [],
+      "claim_gate_results": [
+        {
+          "claim_id": "claim_9e4f778a70cb164c7b82acb8c348c0c09ea399873ae1ca73eb864cca2afe254c",
+          "decision": "omit",
+          "applicable_risk_types": [
+            "date_or_time_window"
+          ],
+          "required_rules": [
+            "primary_or_two_independent"
+          ],
+          "resolved_obligations": {
+            "evidence_strength_rules": [
+              "primary_or_two_independent"
+            ],
+            "required_entity_ids": [],
+            "required_material_side_ids": [],
+            "requires_independent_adjudicator": false
+          },
+          "satisfied_requirements": [],
+          "unmet_requirements": [
+            "primary_or_two_independent_support"
+          ],
+          "supporting_evidence_ids": [
+            "ev_13c584f468449ffc",
+            "ev_2031367fc36e847d",
+            "ev_88dde0d8c1251d4e",
+            "ev_ad6decdf71e91b0b",
+            "ev_b84c6e8b2fc512bc",
+            "ev_d2c625b8589d3de9"
+          ],
+          "conflicting_evidence_ids": [],
+          "reason_codes": [
+            "evidence_requirements_unmet"
+          ]
+        },
+        {
+          "claim_id": "claim_b111342508621cf1ebc17039358afda79e3df0f18be0b369c56f8f29eb8d7979",
+          "decision": "omit",
+          "applicable_risk_types": [
+            "release_status_availability"
+          ],
+          "required_rules": [
+            "primary_or_two_independent"
+          ],
+          "resolved_obligations": {
+            "evidence_strength_rules": [
+              "primary_or_two_independent"
+            ],
+            "required_entity_ids": [],
+            "required_material_side_ids": [],
+            "requires_independent_adjudicator": false
+          },
+          "satisfied_requirements": [],
+          "unmet_requirements": [
+            "primary_or_two_independent_support"
+          ],
+          "supporting_evidence_ids": [
+            "ev_6a7e4f9a786055aa",
+            "ev_88dde0d8c1251d4e",
+            "ev_983d48d235f7e446",
+            "ev_ca517d5eb273d496"
+          ],
+          "conflicting_evidence_ids": [],
+          "reason_codes": [
+            "evidence_requirements_unmet"
+          ]
+        },
+        {
+          "claim_id": "claim_1d418dc0cf0c8bc29d152736410812bb927a99eabaf39219e6b8989d6bcaf18e",
+          "decision": "omit",
+          "applicable_risk_types": [
+            "release_status_availability"
+          ],
+          "required_rules": [
+            "primary_or_two_independent"
+          ],
+          "resolved_obligations": {
+            "evidence_strength_rules": [
+              "primary_or_two_independent"
+            ],
+            "required_entity_ids": [],
+            "required_material_side_ids": [],
+            "requires_independent_adjudicator": false
+          },
+          "satisfied_requirements": [],
+          "unmet_requirements": [
+            "primary_or_two_independent_support"
+          ],
+          "supporting_evidence_ids": [
+            "ev_458848dc112b41ef",
+            "ev_6a7e4f9a786055aa",
+            "ev_88dde0d8c1251d4e",
+            "ev_983d48d235f7e446"
+          ],
+          "conflicting_evidence_ids": [],
+          "reason_codes": [
+            "evidence_requirements_unmet"
+          ]
+        },
+        {
+          "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+          "decision": "omit",
+          "applicable_risk_types": [
+            "numeric_value",
+            "date_or_time_window"
+          ],
+          "required_rules": [
+            "primary_or_two_independent"
+          ],
+          "resolved_obligations": {
+            "evidence_strength_rules": [
+              "primary_or_two_independent"
+            ],
+            "required_entity_ids": [],
+            "required_material_side_ids": [],
+            "requires_independent_adjudicator": false
+          },
+          "satisfied_requirements": [],
+          "unmet_requirements": [
+            "primary_or_two_independent_support"
+          ],
+          "supporting_evidence_ids": [
+            "ev_13c584f468449ffc",
+            "ev_21f28db677e049fe",
+            "ev_458848dc112b41ef",
+            "ev_6a7e4f9a786055aa",
+            "ev_8f8e52e6d185ea05",
+            "ev_91e440e9eb3064ba",
+            "ev_ad6decdf71e91b0b",
+            "ev_cdd0967ac6c58fe5",
+            "ev_d2c625b8589d3de9"
+          ],
+          "conflicting_evidence_ids": [],
+          "reason_codes": [
+            "evidence_requirements_unmet"
+          ]
+        },
+        {
+          "claim_id": "claim_61f44467bd2695b35e816914596f36995cbc93410258a9d65038c9ed4cdea531",
+          "decision": "omit",
+          "applicable_risk_types": [
+            "numeric_value",
+            "release_status_availability",
+            "date_or_time_window"
+          ],
+          "required_rules": [
+            "primary_or_two_independent"
+          ],
+          "resolved_obligations": {
+            "evidence_strength_rules": [
+              "primary_or_two_independent"
+            ],
+            "required_entity_ids": [],
+            "required_material_side_ids": [],
+            "requires_independent_adjudicator": false
+          },
+          "satisfied_requirements": [],
+          "unmet_requirements": [
+            "primary_or_two_independent_support"
+          ],
+          "supporting_evidence_ids": [
+            "ev_6a7e4f9a786055aa",
+            "ev_8f8e52e6d185ea05",
+            "ev_91e440e9eb3064ba",
+            "ev_983d48d235f7e446",
+            "ev_d2c625b8589d3de9"
+          ],
+          "conflicting_evidence_ids": [],
+          "reason_codes": [
+            "evidence_requirements_unmet"
+          ]
+        },
+        {
+          "claim_id": "claim_968eec4326e1928d8d79aa0b8e22ee05c30bbb988a30c01aee9a28b0ec24925a",
+          "decision": "omit",
+          "applicable_risk_types": [
+            "release_status_availability"
+          ],
+          "required_rules": [
+            "primary_or_two_independent"
+          ],
+          "resolved_obligations": {
+            "evidence_strength_rules": [
+              "primary_or_two_independent"
+            ],
+            "required_entity_ids": [],
+            "required_material_side_ids": [],
+            "requires_independent_adjudicator": false
+          },
+          "satisfied_requirements": [],
+          "unmet_requirements": [
+            "primary_or_two_independent_support"
+          ],
+          "supporting_evidence_ids": [
+            "ev_ca517d5eb273d496"
+          ],
+          "conflicting_evidence_ids": [],
+          "reason_codes": [
+            "evidence_requirements_unmet"
+          ]
+        },
+        {
+          "claim_id": "claim_aa46749e8f03033db725d2f59febf4beb38d2a651956126d96049428f4ed15c2",
+          "decision": "omit",
+          "applicable_risk_types": [
+            "release_status_availability"
+          ],
+          "required_rules": [
+            "primary_or_two_independent"
+          ],
+          "resolved_obligations": {
+            "evidence_strength_rules": [
+              "primary_or_two_independent"
+            ],
+            "required_entity_ids": [],
+            "required_material_side_ids": [],
+            "requires_independent_adjudicator": false
+          },
+          "satisfied_requirements": [],
+          "unmet_requirements": [
+            "primary_or_two_independent_support"
+          ],
+          "supporting_evidence_ids": [
+            "ev_3b15c9132d8b3c18",
+            "ev_c448ef1c49789b46"
+          ],
+          "conflicting_evidence_ids": [],
+          "reason_codes": [
+            "evidence_requirements_unmet"
+          ]
+        },
+        {
+          "claim_id": "claim_ebb2fdf6b9007a9429ff7f8d63284da76592ee2e3156f6e5fa270975dd870922",
+          "decision": "emit",
+          "applicable_risk_types": [],
+          "required_rules": [
+            "standard"
+          ],
+          "resolved_obligations": {
+            "evidence_strength_rules": [
+              "standard"
+            ],
+            "required_entity_ids": [],
+            "required_material_side_ids": [],
+            "requires_independent_adjudicator": false
+          },
+          "satisfied_requirements": [
+            "valid_support"
+          ],
+          "unmet_requirements": [],
+          "supporting_evidence_ids": [
+            "ev_6f1b032c397627b6"
+          ],
+          "conflicting_evidence_ids": [],
+          "reason_codes": [
+            "all_requirements_satisfied"
+          ]
+        },
+        {
+          "claim_id": "claim_2234a515da950c6ed95ff539775056780d8e5c9b59a3e39d5228d3c5576230d4",
+          "decision": "omit",
+          "applicable_risk_types": [
+            "comparative_claim"
+          ],
+          "required_rules": [
+            "two_independent"
+          ],
+          "resolved_obligations": {
+            "evidence_strength_rules": [
+              "two_independent"
+            ],
+            "required_entity_ids": [
+              "entity_8774cbb575a60be1600027139eb465e33c28ef938cccc360269056b6655210a6",
+              "entity_361f78bdc2f2046b420b74b0735f6ab8074b26d2b98627a55b590d245fe16d82"
+            ],
+            "required_material_side_ids": [],
+            "requires_independent_adjudicator": false
+          },
+          "satisfied_requirements": [],
+          "unmet_requirements": [
+            "two_independent_support_groups",
+            "comparable_primary:entity_8774cbb575a60be1600027139eb465e33c28ef938cccc360269056b6655210a6",
+            "comparable_primary:entity_361f78bdc2f2046b420b74b0735f6ab8074b26d2b98627a55b590d245fe16d82"
+          ],
+          "supporting_evidence_ids": [
+            "ev_2031367fc36e847d",
+            "ev_ad6decdf71e91b0b",
+            "ev_d2c625b8589d3de9"
+          ],
+          "conflicting_evidence_ids": [],
+          "reason_codes": [
+            "evidence_requirements_unmet"
+          ]
+        },
+        {
+          "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+          "decision": "hedge",
+          "applicable_risk_types": [
+            "conflict_sensitive_claim"
+          ],
+          "required_rules": [
+            "conflict_sides_plus_adjudicator"
+          ],
+          "resolved_obligations": {
+            "evidence_strength_rules": [
+              "conflict_sides_plus_adjudicator"
+            ],
+            "required_entity_ids": [],
+            "required_material_side_ids": [
+              "side_e2a4e9095e2a8907c1a6f576527c0facd25c765ff4dc69f80e8a3686c1ee32bf",
+              "side_434d09af8c2f0cbe7e60cc271437bd34bcaaf5aa62050fbdca76de19cf08bfb1"
+            ],
+            "requires_independent_adjudicator": true
+          },
+          "satisfied_requirements": [
+            "all_required_material_sides"
+          ],
+          "unmet_requirements": [
+            "independent_adjudicating_support"
+          ],
+          "supporting_evidence_ids": [
+            "ev_2031367fc36e847d",
+            "ev_b08a10e340e4cca0",
+            "ev_d2c625b8589d3de9",
+            "ev_d384aee29a4051c8"
+          ],
+          "conflicting_evidence_ids": [],
+          "reason_codes": [
+            "evidence_requirements_unmet",
+            "conflict_unadjudicated"
+          ]
+        },
+        {
+          "claim_id": "claim_a5a49627af874a5f45b351f96d2636bf49cbef914d18bc8c6976977035a23500",
+          "decision": "omit",
+          "applicable_risk_types": [
+            "comparative_claim"
+          ],
+          "required_rules": [
+            "two_independent"
+          ],
+          "resolved_obligations": {
+            "evidence_strength_rules": [
+              "two_independent"
+            ],
+            "required_entity_ids": [
+              "entity_2a6d1812e357d57dcb63042d6072f8ca8f5c4655bbd56cc6888634122ee18591",
+              "entity_62daf1a134f30193e632832a6c04ded1099fb6347693ef859cb6a61b567869f9"
+            ],
+            "required_material_side_ids": [],
+            "requires_independent_adjudicator": false
+          },
+          "satisfied_requirements": [],
+          "unmet_requirements": [
+            "two_independent_support_groups",
+            "comparable_primary:entity_2a6d1812e357d57dcb63042d6072f8ca8f5c4655bbd56cc6888634122ee18591",
+            "comparable_primary:entity_62daf1a134f30193e632832a6c04ded1099fb6347693ef859cb6a61b567869f9"
+          ],
+          "supporting_evidence_ids": [
+            "ev_13c584f468449ffc",
+            "ev_cdd0967ac6c58fe5"
+          ],
+          "conflicting_evidence_ids": [],
+          "reason_codes": [
+            "evidence_requirements_unmet"
+          ]
+        },
+        {
+          "claim_id": "claim_a4df22e9bd24cfad909896d750a814a883f3dcdb87c1bec5436376addfa17de5",
+          "decision": "omit",
+          "applicable_risk_types": [
+            "release_status_availability"
+          ],
+          "required_rules": [
+            "primary_or_two_independent"
+          ],
+          "resolved_obligations": {
+            "evidence_strength_rules": [
+              "primary_or_two_independent"
+            ],
+            "required_entity_ids": [],
+            "required_material_side_ids": [],
+            "requires_independent_adjudicator": false
+          },
+          "satisfied_requirements": [],
+          "unmet_requirements": [
+            "primary_or_two_independent_support"
+          ],
+          "supporting_evidence_ids": [
+            "ev_cdd0967ac6c58fe5"
+          ],
+          "conflicting_evidence_ids": [],
+          "reason_codes": [
+            "evidence_requirements_unmet"
+          ]
+        },
+        {
+          "claim_id": "claim_201ca07284694c08bc9b7009c05e80539b332b2cfc3a6d637fb459b301d052ad",
+          "decision": "emit",
+          "applicable_risk_types": [],
+          "required_rules": [
+            "standard"
+          ],
+          "resolved_obligations": {
+            "evidence_strength_rules": [
+              "standard"
+            ],
+            "required_entity_ids": [],
+            "required_material_side_ids": [],
+            "requires_independent_adjudicator": false
+          },
+          "satisfied_requirements": [
+            "valid_support"
+          ],
+          "unmet_requirements": [],
+          "supporting_evidence_ids": [
+            "ev_2031367fc36e847d"
+          ],
+          "conflicting_evidence_ids": [],
+          "reason_codes": [
+            "all_requirements_satisfied"
+          ]
+        },
+        {
+          "claim_id": "claim_05d9a11718fe40b25469d2a37c50ea36f45c0fda08d940d1f8d967ad89d5904f",
+          "decision": "omit",
+          "applicable_risk_types": [
+            "release_status_availability"
+          ],
+          "required_rules": [
+            "primary_or_two_independent"
+          ],
+          "resolved_obligations": {
+            "evidence_strength_rules": [
+              "primary_or_two_independent"
+            ],
+            "required_entity_ids": [],
+            "required_material_side_ids": [],
+            "requires_independent_adjudicator": false
+          },
+          "satisfied_requirements": [],
+          "unmet_requirements": [
+            "primary_or_two_independent_support"
+          ],
+          "supporting_evidence_ids": [
+            "ev_983d48d235f7e446"
+          ],
+          "conflicting_evidence_ids": [],
+          "reason_codes": [
+            "evidence_requirements_unmet"
+          ]
+        },
+        {
+          "claim_id": "claim_fea8f15ffc198a7eb75756b451aa7ba351bf11e6e13464387a196826f1f04e66",
+          "decision": "omit",
+          "applicable_risk_types": [
+            "date_or_time_window"
+          ],
+          "required_rules": [
+            "primary_or_two_independent"
+          ],
+          "resolved_obligations": {
+            "evidence_strength_rules": [
+              "primary_or_two_independent"
+            ],
+            "required_entity_ids": [],
+            "required_material_side_ids": [],
+            "requires_independent_adjudicator": false
+          },
+          "satisfied_requirements": [],
+          "unmet_requirements": [
+            "primary_or_two_independent_support"
+          ],
+          "supporting_evidence_ids": [
+            "ev_52708fb711c7deaa",
+            "ev_6f1b032c397627b6",
+            "ev_88dde0d8c1251d4e"
+          ],
+          "conflicting_evidence_ids": [],
+          "reason_codes": [
+            "evidence_requirements_unmet"
+          ]
+        },
+        {
+          "claim_id": "claim_223dce122b3ef4d9c38c748c94cc754d57f40b1f62535e95b0c2028f826124c4",
+          "decision": "omit",
+          "applicable_risk_types": [
+            "numeric_value",
+            "date_or_time_window"
+          ],
+          "required_rules": [
+            "primary_or_two_independent"
+          ],
+          "resolved_obligations": {
+            "evidence_strength_rules": [
+              "primary_or_two_independent"
+            ],
+            "required_entity_ids": [],
+            "required_material_side_ids": [],
+            "requires_independent_adjudicator": false
+          },
+          "satisfied_requirements": [],
+          "unmet_requirements": [
+            "primary_or_two_independent_support"
+          ],
+          "supporting_evidence_ids": [
+            "ev_8f8e52e6d185ea05"
+          ],
+          "conflicting_evidence_ids": [],
+          "reason_codes": [
+            "evidence_requirements_unmet"
+          ]
+        }
+      ],
+      "generated_claim_records": [
+        {
+          "claim_id": "claim_ebb2fdf6b9007a9429ff7f8d63284da76592ee2e3156f6e5fa270975dd870922",
+          "rendered_text": "OpenAI 的隐私政策不适用于其代表商业产品客户(例如 API 服务客户)处理的内容;此类数据的使用受相关客户协议约束。",
+          "cited_evidence_ids": [
+            "ev_6f1b032c397627b6"
+          ],
+          "output_mode": "factual"
+        },
+        {
+          "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+          "rendered_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务;该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+          "cited_evidence_ids": [
+            "ev_b08a10e340e4cca0",
+            "ev_d384aee29a4051c8",
+            "ev_d2c625b8589d3de9",
+            "ev_2031367fc36e847d"
+          ],
+          "output_mode": "hedged"
+        },
+        {
+          "claim_id": "claim_201ca07284694c08bc9b7009c05e80539b332b2cfc3a6d637fb459b301d052ad",
+          "rendered_text": "OpenAI 平台文档称 API 数据可能以滥用监控日志和应用状态形式存储;某些 API 功能会为完成请求或任务而持久化数据。",
+          "cited_evidence_ids": [
+            "ev_2031367fc36e847d"
+          ],
+          "output_mode": "factual"
+        }
+      ],
+      "grounding_validation_results": [
+        {
+          "status": "pass",
+          "validated_claim_ids": [
+            "claim_ebb2fdf6b9007a9429ff7f8d63284da76592ee2e3156f6e5fa270975dd870922"
+          ],
+          "findings": [
+            {
+              "code": "cutoff_unverified",
+              "claim_id": "claim_ebb2fdf6b9007a9429ff7f8d63284da76592ee2e3156f6e5fa270975dd870922",
+              "evidence_id": "ev_6f1b032c397627b6",
+              "blocking": false,
+              "repairable": false
+            }
+          ],
+          "repairable_claim_ids": [],
+          "failed_claim_ids": [],
+          "reason_codes": [
+            "cutoff_unverified"
+          ],
+          "repair_attempt": 0,
+          "reapplied_gate_results": [
+            {
+              "claim_id": "claim_ebb2fdf6b9007a9429ff7f8d63284da76592ee2e3156f6e5fa270975dd870922",
+              "decision": "emit",
+              "applicable_risk_types": [],
+              "required_rules": [
+                "standard"
+              ],
+              "resolved_obligations": {
+                "evidence_strength_rules": [
+                  "standard"
+                ],
+                "required_entity_ids": [],
+                "required_material_side_ids": [],
+                "requires_independent_adjudicator": false
+              },
+              "satisfied_requirements": [
+                "valid_support"
+              ],
+              "unmet_requirements": [],
+              "supporting_evidence_ids": [
+                "ev_6f1b032c397627b6"
+              ],
+              "conflicting_evidence_ids": [],
+              "reason_codes": [
+                "all_requirements_satisfied"
+              ]
+            }
+          ]
+        },
+        {
+          "status": "pass",
+          "validated_claim_ids": [
+            "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd"
+          ],
+          "findings": [
+            {
+              "code": "cutoff_unverified",
+              "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+              "evidence_id": "ev_b08a10e340e4cca0",
+              "blocking": false,
+              "repairable": false
+            },
+            {
+              "code": "cutoff_unverified",
+              "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+              "evidence_id": "ev_d384aee29a4051c8",
+              "blocking": false,
+              "repairable": false
+            },
+            {
+              "code": "cutoff_unverified",
+              "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+              "evidence_id": "ev_d2c625b8589d3de9",
+              "blocking": false,
+              "repairable": false
+            },
+            {
+              "code": "cutoff_unverified",
+              "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+              "evidence_id": "ev_2031367fc36e847d",
+              "blocking": false,
+              "repairable": false
+            }
+          ],
+          "repairable_claim_ids": [],
+          "failed_claim_ids": [],
+          "reason_codes": [
+            "cutoff_unverified"
+          ],
+          "repair_attempt": 0,
+          "reapplied_gate_results": [
+            {
+              "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+              "decision": "hedge",
+              "applicable_risk_types": [
+                "conflict_sensitive_claim"
+              ],
+              "required_rules": [
+                "conflict_sides_plus_adjudicator"
+              ],
+              "resolved_obligations": {
+                "evidence_strength_rules": [
+                  "conflict_sides_plus_adjudicator"
+                ],
+                "required_entity_ids": [],
+                "required_material_side_ids": [
+                  "side_e2a4e9095e2a8907c1a6f576527c0facd25c765ff4dc69f80e8a3686c1ee32bf",
+                  "side_434d09af8c2f0cbe7e60cc271437bd34bcaaf5aa62050fbdca76de19cf08bfb1"
+                ],
+                "requires_independent_adjudicator": true
+              },
+              "satisfied_requirements": [
+                "all_required_material_sides"
+              ],
+              "unmet_requirements": [
+                "independent_adjudicating_support"
+              ],
+              "supporting_evidence_ids": [
+                "ev_2031367fc36e847d",
+                "ev_b08a10e340e4cca0",
+                "ev_d2c625b8589d3de9",
+                "ev_d384aee29a4051c8"
+              ],
+              "conflicting_evidence_ids": [],
+              "reason_codes": [
+                "evidence_requirements_unmet",
+                "conflict_unadjudicated"
+              ]
+            }
+          ]
+        },
+        {
+          "status": "pass",
+          "validated_claim_ids": [
+            "claim_201ca07284694c08bc9b7009c05e80539b332b2cfc3a6d637fb459b301d052ad"
+          ],
+          "findings": [
+            {
+              "code": "cutoff_unverified",
+              "claim_id": "claim_201ca07284694c08bc9b7009c05e80539b332b2cfc3a6d637fb459b301d052ad",
+              "evidence_id": "ev_2031367fc36e847d",
+              "blocking": false,
+              "repairable": false
+            }
+          ],
+          "repairable_claim_ids": [],
+          "failed_claim_ids": [],
+          "reason_codes": [
+            "cutoff_unverified"
+          ],
+          "repair_attempt": 0,
+          "reapplied_gate_results": [
+            {
+              "claim_id": "claim_201ca07284694c08bc9b7009c05e80539b332b2cfc3a6d637fb459b301d052ad",
+              "decision": "emit",
+              "applicable_risk_types": [],
+              "required_rules": [
+                "standard"
+              ],
+              "resolved_obligations": {
+                "evidence_strength_rules": [
+                  "standard"
+                ],
+                "required_entity_ids": [],
+                "required_material_side_ids": [],
+                "requires_independent_adjudicator": false
+              },
+              "satisfied_requirements": [
+                "valid_support"
+              ],
+              "unmet_requirements": [],
+              "supporting_evidence_ids": [
+                "ev_2031367fc36e847d"
+              ],
+              "conflicting_evidence_ids": [],
+              "reason_codes": [
+                "all_requirements_satisfied"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "claim_inputs": [
+      {
+        "claim": {
+          "claim_id": "claim_9e4f778a70cb164c7b82acb8c348c0c09ea399873ae1ca73eb864cca2afe254c",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "OpenAI 表示,自 2023 年 3 月 1 日起,发送到 OpenAI API 的数据默认不会用于训练或改进 OpenAI 模型,除非客户明确选择加入共享数据。",
+          "risk_types": [
+            "date_or_time_window"
+          ],
+          "is_material": true
+        },
+        "links": [
+          {
+            "claim_id": "claim_9e4f778a70cb164c7b82acb8c348c0c09ea399873ae1ca73eb864cca2afe254c",
+            "evidence_id": "ev_2031367fc36e847d",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_9e4f778a70cb164c7b82acb8c348c0c09ea399873ae1ca73eb864cca2afe254c",
+            "evidence_id": "ev_d2c625b8589d3de9",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_9e4f778a70cb164c7b82acb8c348c0c09ea399873ae1ca73eb864cca2afe254c",
+            "evidence_id": "ev_13c584f468449ffc",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_9e4f778a70cb164c7b82acb8c348c0c09ea399873ae1ca73eb864cca2afe254c",
+            "evidence_id": "ev_b84c6e8b2fc512bc",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_9e4f778a70cb164c7b82acb8c348c0c09ea399873ae1ca73eb864cca2afe254c",
+            "evidence_id": "ev_ad6decdf71e91b0b",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_9e4f778a70cb164c7b82acb8c348c0c09ea399873ae1ca73eb864cca2afe254c",
+            "evidence_id": "ev_88dde0d8c1251d4e",
+            "relation": "support",
+            "claim": null
+          }
+        ],
+        "qualifications": [],
+        "gate_context": {
+          "required_unit_rule": null,
+          "required_entity_ids": [],
+          "required_material_side_ids": [],
+          "allow_retrieve_more": false
+        },
+        "cited_evidence_ids": [
+          "ev_2031367fc36e847d",
+          "ev_d2c625b8589d3de9",
+          "ev_13c584f468449ffc",
+          "ev_b84c6e8b2fc512bc",
+          "ev_ad6decdf71e91b0b",
+          "ev_88dde0d8c1251d4e"
+        ]
+      },
+      {
+        "claim": {
+          "claim_id": "claim_b111342508621cf1ebc17039358afda79e3df0f18be0b369c56f8f29eb8d7979",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "对于符合条件的 API 客户,Zero Data Retention 承诺在请求处理完成后不保留其提示和模型响应,客户内容不会由 OpenAI 人员审核,且企业客户数据除非客户明确选择加入,否则不会用于训练 OpenAI 模型。",
+          "risk_types": [
+            "release_status_availability"
+          ],
+          "is_material": true
+        },
+        "links": [
+          {
+            "claim_id": "claim_b111342508621cf1ebc17039358afda79e3df0f18be0b369c56f8f29eb8d7979",
+            "evidence_id": "ev_88dde0d8c1251d4e",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_b111342508621cf1ebc17039358afda79e3df0f18be0b369c56f8f29eb8d7979",
+            "evidence_id": "ev_ca517d5eb273d496",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_b111342508621cf1ebc17039358afda79e3df0f18be0b369c56f8f29eb8d7979",
+            "evidence_id": "ev_6a7e4f9a786055aa",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_b111342508621cf1ebc17039358afda79e3df0f18be0b369c56f8f29eb8d7979",
+            "evidence_id": "ev_983d48d235f7e446",
+            "relation": "support",
+            "claim": null
+          }
+        ],
+        "qualifications": [],
+        "gate_context": {
+          "required_unit_rule": null,
+          "required_entity_ids": [],
+          "required_material_side_ids": [],
+          "allow_retrieve_more": false
+        },
+        "cited_evidence_ids": [
+          "ev_88dde0d8c1251d4e",
+          "ev_ca517d5eb273d496",
+          "ev_6a7e4f9a786055aa",
+          "ev_983d48d235f7e446"
+        ]
+      },
+      {
+        "claim": {
+          "claim_id": "claim_1d418dc0cf0c8bc29d152736410812bb927a99eabaf39219e6b8989d6bcaf18e",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "Zero Data Retention 和 Modified Abuse Monitoring 不是默认自动适用于所有 API 用户,而是需要 OpenAI 事先批准并接受附加要求,获批客户可在组织或项目级别选择适用。",
+          "risk_types": [
+            "release_status_availability"
+          ],
+          "is_material": true
+        },
+        "links": [
+          {
+            "claim_id": "claim_1d418dc0cf0c8bc29d152736410812bb927a99eabaf39219e6b8989d6bcaf18e",
+            "evidence_id": "ev_6a7e4f9a786055aa",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_1d418dc0cf0c8bc29d152736410812bb927a99eabaf39219e6b8989d6bcaf18e",
+            "evidence_id": "ev_983d48d235f7e446",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_1d418dc0cf0c8bc29d152736410812bb927a99eabaf39219e6b8989d6bcaf18e",
+            "evidence_id": "ev_458848dc112b41ef",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_1d418dc0cf0c8bc29d152736410812bb927a99eabaf39219e6b8989d6bcaf18e",
+            "evidence_id": "ev_88dde0d8c1251d4e",
+            "relation": "support",
+            "claim": null
+          }
+        ],
+        "qualifications": [],
+        "gate_context": {
+          "required_unit_rule": null,
+          "required_entity_ids": [],
+          "required_material_side_ids": [],
+          "allow_retrieve_more": false
+        },
+        "cited_evidence_ids": [
+          "ev_6a7e4f9a786055aa",
+          "ev_983d48d235f7e446",
+          "ev_458848dc112b41ef",
+          "ev_88dde0d8c1251d4e"
+        ]
+      },
+      {
+        "claim": {
+          "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "API 输入和输出默认会作为滥用监控日志保留最多三十天,之后删除,除非法律要求更长保留或为保护服务或第三方合理必要而延长。",
+          "risk_types": [
+            "numeric_value",
+            "date_or_time_window"
+          ],
+          "is_material": true
+        },
+        "links": [
+          {
+            "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+            "evidence_id": "ev_6a7e4f9a786055aa",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+            "evidence_id": "ev_d2c625b8589d3de9",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+            "evidence_id": "ev_13c584f468449ffc",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+            "evidence_id": "ev_8f8e52e6d185ea05",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+            "evidence_id": "ev_458848dc112b41ef",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+            "evidence_id": "ev_91e440e9eb3064ba",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+            "evidence_id": "ev_21f28db677e049fe",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+            "evidence_id": "ev_cdd0967ac6c58fe5",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+            "evidence_id": "ev_ad6decdf71e91b0b",
+            "relation": "support",
+            "claim": null
+          }
+        ],
+        "qualifications": [],
+        "gate_context": {
+          "required_unit_rule": null,
+          "required_entity_ids": [],
+          "required_material_side_ids": [],
+          "allow_retrieve_more": false
+        },
+        "cited_evidence_ids": [
+          "ev_6a7e4f9a786055aa",
+          "ev_d2c625b8589d3de9",
+          "ev_13c584f468449ffc",
+          "ev_8f8e52e6d185ea05",
+          "ev_458848dc112b41ef",
+          "ev_91e440e9eb3064ba",
+          "ev_21f28db677e049fe",
+          "ev_cdd0967ac6c58fe5",
+          "ev_ad6decdf71e91b0b"
+        ]
+      },
+      {
+        "claim": {
+          "claim_id": "claim_61f44467bd2695b35e816914596f36995cbc93410258a9d65038c9ed4cdea531",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "所给材料列出的保留例外包括:通过 Files 端点提交用于微调的数据会保留到用户删除该文件;经批准的低误用可能性企业客户可请求不存储 API 数据;法律要求可导致超过三十天的保留。",
+          "risk_types": [
+            "numeric_value",
+            "release_status_availability",
+            "date_or_time_window"
+          ],
+          "is_material": true
+        },
+        "links": [
+          {
+            "claim_id": "claim_61f44467bd2695b35e816914596f36995cbc93410258a9d65038c9ed4cdea531",
+            "evidence_id": "ev_d2c625b8589d3de9",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_61f44467bd2695b35e816914596f36995cbc93410258a9d65038c9ed4cdea531",
+            "evidence_id": "ev_8f8e52e6d185ea05",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_61f44467bd2695b35e816914596f36995cbc93410258a9d65038c9ed4cdea531",
+            "evidence_id": "ev_6a7e4f9a786055aa",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_61f44467bd2695b35e816914596f36995cbc93410258a9d65038c9ed4cdea531",
+            "evidence_id": "ev_91e440e9eb3064ba",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_61f44467bd2695b35e816914596f36995cbc93410258a9d65038c9ed4cdea531",
+            "evidence_id": "ev_983d48d235f7e446",
+            "relation": "support",
+            "claim": null
+          }
+        ],
+        "qualifications": [],
+        "gate_context": {
+          "required_unit_rule": null,
+          "required_entity_ids": [],
+          "required_material_side_ids": [],
+          "allow_retrieve_more": false
+        },
+        "cited_evidence_ids": [
+          "ev_d2c625b8589d3de9",
+          "ev_8f8e52e6d185ea05",
+          "ev_6a7e4f9a786055aa",
+          "ev_91e440e9eb3064ba",
+          "ev_983d48d235f7e446"
+        ]
+      },
+      {
+        "claim": {
+          "claim_id": "claim_968eec4326e1928d8d79aa0b8e22ee05c30bbb988a30c01aee9a28b0ec24925a",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "即使部署了 Zero Data Retention,被标记为潜在儿童性虐待材料的图像仍会因人工审核和报告目的而被保留,因为 OpenAI 称其依法需要报告明显的儿童性虐待材料。",
+          "risk_types": [
+            "release_status_availability"
+          ],
+          "is_material": true
+        },
+        "links": [
+          {
+            "claim_id": "claim_968eec4326e1928d8d79aa0b8e22ee05c30bbb988a30c01aee9a28b0ec24925a",
+            "evidence_id": "ev_ca517d5eb273d496",
+            "relation": "support",
+            "claim": null
+          }
+        ],
+        "qualifications": [],
+        "gate_context": {
+          "required_unit_rule": null,
+          "required_entity_ids": [],
+          "required_material_side_ids": [],
+          "allow_retrieve_more": false
+        },
+        "cited_evidence_ids": [
+          "ev_ca517d5eb273d496"
+        ]
+      },
+      {
+        "claim": {
+          "claim_id": "claim_aa46749e8f03033db725d2f59febf4beb38d2a651956126d96049428f4ed15c2",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "对于已获批 Zero Data Retention 或 Modified Abuse Monitoring 的客户,OpenAI 保留在合理必要调查或防止严重风险活动时,经事先书面通知使特定客户或模型不适用这些控制的权利;此时可能保留并由人工审核被分类器判定可能违反使用政策的内容。对于已执行业务关联协议且配置 Safety Retention 或 Eyes Off 的组织,BAA 合格端点即使数据被保留也可用于处理受保护健康信息。",
+          "risk_types": [
+            "release_status_availability"
+          ],
+          "is_material": true
+        },
+        "links": [
+          {
+            "claim_id": "claim_aa46749e8f03033db725d2f59febf4beb38d2a651956126d96049428f4ed15c2",
+            "evidence_id": "ev_3b15c9132d8b3c18",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_aa46749e8f03033db725d2f59febf4beb38d2a651956126d96049428f4ed15c2",
+            "evidence_id": "ev_c448ef1c49789b46",
+            "relation": "support",
+            "claim": null
+          }
+        ],
+        "qualifications": [],
+        "gate_context": {
+          "required_unit_rule": null,
+          "required_entity_ids": [],
+          "required_material_side_ids": [],
+          "allow_retrieve_more": false
+        },
+        "cited_evidence_ids": [
+          "ev_3b15c9132d8b3c18",
+          "ev_c448ef1c49789b46"
+        ]
+      },
+      {
+        "claim": {
+          "claim_id": "claim_ebb2fdf6b9007a9429ff7f8d63284da76592ee2e3156f6e5fa270975dd870922",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "OpenAI 的隐私政策不适用于其代表商业产品客户(例如 API 服务客户)处理的内容;此类数据的使用受相关客户协议约束。",
+          "risk_types": [],
+          "is_material": true
+        },
+        "links": [
+          {
+            "claim_id": "claim_ebb2fdf6b9007a9429ff7f8d63284da76592ee2e3156f6e5fa270975dd870922",
+            "evidence_id": "ev_6f1b032c397627b6",
+            "relation": "support",
+            "claim": null
+          }
+        ],
+        "qualifications": [],
+        "gate_context": {
+          "required_unit_rule": null,
+          "required_entity_ids": [],
+          "required_material_side_ids": [],
+          "allow_retrieve_more": false
+        },
+        "cited_evidence_ids": [
+          "ev_6f1b032c397627b6"
+        ]
+      },
+      {
+        "claim": {
+          "claim_id": "claim_2234a515da950c6ed95ff539775056780d8e5c9b59a3e39d5228d3c5576230d4",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "OpenAI 的企业隐私承诺称 API、ChatGPT Enterprise 和 ChatGPT Team 提交的数据不用于训练 OpenAI 模型;消费者 ChatGPT 免费版和 Plus 版的默认政策不同,不在该 API 页面范围内。",
+          "risk_types": [
+            "comparative_claim"
+          ],
+          "is_material": true
+        },
+        "links": [
+          {
+            "claim_id": "claim_2234a515da950c6ed95ff539775056780d8e5c9b59a3e39d5228d3c5576230d4",
+            "evidence_id": "ev_ad6decdf71e91b0b",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_2234a515da950c6ed95ff539775056780d8e5c9b59a3e39d5228d3c5576230d4",
+            "evidence_id": "ev_d2c625b8589d3de9",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_2234a515da950c6ed95ff539775056780d8e5c9b59a3e39d5228d3c5576230d4",
+            "evidence_id": "ev_2031367fc36e847d",
+            "relation": "support",
+            "claim": null
+          }
+        ],
+        "qualifications": [
+          {
+            "evidence_id": "ev_ad6decdf71e91b0b",
+            "independence_group_id": null,
+            "is_primary_source": null,
+            "supported_entity_ids": [
+              "entity_8774cbb575a60be1600027139eb465e33c28ef938cccc360269056b6655210a6",
+              "entity_361f78bdc2f2046b420b74b0735f6ab8074b26d2b98627a55b590d245fe16d82"
+            ],
+            "material_side_ids": [],
+            "is_independent_adjudicator": null
+          },
+          {
+            "evidence_id": "ev_d2c625b8589d3de9",
+            "independence_group_id": null,
+            "is_primary_source": null,
+            "supported_entity_ids": [
+              "entity_361f78bdc2f2046b420b74b0735f6ab8074b26d2b98627a55b590d245fe16d82"
+            ],
+            "material_side_ids": [],
+            "is_independent_adjudicator": null
+          },
+          {
+            "evidence_id": "ev_2031367fc36e847d",
+            "independence_group_id": null,
+            "is_primary_source": null,
+            "supported_entity_ids": [
+              "entity_8774cbb575a60be1600027139eb465e33c28ef938cccc360269056b6655210a6"
+            ],
+            "material_side_ids": [],
+            "is_independent_adjudicator": null
+          }
+        ],
+        "gate_context": {
+          "required_unit_rule": null,
+          "required_entity_ids": [
+            "entity_8774cbb575a60be1600027139eb465e33c28ef938cccc360269056b6655210a6",
+            "entity_361f78bdc2f2046b420b74b0735f6ab8074b26d2b98627a55b590d245fe16d82"
+          ],
+          "required_material_side_ids": [],
+          "allow_retrieve_more": false
+        },
+        "cited_evidence_ids": [
+          "ev_ad6decdf71e91b0b",
+          "ev_d2c625b8589d3de9",
+          "ev_2031367fc36e847d"
+        ]
+      },
+      {
+        "claim": {
+          "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "社区帖子引用 OpenAI 数据保护附录称,OpenAI 可继续处理源自客户数据的去标识化、匿名化或聚合信息,以改进 OpenAI 的系统和服务;该条款与 API 默认不用于训练或改进的表述之间存在边界争议。",
+          "risk_types": [
+            "conflict_sensitive_claim"
+          ],
+          "is_material": true
+        },
+        "links": [
+          {
+            "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+            "evidence_id": "ev_b08a10e340e4cca0",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+            "evidence_id": "ev_d384aee29a4051c8",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+            "evidence_id": "ev_d2c625b8589d3de9",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+            "evidence_id": "ev_2031367fc36e847d",
+            "relation": "support",
+            "claim": null
+          }
+        ],
+        "qualifications": [
+          {
+            "evidence_id": "ev_b08a10e340e4cca0",
+            "independence_group_id": null,
+            "is_primary_source": null,
+            "supported_entity_ids": [],
+            "material_side_ids": [
+              "side_434d09af8c2f0cbe7e60cc271437bd34bcaaf5aa62050fbdca76de19cf08bfb1"
+            ],
+            "is_independent_adjudicator": null
+          },
+          {
+            "evidence_id": "ev_d384aee29a4051c8",
+            "independence_group_id": null,
+            "is_primary_source": null,
+            "supported_entity_ids": [],
+            "material_side_ids": [
+              "side_434d09af8c2f0cbe7e60cc271437bd34bcaaf5aa62050fbdca76de19cf08bfb1"
+            ],
+            "is_independent_adjudicator": null
+          },
+          {
+            "evidence_id": "ev_d2c625b8589d3de9",
+            "independence_group_id": null,
+            "is_primary_source": null,
+            "supported_entity_ids": [],
+            "material_side_ids": [
+              "side_e2a4e9095e2a8907c1a6f576527c0facd25c765ff4dc69f80e8a3686c1ee32bf"
+            ],
+            "is_independent_adjudicator": null
+          },
+          {
+            "evidence_id": "ev_2031367fc36e847d",
+            "independence_group_id": null,
+            "is_primary_source": null,
+            "supported_entity_ids": [],
+            "material_side_ids": [
+              "side_e2a4e9095e2a8907c1a6f576527c0facd25c765ff4dc69f80e8a3686c1ee32bf"
+            ],
+            "is_independent_adjudicator": null
+          }
+        ],
+        "gate_context": {
+          "required_unit_rule": null,
+          "required_entity_ids": [],
+          "required_material_side_ids": [
+            "side_e2a4e9095e2a8907c1a6f576527c0facd25c765ff4dc69f80e8a3686c1ee32bf",
+            "side_434d09af8c2f0cbe7e60cc271437bd34bcaaf5aa62050fbdca76de19cf08bfb1"
+          ],
+          "allow_retrieve_more": false
+        },
+        "cited_evidence_ids": [
+          "ev_b08a10e340e4cca0",
+          "ev_d384aee29a4051c8",
+          "ev_d2c625b8589d3de9",
+          "ev_2031367fc36e847d"
+        ]
+      },
+      {
+        "claim": {
+          "claim_id": "claim_a5a49627af874a5f45b351f96d2636bf49cbef914d18bc8c6976977035a23500",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "所给材料称所有客户数据在美国处理和存储,OpenAI 目前不在欧洲或其他国家存储数据。",
+          "risk_types": [
+            "comparative_claim"
+          ],
+          "is_material": true
+        },
+        "links": [
+          {
+            "claim_id": "claim_a5a49627af874a5f45b351f96d2636bf49cbef914d18bc8c6976977035a23500",
+            "evidence_id": "ev_cdd0967ac6c58fe5",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_a5a49627af874a5f45b351f96d2636bf49cbef914d18bc8c6976977035a23500",
+            "evidence_id": "ev_13c584f468449ffc",
+            "relation": "support",
+            "claim": null
+          }
+        ],
+        "qualifications": [
+          {
+            "evidence_id": "ev_cdd0967ac6c58fe5",
+            "independence_group_id": null,
+            "is_primary_source": null,
+            "supported_entity_ids": [
+              "entity_2a6d1812e357d57dcb63042d6072f8ca8f5c4655bbd56cc6888634122ee18591",
+              "entity_62daf1a134f30193e632832a6c04ded1099fb6347693ef859cb6a61b567869f9"
+            ],
+            "material_side_ids": [],
+            "is_independent_adjudicator": null
+          },
+          {
+            "evidence_id": "ev_13c584f468449ffc",
+            "independence_group_id": null,
+            "is_primary_source": null,
+            "supported_entity_ids": [
+              "entity_2a6d1812e357d57dcb63042d6072f8ca8f5c4655bbd56cc6888634122ee18591"
+            ],
+            "material_side_ids": [],
+            "is_independent_adjudicator": null
+          }
+        ],
+        "gate_context": {
+          "required_unit_rule": null,
+          "required_entity_ids": [
+            "entity_2a6d1812e357d57dcb63042d6072f8ca8f5c4655bbd56cc6888634122ee18591",
+            "entity_62daf1a134f30193e632832a6c04ded1099fb6347693ef859cb6a61b567869f9"
+          ],
+          "required_material_side_ids": [],
+          "allow_retrieve_more": false
+        },
+        "cited_evidence_ids": [
+          "ev_cdd0967ac6c58fe5",
+          "ev_13c584f468449ffc"
+        ]
+      },
+      {
+        "claim": {
+          "claim_id": "claim_a4df22e9bd24cfad909896d750a814a883f3dcdb87c1bec5436376addfa17de5",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "OpenAI 表示可以签署业务关联协议以支持客户遵守 HIPAA,但客户必须与 OpenAI 签署企业协议并具有符合条件的使用案例;OpenAI 不提供本地托管服务,客户可通过销售团队购买专用容量。",
+          "risk_types": [
+            "release_status_availability"
+          ],
+          "is_material": true
+        },
+        "links": [
+          {
+            "claim_id": "claim_a4df22e9bd24cfad909896d750a814a883f3dcdb87c1bec5436376addfa17de5",
+            "evidence_id": "ev_cdd0967ac6c58fe5",
+            "relation": "support",
+            "claim": null
+          }
+        ],
+        "qualifications": [],
+        "gate_context": {
+          "required_unit_rule": null,
+          "required_entity_ids": [],
+          "required_material_side_ids": [],
+          "allow_retrieve_more": false
+        },
+        "cited_evidence_ids": [
+          "ev_cdd0967ac6c58fe5"
+        ]
+      },
+      {
+        "claim": {
+          "claim_id": "claim_201ca07284694c08bc9b7009c05e80539b332b2cfc3a6d637fb459b301d052ad",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "OpenAI 平台文档称 API 数据可能以滥用监控日志和应用状态形式存储;某些 API 功能会为完成请求或任务而持久化数据。",
+          "risk_types": [],
+          "is_material": true
+        },
+        "links": [
+          {
+            "claim_id": "claim_201ca07284694c08bc9b7009c05e80539b332b2cfc3a6d637fb459b301d052ad",
+            "evidence_id": "ev_2031367fc36e847d",
+            "relation": "support",
+            "claim": null
+          }
+        ],
+        "qualifications": [],
+        "gate_context": {
+          "required_unit_rule": null,
+          "required_entity_ids": [],
+          "required_material_side_ids": [],
+          "allow_retrieve_more": false
+        },
+        "cited_evidence_ids": [
+          "ev_2031367fc36e847d"
+        ]
+      },
+      {
+        "claim": {
+          "claim_id": "claim_05d9a11718fe40b25469d2a37c50ea36f45c0fda08d940d1f8d967ad89d5904f",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "Modified Abuse Monitoring 在大多数情况下将客户内容从滥用监控日志中排除,但图像和文件输入在少数情况下仍可能被保留;Zero Data Retention 同样排除客户内容并将相关存储参数视为 false。",
+          "risk_types": [
+            "release_status_availability"
+          ],
+          "is_material": true
+        },
+        "links": [
+          {
+            "claim_id": "claim_05d9a11718fe40b25469d2a37c50ea36f45c0fda08d940d1f8d967ad89d5904f",
+            "evidence_id": "ev_983d48d235f7e446",
+            "relation": "support",
+            "claim": null
+          }
+        ],
+        "qualifications": [],
+        "gate_context": {
+          "required_unit_rule": null,
+          "required_entity_ids": [],
+          "required_material_side_ids": [],
+          "allow_retrieve_more": false
+        },
+        "cited_evidence_ids": [
+          "ev_983d48d235f7e446"
+        ]
+      },
+      {
+        "claim": {
+          "claim_id": "claim_fea8f15ffc198a7eb75756b451aa7ba351bf11e6e13464387a196826f1f04e66",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "所给证据中,Zero Data Retention 页面标注日期为 2026 年 8 月 19 日;隐私政策页面标注更新于 2026 年 2 月 6 日;另一相关页面仅显示 2026 年,具体日期不明确。",
+          "risk_types": [
+            "date_or_time_window"
+          ],
+          "is_material": false
+        },
+        "links": [
+          {
+            "claim_id": "claim_fea8f15ffc198a7eb75756b451aa7ba351bf11e6e13464387a196826f1f04e66",
+            "evidence_id": "ev_88dde0d8c1251d4e",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_fea8f15ffc198a7eb75756b451aa7ba351bf11e6e13464387a196826f1f04e66",
+            "evidence_id": "ev_6f1b032c397627b6",
+            "relation": "support",
+            "claim": null
+          },
+          {
+            "claim_id": "claim_fea8f15ffc198a7eb75756b451aa7ba351bf11e6e13464387a196826f1f04e66",
+            "evidence_id": "ev_52708fb711c7deaa",
+            "relation": "support",
+            "claim": null
+          }
+        ],
+        "qualifications": [],
+        "gate_context": {
+          "required_unit_rule": null,
+          "required_entity_ids": [],
+          "required_material_side_ids": [],
+          "allow_retrieve_more": false
+        },
+        "cited_evidence_ids": [
+          "ev_88dde0d8c1251d4e",
+          "ev_6f1b032c397627b6",
+          "ev_52708fb711c7deaa"
+        ]
+      },
+      {
+        "claim": {
+          "claim_id": "claim_223dce122b3ef4d9c38c748c94cc754d57f40b1f62535e95b0c2028f826124c4",
+          "scope_id": "01b87b35-114e-49a3-9bf0-e551afd61a75",
+          "normalized_text": "数据保护附录文本称,OpenAI 会在协议期限内保留 ChatGPT Enterprise 服务客户数据,除非协议或订单另有规定;API 服务客户数据通过 API 发送后最多保留三十天,除非法律要求保留副本。",
+          "risk_types": [
+            "numeric_value",
+            "date_or_time_window"
+          ],
+          "is_material": true
+        },
+        "links": [
+          {
+            "claim_id": "claim_223dce122b3ef4d9c38c748c94cc754d57f40b1f62535e95b0c2028f826124c4",
+            "evidence_id": "ev_8f8e52e6d185ea05",
+            "relation": "support",
+            "claim": null
+          }
+        ],
+        "qualifications": [],
+        "gate_context": {
+          "required_unit_rule": null,
+          "required_entity_ids": [],
+          "required_material_side_ids": [],
+          "allow_retrieve_more": false
+        },
+        "cited_evidence_ids": [
+          "ev_8f8e52e6d185ea05"
+        ]
+      }
+    ],
+    "audit_metadata": [],
+    "qualification_diagnostics": {
+      "qualification_available_count": 9,
+      "qualification_missing_count": 39,
+      "source_identity_available_count": 0,
+      "source_identity_missing_count": 26,
+      "primary_qualification_count": 0,
+      "independence_group_populated_count": 0,
+      "distinct_independence_group_count": 0,
+      "supported_entity_association_count": 7,
+      "material_side_association_count": 4,
+      "independent_adjudicator_count": 0,
+      "required_entity_id_count": 4,
+      "required_material_side_id_count": 2,
+      "dropped_qualification_input_count": 1,
+      "source_identity_resolutions": [
+        {
+          "evidence_id": "ev_52708fb711c7deaa",
+          "status": "rejected_unverifiable_anchor",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": "content:organizational_byline",
+          "provenance_text": "Author\nOpenAI"
+        },
+        {
+          "evidence_id": "ev_6f1b032c397627b6",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_ca517d5eb273d496",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_4fdf910968f25851",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_88dde0d8c1251d4e",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_3c96a4fb19211b4f",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_cdd0967ac6c58fe5",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_13c584f468449ffc",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_d09ccbf8429a4b40",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_d384aee29a4051c8",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_b08a10e340e4cca0",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_a8ef44309475cd9a",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_8f8e52e6d185ea05",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_5c8af3b3740a96e1",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_b84c6e8b2fc512bc",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_6a7e4f9a786055aa",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_983d48d235f7e446",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_458848dc112b41ef",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_2031367fc36e847d",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_21acce915f4d0bc6",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_3b15c9132d8b3c18",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_c448ef1c49789b46",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_91e440e9eb3064ba",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_ad6decdf71e91b0b",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        },
+        {
+          "evidence_id": "ev_21f28db677e049fe",
+          "status": "missing",
+          "source_organization": null,
+          "independence_group_id": null,
+          "provenance_field": null,
+          "provenance_text": null
+        }
+      ],
+      "qualification_provenance": [
+        {
+          "claim_id": "claim_2234a515da950c6ed95ff539775056780d8e5c9b59a3e39d5228d3c5576230d4",
+          "evidence_id": "ev_ad6decdf71e91b0b",
+          "qualified_fields": [
+            "supported_entity_ids"
+          ],
+          "source_identity_status": null
+        },
+        {
+          "claim_id": "claim_2234a515da950c6ed95ff539775056780d8e5c9b59a3e39d5228d3c5576230d4",
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "qualified_fields": [
+            "supported_entity_ids"
+          ],
+          "source_identity_status": null
+        },
+        {
+          "claim_id": "claim_2234a515da950c6ed95ff539775056780d8e5c9b59a3e39d5228d3c5576230d4",
+          "evidence_id": "ev_2031367fc36e847d",
+          "qualified_fields": [
+            "supported_entity_ids"
+          ],
+          "source_identity_status": null
+        },
+        {
+          "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+          "evidence_id": "ev_b08a10e340e4cca0",
+          "qualified_fields": [
+            "material_side_ids"
+          ],
+          "source_identity_status": null
+        },
+        {
+          "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+          "evidence_id": "ev_d384aee29a4051c8",
+          "qualified_fields": [
+            "material_side_ids"
+          ],
+          "source_identity_status": null
+        },
+        {
+          "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+          "evidence_id": "ev_d2c625b8589d3de9",
+          "qualified_fields": [
+            "material_side_ids"
+          ],
+          "source_identity_status": null
+        },
+        {
+          "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+          "evidence_id": "ev_2031367fc36e847d",
+          "qualified_fields": [
+            "material_side_ids"
+          ],
+          "source_identity_status": null
+        },
+        {
+          "claim_id": "claim_a5a49627af874a5f45b351f96d2636bf49cbef914d18bc8c6976977035a23500",
+          "evidence_id": "ev_cdd0967ac6c58fe5",
+          "qualified_fields": [
+            "supported_entity_ids"
+          ],
+          "source_identity_status": null
+        },
+        {
+          "claim_id": "claim_a5a49627af874a5f45b351f96d2636bf49cbef914d18bc8c6976977035a23500",
+          "evidence_id": "ev_13c584f468449ffc",
+          "qualified_fields": [
+            "supported_entity_ids"
+          ],
+          "source_identity_status": null
+        }
+      ],
+      "claim_reference_resolutions": [
+        {
+          "claim_id": "claim_9e4f778a70cb164c7b82acb8c348c0c09ea399873ae1ca73eb864cca2afe254c",
+          "entity_references": [],
+          "material_side_references": []
+        },
+        {
+          "claim_id": "claim_b111342508621cf1ebc17039358afda79e3df0f18be0b369c56f8f29eb8d7979",
+          "entity_references": [],
+          "material_side_references": []
+        },
+        {
+          "claim_id": "claim_1d418dc0cf0c8bc29d152736410812bb927a99eabaf39219e6b8989d6bcaf18e",
+          "entity_references": [],
+          "material_side_references": []
+        },
+        {
+          "claim_id": "claim_a45825b207603db2b307c475ca3a32f7b411623946f9cd5867e92840eefa816c",
+          "entity_references": [],
+          "material_side_references": []
+        },
+        {
+          "claim_id": "claim_61f44467bd2695b35e816914596f36995cbc93410258a9d65038c9ed4cdea531",
+          "entity_references": [],
+          "material_side_references": []
+        },
+        {
+          "claim_id": "claim_968eec4326e1928d8d79aa0b8e22ee05c30bbb988a30c01aee9a28b0ec24925a",
+          "entity_references": [],
+          "material_side_references": []
+        },
+        {
+          "claim_id": "claim_aa46749e8f03033db725d2f59febf4beb38d2a651956126d96049428f4ed15c2",
+          "entity_references": [],
+          "material_side_references": []
+        },
+        {
+          "claim_id": "claim_ebb2fdf6b9007a9429ff7f8d63284da76592ee2e3156f6e5fa270975dd870922",
+          "entity_references": [],
+          "material_side_references": []
+        },
+        {
+          "claim_id": "claim_2234a515da950c6ed95ff539775056780d8e5c9b59a3e39d5228d3c5576230d4",
+          "entity_references": [
+            {
+              "writer_reference_id": "api_enterprise_team",
+              "stable_id": "entity_8774cbb575a60be1600027139eb465e33c28ef938cccc360269056b6655210a6",
+              "label": "OpenAI API、ChatGPT Enterprise 和 ChatGPT Team 数据"
+            },
+            {
+              "writer_reference_id": "consumer_chatgpt_free_plus",
+              "stable_id": "entity_361f78bdc2f2046b420b74b0735f6ab8074b26d2b98627a55b590d245fe16d82",
+              "label": "消费者 ChatGPT 免费版和 Plus 版"
+            }
+          ],
+          "material_side_references": []
+        },
+        {
+          "claim_id": "claim_ee4d640a2434ecfe781636608dcb59103bfd97a39125bbae693f143b113dffbd",
+          "entity_references": [],
+          "material_side_references": [
+            {
+              "writer_reference_id": "side_api_default_no_training",
+              "stable_id": "side_e2a4e9095e2a8907c1a6f576527c0facd25c765ff4dc69f80e8a3686c1ee32bf",
+              "label": "API 数据默认不用于训练或改进,除非客户明确选择加入"
+            },
+            {
+              "writer_reference_id": "side_dpa_derived_data_use",
+              "stable_id": "side_434d09af8c2f0cbe7e60cc271437bd34bcaaf5aa62050fbdca76de19cf08bfb1",
+              "label": "数据保护附录允许处理去标识化、匿名化或聚合后的客户数据衍生信息以改进系统和服务"
+            }
+          ]
+        },
+        {
+          "claim_id": "claim_a5a49627af874a5f45b351f96d2636bf49cbef914d18bc8c6976977035a23500",
+          "entity_references": [
+            {
+              "writer_reference_id": "united_states",
+              "stable_id": "entity_2a6d1812e357d57dcb63042d6072f8ca8f5c4655bbd56cc6888634122ee18591",
+              "label": "美国"
+            },
+            {
+              "writer_reference_id": "europe_other",
+              "stable_id": "entity_62daf1a134f30193e632832a6c04ded1099fb6347693ef859cb6a61b567869f9",
+              "label": "欧洲或其他国家"
+            }
+          ],
+          "material_side_references": []
+        },
+        {
+          "claim_id": "claim_a4df22e9bd24cfad909896d750a814a883f3dcdb87c1bec5436376addfa17de5",
+          "entity_references": [],
+          "material_side_references": []
+        },
+        {
+          "claim_id": "claim_201ca07284694c08bc9b7009c05e80539b332b2cfc3a6d637fb459b301d052ad",
+          "entity_references": [],
+          "material_side_references": []
+        },
+        {
+          "claim_id": "claim_05d9a11718fe40b25469d2a37c50ea36f45c0fda08d940d1f8d967ad89d5904f",
+          "entity_references": [],
+          "material_side_references": []
+        },
+        {
+          "claim_id": "claim_fea8f15ffc198a7eb75756b451aa7ba351bf11e6e13464387a196826f1f04e66",
+          "entity_references": [],
+          "material_side_references": []
+        },
+        {
+          "claim_id": "claim_223dce122b3ef4d9c38c748c94cc754d57f40b1f62535e95b0c2028f826124c4",
+          "entity_references": [],
+          "material_side_references": []
+        }
+      ]
+    },
+    "repair_plan": null,
+    "additional_retrieval_attempts": 0,
+    "report_sha256": "1e34a96ff38b88f8b5f50583318e77ff89a456bc2780b706b9b8e1c1c4ca73e0"
+  }
+}

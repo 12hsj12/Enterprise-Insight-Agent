@@ -15,13 +15,10 @@ class ReportStore:
     async def _read_all_unlocked(self) -> Dict[str, Dict[str, Any]]:
         if not self._path.exists():
             return {}
-        try:
-            data = json.loads(self._path.read_text(encoding="utf-8"))
-            if isinstance(data, dict):
-                return data  # type: ignore[return-value]
-        except Exception:
-            return {}
-        return {}
+        data = json.loads(self._path.read_text(encoding="utf-8"))
+        if not isinstance(data, dict) or not all(isinstance(value, dict) for value in data.values()):
+            raise ValueError("Invalid report store structure")
+        return data
 
     async def _write_all_unlocked(self, data: Dict[str, Dict[str, Any]]) -> None:
         await self._ensure_parent_dir()

@@ -6,6 +6,7 @@ class BaseConfig(TypedDict):
     RETRIEVER: str
     EMBEDDING: str
     SIMILARITY_THRESHOLD: float
+    SOURCE_RELIABILITY_WEIGHT: float
     FAST_LLM: str
     SMART_LLM: str
     STRATEGIC_LLM: str

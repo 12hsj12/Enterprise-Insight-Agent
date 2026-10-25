@@ -5,54 +5,37 @@ import styles from './HomepageFeatures.module.css';
 
 const FeatureList = [
   {
-    title: 'GPT Researcher',
-    Svg: require('../../static/img/gptr-logo.png').default,
-    docLink: './docs/gpt-researcher/getting-started',
+    title: 'Product workflow',
+    docLink: '/docs/enterprise-insight-agent',
     description: (
       <>
-        GPT Researcher is an open source autonomous agent designed for comprehensive online research on a variety of tasks.
-      </>
-    ),
-  },
-  /*{
-    title: 'Tavily Search API',
-    Svg: require('../../static/img/tavily.png').default,
-    docLink: './docs/tavily-api/introduction',
-    description: (
-      <>
-        Tavily Search API is a search engine optimized for LLMs, optimized for a factual, efficient, and persistent search experience
-      </>
-    ),
-  },*/
-  {
-    title: 'Multi-Agent Assistant',
-    Svg: require('../../static/img/multi-agent.png').default,
-    docLink: './docs/gpt-researcher/multi_agents/langgraph',
-    description: (
-      <>
-        Learn how a team of AI agents can work together to conduct research on a given topic, from planning to publication.
+        Follow research planning, evidence review, citation grounding, and inspectable report records in one workflow.
       </>
     ),
   },
   {
-    title: 'Examples and Demos',
-    Svg: require('../../static/img/examples.png').default,
-    docLink: './docs/examples',
+    title: 'Architecture and implementation',
+    docLink: '/docs/enterprise-insight-agent#architecture-and-implementation',
     description: (
       <>
-          Check out GPT Researcher in action across multiple frameworks and use cases such as hybrid research and long detailed reports.
+        See the core evidence records, claim checks, enterprise workflow, local API, and persistence modules.
+      </>
+    ),
+  },
+  {
+    title: 'Evaluation and limitations',
+    docLink: '/docs/enterprise-insight-agent#tests-and-evaluation',
+    description: (
+      <>
+        Review the measured holdout outcome, frozen evaluation scope, and known gaps before relying on reports.
       </>
     ),
   },
 ];
 
-function Feature({Svg, title, description, docLink}) {
+function Feature({title, description, docLink}) {
   return (
     <div className={clsx('col col--4')}>
-      <div className="text--center">
-        {/*<Svg className={styles.featureSvg} alt={title} />*/}
-        <img src={Svg} alt={title} height="60"/>
-      </div>
       <div className="text--center padding-horiz--md">
         <Link to={docLink}>
             <h3>{title}</h3>

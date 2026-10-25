@@ -35,6 +35,9 @@ from gpt_researcher.utils.enum import Tone
 from chat.chat import ChatAgentWithMemory
 
 from server.report_store import ReportStore
+from server.enterprise_api import create_enterprise_router
+from server.sqlite_report_store import SQLiteReportStore
+from gpt_researcher.enterprise import IntelligenceWorkflow
 
 # MongoDB services removed - no database persistence needed
 
@@ -71,6 +74,8 @@ class ChatRequest(BaseModel):
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
+    recovered = await enterprise_store.recover_running()
+    logger.info("Enterprise task store ready; marked %d interrupted tasks", recovered)
     os.makedirs("outputs", exist_ok=True)
     app.mount("/outputs", StaticFiles(directory="outputs"), name="outputs")
     
@@ -88,13 +93,19 @@ async def lifespan(app: FastAPI):
     else:
         logger.warning(f"Frontend directory not found: {frontend_path}")
     
-    logger.info("GPT Researcher API ready - local mode (no database persistence)")
+    logger.info("Research API ready - local mode with SQLite enterprise task history")
     yield
     # Shutdown
     logger.info("Research API shutting down")
 
 # App initialization
 app = FastAPI(lifespan=lifespan)
+enterprise_store = SQLiteReportStore(Path(os.getenv("ENTERPRISE_STORE_PATH", "outputs/enterprise_tasks.sqlite3")))
+app.include_router(create_enterprise_router(
+    enterprise_store,
+    workflow_factory=lambda: IntelligenceWorkflow(config_path=os.getenv("ENTERPRISE_CONFIG_PATH")),
+    timeout_s=float(os.getenv("ENTERPRISE_TASK_TIMEOUT", "900")),
+))
 
 # Configure allowed origins for CORS
 allowed_origins_env = os.getenv("CORS_ALLOW_ORIGINS")

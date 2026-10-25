@@ -1,0 +1,27 @@
+[
+  {
+    "case_id": "EIV2_FV_001",
+    "contains": "Audit records currently have no fixed retention period or TTL",
+    "category": "AVAILABILITY_STATUS"
+  },
+  {
+    "case_id": "EIV2_CC_001",
+    "contains": "Bedrock can host OpenAI models in addition to its multi-vendor catalog",
+    "category": "OBJECTIVE_CAPABILITY"
+  },
+  {
+    "case_id": "EIV2_TM_003",
+    "contains": "an order of magnitude larger than its competitors",
+    "category": "COMPARATIVE_SUPERLATIVE"
+  },
+  {
+    "case_id": "EIV2_TM_003",
+    "contains": "run Claude, GPT, and Gemini through any of the three clouds",
+    "category": "AVAILABILITY_STATUS"
+  },
+  {
+    "case_id": "EIV2_CR_003",
+    "contains": "currently resolve to `deepseek-v4-flash`",
+    "category": "AVAILABILITY_STATUS"
+  }
+]

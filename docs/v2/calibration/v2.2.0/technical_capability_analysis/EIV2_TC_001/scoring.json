@@ -1,0 +1,521 @@
+{
+  "assessments": [
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_1d53874093712303",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_b4a21ff90da8556e",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_cc5354d167046db6",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_7db702236aad5d91",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_689e5f5def07a731",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_1d0d67064f32fbda",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_af416855d58a3889",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_9c01b4455145f8f5",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_40a1cba46934f9ee",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_dc1cef6ead9c49b4",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_4b2cc9add6171347",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_02bf768863d92f5e",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_d4e4d8fbf6a7a55c",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_648babff2ebe3058",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_24320d0559472fcb",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_902042d4664e8063",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_8876e809d56f4ff6",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_6919c3340b7fd3e7",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_e38e6e3a23869cb1",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_2483963c63c6d679",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_125fee21af7fa68c",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_69cf6c200a23c3c7",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_37d1cef00eb078b5",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_c6bb0819c495a67b",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_16e2a002c3dcd617",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_1c525a9b96f4bdbc",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_6d09b9285030a3c8",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_657dcc56e68a9259",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_c67ed7cb3f76aa16",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_964671dc24bed509",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_619b70b094285d71",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_98f5028bed21d081",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_7a6809120ded0e6a",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_c87ab4cb76d42dd2",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_274ff76c3275e1d6",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_4426f461ab217c20",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_7b54cb8b85fb3cac",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_a68505e19318d340",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_62fa0fb7bbfd9bb8",
+      "freshness_score": null,
+      "source_type": "web"
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_92b2d904aa05710b",
+      "freshness_score": null,
+      "source_type": "web"
+    }
+  ],
+  "case_id": "EIV2_TC_001",
+  "evidence_policy": {
+    "authority_weight": 0.22,
+    "category": "technical_capability_analysis",
+    "corroboration_rule": "primary_plus_independent",
+    "freshness_mode": "contextual",
+    "independent_source_rule": "publisher_organization",
+    "max_age_days": 730,
+    "policy_version": "enterprise-insight-v2-architecture/2.2.0",
+    "preferred_source_types": [
+      "official_documentation",
+      "peer_reviewed_research",
+      "regulator_standard",
+      "independent_technical"
+    ],
+    "primary_source_rule": "preferred",
+    "reason_codes": [
+      "technical_specificity_primary"
+    ]
+  },
+  "note": "Existing runtime scores only; candidate similarities in candidate.json; no new scores.",
+  "retrieval_diagnostics": [
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_1d53874093712303",
+      "final_score": 0.6868442351902494,
+      "similarity_score": 0.7113387630644223
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_b4a21ff90da8556e",
+      "final_score": 0.6793852792222799,
+      "similarity_score": 0.7017759990029229
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_cc5354d167046db6",
+      "final_score": 0.6752071491452976,
+      "similarity_score": 0.6964194219811507
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_7db702236aad5d91",
+      "final_score": 0.6485062400572847,
+      "similarity_score": 0.6621874872529292
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_689e5f5def07a731",
+      "final_score": 0.6374407724892761,
+      "similarity_score": 0.6480009903708668
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_1d0d67064f32fbda",
+      "final_score": 0.6340567527544237,
+      "similarity_score": 0.6436625035313125
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_af416855d58a3889",
+      "final_score": 0.6141863382140185,
+      "similarity_score": 0.6181876130948954
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_9c01b4455145f8f5",
+      "final_score": 0.5974448357013615,
+      "similarity_score": 0.5967241483350788
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_40a1cba46934f9ee",
+      "final_score": 0.5973592295650219,
+      "similarity_score": 0.5966143968782331
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_dc1cef6ead9c49b4",
+      "final_score": 0.591505535930192,
+      "similarity_score": 0.5891096614489639
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_4b2cc9add6171347",
+      "final_score": 0.5326756765489784,
+      "similarity_score": 0.5136867648063826
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_02bf768863d92f5e",
+      "final_score": 0.5226046586247914,
+      "similarity_score": 0.5007752033651173
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_d4e4d8fbf6a7a55c",
+      "final_score": 0.519402977337792,
+      "similarity_score": 0.49667048376639983
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_648babff2ebe3058",
+      "final_score": 0.5184474826306259,
+      "similarity_score": 0.4954454905520845
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_24320d0559472fcb",
+      "final_score": 0.5066964801240619,
+      "similarity_score": 0.48038010272315623
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_902042d4664e8063",
+      "final_score": 0.5034692514200059,
+      "similarity_score": 0.4762426300256485
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_8876e809d56f4ff6",
+      "final_score": 0.5002415990283199,
+      "similarity_score": 0.4721046141388716
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_6919c3340b7fd3e7",
+      "final_score": 0.4968394233567506,
+      "similarity_score": 0.4677428504573725
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_e38e6e3a23869cb1",
+      "final_score": 0.49264163856875076,
+      "similarity_score": 0.462361075088142
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_2483963c63c6d679",
+      "final_score": 0.49044092490934577,
+      "similarity_score": 0.459539647319674
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_125fee21af7fa68c",
+      "final_score": 0.5867762751695353,
+      "similarity_score": 0.5830465066276094
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_69cf6c200a23c3c7",
+      "final_score": 0.5824985454409207,
+      "similarity_score": 0.5775622377447701
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_37d1cef00eb078b5",
+      "final_score": 0.5537663581743809,
+      "similarity_score": 0.5407261002235653
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_c6bb0819c495a67b",
+      "final_score": 0.5531108816677984,
+      "similarity_score": 0.5398857457279467
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_16e2a002c3dcd617",
+      "final_score": 0.5496375735555818,
+      "similarity_score": 0.5354327866097204
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_1c525a9b96f4bdbc",
+      "final_score": 0.5423785309068252,
+      "similarity_score": 0.5261263216754168
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_6d09b9285030a3c8",
+      "final_score": 0.5283702842179568,
+      "similarity_score": 0.5081670310486626
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_657dcc56e68a9259",
+      "final_score": 0.524817220379975,
+      "similarity_score": 0.5036118209999679
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_c67ed7cb3f76aa16",
+      "final_score": 0.524468477815887,
+      "similarity_score": 0.503164715148573
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_964671dc24bed509",
+      "final_score": 0.5211879569817255,
+      "similarity_score": 0.4989589192073404
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_619b70b094285d71",
+      "final_score": 0.7098140895863618,
+      "similarity_score": 0.7407872943414895
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_98f5028bed21d081",
+      "final_score": 0.6953875356567369,
+      "similarity_score": 0.7222917123804319
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_7a6809120ded0e6a",
+      "final_score": 0.6834494911378118,
+      "similarity_score": 0.7069865270997587
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_c87ab4cb76d42dd2",
+      "final_score": 0.676595138964428,
+      "similarity_score": 0.698198896108241
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_274ff76c3275e1d6",
+      "final_score": 0.6752230338569688,
+      "similarity_score": 0.6964397869961139
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_4426f461ab217c20",
+      "final_score": 0.673919507650926,
+      "similarity_score": 0.6947685995524692
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_7b54cb8b85fb3cac",
+      "final_score": 0.6708007291403949,
+      "similarity_score": 0.6907701655646088
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_a68505e19318d340",
+      "final_score": 0.6554687172819736,
+      "similarity_score": 0.6711137401050944
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_62fa0fb7bbfd9bb8",
+      "final_score": 0.6515863414917183,
+      "similarity_score": 0.6661363352457927
+    },
+    {
+      "authority_score": 0.6,
+      "evidence_id": "ev_92b2d904aa05710b",
+      "final_score": 0.6453605687710802,
+      "similarity_score": 0.6581545753475386
+    }
+  ],
+  "task_classification": {
+    "category": "technical_capability_analysis",
+    "classifier_version": "enterprise-insight-task-classifier/1.1.0",
+    "confidence": 0.9,
+    "fallback_used": false,
+    "matched_signal_codes": [
+      "capability_mechanism",
+      "explicit_analysis"
+    ],
+    "rationale_codes": [
+      "selected_technical_analysis"
+    ],
+    "runner_up_categories": []
+  }
+}

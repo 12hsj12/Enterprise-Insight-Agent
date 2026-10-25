@@ -1,0 +1,307 @@
+{
+  "benchmark_name": "Enterprise Insight Benchmark",
+  "version": "0.1.0",
+  "cutoff_date": "2026-09-05",
+  "description": "Benchmark for evaluating evidence-centric enterprise research and competitive intelligence agents.",
+  "cases": [
+    {
+      "id": "EI_001",
+      "split": "development",
+      "category": "single_company_facts",
+      "query": "梳理小米当前公开披露的手机端 AI Agent / 系统级智能体能力，说明主要功能、技术定位、已落地产品形态。",
+      "cutoff_date": "2026-09-05",
+      "required_dimensions": [
+        "主要功能",
+        "技术定位",
+        "已落地产品形态"
+      ],
+      "preferred_source_types": [
+        "official",
+        "official_documentation",
+        "research",
+        "major_media"
+      ],
+      "evaluation": {
+        "evidence_required": true,
+        "multi_source_required": true,
+        "freshness_required": true
+      }
+    },
+    {
+      "id": "EI_002",
+      "split": "development",
+      "category": "single_company_facts",
+      "query": "梳理百度当前面向企业和开发者提供的 Agent 开发能力，说明平台主要组件、适用场景，以及与传统大模型 API 调用的区别。",
+      "cutoff_date": "2026-09-05",
+      "required_dimensions": [
+        "平台主要组件",
+        "适用场景",
+        "与传统大模型 API 调用的区别"
+      ],
+      "preferred_source_types": [
+        "official",
+        "official_documentation",
+        "research",
+        "major_media"
+      ],
+      "evaluation": {
+        "evidence_required": true,
+        "multi_source_required": true,
+        "freshness_required": true
+      }
+    },
+    {
+      "id": "EI_003",
+      "split": "development",
+      "category": "multi_company_comparison",
+      "query": "比较华为、小米、OPPO、vivo 当前公开披露的手机端 AI Agent 或系统级智能能力，从入口、任务执行、系统权限、跨应用协同、模型能力和实际落地程度进行比较。",
+      "cutoff_date": "2026-09-05",
+      "required_dimensions": [
+        "入口",
+        "任务执行",
+        "系统权限",
+        "跨应用协同",
+        "模型能力",
+        "实际落地程度"
+      ],
+      "preferred_source_types": [
+        "official",
+        "official_documentation",
+        "research",
+        "major_media"
+      ],
+      "evaluation": {
+        "evidence_required": true,
+        "multi_source_required": true,
+        "freshness_required": true
+      }
+    },
+    {
+      "id": "EI_004",
+      "split": "development",
+      "category": "multi_company_comparison",
+      "query": "比较百度、阿里云、腾讯云面向企业提供的 Agent 开发平台，重点分析 Agent 编排、知识库/RAG、工具调用、模型接入、评测与企业集成能力。",
+      "cutoff_date": "2026-09-05",
+      "required_dimensions": [
+        "Agent 编排",
+        "知识库/RAG",
+        "工具调用",
+        "模型接入",
+        "评测能力",
+        "企业集成能力"
+      ],
+      "preferred_source_types": [
+        "official",
+        "official_documentation",
+        "research",
+        "major_media"
+      ],
+      "evaluation": {
+        "evidence_required": true,
+        "multi_source_required": true,
+        "freshness_required": true
+      }
+    },
+    {
+      "id": "EI_005",
+      "split": "development",
+      "category": "multi_company_comparison",
+      "query": "比较国内主要 AI 编程产品在代码生成、代码理解、Agentic Coding、企业代码库支持和开发流程集成方面的差异。",
+      "cutoff_date": "2026-09-05",
+      "required_dimensions": [
+        "代码生成",
+        "代码理解",
+        "Agentic Coding",
+        "企业代码库支持",
+        "开发流程集成"
+      ],
+      "preferred_source_types": [
+        "official",
+        "official_documentation",
+        "research",
+        "major_media"
+      ],
+      "evaluation": {
+        "evidence_required": true,
+        "multi_source_required": true,
+        "freshness_required": true
+      }
+    },
+    {
+      "id": "EI_006",
+      "split": "development",
+      "category": "time_sensitive",
+      "query": "截至 2026-09-05，国内主要互联网公司在 AI Agent 产品和平台方面最近半年有哪些重要公开进展？这些变化反映了哪些产品方向？",
+      "cutoff_date": "2026-09-05",
+      "required_dimensions": [
+        "最近半年重要进展",
+        "代表性企业",
+        "产品方向变化"
+      ],
+      "preferred_source_types": [
+        "official",
+        "official_documentation",
+        "research",
+        "major_media"
+      ],
+      "evaluation": {
+        "evidence_required": true,
+        "multi_source_required": true,
+        "freshness_required": true
+      }
+    },
+    {
+      "id": "EI_007",
+      "split": "development",
+      "category": "time_sensitive",
+      "query": "截至 2026-09-05，AI Agent 评测体系近期重点关注哪些能力？企业实际部署 Agent 最关注哪些效果与工程指标？",
+      "cutoff_date": "2026-09-05",
+      "required_dimensions": [
+        "Agent 能力评测",
+        "任务效果指标",
+        "工程指标",
+        "企业部署关注点"
+      ],
+      "preferred_source_types": [
+        "official",
+        "official_documentation",
+        "research",
+        "major_media"
+      ],
+      "evaluation": {
+        "evidence_required": true,
+        "multi_source_required": true,
+        "freshness_required": true
+      }
+    },
+    {
+      "id": "EI_008",
+      "split": "development",
+      "category": "multi_source_synthesis",
+      "query": "企业采用 RAG + Agent 构建知识助手时主要可靠性问题有哪些？结合企业官方技术资料、权威技术文档或研究资料进行分析。",
+      "cutoff_date": "2026-09-05",
+      "required_dimensions": [
+        "检索可靠性",
+        "生成可靠性",
+        "证据与引用",
+        "数据时效性",
+        "工程可靠性"
+      ],
+      "preferred_source_types": [
+        "official",
+        "official_documentation",
+        "research",
+        "major_media"
+      ],
+      "evaluation": {
+        "evidence_required": true,
+        "multi_source_required": true,
+        "freshness_required": false
+      }
+    },
+    {
+      "id": "EI_009",
+      "split": "holdout",
+      "category": "conflict_information",
+      "query": "选择一个当前主流 AI 产品或平台，寻找公开资料中关于其能力、性能或产品定位存在差异的描述，分析这些描述是否真正冲突，并给出有证据支撑的可信判断。",
+      "cutoff_date": "2026-09-05",
+      "required_dimensions": [
+        "差异描述",
+        "来源",
+        "冲突判断",
+        "冲突原因",
+        "最终可信判断"
+      ],
+      "preferred_source_types": [
+        "official",
+        "official_documentation",
+        "research",
+        "major_media"
+      ],
+      "evaluation": {
+        "evidence_required": true,
+        "multi_source_required": true,
+        "freshness_required": true
+      }
+    },
+    {
+      "id": "EI_010",
+      "split": "holdout",
+      "category": "strategic_judgment",
+      "query": "传统制造企业计划建设内部 AI Research Agent，在通用大模型 API、自建 RAG、企业 Agent 平台之间应如何选择？给出有证据支撑的技术与产品建议。",
+      "cutoff_date": "2026-09-05",
+      "required_dimensions": [
+        "通用大模型 API",
+        "自建 RAG",
+        "企业 Agent 平台",
+        "选型条件",
+        "技术建议",
+        "产品建议"
+      ],
+      "preferred_source_types": [
+        "official",
+        "official_documentation",
+        "research",
+        "major_media"
+      ],
+      "evaluation": {
+        "evidence_required": true,
+        "multi_source_required": true,
+        "freshness_required": false
+      }
+    },
+    {
+      "id": "EI_011",
+      "split": "holdout",
+      "category": "strategic_judgment",
+      "query": "企业建设竞争情报 Agent 时，应优先解决搜索覆盖、证据可信度、生成质量还是 Agent 自动化程度？根据公开资料给出优先级判断。",
+      "cutoff_date": "2026-09-05",
+      "required_dimensions": [
+        "搜索覆盖",
+        "证据可信度",
+        "生成质量",
+        "Agent 自动化程度",
+        "优先级判断",
+        "判断依据"
+      ],
+      "preferred_source_types": [
+        "official",
+        "official_documentation",
+        "research",
+        "major_media"
+      ],
+      "evaluation": {
+        "evidence_required": true,
+        "multi_source_required": true,
+        "freshness_required": false
+      }
+    },
+    {
+      "id": "EI_012",
+      "split": "holdout",
+      "category": "competitive_intelligence",
+      "query": "选择两个具有直接竞争关系的 AI 产品或平台，从产品定位、目标用户、核心能力、技术路线、商业化方式、竞争优势和潜在风险进行完整竞争分析，并确保所有核心事实和判断能够追溯到证据。",
+      "cutoff_date": "2026-09-05",
+      "required_dimensions": [
+        "产品定位",
+        "目标用户",
+        "核心能力",
+        "技术路线",
+        "商业化方式",
+        "竞争优势",
+        "潜在风险"
+      ],
+      "preferred_source_types": [
+        "official",
+        "official_documentation",
+        "research",
+        "major_media"
+      ],
+      "evaluation": {
+        "evidence_required": true,
+        "multi_source_required": true,
+        "freshness_required": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\artifact_references.json": "47a6779a984cdfafefc4f31c41c679f3e53aabfa9ae99fc24dd70ab2bd330445",
+  "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\case_input.json": "2dee559e19e2d395078d6b3692bd66ec2e68eee5ad2474c48361887e6e46b3bc",
+  "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\citation_mapping.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\diagnostics.json": "3cc007a8fabb24c5cd7611ff7c320aba584ce6cd2e600b7738505063d800f586",
+  "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\execution.json": "cd1412c8653fe468929b614914f05001077eb71ac057d86b72b732648a660ece",
+  "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\report.md": "b62b0864f0f22ce06a6b162cf63bfc7c828fb967874bbe681a21ba6434a5ef8b",
+  "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\review_sheet.json": "412998f1b451a62cfc5f3babd93cb48d94c0a74b0cda445657e9960a6a954705",
+  "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\scoring.json": "83a2ace162ffb552f9dff1b50ca4d07d72cabf96a2a8659548eb413e39d6648b",
+  "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\scoring_input.json": "826af3e1d8ff9b54dbc83bd4ede4496ece73abdd62d3ddb427ec1c9af2bad6b1",
+  "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\selected.json": "b0138cc16fad688ee232b6aed000aaf73ba64ea83554bc1fd8de4e743e304a48",
+  "docs\\v2\\calibration\\v2.2.0\\competitive_comparison\\EIV2_CC_001\\trace.json": "dab224bbe785f3dcf379e23395ca68d3bf04be0a8875b078999e34c74eb19ba5",
+  "outputs\\calibration-six-20260911\\EIV2_CC_001\\candidate.json": "f9adf9eeb96586d0c9f9813e48ed6cd20222c2e19c561fae8daaf05e3a468f01",
+  "outputs\\calibration-six-20260911\\EIV2_CC_001\\task.json": "fc4534d9995b12d4504625059119f6df7a2f7ed924c530f0f94097c5a1cddccf"
+}

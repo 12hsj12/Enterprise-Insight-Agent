@@ -1,0 +1,15 @@
+{
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\artifact_references.json": "919effdbeaa1c4ba87db8b43260f52dd93e4c668b6e54336efb1973fa2c1b053",
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\case_input.json": "a116def4b429b318e47d27bdf137d0aca52076e88aca8bf6b5a0bb17ecdac30e",
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\citation_mapping.json": "c603cb77c4ac66c603bff6a518e55fa5e2420681864926c2ef2aa5fa67680733",
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\diagnostics.json": "4938073541c0550a08673ef84197d8593c6cd10a6beef4a94d32402fb653dae9",
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\execution.json": "f463772e1f3f33af985d4d836683b07246a8dcf934e1029389ca77334b360889",
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\report.md": "c5f1d1e8939f43402f1782961b24f646474cbcb11ef7672a12679096a9ced4c7",
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\review_sheet.json": "2d8b2f1d362036cf7238626af34130af30bb2e706c29d8b4b721bb63dde47f78",
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\scoring.json": "8b6564c43adf6a1041e9a664caebad417922e94c47e5d105a8216368e7139e21",
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\scoring_input.json": "be5bf0f6c510b327ad49fc72298402bc09d36bfdee322c6ee84e6a10bb8e61d6",
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\selected.json": "850ad96c87660df375f5749043908917aee8a49b5129f825b5350c9ec0aee8d1",
+  "docs\\v2\\calibration\\v2.2.0\\technical_capability_analysis\\EIV2_TC_001\\trace.json": "5b6fab56da27f5376027c6ea51def81be2d43cd473370076a66faf1009697b44",
+  "outputs\\calibration-six-20260911\\EIV2_TC_001\\candidate.json": "4495644cde1a75d8eeb9a6291359102f2e098bd1f8897ccb933ace39e6f5afa0",
+  "outputs\\calibration-six-20260911\\EIV2_TC_001\\task.json": "803e4d0b7bbac6330e312c41a6316c555674cbde10b3833bdf242ada99a5a746"
+}

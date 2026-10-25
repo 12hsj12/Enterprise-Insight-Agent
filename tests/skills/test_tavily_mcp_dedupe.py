@@ -6,6 +6,7 @@ from unittest.mock import AsyncMock, MagicMock
 import pytest
 
 from gpt_researcher.skills.researcher import ResearchConductor
+from gpt_researcher.evidence import EvidenceContext
 
 
 class TavilySearch:
@@ -29,7 +30,7 @@ async def test_redundant_tavily_mcp_is_skipped():
         cfg=SimpleNamespace(max_search_results_per_query=5),
         kwargs={},
         context_manager=SimpleNamespace(
-            get_similar_content_by_query=AsyncMock(return_value="web-context")
+            get_similar_content_by_query=AsyncMock(return_value=EvidenceContext(context="web-context"))
         ),
     ))
     conductor._mcp_results_cache = None
@@ -56,7 +57,7 @@ async def test_non_tavily_mcp_still_runs():
         cfg=SimpleNamespace(max_search_results_per_query=5),
         kwargs={},
         context_manager=SimpleNamespace(
-            get_similar_content_by_query=AsyncMock(return_value="web-context")
+            get_similar_content_by_query=AsyncMock(return_value=EvidenceContext(context="web-context"))
         ),
     ))
     conductor._execute_mcp_research_for_queries = AsyncMock(return_value=["mcp-context"])

@@ -14,6 +14,7 @@ class FakeSnippetRetriever:
             {
                 "href": "https://example.com/one",
                 "body": "A" * 180,
+                "published_date": "2026-05-10",
             },
             {
                 "href": "https://example.com/two",
@@ -57,25 +58,50 @@ class ResearchConductorRetrievalTests(unittest.IsolatedAsyncioTestCase):
         researcher = self.make_researcher(FakeSnippetRetriever)
         conductor = ResearchConductor(researcher)
 
-        urls, prefetched = await conductor._search_relevant_source_urls("rust async runtimes")
+        urls, prefetched, metadata = await conductor._search_relevant_source_urls("rust async runtimes")
 
         self.assertCountEqual(
             urls,
             ["https://example.com/one", "https://example.com/two"],
         )
         self.assertEqual(prefetched, [])
+        self.assertEqual(metadata, {
+            "https://example.com/one": {"publication_date": "2026-05-10"}
+        })
+
+    async def test_search_metadata_is_merged_after_scraping(self):
+        researcher = self.make_researcher(FakeSnippetRetriever)
+
+        class ScraperManager:
+            async def browse_urls(self, urls):
+                return [
+                    {"url": url, "title": "Story", "raw_content": "body" * 50}
+                    for url in urls
+                ]
+
+        researcher.scraper_manager = ScraperManager()
+        researcher.vector_store = None
+        conductor = ResearchConductor(researcher)
+        pages = await conductor._scrape_data_by_urls("query")
+        first = next(page for page in pages if page["url"].endswith("/one"))
+        self.assertEqual(first["publication_date"], "2026-05-10")
+        self.assertEqual(
+            first["metadata_provenance"]["publication_date"],
+            "SEARCH_RESULT_METADATA",
+        )
 
     async def test_raw_content_results_stay_prefetched(self):
         researcher = self.make_researcher(FakeFullContentRetriever)
         conductor = ResearchConductor(researcher)
 
-        urls, prefetched = await conductor._search_relevant_source_urls("pubmed article")
+        urls, prefetched, metadata = await conductor._search_relevant_source_urls("pubmed article")
 
         self.assertEqual(urls, [])
         self.assertEqual(
             prefetched,
             [{"url": "https://example.com/full", "raw_content": "C" * 500}],
         )
+        self.assertEqual(metadata, {})
 
 
 if __name__ == "__main__":

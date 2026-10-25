@@ -1,0 +1,35 @@
+{
+  "id": "EIV2_CR_003",
+  "split": "development",
+  "category": "conflict_credibility_resolution",
+  "query": "核查 DeepSeek-R1 在 AIME 2024 上的官方报告分数与第三方复现结果的差异，分析模型版本、提示或评测设置的影响。",
+  "cutoff_date": "2026-09-05",
+  "required_units": [
+    {
+      "id": "vendor_score",
+      "description": "厂商报告分数",
+      "evidence_strength_rule": "primary_or_two_independent",
+      "high_risk_types": [
+        "benchmark_or_performance",
+        "numeric_value"
+      ]
+    },
+    {
+      "id": "replication",
+      "description": "第三方复现结果",
+      "evidence_strength_rule": "two_independent",
+      "high_risk_types": [
+        "benchmark_or_performance",
+        "numeric_value"
+      ]
+    },
+    {
+      "id": "explanation",
+      "description": "差异解释与可信判断",
+      "evidence_strength_rule": "conflict_sides_plus_adjudicator",
+      "high_risk_types": [
+        "conflict_sensitive_claim"
+      ]
+    }
+  ]
+}

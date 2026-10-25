@@ -4,10 +4,16 @@ This module provides the main GPTResearcher class that orchestrates
 autonomous research and report generation using LLMs and web search.
 """
 
+from __future__ import annotations
+
 import asyncio
 import json
 import os
-from typing import Any, Optional
+from typing import TYPE_CHECKING, Any, Optional
+
+if TYPE_CHECKING:
+    from .enterprise.task_policy import EvidencePolicy, TaskClassification
+    from .enterprise.requirements import ResearchPlan
 
 from .actions import (
     add_references,
@@ -80,6 +86,9 @@ class GPTResearcher:
         mcp_configs: list[dict] | None = None,
         mcp_max_iterations: int | None = None,
         mcp_strategy: str | None = None,
+        task_classification: TaskClassification | None = None,
+        evidence_policy: EvidencePolicy | None = None,
+        requirement_planning_context: dict[str, Any] | None = None,
         **kwargs
     ):
         """
@@ -149,6 +158,14 @@ class GPTResearcher:
         self.complement_source_urls = complement_source_urls
         self.query_domains = query_domains or []
         self.research_sources = []  # The list of scraped sources including title, content and images
+        self.evidences = []  # The list of structured evidences produced by the RAG pipeline
+        self.evidence_assessments = []  # Reliability assessments for structured evidences
+        self.evidence_consistency_assessments = []  # Cross-evidence consistency assessments
+        self.retrieval_diagnostics = []  # Content-free evidence-selection score components
+        self.task_classification = task_classification
+        self.evidence_policy = evidence_policy
+        self.requirement_planning_context = requirement_planning_context
+        self.research_plan: ResearchPlan | None = None
         self.research_images = []  # The list of selected research images
         self.documents = documents
         self.vector_store = VectorStoreWrapper(vector_store) if vector_store else None
@@ -399,6 +416,11 @@ class GPTResearcher:
             })
         
         return self.context
+
+    async def conduct_targeted_research(self, queries: list[str]):
+        """Execute one deterministic follow-up query batch without replanning."""
+
+        return await self.research_conductor.conduct_targeted_research(queries)
 
     async def _handle_deep_research(self, on_progress=None):
         """Handle deep research execution and logging.
@@ -684,6 +706,38 @@ class GPTResearcher:
             sources: List of source dictionaries to add.
         """
         self.research_sources.extend(sources)
+
+    def get_evidences(self) -> list:
+        """Get all structured evidences collected during research."""
+        return self.evidences
+
+    def add_evidences(self, evidences: list) -> None:
+        """Add structured evidences produced by the RAG pipeline."""
+        self.evidences.extend(evidences)
+
+    def get_evidence_assessments(self) -> list:
+        """Get all evidence reliability assessments."""
+        return self.evidence_assessments
+
+    def get_evidence_consistency_assessments(self):
+        """Get all evidence consistency assessments."""
+        return self.evidence_consistency_assessments
+
+    def get_retrieval_diagnostics(self) -> list:
+        """Get content-free diagnostics for selected evidence chunks."""
+        return self.retrieval_diagnostics
+
+    def add_evidence_assessments(self, assessments: list) -> None:
+        """Add evidence reliability assessments."""
+        self.evidence_assessments.extend(assessments)
+
+    def add_evidence_consistency_assessments(self, assessments):
+        """Add evidence consistency assessments."""
+        self.evidence_consistency_assessments.extend(assessments)
+
+    def add_retrieval_diagnostics(self, diagnostics: list) -> None:
+        """Add selected-evidence ranking diagnostics."""
+        self.retrieval_diagnostics.extend(diagnostics)
 
     def add_references(self, report_markdown: str, visited_urls: set) -> str:
         """Add reference section to a markdown report.

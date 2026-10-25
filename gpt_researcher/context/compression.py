@@ -16,6 +16,7 @@ Classes:
 
 import asyncio
 import os
+import hashlib
 from typing import Optional
 
 from langchain_classic.retrievers import ContextualCompressionRetriever
@@ -30,8 +31,22 @@ from ..memory.embeddings import OPENAI_EMBEDDING_MODEL
 from ..prompts import PromptFamily
 from ..utils.costs import estimate_embedding_cost
 from ..vector_store import VectorStoreWrapper
-from .retriever import SearchAPIRetriever, SectionRetriever
-
+from .retriever import (
+    EXPLICIT_SOURCE_METADATA_FIELDS,
+    SearchAPIRetriever,
+    SectionRetriever,
+    document_metadata_from_page,
+)
+from gpt_researcher.evidence import Evidence, EvidenceContext
+from .source_aware import SourceAwareScorer
+from gpt_researcher.evidence.models import RetrievalDiagnostic
+from gpt_researcher.enterprise.calibration_capture import observe
+from gpt_researcher.enterprise.task_policy import (
+    EvidencePolicy,
+    ResearchTaskCategory,
+    TaskClassification,
+    adaptive_authority_weight,
+)
 
 class VectorstoreCompressor:
     """Retrieves and compresses context from a vector store.
@@ -101,6 +116,9 @@ class ContextCompressor:
         embeddings,
         max_results: int = 5,
         similarity_threshold: float | None = None,
+        source_reliability_weight: float | None = None,
+        evidence_policy: EvidencePolicy | None = None,
+        task_classification: TaskClassification | None = None,
         prompt_family: type[PromptFamily] | PromptFamily = PromptFamily,
         **kwargs,
     ):
@@ -112,6 +130,11 @@ class ContextCompressor:
             max_results: Maximum number of results to return.
             similarity_threshold: Minimum similarity score for inclusion.
                 Falls back to the SIMILARITY_THRESHOLD env var when not given.
+            source_reliability_weight: Optional fixed V1 source-authority weight.
+            evidence_policy: Optional typed V2 policy. When present, its authority
+                anchor and metadata remain available to downstream layers.
+            task_classification: Optional V2 classification. Its primary category
+                selects the adaptive weight; fallback resolves to the neutral 0.20.
             prompt_family: Prompt family for formatting output.
             **kwargs: Additional keyword arguments.
         """
@@ -122,6 +145,41 @@ class ContextCompressor:
         if similarity_threshold is None:
             similarity_threshold = float(os.environ.get("SIMILARITY_THRESHOLD", 0.35))
         self.similarity_threshold = similarity_threshold
+
+        if evidence_policy is not None:
+            if (
+                isinstance(task_classification, TaskClassification)
+                and isinstance(task_classification.category, ResearchTaskCategory)
+                and task_classification.category is not evidence_policy.category
+            ):
+                raise ValueError(
+                    "TaskClassification category conflicts with EvidencePolicy category"
+                )
+            effective_weight = (
+                adaptive_authority_weight(task_classification)
+                if task_classification is not None
+                else evidence_policy.authority_weight
+            )
+            if (
+                source_reliability_weight is not None
+                and source_reliability_weight != effective_weight
+            ):
+                raise ValueError(
+                    "source_reliability_weight conflicts with adaptive authority weight"
+                )
+            source_reliability_weight = effective_weight
+        elif source_reliability_weight is None:
+            source_reliability_weight = float(
+                os.environ.get("SOURCE_RELIABILITY_WEIGHT", "0.0")
+            )
+
+        self.evidence_policy = evidence_policy
+        self.task_classification = task_classification
+        self.source_reliability_weight = source_reliability_weight
+        self.source_aware_scorer = SourceAwareScorer(
+            reliability_weight=source_reliability_weight
+        )
+
         self.prompt_family = prompt_family
 
     def __get_contextual_retriever(self):
@@ -145,7 +203,29 @@ class ContextCompressor:
         )
         return contextual_retriever
 
-    async def async_get_context(self, query: str, max_results: int = 5, cost_callback=None) -> str:
+    def _document_to_evidence(self, doc: Document, sub_query: str) -> Evidence:
+        url = doc.metadata.get("source", "") or ""
+        content = doc.page_content or ""
+
+        raw_id = f"{sub_query}|{url}|{content}"
+        evidence_hash = hashlib.sha256(raw_id.encode("utf-8")).hexdigest()[:16]
+
+        return Evidence(
+            evidence_id=f"ev_{evidence_hash}",
+            sub_query=sub_query,
+            title=doc.metadata.get("title", "") or "",
+            url=url,
+            content=content,
+            source_type=doc.metadata.get("source_type", "unknown") or "unknown",
+            **{
+                field: doc.metadata.get(field)
+                for field in EXPLICIT_SOURCE_METADATA_FIELDS
+                if field != "source_type" and doc.metadata.get(field) is not None
+            },
+        )
+
+
+    async def async_get_context(self, query: str, max_results: int = 5, cost_callback=None) -> EvidenceContext:
         """Get relevant context from documents asynchronously.
 
         Optimization: Skip expensive compression pipeline for small document sets.
@@ -157,35 +237,80 @@ class ContextCompressor:
             cost_callback: Optional callback for tracking embedding costs.
 
         Returns:
-            Formatted string of relevant document content.
+            EvidenceContext containing formatted context and structured evidences.
         """
+        observe("pages_before_compression", query, self.documents)
         # Optimization: Calculate total content size
         total_chars = sum(len(str(doc.get('raw_content', ''))) for doc in self.documents)
         chunk_threshold = int(os.environ.get("COMPRESSION_THRESHOLD", "8000"))
 
         # If total content is small, skip expensive compression and return directly
-        if total_chars < chunk_threshold and len(self.documents) <= max_results:
+        if (
+            self.source_reliability_weight == 0
+            and total_chars < chunk_threshold
+            and len(self.documents) <= max_results
+        ):
             # Fast path: no compression needed
             # Map scraper/retriever dict keys into metadata that pretty_print_docs expects.
             # Raw dicts use `url`; SearchAPIRetriever / pretty_print use `source`.
             direct_docs = [
                 Document(
                     page_content=doc.get('raw_content', '') or '',
-                    metadata={
-                        "title": doc.get("title", "") or "",
-                        "source": doc.get("source") or doc.get("url") or "",
-                    },
+                    metadata=document_metadata_from_page(doc),
                 )
                 for doc in self.documents[:max_results]
             ]
-            return self.prompt_family.pretty_print_docs(direct_docs, max_results)
+            evidences = [
+                self._document_to_evidence(doc, query)
+                for doc in direct_docs
+            ]
+
+            return EvidenceContext(
+                context=self.prompt_family.pretty_print_docs(direct_docs, max_results),
+                evidences=evidences,
+            )
 
         # Standard path: use compression for large content
         compressed_docs = self.__get_contextual_retriever()
+
         if cost_callback:
-            cost_callback(estimate_embedding_cost(model=OPENAI_EMBEDDING_MODEL, docs=self.documents))
-        relevant_docs = await asyncio.to_thread(compressed_docs.invoke, query, **self.kwargs)
-        return self.prompt_family.pretty_print_docs(relevant_docs, max_results)
+            cost_callback(
+                estimate_embedding_cost(
+                    model=OPENAI_EMBEDDING_MODEL,
+                    docs=self.documents,
+                )
+            )
+
+        relevant_docs = await asyncio.to_thread(
+            compressed_docs.invoke,
+            query,
+            **self.kwargs,
+        )
+
+        observe("eligible_chunks_before_ranking", query, relevant_docs)
+        if self.source_reliability_weight > 0:
+            relevant_docs = self.source_aware_scorer.rank_documents(
+                relevant_docs
+            )
+
+        evidences = [
+            self._document_to_evidence(doc, query)
+            for doc in relevant_docs[:max_results]
+        ]
+
+        return EvidenceContext(
+            context=self.prompt_family.pretty_print_docs(relevant_docs, max_results),
+            evidences=evidences,
+            retrieval_diagnostics=[
+                RetrievalDiagnostic(
+                    evidence_id=evidence.evidence_id,
+                    **vars(self.source_aware_scorer.score(
+                        float(doc.state["query_similarity_score"]), evidence.url
+                    )),
+                )
+                for evidence, doc in zip(evidences, relevant_docs)
+            ] if self.source_reliability_weight > 0 else [],
+        )
 
 
 class WrittenContentCompressor:

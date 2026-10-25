@@ -27,9 +27,17 @@ async def test_fast_path_maps_url_to_source_metadata(monkeypatch):
         prompt_family=PromptFamily,
     )
     out = await compressor.async_get_context("market share", max_results=5)
-    assert "Source: https://real.example/report" in out
-    assert "Title: Market share report" in out
-    assert "Source: None" not in out
+    assert "Source: https://real.example/report" in out.context
+    assert "Title: Market share report" in out.context
+    assert "Source: None" not in out.context
+
+    assert len(out.evidences) == 1
+    evidence = out.evidences[0]
+    assert evidence.url == "https://real.example/report"
+    assert evidence.title == "Market share report"
+    assert evidence.content == "snippet content under threshold"
+    assert evidence.sub_query == "market share"
+    assert evidence.evidence_id.startswith("ev_")
 
 
 @pytest.mark.asyncio
@@ -50,5 +58,8 @@ async def test_fast_path_prefers_explicit_source_key(monkeypatch):
         prompt_family=PromptFamily,
     )
     out = await compressor.async_get_context("q", max_results=5)
-    assert "Source: https://canonical.example/doc" in out
-    assert "https://ignored.example" not in out
+    assert "Source: https://canonical.example/doc" in out.context
+    assert "https://ignored.example" not in out.context
+
+    assert len(out.evidences) == 1
+    assert out.evidences[0].url == "https://canonical.example/doc"

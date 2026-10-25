@@ -6,6 +6,8 @@ and context gathering.
 """
 
 import asyncio
+from contextlib import nullcontext
+from gpt_researcher.enterprise.trace import current_trace
 import logging
 import os
 import random
@@ -16,6 +18,7 @@ from ..actions.utils import stream_output
 from ..document import DocumentLoader, LangChainDocumentLoader, OnlineDocumentLoader
 from ..utils.enum import ReportSource, ReportType
 from ..utils.logging_config import get_json_handler
+from gpt_researcher.enterprise.requirements import ResearchPlan
 
 
 class ResearchConductor:
@@ -89,9 +92,15 @@ class ResearchConductor:
             report_type=self.researcher.report_type,
             cost_callback=self.researcher.add_costs,
             retriever_names=retriever_names,  # Pass retriever names for MCP optimization
+            requirement_context=getattr(
+                self.researcher, "requirement_planning_context", None
+            ),
             **self.researcher.kwargs
         )
         self.logger.info(f"Research outline planned: {outline}")
+        if isinstance(outline, ResearchPlan):
+            self.researcher.research_plan = outline
+            return [item.query for item in outline.sub_queries]
         return outline
 
     async def conduct_research(self):
@@ -253,10 +262,10 @@ class ResearchConductor:
         if self.researcher.vector_store:
             self.researcher.vector_store.load(scraped_content)
 
-        context = await self.researcher.context_manager.get_similar_content_by_query(
+        context_result = await self.researcher.context_manager.get_similar_content_by_query(
             self.researcher.query, scraped_content
         )
-        return context
+        return context_result.context
 
     # Add logging to other methods similarly...
 
@@ -507,7 +516,14 @@ class ResearchConductor:
         return all(isinstance(c, dict) and _is_tavily_mcp(c) for c in configs)
 
 
-    async def _process_sub_query(self, sub_query: str, scraped_data: list = [], query_domains: list = []):
+    async def _process_sub_query(
+        self,
+        sub_query: str,
+        scraped_data: list = [],
+        query_domains: list = [],
+        *,
+        allow_mcp: bool = True,
+    ):
         """Takes in a sub query and scrapes urls based on it and gathers context."""
         if self.json_handler:
             self.json_handler.log_event("sub_query", {
@@ -525,7 +541,10 @@ class ResearchConductor:
 
         try:
             # Identify MCP retrievers
-            mcp_retrievers = [r for r in self.researcher.retrievers if "mcpretriever" in r.__name__.lower()]
+            mcp_retrievers = [
+                r for r in self.researcher.retrievers
+                if allow_mcp and "mcpretriever" in r.__name__.lower()
+            ]
             non_mcp_retrievers = [r for r in self.researcher.retrievers if "mcpretriever" not in r.__name__.lower()]
 
             # Avoid dual Tavily path (direct retriever + tavily-mcp) under default RETRIEVER=tavily.
@@ -599,7 +618,10 @@ class ResearchConductor:
 
             # Get similar content based on scraped data
             if scraped_data:
-                web_context = await self.researcher.context_manager.get_similar_content_by_query(sub_query, scraped_data)
+                web_result = await self.researcher.context_manager.get_similar_content_by_query(
+                    sub_query, scraped_data
+                )
+                web_context = web_result.context
                 self.logger.info(f"Web content found for sub-query: {len(str(web_context)) if web_context else 0} chars")
 
             # Combine MCP context with web context intelligently
@@ -651,6 +673,34 @@ class ResearchConductor:
                     self.researcher.websocket,
                 )
             return ""
+
+    async def conduct_targeted_research(self, queries: list[str]):
+        """Run one caller-bounded query batch without another planning call.
+
+        The ordinary direct-retriever, scrape, metadata, ContextManager, and
+        source-aware selection path is reused. MCP is excluded because its tool
+        selection can introduce an additional provider planning call.
+        """
+
+        contexts = await asyncio.gather(*[
+            self._process_sub_query(
+                query,
+                [],
+                self.researcher.query_domains,
+                allow_mcp=False,
+            )
+            for query in queries
+        ])
+        additions = [item for item in contexts if item]
+        if additions:
+            existing = self.researcher.context
+            existing_text = (
+                "\n\n".join(existing) if isinstance(existing, list) else str(existing)
+            )
+            self.researcher.context = "\n\n".join(
+                item for item in (existing_text, *additions) if item
+            )
+        return additions
 
     async def _execute_mcp_research(self, retriever, query):
         """
@@ -824,8 +874,11 @@ class ResearchConductor:
         return new_urls
 
     async def _search_relevant_source_urls(self, query, query_domains: list | None = None):
+        from gpt_researcher.evidence.metadata import search_result_metadata
+
         new_search_urls = []
         prefetched_content = []
+        search_metadata_by_url = {}
         if query_domains is None:
             query_domains = []
 
@@ -841,9 +894,13 @@ class ResearchConductor:
                 retriever = retriever_class(query, query_domains=query_domains)
 
                 # Perform the search using the current retriever
-                search_results = await asyncio.to_thread(
-                    retriever.search, max_results=self.researcher.cfg.max_search_results_per_query
-                )
+                trace = current_trace()
+                if trace:
+                    trace.search_calls += 1
+                with trace.stage("search") if trace else nullcontext():
+                    search_results = await asyncio.to_thread(
+                        retriever.search, max_results=self.researcher.cfg.max_search_results_per_query
+                    )
 
                 if not search_results:
                     continue
@@ -863,6 +920,17 @@ class ResearchConductor:
                     if not url:
                         continue
 
+                    explicit_search_metadata = search_result_metadata(result)
+                    if explicit_search_metadata:
+                        previous = search_metadata_by_url.get(url, {})
+                        merged = dict(previous)
+                        for key, value in explicit_search_metadata.items():
+                            if key in merged and merged[key] != value:
+                                merged["metadata_conflict"] = True
+                            else:
+                                merged[key] = value
+                        search_metadata_by_url[url] = merged
+
                     if requires_scraping is True:
                         # Declared: anything alongside the URL is a preview,
                         # however long, so the page is still fetched. This is
@@ -872,19 +940,37 @@ class ResearchConductor:
                     elif requires_scraping is False:
                         # Declared: the retriever fetched the content itself.
                         if raw_content:
-                            prefetched_content.append({
+                            prefetched = {
                                 "url": url,
                                 "raw_content": raw_content,
-                            })
+                            }
+                            for field in (
+                                "title", "publisher", "source_organization",
+                                "source_owner", "author", "publication_date",
+                                "source_type",
+                            ):
+                                value = result.get(field)
+                                if isinstance(value, str) and value.strip():
+                                    prefetched[field] = value.strip()
+                            prefetched_content.append(prefetched)
                             self.researcher.add_research_sources([{"url": url}])
                         else:
                             new_search_urls.append(url)
                     elif raw_content and len(raw_content) > 100:
                         # Undeclared: legacy behaviour, unchanged.
-                        prefetched_content.append({
+                        prefetched = {
                             "url": url,
                             "raw_content": raw_content,
-                        })
+                        }
+                        for field in (
+                            "title", "publisher", "source_organization",
+                            "source_owner", "author", "publication_date",
+                            "source_type",
+                        ):
+                            value = result.get(field)
+                            if isinstance(value, str) and value.strip():
+                                prefetched[field] = value.strip()
+                        prefetched_content.append(prefetched)
                         self.researcher.add_research_sources([{"url": url}])
                     else:
                         new_search_urls.append(url)
@@ -895,7 +981,7 @@ class ResearchConductor:
         new_search_urls = await self._get_new_urls(new_search_urls)
         random.shuffle(new_search_urls)
 
-        return new_search_urls, prefetched_content
+        return new_search_urls, prefetched_content, search_metadata_by_url
 
     async def _scrape_data_by_urls(self, sub_query, query_domains: list | None = None):
         """
@@ -912,7 +998,12 @@ class ResearchConductor:
         if query_domains is None:
             query_domains = []
 
-        new_search_urls, prefetched_content = await self._search_relevant_source_urls(sub_query, query_domains)
+        from gpt_researcher.evidence.metadata import enrich_page_metadata
+
+        (new_search_urls, prefetched_content,
+         search_metadata_by_url) = await self._search_relevant_source_urls(
+            sub_query, query_domains
+        )
 
         # Log the research process if verbose mode is on
         if self.researcher.verbose:
@@ -928,6 +1019,13 @@ class ResearchConductor:
 
         # Merge pre-fetched content from retrievers that already provide full text
         scraped_content.extend(prefetched_content)
+        scraped_content = [
+            enrich_page_metadata(
+                item,
+                provider_metadata=search_metadata_by_url.get(item.get("url", "")),
+            )
+            for item in scraped_content
+        ]
 
         if self.researcher.vector_store:
             self.researcher.vector_store.load(scraped_content)
@@ -1036,11 +1134,21 @@ class ResearchConductor:
         """
         self.logger.info(f"Extracting content from {len(results)} search results")
         
-        # Get the URLs from the search results
+        from gpt_researcher.evidence.metadata import (
+            enrich_page_metadata,
+            search_result_metadata,
+        )
+
+        # Get the URLs and retain explicit provider metadata for the scrape merge.
         urls = []
+        metadata_by_url = {}
         for result in results:
             if isinstance(result, dict) and "href" in result:
-                urls.append(result["href"])
+                url = result["href"]
+                urls.append(url)
+                metadata = search_result_metadata(result)
+                if metadata:
+                    metadata_by_url[url] = metadata
         
         # Skip if no URLs found
         if not urls:
@@ -1055,6 +1163,13 @@ class ResearchConductor:
             
         # Scrape the content from the URLs
         scraped_content = await self.researcher.scraper_manager.browse_urls(new_urls)
+        scraped_content = [
+            enrich_page_metadata(
+                item,
+                provider_metadata=metadata_by_url.get(item.get("url", "")),
+            )
+            for item in scraped_content
+        ]
         
         # Add the URLs to visited_urls
         self.researcher.visited_urls.update(new_urls)
@@ -1079,11 +1194,11 @@ class ResearchConductor:
             return ""
             
         # Summarize the content using the context manager
-        summary = await self.researcher.context_manager.get_similar_content_by_query(
+        summary_result = await self.researcher.context_manager.get_similar_content_by_query(
             query, content
         )
-        
-        return summary
+
+        return summary_result.context
         
     async def _update_search_progress(self, current, total):
         """

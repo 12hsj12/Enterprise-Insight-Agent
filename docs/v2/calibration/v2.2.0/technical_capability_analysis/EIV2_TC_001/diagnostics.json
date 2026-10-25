@@ -1,0 +1,1877 @@
+{
+  "dropped_events": 0,
+  "elapsed_s": 193.55746999999974,
+  "events": [
+    {
+      "authority_weight": 0.22,
+      "authority_weight_fallback_used": false,
+      "classifier_confidence": 0.9,
+      "classifier_version": "enterprise-insight-task-classifier/1.1.0",
+      "corroboration_rule": "primary_plus_independent",
+      "fallback_used": false,
+      "freshness_mode": "contextual",
+      "independent_source_rule": "publisher_organization",
+      "max_age_days": 730,
+      "policy_authority_weight_anchor": 0.22,
+      "policy_limitation_codes": [
+        "preferred_source_types_not_enforced_missing_structured_provenance",
+        "freshness_not_enforced_missing_publication_time",
+        "corroboration_deferred_to_claim_grounding",
+        "primary_source_rule_deferred_to_claim_grounding",
+        "independence_rule_deferred_to_claim_grounding"
+      ],
+      "policy_reason_codes": [
+        "technical_specificity_primary"
+      ],
+      "policy_version": "enterprise-insight-v2-architecture/2.2.0",
+      "preferred_source_types": [
+        "official_documentation",
+        "peer_reviewed_research",
+        "regulator_standard",
+        "independent_technical"
+      ],
+      "primary_source_rule": "preferred",
+      "stage": "task_policy",
+      "task_category": "technical_capability_analysis"
+    },
+    {
+      "duration_s": 1.828682100007427,
+      "stage": "search",
+      "status": "completed"
+    },
+    {
+      "duration_s": 5.77590570000757,
+      "stage": "search",
+      "status": "completed"
+    },
+    {
+      "duration_s": 5.776244199994835,
+      "stage": "search",
+      "status": "completed"
+    },
+    {
+      "duration_s": 9.013553400000092,
+      "stage": "search",
+      "status": "completed"
+    },
+    {
+      "duration_s": 19.95606620000035,
+      "stage": "retrieval",
+      "status": "completed"
+    },
+    {
+      "authority_weight": 0.22,
+      "authority_weight_fallback_used": false,
+      "classifier_confidence": 0.9,
+      "classifier_version": "enterprise-insight-task-classifier/1.1.0",
+      "corroboration_rule": "primary_plus_independent",
+      "fallback_used": false,
+      "freshness_mode": "contextual",
+      "independent_source_rule": "publisher_organization",
+      "max_age_days": 730,
+      "policy_authority_weight_anchor": 0.22,
+      "policy_limitation_codes": [
+        "preferred_source_types_not_enforced_missing_structured_provenance",
+        "freshness_not_enforced_missing_publication_time",
+        "corroboration_deferred_to_claim_grounding",
+        "primary_source_rule_deferred_to_claim_grounding",
+        "independence_rule_deferred_to_claim_grounding"
+      ],
+      "policy_reason_codes": [
+        "technical_specificity_primary"
+      ],
+      "policy_version": "enterprise-insight-v2-architecture/2.2.0",
+      "preferred_source_types": [
+        "official_documentation",
+        "peer_reviewed_research",
+        "regulator_standard",
+        "independent_technical"
+      ],
+      "primary_source_rule": "preferred",
+      "scores": [
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_1d53874093712303",
+          "final_score": 0.6868442351902494,
+          "similarity_score": 0.7113387630644223
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_b4a21ff90da8556e",
+          "final_score": 0.6793852792222799,
+          "similarity_score": 0.7017759990029229
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_cc5354d167046db6",
+          "final_score": 0.6752071491452976,
+          "similarity_score": 0.6964194219811507
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_7db702236aad5d91",
+          "final_score": 0.6485062400572847,
+          "similarity_score": 0.6621874872529292
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_689e5f5def07a731",
+          "final_score": 0.6374407724892761,
+          "similarity_score": 0.6480009903708668
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_1d0d67064f32fbda",
+          "final_score": 0.6340567527544237,
+          "similarity_score": 0.6436625035313125
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_af416855d58a3889",
+          "final_score": 0.6141863382140185,
+          "similarity_score": 0.6181876130948954
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_9c01b4455145f8f5",
+          "final_score": 0.5974448357013615,
+          "similarity_score": 0.5967241483350788
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_40a1cba46934f9ee",
+          "final_score": 0.5973592295650219,
+          "similarity_score": 0.5966143968782331
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_dc1cef6ead9c49b4",
+          "final_score": 0.591505535930192,
+          "similarity_score": 0.5891096614489639
+        }
+      ],
+      "selected_count": 10,
+      "similarity_threshold": 0.42,
+      "source_reliability_weight": 0.22,
+      "stage": "retrieval_selection",
+      "task_category": "technical_capability_analysis"
+    },
+    {
+      "duration_s": 27.06880410001031,
+      "stage": "retrieval",
+      "status": "completed"
+    },
+    {
+      "authority_weight": 0.22,
+      "authority_weight_fallback_used": false,
+      "classifier_confidence": 0.9,
+      "classifier_version": "enterprise-insight-task-classifier/1.1.0",
+      "corroboration_rule": "primary_plus_independent",
+      "fallback_used": false,
+      "freshness_mode": "contextual",
+      "independent_source_rule": "publisher_organization",
+      "max_age_days": 730,
+      "policy_authority_weight_anchor": 0.22,
+      "policy_limitation_codes": [
+        "preferred_source_types_not_enforced_missing_structured_provenance",
+        "freshness_not_enforced_missing_publication_time",
+        "corroboration_deferred_to_claim_grounding",
+        "primary_source_rule_deferred_to_claim_grounding",
+        "independence_rule_deferred_to_claim_grounding"
+      ],
+      "policy_reason_codes": [
+        "technical_specificity_primary"
+      ],
+      "policy_version": "enterprise-insight-v2-architecture/2.2.0",
+      "preferred_source_types": [
+        "official_documentation",
+        "peer_reviewed_research",
+        "regulator_standard",
+        "independent_technical"
+      ],
+      "primary_source_rule": "preferred",
+      "scores": [
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_4b2cc9add6171347",
+          "final_score": 0.5326756765489784,
+          "similarity_score": 0.5136867648063826
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_02bf768863d92f5e",
+          "final_score": 0.5226046586247914,
+          "similarity_score": 0.5007752033651173
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_d4e4d8fbf6a7a55c",
+          "final_score": 0.519402977337792,
+          "similarity_score": 0.49667048376639983
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_648babff2ebe3058",
+          "final_score": 0.5184474826306259,
+          "similarity_score": 0.4954454905520845
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_24320d0559472fcb",
+          "final_score": 0.5066964801240619,
+          "similarity_score": 0.48038010272315623
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_902042d4664e8063",
+          "final_score": 0.5034692514200059,
+          "similarity_score": 0.4762426300256485
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_8876e809d56f4ff6",
+          "final_score": 0.5002415990283199,
+          "similarity_score": 0.4721046141388716
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_6919c3340b7fd3e7",
+          "final_score": 0.4968394233567506,
+          "similarity_score": 0.4677428504573725
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_e38e6e3a23869cb1",
+          "final_score": 0.49264163856875076,
+          "similarity_score": 0.462361075088142
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_2483963c63c6d679",
+          "final_score": 0.49044092490934577,
+          "similarity_score": 0.459539647319674
+        }
+      ],
+      "selected_count": 10,
+      "similarity_threshold": 0.42,
+      "source_reliability_weight": 0.22,
+      "stage": "retrieval_selection",
+      "task_category": "technical_capability_analysis"
+    },
+    {
+      "duration_s": 25.268527099993662,
+      "stage": "retrieval",
+      "status": "completed"
+    },
+    {
+      "authority_weight": 0.22,
+      "authority_weight_fallback_used": false,
+      "classifier_confidence": 0.9,
+      "classifier_version": "enterprise-insight-task-classifier/1.1.0",
+      "corroboration_rule": "primary_plus_independent",
+      "fallback_used": false,
+      "freshness_mode": "contextual",
+      "independent_source_rule": "publisher_organization",
+      "max_age_days": 730,
+      "policy_authority_weight_anchor": 0.22,
+      "policy_limitation_codes": [
+        "preferred_source_types_not_enforced_missing_structured_provenance",
+        "freshness_not_enforced_missing_publication_time",
+        "corroboration_deferred_to_claim_grounding",
+        "primary_source_rule_deferred_to_claim_grounding",
+        "independence_rule_deferred_to_claim_grounding"
+      ],
+      "policy_reason_codes": [
+        "technical_specificity_primary"
+      ],
+      "policy_version": "enterprise-insight-v2-architecture/2.2.0",
+      "preferred_source_types": [
+        "official_documentation",
+        "peer_reviewed_research",
+        "regulator_standard",
+        "independent_technical"
+      ],
+      "primary_source_rule": "preferred",
+      "scores": [
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_125fee21af7fa68c",
+          "final_score": 0.5867762751695353,
+          "similarity_score": 0.5830465066276094
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_69cf6c200a23c3c7",
+          "final_score": 0.5824985454409207,
+          "similarity_score": 0.5775622377447701
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_37d1cef00eb078b5",
+          "final_score": 0.5537663581743809,
+          "similarity_score": 0.5407261002235653
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_c6bb0819c495a67b",
+          "final_score": 0.5531108816677984,
+          "similarity_score": 0.5398857457279467
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_16e2a002c3dcd617",
+          "final_score": 0.5496375735555818,
+          "similarity_score": 0.5354327866097204
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_1c525a9b96f4bdbc",
+          "final_score": 0.5423785309068252,
+          "similarity_score": 0.5261263216754168
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_6d09b9285030a3c8",
+          "final_score": 0.5283702842179568,
+          "similarity_score": 0.5081670310486626
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_657dcc56e68a9259",
+          "final_score": 0.524817220379975,
+          "similarity_score": 0.5036118209999679
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_c67ed7cb3f76aa16",
+          "final_score": 0.524468477815887,
+          "similarity_score": 0.503164715148573
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_964671dc24bed509",
+          "final_score": 0.5211879569817255,
+          "similarity_score": 0.4989589192073404
+        }
+      ],
+      "selected_count": 10,
+      "similarity_threshold": 0.42,
+      "source_reliability_weight": 0.22,
+      "stage": "retrieval_selection",
+      "task_category": "technical_capability_analysis"
+    },
+    {
+      "duration_s": 24.6191872000054,
+      "stage": "retrieval",
+      "status": "completed"
+    },
+    {
+      "authority_weight": 0.22,
+      "authority_weight_fallback_used": false,
+      "classifier_confidence": 0.9,
+      "classifier_version": "enterprise-insight-task-classifier/1.1.0",
+      "corroboration_rule": "primary_plus_independent",
+      "fallback_used": false,
+      "freshness_mode": "contextual",
+      "independent_source_rule": "publisher_organization",
+      "max_age_days": 730,
+      "policy_authority_weight_anchor": 0.22,
+      "policy_limitation_codes": [
+        "preferred_source_types_not_enforced_missing_structured_provenance",
+        "freshness_not_enforced_missing_publication_time",
+        "corroboration_deferred_to_claim_grounding",
+        "primary_source_rule_deferred_to_claim_grounding",
+        "independence_rule_deferred_to_claim_grounding"
+      ],
+      "policy_reason_codes": [
+        "technical_specificity_primary"
+      ],
+      "policy_version": "enterprise-insight-v2-architecture/2.2.0",
+      "preferred_source_types": [
+        "official_documentation",
+        "peer_reviewed_research",
+        "regulator_standard",
+        "independent_technical"
+      ],
+      "primary_source_rule": "preferred",
+      "scores": [
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_619b70b094285d71",
+          "final_score": 0.7098140895863618,
+          "similarity_score": 0.7407872943414895
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_98f5028bed21d081",
+          "final_score": 0.6953875356567369,
+          "similarity_score": 0.7222917123804319
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_7a6809120ded0e6a",
+          "final_score": 0.6834494911378118,
+          "similarity_score": 0.7069865270997587
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_c87ab4cb76d42dd2",
+          "final_score": 0.676595138964428,
+          "similarity_score": 0.698198896108241
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_274ff76c3275e1d6",
+          "final_score": 0.6752230338569688,
+          "similarity_score": 0.6964397869961139
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_4426f461ab217c20",
+          "final_score": 0.673919507650926,
+          "similarity_score": 0.6947685995524692
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_7b54cb8b85fb3cac",
+          "final_score": 0.6708007291403949,
+          "similarity_score": 0.6907701655646088
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_a68505e19318d340",
+          "final_score": 0.6554687172819736,
+          "similarity_score": 0.6711137401050944
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_62fa0fb7bbfd9bb8",
+          "final_score": 0.6515863414917183,
+          "similarity_score": 0.6661363352457927
+        },
+        {
+          "authority_score": 0.6,
+          "evidence_id": "ev_92b2d904aa05710b",
+          "final_score": 0.6453605687710802,
+          "similarity_score": 0.6581545753475386
+        }
+      ],
+      "selected_count": 10,
+      "similarity_threshold": 0.42,
+      "source_reliability_weight": 0.22,
+      "stage": "retrieval_selection",
+      "task_category": "technical_capability_analysis"
+    },
+    {
+      "duration_s": 60.19633609999437,
+      "stage": "research",
+      "status": "completed"
+    },
+    {
+      "duration_s": 117.97875379999459,
+      "stage": "report",
+      "status": "completed"
+    }
+  ],
+  "research_trace": {
+    "case_id": null,
+    "completed_at": "2026-09-11T13:59:08.502096Z",
+    "dropped_event_count": 0,
+    "error": null,
+    "events": [
+      {
+        "event_type": "research_started",
+        "recorded_at": "2026-09-11T13:55:54.956026Z",
+        "sequence": 0
+      },
+      {
+        "authority_weight": 0.22,
+        "candidate_evidence_count": 4,
+        "event_type": "evidence_selection",
+        "recorded_at": "2026-09-11T13:57:02.598795Z",
+        "scorer_summary": [
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_1d53874093712303",
+            "final_score": 0.6868442351902494,
+            "similarity_score": 0.7113387630644223
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_b4a21ff90da8556e",
+            "final_score": 0.6793852792222799,
+            "similarity_score": 0.7017759990029229
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_cc5354d167046db6",
+            "final_score": 0.6752071491452976,
+            "similarity_score": 0.6964194219811507
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_7db702236aad5d91",
+            "final_score": 0.6485062400572847,
+            "similarity_score": 0.6621874872529292
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_689e5f5def07a731",
+            "final_score": 0.6374407724892761,
+            "similarity_score": 0.6480009903708668
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_1d0d67064f32fbda",
+            "final_score": 0.6340567527544237,
+            "similarity_score": 0.6436625035313125
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_af416855d58a3889",
+            "final_score": 0.6141863382140185,
+            "similarity_score": 0.6181876130948954
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_9c01b4455145f8f5",
+            "final_score": 0.5974448357013615,
+            "similarity_score": 0.5967241483350788
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_40a1cba46934f9ee",
+            "final_score": 0.5973592295650219,
+            "similarity_score": 0.5966143968782331
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_dc1cef6ead9c49b4",
+            "final_score": 0.591505535930192,
+            "similarity_score": 0.5891096614489639
+          }
+        ],
+        "selected_evidence_count": 10,
+        "selected_evidence_ids": [
+          "ev_1d53874093712303",
+          "ev_b4a21ff90da8556e",
+          "ev_cc5354d167046db6",
+          "ev_7db702236aad5d91",
+          "ev_689e5f5def07a731",
+          "ev_1d0d67064f32fbda",
+          "ev_af416855d58a3889",
+          "ev_9c01b4455145f8f5",
+          "ev_40a1cba46934f9ee",
+          "ev_dc1cef6ead9c49b4"
+        ],
+        "sequence": 1,
+        "similarity_threshold": 0.42,
+        "task_category": "technical_capability_analysis"
+      },
+      {
+        "authority_weight": 0.22,
+        "candidate_evidence_count": 5,
+        "event_type": "evidence_selection",
+        "recorded_at": "2026-09-11T13:57:06.079200Z",
+        "scorer_summary": [
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_4b2cc9add6171347",
+            "final_score": 0.5326756765489784,
+            "similarity_score": 0.5136867648063826
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_02bf768863d92f5e",
+            "final_score": 0.5226046586247914,
+            "similarity_score": 0.5007752033651173
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_d4e4d8fbf6a7a55c",
+            "final_score": 0.519402977337792,
+            "similarity_score": 0.49667048376639983
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_648babff2ebe3058",
+            "final_score": 0.5184474826306259,
+            "similarity_score": 0.4954454905520845
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_24320d0559472fcb",
+            "final_score": 0.5066964801240619,
+            "similarity_score": 0.48038010272315623
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_902042d4664e8063",
+            "final_score": 0.5034692514200059,
+            "similarity_score": 0.4762426300256485
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_8876e809d56f4ff6",
+            "final_score": 0.5002415990283199,
+            "similarity_score": 0.4721046141388716
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_6919c3340b7fd3e7",
+            "final_score": 0.4968394233567506,
+            "similarity_score": 0.4677428504573725
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_e38e6e3a23869cb1",
+            "final_score": 0.49264163856875076,
+            "similarity_score": 0.462361075088142
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_2483963c63c6d679",
+            "final_score": 0.49044092490934577,
+            "similarity_score": 0.459539647319674
+          }
+        ],
+        "selected_evidence_count": 10,
+        "selected_evidence_ids": [
+          "ev_4b2cc9add6171347",
+          "ev_02bf768863d92f5e",
+          "ev_d4e4d8fbf6a7a55c",
+          "ev_648babff2ebe3058",
+          "ev_24320d0559472fcb",
+          "ev_902042d4664e8063",
+          "ev_8876e809d56f4ff6",
+          "ev_6919c3340b7fd3e7",
+          "ev_e38e6e3a23869cb1",
+          "ev_2483963c63c6d679"
+        ],
+        "sequence": 2,
+        "similarity_threshold": 0.42,
+        "task_category": "technical_capability_analysis"
+      },
+      {
+        "authority_weight": 0.22,
+        "candidate_evidence_count": 3,
+        "event_type": "evidence_selection",
+        "recorded_at": "2026-09-11T13:57:07.042805Z",
+        "scorer_summary": [
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_125fee21af7fa68c",
+            "final_score": 0.5867762751695353,
+            "similarity_score": 0.5830465066276094
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_69cf6c200a23c3c7",
+            "final_score": 0.5824985454409207,
+            "similarity_score": 0.5775622377447701
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_37d1cef00eb078b5",
+            "final_score": 0.5537663581743809,
+            "similarity_score": 0.5407261002235653
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_c6bb0819c495a67b",
+            "final_score": 0.5531108816677984,
+            "similarity_score": 0.5398857457279467
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_16e2a002c3dcd617",
+            "final_score": 0.5496375735555818,
+            "similarity_score": 0.5354327866097204
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_1c525a9b96f4bdbc",
+            "final_score": 0.5423785309068252,
+            "similarity_score": 0.5261263216754168
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_6d09b9285030a3c8",
+            "final_score": 0.5283702842179568,
+            "similarity_score": 0.5081670310486626
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_657dcc56e68a9259",
+            "final_score": 0.524817220379975,
+            "similarity_score": 0.5036118209999679
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_c67ed7cb3f76aa16",
+            "final_score": 0.524468477815887,
+            "similarity_score": 0.503164715148573
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_964671dc24bed509",
+            "final_score": 0.5211879569817255,
+            "similarity_score": 0.4989589192073404
+          }
+        ],
+        "selected_evidence_count": 10,
+        "selected_evidence_ids": [
+          "ev_125fee21af7fa68c",
+          "ev_69cf6c200a23c3c7",
+          "ev_37d1cef00eb078b5",
+          "ev_c6bb0819c495a67b",
+          "ev_16e2a002c3dcd617",
+          "ev_1c525a9b96f4bdbc",
+          "ev_6d09b9285030a3c8",
+          "ev_657dcc56e68a9259",
+          "ev_c67ed7cb3f76aa16",
+          "ev_964671dc24bed509"
+        ],
+        "sequence": 3,
+        "similarity_threshold": 0.42,
+        "task_category": "technical_capability_analysis"
+      },
+      {
+        "authority_weight": 0.22,
+        "candidate_evidence_count": 4,
+        "event_type": "evidence_selection",
+        "recorded_at": "2026-09-11T13:57:10.488890Z",
+        "scorer_summary": [
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_619b70b094285d71",
+            "final_score": 0.7098140895863618,
+            "similarity_score": 0.7407872943414895
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_98f5028bed21d081",
+            "final_score": 0.6953875356567369,
+            "similarity_score": 0.7222917123804319
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_7a6809120ded0e6a",
+            "final_score": 0.6834494911378118,
+            "similarity_score": 0.7069865270997587
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_c87ab4cb76d42dd2",
+            "final_score": 0.676595138964428,
+            "similarity_score": 0.698198896108241
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_274ff76c3275e1d6",
+            "final_score": 0.6752230338569688,
+            "similarity_score": 0.6964397869961139
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_4426f461ab217c20",
+            "final_score": 0.673919507650926,
+            "similarity_score": 0.6947685995524692
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_7b54cb8b85fb3cac",
+            "final_score": 0.6708007291403949,
+            "similarity_score": 0.6907701655646088
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_a68505e19318d340",
+            "final_score": 0.6554687172819736,
+            "similarity_score": 0.6711137401050944
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_62fa0fb7bbfd9bb8",
+            "final_score": 0.6515863414917183,
+            "similarity_score": 0.6661363352457927
+          },
+          {
+            "authority_score": 0.6,
+            "evidence_id": "ev_92b2d904aa05710b",
+            "final_score": 0.6453605687710802,
+            "similarity_score": 0.6581545753475386
+          }
+        ],
+        "selected_evidence_count": 10,
+        "selected_evidence_ids": [
+          "ev_619b70b094285d71",
+          "ev_98f5028bed21d081",
+          "ev_7a6809120ded0e6a",
+          "ev_c87ab4cb76d42dd2",
+          "ev_274ff76c3275e1d6",
+          "ev_4426f461ab217c20",
+          "ev_7b54cb8b85fb3cac",
+          "ev_a68505e19318d340",
+          "ev_62fa0fb7bbfd9bb8",
+          "ev_92b2d904aa05710b"
+        ],
+        "sequence": 4,
+        "similarity_threshold": 0.42,
+        "task_category": "technical_capability_analysis"
+      },
+      {
+        "claim_id": "claim_101711903f55f31c445a33d6fb936e648fc4522c130ca6bb111b6107333eac67",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "standard"
+        ],
+        "gate_decision": "emit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.463228Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [],
+        "sequence": 5
+      },
+      {
+        "claim_id": "claim_be5bf7c26f6e15a2c128731c8cd89adbaacf43fe3338cd761d59dbc9f5b26338",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "two_independent",
+          "primary_plus_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.463228Z",
+        "required_entity_ids": [
+          "entity_7ba5c0665b62f6fabe96f56ac0fb6d8d1dc89afff24604f7cb758cbaf3fd75ba",
+          "entity_e5fbcc3d24ddb2d254c8db9a06dbff29290ebac9e9f1590cbdac974785efafc8"
+        ],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "comparative_claim",
+          "benchmark_or_performance"
+        ],
+        "sequence": 6
+      },
+      {
+        "claim_id": "claim_87893725cf3c4d1690f9ace3476451700b6ddfb31cd844d623b6317fbc12f65e",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "conflict_sides_plus_adjudicator"
+        ],
+        "gate_decision": "hedge",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.463228Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [
+          "side_7c21c6481e1f7e6b172452c5a38ce4ad597df26141dcf552e7034f6b3322e829",
+          "side_e16821623d56606d5bdfd5a8c6b0179d3e970270dc4d9e4228b188088b998bce"
+        ],
+        "requires_independent_adjudicator": true,
+        "risk_types": [
+          "conflict_sensitive_claim"
+        ],
+        "sequence": 7
+      },
+      {
+        "claim_id": "claim_7c050609792c673b6cb6743c3fa0222b72a9a3427cec7f62a25ad42bf0c1e202",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "primary_or_two_independent",
+          "two_independent",
+          "primary_plus_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.463228Z",
+        "required_entity_ids": [
+          "entity_08c9f8b0d1264b8ef02606866bbddf493efc8237ea83419523b33f42ca799245",
+          "entity_f0f674a275a7bf65b607f41e2f48107cb8b6ff1f5595817d7314c476f5b634c7"
+        ],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "numeric_value",
+          "comparative_claim",
+          "benchmark_or_performance"
+        ],
+        "sequence": 8
+      },
+      {
+        "claim_id": "claim_282d0579560bc18f271de465050a5f966ac1d1058805c8d028780dfc40901f37",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "primary_or_two_independent",
+          "two_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.463228Z",
+        "required_entity_ids": [
+          "entity_08c9f8b0d1264b8ef02606866bbddf493efc8237ea83419523b33f42ca799245",
+          "entity_f0f674a275a7bf65b607f41e2f48107cb8b6ff1f5595817d7314c476f5b634c7"
+        ],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "numeric_value",
+          "comparative_claim",
+          "superlative_or_ranking"
+        ],
+        "sequence": 9
+      },
+      {
+        "claim_id": "claim_43c0fa224b7b3a2e1dfd8a36c719ab2054b448f4bab02e5cfc6062625fcc917d",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "primary_or_two_independent",
+          "primary_plus_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.463228Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "release_status_availability",
+          "benchmark_or_performance",
+          "numeric_value"
+        ],
+        "sequence": 10
+      },
+      {
+        "claim_id": "claim_5e0b0fbcd07afa82362effd18b5a6b79f87be49708ff0d07539b49a87d8fbd2e",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "primary_or_two_independent",
+          "primary_plus_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.463228Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "release_status_availability",
+          "numeric_value",
+          "benchmark_or_performance"
+        ],
+        "sequence": 11
+      },
+      {
+        "claim_id": "claim_9077f6e7d3963a1371b0c490457683e890f898e9872e24ef93a3db1ab39bcc4d",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "primary_or_two_independent",
+          "primary_plus_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.463228Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "numeric_value",
+          "benchmark_or_performance"
+        ],
+        "sequence": 12
+      },
+      {
+        "claim_id": "claim_fb5e9f8aaf43ce0635fc715db8e073b33352d610495b34d4d90f9395995af94e",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "primary_or_two_independent",
+          "primary_plus_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.464229Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "numeric_value",
+          "benchmark_or_performance"
+        ],
+        "sequence": 13
+      },
+      {
+        "claim_id": "claim_8e9076f54c61cd653b51254a2d61fcc3d8b0392bebbd2a344de28c98e88df215",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "two_independent",
+          "primary_plus_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.464229Z",
+        "required_entity_ids": [
+          "entity_08c9f8b0d1264b8ef02606866bbddf493efc8237ea83419523b33f42ca799245",
+          "entity_f0f674a275a7bf65b607f41e2f48107cb8b6ff1f5595817d7314c476f5b634c7"
+        ],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "comparative_claim",
+          "benchmark_or_performance",
+          "superlative_or_ranking"
+        ],
+        "sequence": 14
+      },
+      {
+        "claim_id": "claim_bf4e6b5f925f54709e4a3b1c1ed72608a0f4c8cc282a73b6a676262b5e74de1e",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "primary_or_two_independent",
+          "two_independent",
+          "primary_plus_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.464229Z",
+        "required_entity_ids": [
+          "entity_08c9f8b0d1264b8ef02606866bbddf493efc8237ea83419523b33f42ca799245",
+          "entity_f0f674a275a7bf65b607f41e2f48107cb8b6ff1f5595817d7314c476f5b634c7"
+        ],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "numeric_value",
+          "comparative_claim",
+          "benchmark_or_performance"
+        ],
+        "sequence": 15
+      },
+      {
+        "claim_id": "claim_86742f6a89b619f2afc8c605e4ce78d8a0160b4d701782118d11037bcd4cffd1",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "primary_or_two_independent",
+          "primary_plus_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.464229Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "numeric_value",
+          "benchmark_or_performance"
+        ],
+        "sequence": 16
+      },
+      {
+        "claim_id": "claim_f2c7045d3fc3a80048d7d0efa2e74294280820a2d048a4dda1a1b92f25310874",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "two_independent",
+          "primary_plus_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.464229Z",
+        "required_entity_ids": [
+          "entity_a46b7e15f9da74ad6efb2121ea0beb0702c60646d0528d42db01441273bce804",
+          "entity_08c9f8b0d1264b8ef02606866bbddf493efc8237ea83419523b33f42ca799245"
+        ],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "comparative_claim",
+          "benchmark_or_performance"
+        ],
+        "sequence": 17
+      },
+      {
+        "claim_id": "claim_e8d94eb59c4292d8b10a5f981c585bde7e1528a57369155cf3a515d32bc10276",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "primary_plus_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.464229Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "benchmark_or_performance"
+        ],
+        "sequence": 18
+      },
+      {
+        "claim_id": "claim_1eaac071d033ee27c2b7dd737aae89e69d5cfba3465f0582bbfc861f32ea7620",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "primary_or_two_independent",
+          "primary_plus_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.464229Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "numeric_value",
+          "benchmark_or_performance"
+        ],
+        "sequence": 19
+      },
+      {
+        "claim_id": "claim_af425386166a7efb3267565716974380810ea96d3c29a52c33a51164e050abe6",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "primary_or_two_independent",
+          "primary_plus_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.464229Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "numeric_value",
+          "benchmark_or_performance"
+        ],
+        "sequence": 20
+      },
+      {
+        "claim_id": "claim_b5bb63e7ce9b5fa645b4f64a8f66edeb5a13da910ea5d8a676a6a5c0becb17f0",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "primary_or_two_independent",
+          "two_independent",
+          "primary_plus_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.464229Z",
+        "required_entity_ids": [
+          "entity_7ba5c0665b62f6fabe96f56ac0fb6d8d1dc89afff24604f7cb758cbaf3fd75ba",
+          "entity_9708c2cb345aca00d8f54e18002d2a8378a9b592ff2aa92528c83a895f59d1cd",
+          "entity_e8eedc9143b593c80a6c0e5f714d446a9c704d4cbdbc5e5fcb13e194a20f8ebd"
+        ],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "numeric_value",
+          "comparative_claim",
+          "benchmark_or_performance",
+          "superlative_or_ranking"
+        ],
+        "sequence": 21
+      },
+      {
+        "claim_id": "claim_8a84476679ecb1f9c739850a781726009969fa3c74d31138d4bd0007258f6a05",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "primary_or_two_independent",
+          "primary_plus_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.464229Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "numeric_value",
+          "benchmark_or_performance"
+        ],
+        "sequence": 22
+      },
+      {
+        "claim_id": "claim_e1d37007d2f02e52fc068030b517f804f40a489ea089f5d94f3babe63a621cac",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "standard"
+        ],
+        "gate_decision": "emit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.464229Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [],
+        "sequence": 23
+      },
+      {
+        "claim_id": "claim_5ebc6aa595f4dc38870ee8df476bf90efc34e57598683368ecba084fe43976b9",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "standard"
+        ],
+        "gate_decision": "emit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.465230Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [],
+        "sequence": 24
+      },
+      {
+        "claim_id": "claim_25497b5eefbdd3579d30ae566d33ca06c5a9f6edda428fe551f7ef574adc3642",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "standard"
+        ],
+        "gate_decision": "emit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.465230Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [],
+        "sequence": 25
+      },
+      {
+        "claim_id": "claim_281252c9b91f5c92c87528212eb40b3a0bcd54fa9d86903dccc7d46dc347092d",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "two_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.465230Z",
+        "required_entity_ids": [
+          "entity_7ba5c0665b62f6fabe96f56ac0fb6d8d1dc89afff24604f7cb758cbaf3fd75ba",
+          "entity_e9fc443477d53ca5949751e2c2c8952a599d97a5db82ffd21be8c061c6d416b9"
+        ],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "comparative_claim"
+        ],
+        "sequence": 26
+      },
+      {
+        "claim_id": "claim_dcd681207445083a9a6e046e66a4425bf700ebd2f7330fc941dd782864bf1d0e",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "standard"
+        ],
+        "gate_decision": "emit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.465230Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [],
+        "sequence": 27
+      },
+      {
+        "claim_id": "claim_d712d9abf213453673cf72d8112320366ea13c61b7310c787d2d94bc9ccf38b4",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "standard"
+        ],
+        "gate_decision": "emit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.465230Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [],
+        "sequence": 28
+      },
+      {
+        "claim_id": "claim_088264a7fe22f89a0cfac8c3b88162ca755a1e5b35eb446712c8eb6f20171e5f",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "primary_or_two_independent",
+          "two_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.465230Z",
+        "required_entity_ids": [
+          "entity_08ccf592f5fb1dcbb5846d8ed40ed7878fbd6572e804a72ca5aae883a6fc07b4",
+          "entity_a67ea24558e4e623db103bc4e20f97f769dae939e274fab703de52bff969f4ed",
+          "entity_197d19103e36dad65ecda73d6038331b3fc73522a8bf48ae8ea5476bf5e58626",
+          "entity_631105df5f8dea649e74121d88a1f6c4b010a0acead8db90fa94f8c06e04f855"
+        ],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "market_metric",
+          "numeric_value",
+          "comparative_claim"
+        ],
+        "sequence": 29
+      },
+      {
+        "claim_id": "claim_75123c2f45f204d955ae4db4cd57b81b85e811f48e3e8bac8a783acab3071a88",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "primary_or_two_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": false,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.465230Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "date_or_time_window"
+        ],
+        "sequence": 30
+      },
+      {
+        "claim_id": "claim_b53d9013cd83b81ae14be354afd5f80da6ac52bb89e8f110b88ca0263780cf13",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "two_independent",
+          "primary_or_two_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.465230Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "superlative_or_ranking",
+          "date_or_time_window"
+        ],
+        "sequence": 31
+      },
+      {
+        "claim_id": "claim_fa4f2f42b2325cd0fc750fcaae3b9a2d5a39da3d07715b751fe49c3af42cc1a2",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "two_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.465230Z",
+        "required_entity_ids": [
+          "entity_08c9f8b0d1264b8ef02606866bbddf493efc8237ea83419523b33f42ca799245",
+          "entity_f0f674a275a7bf65b607f41e2f48107cb8b6ff1f5595817d7314c476f5b634c7"
+        ],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "comparative_claim"
+        ],
+        "sequence": 32
+      },
+      {
+        "claim_id": "claim_0be826f05af727ef53b51c64ebb8f7da779054a42d1afdacec54c721e25cc3bd",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "two_independent",
+          "primary_plus_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.465230Z",
+        "required_entity_ids": [
+          "entity_08c9f8b0d1264b8ef02606866bbddf493efc8237ea83419523b33f42ca799245",
+          "entity_f0f674a275a7bf65b607f41e2f48107cb8b6ff1f5595817d7314c476f5b634c7"
+        ],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "comparative_claim",
+          "benchmark_or_performance"
+        ],
+        "sequence": 33
+      },
+      {
+        "claim_id": "claim_bbe9c3e4650af922776134f98dc8542287652989c30579fe0bf4f7d2e297af0b",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "two_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.465230Z",
+        "required_entity_ids": [
+          "entity_7ba5c0665b62f6fabe96f56ac0fb6d8d1dc89afff24604f7cb758cbaf3fd75ba",
+          "entity_e5fbcc3d24ddb2d254c8db9a06dbff29290ebac9e9f1590cbdac974785efafc8"
+        ],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "comparative_claim"
+        ],
+        "sequence": 34
+      },
+      {
+        "claim_id": "claim_12bc113a25626044d355f8779c106165b40eb1742eed0a34cd490f31b42ad2bf",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "standard"
+        ],
+        "gate_decision": "emit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.466237Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [],
+        "sequence": 35
+      },
+      {
+        "claim_id": "claim_58ce29f7f66e255c85202c40dcaae9b274d214aceefd1e0f1f91cee4955dcbd9",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "primary_plus_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.466237Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "benchmark_or_performance"
+        ],
+        "sequence": 36
+      },
+      {
+        "claim_id": "claim_140a2e4b77490fbd5a972e858a8668fcfb567e12755802474a25c56a6e506a64",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "standard"
+        ],
+        "gate_decision": "emit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.466237Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [],
+        "sequence": 37
+      },
+      {
+        "claim_id": "claim_c14112a2e350caf55c5b613f663ea1000c660e962895da416c75c2b438e64404",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "standard"
+        ],
+        "gate_decision": "emit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.466237Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [],
+        "sequence": 38
+      },
+      {
+        "claim_id": "claim_21c181a768a7e263239d26d3951295a1954364d374fee9879116744b4ea27689",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "primary_or_two_independent"
+        ],
+        "gate_decision": "omit",
+        "is_material": true,
+        "phase": "pre_generation",
+        "recorded_at": "2026-09-11T13:59:08.466237Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [
+          "market_metric"
+        ],
+        "sequence": 39
+      },
+      {
+        "event_type": "generation",
+        "generated_claim_count": 10,
+        "generated_claim_ids": [
+          "claim_101711903f55f31c445a33d6fb936e648fc4522c130ca6bb111b6107333eac67",
+          "claim_87893725cf3c4d1690f9ace3476451700b6ddfb31cd844d623b6317fbc12f65e",
+          "claim_e1d37007d2f02e52fc068030b517f804f40a489ea089f5d94f3babe63a621cac",
+          "claim_5ebc6aa595f4dc38870ee8df476bf90efc34e57598683368ecba084fe43976b9",
+          "claim_25497b5eefbdd3579d30ae566d33ca06c5a9f6edda428fe551f7ef574adc3642",
+          "claim_dcd681207445083a9a6e046e66a4425bf700ebd2f7330fc941dd782864bf1d0e",
+          "claim_d712d9abf213453673cf72d8112320366ea13c61b7310c787d2d94bc9ccf38b4",
+          "claim_12bc113a25626044d355f8779c106165b40eb1742eed0a34cd490f31b42ad2bf",
+          "claim_140a2e4b77490fbd5a972e858a8668fcfb567e12755802474a25c56a6e506a64",
+          "claim_c14112a2e350caf55c5b613f663ea1000c660e962895da416c75c2b438e64404"
+        ],
+        "output_artifact_reference": null,
+        "recorded_at": "2026-09-11T13:59:08.466237Z",
+        "sequence": 40
+      },
+      {
+        "claim_id": "claim_101711903f55f31c445a33d6fb936e648fc4522c130ca6bb111b6107333eac67",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "standard"
+        ],
+        "gate_decision": "emit",
+        "is_material": true,
+        "phase": "grounding_revalidation",
+        "recorded_at": "2026-09-11T13:59:08.466237Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [],
+        "sequence": 41
+      },
+      {
+        "cited_evidence_count": 3,
+        "claim_id": "claim_101711903f55f31c445a33d6fb936e648fc4522c130ca6bb111b6107333eac67",
+        "event_type": "grounding_validation",
+        "failed": false,
+        "finding_codes": [
+          "cutoff_unverified"
+        ],
+        "grounding_status": "pass",
+        "planned_repair_action_types": [],
+        "recorded_at": "2026-09-11T13:59:08.466237Z",
+        "repair_required": false,
+        "sequence": 42
+      },
+      {
+        "claim_id": "claim_87893725cf3c4d1690f9ace3476451700b6ddfb31cd844d623b6317fbc12f65e",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "conflict_sides_plus_adjudicator"
+        ],
+        "gate_decision": "hedge",
+        "is_material": true,
+        "phase": "grounding_revalidation",
+        "recorded_at": "2026-09-11T13:59:08.466237Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [
+          "side_7c21c6481e1f7e6b172452c5a38ce4ad597df26141dcf552e7034f6b3322e829",
+          "side_e16821623d56606d5bdfd5a8c6b0179d3e970270dc4d9e4228b188088b998bce"
+        ],
+        "requires_independent_adjudicator": true,
+        "risk_types": [
+          "conflict_sensitive_claim"
+        ],
+        "sequence": 43
+      },
+      {
+        "cited_evidence_count": 4,
+        "claim_id": "claim_87893725cf3c4d1690f9ace3476451700b6ddfb31cd844d623b6317fbc12f65e",
+        "event_type": "grounding_validation",
+        "failed": false,
+        "finding_codes": [
+          "cutoff_unverified"
+        ],
+        "grounding_status": "pass",
+        "planned_repair_action_types": [],
+        "recorded_at": "2026-09-11T13:59:08.466237Z",
+        "repair_required": false,
+        "sequence": 44
+      },
+      {
+        "claim_id": "claim_e1d37007d2f02e52fc068030b517f804f40a489ea089f5d94f3babe63a621cac",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "standard"
+        ],
+        "gate_decision": "emit",
+        "is_material": true,
+        "phase": "grounding_revalidation",
+        "recorded_at": "2026-09-11T13:59:08.467234Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [],
+        "sequence": 45
+      },
+      {
+        "cited_evidence_count": 1,
+        "claim_id": "claim_e1d37007d2f02e52fc068030b517f804f40a489ea089f5d94f3babe63a621cac",
+        "event_type": "grounding_validation",
+        "failed": false,
+        "finding_codes": [
+          "cutoff_unverified"
+        ],
+        "grounding_status": "pass",
+        "planned_repair_action_types": [],
+        "recorded_at": "2026-09-11T13:59:08.467234Z",
+        "repair_required": false,
+        "sequence": 46
+      },
+      {
+        "claim_id": "claim_5ebc6aa595f4dc38870ee8df476bf90efc34e57598683368ecba084fe43976b9",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "standard"
+        ],
+        "gate_decision": "emit",
+        "is_material": true,
+        "phase": "grounding_revalidation",
+        "recorded_at": "2026-09-11T13:59:08.467234Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [],
+        "sequence": 47
+      },
+      {
+        "cited_evidence_count": 2,
+        "claim_id": "claim_5ebc6aa595f4dc38870ee8df476bf90efc34e57598683368ecba084fe43976b9",
+        "event_type": "grounding_validation",
+        "failed": false,
+        "finding_codes": [
+          "cutoff_unverified"
+        ],
+        "grounding_status": "pass",
+        "planned_repair_action_types": [],
+        "recorded_at": "2026-09-11T13:59:08.467234Z",
+        "repair_required": false,
+        "sequence": 48
+      },
+      {
+        "claim_id": "claim_25497b5eefbdd3579d30ae566d33ca06c5a9f6edda428fe551f7ef574adc3642",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "standard"
+        ],
+        "gate_decision": "emit",
+        "is_material": true,
+        "phase": "grounding_revalidation",
+        "recorded_at": "2026-09-11T13:59:08.467234Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [],
+        "sequence": 49
+      },
+      {
+        "cited_evidence_count": 1,
+        "claim_id": "claim_25497b5eefbdd3579d30ae566d33ca06c5a9f6edda428fe551f7ef574adc3642",
+        "event_type": "grounding_validation",
+        "failed": false,
+        "finding_codes": [
+          "cutoff_unverified"
+        ],
+        "grounding_status": "pass",
+        "planned_repair_action_types": [],
+        "recorded_at": "2026-09-11T13:59:08.467234Z",
+        "repair_required": false,
+        "sequence": 50
+      },
+      {
+        "claim_id": "claim_dcd681207445083a9a6e046e66a4425bf700ebd2f7330fc941dd782864bf1d0e",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "standard"
+        ],
+        "gate_decision": "emit",
+        "is_material": true,
+        "phase": "grounding_revalidation",
+        "recorded_at": "2026-09-11T13:59:08.467234Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [],
+        "sequence": 51
+      },
+      {
+        "cited_evidence_count": 3,
+        "claim_id": "claim_dcd681207445083a9a6e046e66a4425bf700ebd2f7330fc941dd782864bf1d0e",
+        "event_type": "grounding_validation",
+        "failed": false,
+        "finding_codes": [
+          "cutoff_unverified"
+        ],
+        "grounding_status": "pass",
+        "planned_repair_action_types": [],
+        "recorded_at": "2026-09-11T13:59:08.467234Z",
+        "repair_required": false,
+        "sequence": 52
+      },
+      {
+        "claim_id": "claim_d712d9abf213453673cf72d8112320366ea13c61b7310c787d2d94bc9ccf38b4",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "standard"
+        ],
+        "gate_decision": "emit",
+        "is_material": true,
+        "phase": "grounding_revalidation",
+        "recorded_at": "2026-09-11T13:59:08.467234Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [],
+        "sequence": 53
+      },
+      {
+        "cited_evidence_count": 3,
+        "claim_id": "claim_d712d9abf213453673cf72d8112320366ea13c61b7310c787d2d94bc9ccf38b4",
+        "event_type": "grounding_validation",
+        "failed": false,
+        "finding_codes": [
+          "cutoff_unverified"
+        ],
+        "grounding_status": "pass",
+        "planned_repair_action_types": [],
+        "recorded_at": "2026-09-11T13:59:08.467234Z",
+        "repair_required": false,
+        "sequence": 54
+      },
+      {
+        "claim_id": "claim_12bc113a25626044d355f8779c106165b40eb1742eed0a34cd490f31b42ad2bf",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "standard"
+        ],
+        "gate_decision": "emit",
+        "is_material": true,
+        "phase": "grounding_revalidation",
+        "recorded_at": "2026-09-11T13:59:08.467234Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [],
+        "sequence": 55
+      },
+      {
+        "cited_evidence_count": 2,
+        "claim_id": "claim_12bc113a25626044d355f8779c106165b40eb1742eed0a34cd490f31b42ad2bf",
+        "event_type": "grounding_validation",
+        "failed": false,
+        "finding_codes": [
+          "cutoff_unverified"
+        ],
+        "grounding_status": "pass",
+        "planned_repair_action_types": [],
+        "recorded_at": "2026-09-11T13:59:08.467234Z",
+        "repair_required": false,
+        "sequence": 56
+      },
+      {
+        "claim_id": "claim_140a2e4b77490fbd5a972e858a8668fcfb567e12755802474a25c56a6e506a64",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "standard"
+        ],
+        "gate_decision": "emit",
+        "is_material": true,
+        "phase": "grounding_revalidation",
+        "recorded_at": "2026-09-11T13:59:08.467234Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [],
+        "sequence": 57
+      },
+      {
+        "cited_evidence_count": 1,
+        "claim_id": "claim_140a2e4b77490fbd5a972e858a8668fcfb567e12755802474a25c56a6e506a64",
+        "event_type": "grounding_validation",
+        "failed": false,
+        "finding_codes": [
+          "cutoff_unverified"
+        ],
+        "grounding_status": "pass",
+        "planned_repair_action_types": [],
+        "recorded_at": "2026-09-11T13:59:08.468240Z",
+        "repair_required": false,
+        "sequence": 58
+      },
+      {
+        "claim_id": "claim_c14112a2e350caf55c5b613f663ea1000c660e962895da416c75c2b438e64404",
+        "event_type": "claim_gate",
+        "evidence_strength_rules": [
+          "standard"
+        ],
+        "gate_decision": "emit",
+        "is_material": true,
+        "phase": "grounding_revalidation",
+        "recorded_at": "2026-09-11T13:59:08.468240Z",
+        "required_entity_ids": [],
+        "required_material_side_ids": [],
+        "requires_independent_adjudicator": false,
+        "risk_types": [],
+        "sequence": 59
+      },
+      {
+        "cited_evidence_count": 1,
+        "claim_id": "claim_c14112a2e350caf55c5b613f663ea1000c660e962895da416c75c2b438e64404",
+        "event_type": "grounding_validation",
+        "failed": false,
+        "finding_codes": [
+          "cutoff_unverified"
+        ],
+        "grounding_status": "pass",
+        "planned_repair_action_types": [],
+        "recorded_at": "2026-09-11T13:59:08.468240Z",
+        "repair_required": false,
+        "sequence": 60
+      },
+      {
+        "error": null,
+        "event_type": "research_completed",
+        "execution_status": "completed",
+        "final_claim_count": 10,
+        "output_artifact_reference": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\993797f0-7184-44b4-b0cf-8f0d390c530f\\report.md",
+        "recorded_at": "2026-09-11T13:59:08.502096Z",
+        "sequence": 61,
+        "total_duration_seconds": 193.54597490000015
+      }
+    ],
+    "execution_status": "completed",
+    "ordering_basis": "recorder_sequence",
+    "output_artifact_reference": "E:\\AIProjects\\gpt-researcher\\outputs\\calibration-six-20260911\\enterprise\\993797f0-7184-44b4-b0cf-8f0d390c530f\\report.md",
+    "query_reference": null,
+    "run_id": "993797f0-7184-44b4-b0cf-8f0d390c530f",
+    "schema_version": "enterprise-research-trace/1.0.0",
+    "started_at": "2026-09-11T13:55:54.956026Z",
+    "trace_id": "trace_130c97530b80463f9c27e97af40155c9"
+  },
+  "retrieval_calls": 4,
+  "run_id": "993797f0-7184-44b4-b0cf-8f0d390c530f",
+  "search_calls": 4,
+  "search_count_scope": "ResearchConductor web searches; planning/MCP/provider internal retries excluded",
+  "search_failures": 0,
+  "selected_evidence_count": 40,
+  "started_at": "2026-09-11T13:55:54.956026+00:00",
+  "trace_id": "trace_130c97530b80463f9c27e97af40155c9"
+}

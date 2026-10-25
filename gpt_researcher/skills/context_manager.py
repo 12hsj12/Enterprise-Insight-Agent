@@ -5,6 +5,7 @@ retrieval, compression, and similarity matching for research queries.
 """
 
 import asyncio
+from contextlib import nullcontext
 from typing import Dict, List, Optional, Set
 
 from ..actions.utils import stream_output
@@ -12,6 +13,12 @@ from ..context.compression import (
     ContextCompressor,
     VectorstoreCompressor,
     WrittenContentCompressor,
+)
+from gpt_researcher.evidence import EvidenceContext
+from gpt_researcher.evidence.reliability import EvidenceReliabilityEvaluator
+from gpt_researcher.enterprise.trace import current_trace
+from gpt_researcher.enterprise.task_policy import (
+    EVIDENCE_SELECTION_LIMITATION_CODES,
 )
 
 
@@ -34,7 +41,7 @@ class ContextManager:
         """
         self.researcher = researcher
 
-    async def get_similar_content_by_query(self, query: str, pages: list) -> str:
+    async def get_similar_content_by_query(self, query: str, pages: list,) -> EvidenceContext:
         """Get similar content from pages based on the query.
 
         Args:
@@ -42,7 +49,7 @@ class ContextManager:
             pages: List of page content to search through.
 
         Returns:
-            Compressed context string of relevant content.
+            EvidenceContext containing formatted context and structured evidences.
         """
         if self.researcher.verbose:
             await stream_output(
@@ -52,16 +59,56 @@ class ContextManager:
                 self.researcher.websocket,
             )
 
-        context_compressor = ContextCompressor(
+        compressor_kwargs = dict(self.researcher.kwargs)
+        evidence_policy = getattr(self.researcher, "evidence_policy", None)
+        task_classification = getattr(self.researcher, "task_classification", None)
+        if evidence_policy is None:
+            source_weight = compressor_kwargs.pop(
+                "source_reliability_weight",
+                getattr(self.researcher.cfg, "source_reliability_weight", None),
+            )
+        else:
+            # The typed per-request policy, not config or an environment variable,
+            # owns the V2 weight. Avoid passing two potentially conflicting sources.
+            compressor_kwargs.pop("source_reliability_weight", None)
+            source_weight = None
+        compressor_init = dict(
             documents=pages,
             embeddings=self.researcher.memory.get_embeddings(),
             similarity_threshold=getattr(self.researcher.cfg, "similarity_threshold", None),
+            source_reliability_weight=source_weight,
             prompt_family=self.researcher.prompt_family,
-            **self.researcher.kwargs
+            **compressor_kwargs
         )
-        return await context_compressor.async_get_context(
-            query=query, max_results=10, cost_callback=self.researcher.add_costs
-        )
+        if evidence_policy is not None:
+            compressor_init["evidence_policy"] = evidence_policy
+            compressor_init["task_classification"] = task_classification
+        context_compressor = ContextCompressor(**compressor_init)
+        trace = current_trace()
+        with trace.stage("retrieval") if trace else nullcontext():
+            result = await context_compressor.async_get_context(
+                query=query, max_results=10, cost_callback=self.researcher.add_costs
+            )
+        if trace:
+            trace.retrieval(result, context_compressor.source_reliability_weight,
+                            context_compressor.similarity_threshold,
+                            task_classification=task_classification,
+                            evidence_policy=evidence_policy,
+                            candidate_evidence_count=len(pages),
+                            policy_limitations=(
+                                EVIDENCE_SELECTION_LIMITATION_CODES
+                                if evidence_policy is not None
+                                else ()
+                            ))
+        self.researcher.add_evidences(result.evidences)
+        add_diagnostics = getattr(self.researcher, "add_retrieval_diagnostics", None)
+        if add_diagnostics is not None:
+            add_diagnostics(result.retrieval_diagnostics)
+        evaluator = EvidenceReliabilityEvaluator()
+        self.researcher.add_evidence_assessments([
+            evaluator.evaluate(evidence) for evidence in result.evidences
+        ])
+        return result
 
     async def get_similar_content_by_query_with_vectorstore(self, query: str, filter: dict | None) -> str:
         """Get similar content from vectorstore based on the query.
@@ -151,5 +198,7 @@ class ContextManager:
             **self.researcher.kwargs
         )
         return await written_content_compressor.async_get_context(
-            query=query, max_results=max_results, cost_callback=self.researcher.add_costs
+            query=query,
+            max_results=10,
+            cost_callback=self.researcher.add_costs,
         )

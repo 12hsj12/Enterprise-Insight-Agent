@@ -16,8 +16,8 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/gpt-researcher/getting-started">
-            Getting Started - 5 min ⏱️
+            to="/docs/enterprise-insight-agent">
+            Explore the product
           </Link>
         </div>
       </div>
@@ -30,7 +30,7 @@ export default function Home() {
   return (
     <Layout
       title={`Documentation`}
-      description="GPT Researcher is the leading autonomous agent designed for comprehensive online research on a variety of tasks.">
+      description="Enterprise Insight Agent brings evidence-grounded research, claim review, citation grounding, and inspectable reports into one enterprise workflow.">
       <HomepageHeader />
       <main>
         <HomepageFeatures />

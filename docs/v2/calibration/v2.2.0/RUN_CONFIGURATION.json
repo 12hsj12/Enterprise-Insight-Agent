@@ -1,0 +1,8 @@
+{
+  "EMBEDDING": "huggingface:sentence-transformers/all-MiniLM-L6-v2",
+  "FAST_LLM": "openai:deepseek-v4-flash",
+  "SMART_LLM": "openai:deepseek-v4-flash",
+  "STRATEGIC_LLM": "openai:deepseek-v4-flash",
+  "search": "TavilySearch",
+  "transport": "httpx.ASGITransport (real POST router; in-process)"
+}

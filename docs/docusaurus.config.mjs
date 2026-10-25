@@ -4,12 +4,21 @@ import rehypeKatex from 'rehype-katex';
 import { createRequire } from 'module';
 
 const require = createRequire(import.meta.url);
+const isProductionBuild = process.env.NODE_ENV === 'production';
+const configuredSiteUrl = process.env.DOCS_SITE_URL;
+const configuredBaseUrl = process.env.DOCS_BASE_URL;
+
+if (isProductionBuild && (!configuredSiteUrl || !configuredBaseUrl)) {
+  throw new Error(
+    'Set DOCS_SITE_URL and DOCS_BASE_URL to the confirmed documentation host and path before building for production.',
+  );
+}
 
 export default {
   title: 'Enterprise Insight Agent',
   tagline: 'Evidence-grounded research for enterprise decisions',
-  url: 'https://docs.gptr.dev',
-  baseUrl: '/',
+  url: configuredSiteUrl || 'http://localhost:3000',
+  baseUrl: configuredBaseUrl || '/',
   onBrokenLinks: 'ignore',
   //deploymentBranch: 'master',
   organizationName: '12hsj12',

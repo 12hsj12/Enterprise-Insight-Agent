@@ -11,10 +11,18 @@ npm install
 npm run start
 ```
 
-Build the static site with:
+Build locally with a local-only canonical URL. In PowerShell:
 
 ```console
+$env:DOCS_SITE_URL = 'http://localhost:3000'
+$env:DOCS_BASE_URL = '/'
 npm run build
 ```
 
-Repository content and edit links point to [12hsj12/Enterprise-Insight-Agent](https://github.com/12hsj12/Enterprise-Insight-Agent). The existing `docs.gptr.dev` custom domain is retained pending confirmation of the project's documentation domain.
+In Bash:
+
+```console
+DOCS_SITE_URL=http://localhost:3000 DOCS_BASE_URL=/ npm run build
+```
+
+For a production build, set `DOCS_SITE_URL` and `DOCS_BASE_URL` to the confirmed documentation host and path. The repository has no documentation deployment workflow or public domain configured. Repository content and edit links point to [12hsj12/Enterprise-Insight-Agent](https://github.com/12hsj12/Enterprise-Insight-Agent).

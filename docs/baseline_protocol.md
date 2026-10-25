@@ -190,12 +190,12 @@ Final experiment results will use the following structure:
 
 Every reported improvement should be traceable to:
 
-Benchmark Case  
-→ Configuration  
-→ Raw Execution  
-→ Generated Report  
-→ Evidence / Annotation  
-→ Metric Calculation  
+Benchmark Case<br />
+→ Configuration<br />
+→ Raw Execution<br />
+→ Generated Report<br />
+→ Evidence / Annotation<br />
+→ Metric Calculation<br />
 → Before / After Result
 
 This traceability chain is part of the engineering quality of the project.

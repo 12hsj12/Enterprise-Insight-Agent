@@ -4,7 +4,7 @@ The documentation site is built with Docusaurus 3.10.2. Start with [`docs/docs/w
 
 ## Local development
 
-Install a supported Node.js release with npm, then from this directory:
+Use Node.js 20.x or 22.x and later releases with npm, then from this directory. The pinned documentation build security updates require Node.js 20 or newer; Node.js 21 is outside the dependency engine ranges:
 
 ```console
 npm install

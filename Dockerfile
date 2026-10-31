@@ -1,5 +1,5 @@
 # Portfolio local deployment; build from the repository root.
-FROM python:3.11-slim-bookworm AS gpt-researcher
+FROM python:3.15-slim-bookworm AS gpt-researcher
 
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_ROOT_USER_ACTION=ignore
 WORKDIR /usr/src/app
